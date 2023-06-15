@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Badge,
   Button,
@@ -27,18 +29,30 @@ import { CircleFlag } from "react-circle-flags";
 import Rating from "react-rating";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { usePathSeparator } from "@/hooks/usePathSeparator";
+import Item from "./item";
 
-export default function List() {
+export default function List({params}: {params: {path: string[]}}) {
   const property = {
     reviewCount: 34,
     rating: 4,
   };
-
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const paths = usePathSeparator(params.path)
   useEffect(() => {
-    console.log(StarIcon);
-  }, [StarIcon]);
+    console.log(paths);
+    
+  },[params.path])
+
+  if(paths?.item){
+    return(
+      <Item/>
+    )
+  }
+
+
 
   return (
     <div className="component mt-5 page-list">
@@ -207,8 +221,9 @@ export default function List() {
               <Card overflow="hidden" variant="outline">
                 <div className="border-b bg-slate-50 h-24 mb-14">
                   <div className="flex justify-center mt-9">
-                    <Link href="/list/item">
+                    <Link href="/de/item">
                       <Image
+                        alt="لیست"
                         src={"/img/list/list-demo.webp"}
                         width={112}
                         height={112}
@@ -225,13 +240,14 @@ export default function List() {
                   <div className="flex justify-center card-header">
                     <HStack>
                       <OpenHours />
-                      <Link href="/list/item">
+                      <Link href="/de/item">
                         <Heading size="md">رستوران البرز کلن</Heading>
                       </Link>
                     </HStack>
                   </div>
 
                   <div className="flex justify-center mt-4 card-rating">
+                  {/* @ts-ignore */}
                     <Rating
                       initialRating={2}
                       emptySymbol={

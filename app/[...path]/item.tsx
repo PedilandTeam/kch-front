@@ -1,3 +1,6 @@
+"use client"
+
+
 import {
   AtSymbolIcon,
   ChatBubbleBottomCenterTextIcon,
@@ -24,6 +27,7 @@ export default function Item() {
             <div className="item-header flex flex-col sm:flex-row bg-slate-100 p-4 sm:p-5 rounded-md">
               <div className="item-image">
                 <Image
+                  alt="logo"
                   src={"/img/list/logo/logo-demo.jpg"}
                   width={112}
                   height={112}
@@ -35,6 +39,8 @@ export default function Item() {
                   رستوران البرز کلن
                 </h1>
                 <div className="flex items-center mt-3 card-rating">
+
+                  {/* @ts-ignore */}
                   <Rating
                     initialRating={2}
                     direction={"rtl"}
@@ -70,12 +76,14 @@ export default function Item() {
               </div>
               <div className="ct-app flex">
                 <Image
+                  alt="whatsapp"
                   src={"/img/icon/whatsapp-outline.svg"}
                   width={18}
                   height={18}
                   className="ml-1"
                 />
                 <Image
+                  alt="telegram"
                   src={"/img/icon/telegram-outline.svg"}
                   width={18}
                   height={18}
@@ -200,8 +208,11 @@ export default function Item() {
             <h3 className="font-semibold mb-5">{GENERAL.FACILITIES}</h3>
           </div>
           {/* Working Hours Section */}
-          <div className="item-description sm:col-span-3">
-            <div className="rounded-md border border-gray-200 p-4">
+          <div className="relative item-description sm:col-span-3">
+            <div className=" select-none absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 font-bold text-sm">
+             ساعت‌کاری در دسترس نیست
+            </div>
+            <div className=" blur-[5px] select-none rounded-md border border-gray-200 p-4">
               <h3 className="font-semibold mb-5">{GENERAL.WORKING_HOURS}</h3>
               <div>
                 <div className="flex items-center justify-between py-1 px-2 border-b border-t border-dashed text-sm text-teal-500 bg-teal-50 border-teal-200 font-semibold">

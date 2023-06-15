@@ -1,10 +1,11 @@
+"use client"
+
 import { Tooltip } from "@chakra-ui/react";
 import { GENERAL } from "../util/allTexts";
 import { useEffect, useState } from "react";
-import classNames from "classnames";
 
-export const OpenHours = ({ variant }) => {
-  const [color, setColor] = useState(false);
+export const OpenHours = ({ variant }: {variant?: undefined}) => {
+  const [color, setColor] = useState<string | undefined>();
   const colors = {
     open: "green",
     close: "red",
@@ -19,23 +20,25 @@ export const OpenHours = ({ variant }) => {
 
   useEffect(() => {
     console.log(variant);
-    setColor(colors[variant] ? colors[variant] : colors["default"]);
+    setColor(colors[variant ?? "close"] ? colors[variant ?? "close"] : colors["default"]);
   }, [variant]);
 
   useEffect(() => {
     console.log(color);
   }, [color]);
 
-  if (color)
+
+
     return (
       <div className="open-hours">
         <Tooltip label={GENERAL.IS_OPEN} placement="top">
           <span
             className={`flex w-3 h-3  rounded-full border ${
-              variantStyles[variant] ?? variantStyles["default"]
+              variantStyles[variant ?? "close"] ?? variantStyles["default"]
             } hover:cursor-help`}
           ></span>
         </Tooltip>
       </div>
     );
-};
+  }
+

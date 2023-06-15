@@ -1,4 +1,6 @@
-import { COUNTRY, MENU, MODAL } from "../util/allTexts";
+"use client"
+
+import { COUNTRY, MENU, MODAL } from "../components/util/allTexts";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import { CircleFlag } from "react-circle-flags";
 
@@ -32,7 +34,7 @@ export const Header = () => {
     onClose: onDrawerClose,
   } = useDisclosure();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef();
+  const btnRef = useRef(null);
 
   return (
     <>
@@ -73,7 +75,7 @@ export const Header = () => {
         isOpen={isDrawerOpen}
         placement="left"
         onClose={onDrawerClose}
-        initialFocusRef={null}
+        initialFocusRef={undefined}
       >
         <DrawerOverlay />
         <DrawerContent>
@@ -93,7 +95,7 @@ export const Header = () => {
           <DrawerBody>
             <ul className="border-dashed border-y divide-dashed divide-y">
               <li className=" py-2 px-3">
-                <Link href="/list" onClick={onDrawerClose}>
+                <Link href="/de" onClick={onDrawerClose}>
                   {MENU.COMMUNITIES}
                 </Link>
               </li>
