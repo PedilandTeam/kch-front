@@ -32,6 +32,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { usePathSeparator } from "@/hooks/usePathSeparator";
 import Item from "./item";
+import Country from "./country";
 
 export default function List({params}: {params: {path: string[]}}) {
   const property = {
@@ -45,6 +46,10 @@ export default function List({params}: {params: {path: string[]}}) {
     console.log(paths);
     
   },[params.path])
+
+  if(paths.country){
+    return <Country/>
+  }
 
   if(paths?.item){
     return(

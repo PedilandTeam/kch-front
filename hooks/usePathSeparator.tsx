@@ -5,7 +5,8 @@ export const usePathSeparator = (path: string[]) => {
 
     return {
         country: path[0],
-        item: path[1]
+        unit: path[1],
+        item: path[2]
     }
 
 }
