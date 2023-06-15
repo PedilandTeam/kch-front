@@ -39,6 +39,7 @@ export default function List({params}: {params: {path: string[]}}) {
     reviewCount: 34,
     rating: 4,
   };
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const paths = usePathSeparator(params.path)
@@ -47,17 +48,12 @@ export default function List({params}: {params: {path: string[]}}) {
     
   },[params.path])
 
-  if(paths.country){
+  if(paths.country && paths.country.length == 2 && !paths.unit){
     return <Country/>
+  }else if(paths.country.length > 2 && !paths.unit){
+    return <Item/>
   }
-
-  if(paths?.item){
-    return(
-      <Item/>
-    )
-  }
-
-
+  
 
   return (
     <div className="component mt-5 page-list">
