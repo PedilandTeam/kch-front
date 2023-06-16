@@ -19,7 +19,7 @@ import {
   Stack,
   useDisclosure,
 } from "@chakra-ui/react";
-import { CATEGORY, COUNTRY, GENERAL } from "../../components/util/allTexts";
+import { CATEGORY, COUNTRY, GENERAL } from "../../components/allTexts";
 import { BadgeNew } from "../../components/elements/badgenew";
 import { BookOpenIcon, EyeIcon, FunnelIcon } from "@heroicons/react/24/solid";
 import { OpenHours } from "../../components/elements/openhours";
@@ -31,7 +31,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { usePathSeparator } from "@/hooks/usePathSeparator";
-import Item from "./item";
+import Item from "./item/item";
 import Country from "./country";
 
 export default function List({params}: {params: {path: string[]}}) {

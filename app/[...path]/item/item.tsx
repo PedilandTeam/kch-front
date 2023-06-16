@@ -1,5 +1,4 @@
-"use client"
-
+"use client";
 
 import {
   AtSymbolIcon,
@@ -15,57 +14,19 @@ import { StarIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { CircleFlag } from "react-circle-flags";
 import Rating from "react-rating";
-import { COUNTRY, DAYS, GENERAL, SOCIAL } from "../../components/util/allTexts";
+import { COUNTRY, DAYS, GENERAL, SOCIAL } from "../../../components/allTexts";
+import { ItemTopInfo } from "./topInfo";
 
 export default function Item() {
   return (
-    <div className="component mt-5 page-item">
-      <div className="container mx-auto max-w-screen-2xl px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-12 gap-y-4 sm:gap-4">
-          {/* Top Section */}
-          <div className="top-section sm:col-span-6 rounded-md">
-            <div className="item-header flex flex-col sm:flex-row bg-slate-100 p-4 sm:p-5 rounded-md">
-              <div className="item-image">
-                <Image
-                  alt="logo"
-                  src={"/img/list/logo/logo-demo.jpg"}
-                  width={112}
-                  height={112}
-                  className="rounded-full sm:rounded-md w-full sm:w-40 h-full sm:h-40 mb-4 sm:mb-0"
-                />
-              </div>
-              <div className="item-details mr-4">
-                <h1 className="text-2xl mt-2 text-slate-600 font-semibold">
-                  رستوران البرز کلن
-                </h1>
-                <div className="flex items-center mt-3 card-rating">
+    <div className="component page-item">
+      <div className="bg-slate-100 h-[300px]">
+        <ItemTopInfo />
+      </div>
 
-                  {/* @ts-ignore */}
-                  <Rating
-                    initialRating={2}
-                    direction={"rtl"}
-                    emptySymbol={<StarIcon className="h-6 w-6 text-gray-300" />}
-                    fullSymbol={
-                      <StarIcon className="h-6 w-6 text-yellow-400" />
-                    }
-                  />
-                  <span className="mr-2 text-sm text-gray-500">(304 نظر)</span>
-                </div>
-                <div className="item-location flex my-3 text-gray-600 text-sm">
-                  <CircleFlag
-                    countryCode="de"
-                    className="w-5 ml-2"
-                    title={COUNTRY.GERMANY}
-                  />
-                  <span>آلمان</span>، <span>فرانکفورت</span>
-                </div>
-                <div className="item-address text-gray-600 text-sm font-PinarLT">
-                  <span>Rathenauerplatz 1</span>, <span>Cologne</span>,{" "}
-                  <span>50674 </span>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="container mx-auto max-w-screen-2xl px-0">
+        <div className="grid grid-cols-1 sm:grid-cols-12 gap-y-4 sm:gap-4">
+          
           {/* Contact Section */}
           <div className="item-contact sm:col-span-2 rounded-md border border-gray-200 p-4">
             <h3 className="font-semibold mb-5">{GENERAL.CONTACT_INFO}</h3>
@@ -210,7 +171,7 @@ export default function Item() {
           {/* Working Hours Section */}
           <div className="relative item-description sm:col-span-3">
             <div className=" select-none absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 font-bold text-sm">
-             ساعت‌کاری در دسترس نیست
+              ساعت‌کاری در دسترس نیست
             </div>
             <div className=" blur-[5px] select-none rounded-md border border-gray-200 p-4">
               <h3 className="font-semibold mb-5">{GENERAL.WORKING_HOURS}</h3>

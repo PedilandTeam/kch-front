@@ -1,6 +1,6 @@
 "use client"
 
-import { COUNTRY, MENU, MODAL } from "../components/util/allTexts";
+import { COUNTRY, MENU, MODAL } from "../components/allTexts";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import { CircleFlag } from "react-circle-flags";
 

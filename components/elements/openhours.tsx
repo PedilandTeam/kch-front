@@ -1,7 +1,7 @@
 "use client"
 
 import { Tooltip } from "@chakra-ui/react";
-import { GENERAL } from "../util/allTexts";
+import { GENERAL } from "../allTexts";
 import { useEffect, useState } from "react";
 
 export const OpenHours = ({ variant }: {variant?: undefined}) => {
