@@ -1,4 +1,5 @@
 export const GENERAL = {
+  HOME: "خانه",
   ABOUT: "درباره کوچا",
   ADD_LIST: "افزودن کسب و کار",
   BACK_TO_LIST: "بازگشت به لیست",
