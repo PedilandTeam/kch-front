@@ -26,30 +26,30 @@ export default function Item() {
       <div className="bg-slate-100 h-[300px] mb-5">
         <ItemTopInfo />
       </div>
-      <div className="container mx-auto px-16">
+
+      <div className="container mx-auto max-w-[1144px]">
         <div className="grid grid-cols-1 sm:grid-cols-12 gap-y-4 sm:gap-4">
-          <div className="item-main sm:col-span-8 px-4">
+          <div className="item-main sm:col-span-8 pl-3">
             <ItemBreadCrumb />
 
-            <ItemButtons />
-
             {/* Description Section */}
-            <div className="item-description ">
-              <h3 className="font-semibold mb-5">{GENERAL.DESCRIPTION}</h3>
-              <div>
-                <p className="text-sm text-gray-500">
-                  توضیحات بیشتری در مورد این واحد ثبت نشده است.
-                </p>
-              </div>
+            <div className="item-description py-8 border-b-[1px] border-gray-200">
+              <h3 className="font-bold mb-5">{GENERAL.DESCRIPTION}</h3>
+              <p className="text-sm text-gray-500">
+                توضیحاتی در مورد این واحد ثبت نشده است.
+              </p>
             </div>
 
             {/* Facilities Section */}
-            <div className="item-description">
+            <div className="item-description py-8 border-b-[1px] border-gray-200">
               <h3 className="font-semibold mb-5">{GENERAL.FACILITIES}</h3>
+              <p className="text-sm text-gray-500">
+                امکانات این واحد لیست نشده است.
+              </p>
             </div>
 
             {/* Working Hours Section */}
-            <div className="relative item-description sm:col-span-3">
+            {/* <div className="relative item-description sm:col-span-3">
               <div className=" select-none absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 font-bold text-sm">
                 ساعت‌کاری در دسترس نیست
               </div>
@@ -122,19 +122,26 @@ export default function Item() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Images Section */}
-            <div className="item-description">
+            <div className="item-description py-8 border-b-[1px] border-gray-200">
               <h3 className="font-semibold mb-5">{GENERAL.IMAGES}</h3>
+              <p className="text-sm text-gray-500">
+                تصویری برای این واحد وجود ندارد.
+              </p>
             </div>
 
             {/* Comment Section */}
-            <div className="item-description">
-              <h3 className="font-semibold mb-5">{GENERAL.COMMENT_USERS}</h3>
+            <div className="item-description py-8 border-b-[1px] border-gray-200">
+              <h3 className="font-semibold mb-5">{GENERAL.USERS_COMMENTS}</h3>
+              <p className="text-sm text-gray-500">
+                امکان ثبت نظرات برای این واحد فعال نشده است.
+              </p>
             </div>
           </div>
-          <div className="sm:col-span-4 rounded-md border border-gray-200 p-4">
+
+          <div className="item-side sm:col-span-4 mr-3">
             <ItemSideInfo />
           </div>
         </div>

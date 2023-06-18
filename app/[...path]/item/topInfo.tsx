@@ -1,4 +1,7 @@
-import { COUNTRY } from "@/components/allTexts";
+import { COUNTRY, GENERAL } from "@/components/allTexts";
+import { NewButton } from "@/components/ui/button";
+import { Button } from "@chakra-ui/react";
+import { ShareIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import { CircleFlag } from "react-circle-flags";
@@ -7,7 +10,7 @@ import Rating from "react-rating";
 export const ItemTopInfo = () => {
   return (
     <div className="top-section h-full">
-      <div className="container mx-auto px-16 h-full">
+      <div className="container mx-auto max-w-[1144px] h-full">
         <div className="flex h-full items-end pb-10">
           <div className="item-image">
             <Image
@@ -38,8 +41,18 @@ export const ItemTopInfo = () => {
                 className="w-5 ml-2"
                 title={COUNTRY.GERMANY}
               />
-              <span>آلمان</span><span className="ml-1">،</span><span>فرانکفورت</span>
+              <span>آلمان</span>
+              <span className="ml-1">،</span>
+              <span>فرانکفورت</span>
             </div>
+          </div>
+          <div className="item-top-buttons flex-1 flex justify-end">
+            <Button variant="outline" color="gray.600">
+              {GENERAL.ALL_IMAGES_VIEW}
+            </Button>
+            <Button variant="outline" color="gray.600" mr="2">
+              <ShareIcon className="w-5 h-5" />
+            </Button>
           </div>
         </div>
       </div>
