@@ -17,7 +17,7 @@ export const ItemBreadCrumb = () => {
         <BreadcrumbLink href="#">مشاغل فارسی زبان</BreadcrumbLink>
       </BreadcrumbItem>
 
-      <BreadcrumbItem isCurrentPage>
+      <BreadcrumbItem>
         <BreadcrumbLink href="#">رستوران ایرانی</BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>

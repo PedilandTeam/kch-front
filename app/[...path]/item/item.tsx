@@ -1,22 +1,7 @@
 "use client";
 
-import {
-  AtSymbolIcon,
-  ChatBubbleBottomCenterTextIcon,
-  DevicePhoneMobileIcon,
-  EyeIcon,
-  FlagIcon,
-  GlobeAltIcon,
-  PhoneIcon,
-  ShareIcon,
-} from "@heroicons/react/24/outline";
-import { StarIcon } from "@heroicons/react/24/solid";
-import Image from "next/image";
-import { CircleFlag } from "react-circle-flags";
-import Rating from "react-rating";
 import { COUNTRY, DAYS, GENERAL, SOCIAL } from "../../../components/allTexts";
 import { ItemBreadCrumb } from "./breadcrumb";
-import { ItemButtons } from "./buttons";
 import { ItemSideInfo } from "./sideInfo";
 import { ItemTopInfo } from "./topInfo";
 
@@ -33,7 +18,7 @@ export default function Item() {
             <ItemBreadCrumb />
 
             {/* Description Section */}
-            <div className="item-description py-8 border-b-[1px] border-gray-200">
+            <div className="item-description py-8 border-b border-gray-200">
               <h3 className="font-bold mb-5">{GENERAL.DESCRIPTION}</h3>
               <p className="text-sm text-gray-500">
                 توضیحاتی در مورد این واحد ثبت نشده است.
@@ -41,8 +26,8 @@ export default function Item() {
             </div>
 
             {/* Facilities Section */}
-            <div className="item-description py-8 border-b-[1px] border-gray-200">
-              <h3 className="font-semibold mb-5">{GENERAL.FACILITIES}</h3>
+            <div className="item-description py-8 border-b border-gray-200">
+              <h3 className="font-bold mb-5">{GENERAL.FACILITIES}</h3>
               <p className="text-sm text-gray-500">
                 امکانات این واحد لیست نشده است.
               </p>
@@ -125,16 +110,16 @@ export default function Item() {
             </div> */}
 
             {/* Images Section */}
-            <div className="item-description py-8 border-b-[1px] border-gray-200">
-              <h3 className="font-semibold mb-5">{GENERAL.IMAGES}</h3>
+            <div className="item-description py-8 border-b border-gray-200">
+              <h3 className="font-bold mb-5">{GENERAL.IMAGES}</h3>
               <p className="text-sm text-gray-500">
                 تصویری برای این واحد وجود ندارد.
               </p>
             </div>
 
             {/* Comment Section */}
-            <div className="item-description py-8 border-b-[1px] border-gray-200">
-              <h3 className="font-semibold mb-5">{GENERAL.USERS_COMMENTS}</h3>
+            <div className="item-description py-8">
+              <h3 className="font-bold mb-5">{GENERAL.USERS_COMMENTS}</h3>
               <p className="text-sm text-gray-500">
                 امکان ثبت نظرات برای این واحد فعال نشده است.
               </p>
