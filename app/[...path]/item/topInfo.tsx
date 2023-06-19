@@ -11,7 +11,7 @@ export const ItemTopInfo = () => {
   return (
     <div className="top-section h-full">
       <div className="container mx-auto max-w-[1144px] h-full">
-        <div className="flex h-full items-end pb-10">
+        <div className="flex flex-col sm:flex-row items-center sm:items-end py-10 sm:pb-10 h-full">
           <div className="item-image">
             <Image
               alt="logo"
@@ -21,7 +21,7 @@ export const ItemTopInfo = () => {
               className="rounded-full w-full sm:w-40 h-full sm:h-40 mb-4 sm:mb-0 drop-shadow-sm"
             />
           </div>
-          <div className="item-details mr-5">
+          <div className="item-details sm:mr-5">
             <h1 className="text-[34px] font-semibold text-slate-700">
               رستوران البرز کلن
             </h1>
@@ -35,7 +35,7 @@ export const ItemTopInfo = () => {
               />
               <span className="mr-2 text-gray-500">(304 نظر)</span>
             </div>
-            <div className="item-location flex mb-5 my-3 text-gray-600">
+            <div className="item-location flex justify-center sm:justify-start mb-5 my-3 text-gray-600">
               <CircleFlag
                 countryCode="de"
                 className="w-5 ml-2"
@@ -74,7 +74,7 @@ export const ItemTopInfo = () => {
                 <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path>
               </svg>
             </div>
-            <div className="sc-youtube group inline-flex ml-7">
+            <div className="sc-youtube group inline-flex ml-4 sm:ml-7">
               <svg
                 className="w-6 h-6 text-gray-400 group-hover:text-red-600 group-hover:cursor-pointer fill-current"
                 xmlns="http://www.w3.org/2000/svg"
