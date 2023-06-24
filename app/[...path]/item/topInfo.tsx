@@ -49,7 +49,7 @@ export const ItemTopInfo = () => {
           <div className="item-top-buttons flex-1 flex justify-end content-end">
             <div className="sc-instagram group inline-flex ml-4">
               <svg
-                className="w-6 h-6 text-gray-400 group-hover:text-pink-700 group-hover:cursor-pointer fill-current"
+                className="w-6 h-6 text-pink-600 group-hover:text-pink-700 group-hover:cursor-pointer fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
@@ -58,7 +58,7 @@ export const ItemTopInfo = () => {
             </div>
             <div className="sc-facebook group inline-flex ml-4">
               <svg
-                className="w-6 h-6 text-gray-400 group-hover:text-blue-500 group-hover:cursor-pointer fill-current"
+                className="w-6 h-6 text-blue-500 group-hover:text-blue-600 group-hover:cursor-pointer fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
@@ -67,7 +67,7 @@ export const ItemTopInfo = () => {
             </div>
             <div className="sc-linkedin group inline-flex ml-4">
               <svg
-                className="w-6 h-6 text-gray-400 group-hover:text-sky-700 group-hover:cursor-pointer fill-current"
+                className="w-6 h-6 text-sky-600 group-hover:text-sky-700 group-hover:cursor-pointer fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 448 512"
               >
@@ -76,7 +76,7 @@ export const ItemTopInfo = () => {
             </div>
             <div className="sc-youtube group inline-flex ml-4 sm:ml-7">
               <svg
-                className="w-6 h-6 text-gray-400 group-hover:text-red-600 group-hover:cursor-pointer fill-current"
+                className="w-6 h-6 text-red-500 group-hover:text-red-600 group-hover:cursor-pointer fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
@@ -84,7 +84,7 @@ export const ItemTopInfo = () => {
               </svg>
             </div>
             <div className="sc-share group inline-flex">
-              <ShareIcon className="w-5 h-5 text-gray-400 group-hover:text-pink-600 group-hover:cursor-pointer" />
+              <ShareIcon className="w-5 h-5 text-gray-400 group-hover:text-pink-600 group-hover:cursor-pointer mt-[2px]" />
             </div>
           </div>
         </div>

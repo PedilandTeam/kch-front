@@ -5,14 +5,15 @@ import {
   HandRaisedIcon,
   PencilIcon,
   PhoneArrowUpRightIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 
 export const ItemSideInfo = () => {
   return (
-    <>
-      <div className="rounded-md border border-gray-200 p-5">
+    <div className="item-side sm:col-span-4 sm:col-end-13 mx-3 sm:mr-3 sm:ml-0">
+      <div className="rounded-md border border-gray-200 p-5 mb-3">
         <div className="item-contact">
           <div className="ct-website flex justify-between pb-3 border-b border-gray-200">
             <Link href="#" target="_blank">
@@ -78,6 +79,27 @@ export const ItemSideInfo = () => {
           </Button>
         </div>
       </div>
-    </>
+      <div className="rounded-md border border-gray-200 p-4">
+        <div className="mb-7 flex justify-between">
+          <Image
+            alt="telegram"
+            src={"/img/icon/verified-badge-100.png"}
+            width={40}
+            height={40}
+            className="ml-2"
+          />
+          <XMarkIcon className="w-5 h-5 text-gray-500 mt-1 hover:cursor-pointer hover:text-gray-800" />
+        </div>
+        <h6 className="font-semibold mb-2">آیا شما مالک این صفحه هستید؟</h6>
+        <p className="text-[14px] leading-6 text-gray-700 mb-5">
+          با احراز هویت تیک آبی دریافت کنید. مدیریت اطلاعات صفحه خود را به عهده
+          بگیرید، با مخاطبان خود در تماس باشید و از سایر امکانات کوچا برای دیده
+          شدن صفحه خود استفاده کنید.
+        </p>
+        <Button variant="outline" colorScheme="gray">
+          دریافت مالکیت صفحه
+        </Button>
+      </div>
+    </div>
   );
 };
