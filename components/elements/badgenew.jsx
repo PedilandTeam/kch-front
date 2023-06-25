@@ -1,5 +1,5 @@
 import { Badge } from "@chakra-ui/react";
-import { GENERAL } from "../util/allTexts";
+import { GENERAL } from "../allTexts";
 
 export const BadgeNew = ({ variant }) => {
   return (

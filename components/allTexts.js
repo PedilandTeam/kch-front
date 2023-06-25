@@ -1,4 +1,6 @@
 export const GENERAL = {
+  HOME: "خانه",
+  ALL_IMAGES_VIEW: "مشاهده تمامی تصاویر",
   ABOUT: "درباره کوچا",
   ADD_LIST: "افزودن کسب و کار",
   BACK_TO_LIST: "بازگشت به لیست",
@@ -11,7 +13,7 @@ export const GENERAL = {
   CITY_NAME: "نام‌شهر",
   CONTACT_INFO: "اطلاعات تماس",
   COMMENT_SUBMIT: "ثبت نظر",
-  COMMENT_USERS: "نظر کاربران",
+  USERS_COMMENTS: "نظرات کاربران",
   CLOSED: "تعطیل",
   DESCRIPTION: "توضیحات",
   EMAIL: "ایمیل",

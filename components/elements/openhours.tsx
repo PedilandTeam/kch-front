@@ -1,7 +1,7 @@
 "use client"
 
 import { Tooltip } from "@chakra-ui/react";
-import { GENERAL } from "../util/allTexts";
+import { GENERAL } from "../allTexts";
 import { useEffect, useState } from "react";
 
 export const OpenHours = ({ variant }: {variant?: undefined}) => {
@@ -33,7 +33,7 @@ export const OpenHours = ({ variant }: {variant?: undefined}) => {
       <div className="open-hours">
         <Tooltip label={GENERAL.IS_OPEN} placement="top">
           <span
-            className={`flex w-3 h-3  rounded-full border ${
+            className={`flex w-4 h-4 rounded-full border ${
               variantStyles[variant ?? "close"] ?? variantStyles["default"]
             } hover:cursor-help`}
           ></span>

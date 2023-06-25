@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Badge,
@@ -18,8 +18,9 @@ import {
   ModalOverlay,
   Stack,
   useDisclosure,
+  CardFooter,
 } from "@chakra-ui/react";
-import { CATEGORY, COUNTRY, GENERAL } from "../../components/util/allTexts";
+import { CATEGORY, COUNTRY, GENERAL } from "../../components/allTexts";
 import { BadgeNew } from "../../components/elements/badgenew";
 import { BookOpenIcon, EyeIcon, FunnelIcon } from "@heroicons/react/24/solid";
 import { OpenHours } from "../../components/elements/openhours";
@@ -31,10 +32,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { usePathSeparator } from "@/hooks/usePathSeparator";
-import Item from "./item";
+import Item from "./item/item";
 import Country from "./country";
 
-export default function List({params}: {params: {path: string[]}}) {
+export default function List({ params }: { params: { path: string[] } }) {
   const property = {
     reviewCount: 34,
     rating: 4,
@@ -42,24 +43,22 @@ export default function List({params}: {params: {path: string[]}}) {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const paths = usePathSeparator(params.path)
+  const paths = usePathSeparator(params.path);
   useEffect(() => {
     console.log(paths);
-    
-  },[params.path])
+  }, [params.path]);
 
-  if(paths.country && paths.country.length == 2 && !paths.unit){
-    return <Country/>
-  }else if(paths.country.length > 2 && !paths.unit){
-    return <Item/>
+  if (paths.country && paths.country.length == 2 && !paths.unit) {
+    return <Country />;
+  } else if (paths.country.length > 2 && !paths.unit) {
+    return <Item />;
   }
-  
 
   return (
     <div className="component mt-5 page-list">
-      <div className="container mx-auto max-w-screen-2xl px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-5 gap-y-4 sm:gap-5">
-          <div className="sidebar rounded-md border bg-slate-50 p-3">
+      <div className="container mx-auto max-w-[1144px]">
+        <div className="grid grid-cols-1 sm:grid-cols-8 gap-y-4 sm:gap-8">
+          <div className="sidebar sm:col-span-2">
             <div
               className="filter-title w-full flex md:hidden pt-1"
               onClick={onOpen}
@@ -217,72 +216,63 @@ export default function List({params}: {params: {path: string[]}}) {
               </div>
             </div>
           </div>
-          <div className="page-content sm:col-span-4">
-            <div className="list-card grid grid-cols-1 sm:grid-cols-4 gap-y-4 sm:gap-3">
-              <Card overflow="hidden" variant="outline">
-                <div className="border-b bg-slate-50 h-24 mb-14">
-                  <div className="flex justify-center mt-9">
-                    <Link href="/de/item">
-                      <Image
-                        alt="لیست"
-                        src={"/img/list/list-demo.webp"}
-                        width={112}
-                        height={112}
-                        className="rounded-full w-28 h-28"
+          <div className="page-content sm:col-span-6">
+            <div className="list-card grid grid-cols-1 sm:grid-cols-1 gap-y-4 sm:gap-4">
+              <Card overflow="hidden" variant={"unstyled"}>
+                <div className="flex">
+                  <Link href="/de/item">
+                    <Image
+                      alt="لیست"
+                      src={"/img/list/list-demo.webp"}
+                      width={180}
+                      height={180}
+                      className="rounded-md w-[180px] h-[180px]"
+                    />
+                  </Link>
+                  <CardBody padding={5}>
+                    <div className="flex card-header items-center">
+                      <OpenHours />
+                      <Link href="/de/item" className="mr-2">
+                        <h2 className="text-[24px] font-bold">رستوران البرز کلن</h2>
+                      </Link>
+                    </div>
+
+                    <div className="flex mt-3 mb-1 card-rating">
+                      {/* @ts-ignore */}
+                      <Rating
+                        initialRating={2}
+                        emptySymbol={
+                          <StarIcon className="h-5 w-5 text-gray-300" />
+                        }
+                        fullSymbol={
+                          <StarIcon className="h-5 w-5 text-yellow-400" />
+                        }
                       />
-                    </Link>
-                  </div>
-                  <div>
+                      <span className="mr-2 text-sm text-gray-500">
+                        (304 نظر)
+                      </span>
+                    </div>
+
+                    <div className="flex w-full card-tools text-[14px] text-gray-700">
+                      <div className="flex ml-5">
+                        <CircleFlag
+                          countryCode="de"
+                          className="w-4 ml-1"
+                          title={COUNTRY.GERMANY}
+                        />
+                        کلن
+                      </div>
+                      <div className="flex justify-center content-center">
+                        <BookOpenIcon className="w-4 ml-1 text-gray-400" />
+                        <span>{CATEGORY.RESTAURANT}</span>
+                      </div>
+                    </div>
+                  </CardBody>
+                </div>
+                {/* <div>
                     <BadgeNew variant={"new"} />
                     <BadgeNew variant={"featured"} />
-                  </div>
-                </div>
-                <CardBody>
-                  <div className="flex justify-center card-header">
-                    <HStack>
-                      <OpenHours />
-                      <Link href="/de/item">
-                        <Heading size="md">رستوران البرز کلن</Heading>
-                      </Link>
-                    </HStack>
-                  </div>
-
-                  <div className="flex justify-center mt-4 card-rating">
-                  {/* @ts-ignore */}
-                    <Rating
-                      initialRating={2}
-                      emptySymbol={
-                        <StarIcon className="h-5 w-5 text-gray-300" />
-                      }
-                      fullSymbol={
-                        <StarIcon className="h-5 w-5 text-yellow-400" />
-                      }
-                    />
-                    <span className="mr-2 text-sm text-gray-500">
-                      (304 نظر)
-                    </span>
-                  </div>
-                </CardBody>
-                <div className="border-t p-3">
-                  <div className="flex w-full justify-between card-tools text-sm text-gray-700">
-                    <div className="flex">
-                      <CircleFlag
-                        countryCode="de"
-                        className="w-5 ml-2"
-                        title={COUNTRY.GERMANY}
-                      />
-                      کلن
-                    </div>
-                    <div className="flex justify-center content-center">
-                      <BookOpenIcon className="w-5 ml-1 text-gray-400" />
-                      <span>{CATEGORY.RESTAURANT}</span>
-                    </div>
-                    <div className="flex">
-                      <EyeIcon className="w-5 ml-1 text-gray-400" />
-                      <span>112</span>
-                    </div>
-                  </div>
-                </div>
+                  </div> */}
               </Card>
             </div>
           </div>

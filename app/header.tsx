@@ -1,6 +1,6 @@
 "use client"
 
-import { COUNTRY, MENU, MODAL } from "../components/util/allTexts";
+import { COUNTRY, MENU, MODAL } from "../components/allTexts";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import { CircleFlag } from "react-circle-flags";
 
@@ -39,8 +39,8 @@ export const Header = () => {
   return (
     <>
       <header className="shadow-sm">
-        <div className="p-3">
-          <div className="flex justify-between">
+        <div className="container mx-auto max-w-[1144px]">
+          <div className="flex justify-between p-3 sm:py-3 sm:px-0">
             <div className="logo">
               <Link href="/">
                 <Image
