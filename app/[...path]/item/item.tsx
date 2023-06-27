@@ -18,7 +18,7 @@ export default function PageItem ({pageData}: PageItemProps) {
 
       <div className="container mx-auto max-w-[1144px]">
         <div className="grid grid-cols-1 sm:grid-cols-12 gap-y-4 sm:gap-4">
-          <ItemSideInfo />
+          <ItemSideInfo pageData={pageData} />
 
           <div className="item-main sm:col-span-8 sm:col-start-1 sm:row-start-1 px-3 sm:pl-3 sm:pr-0">
             <ItemBreadCrumb />

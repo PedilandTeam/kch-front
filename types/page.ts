@@ -11,7 +11,7 @@ export namespace PageNamespace{
         description: string;
         address:     Address;
         socials?:    Partial<Socials>;
-        contact:     null;
+        contact:     Partial<Contact>;
         profile:     null;
         status:      boolean;
         pictures:    any[];
@@ -23,6 +23,14 @@ export namespace PageNamespace{
     
 }
 
+export interface Contact {
+    [key: string]: string | undefined
+    telephone: string;
+    phone: string;
+    whatsapp: string;
+    fax: string
+    email: string
+}
 
 export interface Socials {
     [key: string]: string | undefined
