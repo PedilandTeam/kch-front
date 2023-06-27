@@ -134,7 +134,7 @@ export const Header = () => {
                   {COUNTRY.ALL}
                 </p>
               </Link>
-              <Link href="#">
+              <Link href="de">
                 <CircleFlag
                   countryCode="de"
                   className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"

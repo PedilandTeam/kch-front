@@ -4,8 +4,8 @@ import { useEffect } from "react";
 
 import { usePathSeparator } from "@/hooks/usePathSeparator";
 import Item from "./item/item";
-import Country from "./country";
-import List from "./list";
+import Country from "./country/country";
+import List from "./list/list";
 
 export default function Path({ params }: { params: { path: string[] } }) {
   const property = {

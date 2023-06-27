@@ -10,15 +10,15 @@ export const ItemBreadCrumb = () => {
       separator={<ChevronLeftIcon color="gray.500" />}
     >
       <BreadcrumbItem>
-        <BreadcrumbLink href="#">خانه</BreadcrumbLink>
+        <BreadcrumbLink href="/">خانه</BreadcrumbLink>
       </BreadcrumbItem>
 
       <BreadcrumbItem>
-        <BreadcrumbLink href="#">آلمان</BreadcrumbLink>
+        <BreadcrumbLink href="de">آلمان</BreadcrumbLink>
       </BreadcrumbItem>
 
       <BreadcrumbItem isCurrentPage>
-        <BreadcrumbLink href="#">مشاغل فارسی زبان</BreadcrumbLink>
+        <BreadcrumbLink href="de/list">مشاغل فارسی زبان</BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>
   );

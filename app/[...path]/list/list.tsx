@@ -1,6 +1,6 @@
-import { ItemBreadCrumb } from "./list/breadcrumb";
-import { ListCards } from "./list/cards";
-import { ListFilter } from "./list/filter";
+import { ItemBreadCrumb } from "./breadcrumb";
+import { ListCards } from "./cards";
+import { ListFilter } from "./filter";
 
 export default function List() {
   return (

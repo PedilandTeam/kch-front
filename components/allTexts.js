@@ -23,6 +23,7 @@ export const GENERAL = {
   FILTER_SELECT_PLEASE: "لطفا فیلترهای خود را انتخاب کنید",
   FEATURED: "ویژه",
   IMAGES: "تصاویر",
+  ITEM: "مورد",
   IS_OPEN: "باز است",
   KOOCHAA: "کوچا",
   KOOCHAA_SLOGAN: "جامعه پارسی زبانان مهاجر",
@@ -36,7 +37,7 @@ export const GENERAL = {
   SHARING: "اشتراک گذاری",
   TIMES: "بار",
   TOOLS: "ابزارها",
-  VIEW: "تعداد بازدید",
+  VIEW: "بازدید",
   WEBSITE: "وب سایت",
   WORKING_HOURS: "ساعات کاری",
 };
@@ -88,9 +89,11 @@ export const COUNTRY = {
   JAPAN: "ژاپن",
 };
 export const MENU = {
-  COMMUNITIES: "جوامع فارسی زبان",
-  BUSINESSES: "مشاغل فارسی زبان",
-  DOCTORS: "پزشکان فارسی زبان",
+  BUSINESSES: "مشاغل فارسی‌زبان",
+  DOCTORS: "پزشکان فارسی‌زبان",
+  FREELANCERS: "فریلنسرهای فارسی‌زبان",
+  COMMUNITIES: "جوامع فارسی‌زبان",
+
 };
 export const DAYS = {
   MONDAY: "دوشنبه",
