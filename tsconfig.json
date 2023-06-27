@@ -18,9 +18,16 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@app/*": [
+        "./app/*"
+      ],
+      "@client-packages/*": [
+        "./app/client-packages/*"
       ]
     },
     "plugins": [

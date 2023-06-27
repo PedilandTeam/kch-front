@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import Button from "@client-packages/chakra-ui/button"
 import {
   ArrowTopRightOnSquareIcon,
   ArrowUturnRightIcon,

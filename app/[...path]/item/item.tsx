@@ -1,18 +1,19 @@
-"use client";
 
-import { AlertClose } from "@/components/ui/alertClose";
-import { Alert } from "@chakra-ui/react";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
-import { COUNTRY, DAYS, GENERAL, SOCIAL } from "../../../components/allTexts";
+import { GENERAL } from "../../../components/allTexts";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { ItemSideInfo } from "./sideInfo";
 import { ItemTopInfo } from "./topInfo";
+import React, { useEffect } from "react";
+import { PageNamespace } from "@/types/page";
+export type PageItemProps = {
+  pageData: PageNamespace.GET
+}
+export default function PageItem ({pageData}: PageItemProps) {
 
-export default function Item() {
   return (
     <div className="component page-item">
       <div className="bg-slate-100 sm:h-[300px] mb-3 sm:mb-4">
-        <ItemTopInfo />
+        <ItemTopInfo pageData={pageData} />
       </div>
 
       <div className="container mx-auto max-w-[1144px]">
