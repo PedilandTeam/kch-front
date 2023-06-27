@@ -1,9 +1,6 @@
 "use client";
 
-import { AlertClose } from "@/components/ui/alertClose";
-import { Alert } from "@chakra-ui/react";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
-import { COUNTRY, DAYS, GENERAL, SOCIAL } from "../../../components/allTexts";
+import { GENERAL } from "../../../components/allTexts";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { ItemSideInfo } from "./sideInfo";
 import { ItemTopInfo } from "./topInfo";
