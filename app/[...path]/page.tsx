@@ -4,7 +4,7 @@ import PagesList from "./list/list";
 import { API_ROUTES } from "@/routes";
 import { CountryNamespace } from "@/types/country";
 import PageItem from "./item/item";
-import NotFound from "../not-found";
+import {notFound} from "next/navigation"
 
 export default async function CenterPage({ params }: { params: { path: string[] } }) {
 
@@ -27,6 +27,6 @@ export default async function CenterPage({ params }: { params: { path: string[] 
     const pageData = await (await API_ROUTES.PAGES.GET_ONE(paths.country)).json()
     return <PageItem pageData={pageData} />;
   }catch(e){
-    return <NotFound/>
+    notFound()
   }
 }

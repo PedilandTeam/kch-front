@@ -1,13 +1,12 @@
-"use client"
+
 import { COUNTRY } from "@/components/allTexts";
 import { ShareIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 // import { CircleFlag } from "react-circle-flags";
-import CircleFlag from "@client-packages/chakra-ui/circleflag";
-import Rating from "@client-packages/chakra-ui/react-rating";
+import CircleFlag from "@/app/client-packages/circleflag";
+import Rating from "@client-packages/react-rating";
 import { PageNamespace } from "@/types/page";
-import { useEffect } from "react";
 import SocialLink from "./socials/socialLink";
 import { socials as socialsType } from "@/types/socials.";
 
@@ -54,12 +53,12 @@ export const ItemTopInfo = ({pageData}: ItemTopInfoType) => {
               <span>{pageData?.city?.name}</span>
             </div>
           </div>
-          <div className="item-top-buttons flex-1 flex justify-end content-end">
+          <div className="ittem-top-buttons flex-1 flex justify-end content-end">
 
             {
               pageData.socials &&
               Object.keys(pageData.socials).map((social: string, index: number) => {
-                return <SocialLink key={index} name={social as socialsType} link={pageData?.socials?.[social] || null} />
+                return <SocialLink key={index} name={social as socialsType} link={pageData?.socials?.[social]?.replace(/^https?:\/\//, '') || null} />
               })
             }
 

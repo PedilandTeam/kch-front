@@ -1,7 +1,7 @@
 import { Header } from "./header";
 import { Footer } from "./footer";
 import "@/styles/globals.css";
-import ChakraProvider from "./chackraProvider";
+import ChakraProvider from "@client-packages/chakra-ui/chackraProvider";
 import theme from "../config/theme";
 import Fonts from "../config/fonts";
 

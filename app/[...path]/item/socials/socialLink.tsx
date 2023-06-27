@@ -15,12 +15,12 @@ export type socialLinkProps = {
 export default function SocialLink({ name, link }: socialLinkProps) {
 
     return (
-        link ?
-            <Link href={link} target="_blank" >
+        link  ?
+            <a href={`https://${link}`} rel="norefrer" target="_blank" >
                 {
                     name == "instagram" ? <InstagramIcon /> : name == "facebook" ? <FacebookIcon /> : name == "linkedin" ? <LinkedinIcon /> : name == "youtube" ? <YoutubeIcon/> : null
                 }
-            </Link>
+            </a>
             : null
     )
 
