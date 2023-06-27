@@ -30,7 +30,7 @@ export const ItemTopInfo = ({pageData}: ItemTopInfoType) => {
           </div>
           <div className="item-details sm:mr-5">
             <h1 className="text-[34px] font-semibold text-slate-700">
-              {pageData.title}
+              {pageData?.title}
             </h1>
             <div className="flex items-center mt-3 card-rating">
               {/* @ts-ignore */}
@@ -56,7 +56,7 @@ export const ItemTopInfo = ({pageData}: ItemTopInfoType) => {
           <div className="ittem-top-buttons flex-1 flex justify-end content-end">
 
             {
-              pageData.socials &&
+              pageData?.socials &&
               Object.keys(pageData.socials).map((social: string, index: number) => {
                 return <SocialLink key={index} name={social as socialsType} link={pageData?.socials?.[social]?.replace(/^https?:\/\//, '') || null} />
               })

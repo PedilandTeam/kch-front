@@ -1,3 +1,5 @@
+"use client"
+
 import { Button, ButtonGroup, Stack } from "@chakra-ui/react";
 import {
   ChatBubbleBottomCenterTextIcon,

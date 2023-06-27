@@ -13,7 +13,7 @@ export default async function CenterPage({ params }: { params: { path: string[] 
   
   
   
-  const isCountryExist = countries.find(country => country.code == paths.country)
+  const isCountryExist = countries.find(country => country.code == paths.countryOrSlug)
   if (isCountryExist && !paths.unit) {
     //show country
     return <Country />;
@@ -24,8 +24,11 @@ export default async function CenterPage({ params }: { params: { path: string[] 
 
   //show single page
   try{
-    const pageData = await (await API_ROUTES.PAGES.GET_ONE(paths.country)).json()
-    return <PageItem pageData={pageData} />;
+    const pageData = await (await API_ROUTES.PAGES.GET_ALL(1, 1, paths.countryOrSlug, "default", 5)).json()
+    if(!pageData?.items){
+      notFound()
+    }
+    return <PageItem pageData={pageData.items} />;
   }catch(e){
     notFound()
   }
