@@ -1,12 +1,10 @@
 
 import { usePathSeparator } from "@/hooks/usePathSeparator";
-import Country from "./country";
 import PagesList from "./list/list";
 import { API_ROUTES } from "@/routes";
 import { CountryNamespace } from "@/types/country";
 import PageItem from "./item/item";
 import {notFound} from "next/navigation"
-import { usePathSeparator } from "@/hooks/usePathSeparator";
 import Item from "./item/item";
 import Country from "./country/country";
 import List from "./list/list";

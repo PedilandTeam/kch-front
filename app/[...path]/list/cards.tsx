@@ -1,3 +1,4 @@
+"use client"
 import { Card, CardBody } from "@chakra-ui/react";
 
 import { StarIcon } from "@heroicons/react/24/solid";
