@@ -45,7 +45,7 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
         Array.isArray(Images) &&
         Images.map((image, index) => {
           return (
-            <Link href={image.href || "#"} target="_blank">
+            <Link key={index} href={image.href || "#"} target="_blank">
               <Image
                 key={image.href}
                 alt="social icon"
