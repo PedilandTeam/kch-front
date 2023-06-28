@@ -1,3 +1,4 @@
+
 import { usePathSeparator } from "@/hooks/usePathSeparator";
 import Country from "./country";
 import PagesList from "./list/list";
@@ -5,10 +6,15 @@ import { API_ROUTES } from "@/routes";
 import { CountryNamespace } from "@/types/country";
 import PageItem from "./item/item";
 import {notFound} from "next/navigation"
+import { usePathSeparator } from "@/hooks/usePathSeparator";
+import Item from "./item/item";
+import Country from "./country/country";
+import List from "./list/list";
 
 export default async function CenterPage({ params }: { params: { path: string[] } }) {
 
   const countries: CountryNamespace.GET[] = await (await API_ROUTES.COUNTRIES.GET_ALL("default", 20)).json()
+
   const paths = usePathSeparator(params.path);
   
   
@@ -19,8 +25,9 @@ export default async function CenterPage({ params }: { params: { path: string[] 
     return <Country />;
   } else if (isCountryExist && paths.unit) {
     // show list of pages
-    return <PagesList/>
+  return <List />;
   }
+
 
   //show single page
   try{

@@ -1,5 +1,3 @@
-"use client"
-
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 
@@ -16,11 +14,11 @@ export const ItemBreadCrumb = () => {
       </BreadcrumbItem>
 
       <BreadcrumbItem>
-        <BreadcrumbLink href="/de/list">مشاغل فارسی زبان</BreadcrumbLink>
+        <BreadcrumbLink href="de">آلمان</BreadcrumbLink>
       </BreadcrumbItem>
 
-      <BreadcrumbItem>
-        <BreadcrumbLink href="/de/list">رستوران ایرانی</BreadcrumbLink>
+      <BreadcrumbItem isCurrentPage>
+        <BreadcrumbLink href="de/list">مشاغل فارسی زبان</BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>
   );
