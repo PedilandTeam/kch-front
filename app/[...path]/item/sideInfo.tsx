@@ -1,4 +1,5 @@
-import { Button } from "@chakra-ui/react";
+import { PageNamespace } from "@/types/page";
+import Button from "@client-packages/chakra-ui/button"
 import {
   ArrowTopRightOnSquareIcon,
   ArrowUturnRightIcon,
@@ -9,58 +10,114 @@ import {
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
+import React, { useEffect } from "react";
 
-export const ItemSideInfo = () => {
+
+interface ItemSideInfoType {
+  pageData: PageNamespace.GET
+}
+
+type ImageItem = {
+  src: string,
+  href?: string | undefined | null
+}
+
+type IconItem = {
+  Component: React.ReactNode,
+  href?: string | undefined | null
+}
+interface ItemSideInfoItemType {
+  Icons?: IconItem[];
+  Images?: ImageItem[]
+  text: string | undefined
+}
+
+function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
+  if (!Icons && !Images) {
+    throw new Error("ItemSideInfoItem should have Icons or Images props. you don't pass any of them!")
+  }
+  if (!text) {
+    return null
+  }
+  return (
+    <div className="ct-website flex justify-between  items-center py-2 border-b border-gray-200">
+      {
+        Array.isArray(Images) &&
+        Images.map((image, index) => {
+          return (
+            <Link href={image.href || "#"} target="_blank">
+              <Image
+                key={image.href}
+                alt="social icon"
+                src={image.src}
+                width={20}
+                height={20}
+                className="ml-2"
+              />
+            </Link>
+          )
+        })
+      }
+      {
+        Array.isArray(Icons) &&
+        Icons.map((Icon, index) => {
+          return (
+            <Link key={index} href={Icon.href || "#"} target="_blank">
+              {Icon.Component}
+            </Link>
+          )
+        })
+      }
+      <span>{text}</span>
+    </div>
+  )
+}
+
+
+export function ItemSideInfo({ pageData }: ItemSideInfoType) {
+
   return (
     <div className="item-side sm:col-span-4 sm:col-end-13 mx-3 sm:mr-3 sm:ml-0">
       <div className="rounded-md border border-gray-200 p-5 mb-3">
         <div className="item-contact">
-          <div className="ct-website flex justify-between pb-3 border-b border-gray-200">
-            <Link href="#" target="_blank">
-              <ArrowTopRightOnSquareIcon className="w-5 h-5 text-gray-500" />
-            </Link>
-            <span>www.koochaa.com</span>
-          </div>
 
-          <div className="ct-mobile flex justify-between py-3 border-b border-gray-200">
-            <div className="ct-app flex">
-              <Link href="#" target="_blank">
-                <Image
-                  alt="whatsapp"
-                  src={"/img/icon/whatsapp-outline.svg"}
-                  width={20}
-                  height={20}
-                  className="ml-2"
-                />
-              </Link>
-              <Link href="#" target="_blank">
-                <Image
-                  alt="telegram"
-                  src={"/img/icon/telegram-outline.svg"}
-                  width={20}
-                  height={20}
-                  className="ml-2"
-                />
-              </Link>
-              <Link href="#" target="_blank">
-                <PhoneArrowUpRightIcon className="w-5 h-5 text-gray-500" />
-              </Link>
-            </div>
-            <span className="font-PinarLT text-[15px]" dir="ltr">
-              +49 163 9514203
-            </span>
-          </div>
+          {
+            pageData?.socials?.website ?
+              <ItemSideInfoItem text={new URL(pageData?.socials?.website).host} Icons={[
+                {
+                  Component: <ArrowTopRightOnSquareIcon className="w-5 h-5 text-gray-500" />,
+                  href: pageData?.socials?.website,
+                }
+              ]} />
+              :
+              <ItemSideInfoItem text={pageData?.contact.email} Icons={[
+                {
+                  Component: <ArrowTopRightOnSquareIcon className="w-5 h-5 text-gray-500" />,
+                  href: pageData?.socials?.website,
+                }
+              ]} />
+          }
 
-          <div className="ct-phone flex justify-between py-3 border-b border-gray-200">
-            <Link href="#" target="_blank">
-              <PhoneArrowUpRightIcon className="w-5 h-5 text-gray-500" />
-            </Link>
-            <span className="font-PinarLT text-[15px]" dir="ltr">
-              +49 21 4421124
-            </span>
-          </div>
+          <ItemSideInfoItem text={pageData?.contact?.telephone}
+            Icons={[
+              {
+                Component: <PhoneArrowUpRightIcon className="w-5 h-5 text-gray-500" />,
+                href: `tel:${pageData.contact.telephone}`
+              }
+            ]}
+          />
 
-          <div className="ct-address flex justify-between pt-3 pb-5">
+          <ItemSideInfoItem text={pageData?.contact?.phone}
+            Icons={[
+              {
+                Component: <PhoneArrowUpRightIcon className="w-5 h-5 text-gray-500" />,
+                href: `tel:${pageData.contact.phone}`
+              }
+            ]}
+          />
+
+
+          {/* <div className="ct-address flex justify-between pt-3 pb-5">
             <ArrowUturnRightIcon className="w-5 h-5 text-gray-500" />
             <p className="whitespace-pre font-PinarLT text-left" dir="ltr">
               <span>Rathenauerplatz 1</span>
@@ -76,10 +133,10 @@ export const ItemSideInfo = () => {
             rightIcon={<HandRaisedIcon className="w-5 h-5" />}
           >
             درخواست تغییر در این صفحه
-          </Button>
+          </Button> */}
         </div>
       </div>
-      <div className="rounded-md border border-gray-200 p-4">
+      {/* <div className="rounded-md border border-gray-200 p-4">
         <div className="mb-7 flex justify-between">
           <Image
             alt="telegram"
@@ -99,7 +156,7 @@ export const ItemSideInfo = () => {
         <Button variant="outline" colorScheme="gray">
           دریافت مالکیت صفحه
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -1,3 +1,4 @@
+"use client"
 import { Badge } from "@chakra-ui/react";
 import { GENERAL } from "../allTexts";
 
