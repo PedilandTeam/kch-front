@@ -8,12 +8,22 @@ import {notFound} from "next/navigation"
 import Item from "./item/item";
 import Country from "./country/country";
 import List from "./list/list";
+import { UnitType } from "@/types/unit";
 
 export default async function CenterPage({ params }: { params: { path: string[] } }) {
 
-  const countries: CountryNamespace.GET[] = await (await API_ROUTES.COUNTRIES.GET_ALL("default", 20)).json()
-
   const paths = usePathSeparator(params.path);
+
+
+  let countries: CountryNamespace.GET[]
+  try{
+    countries = await (await API_ROUTES.COUNTRIES.GET_ALL("default", 20)).json()
+  }
+  catch(e){
+    console.log("error in countries", e);  
+    throw new Error("cant get countries")
+  }
+
   
   
   
@@ -23,7 +33,20 @@ export default async function CenterPage({ params }: { params: { path: string[] 
     return <Country />;
   } else if (isCountryExist && paths.unit) {
     // show list of pages
-  return <List />;
+
+    let units: UnitType[]
+    try{
+      units = await (await API_ROUTES.UNITS.GET_ALL("default", 10)).json()
+    }catch(e){
+      throw new Error("error in get all units")
+    }
+
+    const isUnitExist = units.find(unit => unit.slug == decodeURIComponent(paths.unit))
+    
+    if(isUnitExist){
+      return <List />;
+    }
+
   }
 
 

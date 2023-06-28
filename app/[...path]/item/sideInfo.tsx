@@ -90,7 +90,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
                 }
               ]} />
               :
-              <ItemSideInfoItem text={pageData?.contact.email} Icons={[
+              <ItemSideInfoItem text={pageData?.contact?.email} Icons={[
                 {
                   Component: <ArrowTopRightOnSquareIcon className="w-5 h-5 text-gray-500" />,
                   href: pageData?.socials?.website,
@@ -102,7 +102,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
             Icons={[
               {
                 Component: <PhoneArrowUpRightIcon className="w-5 h-5 text-gray-500" />,
-                href: `tel:${pageData.contact.telephone}`
+                href: `tel:${pageData.contact?.telephone}`
               }
             ]}
           />
@@ -111,7 +111,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
             Icons={[
               {
                 Component: <PhoneArrowUpRightIcon className="w-5 h-5 text-gray-500" />,
-                href: `tel:${pageData.contact.phone}`
+                href: `tel:${pageData.contact?.phone}`
               }
             ]}
           />

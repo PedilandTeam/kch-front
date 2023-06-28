@@ -6,10 +6,11 @@ type paramType = {
 }
 type configType = {cache?: requestCacheType, revalidate?: number}
 type requestType = {
-    path: string, method: string, params?: paramType, body?: any
+    path: string, method?: string, params?: paramType, body?: any
 }
 
 const baseFetch = async ({path, method = "GET", params, body}: requestType, {cache = "default", revalidate}: configType): Promise<Response> => {
+
     return new Promise((resolve, reject) => {
 
         let queryParametrs: URLSearchParams | undefined
@@ -47,5 +48,10 @@ export const API_ROUTES = {
         GET_ALL: (cache: requestCacheType = "default", revalidate?: number) => {
             return baseFetch({path: "countries", method: "GET"}, {cache, revalidate})
         },
+    },
+    UNITS: {
+        GET_ALL: (cache?: requestCacheType, revalidate?: number) => {
+            return baseFetch({path: "units"}, {...cache && {cache}, ...revalidate && {revalidate}})
+        }
     }
 }

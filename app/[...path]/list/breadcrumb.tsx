@@ -1,5 +1,4 @@
 "use client"
-
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 
