@@ -1,7 +1,5 @@
 "use client";
 
-import { ButtonGroup } from "@chakra-ui/react";
-import Button from "@client-packages/chakra-ui/button";
 import {
   CursorArrowRaysIcon,
   CursorArrowRippleIcon,
@@ -40,30 +38,19 @@ export const SliderHome = () => {
             به راحتی <span className="">پـروفایل حـرفـه‌ای</span> خـودتون رو
             بـسـازیـد!
           </h2>
-          <Button
-            colorScheme="green"
-            rightIcon={<CursorArrowRippleIcon className="w-7 h-7" />}
-            mt={4}
-            mb={6}
-            size="lg"
-          >
+          <button className="btn">
+            <CursorArrowRippleIcon className="w-7 h-7" />
             از اینجا شروع کنید
-          </Button>
+          </button>
           <h3 className="text-gray-100 font-light text-[17px] tracking-wide">
             و یا دسته‌بندی‌های پربازدید رو مرور کنید:
           </h3>
-          <ButtonGroup
-            variant="solid"
-            spacing="2"
-            size="xs"
-            colorScheme={"gray"}
-            mt={4}
-          >
-            <Button>وکیل فارسی زبان</Button>
-            <Button>سالن زیبایی</Button>
-            <Button>مترجم رسمی</Button>
-            <Button>رستوران ایرانی</Button>
-          </ButtonGroup>
+          <div className="flex">
+            <button className="btn btn-sm btn-neutral">وکیل فارسی زبان</button>
+            <button className="btn btn-sm btn-neutral">سالن زیبایی</button>
+            <button className="btn btn-sm btn-neutral">مترجم رسمی</button>
+            <button className="btn btn-sm btn-neutral">رستوران ایرانی</button>
+          </div>
         </div>
       </div>
     </div>
