@@ -1,9 +1,14 @@
 
+import { UnitType } from "@/types/unit";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { ListCards } from "./cards";
 import { ListFilter } from "./filter";
 
-export default function List() {
+
+type PagesListProps = {
+  unit: UnitType
+}
+export default function PagesList({unit}: PagesListProps) {
   return (
     <div className="component mt-5 page-list">
       <div className="container mx-auto max-w-[1144px]">
