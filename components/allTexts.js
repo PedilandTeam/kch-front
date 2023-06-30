@@ -54,9 +54,11 @@ export const CATEGORY = {
   ZANAN: "متخصص زنان‌و‌زایمان",
   GOOSH: "متخصص گوش و حلق و بینی",
 };
+
 export const MODAL = {
   COUNTRY_TITLE: "لطفا کشور مورد نظر خود را انتخاب نمایید",
 };
+
 export const COUNTRY = {
   ALL: "همه",
   ALL_COUNTRIES: "همه کشورها",
@@ -93,7 +95,6 @@ export const MENU = {
   DOCTORS: "پزشکان فارسی‌زبان",
   FREELANCERS: "فریلنسرهای فارسی‌زبان",
   COMMUNITIES: "جوامع فارسی‌زبان",
-
 };
 export const DAYS = {
   MONDAY: "دوشنبه",
