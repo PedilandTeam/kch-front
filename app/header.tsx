@@ -6,7 +6,7 @@ import { CircleFlag } from "react-circle-flags";
 
 import Link from "next/link";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import { useDisclosure } from "@chakra-ui/react";
 import {
@@ -26,8 +26,15 @@ import {
   DrawerContent,
   DrawerCloseButton,
 } from "@chakra-ui/react";
+import { CountryNamespace } from "@/types/country";
+import { useParams } from "next/navigation";
 
-export const Header = () => {
+
+type HeaderProps = {
+  countries: CountryNamespace.GET[]
+}
+
+export const Header = ({countries}: HeaderProps) => {
   const {
     isOpen: isDrawerOpen,
     onOpen: onDrawerOpen,
@@ -35,6 +42,11 @@ export const Header = () => {
   } = useDisclosure();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef(null);
+  const params = useParams()
+  useEffect(() => {
+    console.log(params.path);
+    
+  },[params])
 
   return (
     <>
@@ -54,7 +66,7 @@ export const Header = () => {
             <div className="flex items-center tools">
               <div className="select-country">
                 <CircleFlag
-                  countryCode="un"
+                  countryCode={params[0]}
                   className="opacity-75 hover:opacity-100 hover:cursor-pointer transition"
                   width={40}
                   onClick={onOpen}
@@ -126,6 +138,7 @@ export const Header = () => {
             <div className="grid grid-cols-4 gap-7 md:grid-cols-12 md:gap-10 place-content-center mb-4 country-list">
               <Link href="#">
                 <CircleFlag
+                  onClick={onClose} 
                   countryCode="un"
                   className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
                   title={COUNTRY.ALL_COUNTRIES}
@@ -134,254 +147,24 @@ export const Header = () => {
                   {COUNTRY.ALL}
                 </p>
               </Link>
-              <Link href="de">
-                <CircleFlag
-                  countryCode="de"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                  title={COUNTRY.GERMANY}
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.GERMANY}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="gb-eng"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                  title={COUNTRY.ENGLAND}
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.ENGLAND}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="se"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                  title={COUNTRY.SWEDEN}
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.SWEDEN}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="at"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                  title={COUNTRY.AUSTRIA}
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.AUSTRIA}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="tr"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                  title={COUNTRY.TURKEY}
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.TURKEY}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="ca"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.CANADA}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="us"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.USA}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="au"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.AUSTRALIA}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="ae"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.UAE}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="my"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.MALAYSIA}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="fr"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.FRANCE}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="nl"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.NETHERLANDS}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="it"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.ITALY}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="dk"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.DENMARK}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="be"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.BELGIUM}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="nz"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.NEWZEALAND}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="kw"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.KUWAIT}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="qa"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.QATAR}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="am"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.ARMENIA}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="ch"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.SWITZERLAND}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="no"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.NORWAY}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="ge"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.GEORGIA}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="es"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.SPAIN}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="ru"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.RUSSIA}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="fi"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.FINLAND}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="cy"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.CYPRUS}
-                </p>
-              </Link>
-              <Link href="#">
-                <CircleFlag
-                  countryCode="jp"
-                  className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
-                />
-                <p className="text-sm	center text-center mt-2 font-medium">
-                  {COUNTRY.JAPAN}
-                </p>
-              </Link>
+              {
+                countries.map((country, index) => {
+                  return (
+                    <Link key={country.code} href={country.code}>
+                    <CircleFlag
+                      onClick={onClose} 
+                      countryCode={country.code}
+                      className="grayscale hover:grayscale-0 opacity-50 hover:opacity-100 hover:cursor-pointer transition duration-200"
+                      title={country.name}
+                    />
+                    <p className="text-sm	center text-center mt-2 font-medium">
+                      {country.name}
+                    </p>
+                  </Link>
+                  )
+                })
+              }
+
             </div>
           </ModalBody>
         </ModalContent>
