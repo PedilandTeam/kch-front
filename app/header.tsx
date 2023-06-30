@@ -43,10 +43,6 @@ export const Header = ({countries}: HeaderProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef(null);
   const params = useParams()
-  useEffect(() => {
-    console.log(params.path);
-    
-  },[params])
 
   return (
     <>
@@ -66,7 +62,7 @@ export const Header = ({countries}: HeaderProps) => {
             <div className="flex items-center tools">
               <div className="select-country">
                 <CircleFlag
-                  countryCode={params[0]}
+                  countryCode={params?.path?.split("/")?.[0] || "un"}
                   className="opacity-75 hover:opacity-100 hover:cursor-pointer transition"
                   width={40}
                   onClick={onOpen}

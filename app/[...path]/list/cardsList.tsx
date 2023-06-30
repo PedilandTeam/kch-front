@@ -1,0 +1,98 @@
+"use client"
+import { Card, CardBody } from "@chakra-ui/react";
+
+import { StarIcon } from "@heroicons/react/24/solid";
+import { CircleFlag } from "react-circle-flags";
+import Rating from "react-rating";
+import Image from "next/image";
+import Link from "next/link";
+import { CATEGORY, COUNTRY } from "../../../components/allTexts";
+import { BookOpenIcon } from "@heroicons/react/24/solid";
+import { OpenHours } from "../../../components/elements/openhours";
+import { PageNamespace } from "@/types/page";
+import { useEffect } from "react";
+import { usePathSeparatorType } from "@/hooks/usePathSeparator";
+import { usePages } from "@/hooks/swr/usePages";
+import { UnitType } from "@/types/unit";
+type CardsListType = {
+  paths: usePathSeparatorType,
+  unit: UnitType
+}
+export const CardsList = ({ paths, unit }: CardsListType) => {
+  
+
+  const {data, isLoading, isError} = usePages(1,15, paths.countryOrSlug, unit.id)
+  
+  useEffect(() => {
+    console.log(data);
+  },[data])
+  if(isLoading){
+    return <p>loading</p>
+  }
+
+  if(data?.meta?.itemCount <= 0){
+    return <p>با فیلتر اعمال شده نتیجه ای یافت نشد</p>
+  }
+
+  return (
+    <>
+      {
+        data?.items.map((page: PageNamespace.GET, index: number) => { 
+          return (
+            <Card key={page.slug} overflow="hidden" variant={"outline"} className="border-gray-200">
+              <div className="flex">
+                <Link href={`/${page.slug}`}>
+                  <Image
+                    alt="لیست"
+                    src={"/img/list/list-demo.webp"}
+                    width={110}
+                    height={110}
+                    className="rounded-full m-3 ml-0 w-[110px] h-[110px]"
+                  />
+                </Link>
+                <CardBody padding={3}>
+                  <div className="flex card-header items-center">
+                    <OpenHours />
+                    <Link href="/item" className="mr-2">
+                      <h2 className="text-[20px] font-semibold">{page.title}</h2>
+                    </Link>
+                  </div>
+
+                  <div className="flex mt-3 mb-2 card-rating">
+                    {/* @ts-ignore */}
+                    <Rating
+                      initialRating={0}
+                      emptySymbol={<StarIcon className="h-6 w-6 text-gray-300" />}
+                      fullSymbol={<StarIcon className="h-6 w-6 text-yellow-400" />}
+                    />
+                    <span className="flex flex-wrap content-center mr-2 text-sm text-gray-500">
+                      (0 نظر)
+                    </span>
+                  </div>
+
+                  <div className="flex w-full card-tools text-sm text-gray-700">
+                    <div className="flex ml-5">
+                      <CircleFlag
+                        countryCode={page?.country?.code}
+                        className="w-4 ml-1"
+                        title={page?.country?.name}
+                      />
+                      {page?.country?.name}
+                    </div>
+                    <div className="flex justify-center content-center">
+                      <BookOpenIcon className="w-4 ml-1 text-gray-400" />
+                      <span>{page?.category?.name}</span>
+                    </div>
+                  </div>
+                </CardBody>
+              </div>
+              {/* <div>
+            <BadgeNew variant={"new"} />
+            <BadgeNew variant={"featured"} />
+          </div> */}
+            </Card>)
+        })
+      }
+    </>
+  );
+};

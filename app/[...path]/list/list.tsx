@@ -1,14 +1,28 @@
-
+"use client"
+import { usePages } from "@/hooks/swr/usePages";
+import { usePathSeparator, usePathSeparatorType } from "@/hooks/usePathSeparator";
+import { Country } from "@/types/page";
 import { UnitType } from "@/types/unit";
+import { useParams, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { ItemBreadCrumb } from "./breadcrumb";
-import { ListCards } from "./cards";
+import { CardsList } from "./cardsList";
 import { ListFilter } from "./filter";
 
 
 type PagesListProps = {
-  unit: UnitType
+  unit: UnitType,
+  country: Country,
+  paths: usePathSeparatorType
 }
-export default function PagesList({unit}: PagesListProps) {
+export default function PagesList({unit, paths, country}: PagesListProps) {
+
+  
+
+
+  if(!paths.countryOrSlug){
+    return <p>loading</p>
+  }
   return (
     <div className="component mt-5 page-list">
       <div className="container mx-auto max-w-[1144px]">
@@ -17,10 +31,10 @@ export default function PagesList({unit}: PagesListProps) {
             <ListFilter />
           </div>
           <div className="page-content sm:col-span-6">
-            <ItemBreadCrumb />
-            <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">لیست مشاغل فارسی زبان</h1>
+            <ItemBreadCrumb unit={{name: unit.name, slug: unit.slug}} country={{name: country.name, code: country.code}}/>
+            <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">لیست {unit?.name} فارسی زبان</h1>
             <div className="list-card grid grid-cols-1 sm:grid-cols-2 gap-y-4 sm:gap-4">
-              <ListCards />
+              <CardsList paths={paths} unit={unit} />
             </div>
           </div>
         </div>

@@ -41,7 +41,7 @@ export default async function CenterPage({ params }: { params: { path: string[] 
       const isUnitExist = units.find(unit => unit.slug == decodeURIComponent(paths.unit))
       
       if(isUnitExist){
-        return <List unit={isUnitExist} />;
+        return <List unit={isUnitExist} country={isCountryExist} paths={paths} />;
       }
     }catch(e){
       throw new Error("error in get all units")
