@@ -5,7 +5,7 @@ import { SliderHome } from "./slider";
 export default function Country() {
   return (
     <div className="component page-country">
-      {/* <SliderHome /> */}
+      <SliderHome />sd
       <div className="container mx-auto max-w-[1144px]">
         <Mod02 />
         <Mod01 />
