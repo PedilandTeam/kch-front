@@ -38,9 +38,9 @@ export const Header = () => {
 
   return (
     <>
-      <header className="shadow-sm">
+      <header>
         <div className="container mx-auto max-w-[1144px]">
-          <div className="flex justify-between p-3 sm:py-3 sm:px-0">
+          <div className="flex justify-between py-3 mx-3 sm:mx-0">
             <div className="logo">
               <Link href="/">
                 <Image
