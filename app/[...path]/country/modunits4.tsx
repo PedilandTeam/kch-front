@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const Mod4Units = () => {
   return (
-    <div className="mode-01 mt-8 mx-3 sm:my-16 sm:mx-0">
+    <div className="mod-units4 my-8 mx-3 sm:my-16 sm:mx-0">
       <div className="mod-header pr-3 pl-3 sm:pr-4 sm:pl-0 border-r-[4px] sm:border-r-[5px] border-pink-600">
         <h2 className="text-[20px] sm:text-[24px] font-bold mb-2">کـوچـا چـه کـار مـی‌کـنـه؟</h2>
         <p className="mb-6 sm:w-1/2 sm:text-justify sm:pl-5 leading-7 font-medium text-gray-500">

@@ -8,7 +8,7 @@ import {
 
 export const Mod4Stats = () => {
   return (
-    <div className="mode-01 my-7 mx-3 sm:mx-0">
+    <div className="mod-stats4 sm:my-20 mx-3 sm:mx-0">
       <div className="wrap border border-gray-200 p-5 rounded-md flex flex-wrap sm:justify-around shadow-sm">
         <div className="item w-full sm:w-auto flex mb-4 sm:mb-0">
           <div className="image bg-pink-100 p-5 ml-4 rounded-full">
