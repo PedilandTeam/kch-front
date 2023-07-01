@@ -1,5 +1,5 @@
-import { Mod01 } from "./mod01";
-import { Mod02 } from "./mod02";
+import { Mod4Stats } from "./mod4Stats";
+import { Mod4Units } from "./mod4Units";
 import { SliderHome } from "./slider";
 
 export default function Country() {
@@ -7,8 +7,8 @@ export default function Country() {
     <div className="component page-country">
       <SliderHome />
       <div className="container mx-auto max-w-[1144px]">
-        <Mod02 />
-        <Mod01 />
+        <Mod4Units />
+        <Mod4Stats />
       </div>
     </div>
   );

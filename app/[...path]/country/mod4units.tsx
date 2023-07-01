@@ -2,16 +2,14 @@ import { MENU } from "@/components/allTexts";
 import Image from "next/image";
 import Link from "next/link";
 
-export const Mod02 = () => {
+export const Mod4Units = () => {
   return (
     <div className="mode-01 mt-8 mx-3 sm:my-16 sm:mx-0">
       <div className="mod-header pr-3 pl-3 sm:pr-4 sm:pl-0 border-r-[4px] sm:border-r-[5px] border-pink-600">
-        <h2 className="text-[20px] sm:text-[24px] font-bold mb-3">کـوچـا چـه کـار مـی‌کـنـه؟</h2>
-        <p className="mb-3 sm:w-1/2 sm:text-justify sm:pl-5 leading-7 font-medium text-gray-500">
+        <h2 className="text-[20px] sm:text-[24px] font-bold mb-2">کـوچـا چـه کـار مـی‌کـنـه؟</h2>
+        <p className="mb-6 sm:w-1/2 sm:text-justify sm:pl-5 leading-7 font-medium text-gray-500">
           کـوچـا، به تمامی مهاجرانی که فعالیت قانونی‌شـون رو به زبـان فارسـی هم ارائه می‌کنن؛ امکان این رو میده که با ایجاد یک پروفایل حرفه‌ای <span className="font-semibold text-gray-600">رایـگـان</span> خدمات یا محصولات خودشون
-          رو به سایر فارسی زبانان در بازار هدف شون معرفی کنن.
-        </p>
-        <p className="mb-6 sm:mb-10 font-medium text-gray-500">می‌تونید لیست این خدمات رو به تفکیک مشاهده کنید:</p>
+          رو به سایر فارسی زبانان حاضر در بازار هدف شون معرفی کنن. می‌تونید لیست خدماتی که تا این لحظه ثبت شدن رو در اینجا مشاهده کنید:</p>
       </div>
 
       <div className="wrap grid grid-cols-1 sm:grid-cols-4 gap-0 sm:gap-8 ">
