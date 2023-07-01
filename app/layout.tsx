@@ -1,7 +1,7 @@
 import { Header } from "./header";
 import { Footer } from "./footer";
 import "@/styles/globals.css";
-import ChakraProvider from "@client-packages/chakra-ui/chackraProvider";
+import {ChakraProvider} from "@client-packages/chakra-ui/components";
 import theme from "../config/theme";
 import Fonts from "../config/fonts";
 import { CountryNamespace } from "@/types/country";
@@ -23,7 +23,7 @@ export default async function RootLayout({
 
   let countries: CountryNamespace.GET[]
   try{
-    countries = await (await API_ROUTES.COUNTRIES.GET_ALL("default", 20)).json()
+    countries = await (await API_ROUTES.COUNTRIES.GET_ALL(20)).json()
   }
   catch(e){
     throw new Error("error in get country")

@@ -9,7 +9,7 @@ export const GENERAL = {
   COPYRIGHT_TEXT1: "تمامی حقوق ناشی از این وب سایت برای",
   COPYRIGHT_TEXT2: "محفوظ است.",
   CITY: "شهر",
-  CITIES: "شهرها",
+  CITIES: "انتخاب شهر",
   CITY_NAME: "نام‌شهر",
   CONTACT_INFO: "اطلاعات تماس",
   COMMENT_SUBMIT: "ثبت نظر",

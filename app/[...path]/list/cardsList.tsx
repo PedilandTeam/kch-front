@@ -14,12 +14,18 @@ import { useEffect } from "react";
 import { usePathSeparatorType } from "@/hooks/usePathSeparator";
 import { usePages } from "@/hooks/swr/usePages";
 import { UnitType } from "@/types/unit";
+import { CountryNamespace } from "@/types/country";
 type CardsListType = {
   paths: usePathSeparatorType,
-  unit: UnitType
+  unit: UnitType,
+  country: CountryNamespace.GET
 }
-export const CardsList = ({ paths, unit }: CardsListType) => {
+export const CardsList = ({ paths, unit, country }: CardsListType) => {
   
+  useEffect(() => {
+    console.log(country);
+    
+  },[country])
 
   const {data, isLoading, isError} = usePages(1,15, paths.countryOrSlug, unit.id)
   
@@ -53,7 +59,7 @@ export const CardsList = ({ paths, unit }: CardsListType) => {
                 <CardBody padding={3}>
                   <div className="flex card-header items-center">
                     <OpenHours />
-                    <Link href="/item" className="mr-2">
+                    <Link href={`/${page.slug}`} className="mr-2">
                       <h2 className="text-[20px] font-semibold">{page.title}</h2>
                     </Link>
                   </div>

@@ -5,6 +5,5 @@ export namespace CountryNamespace {
         id: number,
         name: string,
         code: string,
-        pageCount: string
     }
 }

@@ -1,5 +1,5 @@
 import { PageNamespace } from "@/types/page";
-import Button from "@client-packages/chakra-ui/button"
+import {Button} from "@client-packages/chakra-ui/components"
 import {
   ArrowTopRightOnSquareIcon,
   ArrowUturnRightIcon,

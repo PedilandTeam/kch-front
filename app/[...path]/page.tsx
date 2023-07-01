@@ -18,7 +18,7 @@ export default async function CenterPage({ params }: { params: { path: string[] 
   let countries: CountryNamespace.GET[]
   let isCountryExist: undefined | CountryNamespace.GET
   try{
-    countries = await (await API_ROUTES.COUNTRIES.GET_ALL("default", 20)).json()
+    countries = await (await API_ROUTES.COUNTRIES.GET_ALL(20)).json()
     isCountryExist = countries.find(country => country.code == paths.countryOrSlug)
     if (isCountryExist && !paths.unit) {
       //show country
@@ -37,7 +37,7 @@ export default async function CenterPage({ params }: { params: { path: string[] 
 
     let units: UnitType[]
     try{
-      units = await (await API_ROUTES.UNITS.GET_ALL("default", 10)).json()
+      units = await (await API_ROUTES.UNITS.GET_ALL(10)).json()
       const isUnitExist = units.find(unit => unit.slug == decodeURIComponent(paths.unit))
       
       if(isUnitExist){
@@ -53,7 +53,7 @@ export default async function CenterPage({ params }: { params: { path: string[] 
 
   //show single page
   try{
-    const pageData = await (await API_ROUTES.PAGES.GET_ALL(1, 1, paths.countryOrSlug, "default", 5)).json()
+    const pageData = await (await API_ROUTES.PAGES.GET_ALL(1, 1, paths.countryOrSlug, 5)).json()
     if(!pageData?.items){
       notFound()
     }
