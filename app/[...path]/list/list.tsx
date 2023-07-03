@@ -39,7 +39,7 @@ export default async function PagesList({unit, paths, country}: PagesListProps) 
             <ItemBreadCrumb unit={{name: unit.name, slug: unit.slug}} country={{name: country.name, code: country.code}}/>
             <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">لیست {unit?.name} فارسی زبان</h1>
             <div className="list-card grid grid-cols-1 sm:grid-cols-2 gap-y-4 sm:gap-4">
-              {/* <CardsList data={data} isLoading={isLoading} paths={paths} unit={unit} country={country} /> */}
+              <CardsList paths={paths} unit={unit} country={country} />
             </div>
           </div>
         </div>

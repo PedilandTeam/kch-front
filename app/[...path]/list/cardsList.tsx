@@ -9,23 +9,36 @@ import Link from "next/link";
 import { CATEGORY, COUNTRY } from "../../../components/allTexts";
 import { BookOpenIcon } from "@heroicons/react/24/solid";
 import { OpenHours } from "../../../components/elements/openhours";
-import { PageNamespace } from "@/types/page";
-import { useEffect } from "react";
+import { Country, PageNamespace } from "@/types/page";
+import { useEffect, useState } from "react";
 import { usePathSeparatorType } from "@/hooks/usePathSeparator";
 import { usePages } from "@/hooks/swr/usePages";
 import { UnitType } from "@/types/unit";
 import { CountryNamespace } from "@/types/country";
+import { useSearchParams } from "next/navigation";
+import queryString from "query-string";
+
 type CardsListType = {
   paths: usePathSeparatorType,
   unit: UnitType,
   country: CountryNamespace.GET,
-  data: any,
-  isLoading: boolean
 }
-export const CardsList = ({data, isLoading, paths, unit, country }: CardsListType) => {
-  
 
+type ParsedSearchParamsType = {
+  city?: string[] | string
+}
+
+export const CardsList = ({ paths, unit, country }: CardsListType) => {
   
+  const [parsedSearchParams, setParsedSearchParams] = useState<ParsedSearchParamsType>({})
+  const searchParams = useSearchParams()
+  
+  useEffect(() => {
+    setParsedSearchParams(queryString.parse(searchParams.toString(), { arrayFormat: 'comma' }))
+  }, [searchParams])
+
+  const [page, setPage] = useState(1)
+  const {data, isLoading, error} = usePages(page, 20, country.code, unit.id, Array.isArray(parsedSearchParams.city) ? parsedSearchParams.city.join(",") : parsedSearchParams.city)
 
   if(isLoading){
     return <p>loading</p>
@@ -78,7 +91,7 @@ export const CardsList = ({data, isLoading, paths, unit, country }: CardsListTyp
                         className="w-4 ml-1"
                         title={page?.country?.name}
                       />
-                      {page?.country?.name}
+                      <p className=" truncate">{page?.country?.name} / {page?.city?.name}</p> 
                     </div>
                     <div className="flex justify-center content-center">
                       <BookOpenIcon className="w-4 ml-1 text-gray-400" />

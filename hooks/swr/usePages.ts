@@ -8,7 +8,7 @@ type queryType = {
   [key: string]: string
 } 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
-export function usePages(page: number = 1, limit: number = 15, countryCode: string, unitId: number, cityIds?: number[]) {
+export function usePages(page: number = 1, limit: number = 15, countryCode: string, unitId: number, cityIds?: string[] | string) {
 
   const fetcher = async ({url, args}: {url:string, args: any}) => {
     const requestConfig: AxiosRequestConfig = {
