@@ -9,6 +9,7 @@ import Item from "./item/item";
 import Country from "./country/country";
 import List from "./list/list";
 import { UnitType } from "@/types/unit";
+import ListFilter from "./list/filter/listFilter";
 
 export default async function CenterPage({ params }: { params: { path: string[] } }) {
 
@@ -41,7 +42,8 @@ export default async function CenterPage({ params }: { params: { path: string[] 
       const isUnitExist = units.find(unit => unit.slug == decodeURIComponent(paths.unit))
       
       if(isUnitExist){
-        return <List unit={isUnitExist} country={isCountryExist} paths={paths} />;
+        //@ts-expect-error Server Component
+        return <List unit={isUnitExist} country={isCountryExist} paths={paths}/>
       }
     }catch(e){
       throw new Error("error in get all units")

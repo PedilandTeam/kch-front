@@ -7,11 +7,12 @@ import {
 } from "@client-packages/chakra-ui/components";
 import { GENERAL } from "../../../../components/allTexts";
 import { CityNamespace } from "@/types/city";
+import CityFilterItem from "./city.filter.item";
   
   
 
 type CityFilterType = {
-    cities: CityNamespace.GET[]
+    cities: CityNamespace.city[]
 }
 export default function CityFilter({cities}: CityFilterType){
 
@@ -25,15 +26,9 @@ export default function CityFilter({cities}: CityFilterType){
             className=" text-gray-600 "
           >
               {
-                cities?.map((city: CityNamespace.GET) => {
+                cities?.map((city: CityNamespace.city) => {
                   return (
-                    <div key={city.name} className="item flex justify-between items-center">
-                      <Checkbox>
-                        <span className="text-sm">{city.name}</span>
-                      </Checkbox>
-                      
-                    </div>
-
+                    <CityFilterItem key={city.name} city={city} />
                   )
                 })
               }

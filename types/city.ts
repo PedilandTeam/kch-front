@@ -1,8 +1,21 @@
+import { CountryNamespace } from "./country"
 
 
 export  namespace CityNamespace {
-    export interface GET {
+    
+    export type city = {
+        id: number,
         name: string,
-        id: number
+        country: CountryNamespace.GET
+    }
+    export interface GET {
+        items: city[],
+        meta: {
+          currentPage: number,
+          itemCount: number,
+          itemsPerPage: number,
+          totalItems: number,
+          totalPages: number
+        }
     }
 }

@@ -18,20 +18,15 @@ import { CountryNamespace } from "@/types/country";
 type CardsListType = {
   paths: usePathSeparatorType,
   unit: UnitType,
-  country: CountryNamespace.GET
+  country: CountryNamespace.GET,
+  data: any,
+  isLoading: boolean
 }
-export const CardsList = ({ paths, unit, country }: CardsListType) => {
+export const CardsList = ({data, isLoading, paths, unit, country }: CardsListType) => {
   
-  useEffect(() => {
-    console.log(country);
-    
-  },[country])
 
-  const {data, isLoading, isError} = usePages(1,15, paths.countryOrSlug, unit.id)
   
-  useEffect(() => {
-    console.log(data);
-  },[data])
+
   if(isLoading){
     return <p>loading</p>
   }

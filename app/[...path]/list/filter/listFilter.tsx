@@ -1,4 +1,4 @@
-
+"use client"
 import {
   Badge, Checkbox,
   CheckboxGroup, Stack
@@ -8,21 +8,15 @@ import { FunnelIcon } from "@heroicons/react/24/solid";
 import { API_ROUTES } from "@/routes";
 import FilterMobile from "./filter.mobile";
 import { CityNamespace } from "@/types/city";
-import CityFilter from "./city.filter";
+import CityFilter from "./listFilter.mobile";
+import { useEffect, useState } from "react";
+import { useCities } from "@/hooks/swr/useCities";
 
-
-async function getCities() {
-  try{
-    return await (await API_ROUTES.CITIES.GET_ALL(1, 100, "de", 10)).json()
-  }catch(e){
-    console.log(e);
-    return null
-  }
+type ListFilterProps = {
+  cities: CityNamespace.GET
 }
-export default async function ListFilter() {
+export default function ListFilter({cities}: ListFilterProps) {
 
-
-  const cities = (await getCities())
 
   return (
     <div className="filter-wrap">
@@ -37,7 +31,7 @@ export default async function ListFilter() {
       <div className="filter-body pt-3 hidden md:block">
 
 
-      <CityFilter cities={cities?.items} />
+        <CityFilter cities={cities?.items} />
 
         <div className="filter-section mb-3 pb-4 border-dashed border-b border-gray-300  ">
           <h3 className="font-medium mb-2">{GENERAL.CATEGORY}</h3>
