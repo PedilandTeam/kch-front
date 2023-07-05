@@ -3,12 +3,13 @@ import useSWR from 'swr'
 import axios, {AxiosRequestConfig} from "axios"
 import { useEffect } from 'react'
 import { PageNamespace } from '@/types/page'
+import { CityNamespace } from '@/types/city'
 
 type queryType = {
   [key: string]: string
 } 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
-export function usePages(page: number = 1, limit: number = 15, countryCode: string, unitId: number, cityIds?: string[] | string, categoryIds?: string | string[]) {
+export function useCities(unitId: string) {
 
   const fetcher = async ({url, args}: {url:string, args: any}) => {
     const requestConfig: AxiosRequestConfig = {
@@ -18,15 +19,15 @@ export function usePages(page: number = 1, limit: number = 15, countryCode: stri
     }
     return axios(requestConfig).then(response => response.data).catch(error => error)
   }
-  const { data, error, isLoading } = useSWR({url: `${API_URL}/pages`, args:{page, limit, countryCode, unitId, ...cityIds && {cityIds}, ...categoryIds && {categoryIds}}}, fetcher)
+  const { data, error, isLoading } = useSWR({url: `${API_URL}/cateogris`, args:{unitId,}}, fetcher)
 
   return {
     data,
     isLoading,
-    error
+    error,
   } as unknown as {
     data: {
-      items: PageNamespace.GET[],
+      items: CityNamespace.GET[],
       meta: any
     },
     isLoading: boolean,

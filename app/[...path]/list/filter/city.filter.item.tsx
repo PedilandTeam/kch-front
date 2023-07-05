@@ -77,9 +77,9 @@ function CityFilterItem({ city }: CityFilterItemProps) {
 
     return (
         <div key={city.name} className="item flex justify-between items-center">
-            <label htmlFor={`city-select-${city.name}`} className="text-sm">{city.name}</label>
             {/**  @ts-expect-error */}
             <input onChange={inputClickHandler} id={`city-select-${city.name}`} value={city.id} type="checkbox" checked={Array.isArray(parsedSearchParams.city) ? !!parsedSearchParams.city.find(param => param == city.id) : parsedSearchParams.city == city.id} className="checkbox checkbox-sm" />
+            <label htmlFor={`city-select-${city.name}`} className="text-sm">{city.name}</label>
         </div>
     )
 

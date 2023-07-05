@@ -20,7 +20,6 @@ export function useCities(page: number = 1, limit: number = 15, countryCode: str
     return axios(requestConfig).then(response => response.data).catch(error => error)
   }
   const { data, error, isLoading } = useSWR({url: `${API_URL}/cities`, args:{page, limit, countryCode,}}, fetcher)
-  console.log(`${API_URL}?page=${page}&limit=${limit}`);
   
 
   return {

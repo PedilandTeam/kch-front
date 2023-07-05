@@ -1,3 +1,4 @@
+import { CategoryNamespace } from "./category"
 import { Category } from "./page"
 
 export type UnitType = {
@@ -6,5 +7,5 @@ export type UnitType = {
     slug: string
     createdDate: string
     updateDate: string
-    categories: Category[]
+    categories: CategoryNamespace.GET[]
 }

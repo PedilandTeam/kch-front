@@ -10,13 +10,14 @@ import { CATEGORY, COUNTRY } from "../../../components/allTexts";
 import { BookOpenIcon } from "@heroicons/react/24/solid";
 import { OpenHours } from "../../../components/elements/openhours";
 import { Country, PageNamespace } from "@/types/page";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathSeparatorType } from "@/hooks/usePathSeparator";
 import { usePages } from "@/hooks/swr/usePages";
 import { UnitType } from "@/types/unit";
 import { CountryNamespace } from "@/types/country";
 import { useSearchParams } from "next/navigation";
 import queryString from "query-string";
+import { useIntersectionObserver } from "react-intersection-observer-hook";
 
 type CardsListType = {
   paths: usePathSeparatorType,
@@ -26,6 +27,7 @@ type CardsListType = {
 
 type ParsedSearchParamsType = {
   city?: string[] | string
+  category?: string[] | string
 }
 
 export const CardsList = ({ paths, unit, country }: CardsListType) => {
@@ -35,25 +37,60 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
   
   useEffect(() => {
     setParsedSearchParams(queryString.parse(searchParams.toString(), { arrayFormat: 'comma' }))
+    setPages([])
+    setPage(1)
+    perviousPage.current = 0
+    setPageLock(false)
   }, [searchParams])
 
   const [page, setPage] = useState(1)
-  const {data, isLoading, error} = usePages(page, 20, country.code, unit.id, Array.isArray(parsedSearchParams.city) ? parsedSearchParams.city.join(",") : parsedSearchParams.city)
+  const [pageLock, setPageLock] = useState(false)
+  const perviousPage = useRef<number>(0)
+  const [pages, setPages] = useState<PageNamespace.GET[] | []>([])
+  const {data, isLoading, error} = usePages(page, 30, country.code, unit.id, Array.isArray(parsedSearchParams.city) ? parsedSearchParams.city.join(",") : parsedSearchParams.city, Array.isArray(parsedSearchParams.category) ? parsedSearchParams.category.join(",") : parsedSearchParams.category)
+  
+  useEffect(() => {
+    if(!data?.items)return;
+    if(error)return;
+    if(data.meta.itemCount <= 0){
+      setPageLock(true)
+      return
+    }else{
+      setPageLock(false)
+    }
+    setPages((old) => [...old, ...data.items])
+  },[data])
 
-  if(isLoading){
+  const [ref,{entry}] = useIntersectionObserver()
+  const isVisible = entry && entry.isIntersecting;
+
+
+  useEffect(() => {
+    if(!isVisible) return;
+    if(pageLock)return;
+    if(page == perviousPage.current) return;
+    perviousPage.current = page;
+    setPage(old => old+1)
+  },[isVisible])
+
+
+  if(isLoading && pages.length == 0){
     return <p>loading</p>
   }
 
-  if(data?.meta?.itemCount <= 0){
+  if(data?.meta?.itemCount <= 0 && pages.length == 0){
     return <p>با فیلتر اعمال شده نتیجه ای یافت نشد</p>
   }
+  
 
   return (
     <>
       {
-        data?.items.map((page: PageNamespace.GET, index: number) => { 
+        pages.map((page: PageNamespace.GET, index: number) => { 
+
+
           return (
-            <Card key={page.slug} overflow="hidden" variant={"outline"} className="border-gray-200">
+            <Card ref={index == pages.length-1 ? ref : null} key={page.slug+index} overflow="hidden" variant={"outline"} className="border-gray-200">
               <div className="flex">
                 <Link href={`/${page.slug}`}>
                   <Image

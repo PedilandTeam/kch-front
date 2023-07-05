@@ -3,6 +3,7 @@
 import { usePages } from "@/hooks/swr/usePages";
 import { usePathSeparator, usePathSeparatorType } from "@/hooks/usePathSeparator";
 import { API_ROUTES } from "@/routes";
+import { CategoryNamespace } from "@/types/category";
 import { Country } from "@/types/page";
 import { UnitType } from "@/types/unit";
 import { useParams, useSearchParams } from "next/navigation";
@@ -23,7 +24,9 @@ async function fetchCities(countryCode: string){
 
 export default async function PagesList({unit, paths, country}: PagesListProps) {
 
+
   const cities = await fetchCities(country.code)
+  const categories: CategoryNamespace.GET[] = unit.categories
 
   if(!paths.countryOrSlug || !unit.id){
     return <p>loading</p>
@@ -33,7 +36,7 @@ export default async function PagesList({unit, paths, country}: PagesListProps) 
       <div className="container mx-auto max-w-[1144px]">
         <div className="grid grid-cols-1 sm:grid-cols-8 gap-y-4 sm:gap-8 px-3 sm:px-0">
           <div className="sidebar sm:col-span-2">
-            <ListFilter cities={cities}/>
+            <ListFilter cities={cities} categories={categories} />
           </div>
           <div className="page-content sm:col-span-6">
             <ItemBreadCrumb unit={{name: unit.name, slug: unit.slug}} country={{name: country.name, code: country.code}}/>

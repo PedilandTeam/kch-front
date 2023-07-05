@@ -49,14 +49,19 @@ export const API_ROUTES = {
             return baseFetch({path: "countries", method: "GET"},  {...cache && {cache}, ...revalidate && {revalidate}})
         },
     },
+    CITIES: {
+        GET_ALL: (page: number = 1, limit: number = 20, countryCode?: string ,revalidate?: number, cache?: requestCacheType) => {
+            return baseFetch({path: "cities", method: "GET", params:{page, limit, ...countryCode && {countryCode}}}, {...cache && {cache}, ...revalidate && {revalidate}})
+        }
+    },
     UNITS: {
         GET_ALL: (revalidate?: number, cache?: requestCacheType) => {
             return baseFetch({path: "units"}, {...cache && {cache}, ...revalidate && {revalidate}})
         }
     },
-    CITIES: {
-        GET_ALL: (page: number = 1, limit: number = 20, countryCode?: string ,revalidate?: number, cache?: requestCacheType) => {
-            return baseFetch({path: "cities", method: "GET", params:{page, limit, ...countryCode && {countryCode}}}, {...cache && {cache}, ...revalidate && {revalidate}})
+    CATEGOREIS: {
+        GET_ALL: (unitId: number, revalidate?: number, cache?: requestCacheType) => {
+            return baseFetch({path: "categories", params: {unitId}}, {...cache && {cache}, ...revalidate && {revalidate}})
         }
     }
 } 
