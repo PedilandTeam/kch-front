@@ -1,14 +1,16 @@
-import { Mod01 } from "./mod01";
-import { Mod02 } from "./mod02";
+import { Mod4Stats } from "./modstats4";
+import { Mod4Units } from "./modunits4";
+import { ModCategories } from "./modcategories";
 import { SliderHome } from "./slider";
 
 export default function Country() {
   return (
     <div className="component page-country">
-      <SliderHome />sd
+      <SliderHome />
       <div className="container mx-auto max-w-[1144px]">
-        <Mod02 />
-        <Mod01 />
+        <Mod4Units />
+        <Mod4Stats />
+        <ModCategories />
       </div>
     </div>
   );

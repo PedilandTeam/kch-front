@@ -1,7 +1,7 @@
 export const GENERAL = {
   HOME: "خانه",
   ALL_IMAGES_VIEW: "مشاهده تمامی تصاویر",
-  ABOUT: "درباره کوچا",
+  ABOUT: "درباره کـوچـا",
   ADD_LIST: "افزودن کسب و کار",
   BACK_TO_LIST: "بازگشت به لیست",
   CATEGORY: "دسته‌بندی",
@@ -12,6 +12,8 @@ export const GENERAL = {
   CITIES: "انتخاب شهر",
   CITY_NAME: "نام‌شهر",
   CONTACT_INFO: "اطلاعات تماس",
+  CONTACT_US: "تماس با ما",
+  CORPORATE_OPPORTUNITIES: "فرصت‌های همکاری",
   COMMENT_SUBMIT: "ثبت نظر",
   USERS_COMMENTS: "نظرات کاربران",
   CLOSED: "تعطیل",
@@ -40,6 +42,7 @@ export const GENERAL = {
   VIEW: "بازدید",
   WEBSITE: "وب سایت",
   WORKING_HOURS: "ساعات کاری",
+  TERMS_AND_CONDITIONS: "قوانین و مقررات",
 };
 export const SOCIAL = {
   FACEBOOK: "فیس بوک",
@@ -54,9 +57,11 @@ export const CATEGORY = {
   ZANAN: "متخصص زنان‌و‌زایمان",
   GOOSH: "متخصص گوش و حلق و بینی",
 };
+
 export const MODAL = {
   COUNTRY_TITLE: "لطفا کشور مورد نظر خود را انتخاب نمایید",
 };
+
 export const COUNTRY = {
   ALL: "همه",
   ALL_COUNTRIES: "همه کشورها",
@@ -93,7 +98,6 @@ export const MENU = {
   DOCTORS: "پزشکان فارسی‌زبان",
   FREELANCERS: "فریلنسرهای فارسی‌زبان",
   COMMUNITIES: "جوامع فارسی‌زبان",
-
 };
 export const DAYS = {
   MONDAY: "دوشنبه",
