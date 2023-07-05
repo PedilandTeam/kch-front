@@ -15,7 +15,7 @@ type CityFilterItemProps = {
 type ParsedSearchParamsType = {
     city?: string[] | string
 }
-function CityFilterItem({ city }: CityFilterItemProps) {
+function CityFilterSelectedItem({ city }: CityFilterItemProps) {
 
     const ref = useRef<HTMLInputElement>(null)
     const router = useRouter()
@@ -82,8 +82,8 @@ function CityFilterItem({ city }: CityFilterItemProps) {
     // }
 
     return (
-        <label key={city.name} htmlFor={`city-select-${city.name}`} className="item flex items-center justify-between border-b-[1px] py-4 ">
-            <label htmlFor={`city-select-${city.name}`} className="text-md">{city.name}</label>
+        <label key={city.name} htmlFor={`city-select-${city.name}`} className="item flex items-center justify-between py-4 ">
+            <label htmlFor={`city-select-${city.name}`} className=" text-base">{city.name}</label>
             {/**  @ts-expect-error */}
             <input  ref={ref} className="checkbox checkbox-primary checkbox-sm" onChange={inputClickHandler} id={`city-select-${city.name}`} value={city.id} type="checkbox" checked={Array.isArray(parsedSearchParams.city) ? !!parsedSearchParams.city.find(param => param == city.id) : parsedSearchParams.city == city.id} />
         </label>
@@ -91,4 +91,4 @@ function CityFilterItem({ city }: CityFilterItemProps) {
 
 }
 
-export default memo(CityFilterItem)
+export default memo(CityFilterSelectedItem)

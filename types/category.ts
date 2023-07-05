@@ -3,7 +3,7 @@
 export namespace CategoryNamespace{
 
     export type GET = {
-        id: string
+        id: number
         name: string
         slug: string
         createdDate: string

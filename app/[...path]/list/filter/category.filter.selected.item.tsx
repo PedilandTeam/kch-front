@@ -1,28 +1,30 @@
+
 "use client"
 
-import { CityNamespace } from "@/types/city"
-import { useParams, usePathname, useSearchParams } from "next/navigation"
+import { CategoryNamespace } from "@/types/category"
+import { usePathname, useSearchParams } from "next/navigation"
 import { useRouter } from "next/navigation"
 import queryString from "query-string"
-import React, { memo, useCallback, useEffect, useRef, useState, useTransition } from "react"
+import React, { useCallback, useEffect, useRef, useState, useTransition } from "react"
 
 
 
-type CityFilterItemProps = {
-    city: CityNamespace.city
+type CategoryFilterSelectedItemProps = {
+    category: CategoryNamespace.GET
 }
 
 type ParsedSearchParamsType = {
-    city?: string[] | string
+    category?: string[] | string
 }
-function CityFilterItem({ city }: CityFilterItemProps) {
 
-    const ref = useRef<HTMLInputElement>(null)
+export default function CategoryFilterSelectedItem({ category }: CategoryFilterSelectedItemProps) {
+
     const router = useRouter()
     const searchParams = useSearchParams() as unknown as URLSearchParams
     const pathname = usePathname()
     const [parsedSearchParams, setParsedSearchParams] = useState<ParsedSearchParamsType>({})
     const [isPending, startTransition] = useTransition()
+    const ref = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         setParsedSearchParams(queryString.parse(searchParams.toString(), { arrayFormat: 'comma' }))
@@ -71,24 +73,18 @@ function CityFilterItem({ city }: CityFilterItemProps) {
     const inputClickHandler = (event: React.MouseEvent<HTMLInputElement>) => {
         const currentTarget = event.currentTarget
         if (!currentTarget.checked) {
-            return router.replace(`${pathname}?${deleteQueryString("city", currentTarget.value)}`)
+            return router.replace(`${pathname}?${deleteQueryString("category", currentTarget.value)}`)
         }
-        router.replace(`${pathname}?${createQueryString("city", currentTarget.value)}`)
+        router.replace(`${pathname}?${createQueryString("category", currentTarget.value)}`)
     }
 
-    // const containerClickHandler = () => {
-    //     if(ref.current)
-    //         ref.current.click()
-    // }
 
     return (
-        <label key={city.name} htmlFor={`city-select-${city.name}`} className="item flex items-center justify-between border-b-[1px] py-4 ">
-            <label htmlFor={`city-select-${city.name}`} className="text-md">{city.name}</label>
+        <label key={category.name} htmlFor={`category-select-${category.name}`} className="item flex items-center justify-between py-4 ">
+            <label htmlFor={`category-select-${category.name}`} className="text-md">{category.name}</label>
             {/**  @ts-expect-error */}
-            <input  ref={ref} className="checkbox checkbox-primary checkbox-sm" onChange={inputClickHandler} id={`city-select-${city.name}`} value={city.id} type="checkbox" checked={Array.isArray(parsedSearchParams.city) ? !!parsedSearchParams.city.find(param => param == city.id) : parsedSearchParams.city == city.id} />
+            <input ref={ref} className="checkbox checkbox-primary checkbox-sm" onChange={inputClickHandler} id={`category-select-${category.name}`} value={category.id} type="checkbox" checked={Array.isArray(parsedSearchParams.category) ? !!parsedSearchParams.category.find(param => param == category.id) : parsedSearchParams.category == category.id} />
         </label>
     )
 
 }
-
-export default memo(CityFilterItem)

@@ -30,10 +30,16 @@ type ParsedSearchParamsType = {
   category?: string[] | string
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+
 export const CardsList = ({ paths, unit, country }: CardsListType) => {
   
   const [parsedSearchParams, setParsedSearchParams] = useState<ParsedSearchParamsType>({})
   const searchParams = useSearchParams()
+
+  useEffect(() => {
+    mutate(`${API_URL}/pages`)
+  },[parsedSearchParams])
   
   useEffect(() => {
     setParsedSearchParams(queryString.parse(searchParams.toString(), { arrayFormat: 'comma' }))
@@ -47,8 +53,21 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
   const [pageLock, setPageLock] = useState(false)
   const perviousPage = useRef<number>(0)
   const [pages, setPages] = useState<PageNamespace.GET[] | []>([])
-  const {data, isLoading, error} = usePages(page, 30, country.code, unit.id, Array.isArray(parsedSearchParams.city) ? parsedSearchParams.city.join(",") : parsedSearchParams.city, Array.isArray(parsedSearchParams.category) ? parsedSearchParams.category.join(",") : parsedSearchParams.category)
   
+  
+  const [ref,{entry}] = useIntersectionObserver()
+  const isVisible = entry && entry.isIntersecting;
+  
+  
+  useEffect(() => {
+    if(!isVisible) return;
+    if(pageLock)return;
+    if(page == perviousPage.current) return;
+    perviousPage.current = page;
+    setPage(old => old+1)
+  },[isVisible])
+
+  const {data, isLoading, error, mutate} = usePages(page, 30, country.code, unit.id, Array.isArray(parsedSearchParams.city) ? parsedSearchParams.city.join(",") : parsedSearchParams.city, Array.isArray(parsedSearchParams.category) ? parsedSearchParams.category.join(",") : parsedSearchParams.category)
   useEffect(() => {
     if(!data?.items)return;
     if(error)return;
@@ -61,23 +80,10 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
     setPages((old) => [...old, ...data.items])
   },[data])
 
-  const [ref,{entry}] = useIntersectionObserver()
-  const isVisible = entry && entry.isIntersecting;
-
-
-  useEffect(() => {
-    if(!isVisible) return;
-    if(pageLock)return;
-    if(page == perviousPage.current) return;
-    perviousPage.current = page;
-    setPage(old => old+1)
-  },[isVisible])
-
-
-  if(isLoading && pages.length == 0){
+  if(isLoading && pages.length == 0 || !parsedSearchParams){
     return <p>loading</p>
   }
-
+  
   if(data?.meta?.itemCount <= 0 && pages.length == 0){
     return <p>با فیلتر اعمال شده نتیجه ای یافت نشد</p>
   }
@@ -112,6 +118,7 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
                   <div className="flex mt-3 mb-2 card-rating">
                     {/* @ts-ignore */}
                     <Rating
+                      readonly
                       initialRating={0}
                       emptySymbol={<StarIcon className="h-6 w-6 text-gray-300" />}
                       fullSymbol={<StarIcon className="h-6 w-6 text-yellow-400" />}
@@ -128,7 +135,7 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
                         className="w-4 ml-1"
                         title={page?.country?.name}
                       />
-                      <p className=" truncate">{page?.country?.name} / {page?.city?.name}</p> 
+                      <p className=" truncate">{page?.city?.name}</p> 
                     </div>
                     <div className="flex justify-center content-center">
                       <BookOpenIcon className="w-4 ml-1 text-gray-400" />
