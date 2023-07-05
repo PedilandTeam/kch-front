@@ -5,3 +5,24 @@
 .cat-card {
   @apply border border-gray-300 text-gray-500 hover:border-gray-400 hover:text-gray-600 hover:shadow rounded-md p-4 flex justify-center flex-wrap hover:font-medium hover:cursor-pointer transition-all;
 }
+/* width */
+::-webkit-scrollbar {
+    width: 9px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #9D174D;
+    border-radius: 5px;
+}
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+

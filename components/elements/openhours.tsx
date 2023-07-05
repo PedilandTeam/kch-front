@@ -19,14 +19,8 @@ export const OpenHours = ({ variant }: {variant?: undefined}) => {
   };
 
   useEffect(() => {
-    console.log(variant);
     setColor(colors[variant ?? "close"] ? colors[variant ?? "close"] : colors["default"]);
   }, [variant]);
-
-  useEffect(() => {
-    console.log(color);
-  }, [color]);
-
 
 
     return (

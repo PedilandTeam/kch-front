@@ -9,7 +9,7 @@ type requestType = {
     path: string, method?: string, params?: paramType, body?: any
 }
 
-const baseFetch = async ({path, method = "GET", params, body}: requestType, {cache = "default", revalidate}: configType): Promise<Response> => {
+const baseFetch = async ({path, method = "GET", params, body}: requestType, {cache, revalidate}: configType): Promise<Response> => {
 
     return new Promise((resolve, reject) => {
 
@@ -37,21 +37,31 @@ const baseFetch = async ({path, method = "GET", params, body}: requestType, {cac
 
 export const API_ROUTES = {
     PAGES: {
-        GET_ALL: (page: number, limit: number, slug?: string, cache: requestCacheType = "default", revalidate?: number) => {
-            return baseFetch({path:"pages", method:"GET", params:{page, limit, ...slug && {slug}}}, {cache, revalidate})
+        GET_ALL: (page: number, limit: number, slug?: string, revalidate?: number, cache?: requestCacheType) => {
+            return baseFetch({path:"pages", method:"GET", params:{page, limit, ...slug && {slug}}},  {...cache && {cache}, ...revalidate && {revalidate}})
         },
-        GET_ONE: (id: string ,cache: requestCacheType = "default", revalidate?: number) => {
-            return baseFetch({path: `pages/${id}`, method: "GET"}, {cache, revalidate})
+        GET_ONE: (id: string , revalidate?: number, cache?: requestCacheType) => {
+            return baseFetch({path: `pages/${id}`, method: "GET"},  {...cache && {cache}, ...revalidate && {revalidate}})
         }
     },
     COUNTRIES: {
-        GET_ALL: (cache: requestCacheType = "default", revalidate?: number) => {
-            return baseFetch({path: "countries", method: "GET"}, {cache, revalidate})
+        GET_ALL: (revalidate?: number, cache?: requestCacheType) => {
+            return baseFetch({path: "countries", method: "GET"},  {...cache && {cache}, ...revalidate && {revalidate}})
         },
     },
+    CITIES: {
+        GET_ALL: (page: number = 1, limit: number = 20, countryCode?: string ,revalidate?: number, cache?: requestCacheType) => {
+            return baseFetch({path: "cities", method: "GET", params:{page, limit, ...countryCode && {countryCode}}}, {...cache && {cache}, ...revalidate && {revalidate}})
+        }
+    },
     UNITS: {
-        GET_ALL: (cache?: requestCacheType, revalidate?: number) => {
+        GET_ALL: (revalidate?: number, cache?: requestCacheType) => {
             return baseFetch({path: "units"}, {...cache && {cache}, ...revalidate && {revalidate}})
         }
+    },
+    CATEGOREIS: {
+        GET_ALL: (unitId: number, revalidate?: number, cache?: requestCacheType) => {
+            return baseFetch({path: "categories", params: {unitId}}, {...cache && {cache}, ...revalidate && {revalidate}})
+        }
     }
-}
+} 

@@ -2,7 +2,18 @@
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 
-export const ItemBreadCrumb = () => {
+
+type ItemBreadCrumbType = {
+  unit:{
+    name: string,
+    slug: string
+  },
+  country: {
+    name: string,
+    code: string
+  }
+}
+export const ItemBreadCrumb = ({unit, country}: ItemBreadCrumbType) => {
   return (
     <Breadcrumb
       spacing="4px"
@@ -15,11 +26,11 @@ export const ItemBreadCrumb = () => {
       </BreadcrumbItem>
 
       <BreadcrumbItem>
-        <BreadcrumbLink href="de">آلمان</BreadcrumbLink>
+        <BreadcrumbLink href={`/${country.code}`}>{country.name}</BreadcrumbLink>
       </BreadcrumbItem>
 
       <BreadcrumbItem isCurrentPage>
-        <BreadcrumbLink href="de/list">مشاغل فارسی زبان</BreadcrumbLink>
+        <BreadcrumbLink href={`/${country.code}/${unit.slug}`}>{unit.name} فارسی زبان</BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>
   );

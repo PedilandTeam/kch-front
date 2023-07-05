@@ -1,9 +1,11 @@
 import { Header } from "./header";
 import { Footer } from "./footer";
 import "@/styles/globals.css";
-import ChakraProvider from "@client-packages/chakra-ui/chackraProvider";
+import {ChakraProvider} from "@client-packages/chakra-ui/components";
 import theme from "../config/theme";
 import Fonts from "../config/fonts";
+import { CountryNamespace } from "@/types/country";
+import { API_ROUTES } from "@/routes";
 
 
 export const metadata = {
@@ -12,17 +14,27 @@ export const metadata = {
   viewport: "width=device-width, initial-scale=1",
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
+
+  let countries: CountryNamespace.GET[]
+  try{
+    countries = await (await API_ROUTES.COUNTRIES.GET_ALL(20)).json()
+  }
+  catch(e){
+    throw new Error("error in get country")
+  }
+
   return (
     <html lang="fa" dir="rtl">
       <body>
       <ChakraProvider theme={theme}>
         <Fonts />
-        <Header />
+        <Header countries={countries} />
           {children}
         <Footer />
       </ChakraProvider>
