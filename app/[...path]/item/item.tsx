@@ -19,7 +19,7 @@ export default function PageItem({ pageData }: PageItemProps) {
           <ItemSideInfo pageData={pageData} />
 
           <div className="item-main sm:col-span-8 sm:col-start-1 sm:row-start-1 px-3 sm:pl-3 sm:pr-0">
-            <ItemBreadCrumb />
+            <ItemBreadCrumb pageData={pageData} />
 
             {/* Description Section */}
             <div className="item-description py-8 border-b border-gray-200">

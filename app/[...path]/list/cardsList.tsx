@@ -37,17 +37,15 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
   const [parsedSearchParams, setParsedSearchParams] = useState<ParsedSearchParamsType>({})
   const searchParams = useSearchParams()
 
+
   useEffect(() => {
-    mutate(`${API_URL}/pages`)
-  },[parsedSearchParams])
-  
-  useEffect(() => {
-    setParsedSearchParams(queryString.parse(searchParams.toString(), { arrayFormat: 'comma' }))
-    setPages([])
     setPage(1)
+    setPages([])
+    setParsedSearchParams(queryString.parse(searchParams.toString(), { arrayFormat: 'comma' }))
     perviousPage.current = 0
     setPageLock(false)
   }, [searchParams])
+
 
   const [page, setPage] = useState(1)
   const [pageLock, setPageLock] = useState(false)
@@ -67,7 +65,7 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
     setPage(old => old+1)
   },[isVisible])
 
-  const {data, isLoading, error, mutate} = usePages(page, 30, country.code, unit.id, Array.isArray(parsedSearchParams.city) ? parsedSearchParams.city.join(",") : parsedSearchParams.city, Array.isArray(parsedSearchParams.category) ? parsedSearchParams.category.join(",") : parsedSearchParams.category)
+  const {data, isLoading, error, mutate} = usePages(page, 30, country.code, unit.id, parsedSearchParams.city, parsedSearchParams.category)
   useEffect(() => {
     if(!data?.items)return;
     if(error)return;

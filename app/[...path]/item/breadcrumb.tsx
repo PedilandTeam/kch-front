@@ -1,27 +1,18 @@
-"use client"
+import { PageNamespace } from "@/types/page";
+import Link from "next/link";
 
-import { ChevronLeftIcon } from "@chakra-ui/icons";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
+type ItemBreadCrumbProps = {
+  pageData: PageNamespace.GET
+}
+export const ItemBreadCrumb = ({pageData}: ItemBreadCrumbProps) => {
 
-export const ItemBreadCrumb = () => {
   return (
-    <Breadcrumb
-      spacing="4px"
-      fontSize="small"
-      color="gray.500"
-      separator={<ChevronLeftIcon color="gray.500" />}
-    >
-      <BreadcrumbItem>
-        <BreadcrumbLink href="/">خانه</BreadcrumbLink>
-      </BreadcrumbItem>
-
-      <BreadcrumbItem>
-        <BreadcrumbLink href="/de/list">مشاغل فارسی زبان</BreadcrumbLink>
-      </BreadcrumbItem>
-
-      <BreadcrumbItem>
-        <BreadcrumbLink href="/de/list">رستوران ایرانی</BreadcrumbLink>
-      </BreadcrumbItem>
-    </Breadcrumb>
+    <div className=" text-sm breadcrumbs">
+      <ul>
+        <li><Link href={"/"}>خانه</Link></li>
+        <li><Link href={`/${pageData?.country?.code}/${pageData?.unit?.slug}`}>{pageData?.unit?.name}</Link></li>
+        <li><Link href={`/${pageData?.country.code}/${pageData?.unit?.slug}?city=${pageData?.city?.id}&category=${pageData.category.id}`}>{pageData?.category?.name}</Link></li>
+      </ul>
+    </div>
   );
 };
