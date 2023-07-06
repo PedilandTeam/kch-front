@@ -120,7 +120,7 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
             key={page.slug + index}
             overflow="hidden"
             variant={"outline"}
-            className="border-gray-200 hover:border-gray-300 hover:shadow"
+            className="border-gray-200 border-r-[3px] rounded-tr-none rounded-br-none hover:border-gray-300 hover:border-r-slate-500 hover:shadow"
           >
             <div className="flex">
               <Link href={`/${page.slug}`}>
