@@ -17,7 +17,7 @@ import CategoryFilterSelectedItem from "./category.filter.selected.item";
 
 
 type CategoryFilterType = {
-  categories: CategoryNamespace.GET[]
+  categories: CategoryNamespace.category[]
 }
 export default function CategoryFilter({ categories }: CategoryFilterType) {
 
@@ -78,7 +78,7 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
           </div>
           <div className="px-8 h-[16rem] overflow-y-scroll">
             {
-              modifiedCategories?.map((category: CategoryNamespace.GET) => {
+              modifiedCategories?.map((category: CategoryNamespace.category) => {
                 return (
                   <CategoryFilterItem key={category.name} category={category} />
                 )

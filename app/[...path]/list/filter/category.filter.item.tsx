@@ -10,7 +10,7 @@ import React, { useCallback, useEffect, useRef, useState, useTransition } from "
 
 
 type CategoryFilterItemProps = {
-    category: CategoryNamespace.GET
+    category: CategoryNamespace.category
 }
 
 type ParsedSearchParamsType = {

@@ -1,6 +1,8 @@
 import { MENU } from "@/components/allTexts";
 import Image from "next/image";
 
+
+
 export const ModCategories = () => {
   return (
     <div className="mod-categories my-8 sm:my-16">

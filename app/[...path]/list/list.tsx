@@ -26,7 +26,7 @@ export default async function PagesList({unit, paths, country}: PagesListProps) 
 
 
   const cities = await fetchCities(country.code)
-  const categories: CategoryNamespace.GET[] = unit.categories
+  const categories: CategoryNamespace.category[] = unit.categories
 
   if(!paths.countryOrSlug || !unit.id){
     return <p>loading</p>

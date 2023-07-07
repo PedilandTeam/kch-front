@@ -1,13 +1,26 @@
+import { UnitType } from "./unit"
 
 
-export namespace CategoryNamespace{
+export namespace CategoryNamespace {
 
-    export type GET = {
-        id: number
-        name: string
-        slug: string
-        createdDate: string
+
+    export type category = {
+        id: number,
+        name: string,
+        slug: CategoryNamespace.GET,
+        createdDate: string,
         updateDate: string
+        unit: UnitType
+    }
+    export interface GET {
+        items: category[],
+        meta: {
+            currentPage: number,
+            itemCount: number,
+            itemsPerPage: number,
+            totalItems: number,
+            totalPages: number
+        }
     }
 
 }

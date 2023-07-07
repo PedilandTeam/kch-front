@@ -5,8 +5,12 @@ import {
   MapIcon,
   RectangleStackIcon,
 } from "@heroicons/react/24/outline";
+import { CategoryNamespace } from "@/types/category";
 
-export const Mod4Stats = () => {
+type Mod4StatsProps ={
+  categories: CategoryNamespace.GET
+}
+export const Mod4Stats = ({categories}: Mod4StatsProps) => {
   return (
     <div className="mod-stats4 sm:my-20 mx-3 sm:mx-0">
       <div className="wrap border border-gray-200 p-5 rounded-md flex flex-wrap sm:justify-around shadow-sm">
@@ -33,7 +37,7 @@ export const Mod4Stats = () => {
             <FolderIcon className="w-9 h-9 text-rose-700" />
           </div>
           <div className="info flex flex-wrap content-center text-rose-700 text-[18px]">
-            <div className="ml-2 font-bold ">23</div>
+            <div className="ml-2 font-bold ">{categories?.meta?.totalItems}</div>
             <div className="font-medium">{GENERAL.CATEGORY}</div>
           </div>
         </div>

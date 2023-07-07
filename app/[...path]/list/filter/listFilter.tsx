@@ -9,7 +9,7 @@ import { CategoryNamespace } from "@/types/category";
 
 type ListFilterProps = {
   cities: CityNamespace.GET,
-  categories: CategoryNamespace.GET[]
+  categories: CategoryNamespace.category[]
 }
 export default function ListFilter({cities, categories}: ListFilterProps) {
 
