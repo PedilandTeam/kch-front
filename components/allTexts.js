@@ -1,5 +1,6 @@
 export const GENERAL = {
   ALL: "همه",
+  DELETE_ALL: "حذف همه",
   ALL_COUNTRIES: "همه کشورها",
   HOME: "خانه",
   ALL_IMAGES_VIEW: "مشاهده تمامی تصاویر",
@@ -14,6 +15,7 @@ export const GENERAL = {
   COPYRIGHT_TEXT1: "تمامی حقوق ناشی از این وب سایت برای",
   COPYRIGHT_TEXT2: "محفوظ است.",
   ALL_CITIES: "همه شهرها",
+  DELETE_ALL_CITIES: "حذف همه شهرها",
   CITY: "شهر",
   CITIES: "شهرها",
   CITY_NAME: "نام‌شهر",
@@ -100,6 +102,7 @@ export const COUNTRY = {
   FINLAND: "فنلاند",
   CYPRUS: "قبرس",
   JAPAN: "ژاپن",
+  ALL_COUNTRIES: "تمام کشورها"
 };
 export const MENU = {
   BUSINESSES: "مشاغل فارسی‌زبان",

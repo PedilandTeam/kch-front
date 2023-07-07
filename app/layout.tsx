@@ -7,6 +7,8 @@ import Fonts from "../config/fonts";
 import { CountryNamespace } from "@/types/country";
 import { API_ROUTES } from "@/routes";
 import { ModalCountry } from "./[...path]/layout/modalcountry";
+import {Providers} from "@client-packages/react-redux/provider"
+import store from "@/store/store";
 
 
 export const metadata = {
@@ -33,14 +35,16 @@ export default async function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body>
-      <ChakraProvider theme={theme}>
-        <Fonts />
-        <Header>
-          <ModalCountry countries={countries} />
-        </Header>
-          {children}
-        <Footer />
-      </ChakraProvider>
+      <Providers>
+        <ChakraProvider theme={theme}>
+          <Fonts />
+          <Header>
+            <ModalCountry countries={countries} />
+          </Header>
+            {children}
+          <Footer />
+        </ChakraProvider>
+      </Providers>
       </body>
     </html>
   )

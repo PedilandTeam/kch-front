@@ -33,11 +33,6 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
     arrayFormat: "comma",
   }).city;
 
-  useEffect(() => {
-    if (!citiesInQuery) {
-      deleteAllCategoryHandler();
-    }
-  }, [citiesInQuery]);
 
   const deleteAllCategoryHandler = () => {
     const query = queryString.parse(searchParams.toString());
@@ -54,9 +49,8 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
       {/* The button to open modal */}
       <label
         htmlFor="category_modal"
-        className={`btn ${
-          !citiesInQuery ? "btn-outline" : "btn-outline"
-        }  btn-primary btn-wide`}
+        className={`btn ${!citiesInQuery ? "btn-outline" : "btn-outline"
+          }  btn-primary btn-wide`}
       >
         {citiesInQuery ? GENERAL.CATEGORY_SELECT : GENERAL.CATEGORY_SELECT}
       </label>
@@ -87,12 +81,15 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
           <div className="pt-5 pb-3 px-8 bg-white w-full">
             <h3 className="flex justify-between content-center text-lg font-bold">
               انتخاب دسته بندی
-              <span
-                onClick={deleteAllCategoryHandler}
-                className="cursor-pointer text-[15px] font-normal text-pink-800"
-              >
-                {GENERAL.ALL}
-              </span>
+              {
+                categoriesInQuery ? <span
+                  onClick={deleteAllCategoryHandler}
+                  className="cursor-pointer text-[15px] font-normal text-pink-800"
+                >
+                  {GENERAL.DELETE_ALL}
+                </span>
+                  : null
+              }
             </h3>
             <p className="py-3">
               دسته بندی یا دسته بندی های مورد نظر خود را انتخاب نمایید.
