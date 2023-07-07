@@ -1,6 +1,14 @@
+"use client"
+
+
+import { useParams, usePathname } from "next/navigation";
+import { useEffect } from "react";
 import { CircleFlag } from "react-circle-flags";
 
 export const TopTools = () => {
+
+  const params = useParams()
+
   return (
     <div className="top-tools flex items-center">
       <div
@@ -14,7 +22,7 @@ export const TopTools = () => {
         }}
       >
         <CircleFlag
-          countryCode="de"
+          countryCode={params?.path?.split("/")?.[0] ? params?.path?.split("/")?.[0] : "un"}
           className="opacity-75 hover:opacity-100 hover:cursor-pointer transition"
           width={42}
         />

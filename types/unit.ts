@@ -7,5 +7,5 @@ export type UnitType = {
     slug: string
     createdDate: string
     updateDate: string
-    categories: CategoryNamespace.GET[]
+    categories: CategoryNamespace.category[]
 }

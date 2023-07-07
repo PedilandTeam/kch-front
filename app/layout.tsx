@@ -6,6 +6,7 @@ import theme from "../config/theme";
 import Fonts from "../config/fonts";
 import { CountryNamespace } from "@/types/country";
 import { API_ROUTES } from "@/routes";
+import { ModalCountry } from "./[...path]/layout/modalcountry";
 
 
 export const metadata = {
@@ -34,7 +35,9 @@ export default async function RootLayout({
       <body>
       <ChakraProvider theme={theme}>
         <Fonts />
-        <Header countries={countries} />
+        <Header>
+          <ModalCountry countries={countries} />
+        </Header>
           {children}
         <Footer />
       </ChakraProvider>

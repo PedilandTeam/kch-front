@@ -1,8 +1,13 @@
 import { MENU } from "@/components/allTexts";
+import { CountryNamespace } from "@/types/country";
 import Image from "next/image";
 import Link from "next/link";
 
-export const Mod4Units = () => {
+
+type Mod4UnitsProps = {
+  currentCountry: CountryNamespace.GET
+}
+export const Mod4Units = ({currentCountry}:Mod4UnitsProps) => {
   return (
     <div className="mod-units4 my-8 mx-3 sm:my-16 sm:mx-0">
       <div className="mod-header pr-3 pl-3 sm:pr-4 sm:pl-0 border-r-[4px] sm:border-r-[5px] border-pink-600">
@@ -14,7 +19,7 @@ export const Mod4Units = () => {
 
       <div className="wrap grid grid-cols-1 sm:grid-cols-4 gap-0 sm:gap-8 ">
         <div className="item group flex mb-4 sm:mb-0">
-          <Link href={"/de/list"}>
+          <Link href={`/${currentCountry.code}/businesses`}>
             <div className="image relative h-min overflow-hidden rounded-md">
               <Image
                 src={"/img/modules/mod-business.jpg"}
@@ -30,7 +35,7 @@ export const Mod4Units = () => {
           </Link>
         </div>
         <div className="item group flex mb-4 sm:mb-0">
-          <Link href={"/de/list"}>
+          <Link href={`/${currentCountry.code}/doctors`}>
             <div className="image relative h-min overflow-hidden rounded-md">
               <Image
                 src={"/img/modules/mod-doctors.jpg"}
@@ -46,7 +51,7 @@ export const Mod4Units = () => {
           </Link>
         </div>
         <div className="item group flex mb-4 sm:mb-0">
-          <Link href={"/de/list"}>
+          <Link href={`/${currentCountry.code}/freelancers`}>
             <div className="image relative h-min overflow-hidden rounded-md">
               <Image
                 src={"/img/modules/mod-freelancer.jpg"}
@@ -62,7 +67,7 @@ export const Mod4Units = () => {
           </Link>
         </div>
         <div className="item group flex mb-4 sm:mb-0">
-          <Link href={"/de/list"}>
+          <Link href={`/${currentCountry.code}/associations`}>
             <div className="image relative h-min overflow-hidden rounded-md">
               <Image
                 src={"/img/modules/mod-associations.jpg"}

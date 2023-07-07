@@ -8,10 +8,10 @@ import CategoryFilter from "./category.filter";
 import { CategoryNamespace } from "@/types/category";
 
 type ListFilterProps = {
-  cities: CityNamespace.GET;
-  categories: CategoryNamespace.GET[];
-};
-export default function ListFilter({ cities, categories }: ListFilterProps) {
+  cities: CityNamespace.GET,
+  categories: CategoryNamespace.category[]
+}
+export default function ListFilter({cities, categories}: ListFilterProps) {
   return (
     <div className="filter-wrap">
       <FilterMobile />

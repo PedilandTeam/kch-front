@@ -13,8 +13,8 @@ import React, {
 } from "react";
 
 type CategoryFilterItemProps = {
-  category: CategoryNamespace.GET;
-};
+    category: CategoryNamespace.category
+}
 
 type ParsedSearchParamsType = {
   category?: string[] | string;

@@ -10,8 +10,8 @@ import { useRouter } from "next/navigation";
 import CategoryFilterSelectedItem from "./category.filter.selected.item";
 
 type CategoryFilterType = {
-  categories: CategoryNamespace.GET[];
-};
+  categories: CategoryNamespace.category[]
+}
 export default function CategoryFilter({ categories }: CategoryFilterType) {
   const [modifiedCategories, setModifiedCategories] = useState(categories);
   const categorySearchHandler = (
@@ -105,11 +105,13 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
             />
           </div>
           <div className="px-8 h-[16rem] overflow-y-scroll">
-            {modifiedCategories?.map((category: CategoryNamespace.GET) => {
-              return (
-                <CategoryFilterItem key={category.name} category={category} />
-              );
-            })}
+            {
+              modifiedCategories?.map((category: CategoryNamespace.category) => {
+                return (
+                  <CategoryFilterItem key={category.name} category={category} />
+                )
+              })
+            }
           </div>
 
           <div className="modal-action box-border w-full pt-3 pb-5 px-8 mt-3 flex justify-between items-center bg-white shadow-2xl">
