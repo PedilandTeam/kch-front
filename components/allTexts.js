@@ -1,16 +1,23 @@
 export const GENERAL = {
+  ALL: "همه",
+  ALL_COUNTRIES: "همه کشورها",
   HOME: "خانه",
   ALL_IMAGES_VIEW: "مشاهده تمامی تصاویر",
+  CONFIRM: "تایید",
   ABOUT: "درباره کـوچـا",
   ADD_LIST: "افزودن کسب و کار",
   BACK_TO_LIST: "بازگشت به لیست",
   CATEGORY: "دسته‌بندی",
+  CATEGORY_SELECT: "انتخاب دسته‌بندی",
   CATEGORIES: "دسته‌بندی‌ها",
+  ALL_CATEGORIES: "همه دسته‌بندی‌ها",
   COPYRIGHT_TEXT1: "تمامی حقوق ناشی از این وب سایت برای",
   COPYRIGHT_TEXT2: "محفوظ است.",
+  ALL_CITIES: "همه شهرها",
   CITY: "شهر",
-  CITIES: "انتخاب شهر",
+  CITIES: "شهرها",
   CITY_NAME: "نام‌شهر",
+  CITY_SELECT: "انتخاب شهر",
   CONTACT_INFO: "اطلاعات تماس",
   CONTACT_US: "تماس با ما",
   CORPORATE_OPPORTUNITIES: "فرصت‌های همکاری",
@@ -36,6 +43,8 @@ export const GENERAL = {
   PHONE: "تلفن ثابت",
   REPORT_PAGE: "گزارش صفحه",
   SOCIAL_MEDIA: "رسانه‌های اجتماعی",
+  SELECT: "انتخاب کنید",
+  PLEASE_SELECT: "لطفا انتخاب کنید",
   SHARING: "اشتراک گذاری",
   TIMES: "بار",
   TOOLS: "ابزارها",
@@ -63,8 +72,7 @@ export const MODAL = {
 };
 
 export const COUNTRY = {
-  ALL: "همه",
-  ALL_COUNTRIES: "همه کشورها",
+
   GERMANY: "آلمان",
   ENGLAND: "انگلستان",
   SWEDEN: "سوئد",

@@ -5,6 +5,9 @@
 .cat-card {
   @apply border border-gray-300 text-gray-500 hover:border-gray-400 hover:text-gray-600 hover:shadow rounded-md p-4 flex justify-center flex-wrap hover:font-medium hover:cursor-pointer transition-all;
 }
+.checkbox {
+  direction: ltr;
+}
 
 /* width */
 ::-webkit-scrollbar {
@@ -25,4 +28,22 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.checkbox:checked {
+  background-image: linear-gradient(
+      -45deg,
+      transparent 65%,
+      hsl(var(--chkbg)) 65.99%
+    ),
+    linear-gradient(45deg, transparent 75%, hsl(var(--chkbg)) 75.99%),
+    linear-gradient(-45deg, hsl(var(--chkbg)) 40%, transparent 40.99%),
+    linear-gradient(
+      45deg,
+      hsl(var(--chkbg)) 30%,
+      hsl(var(--chkfg)) 30.99%,
+      hsl(var(--chkfg)) 40%,
+      transparent 40.99%
+    ),
+    linear-gradient(-45deg, hsl(var(--chkfg)) 50%, hsl(var(--chkbg)) 50.99%) !important;
 }

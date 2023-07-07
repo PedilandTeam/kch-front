@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        PinarLT: 'Pinar-LT',
+        PinarLT: "Pinar-LT",
       },
     },
   },
@@ -15,28 +15,19 @@ module.exports = {
     themes: [
       {
         mytheme: {
-
-          "primary": "rgb(157 23 77)",
-
-          "secondary": "#f000b8",
-
-          "accent": "#1dcdbc",
-
-          "neutral": "#2b3440",
-
+          primary: "rgb(157, 23, 77)",
+          secondary: "rgb(23, 37, 84)",
+          accent: "#1dcdbc",
+          neutral: "#2b3440",
           "base-100": "#ffffff",
-
-          "info": "#3abff8",
-
-          "success": "#36d399",
-
-          "warning": "#fbbd23",
-
-          "error": "#f87272",
+          info: "#3abff8",
+          success: "#36d399",
+          warning: "#fbbd23",
+          error: "#f87272",
         },
       },
     ],
   },
   important: true,
   plugins: [require("daisyui")],
-}
+};
