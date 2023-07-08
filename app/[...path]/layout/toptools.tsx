@@ -1,14 +1,22 @@
 "use client"
 
 
+import { API_ROUTES } from "@/routes";
+import { storeType } from "@/store/store";
+import { countryCodeList } from "@/utils/countryCodeList";
 import { useParams, usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CircleFlag } from "react-circle-flags";
+import { useSelector } from "react-redux";
 
 export const TopTools = () => {
 
   const params = useParams()
-
+  const country = useSelector((state: storeType) => state.stateSlice.country)
+  const countryCodeFromParams = params?.path?.split("/")?.[0] 
+  const isMainPage = !params?.path?.split("/")?.[0]
+  const isPathHaveCountry = countryCodeList.find(code => code == countryCodeFromParams)
+  
   return (
     <div className="top-tools flex items-center">
       <div
@@ -22,7 +30,8 @@ export const TopTools = () => {
         }}
       >
         <CircleFlag
-          countryCode={params?.path?.split("/")?.[0] ? params?.path?.split("/")?.[0] : "un"}
+          // countryCode={isPathHaveCountry ? params?.path?.split("/")?.[0] : country ? country : "un"}
+          countryCode={isMainPage ? "un" : isPathHaveCountry ? countryCodeFromParams : country ? country : "un"}
           className="opacity-75 hover:opacity-100 hover:cursor-pointer transition"
           width={42}
         />

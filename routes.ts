@@ -1,5 +1,5 @@
 
-const API_URL = process.env.API_URL
+const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL
 type requestCacheType = "default" | "force-cache" | "no-cache" | "no-store" | "only-if-cached" | "reload";
 type paramType = {
     [key: string]: string | number

@@ -13,7 +13,7 @@ import React, {
 } from "react";
 
 type CategoryFilterItemProps = {
-    category: CategoryNamespace.category
+  category: CategoryNamespace.category
 }
 
 type ParsedSearchParamsType = {
@@ -79,7 +79,7 @@ export default function CategoryFilterItem({
     },
     [searchParams]
   );
-  const inputClickHandler = (event: React.MouseEvent<HTMLInputElement>) => {
+  const inputClickHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const currentTarget = event.currentTarget;
     if (!currentTarget.checked) {
       return router.replace(
@@ -97,7 +97,6 @@ export default function CategoryFilterItem({
       htmlFor={`category-select-${category.name}`}
       className="item flex items-center border-b-[1px] py-3"
     >
-      {/**  @ts-expect-error */}
       <input
         ref={ref}
         className="checkbox checkbox-secondary checkbox-sm ml-3"
@@ -106,11 +105,13 @@ export default function CategoryFilterItem({
         value={category.id}
         type="checkbox"
         checked={
-          Array.isArray(parsedSearchParams.category)
-            ? !!parsedSearchParams.category.find(
-                (param) => param == category.id
+          parsedSearchParams.category ?
+            Array.isArray(parsedSearchParams.category)
+              ? !!parsedSearchParams.category.find(
+                (param) => +param == category.id
               )
-            : parsedSearchParams.category == category.id
+              : +parsedSearchParams.category == category.id
+            : false
         }
       />
       <label htmlFor={`category-select-${category.name}`} className="text-md">

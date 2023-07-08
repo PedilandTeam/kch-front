@@ -86,25 +86,31 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
   }, [data]);
 
   if ((isLoading && pages.length == 0) || !parsedSearchParams) {
-    return Array.from({ length: 12 }).map((skeleton: any, index) => {
-      return (
-        <ContentLoader
-          key={index}
-          speed={2}
-          width={417}
-          height={126}
-          viewBox="0 0 417 126"
-          backgroundColor="#ededed"
-          foregroundColor="#e0e0e0"
-          // {...props}
-        >
-          <rect x="55" y="12" rx="0" ry="0" width="220" height="16" />
-          <rect x="55" y="53" rx="0" ry="0" width="220" height="14" />
-          <rect x="55" y="92" rx="0" ry="0" width="220" height="16" />
-          <circle cx="355" cy="62" r="50" />
-        </ContentLoader>
-      );
-    });
+    return (
+      <>
+        {
+          Array.from({ length: 12 }).map((skeleton: any, index) => {
+            return (
+              <ContentLoader
+                key={index}
+                speed={2}
+                width={417}
+                height={126}
+                viewBox="0 0 417 126"
+                backgroundColor="#ededed"
+                foregroundColor="#e0e0e0"
+              // {...props}
+              >
+                <rect x="55" y="12" rx="0" ry="0" width="220" height="16" />
+                <rect x="55" y="53" rx="0" ry="0" width="220" height="14" />
+                <rect x="55" y="92" rx="0" ry="0" width="220" height="16" />
+                <circle cx="355" cy="62" r="50" />
+              </ContentLoader>
+            );
+          })
+        }
+      </>
+    )
   }
 
   if (data?.meta?.itemCount <= 0 && pages.length == 0) {
@@ -112,7 +118,8 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
   }
 
   return (
-    <>
+
+    <div className="list-card grid grid-cols-1 sm:grid-cols-2 gap-y-4 sm:gap-4">
       {pages.map((page: PageNamespace.GET, index: number) => {
         return (
           <Card
@@ -153,8 +160,8 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
                     }
                   />
                   {/* <span className="flex flex-wrap content-center mr-2 text-sm text-gray-500">
-                    (0 نظر)
-                  </span> */}
+                      (0 نظر)
+                    </span> */}
                 </div>
 
                 <div className="flex w-full card-tools text-sm text-gray-700">
@@ -174,12 +181,22 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
               </CardBody>
             </div>
             {/* <div>
-            <BadgeNew variant={"new"} />
-            <BadgeNew variant={"featured"} />
-          </div> */}
+              <BadgeNew variant={"new"} />
+              <BadgeNew variant={"featured"} />
+            </div> */}
           </Card>
         );
       })}
-    </>
+      {/* {
+        !pageLock ? <div className="w-full mt-9 flex justify-center items-center">
+          <span className="loading bg-gray-300 loading-ball loading-lg"></span>
+          <span className="loading bg-gray-300 loading-ball loading-xs"></span>
+          <span className="loading bg-gray-300 loading-ball loading-sm"></span>
+          <span className="loading bg-gray-300 loading-ball loading-md"></span>
+        </div>
+          : null
+
+      } */}
+    </div>
   );
 };

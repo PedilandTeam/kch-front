@@ -56,7 +56,7 @@ export default async function CenterPage({ params }: { params: { path: string[] 
 
   //show single page
   try{
-    const pageData = await (await API_ROUTES.PAGES.GET_ALL(1, 1, paths.countryOrSlug, 5)).json()
+    const pageData = await (await API_ROUTES.PAGES.GET_ALL(1, 1, paths.countryOrSlug, 20)).json()
     if(!pageData?.items){
       notFound()
     }

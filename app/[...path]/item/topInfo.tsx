@@ -1,3 +1,4 @@
+"use client"
 import { COUNTRY } from "@/components/allTexts";
 import { ShareIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
@@ -7,9 +8,15 @@ import Rating from "@client-packages/react-rating";
 import { PageNamespace } from "@/types/page";
 import SocialLink from "./socials/socialLink";
 import { socials as socialsType } from "@/types/socials.";
+import { useDispatch } from "react-redux";
+import { setCountry } from "@/store/stateSlice";
 
 export type ItemTopInfoType = { pageData: PageNamespace.GET };
 export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
+
+  const dis = useDispatch()
+  dis(setCountry(pageData?.country?.code))
+
   return (
     <div className="top-section h-full">
       <div className="container mx-auto max-w-[1144px] h-full">
@@ -41,7 +48,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
             </div>
             <div className="item-location flex justify-center sm:justify-start mb-6 sm:mb-3 text-gray-600">
               <CircleFlag
-                countryCode="de"
+                countryCode={pageData?.country?.code}
                 className="w-5 ml-2"
                 title={COUNTRY.GERMANY}
               />

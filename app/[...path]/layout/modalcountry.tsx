@@ -25,7 +25,7 @@ export const ModalCountry = ({countries}: ModalCountryProps) => {
                 className="grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-100 group-hover:cursor-pointer transition duration-200"
                 title={GENERAL.ALL_COUNTRIES}
               />
-              <p className="text-[13px] text-center mt-3 group-hover:font-semibold transition duration-200">{GENERAL.ALL}</p>
+              <p className="text-[13px]	center text-center mt-3">{COUNTRY.ALL_COUNTRIES}</p>
             </Link>
           </button>
           {
