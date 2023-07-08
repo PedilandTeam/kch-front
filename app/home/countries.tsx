@@ -13,7 +13,7 @@ export const HomeCountries = () => {
         </div>
         <div className="wrap grid grid-cols-1 sm:grid-cols-3 gap-1">
           <div className="group relative h-min overflow-hidden">
-            <Link href={"/de"}>
+            <Link href={"/at"}>
               <Image
                 src="/img/modules/mod-austria-min.jpg"
                 width="400"
