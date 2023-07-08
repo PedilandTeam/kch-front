@@ -10,18 +10,13 @@ export const OffCanvas = () => {
       <div className="drawer-side">
         <label htmlFor="my-drawer" className="drawer-overlay"></label>
 
-        <div className="menu p-4 w-80 h-full bg-gray-100 text-base-content">
+        <div className="menu p-4 w-80 h-full bg-gray-50 text-base-content">
           <div className="logo mb-5 w-[180px] h-[56px] sm:w-[170px] sm:h-[50px] relative">
             <Link href="/">
               <Image src="/img/logo.svg" fill={true} alt="Pediland Logo" />
             </Link>
           </div>
           <ul>
-            <li>
-              <Link href="/de" className="p-3 text-[16px]">
-                {MENU.COMMUNITIES}
-              </Link>
-            </li>
             <li>
               <Link href="#" className="p-3 text-[16px]">
                 {MENU.BUSINESSES}
@@ -30,6 +25,16 @@ export const OffCanvas = () => {
             <li>
               <Link href="#" className="p-3 text-[16px]">
                 {MENU.DOCTORS}
+              </Link>
+            </li>
+            <li>
+              <Link href="/de" className="p-3 text-[16px]">
+                {MENU.COMMUNITIES}
+              </Link>
+            </li>
+            <li>
+              <Link href="/de" className="p-3 text-[16px]">
+                {MENU.FREELANCERS}
               </Link>
             </li>
           </ul>
