@@ -22,7 +22,7 @@ export const Mod4Units = ({currentCountry}:Mod4UnitsProps) => {
           <Link href={`/${currentCountry.code}/businesses`}>
             <div className="image relative h-min overflow-hidden rounded-md">
               <Image
-                src={"/img/modules/mod-business.jpg"}
+                src={"/img/modules/mod-business-min.jpg"}
                 width={400}
                 height={560}
                 alt="test"
@@ -38,7 +38,7 @@ export const Mod4Units = ({currentCountry}:Mod4UnitsProps) => {
           <Link href={`/${currentCountry.code}/doctors`}>
             <div className="image relative h-min overflow-hidden rounded-md">
               <Image
-                src={"/img/modules/mod-doctors.jpg"}
+                src={"/img/modules/mod-doctors-min.jpg"}
                 width={400}
                 height={560}
                 alt="test"
@@ -54,7 +54,7 @@ export const Mod4Units = ({currentCountry}:Mod4UnitsProps) => {
           <Link href={`/${currentCountry.code}/freelancers`}>
             <div className="image relative h-min overflow-hidden rounded-md">
               <Image
-                src={"/img/modules/mod-freelancer.jpg"}
+                src={"/img/modules/mod-freelancer-min.jpg"}
                 width={400}
                 height={560}
                 alt="test"
@@ -70,7 +70,7 @@ export const Mod4Units = ({currentCountry}:Mod4UnitsProps) => {
           <Link href={`/${currentCountry.code}/associations`}>
             <div className="image relative h-min overflow-hidden rounded-md">
               <Image
-                src={"/img/modules/mod-associations.jpg"}
+                src={"/img/modules/mod-associations-min.jpg"}
                 width={400}
                 height={560}
                 alt="test"
