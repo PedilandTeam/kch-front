@@ -38,7 +38,6 @@ const cacheView = async(currentCountry: CountryNamespace.GET) => {
     })
     await client.connect()
     const viewsInCache = await client.get(viewsKey)
-    console.log(viewsInCache);
     const viewslastUpdate = await client.get(lastUpdateKey)
     
     if (!viewsInCache || !viewslastUpdate) {

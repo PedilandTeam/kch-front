@@ -72,7 +72,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         <div className="item-contact">
           {pageData?.socials?.website ? (
             <ItemSideInfoItem
-              text={new URL(pageData?.socials?.website).host}
+              text={pageData?.socials?.website?.replace(/\/+$/, '') }
               Icons={[
                 {
                   Component: (
