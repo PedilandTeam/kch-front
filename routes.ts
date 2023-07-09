@@ -64,5 +64,13 @@ export const API_ROUTES = {
         GET_ALL: (page: number, limit: number, unitId?: number, revalidate?: number, cache?: requestCacheType) => {
             return baseFetch({path: "categories", params: { page, limit,...unitId && {unitId}}}, {...cache && {cache}, ...revalidate && {revalidate}})
         }
+    },
+    STATS: {
+        OVERVIEW: (revalidate?: number, cache?: requestCacheType) => {
+            return baseFetch({path: "stats"}, {...cache && {cache}, ...revalidate && {revalidate}})
+        },
+        COUNTRY_STATS: (countryCode: string, revalidate?: number, cache?: requestCacheType) => {
+            return baseFetch({path: `stats/${countryCode}`}, {...cache && {cache}, ...revalidate && {revalidate}})
+        },
     }
 } 

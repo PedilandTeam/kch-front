@@ -77,7 +77,7 @@ function CityFilterItem({ city }: CityFilterItemProps) {
     },
     [searchParams]
   );
-  const inputClickHandler = (event: React.MouseEvent<HTMLInputElement>) => {
+  const inputClickHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const currentTarget = event.currentTarget;
     if (!currentTarget.checked) {
       return router.replace(
@@ -100,7 +100,6 @@ function CityFilterItem({ city }: CityFilterItemProps) {
       htmlFor={`city-select-${city.name}`}
       className="item flex items-center border-b-[1px] py-3"
     >
-      {/**  @ts-expect-error */}
       <input
         ref={ref}
         className="checkbox checkbox-secondary checkbox-sm ml-3"
@@ -109,9 +108,11 @@ function CityFilterItem({ city }: CityFilterItemProps) {
         value={city.id}
         type="checkbox"
         checked={
-          Array.isArray(parsedSearchParams.city)
-            ? !!parsedSearchParams.city.find((param) => param == city.id)
-            : parsedSearchParams.city == city.id
+          parsedSearchParams.city ?
+            Array.isArray(parsedSearchParams.city)
+              ? !!parsedSearchParams.city.find((param) => +param == city.id)
+              : +parsedSearchParams.city == city.id
+            : false
         }
       />
       <label htmlFor={`city-select-${city.name}`} className="text-md">

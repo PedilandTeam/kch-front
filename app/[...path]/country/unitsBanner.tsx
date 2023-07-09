@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 
-type Mod4UnitsProps = {
+type UnitsBannerProps = {
   currentCountry: CountryNamespace.GET
 }
-export const Mod4Units = ({currentCountry}:Mod4UnitsProps) => {
+export const UnitsBanner = ({currentCountry}:UnitsBannerProps) => {
   return (
     <div className="mod-units4 my-8 mx-3 sm:my-16 sm:mx-0">
       <div className="mod-header pr-3 pl-3 sm:pr-4 sm:pl-0 border-r-[4px] sm:border-r-[5px] border-pink-600">
