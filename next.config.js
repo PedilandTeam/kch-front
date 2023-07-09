@@ -7,7 +7,7 @@ const nextConfig = {
   eslint:{
     ignoreDuringBuilds: true
   },
-  output: "standalone"
+  reactStrictMode: true,
 }
 
 module.exports = nextConfig

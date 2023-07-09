@@ -26,11 +26,13 @@ const baseFetch = async ({path, method = "GET", params, body}: requestType, {cac
         fetch(url, {body, cache, next: { ...revalidate && {revalidate} }, method, })
             .then((res: Response) => {
                 if(!res.ok){
+                    res.json().then(res => console.log(res))
                     reject()
                 }
                 resolve(res)
             })
             .catch(error => {
+                console.log(error);                
                 reject(error)
             })
     })
