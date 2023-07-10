@@ -12,13 +12,9 @@ type HeaderProps = {
 }
 export const Header = ({children}: HeaderProps) => {
 
-  const header = headers()
-  const path = decodeURIComponent(header.get('x-invoke-path')!)?.replace(/\//g, "")
-  console.log(path);
-  
-  
-  API_ROUTES.PAGES.GET_ALL(1,1,path, 20)
-  .then(async res => await res.json())
+  // const header = headers()
+  // const path = decodeURIComponent(header.get('x-invoke-path')!)?.replace(/\//g, "")
+  // console.log(path);
   
 
   return (

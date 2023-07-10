@@ -7,7 +7,7 @@ export namespace CategoryNamespace {
     export type category = {
         id: number,
         name: string,
-        slug: CategoryNamespace.GET,
+        slug: string,
         createdDate: string,
         updateDate: string
         unit: UnitType

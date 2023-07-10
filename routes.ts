@@ -63,8 +63,8 @@ export const API_ROUTES = {
         }
     },
     CATEGOREIS: {
-        GET_ALL: (page: number, limit: number, unitId?: number, revalidate?: number, cache?: requestCacheType) => {
-            return baseFetch({path: "categories", params: { page, limit,...unitId && {unitId}}}, {...cache && {cache}, ...revalidate && {revalidate}})
+        GET_ALL: (page: number, limit: number, slug?: string, unitId?: number, revalidate?: number, cache?: requestCacheType) => {
+            return baseFetch({path: "categories", params: { page, limit,...slug &&{slug},...unitId && {unitId}}}, {...cache && {cache}, ...revalidate && {revalidate}})
         }
     },
     STATS: {

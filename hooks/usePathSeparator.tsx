@@ -2,13 +2,13 @@
 
 export type usePathSeparatorType = {
     countryOrSlug: string
-    unit: string
+    unitOrCategory: string
 }
 export const usePathSeparator = (path: string[]) => {
 
     return {
         countryOrSlug: path[0],
-        unit: path[1],
+        unitOrCategory: path[1],
     }
 
 }
