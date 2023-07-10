@@ -15,8 +15,15 @@ type CountryStatsProps = {
   currentCountry: CountryNamespace.GET
 }
 
-async function getStats(countryCode: string) {
-  return await (await API_ROUTES.STATS.COUNTRY_STATS(countryCode, 100)).json()
+async function getStats(countryCode: string): Promise<StatsNamespace.COUNTRY_STATS> {
+  let stats;
+  try{
+    stats = await (await API_ROUTES.STATS.COUNTRY_STATS(countryCode, 100)).json()
+  }catch(e){
+    console.log("error in get stats", e);
+    throw new Error("error in get stats")
+  }
+  return stats
 }
 
 const cacheView = async(currentCountry: CountryNamespace.GET) => {
@@ -69,10 +76,10 @@ const cacheView = async(currentCountry: CountryNamespace.GET) => {
 
 export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
 
-
-  const views = await cacheView(currentCountry)
+  let views: string | number
   let stats: StatsNamespace.COUNTRY_STATS
   try {
+    views = await cacheView(currentCountry)
     stats = await getStats(currentCountry.code)
   } catch (e) {
     throw new Error("error in get stats")

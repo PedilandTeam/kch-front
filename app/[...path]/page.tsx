@@ -18,8 +18,8 @@ export default async function CenterPage({ params }: { params: { path: string[] 
 
   let countries: CountryNamespace.GET[]
   let isCountryExist: undefined | CountryNamespace.GET
-  const categories = await(await API_ROUTES.CATEGOREIS.GET_ALL(1, 100, undefined, 20)).json()
   try{
+    const categories = await(await API_ROUTES.CATEGOREIS.GET_ALL(1, 100, undefined, 20)).json()
     countries = await (await API_ROUTES.COUNTRIES.GET_ALL(20)).json() 
     isCountryExist = countries.find(country => country.code == paths.countryOrSlug)
     if (isCountryExist && !paths.unit) {

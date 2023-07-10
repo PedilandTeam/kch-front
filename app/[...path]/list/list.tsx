@@ -5,6 +5,7 @@ import {
 } from "@/hooks/usePathSeparator";
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
+import { CityNamespace } from "@/types/city";
 import { Country } from "@/types/page";
 import { UnitType } from "@/types/unit";
 import { useParams, useSearchParams } from "next/navigation";
@@ -19,10 +20,19 @@ type PagesListProps = {
   paths: usePathSeparatorType;
 };
 
-async function fetchCities(countryCode: string) {
-  return await (
-    await API_ROUTES.CITIES.GET_ALL(1, 100, countryCode, 20)
-  ).json();
+async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
+  let cities: CityNamespace.GET
+
+  try{
+    cities =  await (
+      await API_ROUTES.CITIES.GET_ALL(1, 100, countryCode, 20)
+    ).json();
+  }catch(e){
+    console.log(e);
+    throw new Error("error in get cities fetchCities")
+  }
+
+  return cities
 }
 
 
