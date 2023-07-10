@@ -8,6 +8,7 @@ const nextConfig = {
     ignoreDuringBuilds: true
   },
   reactStrictMode: true,
+  output: "standalone"
 }
 
 module.exports = nextConfig

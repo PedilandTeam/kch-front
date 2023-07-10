@@ -1,15 +1,24 @@
+"use client"
 import { COUNTRY, GENERAL, MODAL } from "../../../components/allTexts";
 import { CircleFlag } from "react-circle-flags";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CountryNamespace } from "@/types/country";
+import { useEffect } from "react";
 
 
 type ModalCountryProps = {
   countries: CountryNamespace.GET[]
 }
-export const ModalCountry = ({countries}: ModalCountryProps) => {
+export const ModalCountry = ({ countries }: ModalCountryProps) => {
+
+useEffect(() => {
+  if(!window) return;
+  {/**@ts-ignore */}
+  console.log(window.modal_country.deleteModal);
   
+},[])
+
   return (
     <dialog id="modal_country" className="modal">
       <form method="dialog" className="modal-box sm:max-w-[50%]">
@@ -32,15 +41,15 @@ export const ModalCountry = ({countries}: ModalCountryProps) => {
             countries?.map(country => {
               return (
                 <button key={country.id} className="group">
-                <Link href={`/${country.code}`}>
-                  <CircleFlag
-                    countryCode={country.code}
-                    className="grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-100 group-hover:cursor-pointer transition duration-200"
-                    title={country.name}
-                  />
-                  <p className="text-[13px] text-center mt-3 group-hover:font-semibold transition duration-200">{country.name}</p>
-                </Link>
-              </button>
+                  <Link href={`/${country.code}`}>
+                    <CircleFlag
+                      countryCode={country.code}
+                      className="grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-100 group-hover:cursor-pointer transition duration-200"
+                      title={country.name}
+                    />
+                    <p className="text-[13px] text-center mt-3 group-hover:font-semibold transition duration-200">{country.name}</p>
+                  </Link>
+                </button>
               )
             })
           }
