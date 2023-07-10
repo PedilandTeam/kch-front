@@ -21,27 +21,27 @@ type PagesListProps = {
 };
 
 async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
-  let cities: CityNamespace.GET
+  let cities: CityNamespace.GET;
 
-  try{
-    cities =  await (
+  try {
+    cities = await (
       await API_ROUTES.CITIES.GET_ALL(1, 100, countryCode, 20)
     ).json();
-  }catch(e){
+  } catch (e) {
     console.log(e);
-    throw new Error("error in get cities fetchCities")
+    throw new Error("error in get cities fetchCities");
   }
 
-  return cities
+  return cities;
 }
 
-
-export default async function UntiList({ unit, paths, country }: PagesListProps) {
-
-
-  const cities = await fetchCities(country.code)
-  const categories: CategoryNamespace.category[] = unit.categories
-
+export default async function UntiList({
+  unit,
+  paths,
+  country,
+}: PagesListProps) {
+  const cities = await fetchCities(country.code);
+  const categories: CategoryNamespace.category[] = unit.categories;
 
   if (!paths.countryOrSlug || !unit.id) {
     return <span className="loading loading-ring loading-lg"></span>;
@@ -61,9 +61,8 @@ export default async function UntiList({ unit, paths, country }: PagesListProps)
             <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">
               لیست {unit?.name} فارسی زبان
             </h1>
-            
-            <CardsList paths={paths} unit={unit} country={country} />
 
+            <CardsList paths={paths} unit={unit} country={country} />
           </div>
         </div>
       </div>
