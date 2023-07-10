@@ -1,5 +1,5 @@
 import { CountryStats } from "./countryStats";
-import { ModCategories } from "./modcategories";
+import { CountryCategories } from "./countryCategories";
 import { SliderHome } from "./slider";
 import { CountryNamespace } from "@/types/country";
 import { CategoryNamespace } from "@/types/category";
@@ -19,7 +19,8 @@ export default function Country({currentCountry, categories}: CountryProps) {
         <UnitsBanner currentCountry={currentCountry} />
         {/** @ts-expect-error Server Component */}
         <CountryStats currentCountry={currentCountry} />
-        {/* <ModCategories categories={categories} /> */}
+        {/** @ts-expect-error Server Component */}
+        <CountryCategories currentCountry={currentCountry}/>
       </div>
     </div>
   );

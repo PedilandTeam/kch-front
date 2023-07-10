@@ -65,6 +65,12 @@ export const API_ROUTES = {
     CATEGOREIS: {
         GET_ALL: (page: number, limit: number, slug?: string, unitId?: number, revalidate?: number, cache?: requestCacheType) => {
             return baseFetch({path: "categories", params: { page, limit,...slug &&{slug},...unitId && {unitId}}}, {...cache && {cache}, ...revalidate && {revalidate}})
+        },
+        RECENTLY_UPDATED: (revalidate?: number, cache?: requestCacheType) => {
+            return baseFetch({path: "categories/recentlyUpdated"}, {...cache && {cache}, ...revalidate && {revalidate}})
+        },
+        MOST_USED: (countryCode?: string, revalidate?: number, cache?: requestCacheType) => {
+            return baseFetch({path: "categories/mostUsed", params:{...countryCode && {countryCode}}}, {...cache && {cache}, ...revalidate && {revalidate}})
         }
     },
     STATS: {

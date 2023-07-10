@@ -4,7 +4,7 @@ import { UnitType } from "./unit"
 export namespace CategoryNamespace {
 
 
-    export type category = {
+    export interface category {
         id: number,
         name: string,
         slug: string,
@@ -12,6 +12,11 @@ export namespace CategoryNamespace {
         updateDate: string
         unit: UnitType
     }
+
+    export interface MostUsedCategory extends category {
+        pageCount: number
+    }
+
     export interface GET {
         items: category[],
         meta: {
@@ -21,6 +26,13 @@ export namespace CategoryNamespace {
             totalItems: number,
             totalPages: number
         }
+    }
+
+    export interface RECENTLY_UPDATED {
+        [key:string]: category[]
+    }
+    export interface MOST_USED {
+        [key:string]: MostUsedCategory[]
     }
 
 }

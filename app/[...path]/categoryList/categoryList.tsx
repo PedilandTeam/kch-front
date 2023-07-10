@@ -15,7 +15,7 @@ import { CardsList } from "./cardsList";
 import ListFilter from "./filter/categoryListFilter";
 
 type PagesListProps = {
-  cateogory: CategoryNamespace.category;
+  category: CategoryNamespace.category;
   country: Country;
   paths: usePathSeparatorType;
 };
@@ -36,13 +36,13 @@ async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
 }
 
 
-export default async function CategoryList({ cateogory, paths, country }: PagesListProps) {
+export default async function CategoryList({ category, paths, country }: PagesListProps) {
 
 
   const cities = await fetchCities(country.code)
 
 
-  if (!paths.countryOrSlug || !cateogory.id) {
+  if (!paths.countryOrSlug || !category.id) {
     return <span className="loading loading-ring loading-lg"></span>;
   }
   return (
@@ -54,14 +54,14 @@ export default async function CategoryList({ cateogory, paths, country }: PagesL
           </div>
           <div className="page-content sm:col-span-6">
             <ItemBreadCrumb
-              unit={{ name: cateogory.name, slug: cateogory.slug }}
+              unit={{ name: category.name, slug: category.slug }}
               country={{ name: country.name, code: country.code }}
             />
             <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">
-              لیست {cateogory?.name} فارسی زبان
+              لیست {category?.name} فارسی زبان
             </h1>
             
-            <CardsList paths={paths} unit={unit} country={country} />
+            <CardsList paths={paths} category={category} country={country} />
 
           </div>
         </div>

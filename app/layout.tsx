@@ -34,7 +34,7 @@ export default async function RootLayout({
 
   return (
     <html lang="fa" dir="rtl">
-      <body>
+      <body className=" min-h-screen flex flex-col">
       <Providers>
         <ChakraProvider theme={theme}>
           <Fonts />

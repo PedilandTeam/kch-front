@@ -70,9 +70,9 @@ export const CardsList = ({ paths, category, country }: CardsListType) => {
     page,
     30,
     country.code,
-    unit.id,
+    undefined,
     parsedSearchParams.city,
-    parsedSearchParams.category
+    category.id
   );
   useEffect(() => {
     if (!data?.items) return;

@@ -18,7 +18,7 @@ export default async function CenterPage({ params }: { params: { path: string[] 
   let countries: CountryNamespace.GET[]
   let isCountryExist: undefined | CountryNamespace.GET
   try{
-    const categories = await(await API_ROUTES.CATEGOREIS.GET_ALL(1, 100, undefined, 20)).json()
+    const categories = await(await API_ROUTES.CATEGOREIS.GET_ALL(1, 300, undefined, undefined, 20)).json()
     countries = await (await API_ROUTES.COUNTRIES.GET_ALL(20)).json() 
     isCountryExist = countries.find(country => country.code == paths.countryOrSlug)
 
@@ -60,7 +60,7 @@ export default async function CenterPage({ params }: { params: { path: string[] 
       const targetCategory = categoriesItems[0]
       if(targetCategory){
         //@ts-expect-error Server Component
-        return <CategoryList cateogory={targetCategory} paths={paths} country={isCountryExist} />
+        return <CategoryList category={targetCategory} paths={paths} country={isCountryExist} />
       }
 
     }catch(e){
