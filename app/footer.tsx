@@ -4,7 +4,7 @@ import { GENERAL } from "../components/allTexts";
 
 export const Footer = () => {
   return (
-    <div className="pt-10 pb-5 mt-auto bg-blue-950 text-gray-50">
+    <div className="pt-10 pb-5 mt-5 sm:mt-10 bg-blue-950 text-gray-50">
       <footer className="footer footer-center container mx-auto max-w-[1144px]">
         <div className="grid grid-flow-col gap-3 sm:gap-4">
           <Link href={"#"} className="link link-hover">

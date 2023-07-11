@@ -18,13 +18,11 @@ type CityFilterType = {
   cities: CityNamespace.city[];
 };
 export default function CityFilter({ cities }: CityFilterType) {
-
-
   const [modifiedCities, setModifiedCities] = useState(cities);
 
   /**
    * find cities that have includes() searched string
-   * if cities not exist do anything 
+   * if cities not exist do anything
    * @param event
    * @returns void
    */
@@ -36,15 +34,13 @@ export default function CityFilter({ cities }: CityFilterType) {
     setModifiedCities(find);
   };
 
-
   /**
    * auto focusing on search input
    */
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    if (inputRef.current)
-      inputRef.current.focus()
-  }, [inputRef])
+    if (inputRef.current) inputRef.current.focus();
+  }, [inputRef]);
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -53,7 +49,7 @@ export default function CityFilter({ cities }: CityFilterType) {
   /**
    * save cities that are in city query
    * if city query have a single number it's return string
-   * if city query have multiple numbers it's return Array[] 
+   * if city query have multiple numbers it's return Array[]
    */
   const citiesInQuery = queryString.parse(searchParams.toString(), {
     arrayFormat: "comma",
@@ -71,7 +67,7 @@ export default function CityFilter({ cities }: CityFilterType) {
     <div className="filter-section mb-4">
       <label
         htmlFor="my_modal_7"
-        className="btn btn-primary btn-outline btn-wide"
+        className="btn btn-primary btn-outline w-full"
       >
         {GENERAL.CITY_SELECT}
       </label>
@@ -99,19 +95,16 @@ export default function CityFilter({ cities }: CityFilterType) {
           <div className="pt-5 pb-3 px-8 bg-white w-full">
             <h3 className="flex justify-between content-center text-lg font-bold">
               {GENERAL.CITY_SELECT}
-              {
-                citiesInQuery ? <span
+              {citiesInQuery ? (
+                <span
                   onClick={deleteAllCityHandler}
                   className="cursor-pointer text-[15px] font-normal text-pink-800"
                 >
                   {GENERAL.DELETE_ALL}
                 </span>
-                  : null
-              }
+              ) : null}
             </h3>
-            <p className="py-3">
-              شهر یا شهرهای مورد نظر خود را انتخاب نمایید.
-            </p>
+            <p className="py-3">شهر یا شهرهای مورد نظر خود را انتخاب نمایید.</p>
             <input
               onChange={citySearchHandler}
               type="text"
