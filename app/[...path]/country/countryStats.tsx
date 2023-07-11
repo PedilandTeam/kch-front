@@ -56,10 +56,9 @@ const cacheView = async(currentCountry: CountryNamespace.GET) => {
 
     
     
-    if ((nowDate - +viewslastUpdate) >= dayInMiliseconds) {
+    if ((nowDate - (+viewslastUpdate)) >= dayInMiliseconds) {
       console.log('here');
       const newViews = views + viewsInCache
-      
       await client.set(viewsKey, newViews)
       await client.set(lastUpdateKey, nowDate)
       return newViews
