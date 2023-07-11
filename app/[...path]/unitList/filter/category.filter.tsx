@@ -10,8 +10,8 @@ import { useRouter } from "next/navigation";
 import CategoryFilterSelectedItem from "./category.filter.selected.item";
 
 type CategoryFilterType = {
-  categories: CategoryNamespace.category[]
-}
+  categories: CategoryNamespace.category[];
+};
 export default function CategoryFilter({ categories }: CategoryFilterType) {
   const [modifiedCategories, setModifiedCategories] = useState(categories);
   const categorySearchHandler = (
@@ -33,7 +33,6 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
     arrayFormat: "comma",
   }).city;
 
-
   const deleteAllCategoryHandler = () => {
     const query = queryString.parse(searchParams.toString());
     if (query.category) {
@@ -49,8 +48,9 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
       {/* The button to open modal */}
       <label
         htmlFor="category_modal"
-        className={`btn ${!citiesInQuery ? "btn-outline" : "btn-outline"
-          }  btn-primary btn-wide`}
+        className={`btn ${
+          !citiesInQuery ? "btn-outline" : "btn-outline"
+        }  btn-primary w-full`}
       >
         {citiesInQuery ? GENERAL.CATEGORY_SELECT : GENERAL.CATEGORY_SELECT}
       </label>
@@ -81,15 +81,14 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
           <div className="pt-5 pb-3 px-8 bg-white w-full">
             <h3 className="flex justify-between content-center text-lg font-bold">
               انتخاب دسته بندی
-              {
-                categoriesInQuery ? <span
+              {categoriesInQuery ? (
+                <span
                   onClick={deleteAllCategoryHandler}
                   className="cursor-pointer text-[15px] font-normal text-pink-800"
                 >
                   {GENERAL.DELETE_ALL}
                 </span>
-                  : null
-              }
+              ) : null}
             </h3>
             <p className="py-3">
               دسته بندی یا دسته بندی های مورد نظر خود را انتخاب نمایید.
@@ -102,13 +101,11 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
             />
           </div>
           <div className="px-8 h-[16rem] overflow-y-scroll">
-            {
-              modifiedCategories?.map((category: CategoryNamespace.category) => {
-                return (
-                  <CategoryFilterItem key={category.name} category={category} />
-                )
-              })
-            }
+            {modifiedCategories?.map((category: CategoryNamespace.category) => {
+              return (
+                <CategoryFilterItem key={category.name} category={category} />
+              );
+            })}
           </div>
 
           <div className="modal-action box-border w-full pt-3 pb-5 px-8 mt-3 flex justify-between items-center bg-white shadow-2xl">
