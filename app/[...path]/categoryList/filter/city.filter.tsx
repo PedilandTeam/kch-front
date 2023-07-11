@@ -1,14 +1,9 @@
 "use client";
 
-import {
-  Checkbox,
-  CheckboxGroup,
-  Stack,
-} from "@client-packages/chakra-ui/components";
 import { GENERAL } from "../../../../components/allTexts";
 import { CityNamespace } from "@/types/city";
 import CityFilterItem from "./city.filter.item";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { useRouter } from "next/navigation";

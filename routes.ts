@@ -82,3 +82,12 @@ export const API_ROUTES = {
         },
     }
 } 
+
+
+
+export enum UNITS_LIST {
+    BUSINESSES = "businesses",
+    DOCTORS = "doctors",
+    COMMUNITIES = "associations",
+    FREELANCERS = "freelancers"
+}
