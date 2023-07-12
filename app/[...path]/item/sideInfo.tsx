@@ -2,7 +2,7 @@ import { PageNamespace } from "@/types/page";
 import {
   ArrowTopRightOnSquareIcon,
   PhoneArrowUpRightIcon,
-  HomeModernIcon
+  HomeModernIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,6 +21,7 @@ type IconItem = {
   Component: React.ReactNode;
   href?: string | undefined | null;
 };
+
 interface ItemSideInfoItemType {
   Icons?: IconItem[];
   Images?: ImageItem[];
@@ -61,22 +62,16 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
             </Link>
           );
         })}
-      <span className=" truncate">{text}</span>
+      <span className="text-left font-PinarLT">{text}</span>
     </div>
   );
 }
 
-
-
-
-
-
 export function ItemSideInfo({ pageData }: ItemSideInfoType) {
-
   const websiteTrimer = (address: string) => {
     let newUrl = address.trim();
 
-    if (newUrl.startsWith('http://') || newUrl.startsWith('https://')) {
+    if (newUrl.startsWith("http://") || newUrl.startsWith("https://")) {
       const urlObj = new URL(newUrl);
       newUrl = `${urlObj.protocol}//${urlObj.host}`;
     } else {
@@ -86,9 +81,8 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
       }
     }
 
-    return newUrl
+    return newUrl;
   };
-
 
   return (
     <div className="item-side sm:col-span-4 sm:col-end-13 mx-3 sm:mr-3 sm:ml-0">
@@ -145,7 +139,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
           />
 
           <ItemSideInfoItem
-            text={`${pageData?.address?.city} ${pageData?.address?.address}`}
+            text={`${pageData?.address?.address} ${pageData?.address?.city}`}
             Icons={[
               {
                 Component: (

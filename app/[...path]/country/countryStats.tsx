@@ -12,74 +12,71 @@ import { CountryNamespace } from "@/types/country";
 import { createClient, RedisClientType } from "redis";
 
 type CountryStatsProps = {
-  currentCountry: CountryNamespace.GET
-}
+  currentCountry: CountryNamespace.GET;
+};
 
-async function getStats(countryCode: string): Promise<StatsNamespace.COUNTRY_STATS> {
+async function getStats(
+  countryCode: string
+): Promise<StatsNamespace.COUNTRY_STATS> {
   let stats;
-  try{
-    stats = await (await API_ROUTES.STATS.COUNTRY_STATS(countryCode, 100)).json()
-  }catch(e){
+  try {
+    stats = await (
+      await API_ROUTES.STATS.COUNTRY_STATS(countryCode, 100)
+    ).json();
+  } catch (e) {
     console.log("error in get stats", e);
-    throw new Error("error in get stats")
+    throw new Error("error in get stats");
   }
-  return stats
+  return stats;
 }
 
-const cacheView = async(currentCountry: CountryNamespace.GET) => {
-  let client: RedisClientType
-  let views: number = 1
-  let dayInMiliseconds = 86_400_000
+const cacheView = async (currentCountry: CountryNamespace.GET) => {
+  let client: RedisClientType;
+  let views: number = 1;
+  let dayInMiliseconds = 86_400_000;
   const viewsKey = `${currentCountry.code}_views`;
-  const lastUpdateKey = `${currentCountry.code}_views_last_update`
-  const nowDate = new Date().getTime()
-  const fromDate = new Date("2023-07-07T15:36:28.521Z").getTime()
-  const dayDiffrence = ((nowDate - fromDate) / dayInMiliseconds)
-  views = Math.floor(60 + dayDiffrence * (Math.floor(Math.random() * 50)))
-
-
+  const lastUpdateKey = `${currentCountry.code}_views_last_update`;
+  const nowDate = new Date().getTime();
+  const fromDate = new Date("2023-07-07T15:36:28.521Z").getTime();
+  const dayDiffrence = (nowDate - fromDate) / dayInMiliseconds;
+  views = Math.floor(60 + dayDiffrence * Math.floor(Math.random() * 50));
 
   try {
     client = createClient({
-      url: process.env.REDIS_URL
-    })
-    await client.connect()
-    const viewsInCache = await client.get(viewsKey)
-    const viewslastUpdate = await client.get(lastUpdateKey)
-    
+      url: process.env.REDIS_URL,
+    });
+    await client.connect();
+    const viewsInCache = await client.get(viewsKey);
+    const viewslastUpdate = await client.get(lastUpdateKey);
+
     if (!viewsInCache || !viewslastUpdate) {
-      await client.set(viewsKey, views)
-      await client.set(lastUpdateKey, nowDate)
-      return views
+      await client.set(viewsKey, views);
+      await client.set(lastUpdateKey, nowDate);
+      return views;
     }
 
-    
-    
-    if ((nowDate - (+viewslastUpdate)) >= dayInMiliseconds) {
-      const newViews = views + viewsInCache
-      await client.set(viewsKey, newViews)
-      await client.set(lastUpdateKey, nowDate)
-      return newViews
+    if (nowDate - +viewslastUpdate >= dayInMiliseconds) {
+      const newViews = views + viewsInCache;
+      await client.set(viewsKey, newViews);
+      await client.set(lastUpdateKey, nowDate);
+      return newViews;
     }
 
-    return viewsInCache
-    
+    return viewsInCache;
   } catch (e) {
     console.log(e);
-    throw new Error("redis error")
+    throw new Error("redis error");
   }
-
-}
+};
 
 export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
-
-  let views: string | number
-  let stats: StatsNamespace.COUNTRY_STATS
+  let views: string | number;
+  let stats: StatsNamespace.COUNTRY_STATS;
   try {
-    views = await cacheView(currentCountry)
-    stats = await getStats(currentCountry.code)
+    views = await cacheView(currentCountry);
+    stats = await getStats(currentCountry.code);
   } catch (e) {
-    throw new Error("error in get stats")
+    throw new Error("error in get stats");
   }
 
   return (
