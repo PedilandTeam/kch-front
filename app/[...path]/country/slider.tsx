@@ -1,9 +1,7 @@
 import { API_ROUTES, UNITS_LIST_ARRAY } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CountryNamespace } from "@/types/country";
-import {
-  CursorArrowRippleIcon
-} from "@heroicons/react/24/outline";
+import { CursorArrowRippleIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,24 +9,23 @@ type SliderHomeProps = {
   currentCountry: CountryNamespace.GET;
 };
 
-
 async function getMostUsedCategories(countryCode: string) {
   let result: CategoryNamespace.MOST_USED;
   try {
-    result = await (await API_ROUTES.CATEGOREIS.MOST_USED(countryCode, 1, 120)).json()
-    return result
+    result = await (
+      await API_ROUTES.CATEGOREIS.MOST_USED(countryCode, 1, 120)
+    ).json();
+    return result;
   } catch (e) {
     console.log(e);
-    throw new Error("error in getMostUsedCategories")
+    throw new Error("error in getMostUsedCategories");
   }
 }
 
-
-
 export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
-
-  const mostUsedCategories: CategoryNamespace.MOST_USED = await getMostUsedCategories(currentCountry.code)
-  const units = UNITS_LIST_ARRAY
+  const mostUsedCategories: CategoryNamespace.MOST_USED =
+    await getMostUsedCategories(currentCountry.code);
+  const units = UNITS_LIST_ARRAY;
 
   return (
     <div className="slider h-[520px] flex justify-center content-center mx-3 sm:mx-auto sm:max-w-[95%] relative">
@@ -62,8 +59,8 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
             بـسـازیـد!
           </h2>
           <Link target={"_blank"} href={"https://t.me/koochaa_support"}>
-            <button className="btn my-3 sm:my-5 px-3 mx-3 sm:mx-0 bg-lime-300 border-lime-300 text-lime-900 hover:bg-lime-400 hover:border-lime-400 hover:text-lime-950">
-              از اینجا شروع کنید
+            <button className="btn my-3 sm:my-5 px-3 mx-3 sm:mx-0 bg-sky-500 border-sky-500 text-white hover:bg-sky-600 hover:border-sky-600">
+              همین الان پـیـام بده
               <CursorArrowRippleIcon className="w-7 h-7" />
             </button>
           </Link>
@@ -71,19 +68,17 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
             و یا دسته‌بندی‌های پربازدید رو مرور کنید:
           </h3>
           <div className="flex flex-wrap gap-1 sm:gap-2 mx-3 sm:mx-0">
-            {
-              UNITS_LIST_ARRAY.map(unit => {
-                return mostUsedCategories[unit.id].map(category => {
-                  return (
-                    <Link href={`/${currentCountry.code}/${category.slug}`}>
-                      <button className="btn btn-sm btn-neutral font-normal text-gray-50 px-2">
-                        {category.name}
-                      </button>
-                    </Link>
-                  )
-                })
-              })
-            }
+            {UNITS_LIST_ARRAY.map((unit) => {
+              return mostUsedCategories[unit.id].map((category) => {
+                return (
+                  <Link href={`/${currentCountry.code}/${category.slug}`}>
+                    <button className="btn btn-sm btn-neutral font-normal text-gray-50 px-2">
+                      {category.name}
+                    </button>
+                  </Link>
+                );
+              });
+            })}
           </div>
         </div>
       </div>
