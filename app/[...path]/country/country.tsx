@@ -14,6 +14,7 @@ type CountryProps = {
 export default function Country({currentCountry, categories}: CountryProps) {
   return (
     <div className="component page-country">
+      {/**@ts-expect-error */}
       <SliderHome currentCountry={currentCountry} />
       <div className="container mx-auto max-w-[1144px]">
         <UnitsBanner currentCountry={currentCountry} />

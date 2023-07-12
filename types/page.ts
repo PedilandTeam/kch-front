@@ -44,6 +44,7 @@ export interface Socials {
 export interface Address {
     country: string;
     city:    string;
+    address: string;
 }
 
 export interface Category {

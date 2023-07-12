@@ -2,6 +2,7 @@ import { PageNamespace } from "@/types/page";
 import {
   ArrowTopRightOnSquareIcon,
   PhoneArrowUpRightIcon,
+  HomeModernIcon
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
@@ -60,25 +61,48 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
             </Link>
           );
         })}
-      <span>{text}</span>
+      <span className=" truncate">{text}</span>
     </div>
   );
 }
 
+
+
+
+
+
 export function ItemSideInfo({ pageData }: ItemSideInfoType) {
+
+  const websiteTrimer = (address: string) => {
+    let newUrl = address.trim();
+
+    if (newUrl.startsWith('http://') || newUrl.startsWith('https://')) {
+      const urlObj = new URL(newUrl);
+      newUrl = `${urlObj.protocol}//${urlObj.host}`;
+    } else {
+      const match = newUrl.match(/^(?!https?:\/\/)([^\/]*)(\/.*)?$/);
+      if (match) {
+        newUrl = `https://${match[1]}`;
+      }
+    }
+
+    return newUrl
+  };
+
+
   return (
     <div className="item-side sm:col-span-4 sm:col-end-13 mx-3 sm:mr-3 sm:ml-0">
       <div className="rounded-md border border-gray-200 px-5 py-3 mb-3">
         <div className="item-contact">
           {pageData?.socials?.website ? (
             <ItemSideInfoItem
-              text={pageData?.socials?.website?.replace(/\/+$/, '') }
+              text={websiteTrimer(pageData?.socials?.website)}
               Icons={[
                 {
                   Component: (
                     <ArrowTopRightOnSquareIcon className="w-[22px] h-[22px] text-gray-500 hover:text-pink-900" />
                   ),
-                  href: pageData?.socials?.website,
+                  href: websiteTrimer(pageData?.socials?.website),
                 },
               ]}
             />
@@ -116,6 +140,17 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
                   <PhoneArrowUpRightIcon className="w-[22px] h-[22px] text-gray-500 hover:text-green-600" />
                 ),
                 href: `tel:${pageData.contact?.phone}`,
+              },
+            ]}
+          />
+
+          <ItemSideInfoItem
+            text={`${pageData?.address?.city} ${pageData?.address?.address}`}
+            Icons={[
+              {
+                Component: (
+                  <HomeModernIcon className="w-[22px] h-[22px] text-gray-500 hover:text-green-600" />
+                ),
               },
             ]}
           />

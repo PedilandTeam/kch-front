@@ -1,5 +1,6 @@
 "use client"
 import { MENU } from "@/components/allTexts"
+import { UNITS_LIST_ARRAY } from "@/routes"
 import { CategoryNamespace } from "@/types/category"
 import { CountryNamespace } from "@/types/country"
 import { UnitType } from "@/types/unit"
@@ -11,20 +12,30 @@ import { useEffect, useState } from "react"
 
 type CountryCategoriesItemsProps = {
     recentlyUpdatedCategories: CategoryNamespace.MOST_USED
-    units: UnitType[]
     currentCountry: CountryNamespace.GET
 }
-export default function CountryCategoriesItems({ recentlyUpdatedCategories, units, currentCountry }: CountryCategoriesItemsProps) {
+export default function CountryCategoriesItems({ recentlyUpdatedCategories, currentCountry }: CountryCategoriesItemsProps) {
+
+    const units = UNITS_LIST_ARRAY
 
     const [activeTab, setActive] = useState<number>(1)
     const activeTabChangeHandler = (value: number) => {
         setActive(value)
     }
+
+    type emptyUnitsType = {
+        unit: string,
+        childs: number
+    }
+    const [emptyUnits, setEmptyUnits] = useState<emptyUnitsType[] | []>([])
+
     return (
         <>
             {
                 units.map(unit => {
-
+                    if(recentlyUpdatedCategories[`${unit.id}`].length == 0){
+                        return;
+                    }
                     return (
                         <a onClick={() => activeTabChangeHandler(unit.id)} key={`unit-${unit.id}`} className={`tab tab-bordered border-b-[3px] font-medium h-[46px] text-base ${activeTab == unit.id ? "tab-active border-orange-300" : ""} `}>
                             {unit.name}
@@ -39,7 +50,7 @@ export default function CountryCategoriesItems({ recentlyUpdatedCategories, unit
                 {
                     recentlyUpdatedCategories[`${activeTab}`].map((category, index) => {
                         return (
-                            <Link href={`/${currentCountry.code}/${category.slug}`}>
+                            <Link key={"country-category" + category.id} href={`/${currentCountry.code}/${category.slug}`}>
                                 <div key={`${category.id}${index}`} className="cat-card group">
                                     <Image
                                         src="/img/icon/cat-restaurant.svg"

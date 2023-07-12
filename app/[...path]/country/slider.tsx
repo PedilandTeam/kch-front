@@ -1,3 +1,5 @@
+import { API_ROUTES, UNITS_LIST_ARRAY } from "@/routes";
+import { CategoryNamespace } from "@/types/category";
 import { CountryNamespace } from "@/types/country";
 import {
   CursorArrowRippleIcon
@@ -8,7 +10,26 @@ import Link from "next/link";
 type SliderHomeProps = {
   currentCountry: CountryNamespace.GET;
 };
-export const SliderHome = ({ currentCountry }: SliderHomeProps) => {
+
+
+async function getMostUsedCategories(countryCode: string) {
+  let result: CategoryNamespace.MOST_USED;
+  try {
+    result = await (await API_ROUTES.CATEGOREIS.MOST_USED(countryCode, 1, 120)).json()
+    return result
+  } catch (e) {
+    console.log(e);
+    throw new Error("error in getMostUsedCategories")
+  }
+}
+
+
+
+export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
+
+  const mostUsedCategories: CategoryNamespace.MOST_USED = await getMostUsedCategories(currentCountry.code)
+  const units = UNITS_LIST_ARRAY
+
   return (
     <div className="slider h-[520px] flex justify-center content-center mx-3 sm:mx-auto sm:max-w-[95%] relative">
       <Image
@@ -50,20 +71,19 @@ export const SliderHome = ({ currentCountry }: SliderHomeProps) => {
             و یا دسته‌بندی‌های پربازدید رو مرور کنید:
           </h3>
           <div className="flex flex-wrap gap-1 sm:gap-2 mx-3 sm:mx-0">
-            <Link href={`/${currentCountry.code}`}>
-              <button className="btn btn-sm btn-neutral font-normal text-gray-50 px-2">
-                وکیل فارسی زبان
-              </button>
-            </Link>
-            <button className="btn btn-sm btn-neutral font-normal text-gray-50 px-2">
-              سالن زیبایی
-            </button>
-            <button className="btn btn-sm btn-neutral font-normal text-gray-50 px-2">
-              مترجم رسمی
-            </button>
-            <button className="btn btn-sm btn-neutral font-normal text-gray-50 px-2">
-              رستوران ایرانی
-            </button>
+            {
+              UNITS_LIST_ARRAY.map(unit => {
+                return mostUsedCategories[unit.id].map(category => {
+                  return (
+                    <Link href={`/${currentCountry.code}/${category.slug}`}>
+                      <button className="btn btn-sm btn-neutral font-normal text-gray-50 px-2">
+                        {category.name}
+                      </button>
+                    </Link>
+                  )
+                })
+              })
+            }
           </div>
         </div>
       </div>

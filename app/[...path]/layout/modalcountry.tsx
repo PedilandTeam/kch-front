@@ -4,7 +4,7 @@ import { CircleFlag } from "react-circle-flags";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CountryNamespace } from "@/types/country";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 
 type ModalCountryProps = {
@@ -12,12 +12,7 @@ type ModalCountryProps = {
 }
 export const ModalCountry = ({ countries }: ModalCountryProps) => {
 
-useEffect(() => {
-  if(!window) return;
-  {/**@ts-ignore */}
-  console.log(window.modal_country.deleteModal);
-  
-},[])
+  const buttonRef = useRef<HTMLButtonElement>(null)
 
   return (
     <dialog id="modal_country" className="modal">
@@ -28,7 +23,7 @@ useEffect(() => {
 
         <div className="grid grid-cols-4 gap-5 md:grid-cols-7 md:gap-6 place-content-center mb-4 country-list">
           <button className="group">
-            <Link href={"/"}>
+            <Link href={"/"} onClick={() => buttonRef.current?.click()}>
               <CircleFlag
                 countryCode="un"
                 className="grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-100 group-hover:cursor-pointer transition duration-200"
@@ -41,7 +36,7 @@ useEffect(() => {
             countries?.map(country => {
               return (
                 <button key={country.id} className="group">
-                  <Link href={`/${country.code}`}>
+                  <Link href={`/${country.code}`} onClick={() => buttonRef.current?.click()} >
                     <CircleFlag
                       countryCode={country.code}
                       className="grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-100 group-hover:cursor-pointer transition duration-200"
@@ -56,7 +51,7 @@ useEffect(() => {
         </div>
       </form>
       <form method="dialog" className="modal-backdrop">
-        <button>close</button>
+        <button ref={buttonRef}>close</button>
       </form>
     </dialog>
   );
