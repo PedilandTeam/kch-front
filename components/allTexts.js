@@ -34,7 +34,7 @@ export const GENERAL = {
   FILTER_SELECT_PLEASE: "لطفا فیلترهای خود را انتخاب کنید",
   FEATURED: "ویژه",
   IMAGES: "تصاویر",
-  ITEM: "مورد",
+  ITEM: "آیتم",
   IS_OPEN: "باز است",
   KOOCHAA: "کوچا",
   KOOCHAA_SLOGAN: "جامعه پارسی زبانان مهاجر",

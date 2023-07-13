@@ -97,6 +97,20 @@ export const HomeCountries = () => {
             </Link>
           </div>
         </div>
+        <div className="mt-12 text-center">
+          <button
+            className="btn"
+            onClick={() => {
+              if (document) {
+                (
+                  document.getElementById("modal_country") as HTMLFormElement
+                ).showModal();
+              }
+            }}
+          >
+            مشاهده تمام کشورها
+          </button>
+        </div>
       </div>
     </div>
   );
