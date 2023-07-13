@@ -10,7 +10,7 @@ type requestType = {
 }
 
 const baseFetch = async ({path, method = "GET", params, body}: requestType, {cache, revalidate}: configType): Promise<Response> => {
-
+    
     return new Promise((resolve, reject) => {
 
         let queryParametrs: URLSearchParams | undefined
@@ -27,7 +27,7 @@ const baseFetch = async ({path, method = "GET", params, body}: requestType, {cac
             
             .then((res: Response) => {
                 if(!res.ok){
-                    // res.json().then(res => console.log(res))
+                    res.json().then(res => console.log(res))
                     reject()
                 }
                 resolve(res)
