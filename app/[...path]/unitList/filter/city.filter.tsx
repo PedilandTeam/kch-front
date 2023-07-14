@@ -32,14 +32,15 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   const searchParams = useSearchParams() as unknown as URLSearchParams;
   const pathname = usePathname();
   const [parsedSearchParams, setParsedSearchParams] = useState<ParsedSearchParamsType>({});
+  const [isParsedSearchParamsAdded, setIsParsedSearchParamsAdded] = useState(false)
 
   const [shouldBeAdd, setShouldBeAdd] = useState<(string)[]>([])
 
   useEffect(() => {
-    console.log(shouldBeAdd);
-    console.log("to array", Array.from(shouldBeAdd));
+    console.log('shouldBeAdd', shouldBeAdd);
+    console.log("pathname", pathname);
     
-  },[shouldBeAdd])
+  },[shouldBeAdd, pathname])
 
   const addToShouldBeAdd: addToShouldBeAddType = (item: string) => {
     if(shouldBeAdd.includes(item))
@@ -60,6 +61,10 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     })
   }
 
+  const clearShouldBeAdd = () => {
+    setShouldBeAdd([])
+  }
+
   useEffect(() => {
     setParsedSearchParams(
       queryString.parse(searchParams.toString(), { arrayFormat: "comma" })
@@ -67,14 +72,16 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   }, [searchParams]);
 
   useEffect(() => {
+    if(isParsedSearchParamsAdded)return;
     if(!parsedSearchParams?.city)return;
-    // if(Array.isArray(parsedSearchParams.city)){
-    //   parsedSearchParams.city.forEach(cityId => {
-    //     addToShouldBeAdd(cityId)
-    //   })
-    // }else{
-    //   addToShouldBeAdd(parsedSearchParams.city)
-    // }
+    if(Array.isArray(parsedSearchParams.city)){
+      parsedSearchParams.city.forEach(cityId => {
+        addToShouldBeAdd(cityId)
+      })
+    }else{
+      addToShouldBeAdd(parsedSearchParams.city)
+    }
+    setIsParsedSearchParamsAdded(true)
   },[parsedSearchParams])
 
 
@@ -130,17 +137,11 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   }).city;
 
   const deleteAllCityHandler = () => {
-    const query = queryString.parse(searchParams.toString());
-    if (query.city) {
-      delete query.city;
-    }
-    router.replace(`${pathname}?${queryString.stringify(query)}`);
+
+    clearShouldBeAdd()
   };
 
   const checkHandler: checkHandlerType = (value: string | number) => {
-
-
-    // const hasItem = shouldBeAdd.includes(value)
     const hasItem = shouldBeAdd.find(n => n == value)
     if(hasItem){
       console.log("have ", value);
@@ -148,25 +149,6 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     }else{
       return false
     }
-
-    // const isInShouldBeRemove = !!shouldBeRemove.find(value => +value == city.id);
-    // const isInShouldBeAdd = !!shouldBeAdd.find(value => +value == city.id);
-    // let isInSearchParams;
-    // if (parsedSearchParams.city) {
-    //   if (Array.isArray(parsedSearchParams.city)) {
-    //     isInSearchParams = !!parsedSearchParams.city.find((param: string) => +param == city.id)
-    //   } else {
-    //     +parsedSearchParams.city == city.id
-    //   }
-    // }
-    // if (isInShouldBeAdd || isInSearchParams) {
-    //   return true
-    // }
-    // if (isInShouldBeRemove || !isInSearchParams) {
-    //   return false
-    // }
-
-
   }
 
   return (
@@ -184,11 +166,13 @@ export default function CityFilter({ cities, id }: CityFilterType) {
             if (!cityId) return;
             const city = cities.find((city) => city.id == +cityId);
             if (!city) return;
-            return <CityFilterSelectedItem city={city} />;
+            return <CityFilterSelectedItem removeFromShouldBeAdd={removeFromShouldBeAdd} key={`city-selected-item-xz-${cityId}`} city={city} />;
           })
         ) : citiesInQuery &&
           cities.find((city) => city.id == +citiesInQuery) ? (
-          <CityFilterSelectedItem
+          <CityFilterSelectedItem 
+            removeFromShouldBeAdd={removeFromShouldBeAdd}
+            key={`city-selected-item-xz-single-`}
             city={cities.find((city) => city.id == +citiesInQuery)!}
           />
         ) : null}
@@ -226,14 +210,9 @@ export default function CityFilter({ cities, id }: CityFilterType) {
             })}
           </div>
           <div className="flex">
-            <div className="modal-action box-border w-1/2 pt-3 pb-5 px-8 mt-3 flex justify-between items-center ">
+            <div className="modal-action box-border w-full pt-3 pb-5 px-8 mt-3 flex justify-between items-center ">
               <label onClick={applyFilters} htmlFor={id} className="btn btn-primary w-full">
                 {GENERAL.CONFIRM}
-              </label>
-            </div>
-            <div className="modal-action box-border w-1/2 pt-3 pb-5 px-8 mt-3 flex justify-between items-center ">
-              <label htmlFor={id} className="btn btn-ghost w-full">
-                {GENERAL.CANCELL}
               </label>
             </div>
           </div>

@@ -1,5 +1,7 @@
 "use client";
 
+import useCreateQueryString from "@/hooks/useCreateQueryString";
+import useDeleteQueryString from "@/hooks/useDeleteQueryString";
 import { CityNamespace } from "@/types/city";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -12,15 +14,17 @@ import React, {
   useState,
   useTransition,
 } from "react";
+import { removeFromShouldBeAddType } from "./city.filter";
 
 type CityFilterItemProps = {
   city: CityNamespace.city;
+  removeFromShouldBeAdd: removeFromShouldBeAddType
 };
 
 type ParsedSearchParamsType = {
   city?: string[] | string;
 };
-function CityFilterSelectedItem({ city }: CityFilterItemProps) {
+function CityFilterSelectedItem({ city, removeFromShouldBeAdd }: CityFilterItemProps) {
   const ref = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const searchParams = useSearchParams() as unknown as URLSearchParams;
@@ -34,58 +38,22 @@ function CityFilterSelectedItem({ city }: CityFilterItemProps) {
     );
   }, [searchParams]);
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = queryString.parse(searchParams.toString());
-      let targetValues = params?.[name];
-      const newValue = [value];
-      if (!targetValues) {
-        params[name] = value;
-        return queryString.stringify(params);
-      }
-      if (!Array.isArray(targetValues)) {
-        newValue.push(targetValues);
-      } else {
-        //@ts-expect-error
-        newValue.push(...targetValues);
-      }
-      params[name] = newValue;
-      return queryString.stringify(params, { arrayFormat: "comma" });
-    },
-    [searchParams]
-  );
+  const createQueryString = useCreateQueryString()
+  const deleteQueryString = useDeleteQueryString()
 
-  const deleteQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = queryString.parse(searchParams.toString(), {
-        arrayFormat: "comma",
-      });
-      let targetValues = params?.[name];
 
-      if (!targetValues) {
-        return;
-      }
-      if (!Array.isArray(targetValues)) {
-        delete params[name];
-      } else {
-        const indexofTarget = targetValues.findIndex((param) => param == value);
-        if (indexofTarget == -1) return;
-        targetValues.splice(indexofTarget, 1);
-      }
-      return queryString.stringify(params, { arrayFormat: "comma" });
-    },
-    [searchParams]
-  );
   const inputClickHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const currentTarget = event.currentTarget;
     if (!currentTarget.checked) {
+      removeFromShouldBeAdd(currentTarget.value)
       return router.replace(
         `${pathname}?${deleteQueryString("city", currentTarget.value)}`
       );
     }
-    router.replace(
-      `${pathname}?${createQueryString("city", currentTarget.value)}`
-    );
+
+    // router.replace(
+    //   `${pathname}?${createQueryString("city", currentTarget.value)}`
+    // );
   };
 
   // const containerClickHandler = () => {
