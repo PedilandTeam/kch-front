@@ -50,16 +50,7 @@ function CityFilterSelectedItem({ city, removeFromShouldBeAdd }: CityFilterItemP
         `${pathname}?${deleteQueryString("city", currentTarget.value)}`
       );
     }
-
-    // router.replace(
-    //   `${pathname}?${createQueryString("city", currentTarget.value)}`
-    // );
-  };
-
-  // const containerClickHandler = () => {
-  //     if(ref.current)
-  //         ref.current.click()
-  // }
+  }
 
   return (
     <label

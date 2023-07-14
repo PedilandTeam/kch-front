@@ -36,12 +36,6 @@ export default function CityFilter({ cities, id }: CityFilterType) {
 
   const [shouldBeAdd, setShouldBeAdd] = useState<(string)[]>([])
 
-  useEffect(() => {
-    console.log('shouldBeAdd', shouldBeAdd);
-    console.log("pathname", pathname);
-    
-  },[shouldBeAdd, pathname])
-
   const addToShouldBeAdd: addToShouldBeAddType = (item: string) => {
     if(shouldBeAdd.includes(item))
       return;
@@ -50,10 +44,7 @@ export default function CityFilter({ cities, id }: CityFilterType) {
 
   const removeFromShouldBeAdd: removeFromShouldBeAddType = (item: string) => {
     setShouldBeAdd(old => {     
-      console.log("delete");
       const index = old.indexOf(item)
-      console.log("index of ", index);
-      
       if(index != -1){
         old.splice(index, 1)
       }
@@ -83,6 +74,35 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     }
     setIsParsedSearchParamsAdded(true)
   },[parsedSearchParams])
+  
+  const createQueryString = useCreateQueryString()
+  const deleteQueryString = useDeleteQueryString()
+
+  const applyFilters = () => {
+    router.replace(`${pathname}?${createQueryString("city", shouldBeAdd)}`);
+  }
+
+  const deleteAllCityHandler = () => {
+
+    clearShouldBeAdd()
+  };
+
+  const checkHandler: checkHandlerType = (value: string | number) => {
+    const hasItem = shouldBeAdd.find(n => n == value)
+    if(hasItem){
+      return true
+    }else{
+      return false
+    }
+  }
+  
+  
+
+
+
+
+
+
 
 
   /**
@@ -103,21 +123,6 @@ export default function CityFilter({ cities, id }: CityFilterType) {
 
 
 
-
-  const createQueryString = useCreateQueryString()
-  const deleteQueryString = useDeleteQueryString()
-
-  const applyFilters = () => {
-    // console.log(createQueryString("city", shouldBeAdd));
-    router.replace(`${pathname}?${createQueryString("city", shouldBeAdd)}`);
-    // shouldBeAdd.forEach(filter => {
-    //   router.replace(
-    //     `${pathname}?${createQueryString("city", filter)}`
-    //   );
-    // });
-  }
-
-
   /**
    * auto focusing on search input
    */
@@ -136,20 +141,7 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     arrayFormat: "comma",
   }).city;
 
-  const deleteAllCityHandler = () => {
 
-    clearShouldBeAdd()
-  };
-
-  const checkHandler: checkHandlerType = (value: string | number) => {
-    const hasItem = shouldBeAdd.find(n => n == value)
-    if(hasItem){
-      console.log("have ", value);
-      return true
-    }else{
-      return false
-    }
-  }
 
   return (
     <div className="filter-section mb-4">

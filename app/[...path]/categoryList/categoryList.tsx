@@ -1,19 +1,14 @@
-import { usePages } from "@/hooks/swr/usePages";
 import {
-  usePathSeparator,
-  usePathSeparatorType,
+  usePathSeparatorType
 } from "@/hooks/usePathSeparator";
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CityNamespace } from "@/types/city";
 import { Country } from "@/types/page";
-import { UnitType } from "@/types/unit";
-import { useParams, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { CardsList } from "./cardsList";
 import ListFilter from "./filter/categoryListFilter";
-
+  
 type PagesListProps = {
   category: CategoryNamespace.category;
   country: Country;
@@ -23,11 +18,11 @@ type PagesListProps = {
 async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
   let cities: CityNamespace.GET
 
-  try{
-    cities =  await (
+  try {
+    cities = await (
       await API_ROUTES.CITIES.GET_ALL(1, 100, countryCode, 20)
     ).json();
-  }catch(e){
+  } catch (e) {
     console.log(e);
     throw new Error("error in get cities fetchCities")
   }
@@ -60,7 +55,7 @@ export default async function CategoryList({ category, paths, country }: PagesLi
             <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">
               لیست {category?.name} فارسی زبان
             </h1>
-            
+
             <CardsList paths={paths} category={category} country={country} />
 
           </div>
