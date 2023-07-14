@@ -27,7 +27,6 @@ function CityFilterSelectedItem({ city }: CityFilterItemProps) {
   const pathname = usePathname();
   const [parsedSearchParams, setParsedSearchParams] =
     useState<ParsedSearchParamsType>({});
-  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     setParsedSearchParams(
@@ -96,7 +95,7 @@ function CityFilterSelectedItem({ city }: CityFilterItemProps) {
 
   return (
     <label
-      key={city.name}
+      key={"selected-cityxc-filter-item-" + city.name}
       htmlFor={`city-select-${city.name}`}
       className="item flex items-center py-2 cursor-pointer"
     >

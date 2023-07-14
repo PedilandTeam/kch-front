@@ -11,8 +11,9 @@ import CategoryFilterSelectedItem from "./category.filter.selected.item";
 
 type CategoryFilterType = {
   categories: CategoryNamespace.category[];
+  id: string
 };
-export default function CategoryFilter({ categories }: CategoryFilterType) {
+export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   const [modifiedCategories, setModifiedCategories] = useState(categories);
   const categorySearchHandler = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -47,7 +48,7 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
 
       {/* The button to open modal */}
       <label
-        htmlFor="category_modal"
+        htmlFor={id}
         className={`btn ${
           !citiesInQuery ? "btn-outline" : "btn-outline"
         }  btn-primary w-full`}
@@ -75,7 +76,7 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
       </div>
 
       {/* Put this part before </body> tag */}
-      <input type="checkbox" id="category_modal" className="modal-toggle" />
+      <input type="checkbox" id={id} className="modal-toggle" />
       <div className="modal">
         <div className=" modal-box p-0 max-h-[550px] ">
           <div className="pt-5 pb-3 px-8 bg-white w-full">
@@ -103,18 +104,18 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
           <div className="px-8 h-[16rem] overflow-y-scroll">
             {modifiedCategories?.map((category: CategoryNamespace.category) => {
               return (
-                <CategoryFilterItem key={category.name} category={category} />
+                <CategoryFilterItem key={`category-filter-item-in-x-${category.name}`} category={category} />
               );
             })}
           </div>
 
           <div className="modal-action box-border w-full pt-3 pb-5 px-8 mt-3 flex justify-between items-center bg-white shadow-2xl">
-            <label htmlFor="category_modal" className="btn btn-primary w-full">
+            <label htmlFor={id} className="btn btn-primary w-full">
               {GENERAL.CONFIRM}
             </label>
           </div>
         </div>
-        <label className="modal-backdrop" htmlFor="category_modal">
+        <label className="modal-backdrop" htmlFor={id}>
           Close
         </label>
       </div>

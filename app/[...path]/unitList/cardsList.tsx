@@ -88,7 +88,7 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
           {Array.from({ length: 12 }).map((skeleton: any, index) => {
             return (
               <ContentLoader
-                key={index}
+                key={`content-loader-card-list-${index}`}
                 speed={2}
                 width={417}
                 height={126}
@@ -120,7 +120,7 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
           return (
             <div
               ref={index == pages.length - 1 ? ref : null}
-              key={page.slug + index}
+              key={`card-list-page-index-${page.slug}`}
               className="card rounded-lg border border-gray-100 shadow-sm hover:shadow hover:border-gray-200 bg-slate-50"
             >
               <div className="flex">

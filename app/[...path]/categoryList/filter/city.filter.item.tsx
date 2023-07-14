@@ -96,7 +96,7 @@ function CityFilterItem({ city }: CityFilterItemProps) {
 
   return (
     <label
-      key={city.name}
+      key={`city-filter-item-x-${city.name}`}
       htmlFor={`city-select-${city.name}`}
       className="item flex items-center border-b-[1px] py-3"
     >

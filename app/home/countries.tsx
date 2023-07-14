@@ -99,7 +99,8 @@ export const HomeCountries = () => {
         </div>
         <div className="mt-12 text-center">
           <button
-            className="btn"
+            className="btn btn-wide"
+            id="show-countries"
             onClick={() => {
               if (document) {
                 (

@@ -42,7 +42,7 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
       {Array.isArray(Images) &&
         Images.map((image, index) => {
           return (
-            <Link key={index} href={image.href || "#"} target="_blank">
+            <Link key={`side-info-${index}`} href={image.href || "#"} target="_blank">
               <Image
                 key={image.href}
                 alt="social icon"
@@ -57,7 +57,7 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
       {Array.isArray(Icons) &&
         Icons.map((Icon, index) => {
           return (
-            <Link key={index} href={Icon.href || "#"} target="_blank">
+            <Link key={`side-info-icons-${index}`} href={Icon.href || "#"} target="_blank">
               {Icon.Component}
             </Link>
           );

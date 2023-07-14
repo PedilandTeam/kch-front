@@ -1,10 +1,5 @@
 "use client";
 
-import {
-  Checkbox,
-  CheckboxGroup,
-  Stack,
-} from "@client-packages/chakra-ui/components";
 import { GENERAL } from "../../../../components/allTexts";
 import { CityNamespace } from "@/types/city";
 import CityFilterItem from "./city.filter.item";
@@ -13,12 +8,75 @@ import { usePathname, useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { useRouter } from "next/navigation";
 import CityFilterSelectedItem from "./city.filter.selected.item";
+import useCreateQueryString from "@/hooks/useCreateQueryString";
+import useDeleteQueryString from "@/hooks/useDeleteQueryString";
+import _ from "lodash"
 
 type CityFilterType = {
   cities: CityNamespace.city[];
+  id: string;
 };
-export default function CityFilter({ cities }: CityFilterType) {
+export type ParsedSearchParamsType = {
+  city?: string[] | string;
+};
+export type addToShouldBeAddType = (item: string) => void;
+export type removeFromShouldBeAddType = (item: string) => void;
+export type checkHandlerType = (value: string | number) => boolean | undefined;
+
+export default function CityFilter({ cities, id }: CityFilterType) {
   const [modifiedCities, setModifiedCities] = useState(cities);
+  // const [shouldBeAdd, setShouldBeAdd] = useState<string[]>([])
+  // const [shouldBeRemove, setShouldBeRemove] = useState<string[]>([])
+
+
+  const searchParams = useSearchParams() as unknown as URLSearchParams;
+  const pathname = usePathname();
+  const [parsedSearchParams, setParsedSearchParams] = useState<ParsedSearchParamsType>({});
+
+  const [shouldBeAdd, setShouldBeAdd] = useState<(string)[]>([])
+
+  useEffect(() => {
+    console.log(shouldBeAdd);
+    console.log("to array", Array.from(shouldBeAdd));
+    
+  },[shouldBeAdd])
+
+  const addToShouldBeAdd: addToShouldBeAddType = (item: string) => {
+    if(shouldBeAdd.includes(item))
+      return;
+    setShouldBeAdd(old => [...old, item])
+  }
+
+  const removeFromShouldBeAdd: removeFromShouldBeAddType = (item: string) => {
+    setShouldBeAdd(old => {     
+      console.log("delete");
+      const index = old.indexOf(item)
+      console.log("index of ", index);
+      
+      if(index != -1){
+        old.splice(index, 1)
+      }
+      return [...old];
+    })
+  }
+
+  useEffect(() => {
+    setParsedSearchParams(
+      queryString.parse(searchParams.toString(), { arrayFormat: "comma" })
+    );
+  }, [searchParams]);
+
+  useEffect(() => {
+    if(!parsedSearchParams?.city)return;
+    // if(Array.isArray(parsedSearchParams.city)){
+    //   parsedSearchParams.city.forEach(cityId => {
+    //     addToShouldBeAdd(cityId)
+    //   })
+    // }else{
+    //   addToShouldBeAdd(parsedSearchParams.city)
+    // }
+  },[parsedSearchParams])
+
 
   /**
    * find cities that have includes() searched string
@@ -34,6 +92,25 @@ export default function CityFilter({ cities }: CityFilterType) {
     setModifiedCities(find);
   };
 
+
+
+
+
+
+  const createQueryString = useCreateQueryString()
+  const deleteQueryString = useDeleteQueryString()
+
+  const applyFilters = () => {
+    // console.log(createQueryString("city", shouldBeAdd));
+    router.replace(`${pathname}?${createQueryString("city", shouldBeAdd)}`);
+    // shouldBeAdd.forEach(filter => {
+    //   router.replace(
+    //     `${pathname}?${createQueryString("city", filter)}`
+    //   );
+    // });
+  }
+
+
   /**
    * auto focusing on search input
    */
@@ -42,10 +119,7 @@ export default function CityFilter({ cities }: CityFilterType) {
     if (inputRef.current) inputRef.current.focus();
   }, [inputRef]);
 
-  const searchParams = useSearchParams();
   const router = useRouter();
-  const pathname = usePathname();
-
   /**
    * save cities that are in city query
    * if city query have a single number it's return string
@@ -63,10 +137,42 @@ export default function CityFilter({ cities }: CityFilterType) {
     router.replace(`${pathname}?${queryString.stringify(query)}`);
   };
 
+  const checkHandler: checkHandlerType = (value: string | number) => {
+
+
+    // const hasItem = shouldBeAdd.includes(value)
+    const hasItem = shouldBeAdd.find(n => n == value)
+    if(hasItem){
+      console.log("have ", value);
+      return true
+    }else{
+      return false
+    }
+
+    // const isInShouldBeRemove = !!shouldBeRemove.find(value => +value == city.id);
+    // const isInShouldBeAdd = !!shouldBeAdd.find(value => +value == city.id);
+    // let isInSearchParams;
+    // if (parsedSearchParams.city) {
+    //   if (Array.isArray(parsedSearchParams.city)) {
+    //     isInSearchParams = !!parsedSearchParams.city.find((param: string) => +param == city.id)
+    //   } else {
+    //     +parsedSearchParams.city == city.id
+    //   }
+    // }
+    // if (isInShouldBeAdd || isInSearchParams) {
+    //   return true
+    // }
+    // if (isInShouldBeRemove || !isInSearchParams) {
+    //   return false
+    // }
+
+
+  }
+
   return (
     <div className="filter-section mb-4">
       <label
-        htmlFor="my_modal_7"
+        htmlFor={id}
         className="btn btn-primary btn-outline w-full"
       >
         {GENERAL.CITY_SELECT}
@@ -89,7 +195,7 @@ export default function CityFilter({ cities }: CityFilterType) {
       </div>
 
       {/* Put this part before </body> tag */}
-      <input type="checkbox" id="my_modal_7" className="modal-toggle" />
+      <input type="checkbox" id={id} className="modal-toggle z-50" />
       <div className="modal">
         <div className=" modal-box p-0 max-h-[550px] ">
           <div className="pt-5 pb-3 px-8 bg-white w-full">
@@ -116,18 +222,25 @@ export default function CityFilter({ cities }: CityFilterType) {
           </div>
           <div className="px-8 h-[16rem] overflow-y-scroll">
             {modifiedCities?.map((city: CityNamespace.city) => {
-              return <CityFilterItem key={city.name} city={city} />;
+              return <CityFilterItem key={`modified-city-filter-${city.name}`} removeFromShouldBeAdd={removeFromShouldBeAdd} parsedSearchParams={parsedSearchParams} checkHandler={checkHandler} shouldBeAdd={shouldBeAdd} addToShouldBeAdd={addToShouldBeAdd}   city={city} />;
             })}
           </div>
-          <div className="modal-action box-border w-full pt-3 pb-5 px-8 mt-3 flex justify-between items-center bg-white shadow-2xl">
-            <label htmlFor="my_modal_7" className="btn btn-primary w-full">
-              {GENERAL.CONFIRM}
-            </label>
+          <div className="flex">
+            <div className="modal-action box-border w-1/2 pt-3 pb-5 px-8 mt-3 flex justify-between items-center ">
+              <label onClick={applyFilters} htmlFor={id} className="btn btn-primary w-full">
+                {GENERAL.CONFIRM}
+              </label>
+            </div>
+            <div className="modal-action box-border w-1/2 pt-3 pb-5 px-8 mt-3 flex justify-between items-center ">
+              <label htmlFor={id} className="btn btn-ghost w-full">
+                {GENERAL.CANCELL}
+              </label>
+            </div>
           </div>
         </div>
-        <label className="modal-backdrop" htmlFor="my_modal_7">
+        {/* <label className="modal-backdrop" htmlFor={id}>
           بستن
-        </label>
+        </label> */}
       </div>
     </div>
   );

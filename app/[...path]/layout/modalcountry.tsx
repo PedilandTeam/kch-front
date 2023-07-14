@@ -35,7 +35,7 @@ export const ModalCountry = ({ countries }: ModalCountryProps) => {
           {
             countries?.map(country => {
               return (
-                <button key={country.id} className="group">
+                <button key={`country-modal-country-code${country.id}`} className="group">
                   <Link href={`/${country.code}`} onClick={() => buttonRef.current?.click()} >
                     <CircleFlag
                       countryCode={country.code}
