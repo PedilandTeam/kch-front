@@ -57,6 +57,19 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
     setShouldBeAdd(old => [...old, item])
   }
 
+  useEffect(() => {
+    if(isParsedSearchParamsAdded)return;
+    if(!parsedSearchParams?.category)return;
+    if(Array.isArray(parsedSearchParams.category)){
+      parsedSearchParams.category.forEach(categoryId => {
+        addToShouldBeAdd(categoryId)
+      })
+    }else{
+      addToShouldBeAdd(parsedSearchParams.category)
+    }
+    setIsParsedSearchParamsAdded(true)
+  },[parsedSearchParams]) 
+
   const removeFromShouldBeAdd: removeFromShouldBeAddType = (item: string) => {
     setShouldBeAdd(old => {
       const index = old.indexOf(item)
@@ -73,18 +86,12 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
 
 
   useEffect(() => {
-    if (isParsedSearchParamsAdded) return;
-    if (!parsedSearchParams?.category) return;
-    if (Array.isArray(parsedSearchParams.category)) {
-      parsedSearchParams.category.forEach(categoryId => {
-        addToShouldBeAdd(categoryId)
-      })
-    } else {
-      addToShouldBeAdd(parsedSearchParams.category)
-    }
-    setIsParsedSearchParamsAdded(true)
-  }, [parsedSearchParams])
+    setParsedSearchParams(
+      queryString.parse(searchParams.toString(), { arrayFormat: "comma" })
+    );
+  }, [searchParams]);
 
+  
   const createQueryString = useCreateQueryString()
   const deleteQueryString = useDeleteQueryString()
 
@@ -113,8 +120,7 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
       {/* The button to open modal */}
       <label
         htmlFor={id}
-        className={`btn ${!citiesInQuery ? "btn-outline" : "btn-outline"
-          }  btn-primary w-full`}
+        className={`btn btn-outline btn-primary w-full`}
       >
         {citiesInQuery ? GENERAL.CATEGORY_SELECT : GENERAL.CATEGORY_SELECT}
       </label>
@@ -179,9 +185,6 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
             </label>
           </div>
         </div>
-        <label className="modal-backdrop" htmlFor={id}>
-          Close
-        </label>
       </div>
     </div>
   );

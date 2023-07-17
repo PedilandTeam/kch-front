@@ -1,15 +1,10 @@
 "use client";
 
 import { CategoryNamespace } from "@/types/category";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import queryString from "query-string";
 import React, {
-  useCallback,
   useEffect,
   useRef,
-  useState,
-  useTransition,
+  useState
 } from "react";
 import { addToShouldBeAddType, checkHandlerType, removeFromShouldBeAddType } from "./city.filter";
 

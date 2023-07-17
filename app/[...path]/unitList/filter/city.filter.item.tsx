@@ -1,20 +1,10 @@
 "use client";
 
-import useCreateQueryString from "@/hooks/useCreateQueryString";
-import useDeleteQueryString from "@/hooks/useDeleteQueryString";
 import { CityNamespace } from "@/types/city";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import queryString from "query-string";
 import React, {
-  Dispatch,
-  SetStateAction,
-  memo,
-  useCallback,
-  useEffect,
+  memo, useEffect,
   useRef,
-  useState,
-  useTransition,
+  useState
 } from "react";
 import { ParsedSearchParamsType, addToShouldBeAddType, checkHandlerType, removeFromShouldBeAddType } from "./city.filter";
 

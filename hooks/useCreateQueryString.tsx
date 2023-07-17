@@ -18,7 +18,11 @@ export default function useCreateQueryString(){
             return queryString.stringify(params, {arrayFormat: "comma"});
           }
           if (!Array.isArray(targetValues)) {
-            newValue.push(targetValues);
+            for(const targetValue of targetValues){
+              if(!newValue.includes(targetValue)){
+                newValue.push();
+              }
+            }
           } else {
             //@ts-expect-error
             newValue.push(...targetValues);
