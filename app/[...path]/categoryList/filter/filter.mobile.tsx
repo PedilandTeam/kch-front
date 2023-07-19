@@ -14,7 +14,7 @@ import {
     Stack,
     useDisclosure
 } from "@chakra-ui/react";
-import { CATEGORY, GENERAL } from "../../../../components/allTexts";
+import { CATEGORY, GENERAL } from "@/app/text/allTexts";
 import { FunnelIcon } from "@heroicons/react/24/solid";
 
 

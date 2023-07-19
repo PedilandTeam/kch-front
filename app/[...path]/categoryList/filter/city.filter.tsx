@@ -1,6 +1,6 @@
 "use client";
 
-import { GENERAL } from "../../../../components/allTexts";
+import { GENERAL } from "@/app/text/allTexts";
 import { CityNamespace } from "@/types/city";
 import CityFilterItem from "./city.filter.item";
 import { useEffect, useRef, useState } from "react";

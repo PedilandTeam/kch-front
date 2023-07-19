@@ -1,11 +1,10 @@
-import { GENERAL } from "@/components/allTexts";
+import { GENERAL } from "@/app/text/allTexts";
 import {
   EyeIcon,
   FolderIcon,
   MapIcon,
   RectangleStackIcon,
 } from "@heroicons/react/24/outline";
-import { CategoryNamespace } from "@/types/category";
 import { API_ROUTES } from "@/routes";
 import { StatsNamespace } from "@/types/stats";
 import { CountryNamespace } from "@/types/country";
@@ -73,11 +72,11 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
   let views: string | number;
   let stats: StatsNamespace.COUNTRY_STATS;
 
-  try{
+  try {
     views = await cacheView(currentCountry);
-  }catch(e){
+  } catch (e) {
     console.error(e);
-    throw new Error("Error in get CacheView from Redis")
+    throw new Error("Error in get CacheView from Redis");
   }
 
   try {

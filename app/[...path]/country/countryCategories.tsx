@@ -1,21 +1,18 @@
-import { MENU } from "@/components/allTexts";
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CountryNamespace } from "@/types/country";
-import { UnitType } from "@/types/unit";
-import Image from "next/image";
-import { useEffect } from "react";
 import CountryCategoriesItems from "./countryCategoriesItems";
-
 
 async function getMostUsedCategories(countryCode: string) {
   let result: CategoryNamespace.MOST_USED;
   try {
-    result = await (await API_ROUTES.CATEGOREIS.MOST_USED(countryCode, 12, 120)).json()
-    return result
+    result = await (
+      await API_ROUTES.CATEGOREIS.MOST_USED(countryCode, 12, 120)
+    ).json();
+    return result;
   } catch (e) {
     console.log(e);
-    throw new Error("error in getMostUsedCategories")
+    throw new Error("error in getMostUsedCategories");
   }
 }
 
@@ -31,12 +28,13 @@ async function getMostUsedCategories(countryCode: string) {
 // }
 
 type CountryCategoriesProps = {
-  currentCountry: CountryNamespace.GET
-}
-export const CountryCategories = async ({currentCountry}: CountryCategoriesProps) => {
-
-  
-  const mostUsedCategories: CategoryNamespace.MOST_USED = await getMostUsedCategories(currentCountry.code)
+  currentCountry: CountryNamespace.GET;
+};
+export const CountryCategories = async ({
+  currentCountry,
+}: CountryCategoriesProps) => {
+  const mostUsedCategories: CategoryNamespace.MOST_USED =
+    await getMostUsedCategories(currentCountry.code);
   // const units = await getUnits()
 
   return (
@@ -46,7 +44,10 @@ export const CountryCategories = async ({currentCountry}: CountryCategoriesProps
           دسته بندی های بروز شده:
         </h2>
       </div>
-      <CountryCategoriesItems currentCountry={currentCountry} recentlyUpdatedCategories={mostUsedCategories} />
+      <CountryCategoriesItems
+        currentCountry={currentCountry}
+        recentlyUpdatedCategories={mostUsedCategories}
+      />
     </div>
   );
 };

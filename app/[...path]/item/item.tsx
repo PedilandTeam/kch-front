@@ -1,4 +1,4 @@
-import { GENERAL } from "../../../components/allTexts";
+import { GENERAL } from "@/app/text/allTexts";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { ItemSideInfo } from "./sideInfo";
 import { ItemTopInfo } from "./topInfo";

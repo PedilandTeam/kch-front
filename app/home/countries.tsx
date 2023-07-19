@@ -1,4 +1,4 @@
-import { COUNTRY } from "@/components/allTexts";
+import { COUNTRY } from "@/app/text/allTexts";
 import Image from "next/image";
 import Link from "next/link";
 
