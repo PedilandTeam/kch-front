@@ -105,7 +105,7 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
             {
               modifiedCategories?.map((category: CategoryNamespace.category) => {
                 return (
-                  <CategoryFilterItem key={category.name} category={category} />
+                  <CategoryFilterItem key={`category-filter-selected-modified-${category.name}`} category={category} />
                 )
               })
             }

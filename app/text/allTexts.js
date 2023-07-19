@@ -5,6 +5,7 @@ export const GENERAL = {
   HOME: "خانه",
   ALL_IMAGES_VIEW: "مشاهده تمامی تصاویر",
   CONFIRM: "تایید",
+  CANCELL: "لغو",
   ABOUT: "درباره کـوچـا",
   ADD_LIST: "افزودن کسب و کار",
   BACK_TO_LIST: "بازگشت به لیست",

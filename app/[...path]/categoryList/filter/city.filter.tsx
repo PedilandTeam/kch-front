@@ -65,7 +65,7 @@ export default function CityFilter({ cities }: CityFilterType) {
   return (
     <div className="filter-section mb-4">
       <label
-        htmlFor="my_modal_7"
+        htmlFor="category_city_modal"
         className="btn btn-primary btn-outline btn-wide"
       >
         {GENERAL.CITY_SELECT}
@@ -88,7 +88,7 @@ export default function CityFilter({ cities }: CityFilterType) {
       </div>
 
       {/* Put this part before </body> tag */}
-      <input type="checkbox" id="my_modal_7" className="modal-toggle" />
+      <input type="checkbox" id="category_city_modal" className="modal-toggle" />
       <div className="modal">
         <div className=" modal-box p-0 max-h-[550px] ">
           <div className="pt-5 pb-3 px-8 bg-white w-full">
@@ -118,16 +118,16 @@ export default function CityFilter({ cities }: CityFilterType) {
           </div>
           <div className="px-8 h-[16rem] overflow-y-scroll">
             {modifiedCities?.map((city: CityNamespace.city) => {
-              return <CityFilterItem key={city.name} city={city} />;
+              return <CityFilterItem key={`city-filter-item-xy-${city.name}`} city={city} />;
             })}
           </div>
           <div className="modal-action box-border w-full pt-3 pb-5 px-8 mt-3 flex justify-between items-center bg-white shadow-2xl">
-            <label htmlFor="my_modal_7" className="btn btn-primary w-full">
+            <label htmlFor="category_city_modal" className="btn btn-primary w-full">
               {GENERAL.CONFIRM}
             </label>
           </div>
         </div>
-        <label className="modal-backdrop" htmlFor="my_modal_7">
+        <label className="modal-backdrop" htmlFor="category_city_modal">
           بستن
         </label>
       </div>

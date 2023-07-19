@@ -72,11 +72,18 @@ const cacheView = async (currentCountry: CountryNamespace.GET) => {
 export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
   let views: string | number;
   let stats: StatsNamespace.COUNTRY_STATS;
-  try {
+
+  try{
     views = await cacheView(currentCountry);
+  }catch(e){
+    console.error(e);
+    throw new Error("Error in get CacheView from Redis")
+  }
+
+  try {
     stats = await getStats(currentCountry.code);
   } catch (e) {
-    throw new Error("error in get stats");
+    throw new Error("Error in get stats");
   }
 
   return (

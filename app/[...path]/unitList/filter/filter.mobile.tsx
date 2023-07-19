@@ -41,10 +41,10 @@ export default function FilterMobile({
             <FunnelIcon className="h-4 w-4 ml-2" />
             <span className="font-semibold">{GENERAL.FILTERS}</span>
           </div>
-          <p className="py-4">
-            <CityFilter cities={cities} />
-            <CategoryFilter categories={categories} />
-          </p>
+          <div className="py-4">
+            <CityFilter id="mobile-cityfilter-modal" cities={cities} />
+            <CategoryFilter id="mobile-categoryfilter-modal" categories={categories} />
+          </div>
           <div className="modal-action">
             <button className="btn w-full">اعمال فیلترها</button>
           </div>

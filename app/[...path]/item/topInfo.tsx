@@ -63,7 +63,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                 (social: string, index: number) => {
                   return (
                     <SocialLink
-                      key={index}
+                      key={`social-link-${index}`}
                       name={social as socialsType}
                       link={
                         pageData?.socials?.[social]?.replace(

@@ -8,11 +8,23 @@ import { usePathname, useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { useRouter } from "next/navigation";
 import CategoryFilterSelectedItem from "./category.filter.selected.item";
+import useCreateQueryString from "@/hooks/useCreateQueryString";
+import useDeleteQueryString from "@/hooks/useDeleteQueryString";
 
 type CategoryFilterType = {
   categories: CategoryNamespace.category[];
+  id: string
 };
-export default function CategoryFilter({ categories }: CategoryFilterType) {
+
+export type ParsedSearchParamsType = {
+  category?: string[] | string;
+};
+
+export type addToShouldBeAddType = (item: string) => void;
+export type removeFromShouldBeAddType = (item: string) => void;
+export type checkHandlerType = (value: string | number) => boolean | undefined;
+
+export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   const [modifiedCategories, setModifiedCategories] = useState(categories);
   const categorySearchHandler = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -33,13 +45,73 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
     arrayFormat: "comma",
   }).city;
 
-  const deleteAllCategoryHandler = () => {
-    const query = queryString.parse(searchParams.toString());
-    if (query.category) {
-      delete query.category;
+
+
+  const [parsedSearchParams, setParsedSearchParams] = useState<ParsedSearchParamsType>({});
+  const [isParsedSearchParamsAdded, setIsParsedSearchParamsAdded] = useState(false)
+  const [shouldBeAdd, setShouldBeAdd] = useState<(string)[]>([])
+
+  const addToShouldBeAdd: addToShouldBeAddType = (item: string) => {
+    if (shouldBeAdd.includes(item))
+      return;
+    setShouldBeAdd(old => [...old, item])
+  }
+
+  useEffect(() => {
+    if(isParsedSearchParamsAdded)return;
+    if(!parsedSearchParams?.category)return;
+    if(Array.isArray(parsedSearchParams.category)){
+      parsedSearchParams.category.forEach(categoryId => {
+        addToShouldBeAdd(categoryId)
+      })
+    }else{
+      addToShouldBeAdd(parsedSearchParams.category)
     }
-    router.replace(`${pathname}?${queryString.stringify(query)}`);
+    setIsParsedSearchParamsAdded(true)
+  },[parsedSearchParams]) 
+
+  const removeFromShouldBeAdd: removeFromShouldBeAddType = (item: string) => {
+    setShouldBeAdd(old => {
+      const index = old.indexOf(item)
+      if (index != -1) {
+        old.splice(index, 1)
+      }
+      return [...old];
+    })
+  }
+
+  const clearShouldBeAdd = () => {
+    setShouldBeAdd([])
+  }
+
+
+  useEffect(() => {
+    setParsedSearchParams(
+      queryString.parse(searchParams.toString(), { arrayFormat: "comma" })
+    );
+  }, [searchParams]);
+
+  
+  const createQueryString = useCreateQueryString()
+  const deleteQueryString = useDeleteQueryString()
+
+  const applyFilters = () => {
+    router.replace(`${pathname}?${createQueryString("category", shouldBeAdd)}`);
+  }
+
+  const deleteAllCategoryHandler = () => {
+    clearShouldBeAdd()
   };
+
+  const checkHandler: checkHandlerType = (value: string | number) => {
+    const hasItem = shouldBeAdd.find(n => n == value)
+    if (hasItem) {
+      return true
+    } else {
+      return false
+    }
+  }
+
 
   return (
     <div className="filter-section mb-4">
@@ -47,10 +119,8 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
 
       {/* The button to open modal */}
       <label
-        htmlFor="category_modal"
-        className={`btn ${
-          !citiesInQuery ? "btn-outline" : "btn-outline"
-        }  btn-primary w-full`}
+        htmlFor={id}
+        className={`btn btn-outline btn-primary w-full`}
       >
         {citiesInQuery ? GENERAL.CATEGORY_SELECT : GENERAL.CATEGORY_SELECT}
       </label>
@@ -62,11 +132,12 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
               (category) => category.id == +categoryId
             );
             if (!category) return;
-            return <CategoryFilterSelectedItem category={category} />;
+            return <CategoryFilterSelectedItem removeFromShouldBeAdd={removeFromShouldBeAdd} category={category} />;
           })
         ) : categoriesInQuery &&
           categories.find((category) => category.id == +categoriesInQuery) ? (
           <CategoryFilterSelectedItem
+            removeFromShouldBeAdd={removeFromShouldBeAdd}
             category={
               categories.find((category) => category.id == +categoriesInQuery)!
             }
@@ -75,7 +146,7 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
       </div>
 
       {/* Put this part before </body> tag */}
-      <input type="checkbox" id="category_modal" className="modal-toggle" />
+      <input type="checkbox" id={id} className="modal-toggle" />
       <div className="modal">
         <div className=" modal-box p-0 max-h-[550px] ">
           <div className="pt-5 pb-3 px-8 bg-white w-full">
@@ -103,20 +174,17 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
           <div className="px-8 h-[16rem] overflow-y-scroll">
             {modifiedCategories?.map((category: CategoryNamespace.category) => {
               return (
-                <CategoryFilterItem key={category.name} category={category} />
+                <CategoryFilterItem key={`category-filter-item-in-x-${category.name}`} removeFromShouldBeAdd={removeFromShouldBeAdd} parsedSearchParams={parsedSearchParams} checkHandler={checkHandler} shouldBeAdd={shouldBeAdd} addToShouldBeAdd={addToShouldBeAdd} category={category} />
               );
             })}
           </div>
 
           <div className="modal-action box-border w-full pt-3 pb-5 px-8 mt-3 flex justify-between items-center bg-white shadow-2xl">
-            <label htmlFor="category_modal" className="btn btn-primary w-full">
+            <label onClick={applyFilters} htmlFor={id} className="btn btn-primary w-full">
               {GENERAL.CONFIRM}
             </label>
           </div>
         </div>
-        <label className="modal-backdrop" htmlFor="category_modal">
-          Close
-        </label>
       </div>
     </div>
   );

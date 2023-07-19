@@ -51,7 +51,7 @@ export default function CountryCategoriesItems({ recentlyUpdatedCategories, curr
                     recentlyUpdatedCategories[`${activeTab}`].map((category, index) => {
                         return (
                             <Link key={"country-category" + category.id} href={`/${currentCountry.code}/${category.slug}`}>
-                                <div key={`${category.id}${index}`} className="cat-card group">
+                                <div key={`country-category-list-${category.id}${index}`} className="cat-card group">
                                     <Image
                                         src="/img/icon/cat-restaurant.svg"
                                         width="34"

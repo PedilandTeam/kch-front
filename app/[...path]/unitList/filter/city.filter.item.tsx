@@ -1,102 +1,51 @@
 "use client";
 
 import { CityNamespace } from "@/types/city";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import queryString from "query-string";
 import React, {
-  memo,
-  useCallback,
-  useEffect,
+  memo, useEffect,
   useRef,
-  useState,
-  useTransition,
+  useState
 } from "react";
+import { ParsedSearchParamsType, addToShouldBeAddType, checkHandlerType, removeFromShouldBeAddType } from "./city.filter";
 
 type CityFilterItemProps = {
   city: CityNamespace.city;
+  checkHandler: checkHandlerType;
+  parsedSearchParams: ParsedSearchParamsType
+  shouldBeAdd: (number | string)[],
+  addToShouldBeAdd: addToShouldBeAddType
+  removeFromShouldBeAdd: removeFromShouldBeAddType
 };
 
-type ParsedSearchParamsType = {
-  city?: string[] | string;
-};
-function CityFilterItem({ city }: CityFilterItemProps) {
+
+function CityFilterItem({ city, shouldBeAdd, checkHandler, parsedSearchParams, addToShouldBeAdd, removeFromShouldBeAdd }: CityFilterItemProps) {
+  
+  
   const ref = useRef<HTMLInputElement>(null);
-  const router = useRouter();
-  const searchParams = useSearchParams() as unknown as URLSearchParams;
-  const pathname = usePathname();
-  const [parsedSearchParams, setParsedSearchParams] =
-    useState<ParsedSearchParamsType>({});
-  const [isPending, startTransition] = useTransition();
+  const [isChecked, setIsChecked] = useState<boolean | undefined>(false)  
 
   useEffect(() => {
-    setParsedSearchParams(
-      queryString.parse(searchParams.toString(), { arrayFormat: "comma" })
-    );
-  }, [searchParams]);
+    setIsChecked(checkHandler(city.id))
+  },[shouldBeAdd])
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = queryString.parse(searchParams.toString());
-      let targetValues = params?.[name];
-      const newValue = [value];
-      if (!targetValues) {
-        params[name] = value;
-        return queryString.stringify(params);
-      }
-      if (!Array.isArray(targetValues)) {
-        newValue.push(targetValues);
-      } else {
-        //@ts-expect-error
-        newValue.push(...targetValues);
-      }
-      params[name] = newValue;
-      return queryString.stringify(params, { arrayFormat: "comma" });
-    },
-    [searchParams]
-  );
 
-  const deleteQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = queryString.parse(searchParams.toString(), {
-        arrayFormat: "comma",
-      });
-      let targetValues = params?.[name];
-
-      if (!targetValues) {
-        return;
-      }
-      if (!Array.isArray(targetValues)) {
-        delete params[name];
-      } else {
-        const indexofTarget = targetValues.findIndex((param) => param == value);
-        if (indexofTarget == -1) return;
-        targetValues.splice(indexofTarget, 1);
-      }
-      return queryString.stringify(params, { arrayFormat: "comma" });
-    },
-    [searchParams]
-  );
   const inputClickHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const currentTarget = event.currentTarget;
-    if (!currentTarget.checked) {
-      return router.replace(
-        `${pathname}?${deleteQueryString("city", currentTarget.value)}`
-      );
-    }
-    router.replace(
-      `${pathname}?${createQueryString("city", currentTarget.value)}`
-    );
-  };
 
-  // const containerClickHandler = () => {
-  //     if(ref.current)
-  //         ref.current.click()
-  // }
+
+    const currentTarget = event.currentTarget;
+
+    if(!currentTarget.checked){
+      setIsChecked(false)
+      removeFromShouldBeAdd(currentTarget.value)
+    }else{
+      setIsChecked(true)
+      addToShouldBeAdd(currentTarget.value)
+    }
+  }
 
   return (
     <label
-      key={city.name}
+      key={"selected-city-cfilter-item-" + city.name}
       htmlFor={`city-select-${city.name}`}
       className="item flex items-center border-b-[1px] py-3"
     >
@@ -107,13 +56,7 @@ function CityFilterItem({ city }: CityFilterItemProps) {
         id={`city-select-${city.name}`}
         value={city.id}
         type="checkbox"
-        checked={
-          parsedSearchParams.city ?
-            Array.isArray(parsedSearchParams.city)
-              ? !!parsedSearchParams.city.find((param) => +param == city.id)
-              : +parsedSearchParams.city == city.id
-            : false
-        }
+        checked={isChecked}
       />
       <label htmlFor={`city-select-${city.name}`} className="text-md">
         {city.name}

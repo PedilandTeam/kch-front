@@ -93,7 +93,7 @@ export default function CategoryFilterItem({
 
   return (
     <label
-      key={category.name}
+      key={`category-filter-item-${category.name}`}
       htmlFor={`category-select-${category.name}`}
       className="item flex items-center border-b-[1px] py-3"
     >

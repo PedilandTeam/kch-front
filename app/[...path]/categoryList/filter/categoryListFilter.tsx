@@ -3,8 +3,7 @@ import { GENERAL } from "../../../../components/allTexts";
 import { FunnelIcon } from "@client-packages/heroicons/components";
 import FilterMobile from "./filter.mobile";
 import { CityNamespace } from "@/types/city";
-import CityFilter from "./city.filter";
-import CategoryFilter from "./category.filter";
+import CityFilter from "../../unitList/filter/city.filter";
 import { CategoryNamespace } from "@/types/category";
 
 type ListFilterProps = {
@@ -22,7 +21,7 @@ export default function CategoryListFilter({cities}: ListFilterProps) {
       </div>
 
       <div className="filter-body pt-4 hidden md:block">
-        <CityFilter cities={cities?.items} />
+        <CityFilter id="category-cities-filter" cities={cities?.items} />
         {/* <CategoryFilter categories={categories} /> */}
       </div>
     </div>

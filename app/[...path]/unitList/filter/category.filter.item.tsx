@@ -1,99 +1,53 @@
 "use client";
 
 import { CategoryNamespace } from "@/types/category";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import queryString from "query-string";
 import React, {
-  useCallback,
   useEffect,
   useRef,
-  useState,
-  useTransition,
+  useState
 } from "react";
+import { addToShouldBeAddType, checkHandlerType, removeFromShouldBeAddType } from "./city.filter";
+
 
 type CategoryFilterItemProps = {
   category: CategoryNamespace.category
-}
+  checkHandler: checkHandlerType;
+  parsedSearchParams: ParsedSearchParamsType
+  shouldBeAdd: (number | string)[],
+  addToShouldBeAdd: addToShouldBeAddType
+  removeFromShouldBeAdd: removeFromShouldBeAddType
+};
+
 
 type ParsedSearchParamsType = {
   category?: string[] | string;
 };
 
-export default function CategoryFilterItem({
-  category,
-}: CategoryFilterItemProps) {
-  const router = useRouter();
-  const searchParams = useSearchParams() as unknown as URLSearchParams;
-  const pathname = usePathname();
-  const [parsedSearchParams, setParsedSearchParams] =
-    useState<ParsedSearchParamsType>({});
-  const [isPending, startTransition] = useTransition();
+export default function CategoryFilterItem({ category, shouldBeAdd, checkHandler, parsedSearchParams, addToShouldBeAdd, removeFromShouldBeAdd }: CategoryFilterItemProps) {
+
   const ref = useRef<HTMLInputElement>(null);
+  const [isChecked, setIsChecked] = useState<boolean | undefined>(false)  
 
   useEffect(() => {
-    setParsedSearchParams(
-      queryString.parse(searchParams.toString(), { arrayFormat: "comma" })
-    );
-  }, [searchParams]);
+    setIsChecked(checkHandler(category.id))
+  },[shouldBeAdd])
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = queryString.parse(searchParams.toString());
-      let targetValues = params?.[name];
-      const newValue = [value];
-      if (!targetValues) {
-        params[name] = value;
-        return queryString.stringify(params);
-      }
-      if (!Array.isArray(targetValues)) {
-        newValue.push(targetValues);
-      } else {
-        //@ts-expect-error
-        newValue.push(...targetValues);
-      }
-      params[name] = newValue;
-      return queryString.stringify(params, { arrayFormat: "comma" });
-    },
-    [searchParams]
-  );
 
-  const deleteQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = queryString.parse(searchParams.toString(), {
-        arrayFormat: "comma",
-      });
-      let targetValues = params?.[name];
-
-      if (!targetValues) {
-        return;
-      }
-      if (!Array.isArray(targetValues)) {
-        delete params[name];
-      } else {
-        const indexofTarget = targetValues.findIndex((param) => param == value);
-        if (indexofTarget == -1) return;
-        targetValues.splice(indexofTarget, 1);
-      }
-      return queryString.stringify(params, { arrayFormat: "comma" });
-    },
-    [searchParams]
-  );
   const inputClickHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const currentTarget = event.currentTarget;
-    if (!currentTarget.checked) {
-      return router.replace(
-        `${pathname}?${deleteQueryString("category", currentTarget.value)}`
-      );
+
+    if(!currentTarget.checked){
+      setIsChecked(false)
+      removeFromShouldBeAdd(currentTarget.value)
+    }else{
+      setIsChecked(true)
+      addToShouldBeAdd(currentTarget.value)
     }
-    router.replace(
-      `${pathname}?${createQueryString("category", currentTarget.value)}`
-    );
-  };
+  }
 
   return (
     <label
-      key={category.name}
+      key={`my-category-filter-item-${category.name}`}
       htmlFor={`category-select-${category.name}`}
       className="item flex items-center border-b-[1px] py-3"
     >
@@ -104,15 +58,7 @@ export default function CategoryFilterItem({
         id={`category-select-${category.name}`}
         value={category.id}
         type="checkbox"
-        checked={
-          parsedSearchParams.category ?
-            Array.isArray(parsedSearchParams.category)
-              ? !!parsedSearchParams.category.find(
-                (param) => +param == category.id
-              )
-              : +parsedSearchParams.category == category.id
-            : false
-        }
+        checked={isChecked}
       />
       <label htmlFor={`category-select-${category.name}`} className="text-md">
         {category.name}

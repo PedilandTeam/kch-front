@@ -22,8 +22,8 @@ export default function ListFilter({cities, categories}: ListFilterProps) {
       </div>
 
       <div className="filter-body pt-4 hidden md:block">
-        <CityFilter cities={cities?.items} />
-        <CategoryFilter categories={categories} />
+        <CityFilter id="cityfilter-modal" cities={cities?.items} />
+        <CategoryFilter id="categoryfilter-modal" categories={categories} />
       </div>
     </div>
   );
