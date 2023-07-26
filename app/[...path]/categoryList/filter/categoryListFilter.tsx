@@ -13,7 +13,7 @@ type ListFilterProps = {
 export default function CategoryListFilter({cities}: ListFilterProps) {
   return (
     <div className="filter-wrap">
-      <FilterMobile />
+      <FilterMobile cities={cities.items} />
 
       <div className="filter-title w-full hidden md:flex md:items-center border-b-[2px] border-b-gray-200 pb-2">
         <FunnelIcon className="h-4 w-4 ml-2" />
