@@ -70,14 +70,13 @@ const cacheView = async (currentCountry: CountryNamespace.GET) => {
 };
 
 export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
-  let views: string | number;
+  let views: string | number | null = null;
   let stats: StatsNamespace.COUNTRY_STATS;
 
   try{
     views = await cacheView(currentCountry);
   }catch(e){
     console.error(e);
-    throw new Error("Error in get CacheView from Redis")
   }
 
   try {
@@ -121,7 +120,7 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
             <EyeIcon className="w-9 h-9 text-sky-700" />
           </div>
           <div className="info flex flex-wrap content-center text-sky-700 text-[18px]">
-            <div className="ml-2 font-bold ">{views}</div>
+            <div className="ml-2 font-bold ">{views ?? "درحال بارگذاری"}</div>
             <div className="font-medium">{GENERAL.VIEW}</div>
           </div>
         </div>
