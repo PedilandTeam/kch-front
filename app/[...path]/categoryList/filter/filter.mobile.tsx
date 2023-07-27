@@ -2,10 +2,11 @@
 
 import { GENERAL } from "../../../../components/allTexts";
 import { FunnelIcon } from "@heroicons/react/24/solid";
-import CityFilter from "./city.filter";
+// import CityFilter from "./city.filter";
 import CategoryFilter from "./category.filter";
 import { CityNamespace } from "@/types/city";
 import { CategoryNamespace } from "@/types/category";
+import CityFilter from "../../unitList/filter/city.filter";
 
 type FilterMobileProps = {
   cities: CityNamespace.city[];
