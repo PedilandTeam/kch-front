@@ -1,3 +1,5 @@
+"use client"
+
 import { COUNTRY } from "@/components/allTexts";
 import Image from "next/image";
 import Link from "next/link";
