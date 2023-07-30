@@ -19,6 +19,10 @@ type PathGeneratorType = {
 }
 const pathGenerator = async function (path: string[]): Promise<PathGeneratorType> {
   const paths = usePathSeparator(path);
+
+  console.log("this is paths", paths);
+
+
   let countries: CountryNamespace.GET[]
   let currentCountry: undefined | CountryNamespace.GET
   try {
@@ -26,12 +30,12 @@ const pathGenerator = async function (path: string[]): Promise<PathGeneratorType
     countries = await (await API_ROUTES.COUNTRIES.GET_ALL(20)).json()
     currentCountry = countries.find(country => country.code == paths.countryOrSlug)
 
-  
+
+
     //Step1: check if page is country page
-    if (currentCountry && !paths.unitOrCategory) {
+    if (currentCountry && !paths.unit) {
+
       //show country
-      // metadata = {...metadata, title: `کوچا | جامعه  ${isCountryExist.name}`}
-      console.log("country", currentCountry.name);
       return {
         type: "country",
         props: {
@@ -39,44 +43,50 @@ const pathGenerator = async function (path: string[]): Promise<PathGeneratorType
           currentCountry
         }
       }
-      // return <Country metadata={metadata} categories={categories} currentCountry={isCountryExist} />;
     }
   }
   catch (e) {
     console.log("error in countries", e);
     throw new Error("cant get countries")
   }
-
-
-
   /**
-   * Step2: check if the path is countryCode/unitOrCategory
+   * Step2: check if the path is countryCode/unit
    * @example de/آبمیوه_و_بستنی
    * @example de/businesses
    */
-  if (currentCountry && paths.unitOrCategory) {
+  if (currentCountry && paths.unit) {
     // show list of pages
 
     let units: UnitType[]
     let categories: CategoryNamespace.GET
     try {
       units = await (await API_ROUTES.UNITS.GET_ALL(10)).json()
-      const unit = units.find(unit => unit.slug == decodeURIComponent(paths.unitOrCategory))
+      const unit = units.find(unit => unit.slug == decodeURIComponent(paths.unit as string))
 
-      if (unit) {
+      if (!paths.category) {
 
-        return {
-          type: "unit",
-          props: {
-            unit,
-            currentCountry,
-            paths
+        if(unit){
+          return {
+            type: "unit",
+            props: {
+              unit,
+              currentCountry,
+              paths
+            }
+          }
+        }else{
+          return {
+            type: null
           }
         }
         // return <UnitList unit={isUnitExist} country={isCountryExist} paths={paths}/>
       }
+    } catch (e) {
+      throw new Error("error in get all units")
+    }
 
-      categories = await (await API_ROUTES.CATEGOREIS.GET_ALL(1, 1, paths.unitOrCategory)).json()
+    try {
+      categories = await (await API_ROUTES.CATEGOREIS.GET_ALL(1, 1, paths.category)).json()
       const categoriesItems = categories.items
       const category = categoriesItems[0]
       if (category) {
@@ -99,24 +109,32 @@ const pathGenerator = async function (path: string[]): Promise<PathGeneratorType
   }
 
 
-  //show single page
-  try {
-    const pageData = await (await API_ROUTES.PAGES.GET_ALL(1, 1, paths.countryOrSlug, 20)).json()
-    if (!pageData?.items) {
-      notFound()
-    }
-    return {
-      type: "item",
-      props: {
-        pageData: pageData.items
+  if (paths.countryOrSlug) {
+    //show single page
+    try {
+      const pageData = await (await API_ROUTES.PAGES.GET_ALL(1, 1, paths.countryOrSlug, 20)).json()
+      if (!pageData?.items) {
+        return {
+          type: null
+        }
+      }
+      return {
+        type: "item",
+        props: {
+          pageData: pageData.items
+        }
+      }
+      // return <PageItem metadata={metadata} pageData={pageData.items} />;
+    } catch (e) {
+      // notFound()
+      return {
+        type: null
       }
     }
-    // return <PageItem metadata={metadata} pageData={pageData.items} />;
-  } catch (e) {
-    // notFound()
-    return {
-      type: null
-    }
+  }
+
+  return {
+    type: null
   }
 
 }
@@ -127,7 +145,7 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export async function generateMetadata({params, searchParams }:Props) {
+export async function generateMetadata({ params, searchParams }: Props) {
   let pathInfo: PathGeneratorType
 
   try {
@@ -139,7 +157,7 @@ export async function generateMetadata({params, searchParams }:Props) {
 
   switch (pathInfo.type) {
     case "country":
-      return{
+      return {
         title: `کوچا | جامعه ایرانیان مهاجر مقیم ${pathInfo?.props?.currentCountry?.name}`
       }
     case "unit":
@@ -156,7 +174,7 @@ export async function generateMetadata({params, searchParams }:Props) {
       }
 
     default:
-      notFound()
+      "کوچا | یافت نشد"
 
   }
 }
