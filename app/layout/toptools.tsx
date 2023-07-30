@@ -22,6 +22,11 @@ export const TopTools = () => {
   }
   const isPathHaveCountry = countryCodeList.find(code => code == countryCodeFromParams)
 
+  const haveCountry = (countryOrSlug: string) => {
+    return countryCodeList.some(code => code == countryOrSlug)
+  }
+
+
   return (
     <div className="top-tools flex items-center">
       <div
@@ -35,8 +40,8 @@ export const TopTools = () => {
         }}
       >
         <CircleFlag
-          // countryCode={isPathHaveCountry ? params?.path?.split("/")?.[0] : country ? country : "un"}
-          countryCode={isMainPage ? "un" : isPathHaveCountry ? countryCodeFromParams : country ? country : "un"}
+          // countryCode={isMainPage ? "un" : isPathHaveCountry ? countryCodeFromParams : country ? country : "un"}
+          countryCode={haveCountry(params?.countryOrSlug as string) ? params.countryOrSlug as string : isMainPage ? "un" : isPathHaveCountry ? countryCodeFromParams : country ? country : "un"}
           className="opacity-75 hover:opacity-100 hover:cursor-pointer transition"
           width={42}
         />

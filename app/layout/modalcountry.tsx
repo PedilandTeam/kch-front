@@ -1,5 +1,5 @@
 "use client"
-import { COUNTRY, GENERAL, MODAL } from "../../../components/allTexts";
+import { COUNTRY, GENERAL, MODAL } from "../../components/allTexts";
 import { CircleFlag } from "react-circle-flags";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
