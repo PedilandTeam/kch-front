@@ -1,14 +1,15 @@
 import { Header } from "./header";
 import { Footer } from "./footer";
 import "@/styles/globals.css";
-import {ChakraProvider} from "@client-packages/chakra-ui/components";
+import { ChakraProvider } from "@client-packages/chakra-ui/components";
 import theme from "../config/theme";
 import Fonts from "../config/fonts";
 import { CountryNamespace } from "@/types/country";
 import { API_ROUTES } from "@/routes";
 import { ModalCountry } from "./[...path]/layout/modalcountry";
-import {Providers} from "@client-packages/react-redux/provider"
+import { Providers } from "@client-packages/react-redux/provider"
 import store from "@/store/store";
+import Script from "next/script";
 
 
 export const metadata = {
@@ -25,10 +26,10 @@ export default async function RootLayout({
 
 
   let countries: CountryNamespace.GET[]
-  try{
+  try {
     countries = await (await API_ROUTES.COUNTRIES.GET_ALL(20)).json()
   }
-  catch(e){
+  catch (e) {
     console.log(e);
     throw new Error("error in get country")
   }
@@ -36,16 +37,26 @@ export default async function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body className=" min-h-screen flex flex-col">
-      <Providers>
-        <ChakraProvider theme={theme}>
-          <Fonts />
-          <Header>
-            <ModalCountry countries={countries} />
-          </Header>
+        <Providers>
+          <ChakraProvider theme={theme}>
+            <Fonts />
+            <Header>
+              <ModalCountry countries={countries} />
+            </Header>
             {children}
-          <Footer />
-        </ChakraProvider>
-      </Providers>
+            <Footer />
+          </ChakraProvider>
+        </Providers>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD" />
+        <Script id="google-analytics">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'G-EED4RG3GPD');
+        `}
+        </Script>
       </body>
     </html>
   )
