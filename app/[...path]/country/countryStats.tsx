@@ -30,58 +30,38 @@ async function getStats(
   return stats;
 }
 
-// const cacheView = async (currentCountry: CountryNamespace.GET) => {
-//   let client: RedisClientType;
-//   let views: number = 1;
-//   let dayInMiliseconds = 86_400_000;
-//   const viewsKey = `${currentCountry.code}_views`;
-//   const lastUpdateKey = `${currentCountry.code}_views_last_update`;
-//   const nowDate = new Date().getTime();
-//   const fromDate = new Date("2023-07-07T15:36:28.521Z").getTime();
-//   const dayDiffrence = (nowDate - fromDate) / dayInMiliseconds;
-//   views = Math.floor(60 + dayDiffrence * Math.floor(Math.random() * 50));
+const cacheView = async (currentCountry: CountryNamespace.GET) => {
+  let client: RedisClientType;
+  let views: number = 1;
 
-//   try {
-//     client = createClient({
-//       url: process.env.REDIS_URL,
-//     });
-//     await client.connect();
-//     const viewsInCache = await client.get(viewsKey);
-//     const viewslastUpdate = await client.get(lastUpdateKey);
+  const viewsKey = `${currentCountry.code}_views`;
 
-//     if (!viewsInCache || !viewslastUpdate) {
-//       await client.set(viewsKey, views);
-//       await client.set(lastUpdateKey, nowDate);
-//       return views;
-//     }
-
-//     if (nowDate - (+viewslastUpdate ) >= dayInMiliseconds) {
-//       const newViews = views + viewsInCache;
-//       await client.set(viewsKey, newViews);
-//       await client.set(lastUpdateKey, nowDate);
-//       return newViews;
-//     }
-
-//     return viewsInCache;
-//   } catch (e) {
-//     console.log(e);
-//     throw new Error("redis error");
-//   }
-// };
+  try {
+    client = createClient({
+      url: process.env.REDIS_URL,
+    });
+    await client.connect();
+    views = Number(await client.get(viewsKey)) ?? 1;
+    return views;
+  } catch (e) {
+    console.log(e);
+    throw new Error("redis error");
+  }
+};
 
 export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
   let views: string | number | null = null;
   let stats: StatsNamespace.COUNTRY_STATS;
 
-  // try{
-  //   views = await cacheView(currentCountry);
-  // }catch(e){
-  //   console.error(e);
-  // }
+  try{
+    views = await cacheView(currentCountry);
+  }catch(e){
+    console.error(e);
+  }
 
   try {
     stats = await getStats(currentCountry.code);
-  } catch (e) {
+  } catch (e) {getStats
     throw new Error("Error in get stats");
   }
 
