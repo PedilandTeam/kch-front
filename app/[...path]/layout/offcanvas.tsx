@@ -17,8 +17,12 @@ export const OffCanvas = () => {
 
   const params = useParams()
   const country = useSelector((state: storeType) => state.stateSlice.country)
-  const countryCodeFromParams = params?.path?.split("/")?.[0]
-  const isMainPage = !params?.path?.split("/")?.[0]
+  let countryCodeFromParams: string = ""
+  let isMainPage: boolean | null = null
+  if(typeof params?.path == "string"){
+    countryCodeFromParams = params?.path?.split("/")?.[0]
+    isMainPage = !params?.path?.split("/")?.[0]
+  }
   const isPathHaveCountry = countryCodeList.find(code => code == countryCodeFromParams)
   const countryForMenu = isPathHaveCountry ? countryCodeFromParams : country ? country : "un"
   

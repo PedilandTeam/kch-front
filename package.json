@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3004",
     "lint": "next lint"
   },
   "dependencies": {
@@ -25,7 +25,7 @@
     "eslint-config-next": "13.2.4",
     "framer-motion": "^10.2.4",
     "lodash": "^4.17.21",
-    "next": "13.4.7",
+    "next": "13.4.12",
     "next-images": "^1.8.5",
     "query-string": "^8.1.0",
     "react": "18.2.0",
