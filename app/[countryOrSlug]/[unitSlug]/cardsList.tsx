@@ -17,6 +17,7 @@ import { useIntersectionObserver } from "react-intersection-observer-hook";
 import ContentLoader from "react-content-loader";
 import { FolderIcon } from "@heroicons/react/24/outline";
 import CardSkeleton from "../categoryList/filter/card.skeleton";
+import categoryPathGenerator from "@/utils/categoryPathGenerator";
 
 
 type CardsListType = {
@@ -161,7 +162,7 @@ export const CardsList = ({unit, country }: CardsListType) => {
                     </div>
                     <div className="flex justify-center content-center">
                       <FolderIcon className="w-4 ml-1 text-gray-400" />
-                      <span>{page?.category?.name}</span>
+                      <Link href={categoryPathGenerator(country.code, unit.slug, page.category.slug)}><span>{page?.category?.name}</span></Link>
                     </div>
                   </div>
                 </div>

@@ -23,7 +23,7 @@ export const Footer = () => {
         <div>
           <div className="grid grid-flow-col gap-4">
             <Link
-              href={"https://www.instagram.com/koochaa.social/"}
+              href={"https://www.instagram.com/koochaa.ir/"}
               target="_blank"
             >
               <svg
@@ -38,7 +38,7 @@ export const Footer = () => {
               </svg>
             </Link>
             <Link
-              href={"https://www.facebook.com/koochaa.social"}
+              href={"https://www.facebook.com/koochaa.ir"}
               target="_blank"
             >
               <svg

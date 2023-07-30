@@ -2,6 +2,7 @@ import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CityNamespace } from "@/types/city";
 import { Country } from "@/types/page";
+import { UnitType } from "@/types/unit";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { CardsList } from "./cardsList";
 import ListFilter from "./filter/categoryListFilter";
@@ -9,6 +10,7 @@ import ListFilter from "./filter/categoryListFilter";
 type PagesListProps = {
   category: CategoryNamespace.category;
   country: Country;
+  unit: UnitType
 };
 
 async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
@@ -27,14 +29,12 @@ async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
 }
 
 
-export default async function CategoryList({ category, country }: PagesListProps) {
+export default async function CategoryList({ category, country, unit }: PagesListProps) {
 
   const cities = await fetchCities(country.code)
 
 
-  // if (!paths.countryOrSlug || !category.id) {
-  //   return <span className="loading loading-ring loading-lg"></span>;
-  // }
+
   return (
     <div className="component mt-5 page-list">
       <div className="container mx-auto max-w-[1144px]">
@@ -44,7 +44,8 @@ export default async function CategoryList({ category, country }: PagesListProps
           </div>
           <div className="page-content sm:col-span-6">
             <ItemBreadCrumb
-              unit={{ name: category.name, slug: category.slug }}
+              unit={unit}
+              category={category}
               country={{ name: country.name, code: country.code }}
             />
             <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">

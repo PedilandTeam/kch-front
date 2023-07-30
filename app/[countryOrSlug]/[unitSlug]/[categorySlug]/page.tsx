@@ -27,7 +27,8 @@ const pathGenerator = async(countryOrSlug: string, unitSlug: string, categorySlu
         type: 'category',
         props: {
             category: currentCategory,
-            country: currentCountry
+            country: currentCountry,
+            unit: currentUnit
         }
     }
     // return <CategoryList category={currentCategory} country={currentCountry} />

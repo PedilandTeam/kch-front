@@ -1,19 +1,21 @@
 "use client"
+import { UnitType } from "@/types/unit";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 
 
 type ItemBreadCrumbType = {
-  unit:{
+  category:{
     name: string,
     slug: string
   },
   country: {
     name: string,
     code: string
-  }
+  },
+  unit: UnitType
 }
-export const ItemBreadCrumb = ({unit, country}: ItemBreadCrumbType) => {
+export const ItemBreadCrumb = ({category, country, unit}: ItemBreadCrumbType) => {
   return (
     <Breadcrumb
       spacing="4px"
@@ -29,8 +31,12 @@ export const ItemBreadCrumb = ({unit, country}: ItemBreadCrumbType) => {
         <BreadcrumbLink href={`/${country.code}`}>{country.name}</BreadcrumbLink>
       </BreadcrumbItem>
 
+      <BreadcrumbItem>
+        <BreadcrumbLink href={`/${country.code}/${unit.slug}`}>{unit.name}</BreadcrumbLink>
+      </BreadcrumbItem>
+
       <BreadcrumbItem isCurrentPage>
-        <BreadcrumbLink href={`/${country.code}/${unit.slug}`}>{unit.name} فارسی زبان</BreadcrumbLink>
+        <BreadcrumbLink href={`/${country.code}/${unit.slug}/${category.slug}`}>{category.name} فارسی زبان</BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>
   );
