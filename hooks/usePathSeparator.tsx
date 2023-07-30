@@ -6,7 +6,6 @@ export type usePathSeparatorType = {
     category: string
 }
 export const usePathSeparator = (path: string[]) => {
-    console.log("this is usePathSeperator path", path.length);
     
     return {
         countryOrSlug: path[0],

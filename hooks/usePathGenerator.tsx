@@ -26,7 +26,6 @@ const pathGenerator = async (path: string[]): Promise<PathGeneratorType> => {
       if (currentCountry && !paths.unitOrCategory) {
         //show country
         // metadata = {...metadata, title: `کوچا | جامعه  ${isCountryExist.name}`}
-        console.log("country", currentCountry.name);
         return {
           type: "country",
           props: {

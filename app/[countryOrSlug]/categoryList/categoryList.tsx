@@ -29,7 +29,6 @@ async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
 
 export default async function CategoryList({ category, country }: PagesListProps) {
 
-  console.log(country);
   const cities = await fetchCities(country.code)
 
 
