@@ -1,8 +1,8 @@
 
-import { LogoTop } from "./[...path]/layout/logo";
-import { TopTools } from "./[...path]/layout/toptools";
-import { OffCanvas } from "./[...path]/layout/offcanvas";
-import { ModalCountry } from "./[...path]/layout/modalcountry";
+import { LogoTop } from "./[countryOrSlug]/layout/logo";
+import { TopTools } from "./[countryOrSlug]/layout/toptools";
+import { OffCanvas } from "./[countryOrSlug]/layout/offcanvas";
+import { ModalCountry } from "./[countryOrSlug]/layout/modalcountry";
 import { CountryNamespace } from "@/types/country";
 import {headers} from "next/headers"
 import { API_ROUTES } from "@/routes";

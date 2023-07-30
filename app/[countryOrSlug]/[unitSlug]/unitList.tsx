@@ -17,7 +17,6 @@ import ListFilter from "./filter/listFilter";
 type PagesListProps = {
   unit: UnitType;
   currentCountry: Country;
-  paths: usePathSeparatorType;
 };
 
 async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
@@ -37,15 +36,14 @@ async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
 
 export default async function UntiList({
   unit,
-  paths,
   currentCountry,
 }: PagesListProps) {
   const cities = await fetchCities(currentCountry.code);
   const categories: CategoryNamespace.category[] = unit.categories;
 
-  if (!paths.countryOrSlug || !unit.id) {
-    return <span className="loading loading-ring loading-lg"></span>;
-  }
+  // if (!unit.id) {
+  //   return <span className="loading loading-ring loading-lg"></span>;
+  // }
   return (
     <div className="component mt-5 page-list">
       <div className="container mx-auto max-w-[1144px]">
@@ -62,7 +60,7 @@ export default async function UntiList({
               لیست {unit?.name} فارسی زبان
             </h1>
 
-            <CardsList paths={paths} unit={unit} country={currentCountry} />
+            <CardsList unit={unit} country={currentCountry} />
           </div>
         </div>
       </div>

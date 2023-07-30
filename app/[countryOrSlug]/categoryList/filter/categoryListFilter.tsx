@@ -3,7 +3,7 @@ import { GENERAL } from "../../../../components/allTexts";
 import { FunnelIcon } from "@client-packages/heroicons/components";
 import FilterMobile from "./filter.mobile";
 import { CityNamespace } from "@/types/city";
-import CityFilter from "../../unitList/filter/city.filter";
+import CityFilter from "../../[unitSlug]/filter/city.filter";
 import { CategoryNamespace } from "@/types/category";
 
 type ListFilterProps = {

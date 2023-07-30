@@ -6,7 +6,7 @@ import theme from "../config/theme";
 import Fonts from "../config/fonts";
 import { CountryNamespace } from "@/types/country";
 import { API_ROUTES } from "@/routes";
-import { ModalCountry } from "./[...path]/layout/modalcountry";
+import { ModalCountry } from "./[countryOrSlug]/layout/modalcountry";
 import { Providers } from "@client-packages/react-redux/provider"
 import store from "@/store/store";
 import Script from "next/script";

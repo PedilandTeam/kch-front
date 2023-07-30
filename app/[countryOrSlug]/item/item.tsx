@@ -7,7 +7,6 @@ import { PageNamespace } from "@/types/page";
 import { Metadata } from "next";
 export type PageItemProps = {
   pageData: PageNamespace.GET;
-  metadata: Metadata
 };
 
 // export function generateMetadata({params, searchParams}: GenerateMetadataProps): Metadata{  

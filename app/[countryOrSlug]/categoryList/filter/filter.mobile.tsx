@@ -6,7 +6,7 @@ import { FunnelIcon } from "@heroicons/react/24/solid";
 import CategoryFilter from "./category.filter";
 import { CityNamespace } from "@/types/city";
 import { CategoryNamespace } from "@/types/category";
-import CityFilter from "../../unitList/filter/city.filter";
+import CityFilter from "../../[unitSlug]/filter/city.filter";
 
 type FilterMobileProps = {
   cities: CityNamespace.city[];

@@ -20,7 +20,6 @@ import CardSkeleton from "../categoryList/filter/card.skeleton";
 
 
 type CardsListType = {
-  paths: usePathSeparatorType;
   unit: UnitType;
   country: CountryNamespace.GET;
 };
@@ -32,7 +31,7 @@ type ParsedSearchParamsType = {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const CardsList = ({ paths, unit, country }: CardsListType) => {
+export const CardsList = ({unit, country }: CardsListType) => {
   const [parsedSearchParams, setParsedSearchParams] =
     useState<ParsedSearchParamsType>({});
   const searchParams = useSearchParams();
