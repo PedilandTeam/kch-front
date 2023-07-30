@@ -44,7 +44,7 @@ export const generateMetadata = async({ params: {countryOrSlug, unitSlug, catego
     }
 
     return {
-        title: `لیست ${pathInfo?.props?.unit?.name} فارسی زبان | کوچا`
+        title: `لیست ${pathInfo?.props?.category?.name} فارسی زبان | کوچا`
     }
 }
 

@@ -15,6 +15,7 @@ export namespace CategoryNamespace {
 
     export interface MostUsedCategory extends category {
         pageCount: number
+        unitId: number
     }
 
     export interface GET {

@@ -27,7 +27,13 @@ export default function CountryCategoriesItems({ recentlyUpdatedCategories, curr
         unit: string,
         childs: number
     }
-    const [emptyUnits, setEmptyUnits] = useState<emptyUnitsType[] | []>([])
+    const unitFinder = (unitId: number)=> {
+        const unit = UNITS_LIST_ARRAY.find(unit => unit.id == unitId)
+        if(unit?.categories){
+            unit.categories = []
+        }
+        return unit
+    }
 
     return (
         <>
@@ -50,7 +56,7 @@ export default function CountryCategoriesItems({ recentlyUpdatedCategories, curr
                 {
                     recentlyUpdatedCategories[`${activeTab}`].map((category, index) => {
                         return (
-                            <Link key={"country-category" + category.id} href={`/${currentCountry.code}/${category.slug}`}>
+                            <Link key={"country-category" + category.id} href={`/${currentCountry.code}/${unitFinder(category.unitId)?.slug}/${category.slug}`}>
                                 <div key={`country-category-list-${category.id}${index}`} className="cat-card group">
                                     <Image
                                         src="/img/icon/cat-restaurant.svg"
