@@ -7,6 +7,7 @@ export  namespace CityNamespace {
         id: number,
         name: string,
         country: CountryNamespace.GET
+        englishName?: string
     }
     export interface GET {
         items: city[],

@@ -1,3 +1,4 @@
+import { CityNamespace } from "./city";
 
 
 
@@ -17,7 +18,7 @@ export namespace PageNamespace{
         pictures:    any[];
         unit:        Category;
         category:    Category;
-        city:        City;
+        city:        CityNamespace.city;
         country:     Country;
     }
     
@@ -55,10 +56,6 @@ export interface Category {
     updateDate:  Date;
 }
 
-export interface City {
-    id:   number;
-    name: string;
-}
 
 export interface Country {
     id:   number;
