@@ -50,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
         pages.forEach((page: PageNamespace.GET) => {
             pagesSiteMap.push({
-                url: encodeURIComponent(`${baseUrl}/${page.slug}`),
+                url: `${baseUrl}/${encodeURIComponent(page.slug)}`,
                 lastModified: page.updatedDate
             })
         })
