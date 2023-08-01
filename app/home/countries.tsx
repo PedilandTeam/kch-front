@@ -71,7 +71,7 @@ export const HomeCountries = () => {
             </Link>
           </div>
           <div className="group relative h-min overflow-hidden">
-            <Link href={"/gb-eng"}>
+            <Link href={"/uk"}>
               <Image
                 src="/img/modules/mod-england-min.jpg"
                 width="400"
