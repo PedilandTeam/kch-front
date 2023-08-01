@@ -82,10 +82,9 @@ const pathGenerator = async (countryOrSlug: string): Promise<PathGeneratorType> 
     //show single page
     if (countryOrSlug) {
       try {
-        const pageData = await (await API_ROUTES.PAGES.GET_ALL(1, 1, countryOrSlug, 20)).json()
+        const pageData = await (await API_ROUTES.PAGES.GET_ALL(1, 1, countryOrSlug, 20)).json()        
         if (!pageData?.items) {
           return NOT_FOUND
-          // notFound()
         }
         return {
           type: "item",

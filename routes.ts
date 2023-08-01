@@ -8,10 +8,7 @@ type paramType = {
 type configType = {cache?: requestCacheType, revalidate?: number}
 type requestType = {
     path: string, method?: string, params?: paramType, body?: any
-    headers?: {
-        "api-key": string
-        [key: string]: string | number
-    }
+    headers?: HeadersInit
 }
 
 const baseFetch = async ({path, method = "GET", params, body, headers}: requestType, {cache, revalidate}: configType): Promise<Response> => {
@@ -28,7 +25,7 @@ const baseFetch = async ({path, method = "GET", params, body, headers}: requestT
         }
         
         let url = queryParametrs ? `${API_URL}/${path}?${queryParametrs}` : `${API_URL}/${path}`
-        fetch(url, {body, cache, next: { ...revalidate && {revalidate} }, method, })    
+        fetch(url, {body, cache, next: { ...revalidate && {revalidate} }, method,headers})    
             
             .then((res: Response) => {
                 if(!res.ok){
