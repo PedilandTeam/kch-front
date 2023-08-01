@@ -16,7 +16,7 @@ import queryString from "query-string";
 import { useIntersectionObserver } from "react-intersection-observer-hook";
 import ContentLoader from "react-content-loader";
 import { FolderIcon } from "@heroicons/react/24/outline";
-import CardSkeleton from "../categoryList/filter/card.skeleton";
+import CardSkeleton from "./[categorySlug]/categoryList/filter/card.skeleton";
 import categoryPathGenerator from "@/utils/categoryPathGenerator";
 
 

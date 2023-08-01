@@ -4,7 +4,7 @@ import { CountryNamespace } from "@/types/country";
 import { UnitType } from "@/types/unit";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import CategoryList from "../../categoryList/categoryList";
+import CategoryList from "./categoryList/categoryList";
 import { PathGeneratorType } from "../../page";
 
 
