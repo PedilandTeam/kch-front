@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { MENU } from "@/components/allTexts";
+import { MENU } from "@/app/text/allTexts";
 import Image from "next/image";
 import Link from "next/link";
 

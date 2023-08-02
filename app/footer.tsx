@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { GENERAL } from "../components/allTexts";
+import { GENERAL } from "@/app/text/allTexts";
 
 export const Footer = () => {
   return (

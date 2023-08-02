@@ -1,5 +1,5 @@
 "use client";
-import { GENERAL } from "../../../../components/allTexts";
+import { GENERAL } from "@/app/text/allTexts";
 import { FunnelIcon } from "@client-packages/heroicons/components";
 import FilterMobile from "./filter.mobile";
 import { CityNamespace } from "@/types/city";

@@ -1,5 +1,5 @@
-"use client"
-import { COUNTRY } from "@/components/allTexts";
+"use client";
+import { COUNTRY } from "@/app/text/allTexts";
 import { ShareIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
@@ -13,9 +13,8 @@ import { setCountry } from "@/store/stateSlice";
 
 export type ItemTopInfoType = { pageData: PageNamespace.GET };
 export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
-
-  const dis = useDispatch()
-  dis(setCountry(pageData?.country?.code))
+  const dis = useDispatch();
+  dis(setCountry(pageData?.country?.code));
 
   return (
     <div className="top-section h-full">
