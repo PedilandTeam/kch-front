@@ -1,6 +1,6 @@
 "use client"
 
-import { CircleFlag } from "react-circle-flags";
+import { CircleFlag } from "next-circle-flags";
 
 type TopToolsProps = {
   countryCode: string,
@@ -23,10 +23,12 @@ export const TopTools = ({countryCode, isMainPage}: TopToolsProps) => {
           }}
         >
           <CircleFlag
+            width={50}
+            height={50}
+            loading={"lazy"}
             // countryCode={isMainPage ? "un" : isPathHaveCountry ? countryCodeFromParams : country ? country : "un"}
             countryCode={countryCode}
             className="opacity-75 hover:opacity-100 hover:cursor-pointer transition"
-            width={42}
           />
           </div>
         {
@@ -63,3 +65,4 @@ export const TopTools = ({countryCode, isMainPage}: TopToolsProps) => {
     </>
   );
 };
+
