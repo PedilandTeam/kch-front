@@ -1,6 +1,6 @@
 "use client";
 
-import { GENERAL } from "../../../../components/allTexts";
+import { GENERAL } from "@/app/text/allTexts";
 import { CategoryNamespace } from "@/types/category";
 import CategoryFilterItem from "./category.filter.item";
 import { useEffect, useState } from "react";
