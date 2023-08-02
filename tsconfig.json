@@ -28,6 +28,9 @@
       ],
       "@client-packages/*": [
         "./app/client-packages/*"
+      ],
+      "@text/*": [
+        "./app/text/*"
       ]
     },
     "plugins": [

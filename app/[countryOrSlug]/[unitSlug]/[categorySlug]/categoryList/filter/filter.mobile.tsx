@@ -1,6 +1,6 @@
 "use client";
 
-import { GENERAL } from "../../../../../../components/allTexts";
+import { GENERAL } from "@text/allTexts";
 import { FunnelIcon } from "@heroicons/react/24/solid";
 // import CityFilter from "./city.filter";
 import CategoryFilter from "./category.filter";
