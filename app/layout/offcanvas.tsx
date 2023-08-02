@@ -10,19 +10,11 @@ import { useParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import { UNITS_LIST } from "@/routes";
 
-export const OffCanvas = () => {
-  const params = useParams();
-  const country = useSelector((state: storeType) => state.stateSlice.country);
-  const countryCodeFromParams = params?.path?.split("/")?.[0];
-  const isMainPage = !params?.path?.split("/")?.[0];
-  const isPathHaveCountry = countryCodeList.find(
-    (code) => code == countryCodeFromParams
-  );
-  const countryForMenu = isPathHaveCountry
-    ? countryCodeFromParams
-    : country
-    ? country
-    : "un";
+type OffCanvasProps = {
+  countryCode: string,
+}
+
+export const OffCanvas = ({countryCode}: OffCanvasProps) => {
 
   return (
     <div className="drawer drawer-end z-10">
@@ -39,34 +31,22 @@ export const OffCanvas = () => {
           </div>
           <ul>
             <li>
-              <Link
-                href={`/${countryForMenu}/${UNITS_LIST.BUSINESSES}`}
-                className="p-3 text-[16px]"
-              >
+              <Link href={`/${countryCode}/${UNITS_LIST.BUSINESSES}`} className="p-3 text-[16px]">
                 {MENU.BUSINESSES}
               </Link>
             </li>
             <li>
-              <Link
-                href={`/${countryForMenu}/${UNITS_LIST.DOCTORS}`}
-                className="p-3 text-[16px]"
-              >
+              <Link href={`/${countryCode}/${UNITS_LIST.DOCTORS}`} className="p-3 text-[16px]">
                 {MENU.DOCTORS}
               </Link>
             </li>
             <li>
-              <Link
-                href={`/${countryForMenu}/${UNITS_LIST.COMMUNITIES}`}
-                className="p-3 text-[16px]"
-              >
+              <Link href={`/${countryCode}/${UNITS_LIST.COMMUNITIES}`} className="p-3 text-[16px]">
                 {MENU.COMMUNITIES}
               </Link>
             </li>
             <li>
-              <Link
-                href={`/${countryForMenu}/${UNITS_LIST.FREELANCERS}`}
-                className="p-3 text-[16px]"
-              >
+              <Link href={`/${countryCode}/${UNITS_LIST.FREELANCERS}`} className="p-3 text-[16px]">
                 {MENU.FREELANCERS}
               </Link>
             </li>

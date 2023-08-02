@@ -1,5 +1,6 @@
 
 const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL
+const API_KEY = process.env.API_KEY!
 type requestCacheType = "default" | "force-cache" | "no-cache" | "no-store" | "only-if-cached" | "reload";
 type paramType = {
     [key: string]: string | number
@@ -7,9 +8,10 @@ type paramType = {
 type configType = {cache?: requestCacheType, revalidate?: number}
 type requestType = {
     path: string, method?: string, params?: paramType, body?: any
+    headers?: HeadersInit
 }
 
-const baseFetch = async ({path, method = "GET", params, body}: requestType, {cache, revalidate}: configType): Promise<Response> => {
+const baseFetch = async ({path, method = "GET", params, body, headers}: requestType, {cache, revalidate}: configType): Promise<Response> => {
     
     return new Promise((resolve, reject) => {
 
@@ -23,7 +25,7 @@ const baseFetch = async ({path, method = "GET", params, body}: requestType, {cac
         }
         
         let url = queryParametrs ? `${API_URL}/${path}?${queryParametrs}` : `${API_URL}/${path}`
-        fetch(url, {body, cache, next: { ...revalidate && {revalidate} }, method, })    
+        fetch(url, {body, cache, next: { ...revalidate && {revalidate} }, method,headers})    
             
             .then((res: Response) => {
                 if(!res.ok){
@@ -42,10 +44,13 @@ const baseFetch = async ({path, method = "GET", params, body}: requestType, {cac
 export const API_ROUTES = {
     PAGES: {
         GET_ALL: (page: number, limit: number, slug?: string, revalidate?: number, cache?: requestCacheType) => {
+            return baseFetch({path:"pages", method:"GET", params:{page, limit, ...slug && {slug}}, headers: {"api-key": API_KEY}},  {...cache && {cache}, ...revalidate && {revalidate}})
+        },
+        GET_ALL_PREVIEW: (page: number, limit: number, slug?: string, revalidate?: number, cache?: requestCacheType) => {
             return baseFetch({path:"pages", method:"GET", params:{page, limit, ...slug && {slug}}},  {...cache && {cache}, ...revalidate && {revalidate}})
         },
         GET_ONE: (id: string , revalidate?: number, cache?: requestCacheType) => {
-            return baseFetch({path: `pages/${id}`, method: "GET"},  {...cache && {cache}, ...revalidate && {revalidate}})
+            return baseFetch({path: `pages/${id}`, method: "GET", headers: {"api-key": API_KEY}},  {...cache && {cache}, ...revalidate && {revalidate}})
         }
     },
     COUNTRIES: {

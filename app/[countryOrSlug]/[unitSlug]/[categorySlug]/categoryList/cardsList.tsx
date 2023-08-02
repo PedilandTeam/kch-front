@@ -16,9 +16,11 @@ import { useIntersectionObserver } from "react-intersection-observer-hook";
 import ContentLoader from "react-content-loader";
 import { FolderIcon } from "@heroicons/react/24/outline";
 import { CategoryNamespace } from "@/types/category";
+import { nanoid } from "nanoid";
+import CardSkeleton from "./filter/card.skeleton";
+
 
 type CardsListType = {
-  paths: usePathSeparatorType;
   category: CategoryNamespace.category;
   country: CountryNamespace.GET;
 };
@@ -30,7 +32,7 @@ type ParsedSearchParamsType = {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const CardsList = ({ paths, category, country }: CardsListType) => {
+export const CardsList = ({category, country }: CardsListType) => {
   const [parsedSearchParams, setParsedSearchParams] =
     useState<ParsedSearchParamsType>({});
   const searchParams = useSearchParams();
@@ -49,6 +51,7 @@ export const CardsList = ({ paths, category, country }: CardsListType) => {
   const [pageLock, setPageLock] = useState(false);
   const perviousPage = useRef<number>(0);
   const [pages, setPages] = useState<PageNamespace.GET[] | []>([]);
+
 
   const [ref, { entry }] = useIntersectionObserver();
   const isVisible = entry && entry.isIntersecting;
@@ -69,6 +72,17 @@ export const CardsList = ({ paths, category, country }: CardsListType) => {
     parsedSearchParams.city,
     category.id
   );
+
+  const [firstLoading, setFirstLoading] = useState<boolean>(true)
+
+
+  useEffect(() => {
+    if(data){
+      if(firstLoading)
+        setFirstLoading(false)
+    }
+  },[data])
+
   useEffect(() => {
     if (!data?.items) return;
     if (error) return;
@@ -81,31 +95,9 @@ export const CardsList = ({ paths, category, country }: CardsListType) => {
     setPages((old) => [...old, ...data.items]);
   }, [data]);
 
-  if ((isLoading && pages.length == 0) || !parsedSearchParams) {
+  if ((firstLoading || isLoading && pages.length == 0) || !parsedSearchParams) {
     return (
-      <div className="skeleton min-h-[500px]">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 sm:gap-4">
-          {Array.from({ length: 12 }).map((skeleton: any, index) => {
-            return (
-              <ContentLoader
-                key={`content-loader-${skeleton}`}
-                speed={2}
-                width={417}
-                height={126}
-                viewBox="0 0 417 126"
-                backgroundColor="#ededed"
-                foregroundColor="#e0e0e0"
-                // {...props}
-              >
-                <rect x="55" y="12" rx="0" ry="0" width="220" height="16" />
-                <rect x="55" y="53" rx="0" ry="0" width="220" height="14" />
-                <rect x="55" y="92" rx="0" ry="0" width="220" height="16" />
-                <circle cx="355" cy="62" r="50" />
-              </ContentLoader>
-            );
-          })}
-        </div>
-      </div>
+      <CardSkeleton/>
     );
   }
 

@@ -32,36 +32,16 @@ async function getStats(
 const cacheView = async (currentCountry: CountryNamespace.GET) => {
   let client: RedisClientType;
   let views: number = 1;
-  let dayInMiliseconds = 86_400_000;
+
   const viewsKey = `${currentCountry.code}_views`;
-  const lastUpdateKey = `${currentCountry.code}_views_last_update`;
-  const nowDate = new Date().getTime();
-  const fromDate = new Date("2023-07-07T15:36:28.521Z").getTime();
-  const dayDiffrence = (nowDate - fromDate) / dayInMiliseconds;
-  views = Math.floor(60 + dayDiffrence * Math.floor(Math.random() * 50));
 
   try {
     client = createClient({
       url: process.env.REDIS_URL,
     });
     await client.connect();
-    const viewsInCache = await client.get(viewsKey);
-    const viewslastUpdate = await client.get(lastUpdateKey);
-
-    if (!viewsInCache || !viewslastUpdate) {
-      await client.set(viewsKey, views);
-      await client.set(lastUpdateKey, nowDate);
-      return views;
-    }
-
-    if (nowDate - +viewslastUpdate >= dayInMiliseconds) {
-      const newViews = views + viewsInCache;
-      await client.set(viewsKey, newViews);
-      await client.set(lastUpdateKey, nowDate);
-      return newViews;
-    }
-
-    return viewsInCache;
+    views = Number(await client.get(viewsKey)) ?? 1;
+    return views;
   } catch (e) {
     console.log(e);
     throw new Error("redis error");
@@ -69,19 +49,18 @@ const cacheView = async (currentCountry: CountryNamespace.GET) => {
 };
 
 export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
-  let views: string | number;
+  let views: string | number | null = null;
   let stats: StatsNamespace.COUNTRY_STATS;
 
   try {
     views = await cacheView(currentCountry);
   } catch (e) {
     console.error(e);
-    throw new Error("Error in get CacheView from Redis");
   }
 
   try {
     stats = await getStats(currentCountry.code);
-  } catch (e) {
+  } catch (e) {getStats
     throw new Error("Error in get stats");
   }
 
@@ -120,7 +99,7 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
             <EyeIcon className="w-9 h-9 text-sky-700" />
           </div>
           <div className="info flex flex-wrap content-center text-sky-700 text-[18px]">
-            <div className="ml-2 font-bold ">{views}</div>
+            <div className="ml-2 font-bold ">{views ?? "درحال بارگذاری"}</div>
             <div className="font-medium">{GENERAL.VIEW}</div>
           </div>
         </div>

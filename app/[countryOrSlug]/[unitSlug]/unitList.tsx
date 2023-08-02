@@ -16,8 +16,7 @@ import ListFilter from "./filter/listFilter";
 
 type PagesListProps = {
   unit: UnitType;
-  country: Country;
-  paths: usePathSeparatorType;
+  currentCountry: Country;
 };
 
 async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
@@ -37,15 +36,14 @@ async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
 
 export default async function UntiList({
   unit,
-  paths,
-  country,
+  currentCountry,
 }: PagesListProps) {
-  const cities = await fetchCities(country.code);
+  const cities = await fetchCities(currentCountry.code);
   const categories: CategoryNamespace.category[] = unit.categories;
 
-  if (!paths.countryOrSlug || !unit.id) {
-    return <span className="loading loading-ring loading-lg"></span>;
-  }
+  // if (!unit.id) {
+  //   return <span className="loading loading-ring loading-lg"></span>;
+  // }
   return (
     <div className="component mt-5 page-list">
       <div className="container mx-auto max-w-[1144px]">
@@ -56,13 +54,13 @@ export default async function UntiList({
           <div className="page-content sm:col-span-6">
             <ItemBreadCrumb
               unit={{ name: unit.name, slug: unit.slug }}
-              country={{ name: country.name, code: country.code }}
+              country={{ name: currentCountry.name, code: currentCountry.code }}
             />
             <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">
               لیست {unit?.name} فارسی زبان
             </h1>
 
-            <CardsList paths={paths} unit={unit} country={country} />
+            <CardsList unit={unit} country={currentCountry} />
           </div>
         </div>
       </div>

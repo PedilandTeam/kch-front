@@ -139,7 +139,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
           />
 
           <ItemSideInfoItem
-            text={`${pageData?.address?.address} ${pageData?.address?.city}`}
+            text={`${pageData?.address?.address} ${pageData?.city?.englishName ? pageData.city.englishName : pageData?.city?.name}`}
             Icons={[
               {
                 Component: (

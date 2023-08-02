@@ -16,9 +16,11 @@ import queryString from "query-string";
 import { useIntersectionObserver } from "react-intersection-observer-hook";
 import ContentLoader from "react-content-loader";
 import { FolderIcon } from "@heroicons/react/24/outline";
+import CardSkeleton from "./[categorySlug]/categoryList/filter/card.skeleton";
+import categoryPathGenerator from "@/utils/categoryPathGenerator";
+
 
 type CardsListType = {
-  paths: usePathSeparatorType;
   unit: UnitType;
   country: CountryNamespace.GET;
 };
@@ -30,7 +32,7 @@ type ParsedSearchParamsType = {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const CardsList = ({ paths, unit, country }: CardsListType) => {
+export const CardsList = ({unit, country }: CardsListType) => {
   const [parsedSearchParams, setParsedSearchParams] =
     useState<ParsedSearchParamsType>({});
   const searchParams = useSearchParams();
@@ -69,6 +71,17 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
     parsedSearchParams.city,
     parsedSearchParams.category
   );
+
+  const [firstLoading, setFirstLoading] = useState<boolean>(true)
+
+
+  useEffect(() => {
+    if (data) {
+      if (firstLoading)
+        setFirstLoading(false)
+    }
+  }, [data])
+
   useEffect(() => {
     if (!data?.items) return;
     if (error) return;
@@ -81,31 +94,9 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
     setPages((old) => [...old, ...data.items]);
   }, [data]);
 
-  if ((isLoading && pages.length == 0) || !parsedSearchParams) {
+  if ((firstLoading || isLoading && pages.length == 0) || !parsedSearchParams) {
     return (
-      <div className="skeleton min-h-[500px]">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 sm:gap-4">
-          {Array.from({ length: 12 }).map((skeleton: any, index) => {
-            return (
-              <ContentLoader
-                key={`content-loader-card-list-${index}`}
-                speed={2}
-                width={417}
-                height={126}
-                viewBox="0 0 417 126"
-                backgroundColor="#ededed"
-                foregroundColor="#e0e0e0"
-                // {...props}
-              >
-                <rect x="55" y="12" rx="0" ry="0" width="220" height="16" />
-                <rect x="55" y="53" rx="0" ry="0" width="220" height="14" />
-                <rect x="55" y="92" rx="0" ry="0" width="220" height="16" />
-                <circle cx="355" cy="62" r="50" />
-              </ContentLoader>
-            );
-          })}
-        </div>
-      </div>
+      <CardSkeleton/>
     );
   }
 
@@ -171,7 +162,7 @@ export const CardsList = ({ paths, unit, country }: CardsListType) => {
                     </div>
                     <div className="flex justify-center content-center">
                       <FolderIcon className="w-4 ml-1 text-gray-400" />
-                      <span>{page?.category?.name}</span>
+                      <Link href={categoryPathGenerator(country.code, unit.slug, page.category.slug)}><span>{page?.category?.name}</span></Link>
                     </div>
                   </div>
                 </div>
