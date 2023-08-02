@@ -1,7 +1,7 @@
 "use client";
 
 import { StarIcon } from "@heroicons/react/24/solid";
-import { CircleFlag } from "react-circle-flags";
+import { CircleFlag } from "next-circle-flags";
 import Rating from "react-rating";
 import Image from "next/image";
 import Link from "next/link";
@@ -32,7 +32,7 @@ type ParsedSearchParamsType = {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const CardsList = ({category, country }: CardsListType) => {
+export const CardsList = ({ category, country }: CardsListType) => {
   const [parsedSearchParams, setParsedSearchParams] =
     useState<ParsedSearchParamsType>({});
   const searchParams = useSearchParams();
@@ -77,11 +77,11 @@ export const CardsList = ({category, country }: CardsListType) => {
 
 
   useEffect(() => {
-    if(data){
-      if(firstLoading)
+    if (data) {
+      if (firstLoading)
         setFirstLoading(false)
     }
-  },[data])
+  }, [data])
 
   useEffect(() => {
     if (!data?.items) return;
@@ -97,7 +97,7 @@ export const CardsList = ({category, country }: CardsListType) => {
 
   if ((firstLoading || isLoading && pages.length == 0) || !parsedSearchParams) {
     return (
-      <CardSkeleton/>
+      <CardSkeleton />
     );
   }
 
@@ -155,6 +155,8 @@ export const CardsList = ({category, country }: CardsListType) => {
                   <div className="flex w-full card-tools mb-1 text-sm text-gray-700">
                     <div className="flex ml-5">
                       <CircleFlag
+                        width={50}
+                        height={50}
                         countryCode={page?.country?.code}
                         className="w-4 ml-2"
                         title={page?.country?.name}

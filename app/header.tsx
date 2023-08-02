@@ -8,7 +8,7 @@ import { storeType } from "@/store/store";
 import { countryCodeList } from "@/utils/countryCodeList";
 import { useParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { CircleFlag } from "react-circle-flags";
+import { CircleFlag } from "next-circle-flags";
 import { useSelector } from "react-redux";
 
 
