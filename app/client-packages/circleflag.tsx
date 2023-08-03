@@ -1,3 +1,3 @@
 "use client"
-import { CircleFlag } from "react-circle-flags";
+import { CircleFlag } from "next-circle-flags";
 export default CircleFlag

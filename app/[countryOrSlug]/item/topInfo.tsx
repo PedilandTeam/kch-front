@@ -47,6 +47,8 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
             </div>
             <div className="item-location flex justify-center sm:justify-start mb-6 sm:mb-3 text-gray-600">
               <CircleFlag
+                width={1}
+                height={1}
                 countryCode={pageData?.country?.code}
                 className="w-5 ml-2"
                 title={COUNTRY.GERMANY}

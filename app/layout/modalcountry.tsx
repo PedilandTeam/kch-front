@@ -1,6 +1,6 @@
 "use client"
 import { COUNTRY, GENERAL, MODAL } from "@/app/text/allTexts";
-import { CircleFlag } from "react-circle-flags";
+import { CircleFlag } from "next-circle-flags";
 import Link from "next/link";
 import { CountryNamespace } from "@/types/country";
 import { useRef } from "react";
@@ -22,6 +22,8 @@ export const ModalCountry = ({ countries }: ModalCountryProps) => {
           <button className="group">
             <Link href={"/"} onClick={() => buttonRef.current?.click()}>
               <CircleFlag
+                width={100}
+                height={100}
                 countryCode="un"
                 className="grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-100 group-hover:cursor-pointer transition duration-200"
                 title={GENERAL.ALL_COUNTRIES}
@@ -42,6 +44,8 @@ export const ModalCountry = ({ countries }: ModalCountryProps) => {
                   onClick={() => buttonRef.current?.click()}
                 >
                   <CircleFlag
+                    width={100}
+                    height={100}
                     countryCode={country.code}
                     className="grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-100 group-hover:cursor-pointer transition duration-200"
                     title={country.name}

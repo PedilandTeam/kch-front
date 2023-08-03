@@ -1,7 +1,7 @@
 "use client";
 
 import { StarIcon } from "@heroicons/react/24/solid";
-import { CircleFlag } from "react-circle-flags";
+import { CircleFlag } from "next-circle-flags";
 import Rating from "react-rating";
 import Image from "next/image";
 import Link from "next/link";
@@ -154,6 +154,8 @@ export const CardsList = ({unit, country }: CardsListType) => {
                   <div className="flex w-full card-tools mb-1 text-sm text-gray-700">
                     <div className="flex ml-5">
                       <CircleFlag
+                        width={4}
+                        height={4}
                         countryCode={page?.country?.code}
                         className="w-4 ml-2"
                         title={page?.country?.name}
