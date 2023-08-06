@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -6,7 +6,7 @@ import Link from "next/link";
 export const LogoTop = () => {
   return (
     <div className="logo">
-      <Link  href="/">
+      <Link href="/">
         <Image
           src="/img/logo.svg"
           width={180}

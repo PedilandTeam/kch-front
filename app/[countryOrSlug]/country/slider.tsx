@@ -71,7 +71,9 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
             {UNITS_LIST_ARRAY.map((unit) => {
               return mostUsedCategories[unit.id].map((category) => {
                 return (
-                  <Link href={`/${currentCountry.code}/${unit.slug}/${category.slug}`}>
+                  <Link
+                    href={`/${currentCountry.code}/${unit.slug}/${category.slug}`}
+                  >
                     <button className="btn btn-sm btn-neutral font-normal text-gray-50 px-2">
                       {category.name}
                     </button>

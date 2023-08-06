@@ -6,15 +6,15 @@ import { UnitType } from "@/types/unit";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { CardsList } from "./cardsList";
 import ListFilter from "./filter/categoryListFilter";
-  
+
 type PagesListProps = {
   category: CategoryNamespace.category;
   country: Country;
-  unit: UnitType
+  unit: UnitType;
 };
 
 async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
-  let cities: CityNamespace.GET
+  let cities: CityNamespace.GET;
 
   try {
     cities = await (
@@ -22,18 +22,18 @@ async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
     ).json();
   } catch (e) {
     console.log(e);
-    throw new Error("error in get cities fetchCities")
+    throw new Error("error in get cities fetchCities");
   }
 
-  return cities
+  return cities;
 }
 
-
-export default async function CategoryList({ category, country, unit }: PagesListProps) {
-
-  const cities = await fetchCities(country.code)
-
-
+export default async function CategoryList({
+  category,
+  country,
+  unit,
+}: PagesListProps) {
+  const cities = await fetchCities(country.code);
 
   return (
     <div className="component mt-5 page-list">
@@ -53,7 +53,6 @@ export default async function CategoryList({ category, country, unit }: PagesLis
             </h1>
 
             <CardsList category={category} country={country} />
-
           </div>
         </div>
       </div>

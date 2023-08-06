@@ -6,63 +6,67 @@ import { notFound } from "next/navigation";
 import { PathGeneratorType } from "../page";
 import UnitList from "./unitList";
 
+const pathGenerator = async (
+  countryOrSlug: string,
+  unitSlug: string
+): Promise<PathGeneratorType> => {
+  const units = await (await API_ROUTES.UNITS.GET_ALL(2000)).json();
+  const currentUnit = units.find((unit: UnitType) => unit.slug == unitSlug);
+  const countryList = await (await API_ROUTES.COUNTRIES.GET_ALL(20)).json();
+  const currentCountry = countryList.find(
+    (country: CountryNamespace.GET) => country.code == countryOrSlug
+  );
 
-
-
-
-const pathGenerator = async(countryOrSlug: string, unitSlug: string): Promise<PathGeneratorType> => {
-    const units = await (await API_ROUTES.UNITS.GET_ALL(2000)).json()    
-    const currentUnit = units.find((unit: UnitType) => unit.slug == unitSlug)
-    const countryList = await(await API_ROUTES.COUNTRIES.GET_ALL(20)).json()
-    const currentCountry = countryList.find((country: CountryNamespace.GET) => country.code == countryOrSlug)
-    
-    if(!currentUnit || !currentCountry){
-        return {
-            type: null
-        }
-    }
-
+  if (!currentUnit || !currentCountry) {
     return {
-        type: "unit",
-        props:{
-            unit: currentUnit,
-            currentCountry
-        }
-    }
-}
+      type: null,
+    };
+  }
 
+  return {
+    type: "unit",
+    props: {
+      unit: currentUnit,
+      currentCountry,
+    },
+  };
+};
 
+export const generateMetadata = async ({
+  params: { countryOrSlug, unitSlug },
+}: {
+  params: { countryOrSlug: string; unitSlug: string };
+}): Promise<Metadata> => {
+  let pathInfo: PathGeneratorType;
 
-export const generateMetadata = async({params:{countryOrSlug, unitSlug}}: {params: {countryOrSlug: string, unitSlug: string}}): Promise<Metadata> => {
+  try {
+    pathInfo = await pathGenerator(countryOrSlug, unitSlug);
+  } catch (e: any) {
+    throw Error(e);
+  }
 
-    let pathInfo: PathGeneratorType
-    
-    try {
-      pathInfo = await pathGenerator(countryOrSlug, unitSlug)
-    } catch (e: any) {
-      throw Error(e)
-    }
+  return {
+    title: `لیست ${pathInfo?.props?.unit?.name} فارسی زبان | کوچا`,
+  };
+};
 
-    return {
-        title: `لیست ${pathInfo?.props?.unit?.name} فارسی زبان | کوچا`
-    }
-}
+export default async function UnitPage({
+  params: { countryOrSlug, unitSlug },
+}: {
+  params: { countryOrSlug: string; unitSlug: string };
+}) {
+  let pathInfo: PathGeneratorType;
 
+  try {
+    pathInfo = await pathGenerator(countryOrSlug, unitSlug);
+  } catch (e: any) {
+    throw Error(e);
+  }
 
-export default async function UnitPage({params:{countryOrSlug, unitSlug}}: {params: {countryOrSlug: string, unitSlug: string}}){
-
-    let pathInfo: PathGeneratorType
-
-    try {
-      pathInfo = await pathGenerator(countryOrSlug, unitSlug)
-    } catch (e: any) {
-      throw Error(e)
-    }
-  
-    if(pathInfo.type){
-        //@ts-expect-error
-        return <UnitList {...pathInfo.props}/>
-    }else{
-        notFound()
-    }
+  if (pathInfo.type) {
+    //@ts-expect-error
+    return <UnitList {...pathInfo.props} />;
+  } else {
+    notFound();
+  }
 }

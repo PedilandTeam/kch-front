@@ -4,16 +4,12 @@ import { SliderHome } from "./slider";
 import { CountryNamespace } from "@/types/country";
 import { CategoryNamespace } from "@/types/category";
 import { UnitsBanner } from "./unitsBanner";
-import { Metadata } from "next";
-
-
 
 type CountryProps = {
-  currentCountry: CountryNamespace.GET
+  currentCountry: CountryNamespace.GET;
   categories: CategoryNamespace.GET;
-}
-export default function Country({currentCountry, categories}: CountryProps) {
-
+};
+export default function Country({ currentCountry, categories }: CountryProps) {
   return (
     <div className="component page-country">
       {/** @ts-expect-error server component */}
@@ -23,7 +19,7 @@ export default function Country({currentCountry, categories}: CountryProps) {
         {/** @ts-expect-error server component */}
         <CountryStats currentCountry={currentCountry} />
         {/** @ts-expect-error server component */}
-        <CountryCategories currentCountry={currentCountry}/>
+        <CountryCategories currentCountry={currentCountry} />
       </div>
     </div>
   );

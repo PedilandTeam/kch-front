@@ -1,47 +1,49 @@
 "use client";
 
 import { CityNamespace } from "@/types/city";
-import React, {
-  memo, useEffect,
-  useRef,
-  useState
-} from "react";
-import { ParsedSearchParamsType, addToShouldBeAddType, checkHandlerType, removeFromShouldBeAddType } from "./city.filter";
+import React, { memo, useEffect, useRef, useState } from "react";
+import {
+  ParsedSearchParamsType,
+  addToShouldBeAddType,
+  checkHandlerType,
+  removeFromShouldBeAddType,
+} from "./city.filter";
 
 type CityFilterItemProps = {
   city: CityNamespace.city;
   checkHandler: checkHandlerType;
-  parsedSearchParams: ParsedSearchParamsType
-  shouldBeAdd: (number | string)[],
-  addToShouldBeAdd: addToShouldBeAddType
-  removeFromShouldBeAdd: removeFromShouldBeAddType
+  parsedSearchParams: ParsedSearchParamsType;
+  shouldBeAdd: (number | string)[];
+  addToShouldBeAdd: addToShouldBeAddType;
+  removeFromShouldBeAdd: removeFromShouldBeAddType;
 };
 
-
-function CityFilterItem({ city, shouldBeAdd, checkHandler, parsedSearchParams, addToShouldBeAdd, removeFromShouldBeAdd }: CityFilterItemProps) {
-  
-  
+function CityFilterItem({
+  city,
+  shouldBeAdd,
+  checkHandler,
+  parsedSearchParams,
+  addToShouldBeAdd,
+  removeFromShouldBeAdd,
+}: CityFilterItemProps) {
   const ref = useRef<HTMLInputElement>(null);
-  const [isChecked, setIsChecked] = useState<boolean | undefined>(false)  
+  const [isChecked, setIsChecked] = useState<boolean | undefined>(false);
 
   useEffect(() => {
-    setIsChecked(checkHandler(city.id))
-  },[shouldBeAdd])
-
+    setIsChecked(checkHandler(city.id));
+  }, [shouldBeAdd]);
 
   const inputClickHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-
-
     const currentTarget = event.currentTarget;
 
-    if(!currentTarget.checked){
-      setIsChecked(false)
-      removeFromShouldBeAdd(currentTarget.value)
-    }else{
-      setIsChecked(true)
-      addToShouldBeAdd(currentTarget.value)
+    if (!currentTarget.checked) {
+      setIsChecked(false);
+      removeFromShouldBeAdd(currentTarget.value);
+    } else {
+      setIsChecked(true);
+      addToShouldBeAdd(currentTarget.value);
     }
-  }
+  };
 
   return (
     <label

@@ -1,3 +1,4 @@
+import { _TXT } from "@/app/text";
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CountryNamespace } from "@/types/country";
@@ -41,7 +42,7 @@ export const CountryCategories = async ({
     <div className="mod-categories my-8 sm:my-16">
       <div className="mod-header pr-3 pl-3 mb-7 sm:pr-4 sm:pl-0 border-r-[4px] sm:border-r-[5px] border-pink-600">
         <h2 className="text-[20px] sm:text-[24px] font-bold">
-          دسته بندی های بروز شده:
+          {_TXT.CATEGORY.UPDATED}:
         </h2>
       </div>
       <CountryCategoriesItems

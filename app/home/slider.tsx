@@ -19,10 +19,10 @@ export const SliderMainHome = () => {
             هر کجای جهان که زندگی می‌کنید،
           </h3>
           <h2 className="text-white font-bold text-[28px] sm:text-[36px] mt-3 mx-3 sm:mx-0 drop-shadow">
-            به راحتی جامعه فـارسـی زبـان اطراف خود را پیدا کنید!
+            به راحتی مشاغل و پزشکان فـارسـی زبـان اطراف خود را پیدا کنید!
           </h2>
 
-          <Link href={"#show-countries"} scroll>
+          <Link href={"#select-country"} scroll>
             <button className="btn my-3 sm:my-5 px-3 mx-3 sm:mx-0 bg-lime-300 border-lime-300 text-lime-900 hover:bg-lime-400 hover:border-lime-400 hover:text-lime-950">
               از اینجا شروع کنید
               <CursorArrowRippleIcon className="w-7 h-7" />

@@ -7,18 +7,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { PageNamespace } from "@/types/page";
 import { useEffect, useRef, useState } from "react";
-import { usePathSeparatorType } from "@/hooks/usePathSeparator";
 import { usePages } from "@/hooks/swr/usePages";
 import { CountryNamespace } from "@/types/country";
 import { useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { useIntersectionObserver } from "react-intersection-observer-hook";
-import ContentLoader from "react-content-loader";
 import { FolderIcon } from "@heroicons/react/24/outline";
 import { CategoryNamespace } from "@/types/category";
-import { nanoid } from "nanoid";
 import CardSkeleton from "./filter/card.skeleton";
-
+import { _TXT } from "@/app/text";
 
 type CardsListType = {
   category: CategoryNamespace.category;
@@ -52,7 +49,6 @@ export const CardsList = ({ category, country }: CardsListType) => {
   const perviousPage = useRef<number>(0);
   const [pages, setPages] = useState<PageNamespace.GET[] | []>([]);
 
-
   const [ref, { entry }] = useIntersectionObserver();
   const isVisible = entry && entry.isIntersecting;
 
@@ -73,15 +69,13 @@ export const CardsList = ({ category, country }: CardsListType) => {
     category.id
   );
 
-  const [firstLoading, setFirstLoading] = useState<boolean>(true)
-
+  const [firstLoading, setFirstLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (data) {
-      if (firstLoading)
-        setFirstLoading(false)
+      if (firstLoading) setFirstLoading(false);
     }
-  }, [data])
+  }, [data]);
 
   useEffect(() => {
     if (!data?.items) return;
@@ -95,14 +89,12 @@ export const CardsList = ({ category, country }: CardsListType) => {
     setPages((old) => [...old, ...data.items]);
   }, [data]);
 
-  if ((firstLoading || isLoading && pages.length == 0) || !parsedSearchParams) {
-    return (
-      <CardSkeleton />
-    );
+  if (firstLoading || (isLoading && pages.length == 0) || !parsedSearchParams) {
+    return <CardSkeleton />;
   }
 
   if (data?.meta?.itemCount <= 0 && pages.length == 0) {
-    return <p>با فیلتر اعمال شده نتیجه ای یافت نشد</p>;
+    return <p>{_TXT.FILTER.RESAULT_NO}</p>;
   }
 
   return (

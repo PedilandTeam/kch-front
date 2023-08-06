@@ -1,4 +1,4 @@
-import { GENERAL } from "@/app/text/allTexts";
+import { _TXT } from "@/app/text";
 import {
   EyeIcon,
   FolderIcon,
@@ -60,7 +60,8 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
 
   try {
     stats = await getStats(currentCountry.code);
-  } catch (e) {getStats
+  } catch (e) {
+    getStats;
     throw new Error("Error in get stats");
   }
 
@@ -73,7 +74,7 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
           </div>
           <div className="info flex flex-wrap content-center text-pink-700 text-[18px]">
             <div className="ml-2 font-bold ">{stats.page}</div>
-            <div className="font-medium">{GENERAL.ITEM}</div>
+            <div className="font-medium">{_TXT.ITEM._}</div>
           </div>
         </div>
         <div className="item w-full sm:w-auto flex mb-4 sm:mb-0">
@@ -82,7 +83,7 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
           </div>
           <div className="info flex flex-wrap content-center text-lime-700 text-[18px]">
             <div className="ml-2 font-bold ">{stats.city}</div>
-            <div className="font-medium">{GENERAL.CITY}</div>
+            <div className="font-medium">{_TXT.CITY._}</div>
           </div>
         </div>
         <div className="item w-full sm:w-auto flex mb-4 sm:mb-0">
@@ -91,7 +92,7 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
           </div>
           <div className="info flex flex-wrap content-center text-rose-700 text-[18px]">
             <div className="ml-2 font-bold ">{stats.category}</div>
-            <div className="font-medium">{GENERAL.CATEGORY}</div>
+            <div className="font-medium">{_TXT.CATEGORY._}</div>
           </div>
         </div>
         <div className="item w-full sm:w-auto flex">
@@ -99,8 +100,10 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
             <EyeIcon className="w-9 h-9 text-sky-700" />
           </div>
           <div className="info flex flex-wrap content-center text-sky-700 text-[18px]">
-            <div className="ml-2 font-bold ">{views ?? "درحال بارگذاری"}</div>
-            <div className="font-medium">{GENERAL.VIEW}</div>
+            <div className="ml-2 font-bold ">
+              {views ?? _TXT.GENERAL.LOADING}
+            </div>
+            <div className="font-medium">{_TXT.GENERAL.VIEW}</div>
           </div>
         </div>
       </div>

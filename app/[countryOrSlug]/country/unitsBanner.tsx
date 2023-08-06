@@ -1,4 +1,4 @@
-import { MENU } from "@/app/text/allTexts";
+import { _TXT } from "@/app/text";
 import { CountryNamespace } from "@/types/country";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,7 +35,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
                 className="rounded-md group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
               <div className="info absolute bottom-0 w-full px-4 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md text-[20px] bg-gradient-to-t from-black text-white">
-                {MENU.BUSINESSES}
+                {_TXT.MENU.BUSINESSES}
               </div>
             </div>
           </Link>
@@ -51,39 +51,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
                 className="rounded-md group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
               <div className="info absolute bottom-0 w-full px-4 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md text-[20px] bg-gradient-to-t from-black text-white">
-                {MENU.DOCTORS}
-              </div>
-            </div>
-          </Link>
-        </div>
-        <div className="item group flex mb-4 sm:mb-0">
-          <Link href={`/${currentCountry.code}/freelancers`}>
-            <div className="image relative h-min overflow-hidden rounded-md">
-              <Image
-                src={"/img/modules/mod-freelancer-min.jpg"}
-                width={400}
-                height={560}
-                alt="test"
-                className="rounded-md group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
-              />
-              <div className="info absolute bottom-0 w-full px-4 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md text-[20px] bg-gradient-to-t from-black text-white">
-                {MENU.FREELANCERS}
-              </div>
-            </div>
-          </Link>
-        </div>
-        <div className="item group flex mb-4 sm:mb-0">
-          <Link href={`/${currentCountry.code}/associations`}>
-            <div className="image relative h-min overflow-hidden rounded-md">
-              <Image
-                src={"/img/modules/mod-associations-min.jpg"}
-                width={400}
-                height={560}
-                alt="test"
-                className="rounded-md group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
-              />
-              <div className="info absolute bottom-0 w-full px-4 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md text-[20px] bg-gradient-to-t from-black text-white">
-                {MENU.COMMUNITIES}
+                {_TXT.MENU.DOCTORS}
               </div>
             </div>
           </Link>
