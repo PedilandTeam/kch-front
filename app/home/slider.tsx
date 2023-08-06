@@ -1,17 +1,16 @@
-
 import { CursorArrowRippleIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 
 export const SliderMainHome = () => {
   return (
-    <div className="slider h-[520px] flex justify-center content-center mx-3 sm:mx-auto sm:max-w-[95%] relative">
+    <div className="slider h-[520px] flex justify-center content-center mx-3 sm:mx-auto relative">
       <Image
         className="rounded-xl brightness-[.50] object-cover"
-        src={"/img/slide/home-slider-04-min.jpg"}
+        src={"/images/slide/home-slider-04-min.jpg"}
         width={1700}
-        height={600}
-        alt=""
+        height={520}
+        alt="a Woman working with laptop"
       />
       <div className="max-w-[1144px] sm:m-auto absolute w-auto bottom-[15%] sm:left-0 sm:right-0 sm:w-full">
         <div>

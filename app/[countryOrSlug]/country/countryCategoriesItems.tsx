@@ -48,11 +48,10 @@ export default function CountryCategoriesItems({
               activeTab == unit.id ? "tab-active border-orange-300" : ""
             } `}
           >
-            {unit.name}
+            {unit.name} فارسی زبان
           </a>
         );
       })}
-      <div className="tabs"></div>
       <div className="content mt-6 grid sm:grid-cols-6 gap-4 mx-3 sm:mx-0">
         {recentlyUpdatedCategories[`${activeTab}`].map((category, index) => {
           return (
@@ -68,7 +67,7 @@ export default function CountryCategoriesItems({
                 className="cat-card group"
               >
                 <Image
-                  src="/img/icon/cat-restaurant.svg"
+                  src="/images/icon/cat-restaurant.svg"
                   width="34"
                   height="34"
                   alt="Restaurant Icon"

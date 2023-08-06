@@ -8,7 +8,7 @@ export const LogoTop = () => {
     <div className="logo">
       <Link href="/">
         <Image
-          src="/img/logo.svg"
+          src="/images/logo.svg"
           width={180}
           height={56}
           alt="Pediland Logo"

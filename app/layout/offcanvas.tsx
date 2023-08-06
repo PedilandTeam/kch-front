@@ -21,7 +21,7 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
         <div className="menu p-4 w-80 h-full bg-gray-50 text-base-content">
           <div className="logo mb-5 w-[180px] h-[56px] sm:w-[170px] sm:h-[50px] relative">
             <Link href="/">
-              <Image src="/img/logo.svg" fill={true} alt="Pediland Logo" />
+              <Image src="/images/logo.svg" fill={true} alt="Pediland Logo" />
             </Link>
           </div>
           <ul>
@@ -42,10 +42,7 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
               </Link>
             </li>
             <li>
-              <Link
-                href={`/about`}
-                className="p-3 text-[16px]"
-              >
+              <Link href={`/about`} className="p-3 text-[16px]">
                 {_TXT.MENU.ABOUT}
               </Link>
             </li>

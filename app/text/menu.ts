@@ -3,6 +3,6 @@ export const MENU = {
   CONTACT_US: "تماس با ما",
   CORPORATE_OPPORTUNITIES: "فرصت‌های همکاری",
   TERMS_AND_CONDITIONS: "قوانین و مقررات",
-  BUSINESSES: "مشاغل فارسی‌زبان",
-  DOCTORS: "پزشکان فارسی‌زبان",
+  BUSINESSES: "مشاغل فارسی زبان",
+  DOCTORS: "پزشکان فارسی زبان",
 };

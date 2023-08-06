@@ -111,7 +111,7 @@ export const CardsList = ({ category, country }: CardsListType) => {
                 <Link href={`/${page.slug}`}>
                   <Image
                     alt="لیست"
-                    src={"/img/list/logo/logo-placeholder.webp"}
+                    src={"/images/list/logo/logo-placeholder.webp"}
                     width={100}
                     height={100}
                     className="rounded-full m-3 ml-0 w-[100px] h-[100px]"

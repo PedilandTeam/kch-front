@@ -23,7 +23,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
           <div className="item-image mb-5 sm:mb-0">
             <Image
               alt="logo"
-              src={"/img/list/logo/logo-placeholder.webp"}
+              src={"/images/list/logo/logo-placeholder.webp"}
               width={160}
               height={160}
               className="rounded-full w-full sm:w-40 h-full sm:h-40 drop-shadow-sm"

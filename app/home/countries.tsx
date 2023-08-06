@@ -17,7 +17,7 @@ export const HomeCountries = () => {
           <div className="group relative h-min overflow-hidden">
             <Link href={"/at"}>
               <Image
-                src="/img/modules/mod-austria-min.jpg"
+                src="/images/modules/mod-austria-min.jpg"
                 width="400"
                 height="250"
                 alt=""
@@ -31,7 +31,7 @@ export const HomeCountries = () => {
           <div className="group relative h-min overflow-hidden">
             <Link href={"/fr"}>
               <Image
-                src="/img/modules/mod-france-min.jpg"
+                src="/images/modules/mod-france-min.jpg"
                 width="400"
                 height="250"
                 alt=""
@@ -45,7 +45,7 @@ export const HomeCountries = () => {
           <div className="group relative h-min overflow-hidden">
             <Link href={"/de"}>
               <Image
-                src="/img/modules/mod-germany-min.jpg"
+                src="/images/modules/mod-germany-min.jpg"
                 width="400"
                 height="250"
                 alt=""
@@ -59,7 +59,7 @@ export const HomeCountries = () => {
           <div className="group relative h-min overflow-hidden">
             <Link href={"/dk"}>
               <Image
-                src="/img/modules/mod-denmark-min.jpg"
+                src="/images/modules/mod-denmark-min.jpg"
                 width="400"
                 height="250"
                 alt=""
@@ -73,7 +73,7 @@ export const HomeCountries = () => {
           <div className="group relative h-min overflow-hidden">
             <Link href={"/uk"}>
               <Image
-                src="/img/modules/mod-england-min.jpg"
+                src="/images/modules/mod-england-min.jpg"
                 width="400"
                 height="250"
                 alt=""
@@ -87,7 +87,7 @@ export const HomeCountries = () => {
           <div className="group relative h-min overflow-hidden">
             <Link href={"/ge"}>
               <Image
-                src="/img/modules/mod-georgia-min.jpg"
+                src="/images/modules/mod-georgia-min.jpg"
                 width="400"
                 height="250"
                 alt=""
