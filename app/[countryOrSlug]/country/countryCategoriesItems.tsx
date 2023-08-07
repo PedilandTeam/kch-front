@@ -44,8 +44,8 @@ export default function CountryCategoriesItems({
           <a
             onClick={() => activeTabChangeHandler(unit.id)}
             key={`unit-${unit.id}`}
-            className={`tab tab-bordered border-b-[3px] font-medium h-[46px] text-base ${
-              activeTab == unit.id ? "tab-active border-orange-300" : ""
+            className={`tab tab-bordered border-b-[2px] font-medium h-[50px] text-[16px] ${
+              activeTab == unit.id ? "tab-active border-lime-600" : ""
             } `}
           >
             {unit.name} فارسی زبان
