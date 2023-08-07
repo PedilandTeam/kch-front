@@ -6,19 +6,13 @@ import { CategoryNamespace } from "@/types/category";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import queryString from "query-string";
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  useTransition,
-} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { removeFromShouldBeAddType } from "./city.filter";
 
 type CategoryFilterSelectedItemProps = {
-  category: CategoryNamespace.category
-  removeFromShouldBeAdd: removeFromShouldBeAddType
-}
+  category: CategoryNamespace.category;
+  removeFromShouldBeAdd: removeFromShouldBeAddType;
+};
 
 type ParsedSearchParamsType = {
   category?: string[] | string;
@@ -26,7 +20,7 @@ type ParsedSearchParamsType = {
 
 export default function CategoryFilterSelectedItem({
   category,
-  removeFromShouldBeAdd
+  removeFromShouldBeAdd,
 }: CategoryFilterSelectedItemProps) {
   const router = useRouter();
   const searchParams = useSearchParams() as unknown as URLSearchParams;
@@ -41,21 +35,18 @@ export default function CategoryFilterSelectedItem({
     );
   }, [searchParams]);
 
-
-
-  const createQueryString = useCreateQueryString()
-  const deleteQueryString = useDeleteQueryString()
-
+  const createQueryString = useCreateQueryString();
+  const deleteQueryString = useDeleteQueryString();
 
   const inputClickHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const currentTarget = event.currentTarget;
     if (!currentTarget.checked) {
-      removeFromShouldBeAdd(currentTarget.value)
+      removeFromShouldBeAdd(currentTarget.value);
       return router.replace(
         `${pathname}?${deleteQueryString("category", currentTarget.value)}`
       );
     }
-  }
+  };
 
   return (
     <label
@@ -71,11 +62,11 @@ export default function CategoryFilterSelectedItem({
         value={category.id}
         type="checkbox"
         checked={
-          parsedSearchParams.category ?
-            Array.isArray(parsedSearchParams.category)
+          parsedSearchParams.category
+            ? Array.isArray(parsedSearchParams.category)
               ? !!parsedSearchParams.category.find(
-                (param) => +param == category.id
-              )
+                  (param) => +param == category.id
+                )
               : +parsedSearchParams.category == category.id
             : false
         }

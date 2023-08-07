@@ -42,7 +42,11 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
       {Array.isArray(Images) &&
         Images.map((image, index) => {
           return (
-            <Link key={`side-info-${index}`} href={image.href || "#"} target="_blank">
+            <Link
+              key={`side-info-${index}`}
+              href={image.href || "#"}
+              target="_blank"
+            >
               <Image
                 key={image.href}
                 alt="social icon"
@@ -57,7 +61,11 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
       {Array.isArray(Icons) &&
         Icons.map((Icon, index) => {
           return (
-            <Link key={`side-info-icons-${index}`} href={Icon.href || "#"} target="_blank">
+            <Link
+              key={`side-info-icons-${index}`}
+              href={Icon.href || "#"}
+              target="_blank"
+            >
               {Icon.Component}
             </Link>
           );
@@ -139,7 +147,11 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
           />
 
           <ItemSideInfoItem
-            text={`${pageData?.address?.address} ${pageData?.city?.englishName ? pageData.city.englishName : pageData?.city?.name}`}
+            text={`${pageData?.address?.address} ${
+              pageData?.city?.englishName
+                ? pageData.city.englishName
+                : pageData?.city?.name
+            }`}
             Icons={[
               {
                 Component: (
@@ -172,7 +184,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         <div className="mb-7 flex justify-between">
           <Image
             alt="telegram"
-            src={"/img/icon/verified-badge-100.png"}
+            src={"/images/icon/verified-badge-100.png"}
             width={40}
             height={40}
             className="ml-2"

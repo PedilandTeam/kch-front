@@ -1,6 +1,6 @@
 "use client";
 
-import { GENERAL } from "@/app/text/allTexts";
+import { _TXT } from "@/app/text";
 import { FunnelIcon } from "@heroicons/react/24/solid";
 import CityFilter from "./city.filter";
 import CategoryFilter from "./category.filter";
@@ -29,7 +29,7 @@ export default function FilterMobile({
         }}
       >
         <FunnelIcon className="h-5 w-5 ml-2" />
-        <span className="font-semibold">{GENERAL.FILTERS}</span>
+        <span className="font-semibold">{_TXT.FILTER._S}</span>
       </div>
 
       <dialog id="modal_unit_filter" className="modal">
@@ -39,14 +39,17 @@ export default function FilterMobile({
         >
           <div className="filter-title flex w-full border-b-[2px] border-b-gray-200 pb-2">
             <FunnelIcon className="h-4 w-4 ml-2" />
-            <span className="font-semibold">{GENERAL.FILTERS}</span>
+            <span className="font-semibold">{_TXT.FILTER._S}</span>
           </div>
           <div className="py-4">
             <CityFilter id="mobile-cityfilter-modal" cities={cities} />
-            <CategoryFilter id="mobile-categoryfilter-modal" categories={categories} />
+            <CategoryFilter
+              id="mobile-categoryfilter-modal"
+              categories={categories}
+            />
           </div>
           <div className="modal-action">
-            <button className="btn w-full">اعمال فیلترها</button>
+            <button className="btn w-full">{_TXT.FILTER.APPLY}</button>
           </div>
         </form>
       </dialog>

@@ -1,4 +1,4 @@
-import { GENERAL } from "@text/allTexts";
+import { _TXT } from "@app/text/index";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { ItemSideInfo } from "./sideInfo";
 import { ItemTopInfo } from "./topInfo";
@@ -9,14 +9,14 @@ export type PageItemProps = {
   pageData: PageNamespace.GET;
 };
 
-// export function generateMetadata({params, searchParams}: GenerateMetadataProps): Metadata{  
+// export function generateMetadata({params, searchParams}: GenerateMetadataProps): Metadata{
 
 //   console.log(params);
 //   console.log(searchParams);
 //   return {
 //     title: `changed ${JSON.stringify(searchParams)}`
 //   }
-// } 
+// }
 
 // export const metadata: Metadata = {
 //   title: "hello"
@@ -25,11 +25,9 @@ export type PageItemProps = {
 export default function PageItem({ pageData }: PageItemProps) {
   return (
     <div className="component page-item">
-
       <div className="bg-slate-100 sm:h-[300px] mb-3 sm:mb-4">
         <ItemTopInfo pageData={pageData} />
       </div>
-
 
       <div className="container mx-auto max-w-[1144px]">
         <div className="grid grid-cols-1 sm:grid-cols-12 gap-y-4 sm:gap-4">
@@ -40,7 +38,7 @@ export default function PageItem({ pageData }: PageItemProps) {
 
             {/* Description Section */}
             <div className="item-description py-8 border-b border-gray-200">
-              <h3 className="font-bold mb-5">{GENERAL.DESCRIPTION}</h3>
+              <h3 className="font-bold mb-5">{_TXT.ITEM.DESCRIPTION}</h3>
               <p className="text-[15px] text-gray-500">
                 توضیحاتی در مورد این واحد ثبت نشده است.
               </p>
@@ -48,7 +46,7 @@ export default function PageItem({ pageData }: PageItemProps) {
 
             {/* Facilities Section */}
             <div className="item-description py-8 border-b border-gray-200">
-              <h3 className="font-bold mb-5">{GENERAL.FACILITIES}</h3>
+              <h3 className="font-bold mb-5">{_TXT.ITEM.FACILITIES}</h3>
               <p className="text-[15px] text-gray-500">
                 امکانات این واحد لیست نشده است.
               </p>
@@ -132,7 +130,7 @@ export default function PageItem({ pageData }: PageItemProps) {
 
             {/* Images Section */}
             <div className="item-description py-8 border-b border-gray-200">
-              <h3 className="font-bold mb-5">{GENERAL.IMAGES}</h3>
+              <h3 className="font-bold mb-5">{_TXT.ITEM.IMAGES}</h3>
               <p className="text-[15px] text-gray-500">
                 تصویری برای این واحد وجود ندارد.
               </p>
@@ -140,7 +138,7 @@ export default function PageItem({ pageData }: PageItemProps) {
 
             {/* Comment Section */}
             <div className="item-description py-8">
-              <h3 className="font-bold mb-5">{GENERAL.USERS_COMMENTS}</h3>
+              <h3 className="font-bold mb-5">{_TXT.ITEM.USERS_COMMENTS}</h3>
               <p className="text-[15px] text-gray-500">
                 امکان ثبت نظرات برای این واحد فعال نشده است.
               </p>
@@ -149,6 +147,5 @@ export default function PageItem({ pageData }: PageItemProps) {
         </div>
       </div>
     </div>
-
   );
 }

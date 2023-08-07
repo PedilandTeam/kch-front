@@ -13,8 +13,8 @@ import React, {
 } from "react";
 
 type CategoryFilterItemProps = {
-  category: CategoryNamespace.category
-}
+  category: CategoryNamespace.category;
+};
 
 type ParsedSearchParamsType = {
   category?: string[] | string;
@@ -105,11 +105,11 @@ export default function CategoryFilterItem({
         value={category.id}
         type="checkbox"
         checked={
-          parsedSearchParams.category ?
-            Array.isArray(parsedSearchParams.category)
+          parsedSearchParams.category
+            ? Array.isArray(parsedSearchParams.category)
               ? !!parsedSearchParams.category.find(
-                (param) => +param == category.id
-              )
+                  (param) => +param == category.id
+                )
               : +parsedSearchParams.category == category.id
             : false
         }

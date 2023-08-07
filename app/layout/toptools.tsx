@@ -23,8 +23,8 @@ export const TopTools = ({countryCode, isMainPage}: TopToolsProps) => {
           }}
         >
           <CircleFlag
-            width={50}
-            height={50}
+            width={44}
+            height={44}
             loading={"lazy"}
             // countryCode={isMainPage ? "un" : isPathHaveCountry ? countryCodeFromParams : country ? country : "un"}
             countryCode={countryCode}

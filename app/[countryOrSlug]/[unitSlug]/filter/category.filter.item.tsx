@@ -1,49 +1,52 @@
 "use client";
 
 import { CategoryNamespace } from "@/types/category";
-import React, {
-  useEffect,
-  useRef,
-  useState
-} from "react";
-import { addToShouldBeAddType, checkHandlerType, removeFromShouldBeAddType } from "./city.filter";
-
+import React, { useEffect, useRef, useState } from "react";
+import {
+  addToShouldBeAddType,
+  checkHandlerType,
+  removeFromShouldBeAddType,
+} from "./city.filter";
 
 type CategoryFilterItemProps = {
-  category: CategoryNamespace.category
+  category: CategoryNamespace.category;
   checkHandler: checkHandlerType;
-  parsedSearchParams: ParsedSearchParamsType
-  shouldBeAdd: (number | string)[],
-  addToShouldBeAdd: addToShouldBeAddType
-  removeFromShouldBeAdd: removeFromShouldBeAddType
+  parsedSearchParams: ParsedSearchParamsType;
+  shouldBeAdd: (number | string)[];
+  addToShouldBeAdd: addToShouldBeAddType;
+  removeFromShouldBeAdd: removeFromShouldBeAddType;
 };
-
 
 type ParsedSearchParamsType = {
   category?: string[] | string;
 };
 
-export default function CategoryFilterItem({ category, shouldBeAdd, checkHandler, parsedSearchParams, addToShouldBeAdd, removeFromShouldBeAdd }: CategoryFilterItemProps) {
-
+export default function CategoryFilterItem({
+  category,
+  shouldBeAdd,
+  checkHandler,
+  parsedSearchParams,
+  addToShouldBeAdd,
+  removeFromShouldBeAdd,
+}: CategoryFilterItemProps) {
   const ref = useRef<HTMLInputElement>(null);
-  const [isChecked, setIsChecked] = useState<boolean | undefined>(false)  
+  const [isChecked, setIsChecked] = useState<boolean | undefined>(false);
 
   useEffect(() => {
-    setIsChecked(checkHandler(category.id))
-  },[shouldBeAdd])
-
+    setIsChecked(checkHandler(category.id));
+  }, [shouldBeAdd]);
 
   const inputClickHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const currentTarget = event.currentTarget;
 
-    if(!currentTarget.checked){
-      setIsChecked(false)
-      removeFromShouldBeAdd(currentTarget.value)
-    }else{
-      setIsChecked(true)
-      addToShouldBeAdd(currentTarget.value)
+    if (!currentTarget.checked) {
+      setIsChecked(false);
+      removeFromShouldBeAdd(currentTarget.value);
+    } else {
+      setIsChecked(true);
+      addToShouldBeAdd(currentTarget.value);
     }
-  }
+  };
 
   return (
     <label

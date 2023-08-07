@@ -30,11 +30,11 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
   return (
     <div className="slider h-[520px] flex justify-center content-center mx-3 sm:mx-auto sm:max-w-[95%] relative">
       <Image
-        className="rounded-xl brightness-[.60] object-cover"
-        src={"/img/slide/home-slider-01-min.jpg"}
+        className="rounded-xl brightness-[.50] object-cover"
+        src={`/images/slide/home/${currentCountry.code}.webp`}
         width={1700}
-        height={600}
-        alt=""
+        height={520}
+        alt={`یک تصویر از کشور ${currentCountry.name}`}
       />
       {/* <Typewriter
             options={{
@@ -44,34 +44,41 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
             }}
       /> */}
       <div className="max-w-[1144px] sm:m-auto absolute w-auto bottom-[10%] sm:bottom-[15%] sm:left-0 sm:right-0 sm:w-full">
-        <div>
-          <h3 className="text-gray-300 bg-pink-700 bg-opacity-60 whitespace-normal p-3 sm:pt-2 sm:pb-[45px] px-3 sm:px-2 inline-flex flex-wrap text-[18px] sm:text-[21px] sm:rounded-md">
+        <div className="wrap text-center">
+          <h3 className="sm:inline-block text-gray-300 bg-pink-700 bg-opacity-70 p-3 sm:pb-[40px] px-3 sm:px-[45px] text-[18px] sm:text-[21px] leading-[30px] sm:leading-[36px] sm:rounded-lg">
             اگر در
-            <span className="text-white font-semibold mx-1">
+            <span className="text-white font-semibold mx-1 inline-block">
               {currentCountry.name}
             </span>
-            فعالیت می‌کنید و خدمات خود را به
-            <span className="text-white font-semibold mx-1">زبـان فـارسـی</span>
-            هم ارائه می‌دهید؛
+            زندگی می‌کنی و دلت میخواد
+            <br />
+            لیست کامل و بروزی از خدمات
+            <span className="text-white font-semibold inline-block mx-1">
+              فـارسـی زبـان
+            </span>
+            اطرافت داشته باشی
           </h3>
           <h2 className="text-white font-bold text-[30px] sm:text-[40px] mt-3 mx-3 sm:mx-0 sm:-mt-[36px] drop-shadow">
-            به راحتی <span className="">پـروفایل حـرفـه‌ای</span> خـودتون رو
-            بـسـازیـد!
+            بیزینس دایرکتوری کـوچـا رو مـرور کن!
           </h2>
-          <Link target={"_blank"} href={"https://t.me/koochaa_support"}>
-            <button className="btn my-3 sm:my-5 px-3 mx-3 sm:mx-0 bg-sky-500 border-sky-500 text-white hover:bg-sky-600 hover:border-sky-600">
-              همین الان پـیـام بده
+
+          <Link href={"#select-unit"} scroll>
+            <button className="btn mx-auto my-3 sm:my-5 px-3  sm:mx-0 bg-lime-300 border-lime-300 text-lime-900 hover:bg-lime-400 hover:border-lime-400 hover:text-lime-950">
+              از اینجا شروع کن
               <CursorArrowRippleIcon className="w-7 h-7" />
             </button>
           </Link>
+
           <h3 className="text-white mx-3 sm:mx-0 text-[17px] tracking-wide mb-3">
-            و یا دسته‌بندی‌های پربازدید رو مرور کنید:
+            و یا دسته‌بندی‌های پربازدید رو ببین:
           </h3>
-          <div className="flex flex-wrap gap-1 sm:gap-2 mx-3 sm:mx-0">
+          <div className="flex flex-wrap justify-center gap-1 sm:gap-2 mx-3 sm:mx-0">
             {UNITS_LIST_ARRAY.map((unit) => {
               return mostUsedCategories[unit.id].map((category) => {
                 return (
-                  <Link href={`/${currentCountry.code}/${unit.slug}/${category.slug}`}>
+                  <Link
+                    href={`/${currentCountry.code}/${unit.slug}/${category.slug}`}
+                  >
                     <button className="btn btn-sm btn-neutral font-normal text-gray-50 px-2">
                       {category.name}
                     </button>

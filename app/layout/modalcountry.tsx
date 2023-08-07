@@ -1,5 +1,5 @@
-"use client"
-import { COUNTRY, GENERAL, MODAL } from "@/app/text/allTexts";
+"use client";
+import { _TXT } from "@/app/text";
 import { CircleFlag } from "next-circle-flags";
 import Link from "next/link";
 import { CountryNamespace } from "@/types/country";
@@ -13,26 +13,27 @@ export const ModalCountry = ({ countries }: ModalCountryProps) => {
 
   return (
     <dialog id="modal_country" className="modal">
-      <form method="dialog" className="modal-box sm:max-w-[50%]">
-        <h3 className="mb-5 text-pink-800 font-medium">
-          {MODAL.COUNTRY_TITLE}:
+      <form method="dialog" className="modal-box sm:max-w-[50%] md:p-8">
+        <h3 className="mb-6 font-medium">
+          {_TXT.MODAL.COUNTRY_TITLE}
         </h3>
 
-        <div className="grid grid-cols-4 gap-5 md:grid-cols-7 md:gap-6 place-content-center mb-4 country-list">
-          <button className="group">
+        <div className="grid grid-cols-3 gap-5 md:grid-cols-7 md:gap-5 place-content-center country-list">
+          {/* <button className="group">
             <Link href={"/"} onClick={() => buttonRef.current?.click()}>
               <CircleFlag
-                width={100}
-                height={100}
+                width={80}
+                height={80}
                 countryCode="un"
-                className="grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-100 group-hover:cursor-pointer transition duration-200"
-                title={GENERAL.ALL_COUNTRIES}
+                className="opacity-50 group-hover:opacity-100 group-hover:cursor-pointer transition duration-200 mx-auto w-[54px] h-[54px] 2xl:w-[74px] 2xl:h-[74px]"
+                alt="UN Flag"
+                title={_TXT.COUNTRY.ALL}
               />
-              <p className="text-[13px]	center text-center mt-3">
-                {GENERAL.ALL_COUNTRIES}
+              <p className="text-[13px] text-center mt-3 group-hover:font-semibold transition duration-200">
+                {_TXT.COUNTRY.ALL}
               </p>
             </Link>
-          </button>
+          </button> */}
           {countries?.map((country) => {
             return (
               <button
@@ -44,10 +45,11 @@ export const ModalCountry = ({ countries }: ModalCountryProps) => {
                   onClick={() => buttonRef.current?.click()}
                 >
                   <CircleFlag
-                    width={100}
-                    height={100}
+                    width={80}
+                    height={80}
                     countryCode={country.code}
-                    className="grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-100 group-hover:cursor-pointer transition duration-200"
+                    className="opacity-40 group-hover:opacity-100 group-hover:cursor-pointer transition duration-200 mx-auto w-[54px] h-[54px] 2xl:w-[74px] 2xl:h-[74px]"
+                    alt={country.name}
                     title={country.name}
                   />
                   <p className="text-[13px] text-center mt-3 group-hover:font-semibold transition duration-200">

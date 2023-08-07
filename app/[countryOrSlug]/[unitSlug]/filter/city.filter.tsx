@@ -1,16 +1,15 @@
 "use client";
 
-import { GENERAL } from "@/app/text/allTexts";
+import { _TXT } from "@/app/text";
 import { CityNamespace } from "@/types/city";
 import CityFilterItem from "./city.filter.item";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { useRouter } from "next/navigation";
 import CityFilterSelectedItem from "./city.filter.selected.item";
 import useCreateQueryString from "@/hooks/useCreateQueryString";
 import useDeleteQueryString from "@/hooks/useDeleteQueryString";
-import _ from "lodash"
 
 type CityFilterType = {
   cities: CityNamespace.city[];
@@ -28,33 +27,33 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   // const [shouldBeAdd, setShouldBeAdd] = useState<string[]>([])
   // const [shouldBeRemove, setShouldBeRemove] = useState<string[]>([])
 
-
   const searchParams = useSearchParams() as unknown as URLSearchParams;
   const pathname = usePathname();
-  const [parsedSearchParams, setParsedSearchParams] = useState<ParsedSearchParamsType>({});
-  const [isParsedSearchParamsAdded, setIsParsedSearchParamsAdded] = useState(false)
+  const [parsedSearchParams, setParsedSearchParams] =
+    useState<ParsedSearchParamsType>({});
+  const [isParsedSearchParamsAdded, setIsParsedSearchParamsAdded] =
+    useState(false);
 
-  const [shouldBeAdd, setShouldBeAdd] = useState<(string)[]>([])
+  const [shouldBeAdd, setShouldBeAdd] = useState<string[]>([]);
 
   const addToShouldBeAdd: addToShouldBeAddType = (item: string) => {
-    if(shouldBeAdd.includes(item))
-      return;
-    setShouldBeAdd(old => [...old, item])
-  }
+    if (shouldBeAdd.includes(item)) return;
+    setShouldBeAdd((old) => [...old, item]);
+  };
 
   const removeFromShouldBeAdd: removeFromShouldBeAddType = (item: string) => {
-    setShouldBeAdd(old => {     
-      const index = old.indexOf(item)
-      if(index != -1){
-        old.splice(index, 1)
+    setShouldBeAdd((old) => {
+      const index = old.indexOf(item);
+      if (index != -1) {
+        old.splice(index, 1);
       }
       return [...old];
-    })
-  }
+    });
+  };
 
   const clearShouldBeAdd = () => {
-    setShouldBeAdd([])
-  }
+    setShouldBeAdd([]);
+  };
 
   useEffect(() => {
     setParsedSearchParams(
@@ -63,47 +62,37 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   }, [searchParams]);
 
   useEffect(() => {
-    if(isParsedSearchParamsAdded)return;
-    if(!parsedSearchParams?.city)return;
-    if(Array.isArray(parsedSearchParams.city)){
-      parsedSearchParams.city.forEach(cityId => {
-        addToShouldBeAdd(cityId)
-      })
-    }else{
-      addToShouldBeAdd(parsedSearchParams.city)
+    if (isParsedSearchParamsAdded) return;
+    if (!parsedSearchParams?.city) return;
+    if (Array.isArray(parsedSearchParams.city)) {
+      parsedSearchParams.city.forEach((cityId) => {
+        addToShouldBeAdd(cityId);
+      });
+    } else {
+      addToShouldBeAdd(parsedSearchParams.city);
     }
-    setIsParsedSearchParamsAdded(true)
-  },[parsedSearchParams])
-  
-  const createQueryString = useCreateQueryString()
-  const deleteQueryString = useDeleteQueryString()
+    setIsParsedSearchParamsAdded(true);
+  }, [parsedSearchParams]);
+
+  const createQueryString = useCreateQueryString();
+  const deleteQueryString = useDeleteQueryString();
 
   const applyFilters = () => {
     router.replace(`${pathname}?${createQueryString("city", shouldBeAdd)}`);
-  }
+  };
 
   const deleteAllCityHandler = () => {
-
-    clearShouldBeAdd()
+    clearShouldBeAdd();
   };
 
   const checkHandler: checkHandlerType = (value: string | number) => {
-    const hasItem = shouldBeAdd.find(n => n == value)
-    if(hasItem){
-      return true
-    }else{
-      return false
+    const hasItem = shouldBeAdd.find((n) => n == value);
+    if (hasItem) {
+      return true;
+    } else {
+      return false;
     }
-  }
-  
-  
-
-
-
-
-
-
-
+  };
 
   /**
    * find cities that have includes() searched string
@@ -118,10 +107,6 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     );
     setModifiedCities(find);
   };
-
-
-
-
 
   /**
    * auto focusing on search input
@@ -141,15 +126,10 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     arrayFormat: "comma",
   }).city;
 
-
-
   return (
     <div className="filter-section mb-4">
-      <label
-        htmlFor={id}
-        className="btn btn-primary btn-outline w-full"
-      >
-        {GENERAL.CITY_SELECT}
+      <label htmlFor={id} className="btn btn-primary btn-outline w-full">
+        {_TXT.CITY.SELECT}
       </label>
       <div className="px-3 mt-3">
         {Array.isArray(citiesInQuery) ? (
@@ -158,11 +138,17 @@ export default function CityFilter({ cities, id }: CityFilterType) {
             if (!cityId) return;
             const city = cities.find((city) => city.id == +cityId);
             if (!city) return;
-            return <CityFilterSelectedItem removeFromShouldBeAdd={removeFromShouldBeAdd} key={`city-selected-item-xz-${cityId}`} city={city} />;
+            return (
+              <CityFilterSelectedItem
+                removeFromShouldBeAdd={removeFromShouldBeAdd}
+                key={`city-selected-item-xz-${cityId}`}
+                city={city}
+              />
+            );
           })
         ) : citiesInQuery &&
           cities.find((city) => city.id == +citiesInQuery) ? (
-          <CityFilterSelectedItem 
+          <CityFilterSelectedItem
             removeFromShouldBeAdd={removeFromShouldBeAdd}
             key={`city-selected-item-xz-single-`}
             city={cities.find((city) => city.id == +citiesInQuery)!}
@@ -176,21 +162,21 @@ export default function CityFilter({ cities, id }: CityFilterType) {
         <div className=" modal-box p-0 max-h-[550px] ">
           <div className="pt-5 pb-3 px-8 bg-white w-full">
             <h3 className="flex justify-between content-center text-lg font-bold">
-              {GENERAL.CITY_SELECT}
+              {_TXT.CITY.SELECT}
               {citiesInQuery ? (
                 <span
                   onClick={deleteAllCityHandler}
                   className="cursor-pointer text-[15px] font-normal text-pink-800"
                 >
-                  {GENERAL.DELETE_ALL}
+                  {_TXT.GENERAL.DELETE_ALL}
                 </span>
               ) : null}
             </h3>
-            <p className="py-3">شهر یا شهرهای مورد نظر خود را انتخاب نمایید.</p>
+            <p className="py-3">{_TXT.CITY.SELECT_MULTI}</p>
             <input
               onChange={citySearchHandler}
               type="text"
-              placeholder="جستجو در لیست شهرها"
+              placeholder={_TXT.CITY.SEARCH_IN_LIST}
               className="input input-bordered w-full"
               autoFocus={true}
               ref={inputRef}
@@ -198,13 +184,27 @@ export default function CityFilter({ cities, id }: CityFilterType) {
           </div>
           <div className="px-8 h-[16rem] overflow-y-scroll">
             {modifiedCities?.map((city: CityNamespace.city) => {
-              return <CityFilterItem key={`modified-city-filter-${city.name}`} removeFromShouldBeAdd={removeFromShouldBeAdd} parsedSearchParams={parsedSearchParams} checkHandler={checkHandler} shouldBeAdd={shouldBeAdd} addToShouldBeAdd={addToShouldBeAdd}   city={city} />;
+              return (
+                <CityFilterItem
+                  key={`modified-city-filter-${city.name}`}
+                  removeFromShouldBeAdd={removeFromShouldBeAdd}
+                  parsedSearchParams={parsedSearchParams}
+                  checkHandler={checkHandler}
+                  shouldBeAdd={shouldBeAdd}
+                  addToShouldBeAdd={addToShouldBeAdd}
+                  city={city}
+                />
+              );
             })}
           </div>
           <div className="flex">
             <div className="modal-action box-border w-full pt-3 pb-5 px-8 mt-3 flex justify-between items-center ">
-              <label onClick={applyFilters} htmlFor={id} className="btn btn-primary w-full">
-                {GENERAL.CONFIRM}
+              <label
+                onClick={applyFilters}
+                htmlFor={id}
+                className="btn btn-primary w-full"
+              >
+                {_TXT.GENERAL.CONFIRM}
               </label>
             </div>
           </div>

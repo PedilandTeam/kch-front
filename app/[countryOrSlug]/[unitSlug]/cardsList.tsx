@@ -1,24 +1,22 @@
 "use client";
 
-import { StarIcon } from "@heroicons/react/24/solid";
 import { CircleFlag } from "next-circle-flags";
+import { _TXT } from "@/app/text";
+import { FolderIcon } from "@heroicons/react/24/outline";
+import { StarIcon } from "@heroicons/react/24/solid";
 import Rating from "react-rating";
 import Image from "next/image";
 import Link from "next/link";
 import { PageNamespace } from "@/types/page";
 import { useEffect, useRef, useState } from "react";
-import { usePathSeparatorType } from "@/hooks/usePathSeparator";
 import { usePages } from "@/hooks/swr/usePages";
 import { UnitType } from "@/types/unit";
 import { CountryNamespace } from "@/types/country";
 import { useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { useIntersectionObserver } from "react-intersection-observer-hook";
-import ContentLoader from "react-content-loader";
-import { FolderIcon } from "@heroicons/react/24/outline";
 import CardSkeleton from "./[categorySlug]/categoryList/filter/card.skeleton";
 import categoryPathGenerator from "@/utils/categoryPathGenerator";
-
 
 type CardsListType = {
   unit: UnitType;
@@ -32,7 +30,7 @@ type ParsedSearchParamsType = {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const CardsList = ({unit, country }: CardsListType) => {
+export const CardsList = ({ unit, country }: CardsListType) => {
   const [parsedSearchParams, setParsedSearchParams] =
     useState<ParsedSearchParamsType>({});
   const searchParams = useSearchParams();
@@ -72,15 +70,13 @@ export const CardsList = ({unit, country }: CardsListType) => {
     parsedSearchParams.category
   );
 
-  const [firstLoading, setFirstLoading] = useState<boolean>(true)
-
+  const [firstLoading, setFirstLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (data) {
-      if (firstLoading)
-        setFirstLoading(false)
+      if (firstLoading) setFirstLoading(false);
     }
-  }, [data])
+  }, [data]);
 
   useEffect(() => {
     if (!data?.items) return;
@@ -94,14 +90,12 @@ export const CardsList = ({unit, country }: CardsListType) => {
     setPages((old) => [...old, ...data.items]);
   }, [data]);
 
-  if ((firstLoading || isLoading && pages.length == 0) || !parsedSearchParams) {
-    return (
-      <CardSkeleton/>
-    );
+  if (firstLoading || (isLoading && pages.length == 0) || !parsedSearchParams) {
+    return <CardSkeleton />;
   }
 
   if (data?.meta?.itemCount <= 0 && pages.length == 0) {
-    return <p>با فیلتر اعمال شده نتیجه ای یافت نشد</p>;
+    return <p>{_TXT.FILTER.RESAULT_NO}</p>;
   }
 
   return (
@@ -117,8 +111,8 @@ export const CardsList = ({unit, country }: CardsListType) => {
               <div className="flex">
                 <Link href={`/${page.slug}`}>
                   <Image
-                    alt="لیست"
-                    src={"/img/list/logo/logo-placeholder.webp"}
+                    alt=""
+                    src={"/images/list/logo/logo-placeholder.webp"}
                     width={100}
                     height={100}
                     className="rounded-full m-3 ml-0 w-[100px] h-[100px]"
@@ -164,7 +158,15 @@ export const CardsList = ({unit, country }: CardsListType) => {
                     </div>
                     <div className="flex justify-center content-center">
                       <FolderIcon className="w-4 ml-1 text-gray-400" />
-                      <Link href={categoryPathGenerator(country.code, unit.slug, page.category.slug)}><span>{page?.category?.name}</span></Link>
+                      <Link
+                        href={categoryPathGenerator(
+                          country.code,
+                          unit.slug,
+                          page.category.slug
+                        )}
+                      >
+                        <span>{page?.category?.name}</span>
+                      </Link>
                     </div>
                   </div>
                 </div>

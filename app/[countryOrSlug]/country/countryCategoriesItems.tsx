@@ -11,68 +11,76 @@ type CountryCategoriesItemsProps = {
   currentCountry: CountryNamespace.GET;
 };
 
+export default function CountryCategoriesItems({
+  recentlyUpdatedCategories,
+  currentCountry,
+}: CountryCategoriesItemsProps) {
+  const units = UNITS_LIST_ARRAY;
 
-export default function CountryCategoriesItems({ recentlyUpdatedCategories, currentCountry }: CountryCategoriesItemsProps) {
-
-  const units = UNITS_LIST_ARRAY
-
-  const [activeTab, setActive] = useState<number>(1)
+  const [activeTab, setActive] = useState<number>(1);
   const activeTabChangeHandler = (value: number) => {
-    setActive(value)
-  }
+    setActive(value);
+  };
 
   type emptyUnitsType = {
-    unit: string,
-    childs: number
-  }
+    unit: string;
+    childs: number;
+  };
   const unitFinder = (unitId: number) => {
-    const unit = UNITS_LIST_ARRAY.find(unit => unit.id == unitId)
+    const unit = UNITS_LIST_ARRAY.find((unit) => unit.id == unitId);
     if (unit?.categories) {
-      unit.categories = []
+      unit.categories = [];
     }
-    return unit
-  }
+    return unit;
+  };
 
   return (
     <>
-      {
-        units.map(unit => {
-          if (recentlyUpdatedCategories[`${unit.id}`].length == 0) {
-            return;
-          }
-          return (
-            <a onClick={() => activeTabChangeHandler(unit.id)} key={`unit-${unit.id}`} className={`tab tab-bordered border-b-[3px] font-medium h-[46px] text-base ${activeTab == unit.id ? "tab-active border-orange-300" : ""} `}>
-              {unit.name}
-            </a>
-          )
-
-        })
-      }
-      <div className="tabs">
-      </div>
-      <div className="content mt-6 grid sm:grid-cols-6 gap-4 mx-3 sm:mx-0">
-        {
-          recentlyUpdatedCategories[`${activeTab}`].map((category, index) => {
-            return (
-              <Link scroll key={"country-category" + category.id} href={`/${currentCountry.code}/${unitFinder(category.unitId)?.slug}/${category.slug}`}>
-                <div key={`country-category-list-${category.id}${index}`} className="cat-card group">
-                  <Image
-                    src="/img/icon/cat-restaurant.svg"
-                    width="34"
-                    height="34"
-                    alt="Restaurant Icon"
-                  />
-                  <div className="w-full text-center my-3">{category.name}</div>
-                  <span className="tracking-[1px] text-sm group-hover:font-semibold">
-                    {category.pageCount}
-                  </span>
-                </div>
-              </Link>
-            )
-          })
+      {units.map((unit) => {
+        if (recentlyUpdatedCategories[`${unit.id}`].length == 0) {
+          return;
         }
+        return (
+          <a
+            onClick={() => activeTabChangeHandler(unit.id)}
+            key={`unit-${unit.id}`}
+            className={`tab tab-bordered border-b-[3px] font-medium h-[46px] text-base ${
+              activeTab == unit.id ? "tab-active border-orange-300" : ""
+            } `}
+          >
+            {unit.name} فارسی زبان
+          </a>
+        );
+      })}
+      <div className="content mt-6 grid sm:grid-cols-6 gap-4 mx-3 sm:mx-0">
+        {recentlyUpdatedCategories[`${activeTab}`].map((category, index) => {
+          return (
+            <Link
+              scroll
+              key={"country-category" + category.id}
+              href={`/${currentCountry.code}/${
+                unitFinder(category.unitId)?.slug
+              }/${category.slug}`}
+            >
+              <div
+                key={`country-category-list-${category.id}${index}`}
+                className="cat-card group"
+              >
+                <Image
+                  src="/images/icon/cat-restaurant.svg"
+                  width="34"
+                  height="34"
+                  alt="Restaurant Icon"
+                />
+                <div className="w-full text-center my-3">{category.name}</div>
+                <span className="tracking-[1px] text-sm group-hover:font-semibold">
+                  {category.pageCount}
+                </span>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </>
-  )
-
+  );
 }

@@ -1,5 +1,5 @@
 "use client";
-import { COUNTRY } from "@/app/text/allTexts";
+import { _TXT } from "@/app/text";
 import { ShareIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
@@ -23,7 +23,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
           <div className="item-image mb-5 sm:mb-0">
             <Image
               alt="logo"
-              src={"/img/list/logo/logo-placeholder.webp"}
+              src={"/images/list/logo/logo-placeholder.webp"}
               width={160}
               height={160}
               className="rounded-full w-full sm:w-40 h-full sm:h-40 drop-shadow-sm"
@@ -51,7 +51,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                 height={1}
                 countryCode={pageData?.country?.code}
                 className="w-5 ml-2"
-                title={COUNTRY.GERMANY}
+                title={_TXT.COUNTRY.GERMANY}
               />
               <span>{pageData?.country?.name}</span>
               <span className="ml-1">،</span>

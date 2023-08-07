@@ -1,15 +1,8 @@
-import { usePages } from "@/hooks/swr/usePages";
-import {
-  usePathSeparator,
-  usePathSeparatorType,
-} from "@/hooks/usePathSeparator";
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CityNamespace } from "@/types/city";
 import { Country } from "@/types/page";
 import { UnitType } from "@/types/unit";
-import { useParams, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { CardsList } from "./cardsList";
 import ListFilter from "./filter/listFilter";
@@ -59,7 +52,6 @@ export default async function UntiList({
             <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">
               لیست {unit?.name} فارسی زبان
             </h1>
-
             <CardsList unit={unit} country={currentCountry} />
           </div>
         </div>
