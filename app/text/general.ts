@@ -34,4 +34,5 @@ export const GENERAL = {
   WORKING_HOURS: "ساعات کاری",
   PERSIAN: "فارسی زبان",
   LOADING: "درحال بارگذاری",
+  LOAD_MORE: "مشاهده موارد بیشتر",
 };

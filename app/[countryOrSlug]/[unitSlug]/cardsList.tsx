@@ -2,7 +2,7 @@
 
 import { CircleFlag } from "next-circle-flags";
 import { _TXT } from "@/app/text";
-import { FolderIcon } from "@heroicons/react/24/outline";
+import { FolderIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
 import Rating from "react-rating";
 import Image from "next/image";
@@ -189,6 +189,11 @@ export const CardsList = ({ unit, country }: CardsListType) => {
           : null
 
       } */}
+      </div>
+      <div className="load-more mt-10 text-center">
+        <button className="btn btn-circle p-2">
+          <PlusIcon className="w-[24px] h-[24px]" />
+        </button>
       </div>
     </div>
   );

@@ -28,8 +28,8 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="fa" dir="rtl">
-      <body className=" min-h-screen flex flex-col">
+    <html lang="fa" dir="rtl" className="scroll-smooth">
+      <body className="min-h-screen pt-[77px]">
         <Providers>
           <Fonts />
           <Header>

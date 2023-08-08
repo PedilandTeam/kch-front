@@ -48,7 +48,7 @@
     "components/elements/badgenew.jsx",
     "components/elements/badgenew.jsx",
     ".next/types/**/*.ts"
-  ],
+, "app/layout/backtotop.jsx"  ],
   "exclude": [
     "node_modules"
   ]
