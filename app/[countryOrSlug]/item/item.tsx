@@ -2,9 +2,7 @@ import { _TXT } from "@app/text/index";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { ItemSideInfo } from "./sideInfo";
 import { ItemTopInfo } from "./topInfo";
-import React, { useEffect } from "react";
 import { PageNamespace } from "@/types/page";
-import { Metadata } from "next";
 export type PageItemProps = {
   pageData: PageNamespace.GET;
 };
@@ -48,7 +46,7 @@ export default function PageItem({ pageData }: PageItemProps) {
             <div className="item-description py-8 border-b border-gray-200">
               <h3 className="font-bold mb-5">{_TXT.ITEM.FACILITIES}</h3>
               <p className="text-[15px] text-gray-500">
-                امکانات این واحد لیست نشده است.
+                {_TXT.ITEM.FACILITIES_NO}
               </p>
             </div>
 
@@ -129,18 +127,16 @@ export default function PageItem({ pageData }: PageItemProps) {
               </div> */}
 
             {/* Images Section */}
-            <div className="item-description py-8 border-b border-gray-200">
+            {/* <div className="item-description py-8 border-b border-gray-200">
               <h3 className="font-bold mb-5">{_TXT.ITEM.IMAGES}</h3>
-              <p className="text-[15px] text-gray-500">
-                تصویری برای این واحد وجود ندارد.
-              </p>
-            </div>
+              <p className="text-[15px] text-gray-500">{_TXT.ITEM.IMAGES_NO}</p>
+            </div> */}
 
             {/* Comment Section */}
             <div className="item-description py-8">
               <h3 className="font-bold mb-5">{_TXT.ITEM.USERS_COMMENTS}</h3>
               <p className="text-[15px] text-gray-500">
-                امکان ثبت نظرات برای این واحد فعال نشده است.
+                {_TXT.ITEM.USERS_COMMENTS_DISABLE}
               </p>
             </div>
           </div>

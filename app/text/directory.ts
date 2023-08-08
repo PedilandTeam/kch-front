@@ -15,8 +15,11 @@ export const ITEM = {
   _: "آیتم",
   DESCRIPTION: "توضیحات",
   FACILITIES: "امکانات",
+  FACILITIES_NO: "امکانات این واحد لیست نشده است.",
   IMAGES: "تصاویر",
+  IMAGES_NO: "تصویری برای این واحد وجود ندارد.",
   USERS_COMMENTS: "نظرات کاربران",
+  USERS_COMMENTS_DISABLE: "امکان ثبت نظرات برای این واحد فعال نشده است.",
 };
 
 export const FILTER = {

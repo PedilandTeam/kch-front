@@ -24,16 +24,16 @@ export const Footer = () => {
     <div className="pt-10 pb-5 mt-5 sm:mt-10 bg-blue-950 text-gray-50">
       <footer className="footer footer-center container mx-auto max-w-[1144px]">
         <div className="grid grid-flow-col gap-3 sm:gap-4">
-          <Link href={"#"} className="link link-hover">
+          <Link href={"/about"} className="link link-hover">
             {_TXT.MENU.ABOUT}
           </Link>
           {/* <Link href={"#"} className="link link-hover">
             {GENERAL.CORPORATE_OPPORTUNITIES}
           </Link> */}
-          <Link href={"#"} className="link link-hover">
+          <Link href={"/policies"} className="link link-hover">
             {_TXT.MENU.TERMS_AND_CONDITIONS}
           </Link>
-          <Link href={"#"} className="link link-hover">
+          <Link href={"contact"} className="link link-hover">
             {_TXT.MENU.CONTACT_US}
           </Link>
         </div>
