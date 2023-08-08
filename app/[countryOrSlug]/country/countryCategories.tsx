@@ -41,9 +41,9 @@ export const CountryCategories = async ({
   return (
     <div className="container mx-auto max-w-[1144px]">
       <div className="mod-categories my-8 sm:my-16">
-        <div className="mod-header pr-3 pl-3 mb-7 sm:pr-4 sm:pl-0 border-r-[4px] sm:border-r-[5px] border-pink-600">
-          <h2 className="text-[20px] sm:text-[24px] font-bold">
-            {_TXT.CATEGORY.UPDATED}:
+        <div className="mod-header text-center">
+          <h2 className="text-[20px] inline-block sm:text-[24px] font-semibold mb-7">
+            {_TXT.CATEGORY.POPULAR}
           </h2>
         </div>
         <CountryCategoriesItems

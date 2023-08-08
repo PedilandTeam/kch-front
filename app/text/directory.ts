@@ -7,7 +7,8 @@ export const CATEGORY = {
   DRIVING_SCHOOL: "آموزشگاه رانندگی",
   ZANAN: "متخصص زنان‌و‌زایمان",
   GOOSH: "متخصص گوش و حلق و بینی",
-  UPDATED: "دسته بندی های بروز شده",
+  UPDATED: " بروزترین دسته‌بندی‌ها",
+  POPULAR: "محبوب‌ترین دسته‌بندی‌ها",
 };
 
 export const ITEM = {
