@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 export const Footer = () => {
   useEffect(() => {
-    if (!window) return;
+    if (typeof window == "undefined") return;
     var toTopDiv = document.getElementById("toTopDiv");
     if (!toTopDiv) return;
     window.addEventListener("scroll", function () {
@@ -18,7 +18,7 @@ export const Footer = () => {
         toTopDiv!.classList.add("hidden");
       }
     });
-  }, [window]);
+  }, []);
 
   return (
     <div className="pt-10 pb-5 mt-5 sm:mt-10 bg-blue-950 text-gray-50">

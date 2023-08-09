@@ -71,6 +71,7 @@ export const Header = ({ children }: HeaderProps) => {
   const [prevScrollY, setPrevScrollY] = useState(0);
 
   const handleScroll = () => {
+    if (typeof window == "undefined") return;
     const currentScrollY = window.scrollY;
     setScrollingDown(currentScrollY > prevScrollY);
     setIsTop(currentScrollY === 0); // Check if scroll is at the top
@@ -78,6 +79,7 @@ export const Header = ({ children }: HeaderProps) => {
   };
 
   useEffect(() => {
+    if (typeof window == "undefined") return;
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
