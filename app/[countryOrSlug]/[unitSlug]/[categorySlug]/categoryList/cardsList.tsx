@@ -12,7 +12,7 @@ import { CountryNamespace } from "@/types/country";
 import { useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { useIntersectionObserver } from "react-intersection-observer-hook";
-import { FolderIcon } from "@heroicons/react/24/outline";
+import { FolderIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { CategoryNamespace } from "@/types/category";
 import CardSkeleton from "./filter/card.skeleton";
 import { _TXT } from "@/app/text";
@@ -178,6 +178,11 @@ export const CardsList = ({ category, country }: CardsListType) => {
         </div>
           : null
       } */}
+      </div>
+      <div className="load-more mt-10 text-center">
+        <button className="btn btn-circle p-2">
+          <PlusIcon className="w-[24px] h-[24px]" />
+        </button>
       </div>
     </div>
   );

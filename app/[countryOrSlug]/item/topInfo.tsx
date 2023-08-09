@@ -38,6 +38,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
               <Rating
                 initialRating={0}
                 direction={"rtl"}
+                readonly={true}
                 emptySymbol={<StarIcon className="h-8 w-8 text-gray-300" />}
                 fullSymbol={<StarIcon className="h-8 w-8 text-yellow-400" />}
               />
