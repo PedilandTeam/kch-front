@@ -15,40 +15,6 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-// export async function generateMetadata({ params, searchParams }: Props) {
-
-//   let pathInfo: PathGeneratorType
-
-//   try {
-//     pathInfo = await pathGenerator(params.path)
-//   } catch (e: any) {
-//     throw Error(e)
-//   }
-
-//   switch (pathInfo.type) {
-//     case "country":
-//       return {
-//         title: `کوچا | جامعه ایرانیان مهاجر مقیم ${pathInfo?.props?.currentCountry?.name}`
-//       }
-//     case "unit":
-//       return {
-//         title: `لیست ${pathInfo?.props?.unit?.name} فارسی زبان | کوچا`
-//       }
-//     case "category":
-//       return {
-//         title: `لیست ${pathInfo?.props?.category?.name} فارسی زبان | کوچا`
-//       }
-//     case "item":
-//       return {
-//         title: `${pathInfo?.props?.pageData?.title} | کوچا`
-//       }
-
-//     default:
-//       "کوچا | یافت نشد"
-
-//   }
-// }
-
 const pathGenerator = async (
   countryOrSlug: string
 ): Promise<PathGeneratorType> => {
@@ -76,7 +42,6 @@ const pathGenerator = async (
           categories,
         },
       };
-      // return <Country currentCountry={currentCountry} categories={categories} />;
     }
 
     //show single page
@@ -94,7 +59,6 @@ const pathGenerator = async (
             pageData: pageData.items,
           },
         };
-        // return <PageItem pageData={pageData.items} />;
       } catch (e: any) {
         return NOT_FOUND;
       }
@@ -152,6 +116,11 @@ export default async function CenterPage({
       return <Country {...pathInfo.props} />;
 
     case "item":
+      const status = pathInfo.props?.pageData?.status
+      
+      if(!status){
+        return notFound()
+      }
       return <PageItem {...pathInfo.props} />;
 
     default:
