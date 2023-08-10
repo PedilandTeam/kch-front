@@ -60,6 +60,7 @@ export const generateMetadata = async ({
   };
 };
 
+
 export default async function CategoryPage({
   params: { countryOrSlug, unitSlug, categorySlug },
 }: {
