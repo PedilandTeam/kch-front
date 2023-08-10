@@ -102,9 +102,6 @@ export const CardsList = ({ unit, country }: CardsListType) => {
     <div className="list-card min-h-[500px]">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 sm:gap-4">
         {pages.map((page: PageNamespace.GET, index: number) => {
-
-          if(!page.status)return;
-
           return (
             <div
               ref={index == pages.length - 1 ? ref : null}

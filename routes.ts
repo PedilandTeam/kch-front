@@ -1,3 +1,4 @@
+import { koochaaConfig } from "./koochaa.config";
 
 const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL
 const API_KEY = process.env.API_KEY!
@@ -18,13 +19,18 @@ const baseFetch = async ({path, method = "GET", params, body, headers}: requestT
         let queryParametrs: URLSearchParams | undefined
         
         if(params){
-            queryParametrs = new URLSearchParams()  
+            queryParametrs = new URLSearchParams() 
+            if(!koochaaConfig.modules.status.enabled){
+                queryParametrs.append("status", "0")
+            }
             for(const param in params){
                 queryParametrs.append(param, `${params[param]}`)
             }
         }
         
         let url = queryParametrs ? `${API_URL}/${path}?${queryParametrs}` : `${API_URL}/${path}`
+        console.log(url);
+        
         fetch(url, {body, cache, next: { ...revalidate && {revalidate} }, method,headers})    
             
             .then((res: Response) => {

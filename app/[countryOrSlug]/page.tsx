@@ -117,6 +117,7 @@ export default async function CenterPage({
 
     case "item":
       const status = pathInfo.props?.pageData?.status
+      const pageData = pathInfo.props?.pageData
       
       if(!status){
         return notFound()
