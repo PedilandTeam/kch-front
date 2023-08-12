@@ -1,10 +1,13 @@
+import PageHead from "./page-head";
+import TermsText from "./text";
 
 const PoliciesPage = () => {
-    return (
-      <div>
-        <h1>Policies Page</h1>
-      </div>
-    );
-  };
-  
-  export default PoliciesPage;
+  return (
+    <div className="page-wrap">
+      <PageHead />
+      <TermsText />
+    </div>
+  );
+};
+
+export default PoliciesPage;

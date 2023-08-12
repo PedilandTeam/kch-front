@@ -5,15 +5,15 @@ const PageHead = () => {
     <div className="page-head h-[300px] flex justify-center content-center mx-3 sm:mx-auto sm:max-w-[95%] relative">
       <Image
         className="rounded-xl brightness-[.50] object-cover h-[300px]"
-        src={`/images/phead/ph-contact-01.webp`}
+        src={`/images/phead/ph-terms-01.webp`}
         width={1700}
         height={300}
         alt=""
       />
       <div className="max-w-[1144px] w-full mx-auto absolute top-0 left-0 right-0 h-full flex flex-wrap items-center">
         <div className="wrap text-white">
-          <h1 className=" font-bold text-[40px] mb-3">تماس با ما</h1>
-          <h2 className="font-normal text-[22px]">مشتاق شنیدن تـون هستیم!</h2>
+          <h1 className=" font-bold text-[40px] mb-3">قوانین و مقررات</h1>
+          <h2 className="font-normal text-[22px]">مراقب حق و حقوق تـون هستیم!</h2>
         </div>
       </div>
     </div>

@@ -21,9 +21,9 @@ export const Footer = () => {
   }, []);
 
   return (
-    <div className="pt-10 pb-5 mt-5 sm:mt-10 bg-blue-950 text-gray-50">
+    <div className="pt-10 pb-5 sm:pb-8 mt-5 sm:mt-10 bg-blue-950 text-gray-50">
       <footer className="footer footer-center container mx-auto max-w-[1144px]">
-        <div className="grid grid-flow-col gap-3 sm:gap-4">
+        <div className="grid grid-flow-col gap-3 sm:gap-4 text-[16px]">
           <Link href={"/about"} className="link link-hover">
             {_TXT.MENU.ABOUT}
           </Link>
@@ -33,17 +33,21 @@ export const Footer = () => {
           <Link href={"/policies"} className="link link-hover">
             {_TXT.MENU.TERMS_AND_CONDITIONS}
           </Link>
-          <Link href={"contact"} className="link link-hover">
+          <Link href={"/contact"} className="link link-hover">
             {_TXT.MENU.CONTACT_US}
           </Link>
         </div>
         <div>
-          <div className="grid grid-flow-col gap-4">
-            <Link href={"https://www.instagram.com/_koochaa"} target="_blank">
+          <div className="grid grid-flow-col gap-3">
+            <Link
+              href={"https://www.instagram.com/_koochaa"}
+              target="_blank"
+              className="bg-slate-500 p-2 rounded hover:bg-pink-900"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 fill="currentColor"
                 className="fill-current"
                 viewBox="0 0 16 16"
@@ -55,11 +59,12 @@ export const Footer = () => {
             <Link
               href={"https://www.linkedin.com/company/koochaa"}
               target="_blank"
+              className="bg-slate-500 p-2 rounded hover:bg-pink-900"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 className="fill-current"
               >
@@ -71,11 +76,15 @@ export const Footer = () => {
               </svg>
             </Link>
 
-            <Link href={"https://www.facebook.com/koochaa.fb"} target="_blank">
+            <Link
+              href={"https://www.facebook.com/koochaa.fb"}
+              target="_blank"
+              className="bg-slate-500 p-2 rounded hover:bg-pink-900"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 className="fill-current"
               >
@@ -86,8 +95,8 @@ export const Footer = () => {
             {/* <Link href={"https://www.youtube.com"} target="_blank">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 className="fill-current"
               >
@@ -95,11 +104,15 @@ export const Footer = () => {
               </svg>
             </Link> */}
 
-            <Link href={"https://twitter.com/_koochaa"} target="_blank">
+            <Link
+              href={"https://twitter.com/_koochaa"}
+              target="_blank"
+              className="bg-slate-500 p-2 rounded hover:bg-pink-900"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 className="fill-current"
               >

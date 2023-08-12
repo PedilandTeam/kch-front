@@ -1,10 +1,11 @@
+import PageHead from "./page-head";
 
 const AboutPage = () => {
-    return (
-      <div>
-        <h1>About Page</h1>
-      </div>
-    );
-  };
-  
-  export default AboutPage;
+  return (
+    <div className="page-wrap">
+      <PageHead />
+    </div>
+  );
+};
+
+export default AboutPage;
