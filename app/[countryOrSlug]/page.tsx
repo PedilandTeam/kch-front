@@ -116,10 +116,10 @@ export default async function CenterPage({
       return <Country {...pathInfo.props} />;
 
     case "item":
-      const status = pathInfo.props?.pageData?.status
+      const availability = pathInfo.props?.pageData?.availability
       const pageData = pathInfo.props?.pageData
       
-      if(!status){
+      if(!availability){
         return notFound()
       }
       return <PageItem {...pathInfo.props} />;
