@@ -8,7 +8,7 @@ import type { PageNamespace } from "types/page"
 const baseUrl = `https://koochaa.com`
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
-    const countries: CountryNamespace.GET[] = await (await API_ROUTES.COUNTRIES.GET_ALL(100)).json()
+    const countries: CountryNamespace.GET[] = await (await API_ROUTES.COUNTRIES.GET_ALL(1,100)).json()
     const countriesSiteMap = countries.map((country: CountryNamespace.GET) => {
         return {
             url: `${baseUrl}/${country.code}`,

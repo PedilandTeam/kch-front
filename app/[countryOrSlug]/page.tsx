@@ -26,7 +26,7 @@ const pathGenerator = async (
   let currentCountry: CountryNamespace.GET;
 
   try {
-    const countries = await (await API_ROUTES.COUNTRIES.GET_ALL(20)).json();
+    const countries = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 20)).json();
     currentCountry = countries.find(
       (country: CountryNamespace.GET) => country.code == countryOrSlug
     );

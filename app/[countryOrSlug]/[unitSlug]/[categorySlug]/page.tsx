@@ -16,7 +16,7 @@ const pathGenerator = async (
   const currentUnit: UnitType = units.find(
     (unit: UnitType) => unit.slug == unitSlug
   );
-  const countryList = await (await API_ROUTES.COUNTRIES.GET_ALL(20)).json();
+  const countryList = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 20)).json();
   const currentCountry = countryList.find(
     (country: CountryNamespace.GET) => country.code == countryOrSlug
   );

@@ -1,10 +1,11 @@
 import { koochaaConfig } from "./koochaa.config";
+import isBetweenZeroAndOne from "./utils/isBetweenZeroAndOne";
 
 const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL
 const API_KEY = process.env.API_KEY!
 type requestCacheType = "default" | "force-cache" | "no-cache" | "no-store" | "only-if-cached" | "reload";
 type paramType = {
-    [key: string]: string | number
+    [key: string]: string | number | boolean
 }
 type configType = {cache?: requestCacheType, revalidate?: number}
 type requestType = {
@@ -60,8 +61,8 @@ export const API_ROUTES = {
         }
     },
     COUNTRIES: {
-        GET_ALL: (revalidate?: number, cache?: requestCacheType) => {
-            return baseFetch({path: "countries", method: "GET"},  {...cache && {cache}, ...revalidate && {revalidate}})
+        GET_ALL: (status?: any, revalidate?: number, cache?: requestCacheType) => {
+            return baseFetch({path: "countries", method: "GET", params: {...isBetweenZeroAndOne(status) && {status}}},  {...cache && {cache}, ...revalidate && {revalidate}})
         },
     },
     CITIES: {

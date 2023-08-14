@@ -7,6 +7,7 @@ import { API_ROUTES } from "@/routes";
 import { ModalCountry } from "./layout/modalcountry";
 import { Providers } from "@client-packages/react-redux/provider";
 import Script from "next/script";
+import isBetweenZeroAndOne from "@/utils/isBetweenZeroAndOne";
 
 export const metadata = {
   title: "وبسایت کوچا",
@@ -21,7 +22,7 @@ export default async function RootLayout({
 }) {
   let countries: CountryNamespace.GET[];
   try {
-    countries = await (await API_ROUTES.COUNTRIES.GET_ALL(20)).json();
+    countries = await (await API_ROUTES.COUNTRIES.GET_ALL(1, 20)).json();
   } catch (e) {
     console.log(e);
     throw new Error("error in get country");
