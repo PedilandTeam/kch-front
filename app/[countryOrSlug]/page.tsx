@@ -26,10 +26,11 @@ const pathGenerator = async (
   let currentCountry: CountryNamespace.GET;
 
   try {
-    const countries = await (await API_ROUTES.COUNTRIES.GET_ALL(20)).json();
+    const countries = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 20)).json();
     currentCountry = countries.find(
       (country: CountryNamespace.GET) => country.code == countryOrSlug
     );
+    
     const categories = await (
       await API_ROUTES.CATEGOREIS.GET_ALL(1, 300, undefined, undefined, 20)
     ).json();
@@ -111,14 +112,17 @@ export default async function CenterPage({
     throw Error(e);
   }
 
+  let availability: boolean = true
   switch (pathInfo.type) {
     case "country":
+      availability = pathInfo.props?.currentCountry.availability
+      if(!availability){
+        return notFound()
+      }
       return <Country {...pathInfo.props} />;
 
     case "item":
-      const availability = pathInfo.props?.pageData?.availability
-      const pageData = pathInfo.props?.pageData
-      
+      availability = pathInfo.props?.pageData?.availability
       if(!availability){
         return notFound()
       }

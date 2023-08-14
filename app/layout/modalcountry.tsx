@@ -19,21 +19,6 @@ export const ModalCountry = ({ countries }: ModalCountryProps) => {
         </h3>
 
         <div className="grid grid-cols-3 gap-5 md:grid-cols-7 md:gap-5 place-content-center country-list">
-          {/* <button className="group">
-            <Link href={"/"} onClick={() => buttonRef.current?.click()}>
-              <CircleFlag
-                width={80}
-                height={80}
-                countryCode="un"
-                className="opacity-50 group-hover:opacity-100 group-hover:cursor-pointer transition duration-200 mx-auto w-[54px] h-[54px] 2xl:w-[74px] 2xl:h-[74px]"
-                alt="UN Flag"
-                title={_TXT.COUNTRY.ALL}
-              />
-              <p className="text-[13px] text-center mt-3 group-hover:font-semibold transition duration-200">
-                {_TXT.COUNTRY.ALL}
-              </p>
-            </Link>
-          </button> */}
           {countries?.map((country) => {
             return (
               <button

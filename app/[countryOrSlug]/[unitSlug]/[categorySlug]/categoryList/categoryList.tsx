@@ -3,6 +3,7 @@ import { CategoryNamespace } from "@/types/category";
 import { CityNamespace } from "@/types/city";
 import { Country } from "@/types/page";
 import { UnitType } from "@/types/unit";
+import { notFound } from "next/navigation";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { CardsList } from "./cardsList";
 import ListFilter from "./filter/categoryListFilter";
@@ -33,7 +34,8 @@ export default async function CategoryList({
   country,
   unit,
 }: PagesListProps) {
-  const cities = await fetchCities(country.code);
+  if(!country) return notFound()
+  const cities = await fetchCities(country?.code);
 
   return (
     <div className="component mt-5 page-list">
