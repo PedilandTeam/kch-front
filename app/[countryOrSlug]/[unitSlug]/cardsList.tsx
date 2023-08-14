@@ -53,13 +53,6 @@ export const CardsList = ({ unit, country }: CardsListType) => {
   const [ref, { entry }] = useIntersectionObserver();
   const isVisible = entry && entry.isIntersecting;
 
-  useEffect(() => {
-    if (!isVisible) return;
-    if (pageLock) return;
-    if (page == perviousPage.current) return;
-    perviousPage.current = page;
-    setPage((old) => old + 1);
-  }, [isVisible]);
 
   const { data, isLoading, error, mutate } = usePages(
     page,
@@ -69,6 +62,17 @@ export const CardsList = ({ unit, country }: CardsListType) => {
     parsedSearchParams.city,
     parsedSearchParams.category
   );
+
+
+  const [canLoadMore, setCanLoadMore] = useState(true)
+  const loadMore = () => {
+    if(data.meta.totalPages -1 == page){
+      setCanLoadMore(false)
+    }
+    if(!canLoadMore) return;
+    setPage(old => old + 1);
+  }
+
 
   const [firstLoading, setFirstLoading] = useState<boolean>(true);
 
@@ -190,8 +194,8 @@ export const CardsList = ({ unit, country }: CardsListType) => {
 
       } */}
       </div>
-      <div className="load-more mt-10 text-center">
-        <button className="btn btn-circle p-2">
+      <div className={` ${canLoadMore ? "block" : "hidden"} load-more mt-10 text-center`}>
+        <button onClick={loadMore} className="btn btn-circle p-2">
           <PlusIcon className="w-[24px] h-[24px]" />
         </button>
       </div>
