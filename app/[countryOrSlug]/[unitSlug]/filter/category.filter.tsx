@@ -152,6 +152,7 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
             if (!category) return;
             return (
               <CategoryFilterSelectedItem
+                key={`category-in-query-${category.slug}`}
                 removeFromShouldBeAdd={removeFromShouldBeAdd}
                 category={category}
               />

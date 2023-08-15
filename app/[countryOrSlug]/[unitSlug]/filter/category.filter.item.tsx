@@ -33,10 +33,7 @@ export default function CategoryFilterItem({
   const [isChecked, setIsChecked] = useState<boolean | undefined>(false);
 
   useEffect(() => {
-    console.log();
     setIsChecked(checkHandler(category.id));
-    console.log(shouldBeAdd);
-    
   }, [shouldBeAdd]);
 
   const inputClickHandler = (event: React.ChangeEvent<HTMLInputElement>) => {

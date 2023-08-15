@@ -11,6 +11,7 @@ export const LogoTop = () => {
           src="/images/logo.svg"
           width={180}
           height={56}
+          priority={true}
           alt="Pediland Logo"
         />
       </Link>

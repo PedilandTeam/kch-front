@@ -52,15 +52,7 @@ export const CardsList = ({ category, country }: CardsListType) => {
   const [ref, { entry }] = useIntersectionObserver();
   const isVisible = entry && entry.isIntersecting;
 
-  // useEffect(() => {
-  //   if (!isVisible) return;
-  //   if (pageLock) return;
-  //   if (page == perviousPage.current) return;
-  //   perviousPage.current = page;
-  //   setPage((old) => old + 1);
-  // }, [isVisible]);
 
-  
   const [canLoadMore, setCanLoadMore] = useState(true)
   const loadMore = () => {
     if(data.meta.totalPages -1 == page){

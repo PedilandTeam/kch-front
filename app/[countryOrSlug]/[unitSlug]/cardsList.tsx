@@ -115,7 +115,7 @@ export const CardsList = ({ unit, country }: CardsListType) => {
               <div className="flex">
                 <Link href={`/${page.slug}`}>
                   <Image
-                    alt=""
+                    alt={`صفحه کشور ${page.title}`}
                     src={"/images/list/logo/logo-placeholder.webp"}
                     width={100}
                     height={100}
@@ -152,6 +152,7 @@ export const CardsList = ({ unit, country }: CardsListType) => {
                   <div className="flex w-full card-tools mb-1 text-sm text-gray-700">
                     <div className="flex ml-5">
                       <CircleFlag
+                        alt={`پرچم کشور ${country.name}`}
                         width={4}
                         height={4}
                         countryCode={page?.country?.code}
