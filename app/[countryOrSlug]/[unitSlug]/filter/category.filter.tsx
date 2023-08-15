@@ -26,9 +26,13 @@ export type checkHandlerType = (value: string | number) => boolean | undefined;
 
 export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   const [modifiedCategories, setModifiedCategories] = useState(categories);
+  
+
+  
   const categorySearchHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    
     if (!categories) return;
     const find = categories.filter((category) =>
       category.name.includes(event.currentTarget.value)
@@ -38,23 +42,56 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+
+  //category=1,2 -> [1,2] or category=3 -> "3"
   const categoriesInQuery = queryString.parse(searchParams.toString(), {
     arrayFormat: "comma",
   }).category;
+
+  // city=1,2 -> [1,2] or city=1 -> "1"
   const citiesInQuery = queryString.parse(searchParams.toString(), {
     arrayFormat: "comma",
   }).city;
 
+
   const [parsedSearchParams, setParsedSearchParams] =
     useState<ParsedSearchParamsType>({});
+
   const [isParsedSearchParamsAdded, setIsParsedSearchParamsAdded] =
     useState(false);
+
+
+
+
+  // filters that should be added
   const [shouldBeAdd, setShouldBeAdd] = useState<string[]>([]);
 
   const addToShouldBeAdd: addToShouldBeAddType = (item: string) => {
     if (shouldBeAdd.includes(item)) return;
     setShouldBeAdd((old) => [...old, item]);
-  };
+  };  
+  
+    const removeFromShouldBeAdd: removeFromShouldBeAddType = (item: string) => {      
+      setShouldBeAdd((old) => {
+        if(!old.includes(item)){
+          return [...old, item]
+        }else{
+          return old.filter(n => n !== item);
+        }
+        // const index = old.indexOf(item);
+        // if (index != -1) {
+        //   old.splice(index, 1);
+        // }
+        // return [...old];
+      });
+    };
+  
+
+    const clearShouldBeAdd = () => {
+      setShouldBeAdd([]);
+    };
+
+
 
   useEffect(() => {
     if (isParsedSearchParamsAdded) return;
@@ -68,20 +105,6 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
     }
     setIsParsedSearchParamsAdded(true);
   }, [parsedSearchParams]);
-
-  const removeFromShouldBeAdd: removeFromShouldBeAddType = (item: string) => {
-    setShouldBeAdd((old) => {
-      const index = old.indexOf(item);
-      if (index != -1) {
-        old.splice(index, 1);
-      }
-      return [...old];
-    });
-  };
-
-  const clearShouldBeAdd = () => {
-    setShouldBeAdd([]);
-  };
 
   useEffect(() => {
     setParsedSearchParams(
@@ -101,12 +124,12 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   };
 
   const checkHandler: checkHandlerType = (value: string | number) => {
-    const hasItem = shouldBeAdd.find((n) => n == value);
-    if (hasItem) {
-      return true;
-    } else {
-      return false;
-    }
+    // console.log(value);
+    // shouldBeAdd.find((n) => {
+    //   shouldBeAdd.find((n) => console.log(n))
+    // })
+    const hasItem = shouldBeAdd.some((n) => n == value);
+    return hasItem
   };
 
   return (
@@ -118,6 +141,8 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
         {citiesInQuery ? _TXT.CATEGORY.SELECT : _TXT.CATEGORY.SELECT}
       </label>
       <div className="mt-3 px-3">
+
+
         {Array.isArray(categoriesInQuery) ? (
           categoriesInQuery.map((categoryId) => {
             if (!categoryId) return;
@@ -141,6 +166,8 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
             }
           />
         ) : null}
+
+        
       </div>
 
       {/* Put this part before </body> tag */}
