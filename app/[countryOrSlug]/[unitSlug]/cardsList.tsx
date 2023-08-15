@@ -109,7 +109,7 @@ export const CardsList = ({ unit, country }: CardsListType) => {
           return (
             <div
               ref={index == pages.length - 1 ? ref : null}
-              key={`card-list-page-index-${page.slug}`}
+              key={`cardlist-page-index-${page.slug}`}
               className="card rounded-lg border border-gray-100 shadow-sm hover:shadow hover:border-gray-200 bg-slate-50"
             >
               <div className="flex">
