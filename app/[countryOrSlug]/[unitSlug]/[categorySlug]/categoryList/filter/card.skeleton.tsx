@@ -14,7 +14,8 @@ export default function CardSkeleton() {
               viewBox="0 0 417 126"
               backgroundColor="#ededed"
               foregroundColor="#e0e0e0"
-              // {...props}
+              id={`content-loader-${index}-id`}
+              uniqueKey="unit-pages"
             >
               <rect x="55" y="12" rx="0" ry="0" width="220" height="16" />
               <rect x="55" y="53" rx="0" ry="0" width="220" height="14" />

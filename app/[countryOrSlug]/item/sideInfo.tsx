@@ -29,11 +29,6 @@ interface ItemSideInfoItemType {
 }
 
 function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
-  if (!Icons && !Images) {
-    throw new Error(
-      "ItemSideInfoItem should have Icons or Images props. you don't pass any of them!"
-    );
-  }
   if (!text) {
     return null;
   }
@@ -76,35 +71,25 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
 }
 
 export function ItemSideInfo({ pageData }: ItemSideInfoType) {
-  const websiteTrimer = (address: string) => {
-    let newUrl = address.trim();
 
-    if (newUrl.startsWith("http://") || newUrl.startsWith("https://")) {
-      const urlObj = new URL(newUrl);
-      newUrl = `${urlObj.protocol}//${urlObj.host}`;
-    } else {
-      const match = newUrl.match(/^(?!https?:\/\/)([^\/]*)(\/.*)?$/);
-      if (match) {
-        newUrl = `https://${match[1]}`;
-      }
-    }
 
-    return newUrl;
-  };
+  const websiteWithoutProtocol = pageData?.socials?.website?.match(/^(https?:\/\/)?(?:www\d?\.)?([^/]+)/i)?.[2]
+
 
   return (
     <div className="item-side sm:col-span-4 sm:col-end-13 mx-3 sm:mr-3 sm:ml-0">
       <div className="rounded-md border border-gray-200 px-5 py-3 mb-3">
         <div className="item-contact">
+
           {pageData?.socials?.website ? (
             <ItemSideInfoItem
-              text={websiteTrimer(pageData?.socials?.website)}
+              text={websiteWithoutProtocol}
               Icons={[
                 {
                   Component: (
                     <ArrowTopRightOnSquareIcon className="w-[22px] h-[22px] text-gray-500 hover:text-pink-900" />
                   ),
-                  href: websiteTrimer(pageData?.socials?.website),
+                  href: `https://${websiteWithoutProtocol}`,
                 },
               ]}
             />
@@ -147,18 +132,11 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
           />
 
           <ItemSideInfoItem
-            text={`${pageData?.address?.address} ${
+            text={`${pageData?.address?.address ? pageData?.address?.address : ""} ${
               pageData?.city?.englishName
                 ? pageData.city.englishName
                 : pageData?.city?.name
             }`}
-            Icons={[
-              {
-                Component: (
-                  <HomeModernIcon className="w-[22px] h-[22px] text-gray-500 hover:text-green-600" />
-                ),
-              },
-            ]}
           />
 
           {/* <div className="ct-address flex justify-between pt-3 pb-5">

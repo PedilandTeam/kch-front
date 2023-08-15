@@ -26,7 +26,7 @@ export const TopTools = ({countryCode, isMainPage}: TopToolsProps) => {
             width={44}
             height={44}
             loading={"lazy"}
-            // countryCode={isMainPage ? "un" : isPathHaveCountry ? countryCodeFromParams : country ? country : "un"}
+            alt={`logo of country with code ${countryCode}`}
             countryCode={countryCode}
             className="opacity-75 hover:opacity-100 hover:cursor-pointer transition"
           />
