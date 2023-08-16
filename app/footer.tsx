@@ -27,10 +27,10 @@ export const Footer = () => {
           <Link href={"/about"} className="link link-hover">
             {_TXT.MENU.ABOUT}
           </Link>
-          {/* <Link href={"#"} className="link link-hover">
-            {GENERAL.CORPORATE_OPPORTUNITIES}
-          </Link> */}
-          <Link href={"/policies"} className="link link-hover">
+          <Link href={"/privacy"} className="link link-hover">
+            {_TXT.MENU.PRIVACY_POLICIES}
+          </Link>
+          <Link href={"/terms"} className="link link-hover">
             {_TXT.MENU.TERMS_AND_CONDITIONS}
           </Link>
           <Link href={"/contact"} className="link link-hover">
