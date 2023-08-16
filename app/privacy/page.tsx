@@ -1,16 +1,17 @@
 import PageHead from "./page-head";
+import TermsText from "./text";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "کوچا | درباره ما",
+  title: "کوچا | حریم خصوصی کاربران سایت",
 };
-
-const AboutPage = () => {
+const PrivacyPage = () => {
   return (
     <div className="page-wrap">
       <PageHead />
+      <TermsText />
     </div>
   );
 };
 
-export default AboutPage;
+export default PrivacyPage;

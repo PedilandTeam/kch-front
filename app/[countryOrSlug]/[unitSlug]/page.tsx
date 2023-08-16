@@ -12,7 +12,9 @@ const pathGenerator = async (
 ): Promise<PathGeneratorType> => {
   const units = await (await API_ROUTES.UNITS.GET_ALL(2000)).json();
   const currentUnit = units.find((unit: UnitType) => unit.slug == unitSlug);
-  const countryList = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 20)).json();
+  const countryList = await (
+    await API_ROUTES.COUNTRIES.GET_ALL(false, 20)
+  ).json();
   const currentCountry = countryList.find(
     (country: CountryNamespace.GET) => country.code == countryOrSlug
   );
@@ -51,7 +53,7 @@ export const generateMetadata = async ({
 };
 
 export default async function UnitPage({
-  params: { countryOrSlug, unitSlug },
+  params: { countryOrSlug, unitSlug }
 }: {
   params: { countryOrSlug: string; unitSlug: string };
 }) {

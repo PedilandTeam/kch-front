@@ -1,24 +1,24 @@
 import {
-    AtSymbolIcon,
-    ChatBubbleBottomCenterTextIcon,
-    DevicePhoneMobileIcon,
+  AtSymbolIcon,
+  ChatBubbleBottomCenterTextIcon,
+  DevicePhoneMobileIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 const CardsGroup = () => {
   return (
-    <div className="container max-w-[1144px] mx-auto mt-10 px-3 sm:px-3">
+    <div className="container max-w-[1144px] mx-auto mt-10 px-3 sm:px-0">
       <div className="card-group grid sm:grid-cols-3 gap-4 sm:gap-8">
         <div className="card shadow-lg border-[2px] border-gray-100">
-          <div className="card-body">
+          <div className="card-body p-8">
             <div className="icon flex justify-center">
               <ChatBubbleBottomCenterTextIcon className="w-[46px] h-[46px] stroke-blue-900" />
             </div>
-            <h2 className="card-title justify-center mt-4 mb-2">
+            <h2 className="card-title text-[18px] justify-center mt-4">
               پشتیبانی در تلگرام
             </h2>
             <p
-              className="font-PinarLT text-center text-[19px] text-gray-500"
+              className="font-PinarLT text-center text-[18px] text-gray-500"
               dir="ltr"
             >
               <Link
@@ -33,13 +33,15 @@ const CardsGroup = () => {
         </div>
 
         <div className="card shadow-lg border-[2px] border-gray-100">
-          <div className="card-body">
+          <div className="card-body p-8">
             <div className="icon flex justify-center">
               <AtSymbolIcon className="w-[46px] h-[46px] stroke-blue-900" />
             </div>
-            <h2 className="card-title justify-center mt-4 mb-2">ارسال ایمیل</h2>
+            <h2 className="card-title text-[18px] justify-center mt-4">
+              ارسال ایمیل
+            </h2>
             <p
-              className="font-PinarLT text-center text-[19px] text-gray-500"
+              className="font-PinarLT text-center text-[18px] text-gray-500"
               dir="ltr"
             >
               <Link
@@ -54,11 +56,11 @@ const CardsGroup = () => {
         </div>
 
         <div className="card shadow-lg border-[2px] border-gray-100">
-          <div className="card-body">
+          <div className="card-body p-8">
             <div className="icon flex justify-center">
               <DevicePhoneMobileIcon className="w-[46px] h-[46px] stroke-blue-900" />
             </div>
-            <h2 className="card-title justify-center mt-4 mb-2">
+            <h2 className="card-title text-[18px] justify-center mt-4">
               تماس در واتس‌آپ
             </h2>
             <p
