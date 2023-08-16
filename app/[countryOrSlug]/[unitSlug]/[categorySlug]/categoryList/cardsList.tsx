@@ -182,8 +182,8 @@ export const CardsList = ({ category, country }: CardsListType) => {
           : null
       } */}
       </div>
-      <div className="load-more mt-10 text-center">
-        <button className="btn btn-circle p-2">
+      <div className={` ${canLoadMore ? "block" : "hidden"} load-more mt-10 text-center`}>
+        <button onClick={loadMore} className="btn btn-circle p-2">
           <PlusIcon className="w-[24px] h-[24px]" />
         </button>
       </div>
