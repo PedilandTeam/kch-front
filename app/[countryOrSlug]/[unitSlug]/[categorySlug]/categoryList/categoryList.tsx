@@ -51,7 +51,7 @@ export default async function CategoryList({
               country={{ name: country.name, code: country.code }}
             />
             <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">
-              لیست {category?.name} فارسی زبان
+              لیست {category?.name} فارسی زبان در {country.name}
             </h1>
 
             <CardsList category={category} country={country} />

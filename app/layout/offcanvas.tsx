@@ -5,15 +5,19 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { UNITS_LIST } from "@/routes";
+import { useRef } from "react";
 
 type OffCanvasProps = {
   countryCode: string;
 };
 
 export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
+
+  const ref = useRef<HTMLInputElement>(null)
+
   return (
     <div className="drawer drawer-end z-10">
-      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+      <input ref={ref} id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content"></div>
       <div className="drawer-side">
         <label htmlFor="my-drawer" className="drawer-overlay"></label>
@@ -25,7 +29,7 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
             </Link>
           </div>
           <ul>
-            <li>
+            <li onClick={() => ref.current?.click()}>
               <Link
                 href={`/${countryCode}/${UNITS_LIST.BUSINESSES}`}
                 className="p-3 text-[16px]"
@@ -33,7 +37,7 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
                 {_TXT.MENU.BUSINESSES}
               </Link>
             </li>
-            <li>
+            <li onClick={() => ref.current?.click()}>
               <Link
                 href={`/${countryCode}/${UNITS_LIST.DOCTORS}`}
                 className="p-3 text-[16px]"
@@ -41,7 +45,7 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
                 {_TXT.MENU.DOCTORS}
               </Link>
             </li>
-            <li>
+            <li onClick={() => ref.current?.click()}>
               <Link href={`/about`} className="p-3 text-[16px]">
                 {_TXT.MENU.ABOUT}
               </Link>
