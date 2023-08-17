@@ -85,11 +85,13 @@ export async function generateMetadata({ params, searchParams }: Props) {
     case "country":
       return {
         title: `کوچا | جامعه ایرانیان مهاجر مقیم ${pathInfo?.props?.currentCountry?.name}`,
+        description: ""
       };
 
     case "item":
       return {
         title: `${pathInfo?.props?.pageData?.title} | کوچا`,
+        description: ""
       };
 
     default:

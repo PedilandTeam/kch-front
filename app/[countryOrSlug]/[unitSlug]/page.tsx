@@ -51,6 +51,7 @@ export const generateMetadata = async ({
   const currentCountry: CountryNamespace.GET | undefined = countries.find((country: CountryNamespace.GET) => country.code == countryOrSlug)
   return {
     title: `لیست ${pathInfo?.props?.unit?.name} فارسی زبان در ${countryOrSlug && currentCountry && currentCountry.name} | کوچا`,
+    description: ""
   };
 };
 
