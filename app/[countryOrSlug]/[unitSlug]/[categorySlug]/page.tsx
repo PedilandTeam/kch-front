@@ -55,9 +55,14 @@ export const generateMetadata = async ({
     throw Error(e);
   }
 
+  const countries = await (await (API_ROUTES.COUNTRIES.GET_ALL(false, 120))).json()
+  const currentCountry: CountryNamespace.GET | undefined = countries.find((country: CountryNamespace.GET) => country.code == countryOrSlug)
   return {
-    title: `لیست ${pathInfo?.props?.category?.name} فارسی زبان | کوچا`,
+    title: `لیست ${pathInfo?.props?.category?.name} فارسی زبان در ${countryOrSlug && currentCountry && currentCountry.name} | کوچا`,
   };
+  // return {
+  //   title: `لیست ${pathInfo?.props?.category?.name} فارسی زبان | کوچا`,
+  // };
 };
 
 

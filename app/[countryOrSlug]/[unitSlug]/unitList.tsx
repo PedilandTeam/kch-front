@@ -50,7 +50,7 @@ export default async function UntiList({
               country={{ name: currentCountry.name, code: currentCountry.code }}
             />
             <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">
-              لیست {unit?.name} فارسی زبان در {currentCountry.name}
+              لیست {unit?.name} فارسی زبان
             </h1>
             <CardsList unit={unit} country={currentCountry} />
           </div>
