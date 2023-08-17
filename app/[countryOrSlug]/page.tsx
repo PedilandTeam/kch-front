@@ -26,11 +26,13 @@ const pathGenerator = async (
   let currentCountry: CountryNamespace.GET;
 
   try {
-    const countries = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 20)).json();
+    const countries = await (
+      await API_ROUTES.COUNTRIES.GET_ALL(false, 20)
+    ).json();
     currentCountry = countries.find(
       (country: CountryNamespace.GET) => country.code == countryOrSlug
     );
-    
+
     const categories = await (
       await API_ROUTES.CATEGOREIS.GET_ALL(1, 300, undefined, undefined, 20)
     ).json();
@@ -85,13 +87,13 @@ export async function generateMetadata({ params, searchParams }: Props) {
     case "country":
       return {
         title: `کوچا | جامعه ایرانیان مهاجر مقیم ${pathInfo?.props?.currentCountry?.name}`,
-        description: ""
+        description: `به جامعه مجازی ایرانیان مهاجر مقیم ${pathInfo?.props?.currentCountry?.name} خوش آمدید. کوچا همراه شماست تا بتوانید نیازهای خود را به زبان مادری تامین کنید. از جستجوی کسب و کارهای محلی گرفته تا یافتن پزشکانی که به زبان فارسی صحبت می کنند. همچنین خدماتی مثل ثبت آگهی نیازمندی، آموزش، اطلاع از رویدادهای ایرانی، کاریابی و خرید آنلاین محصولات ایرانی بخشی از راهکارهایی است که برای شما در نظر داریم.`,
       };
 
     case "item":
       return {
         title: `${pathInfo?.props?.pageData?.title} | کوچا`,
-        description: ""
+        description: `این صفحه پروفایل اختصاصی ${pathInfo?.props?.pageData?.title} در پلتفرم کوچاست که شامل بروزترین و کاملترین اطلاعات موجود در فضای اینترنت درباره ایشان می باشد.`,
       };
 
     default:
@@ -114,19 +116,19 @@ export default async function CenterPage({
     throw Error(e);
   }
 
-  let availability: boolean = true
+  let availability: boolean = true;
   switch (pathInfo.type) {
     case "country":
-      availability = pathInfo.props?.currentCountry.availability
-      if(!availability){
-        return notFound()
+      availability = pathInfo.props?.currentCountry.availability;
+      if (!availability) {
+        return notFound();
       }
       return <Country {...pathInfo.props} />;
 
     case "item":
-      availability = pathInfo.props?.pageData?.availability
-      if(!availability){
-        return notFound()
+      availability = pathInfo.props?.pageData?.availability;
+      if (!availability) {
+        return notFound();
       }
       return <PageItem {...pathInfo.props} />;
 
