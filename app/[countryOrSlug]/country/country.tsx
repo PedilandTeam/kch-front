@@ -4,6 +4,7 @@ import { SliderHome } from "./slider";
 import { CountryNamespace } from "@/types/country";
 import { CategoryNamespace } from "@/types/category";
 import { UnitsBanner } from "./unitsBanner";
+import { SeoText } from "./seoText";
 
 type CountryProps = {
   currentCountry: CountryNamespace.GET;
@@ -19,6 +20,8 @@ export default function Country({ currentCountry, categories }: CountryProps) {
       <CountryStats currentCountry={currentCountry} />
       {/** @ts-expect-error server component */}
       <CountryCategories currentCountry={currentCountry} />
+      {/** @ts-expect-error server component */}
+      <SeoText currentCountry={currentCountry} />
     </div>
   );
 }

@@ -47,16 +47,26 @@ export const generateMetadata = async ({
     throw Error(e);
   }
 
-  const countries = await (await (API_ROUTES.COUNTRIES.GET_ALL(false, 120))).json()
-  const currentCountry: CountryNamespace.GET | undefined = countries.find((country: CountryNamespace.GET) => country.code == countryOrSlug)
+  const countries = await (
+    await API_ROUTES.COUNTRIES.GET_ALL(false, 120)
+  ).json();
+  const currentCountry: CountryNamespace.GET | undefined = countries.find(
+    (country: CountryNamespace.GET) => country.code == countryOrSlug
+  );
   return {
-    title: `لیست ${pathInfo?.props?.unit?.name} فارسی زبان در ${countryOrSlug && currentCountry && currentCountry.name} | کوچا`,
-    description: ""
+    title: `لیست ${pathInfo?.props?.unit?.name} فارسی زبان در ${
+      countryOrSlug && currentCountry && currentCountry.name
+    } | کوچا`,
+    description: `به جامعه مجازی ایرانیان مهاجر مقیم ${
+      countryOrSlug && currentCountry && currentCountry.name
+    } خوش آمدید. در این صفحه لیست کاملی از ${
+      pathInfo?.props?.unit?.name
+    } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
   };
 };
 
 export default async function UnitPage({
-  params: { countryOrSlug, unitSlug }
+  params: { countryOrSlug, unitSlug },
 }: {
   params: { countryOrSlug: string; unitSlug: string };
 }) {

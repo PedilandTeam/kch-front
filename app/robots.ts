@@ -5,8 +5,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: '/_next/',
+      disallow: ['/_next/', '/images/'],
+
     },
-    sitemap: 'https://acme.com/sitemap.xml',
+    sitemap: 'https://koochaa.com/sitemap.xml',
   }
 }
