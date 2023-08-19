@@ -181,7 +181,6 @@ export default function CityFilter({ cities, id }: CityFilterType) {
               type="text"
               placeholder={_TXT.CITY.SEARCH_IN_LIST}
               className="input input-bordered w-full"
-              autoFocus={true}
               ref={inputRef}
             />
           </div>
