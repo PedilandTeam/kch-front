@@ -3,6 +3,7 @@ import { CountryNamespace } from "@/types/country";
 import PageItem from "./item/item";
 import { notFound } from "next/navigation";
 import Country from "./country/country";
+import { metadata } from "../layout";
 
 export type PathsType = "country" | "unit" | "category" | "item";
 export type PathGeneratorType = {
@@ -86,14 +87,22 @@ export async function generateMetadata({ params, searchParams }: Props) {
   switch (pathInfo.type) {
     case "country":
       return {
+        ...metadata,
         title: `کوچا | جامعه ایرانیان مهاجر مقیم ${pathInfo?.props?.currentCountry?.name}`,
         description: `به جامعه مجازی ایرانیان مهاجر مقیم ${pathInfo?.props?.currentCountry?.name} خوش آمدید. کوچا همراه شماست تا بتوانید نیازهای خود را به زبان مادری و به سادگی رفع کنید. اطلاعات بیشتر در این صفحه`,
+        alternates:{
+          canonical: `${process.env.FRONT_URL}/${pathInfo?.props.currentCountry?.code}`
+        }
       };
 
     case "item":
       return {
+        ...metadata,
         title: `${pathInfo?.props?.pageData?.title} | کوچا`,
         description: `این صفحه پروفایل اختصاصی ${pathInfo?.props?.pageData?.title} در پلتفرم کوچاست که شامل بروزترین و کاملترین اطلاعات موجود در فضای اینترنت درباره ایشان می باشد.`,
+        alternates:{
+          canonical: `${process.env.FRONT_URL}/${pathInfo?.props.pageData?.slug}`
+        }
       };
 
     default:

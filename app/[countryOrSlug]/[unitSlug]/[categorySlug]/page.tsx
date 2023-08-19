@@ -7,24 +7,14 @@ import { notFound } from "next/navigation";
 import CategoryList from "./categoryList/categoryList";
 import { PathGeneratorType } from "../../page";
 
-const pathGenerator = async (
-  countryOrSlug: string,
-  unitSlug: string,
-  categorySlug: string
-): Promise<PathGeneratorType> => {
+const pathGenerator = async (countryOrSlug: string, unitSlug: string, categorySlug: string): Promise<PathGeneratorType> => {
+
   const units = await (await API_ROUTES.UNITS.GET_ALL(2000)).json();
-  const currentUnit: UnitType = units.find(
-    (unit: UnitType) => unit.slug == unitSlug
-  );
-  const countryList = await (
-    await API_ROUTES.COUNTRIES.GET_ALL(false, 20)
-  ).json();
-  const currentCountry = countryList.find(
-    (country: CountryNamespace.GET) => country.code == countryOrSlug
-  );
-  const categories: CategoryNamespace.GET = await (
-    await API_ROUTES.CATEGOREIS.GET_ALL(1, 1, categorySlug)
-  ).json();
+  const currentUnit: UnitType = units.find((unit: UnitType) => unit.slug == unitSlug);
+  const countryList = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 20)).json();
+  const currentCountry = countryList.find((country: CountryNamespace.GET) => country.code == countryOrSlug);
+
+  const categories: CategoryNamespace.GET = await (await API_ROUTES.CATEGOREIS.GET_ALL(1, 1, categorySlug)).json();
   const currentCategory = categories?.items[0];
 
   if (currentCategory?.unit?.id != currentUnit?.id) {
@@ -44,11 +34,8 @@ const pathGenerator = async (
   // return <CategoryList category={currentCategory} country={currentCountry} />
 };
 
-export const generateMetadata = async ({
-  params: { countryOrSlug, unitSlug, categorySlug },
-}: {
-  params: { countryOrSlug: string; unitSlug: string; categorySlug: string };
-}): Promise<Metadata> => {
+type generateMetadata = {params: { countryOrSlug: string; unitSlug: string; categorySlug: string }}
+export const generateMetadata = async ({params: { countryOrSlug, unitSlug, categorySlug }}: generateMetadata): Promise<Metadata> => {
   let pathInfo: PathGeneratorType;
 
   try {
@@ -57,12 +44,8 @@ export const generateMetadata = async ({
     throw Error(e);
   }
 
-  const countries = await (
-    await API_ROUTES.COUNTRIES.GET_ALL(false, 120)
-  ).json();
-  const currentCountry: CountryNamespace.GET | undefined = countries.find(
-    (country: CountryNamespace.GET) => country.code == countryOrSlug
-  );
+  const countries = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 120)).json();
+  const currentCountry: CountryNamespace.GET | undefined = countries.find((country: CountryNamespace.GET) => country.code == countryOrSlug);
   return {
     title: `لیست ${pathInfo?.props?.category?.name} فارسی زبان در ${
       countryOrSlug && currentCountry && currentCountry.name
@@ -72,6 +55,9 @@ export const generateMetadata = async ({
     } خوش آمدید. در این صفحه لیست کاملی از ${
       pathInfo?.props?.category?.name
     } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
+    alternates:{
+      canonical: `${process.env.FRONT_URL}/${ pathInfo?.props?.category?.slug}`
+    }
   };
 };
 
