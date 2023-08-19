@@ -108,13 +108,13 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     setModifiedCities(find);
   };
 
+  const inputRef = useRef<HTMLInputElement>(null);
   /**
    * auto focusing on search input
    */
-  const inputRef = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    if (inputRef.current) inputRef.current.focus();
-  }, [inputRef]);
+  // useEffect(() => {
+  //   if (inputRef.current) inputRef.current.focus();
+  // }, [inputRef]);
 
   const router = useRouter();
   /**

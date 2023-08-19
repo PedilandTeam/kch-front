@@ -108,15 +108,18 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     setModifiedCities(find);
   };
 
+  const inputRef = useRef<HTMLInputElement>(null);
   /**
    * auto focusing on search input
    */
-  const inputRef = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    if (inputRef.current) inputRef.current.focus();
-  }, [inputRef]);
-
+  // useEffect(() => {
+  //   if (inputRef.current) inputRef.current.focus();
+  // }, [inputRef]);
+  
   const router = useRouter();
+
+  
+
   /**
    * save cities that are in city query
    * if city query have a single number it's return string
