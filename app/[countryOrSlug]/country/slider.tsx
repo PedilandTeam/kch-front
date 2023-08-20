@@ -13,7 +13,7 @@ async function getMostUsedCategories(countryCode: string) {
   let result: CategoryNamespace.MOST_USED;
   try {
     result = await (
-      await API_ROUTES.CATEGOREIS.MOST_USED(countryCode, 1, 120)
+      await API_ROUTES.CATEGOREIS.MOST_USED(countryCode, 2, 120)
     ).json();
     return result;
   } catch (e) {
