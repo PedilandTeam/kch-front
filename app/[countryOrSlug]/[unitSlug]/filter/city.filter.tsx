@@ -172,7 +172,7 @@ export default function CityFilter({ cities, id }: CityFilterType) {
                   className="cursor-pointer text-[15px] font-normal text-pink-800"
                 >
                   {_TXT.GENERAL.DELETE_ALL}
-                </span>
+                </span> 
               ) : null}
             </h3>
             <p className="py-3">{_TXT.CITY.SELECT_MULTI}</p>
