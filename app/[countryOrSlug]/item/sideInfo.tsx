@@ -9,7 +9,7 @@ import Link from "next/link";
 import React from "react";
 
 interface ItemSideInfoType {
-  pageData: PageNamespace.GET;
+  pageData: PageNamespace.Page;
 }
 
 type ImageItem = {

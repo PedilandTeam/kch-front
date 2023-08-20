@@ -4,7 +4,7 @@ import { ItemSideInfo } from "./sideInfo";
 import { ItemTopInfo } from "./topInfo";
 import { PageNamespace } from "@/types/page";
 export type PageItemProps = {
-  pageData: PageNamespace.GET;
+  pageData: PageNamespace.Page;
 };
 
 // export function generateMetadata({params, searchParams}: GenerateMetadataProps): Metadata{

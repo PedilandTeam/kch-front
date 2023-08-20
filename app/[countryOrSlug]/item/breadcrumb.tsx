@@ -3,7 +3,7 @@ import { PageNamespace } from "@/types/page";
 import Link from "next/link";
 
 type ItemBreadCrumbProps = {
-  pageData: PageNamespace.GET;
+  pageData: PageNamespace.Page;
 };
 export const ItemBreadCrumb = ({ pageData }: ItemBreadCrumbProps) => {
   return (

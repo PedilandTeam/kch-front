@@ -2,26 +2,37 @@ import { CityNamespace } from "./city";
 
 
 
-export namespace PageNamespace{
+export namespace PageNamespace {
     export interface GET {
-        id:          number;
-        slug:        string;
+        items: Page[]
+        meta: {
+            currentPage: number,
+            itemCount: number,
+            itemsPerPage: number,
+            totalItems: number,
+            totalPages: number
+        }
+    }
+
+    export interface Page {
+        id: number;
+        slug: string;
         createdDate: Date;
         updatedDate: Date;
-        title:       string;
+        title: string;
         description: string;
-        address:     Address;
-        socials?:    Partial<Socials>;
-        contact:     Partial<Contact>;
-        profile:     null;
-        status:      boolean;
-        pictures:    any[];
-        unit:        Category;
-        category:    Category;
-        city:        CityNamespace.city;
-        country:     Country;
+        address: Address;
+        socials?: Partial<Socials>;
+        contact: Partial<Contact>;
+        profile: null;
+        status: boolean;
+        pictures: any[];
+        unit: Category;
+        category: Category;
+        city: CityNamespace.city;
+        country: Country;
     }
-    
+
 }
 
 export interface Contact {
@@ -44,21 +55,21 @@ export interface Socials {
 }
 export interface Address {
     country: string;
-    city:    string;
+    city: string;
     address: string;
 }
 
 export interface Category {
-    id:          number;
-    name:        string;
-    slug:        string;
+    id: number;
+    name: string;
+    slug: string;
     createdDate: Date;
-    updateDate:  Date;
+    updateDate: Date;
 }
 
 
 export interface Country {
-    id:   number;
+    id: number;
     name: string;
     code: string;
 }

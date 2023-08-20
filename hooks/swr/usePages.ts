@@ -32,10 +32,7 @@ export function usePages(page: number = 1, limit: number = 15, countryCode: stri
     error,
     mutate
   } as unknown as {
-    data: {
-      items: PageNamespace.GET[],
-      meta: any
-    },
+    data: PageNamespace.GET,
     isLoading: boolean,
     error: boolean,
     mutate: KeyedMutator<any>

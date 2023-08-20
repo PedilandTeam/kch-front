@@ -11,7 +11,7 @@ import { socials as socialsType } from "@/types/socials.";
 import { useDispatch } from "react-redux";
 import { setCountry } from "@/store/stateSlice";
 
-export type ItemTopInfoType = { pageData: PageNamespace.GET };
+export type ItemTopInfoType = { pageData: PageNamespace.Page };
 export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
   const dis = useDispatch();
   dis(setCountry(pageData?.country?.code));

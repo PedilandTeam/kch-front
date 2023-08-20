@@ -47,13 +47,13 @@ export const CardsList = ({ category, country }: CardsListType) => {
   const [page, setPage] = useState(1);
   const [pageLock, setPageLock] = useState(false);
   const perviousPage = useRef<number>(0);
-  const [pages, setPages] = useState<PageNamespace.GET[] | []>([]);
+  const [pages, setPages] = useState<PageNamespace.Page[] | []>([]);
 
   const [ref, { entry }] = useIntersectionObserver();
   const isVisible = entry && entry.isIntersecting;
 
 
-  const [canLoadMore, setCanLoadMore] = useState(true)
+  const [canLoadMore, setCanLoadMore] = useState(false)
   const loadMore = () => {
     if(data.meta.totalPages -1 == page){
       setCanLoadMore(false)
@@ -83,11 +83,10 @@ export const CardsList = ({ category, country }: CardsListType) => {
   useEffect(() => {
     if (!data?.items) return;
     if (error) return;
-    if (data.meta.itemCount <= 0) {
-      setPageLock(true);
-      return;
-    } else {
-      setPageLock(false);
+    if(data.meta.currentPage == data.meta.totalPages){
+      setCanLoadMore(false)
+    }else{
+      setCanLoadMore(true)
     }
     setPages((old) => [...old, ...data.items]);
   }, [data]);
@@ -103,7 +102,7 @@ export const CardsList = ({ category, country }: CardsListType) => {
   return (
     <div className="list-card min-h-[500px]">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 sm:gap-4">
-        {pages.map((page: PageNamespace.GET, index: number) => {
+        {pages.map((page: PageNamespace.Page, index: number) => {
           return (
             <div
               ref={index == pages.length - 1 ? ref : null}

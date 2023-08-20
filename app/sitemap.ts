@@ -48,7 +48,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         const pages = pagesGet.items
         const meta = pagesGet.meta
 
-        pages.forEach((page: PageNamespace.GET) => {
+        pages.forEach((page: PageNamespace.Page) => {
             pagesSiteMap.push({
                 url: `${baseUrl}/${encodeURIComponent(page.slug)}`,
                 lastModified: page.updatedDate
