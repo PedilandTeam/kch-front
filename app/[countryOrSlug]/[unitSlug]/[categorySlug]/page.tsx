@@ -56,7 +56,7 @@ export const generateMetadata = async ({params: { countryOrSlug, unitSlug, categ
       pathInfo?.props?.category?.name
     } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
     alternates:{
-      canonical: `${process.env.FRONT_URL}/${ pathInfo?.props?.category?.slug}`
+      canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${unitSlug}/${ pathInfo?.props?.category?.slug}`
     }
   };
 };

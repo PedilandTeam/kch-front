@@ -57,7 +57,7 @@ export const generateMetadata = async ({params: { countryOrSlug, unitSlug }}: ge
       pathInfo?.props?.unit?.name
     } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
     alternates:{
-      canonical: `${process.env.FRONT_URL}/${pathInfo?.props?.unit?.slug}`
+      canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${pathInfo?.props?.unit?.slug}`
     }
   };
 };
