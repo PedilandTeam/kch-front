@@ -88,11 +88,12 @@ export const Header = ({ children }: HeaderProps) => {
 
   return (
     <header
-      className={`fixed z-10 top-0 w-full bg-white transition-all ${
-        scrollingDown
-          ? "transform -translate-y-full"
-          : "transform translate-y-0"
-      } ${isTop ? "py-[10px]" : "py-[6px] shadow"} duration-200`}
+      // className={`fixed z-10 top-0 w-full bg-white transition-all ${
+      //   scrollingDown
+      //     ? "transform -translate-y-full"
+      //     : "transform translate-y-0"
+      // } ${isTop ? "py-[10px]" : "py-[6px] shadow"} duration-200`}
+      className="w-full bg-white py-[10px]"
     >
       <div className="container mx-auto max-w-[1144px]">
         <div className="flex justify-between mx-3 sm:mx-0">

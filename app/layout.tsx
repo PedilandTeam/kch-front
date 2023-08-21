@@ -34,7 +34,7 @@ export default async function RootLayout({
 
   return (
     <html lang="fa" dir="rtl" className="scroll-smooth">
-      <body className="min-h-screen pt-[77px]">
+      <body className="min-h-screen">
         <Providers>
           <Fonts />
           <Header>

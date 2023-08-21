@@ -4,7 +4,7 @@ const PageHead = () => {
   return (
     <div className="page-head h-[300px] flex justify-center content-center mx-3 sm:mx-auto sm:max-w-[95%] relative">
       <Image
-        className="rounded-xl brightness-[.50] object-cover h-[300px]"
+        className="rounded-xl brightness-[.75] object-cover h-[300px]"
         src={`/images/phead/ph-terms-01.webp`}
         width={1700}
         height={300}

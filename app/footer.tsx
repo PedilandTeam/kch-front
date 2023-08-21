@@ -5,25 +5,25 @@ import { RocketLaunchIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
 
 export const Footer = () => {
-  useEffect(() => {
-    if (typeof window == "undefined") return;
-    var toTopDiv = document.getElementById("toTopDiv");
-    if (!toTopDiv) return;
-    window.addEventListener("scroll", function () {
-      var toTopDiv = document.getElementById("toTopDiv");
-      if (window.scrollY > 600) {
-        // Change the value as needed
-        toTopDiv!.classList.remove("hidden");
-      } else {
-        toTopDiv!.classList.add("hidden");
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window == "undefined") return;
+  //   var toTopDiv = document.getElementById("toTopDiv");
+  //   if (!toTopDiv) return;
+  //   window.addEventListener("scroll", function () {
+  //     var toTopDiv = document.getElementById("toTopDiv");
+  //     if (window.scrollY > 600) {
+  //       // Change the value as needed
+  //       toTopDiv!.classList.remove("hidden");
+  //     } else {
+  //       toTopDiv!.classList.add("hidden");
+  //     }
+  //   });
+  // }, []);
 
   return (
     <div className="pt-10 pb-5 sm:pb-8 mt-5 sm:mt-10 bg-blue-950 text-gray-50">
       <footer className="footer footer-center container mx-auto max-w-[1144px]">
-        <div className="grid grid-flow-col gap-3 sm:gap-4 text-[16px]">
+        <div className="grid grid-flow-col gap-3 sm:gap-4 text-[15px]">
           <Link href={"/about"} className="link link-hover">
             {_TXT.MENU.ABOUT}
           </Link>
@@ -134,14 +134,14 @@ export const Footer = () => {
           </p>
         </div>
       </footer>
-      <Link
+      {/* <Link
         href={"#top"}
         scroll
         className="hidden fixed bottom-[10px] sm:bottom-[50px] right-0 sm:right-[50px] p-3 rounded-full"
         id="toTopDiv"
       >
         <RocketLaunchIcon className="w-[36px] h-[36px] -rotate-45 stroke-gray-400" />
-      </Link>
+      </Link> */}
     </div>
   );
 };
