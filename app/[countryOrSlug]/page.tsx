@@ -98,7 +98,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
     case "item":
       return {
         ...metadata,
-        title: `${pathInfo?.props?.pageData?.title} | کوچا`,
+        title: `${pathInfo?.props?.pageData?.title} - ${pathInfo?.props.pageData.city.name}، ${pathInfo?.props.pageData.country.name} | کوچا`,
         description: `این صفحه پروفایل اختصاصی ${pathInfo?.props?.pageData?.title} در پلتفرم کوچاست که شامل بروزترین و کاملترین اطلاعات موجود در فضای اینترنت درباره ایشان می باشد.`,
         alternates:{
           canonical: `${process.env.FRONT_URL}/${pathInfo?.props.pageData?.slug}`
