@@ -30,7 +30,6 @@ const baseFetch = async ({path, method = "GET", params, body, headers}: requestT
         }
         
         let url = queryParametrs ? `${API_URL}/${path}?${queryParametrs}` : `${API_URL}/${path}`
-        console.log(url);
         
         fetch(url, {body, cache, next: { ...revalidate && {revalidate} }, method,headers})    
             
@@ -53,8 +52,8 @@ export const API_ROUTES = {
         GET_ALL: (page: number, limit: number, slug?: string, revalidate?: number, cache?: requestCacheType) => {
             return baseFetch({path:"pages", method:"GET", params:{page, limit, ...slug && {slug}}, headers: {"api-key": API_KEY}},  {...cache && {cache}, ...revalidate && {revalidate}})
         },
-        GET_ALL_PREVIEW: (page: number, limit: number, slug?: string, revalidate?: number, cache?: requestCacheType) => {
-            return baseFetch({path:"pages", method:"GET", params:{page, limit, ...slug && {slug}}},  {...cache && {cache}, ...revalidate && {revalidate}})
+        GET_ALL_PREVIEW: (page: number, limit: number, {slug, countryCode, status, unitId, categoryId}: {slug?: string, countryCode?: string, status?: string, unitId?: number, categoryId?: number}, revalidate?: number, cache?: requestCacheType) => {
+            return baseFetch({path:"pages/preview", method:"GET", params:{page, limit, ...slug && {slug}, ...countryCode && {countryCode}, ...status && {status}, ...unitId && {unitId}, ...categoryId && {categoryId}}},  {...cache && {cache}, ...revalidate && {revalidate}})
         },
         GET_ONE: (id: string , revalidate?: number, cache?: requestCacheType) => {
             return baseFetch({path: `pages/${id}`, method: "GET", headers: {"api-key": API_KEY}},  {...cache && {cache}, ...revalidate && {revalidate}})

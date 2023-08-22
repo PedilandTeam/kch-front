@@ -9,7 +9,7 @@ import ListFilter from "./filter/listFilter";
 
 type PagesListProps = {
   unit: UnitType;
-  currentCountry: Country;
+  country: Country;
 };
 
 async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
@@ -27,12 +27,12 @@ async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
   return cities;
 }
 
-export default async function UntiList({
-  unit,
-  currentCountry,
-}: PagesListProps) {
-  const cities = await fetchCities(currentCountry.code);
+export default async function UntiList({unit, country}: PagesListProps) {
+  const cities = await fetchCities(country.code);
   const categories: CategoryNamespace.category[] = unit.categories;
+  const pages = await (await API_ROUTES.PAGES.GET_ALL_PREVIEW(1, 30, {countryCode: country.code, unitId: unit.id})).json()
+
+  
 
   // if (!unit.id) {
   //   return <span className="loading loading-ring loading-lg"></span>;
@@ -47,12 +47,12 @@ export default async function UntiList({
           <div className="page-content sm:col-span-6">
             <ItemBreadCrumb
               unit={{ name: unit.name, slug: unit.slug }}
-              country={{ name: currentCountry.name, code: currentCountry.code }}
+              country={{ name: country.name, code: country.code }}
             />
             <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">
-              لیست {unit?.name} فارسی زبان در {currentCountry?.name}
+              لیست {unit?.name} فارسی زبان در {country?.name}
             </h1>
-            <CardsList unit={unit} country={currentCountry} />
+            <CardsList initPages={pages} unit={unit} country={country} />
           </div>
         </div>
       </div>

@@ -34,7 +34,7 @@ export default async function CategoryList({
   country,
   unit,
 }: PagesListProps) {
-  if(!country) return notFound()
+  if (!country) return notFound()
   const cities = await fetchCities(country?.code);
 
   return (

@@ -11,7 +11,12 @@ const nextConfig = {
     ignoreBuildErrors: true
   },
   reactStrictMode: true,
-  output: "standalone"
+  output: "standalone",
+  images:{
+    domains:[
+      "dl.koochaa.com"
+    ]
+  }
 }
 
 module.exports = nextConfig

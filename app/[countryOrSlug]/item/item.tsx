@@ -3,6 +3,7 @@ import { ItemBreadCrumb } from "./breadcrumb";
 import { ItemSideInfo } from "./sideInfo";
 import { ItemTopInfo } from "./topInfo";
 import { PageNamespace } from "@/types/page";
+import CountryUpdater from "./countryUpdater";
 export type PageItemProps = {
   pageData: PageNamespace.Page;
 };
@@ -23,6 +24,9 @@ export type PageItemProps = {
 export default function PageItem({ pageData }: PageItemProps) {
   return (
     <div className="component page-item">
+
+      <CountryUpdater pageData={pageData} />
+
       <div className="bg-slate-100 sm:h-[300px] mb-3 sm:mb-4">
         <ItemTopInfo pageData={pageData} />
       </div>

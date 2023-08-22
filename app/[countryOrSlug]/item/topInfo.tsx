@@ -1,4 +1,4 @@
-"use client";
+
 import { _TXT } from "@/app/text";
 import { ShareIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
@@ -10,25 +10,18 @@ import SocialLink from "./socials/socialLink";
 import { socials as socialsType } from "@/types/socials.";
 import { useDispatch } from "react-redux";
 import { setCountry } from "@/store/stateSlice";
+import ItemProfilePicture from "./itemProfilePicture";
 
 export type ItemTopInfoType = { pageData: PageNamespace.Page };
 export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
-  const dis = useDispatch();
-  dis(setCountry(pageData?.country?.code));
 
   return (
     <div className="top-section h-full">
       <div className="container mx-auto max-w-[1144px] h-full">
         <div className="flex flex-col sm:flex-row items-center sm:items-end py-10 sm:pb-10 h-full">
-          <div className="item-image mb-5 sm:mb-0">
-            <Image
-              alt="logo"
-              src={"/images/list/logo/logo-placeholder.webp"}
-              width={160}
-              height={160}
-              className="rounded-full w-full sm:w-40 h-full sm:h-40 drop-shadow-sm"
-            />
-          </div>
+
+          <ItemProfilePicture className="rounded-full w-full sm:w-40 h-full sm:h-40 drop-shadow-sm" pageData={pageData}/>
+
           <div className="item-details sm:mr-5">
             <h1 className="text-[28px] font-semibold text-center sm:text-right text-slate-700">
               {pageData?.title}
