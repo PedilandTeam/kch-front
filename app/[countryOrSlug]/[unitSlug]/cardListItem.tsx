@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import categoryPathGenerator from "@/utils/categoryPathGenerator";
 import { PageNamespace } from "@/types/page";
-import { LegacyRef, RefObject } from "react";
+import { forwardRef, LegacyRef, RefObject } from "react";
 import { CountryNamespace } from "@/types/country";
 import { UnitType } from "@/types/unit";
 import ItemProfilePicture from "../item/itemProfilePicture";
@@ -22,7 +22,7 @@ type cardListItem = {
     variant: "category" | "unit"
 }
 
-export default function ({ page, pages, index, ref, country, unit, variant }: cardListItem) {
+export default forwardRef(function({ page, pages, index, country, unit, variant }: cardListItem, ref: LegacyRef<HTMLDivElement>) {
 
     if(variant != "category" && !unit){
         throw new Error("unit can't be empty when variant is not category")
@@ -101,4 +101,4 @@ export default function ({ page, pages, index, ref, country, unit, variant }: ca
         </div>
 
     )
-}
+})

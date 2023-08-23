@@ -14,7 +14,7 @@ export default function({pageData, height, width, className}: itemProfilePicture
     return (
         <div className="item-image mb-5 sm:mb-0">
         <Image
-          priority
+          loading="lazy"
           alt="logo"
           src={src}
           onError={onImageError}

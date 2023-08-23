@@ -18,6 +18,7 @@ import { useIntersectionObserver } from "react-intersection-observer-hook";
 import CardSkeleton from "./[categorySlug]/categoryList/filter/card.skeleton";
 import categoryPathGenerator from "@/utils/categoryPathGenerator";
 import CardListItem from "./cardListItem";
+import Pagination from "./pagination/pagination";
 
 type CardsListType = {
   unit: UnitType;
@@ -107,20 +108,26 @@ export const CardsList = ({ unit, country, initPages }: CardsListType) => {
   }
 
   return (
-    <div className="list-card min-h-[500px]">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 sm:gap-4">
-        {initPages?.items?.map((page: PageNamespace.Page, index: number) => {
-          return <CardListItem key={`unit-preview-item-${page.id}`} variant="unit" page={page} pages={pages} index={index} unit={unit} country={page.country} ref={ref} />
-        })}
-        {pages.map((page: PageNamespace.Page, index: number) => {
-          return <CardListItem key={`unit-preview-item-${page.id}`} variant="unit" page={page} pages={pages} index={index} unit={unit} country={country} ref={ref} />
-        })}
-      </div>
-      <div className={` ${canLoadMore ? "block" : "hidden"} load-more mt-10 text-center`}>
+    <div className="flex flex-col justify-center items-center">
+      <div className="list-card min-h-[500px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 sm:gap-4">
+          {initPages?.items?.map((page: PageNamespace.Page, index: number) => {
+            return <CardListItem key={`unit-preview-item-${page.id}`} variant="unit" page={page} pages={pages} index={index} unit={unit} country={page.country} ref={ref} />
+          })}
+          {/* {pages.map((page: PageNamespace.Page, index: number) => {
+            return <CardListItem key={`unit-preview-item-${page.id}`} variant="unit" page={page} pages={pages} index={index} unit={unit} country={country} ref={ref} />
+          })} */}
+        </div>
+        {/* <div className={` ${canLoadMore ? "block" : "hidden"} load-more mt-10 text-center`}>
         <a rel="next" onClick={loadMore} className="btn btn-circle p-2">
           <PlusIcon className="w-[24px] h-[24px]" />
         </a>
+      </div>] */}
       </div>
+
+      <Pagination pages={initPages}/>
+
     </div>
+
   );
 };
