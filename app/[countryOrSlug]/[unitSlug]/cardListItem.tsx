@@ -16,13 +16,12 @@ type cardListItem = {
     pages: PageNamespace.Page[],
     index: number,
     page: PageNamespace.Page,
-    ref: LegacyRef<HTMLDivElement> | undefined,
     country: CountryNamespace.GET,
     unit?: UnitType,
     variant: "category" | "unit"
 }
 
-export default forwardRef(function({ page, pages, index, country, unit, variant }: cardListItem, ref: LegacyRef<HTMLDivElement>) {
+export default function({ page, pages, index, country, unit, variant }: cardListItem) {
 
     if(variant != "category" && !unit){
         throw new Error("unit can't be empty when variant is not category")
@@ -31,7 +30,6 @@ export default forwardRef(function({ page, pages, index, country, unit, variant 
     return (
 
         <div
-            ref={index == pages.length - 1 ? ref : null}
             key={`cardlist-page-index-${page.slug}`}
             className="card rounded-lg border border-gray-100 shadow-sm hover:shadow hover:border-gray-200 bg-slate-50"
         >
@@ -101,4 +99,4 @@ export default forwardRef(function({ page, pages, index, country, unit, variant 
         </div>
 
     )
-})
+}

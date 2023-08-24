@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@heroicons/react": "^2.0.16",
+    "@nextui-org/pagination": "^2.0.15",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "^20.3.3",
     "@types/react": "^18.2.14",
