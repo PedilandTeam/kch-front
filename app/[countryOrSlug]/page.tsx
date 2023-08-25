@@ -52,7 +52,7 @@ const pathGenerator = async (
     if (countryOrSlug) {
       try {
         const pageData = await (
-          await API_ROUTES.PAGES.GET_ALL(1, 1, countryOrSlug, 20)
+          await API_ROUTES.PAGES.GET_ALL(1, 1, {slug: countryOrSlug}, 20)
         ).json();
         if (!pageData?.items) {
           return NOT_FOUND;
