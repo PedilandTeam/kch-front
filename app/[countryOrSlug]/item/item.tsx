@@ -8,20 +8,10 @@ export type PageItemProps = {
   pageData: PageNamespace.Page;
 };
 
-// export function generateMetadata({params, searchParams}: GenerateMetadataProps): Metadata{
-
-//   console.log(params);
-//   console.log(searchParams);
-//   return {
-//     title: `changed ${JSON.stringify(searchParams)}`
-//   }
-// }
-
-// export const metadata: Metadata = {
-//   title: "hello"
-// }
-
 export default function PageItem({ pageData }: PageItemProps) {
+
+  
+
   return (
     <div className="component page-item">
 
