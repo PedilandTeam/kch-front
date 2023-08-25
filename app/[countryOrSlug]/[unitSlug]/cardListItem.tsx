@@ -51,7 +51,7 @@ export default function ({ page, pages, index, country, unit, variant }: cardLis
                         {/* @ts-ignore */}
                         <div className="rating">
                             <input type="radio" name="rating-1" className="mask w-[20px] h-[20px] mask-star-2 bg-gray-200" />
-                            <input type="radio" name="rating-2" className="mask w-[20px] h-[20px] mask-star-2 bg-gray-200" checked />
+                            <input type="radio" name="rating-2" className="mask w-[20px] h-[20px] mask-star-2 bg-gray-200" />
                             <input type="radio" name="rating-2" className="mask w-[20px] h-[20px] mask-star-2 bg-gray-200" />
                             <input type="radio" name="rating-2" className="mask w-[20px] h-[20px] mask-star-2 bg-gray-200" />
                             <input type="radio" name="rating-2" className="mask w-[20px] h-[20px] mask-star-2 bg-gray-200" />

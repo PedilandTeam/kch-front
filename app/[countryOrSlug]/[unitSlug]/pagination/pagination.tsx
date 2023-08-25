@@ -2,10 +2,16 @@
 import { PageNamespace } from "@/types/page";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import queryString from "query-string";
 import React, { useCallback, useEffect, useState, useTransition } from "react";
 
 
 
+type ParsedSearchParams = {
+    page?: number
+    city?: number | number[]
+    category?: number | number[]
+}
 type PaginationProps = {
     pages: PageNamespace.GET
 }
@@ -23,7 +29,19 @@ export default function ({ pages }: PaginationProps) {
     const pathname = usePathname()
     const searchParams = useSearchParams()
     const [isPending, startTransition] = useTransition()
+    const [parsedSearchParams, setParsedSearchParams] = useState<ParsedSearchParams>()
 
+
+    useEffect(() => {
+        setParsedSearchParams(
+          queryString.parse(searchParams.toString(), { arrayFormat: "comma" })
+        );
+      }, [searchParams]);
+
+      useEffect(() => {
+        console.log(parsedSearchParams);
+        
+      }, [parsedSearchParams])
 
 
     /** 
@@ -67,31 +85,32 @@ export default function ({ pages }: PaginationProps) {
         })
     }
 
+    
+    
     useEffect(() => {
         const pageInSearchParams = searchParams.get("page");
         if (!pageInSearchParams) return;
         setPageNumber(+pageInSearchParams)
     }, [searchParams])
 
+    const routeGenerator = (page: number | string, parsedSearchParams: ParsedSearchParams | undefined) => {
+        delete parsedSearchParams?.page
+        router.replace(`${pathname}?page=${page}&${queryString.stringify(parsedSearchParams || {}, {arrayFormat: "comma"})}`, {scroll: true})
+    }
 
     const paginationButtonClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-        // updatePagination()
-        router.replace(`${pathname}?page=${e.currentTarget.textContent}`, {scroll: true})
+        routeGenerator(e.currentTarget?.textContent ?? 1, parsedSearchParams)
     }
 
     const nextButtonClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-        // const buttonNumber = +e.currentTarget.textContent!
         if (pageNumber < totalPages) {
-            // updatePagination()
-            router.replace(`${pathname}?page=${pageNumber + 1}`, { scroll: true })
+            routeGenerator(pageNumber+1, parsedSearchParams)
         }
     }
 
     const prevButtonClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-        // const buttonNumber = +e.currentTarget.textContent!
         if (pageNumber > 1) {
-
-            router.replace(`${pathname}?page=${pageNumber - 1}`, { scroll: true })
+            routeGenerator(pageNumber-1, parsedSearchParams)
         }
     }
 
