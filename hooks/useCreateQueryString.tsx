@@ -28,8 +28,7 @@ export default function useCreateQueryString(){
             newValue.push(...targetValues);
           }
           params[name] = newValue;
-          console.log("params[name]", params[name]);
-          
+          params.page = "1"
           return queryString.stringify(params, { arrayFormat: "comma" });
         },
         [searchParams]

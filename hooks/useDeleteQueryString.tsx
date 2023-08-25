@@ -24,6 +24,7 @@ export default function useDeleteQueryString(){
             if (indexofTarget == -1) return;
             targetValues.splice(indexofTarget, 1);
           }
+          params.page = "1"
           return queryString.stringify(params, { arrayFormat: "comma" });
         },
         [searchParams]
