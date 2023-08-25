@@ -75,7 +75,7 @@ export default function ({ page, country, variant }: cardListItem) {
                                     <Link
                                         href={categoryPathGenerator(
                                             country.code,
-                                            page.unit?.name,
+                                            page.unit?.slug,
                                             page.category.slug
                                         )}
                                     >

@@ -35,6 +35,10 @@ export default async function UntiList({unit, country, pageNumber, city, categor
   const cities = await fetchCities(country.code);
   const categories: CategoryNamespace.category[] = unit.categories;
   const pages: PageNamespace.GET = await (await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 30, {countryCode: country.code, unitId: unit.id, categoryIds: category, cityIds: city})).json()
+
+  console.log(pages);
+  
+
   let notFound = false
   
   if(pages.items.length == 0){
