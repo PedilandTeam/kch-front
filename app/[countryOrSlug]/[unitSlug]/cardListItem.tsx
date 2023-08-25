@@ -21,9 +21,9 @@ type cardListItem = {
     variant: "category" | "unit"
 }
 
-export default function({ page, pages, index, country, unit, variant }: cardListItem) {
+export default function ({ page, pages, index, country, unit, variant }: cardListItem) {
 
-    if(variant != "category" && !unit){
+    if (variant != "category" && !unit) {
         throw new Error("unit can't be empty when variant is not category")
     }
 
@@ -49,16 +49,13 @@ export default function({ page, pages, index, country, unit, variant }: cardList
 
                     <div className="flex mt-1 card-rating">
                         {/* @ts-ignore */}
-                        <Rating
-                            readonly
-                            initialRating={0}
-                            emptySymbol={
-                                <StarIcon className="h-5 w-5 text-gray-300" />
-                            }
-                            fullSymbol={
-                                <StarIcon className="h-6 w-6 text-yellow-400" />
-                            }
-                        />
+                        <div className="rating">
+                            <input type="radio" name="rating-1" className="mask w-[20px] h-[20px] mask-star-2 bg-gray-200" />
+                            <input type="radio" name="rating-2" className="mask w-[20px] h-[20px] mask-star-2 bg-gray-200" checked />
+                            <input type="radio" name="rating-2" className="mask w-[20px] h-[20px] mask-star-2 bg-gray-200" />
+                            <input type="radio" name="rating-2" className="mask w-[20px] h-[20px] mask-star-2 bg-gray-200" />
+                            <input type="radio" name="rating-2" className="mask w-[20px] h-[20px] mask-star-2 bg-gray-200" />
+                        </div>
                         {/* <span className="flex flex-wrap content-center mr-2 text-sm text-gray-500">
                       (0 نظر)
                     </span> */}

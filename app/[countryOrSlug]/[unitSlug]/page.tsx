@@ -2,14 +2,16 @@ import { metadata } from "@/app/layout";
 import { API_ROUTES } from "@/routes";
 import { CountryNamespace } from "@/types/country";
 import { UnitType } from "@/types/unit";
+import { isNumber } from "lodash";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import queryString from "query-string";
 import { PathGeneratorType } from "../page";
 import UnitList from "./unitList";
 
 const pathGenerator = async (
   countryOrSlug: string,
-  unitSlug: string
+  unitSlug: string,
 ): Promise<PathGeneratorType> => {
   const units = await (await API_ROUTES.UNITS.GET_ALL(2000)).json();
   const currentUnit = units.find((unit: UnitType) => unit.slug == unitSlug);
@@ -62,12 +64,18 @@ export const generateMetadata = async ({params: { countryOrSlug, unitSlug }}: ge
   };
 };
 
-export default async function UnitPage({
-  params: { countryOrSlug, unitSlug },
-}: {
-  params: { countryOrSlug: string; unitSlug: string };
-}) {
+type Param =  number | undefined;
+type ParsedSearchParams = {page?: number | number[], category?: number | number[], city?: any}
+
+
+export default async function UnitPage({params: { countryOrSlug, unitSlug }, searchParams}: {params: { countryOrSlug: string; unitSlug: string }, searchParams:{ [key: string]: string | string[] | undefined }}) {
+
+  
+  let parsedSearchParams: ParsedSearchParams
   let pathInfo: PathGeneratorType;
+
+  parsedSearchParams = queryString.parse(queryString.stringify(searchParams ?? {}), {arrayFormat:"comma", parseNumbers: true}) as ParsedSearchParams
+  const {page: pageNumber, category, city} = parsedSearchParams
 
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug);
@@ -77,7 +85,7 @@ export default async function UnitPage({
 
   if (pathInfo.type) {
     //@ts-expect-error
-    return <UnitList {...pathInfo.props} />;
+    return <UnitList {...pathInfo.props} city={city} category={category} pageNumber={pageNumber} />;
   } else {
     notFound();
   }

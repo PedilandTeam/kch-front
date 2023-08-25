@@ -1,8 +1,9 @@
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CityNamespace } from "@/types/city";
-import { Country } from "@/types/page";
+import { Country, PageNamespace } from "@/types/page";
 import { UnitType } from "@/types/unit";
+import { notFound } from "next/navigation";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { CardsList } from "./cardsList";
 import ListFilter from "./filter/listFilter";
@@ -10,6 +11,9 @@ import ListFilter from "./filter/listFilter";
 type PagesListProps = {
   unit: UnitType;
   country: Country;
+  pageNumber?: number;
+  city?: number | number[];
+  category: number | number[];
 };
 
 async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
@@ -27,11 +31,16 @@ async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
   return cities;
 }
 
-export default async function UntiList({unit, country}: PagesListProps) {
+export default async function UntiList({unit, country, pageNumber, city, category}: PagesListProps) {
   const cities = await fetchCities(country.code);
   const categories: CategoryNamespace.category[] = unit.categories;
-  const pages = await (await API_ROUTES.PAGES.GET_ALL_PREVIEW(1, 30, {countryCode: country.code, unitId: unit.id})).json()
-
+  const pages: PageNamespace.GET = await (await API_ROUTES.PAGES.GET_ALL_PREVIEW(pageNumber ? pageNumber : 1, 30, {countryCode: country.code, unitId: unit.id, categoryIds: category, cityIds: city})).json()
+  let notFound = false
+  
+  if(pages.items.length == 0){
+    notFound = true
+  }
+  
   
 
   // if (!unit.id) {
@@ -52,7 +61,13 @@ export default async function UntiList({unit, country}: PagesListProps) {
             <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">
               لیست {unit?.name} فارسی زبان در {country?.name}
             </h1>
-            <CardsList initPages={pages} unit={unit} country={country} />
+            {
+              notFound 
+              ? 
+              <p>با فیلترهای وارد شده چیزی یافت نشد </p>
+              :
+              <CardsList pages={pages} unit={unit} country={country} />
+            }
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@
 import { PageNamespace } from "@/types/page";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState, useTransition } from "react";
+import React, { useCallback, useEffect, useState, useTransition } from "react";
 
 
 
@@ -99,24 +99,27 @@ export default function ({ pages }: PaginationProps) {
         e.preventDefault()
     }
 
+    const isPrevOrNext = useCallback((num: number) => {
+            return num > pageNumber ? {rel: "next"} : num < pageNumber ? {rel: "prev"} : num == pageNumber ? {} : {}
+    }, [pageNumber])
 
     return (
         <div className="flex justify-center items-center mt-9">
 
-            <Link href={`${pathname}?page=${pageNumber + 1}`} onClick={buttonLinkHandler}>
+            <Link rel="next" href={`${pathname}?page=${pageNumber + 1}`} onClick={buttonLinkHandler}>
                 <button onClick={nextButtonClickHandler} className={`join-item btn ml-2 ${pageNumber == totalPages && "btn-active"} `}>بعدی</button>
 
             </Link>
             <div className="join" dir="ltr">
 
-                <Link href={`${pathname}?page=1`} onClick={buttonLinkHandler}>
+                <Link {...isPrevOrNext(1)} href={`${pathname}?page=1`} onClick={buttonLinkHandler}>
                     <button onClick={paginationButtonClickHandler} className={`join-item btn ${pageNumber == 1 && "btn-active"} `}>{1}</button>
                 </Link>
 
                 {
                     pagesArray?.map((number, index) => {
                         return (
-                            <Link key={`pagination-button-${number}`} href={`${pathname}?page=${number}`} onClick={buttonLinkHandler}>
+                            <Link {...isPrevOrNext(number)} key={`pagination-button-${number}`} href={`${pathname}?page=${number}`} onClick={buttonLinkHandler}>
                                 <button onClick={paginationButtonClickHandler} className={`join-item btn ${pageNumber == number && "btn-active"} `}>{number}</button>
                             </Link>
                         )
@@ -124,7 +127,7 @@ export default function ({ pages }: PaginationProps) {
                 }
                 {
                     totalPages >= paginationLimit ? (
-                        <Link href={`${pathname}?page=${totalPages}`} onClick={buttonLinkHandler}>
+                        <Link {...isPrevOrNext(totalPages)} href={`${pathname}?page=${totalPages}`} onClick={buttonLinkHandler}>
                             <button onClick={paginationButtonClickHandler} className={`join-item btn ${pageNumber == totalPages && "btn-active"}`}>{totalPages}</button>
                         </Link>
                     )
@@ -132,7 +135,7 @@ export default function ({ pages }: PaginationProps) {
                         null
                 }
             </div>
-            <Link href={`${pathname}?page=${pageNumber - 1}`} onClick={buttonLinkHandler}>
+            <Link rel="prev" href={`${pathname}?page=${pageNumber - 1}`} onClick={buttonLinkHandler}>
                 <button onClick={prevButtonClickHandler} className={`join-item btn mr-2 ${pageNumber == 1 && "btn-disabled"} `}>قبلی</button>
             </Link>
 
