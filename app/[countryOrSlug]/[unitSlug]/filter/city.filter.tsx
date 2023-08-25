@@ -109,13 +109,6 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
-  /**
-   * auto focusing on search input
-   */
-  // useEffect(() => {
-  //   if (inputRef.current) inputRef.current.focus();
-  // }, [inputRef]);
-  
   const router = useRouter();
 
   

@@ -71,7 +71,7 @@ export default function ({ pages }: PaginationProps) {
 
                 setPagesArray([...prevPagesArrayCache.reverse(), ...pagesArrayCache])
             } else {
-                if(totalPages > 2){
+                if(totalPages > 1){
                     const temp = []
                     for(let i=2; i <= totalPages; i++){
                         temp.push(i)

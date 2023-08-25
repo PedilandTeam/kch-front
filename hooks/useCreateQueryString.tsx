@@ -15,6 +15,7 @@ export default function useCreateQueryString(){
           const newValue = [...value];
           if (!targetValues) {
             params[name] = value;
+            params.page = "1"
             return queryString.stringify(params, {arrayFormat: "comma"});
           }
           if (!Array.isArray(targetValues)) {

@@ -18,6 +18,7 @@ export default function useDeleteQueryString(){
             return;
           }
           if (!Array.isArray(targetValues)) {
+            params.page = "1"
             delete params[name];
           } else {
             const indexofTarget = targetValues.findIndex((param) => param == value);
