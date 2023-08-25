@@ -4,8 +4,13 @@ import { CountryNamespace } from "@/types/country";
 import { UnitType } from "@/types/unit";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import CategoryList from "./categoryList/categoryList";
+import CategoryList from "./categoryList";
 import { PathGeneratorType } from "../../page";
+import queryString from "query-string";
+
+
+
+type ParsedSearchParams = {page?: number | number[], city?: any}
 
 const pathGenerator = async (countryOrSlug: string, unitSlug: string, categorySlug: string): Promise<PathGeneratorType> => {
 
@@ -61,12 +66,14 @@ export const generateMetadata = async ({params: { countryOrSlug, unitSlug, categ
   };
 };
 
-export default async function CategoryPage({
-  params: { countryOrSlug, unitSlug, categorySlug },
-}: {
-  params: { countryOrSlug: string; unitSlug: string; categorySlug: string };
-}) {
+export default async function CategoryPage({params: { countryOrSlug, unitSlug, categorySlug }, searchParams}: {params: { countryOrSlug: string; unitSlug: string; categorySlug: string }, searchParams:{ [key: string]: string | string[] | undefined }}) {
+
+  let parsedSearchParams: ParsedSearchParams
   let pathInfo: PathGeneratorType;
+
+  parsedSearchParams = queryString.parse(queryString.stringify(searchParams ?? {}), {arrayFormat:"comma", parseNumbers: true}) as ParsedSearchParams
+  const {page: pageNumber, city} = parsedSearchParams
+
 
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug, categorySlug);
@@ -76,7 +83,7 @@ export default async function CategoryPage({
 
   if (pathInfo.type) {
     //@ts-expect-error
-    return <CategoryList {...pathInfo.props} />;
+    return <CategoryList {...pathInfo.props} pageNumber={pageNumber} city={city} />;
   } else {
     notFound();
   }

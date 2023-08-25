@@ -34,7 +34,7 @@ async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
 export default async function UntiList({unit, country, pageNumber, city, category}: PagesListProps) {
   const cities = await fetchCities(country.code);
   const categories: CategoryNamespace.category[] = unit.categories;
-  const pages: PageNamespace.GET = await (await API_ROUTES.PAGES.GET_ALL_PREVIEW(pageNumber ? pageNumber : 1, 30, {countryCode: country.code, unitId: unit.id, categoryIds: category, cityIds: city})).json()
+  const pages: PageNamespace.GET = await (await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 30, {countryCode: country.code, unitId: unit.id, categoryIds: category, cityIds: city})).json()
   let notFound = false
   
   if(pages.items.length == 0){

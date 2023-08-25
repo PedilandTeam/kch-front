@@ -13,19 +13,12 @@ import ItemProfilePicture from "../item/itemProfilePicture";
 
 
 type cardListItem = {
-    pages: PageNamespace.Page[],
-    index: number,
     page: PageNamespace.Page,
     country: CountryNamespace.GET,
-    unit?: UnitType,
     variant: "category" | "unit"
 }
 
-export default function ({ page, pages, index, country, unit, variant }: cardListItem) {
-
-    if (variant != "category" && !unit) {
-        throw new Error("unit can't be empty when variant is not category")
-    }
+export default function ({ page, country, variant }: cardListItem) {
 
     return (
 
@@ -82,7 +75,7 @@ export default function ({ page, pages, index, country, unit, variant }: cardLis
                                     <Link
                                         href={categoryPathGenerator(
                                             country.code,
-                                            unit!.slug,
+                                            page.unit?.name,
                                             page.category.slug
                                         )}
                                     >

@@ -49,11 +49,14 @@ const baseFetch = async ({path, method = "GET", params, body, headers}: requestT
 
 export const API_ROUTES = {
     PAGES: {
-        GET_ALL: (page: number, limit: number, slug?: string, revalidate?: number, cache?: requestCacheType) => {
-            return baseFetch({path:"pages", method:"GET", params:{page, limit, ...slug && {slug}}, headers: {"api-key": API_KEY}},  {...cache && {cache}, ...revalidate && {revalidate}})
-        },
+        // GET_ALL: (page: number, limit: number, slug?: string, revalidate?: number, cache?: requestCacheType) => {
+        //     return baseFetch({path:"pages", method:"GET", params:{page, limit, ...slug && {slug}}, headers: {"api-key": API_KEY}},  {...cache && {cache}, ...revalidate && {revalidate}})
+        // },
         GET_ALL_PREVIEW: (page: number, limit: number, {slug, countryCode, status, unitId, categoryIds, cityIds}: {slug?: string, countryCode?: string, status?: string, unitId?: number, categoryIds?: number | number[], cityIds?: number | number[]}, revalidate?: number, cache?: requestCacheType) => {
             return baseFetch({path:"pages/preview", method:"GET", params:{page, limit, ...slug && {slug}, ...countryCode && {countryCode}, ...status && {status}, ...unitId && {unitId}, ...categoryIds && {categoryIds: `${categoryIds}`}, ...cityIds && {cityIds: `${cityIds}`}}},  {...cache && {cache}, ...revalidate && {revalidate}})
+        },
+        GET_ALL: (page: number, limit: number, {slug, countryCode, status, unitId, categoryIds, cityIds}: {slug?: string, countryCode?: string, status?: string, unitId?: number, categoryIds?: number | number[], cityIds?: number | number[]}, revalidate?: number, cache?: requestCacheType) => {
+            return baseFetch({path:"pages/preview", method:"GET", params:{page, limit, ...slug && {slug}, ...countryCode && {countryCode}, ...status && {status}, ...unitId && {unitId}, ...categoryIds && {categoryIds: `${categoryIds}`}, ...cityIds && {cityIds: `${cityIds}`}}, headers: {"api-key": API_KEY}},  {...cache && {cache}, ...revalidate && {revalidate}})
         },
         GET_ONE: (id: string , revalidate?: number, cache?: requestCacheType) => {
             return baseFetch({path: `pages/${id}`, method: "GET", headers: {"api-key": API_KEY}},  {...cache && {cache}, ...revalidate && {revalidate}})

@@ -1,7 +1,7 @@
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CityNamespace } from "@/types/city";
-import { Country } from "@/types/page";
+import { Country, PageNamespace } from "@/types/page";
 import { UnitType } from "@/types/unit";
 import { notFound } from "next/navigation";
 import { ItemBreadCrumb } from "./breadcrumb";
@@ -12,6 +12,8 @@ type PagesListProps = {
   category: CategoryNamespace.category;
   country: Country;
   unit: UnitType;
+  pageNumber: number;
+  city: number | number[]
 };
 
 async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
@@ -29,13 +31,17 @@ async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
   return cities;
 }
 
-export default async function CategoryList({
-  category,
-  country,
-  unit,
-}: PagesListProps) {
+export default async function CategoryList({category, country, unit, pageNumber, city}: PagesListProps) {
+
   if (!country) return notFound()
   const cities = await fetchCities(country?.code);
+  const pages: PageNamespace.GET = await (await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 30, {countryCode: country.code, unitId: unit.id, cityIds: city, categoryIds: category.id})).json()
+  let isNotFound = false
+  
+  if(pages.items.length == 0){
+    isNotFound = true
+  }
+  
 
   return (
     <div className="component mt-5 page-list">
@@ -54,7 +60,7 @@ export default async function CategoryList({
               لیست {category?.name} فارسی زبان در {country?.name}
             </h1>
 
-            <CardsList category={category} country={country} />
+            <CardsList pages={pages} category={category} country={country} />
           </div>
         </div>
       </div>

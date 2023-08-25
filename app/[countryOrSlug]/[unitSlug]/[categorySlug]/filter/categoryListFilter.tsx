@@ -3,7 +3,7 @@ import { _TXT } from "@app/text/index";
 import { FunnelIcon } from "@client-packages/heroicons/components";
 import FilterMobile from "./filter.mobile";
 import { CityNamespace } from "@/types/city";
-import CityFilter from "../../../filter/city.filter";
+import CityFilter from "../../filter/city.filter";
 
 type ListFilterProps = {
   cities: CityNamespace.GET;
