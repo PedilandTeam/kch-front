@@ -16,7 +16,7 @@ export default function SocialLink({ name, link }: socialLinkProps) {
 
     return (
         link  ?
-            <a href={`https://${link}`} rel="norefrer" target="_blank" >
+            <a href={name == "instagram" ? `https://www.instagram.com/${link}` : name == "facebook" ? `https://www.youtube.com/${link}` : name == "telegram" ? `https://t.me/${link}` : ""} rel="norefrer" target="_blank" >
                 {
                     name == "instagram" ? <InstagramIcon /> : name == "facebook" ? <FacebookIcon /> : name == "linkedin" ? <LinkedinIcon /> : name == "youtube" ? <YoutubeIcon/> : null
                 }

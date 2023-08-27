@@ -52,6 +52,7 @@ export interface Socials {
     facebook: string;
     twitter: string;
     linkedin: string;
+    telegram: string;
 }
 export interface Address {
     country: string;

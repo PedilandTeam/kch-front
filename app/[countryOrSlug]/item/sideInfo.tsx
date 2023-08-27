@@ -41,6 +41,7 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
               key={`side-info-${index}`}
               href={image.href || "#"}
               target="_blank"
+              rel="nofollow noopener"
             >
               <Image
                 key={image.href}
@@ -60,6 +61,7 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
               key={`side-info-icons-${index}`}
               href={Icon.href || "#"}
               target="_blank"
+              rel="nofollow noopener"
             >
               {Icon.Component}
             </Link>

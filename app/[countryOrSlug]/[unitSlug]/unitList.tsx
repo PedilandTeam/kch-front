@@ -34,22 +34,21 @@ async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
 export default async function UntiList({unit, country, pageNumber, city, category}: PagesListProps) {
   const cities = await fetchCities(country.code);
   const categories: CategoryNamespace.category[] = unit.categories;
-  const pages: PageNamespace.GET = await (await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 30, {countryCode: country.code, unitId: unit.id, categoryIds: category, cityIds: city})).json()
+  let isNotFound = false
+  let pages: PageNamespace.GET | undefined = undefined
 
-  console.log(pages);
-  
 
-  let notFound = false
-  
-  if(pages.items.length == 0){
-    notFound = true
+  try{
+    pages = await (await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 30, {countryCode: country.code, unitId: unit.id, categoryIds: category, cityIds: city})).json()
+  }catch(e: any){
+    isNotFound = true
+
   }
-  
-  
 
-  // if (!unit.id) {
-  //   return <span className="loading loading-ring loading-lg"></span>;
-  // }
+  if(pages && pages.items.length == 0){
+    isNotFound = true
+  }
+
   return (
     <div className="component mt-5 page-list">
       <div className="container mx-auto max-w-[1144px]">
@@ -66,11 +65,11 @@ export default async function UntiList({unit, country, pageNumber, city, categor
               لیست {unit?.name} فارسی زبان در {country?.name}
             </h1>
             {
-              notFound 
+              isNotFound 
               ? 
-              <p>با فیلترهای وارد شده چیزی یافت نشد </p>
+              <h4>با فیلترهای وارد شده چیزی یافت نشد </h4>
               :
-              <CardsList pages={pages} unit={unit} country={country} />
+              <CardsList pages={pages!} unit={unit} country={country} />
             }
           </div>
         </div>
