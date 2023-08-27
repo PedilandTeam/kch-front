@@ -78,7 +78,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
             {
               pageData?.socials?.telegram
                 ?
-                <Link href={`https://t.me/${pageData?.socials?.telegram}`}  rel="nofollow noopener">
+                <Link href={`https://t.me/${pageData?.socials?.telegram}`} target="_blank" rel="nofollow noopener">
                   <TelegramIcon/>
                 </Link>
                 :
@@ -87,7 +87,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
             {
               pageData.socials?.instagram
                 ?
-                <Link href={`https://www.instagram.com/${pageData.socials?.instagram}`} rel="nofollow noopener" >
+                <Link href={`https://www.instagram.com/${pageData.socials?.instagram}`} target="_blank" rel="nofollow noopener" >
                   <InstagramIcon/>
                 </Link>
                 :
@@ -96,7 +96,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
             {
               pageData.socials?.facebook
                 ?
-                <Link href={`https://www.facebook.com/${pageData.socials?.facebook}`}  rel="nofollow noopener">
+                <Link href={`https://www.facebook.com/${pageData.socials?.facebook}`} target="_blank"  rel="nofollow noopener">
                   <FacebookIcon/>
                 </Link>
                 :
@@ -106,7 +106,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
             {
               pageData.socials?.youtube
                 ?
-                <Link href={`https://www.youtube.com/${pageData.socials?.youtube}`}  rel="nofollow noopener">
+                <Link href={`https://www.youtube.com/${pageData.socials?.youtube}`} target="_blank" rel="nofollow noopener">
                   <YoutubeIcon/>
                 </Link>
                 :
