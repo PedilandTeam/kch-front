@@ -47,7 +47,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         let page: number = 1
         let pageEnded = false
         const pagesGenerator = async (page: number) => await (await API_ROUTES.PAGES.GET_ALL(page, 100, {})).json()
-        const pagesSiteMap = []
         while (!pageEnded) {
             const pagesGet = await (await pagesGenerator(page))
             const pages = pagesGet.items
@@ -73,6 +72,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         console.log(e);
     }
 
+    console.log(pagesSiteMap);
+    
     return [
         ...countriesSiteMap,
         ...unitsSiteMap,
