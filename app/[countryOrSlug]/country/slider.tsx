@@ -45,7 +45,7 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
       /> */}
       <div className="max-w-[1144px] sm:m-auto absolute w-auto bottom-[10%] sm:bottom-[15%] sm:left-0 sm:right-0 sm:w-full">
         <div className="wrap text-center">
-          <h3 className="sm:inline-block text-gray-300 bg-pink-700 bg-opacity-70 p-3 sm:pb-[40px] px-3 sm:px-[45px] text-[18px] sm:text-[21px] leading-[30px] sm:leading-[36px] sm:rounded-lg">
+          <h3 className="sm:inline-block text-gray-300 bg-pink-700 bg-opacity-70 p-3 sm:pb-[40px] px-3 sm:px-[20px] text-[18px] sm:text-[21px] leading-[30px] sm:leading-[36px] sm:rounded-lg">
             اگر در
             <span className="text-white font-semibold mx-1 inline-block">
               {currentCountry.name}
@@ -59,7 +59,7 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
             اطرافت داشته باشی
           </h3>
           <h2 className="text-white font-bold text-[30px] sm:text-[40px] mt-3 mx-3 sm:mx-0 sm:-mt-[36px] drop-shadow">
-            بیزینس دایرکتوری کـوچـا رو مـرور کن!
+            راهنمای مشاغل کـوچـا رو مرور کن!
           </h2>
 
           <Link href={"#select-unit"} scroll>

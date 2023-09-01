@@ -73,7 +73,7 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
             <div className="image border border-dashed border-white p-5 ml-4 rounded-full">
               <RectangleStackIcon className="w-9 h-9" />
             </div>
-            <div className="info flex flex-wrap content-center text-[18px]">
+            <div className="info flex flex-wrap content-center text-[20px]">
               <div className="ml-2 font-bold ">{stats.page}</div>
               <div className="font-medium">{_TXT.ITEM._}</div>
             </div>
@@ -82,31 +82,31 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
             <div className="image border border-dashed border-white p-5 ml-4 rounded-full">
               <MapIcon className="w-9 h-9" />
             </div>
-            <div className="info flex flex-wrap content-center text-[18px]">
+            <div className="info flex flex-wrap content-center text-[20px]">
               <div className="ml-2 font-bold ">{stats.city}</div>
               <div className="font-medium">{_TXT.CITY._}</div>
             </div>
           </div>
-          <div className="item w-full sm:w-auto flex mb-6 sm:mb-0">
+          <div className="item w-full sm:w-auto flex">
             <div className="image border border-dashed border-white p-5 ml-4 rounded-full">
               <FolderIcon className="w-9 h-9" />
             </div>
-            <div className="info flex flex-wrap content-center text-[18px]">
+            <div className="info flex flex-wrap content-center text-[20px]">
               <div className="ml-2 font-bold ">{stats.category}</div>
               <div className="font-medium">{_TXT.CATEGORY._}</div>
             </div>
           </div>
-          <div className="item w-full sm:w-auto flex">
+          {/* <div className="item w-full sm:w-auto flex">
             <div className="image border border-dashed border-white p-5 ml-4 rounded-full">
               <EyeIcon className="w-9 h-9" />
             </div>
-            <div className="info flex flex-wrap content-center text-[18px]">
+            <div className="info flex flex-wrap content-center text-[20px]">
               <div className="ml-2 font-bold ">
                 {views ?? _TXT.GENERAL.LOADING}
               </div>
               <div className="font-medium">{_TXT.GENERAL.VIEW}</div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

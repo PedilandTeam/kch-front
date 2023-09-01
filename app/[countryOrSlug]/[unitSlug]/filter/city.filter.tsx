@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import CityFilterSelectedItem from "./city.filter.selected.item";
 import useCreateQueryString from "@/hooks/useCreateQueryString";
 import useDeleteQueryString from "@/hooks/useDeleteQueryString";
+import { FunnelIcon } from "@heroicons/react/24/solid";
 
 type CityFilterType = {
   cities: CityNamespace.city[];
@@ -111,8 +112,6 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
-  
-
   /**
    * save cities that are in city query
    * if city query have a single number it's return string
@@ -123,37 +122,45 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   }).city;
 
   return (
-    <div className="filter-section mb-4">
-      <label htmlFor={id} className="btn btn-primary btn-outline w-full">
-        {_TXT.CITY.SELECT}
-      </label>
-      <div className="px-3 mt-3">
-        {Array.isArray(citiesInQuery) ? (
-          // if city is multiple number, find all of that from cities
-          citiesInQuery.map((cityId) => {
-            if (!cityId) return;
-            const city = cities.find((city) => city.id == +cityId);
-            if (!city) return;
-            return (
-              <CityFilterSelectedItem
-                removeFromShouldBeAdd={removeFromShouldBeAdd}
-                key={`city-selected-item-xz-${cityId}`}
-                city={city}
-              />
-            );
-          })
-        ) : citiesInQuery &&
-          cities.find((city) => city.id == +citiesInQuery) ? (
-          <CityFilterSelectedItem
-            removeFromShouldBeAdd={removeFromShouldBeAdd}
-            key={`city-selected-item-xz-single-`}
-            city={cities.find((city) => city.id == +citiesInQuery)!}
-          />
-        ) : null}
+    <div className="filter-wrap">
+      <div className="filter-section sticky p-5">
+        <div className="filter-title w-full hidden md:flex md:items-center border-b-[2px] border-b-gray-200 pb-2 mb-4">
+          <FunnelIcon className="h-4 w-4 ml-2" />
+          <span className="font-semibold">{_TXT.FILTER._S}</span>
+        </div>
+        <label
+          htmlFor="category-cities-filter"
+          className="btn btn-primary btn-outline w-full"
+        >
+          {_TXT.CITY.SELECT}
+        </label>
+        <div className="px-3 mt-3">
+          {Array.isArray(citiesInQuery) ? (
+            // if city is multiple number, find all of that from cities
+            citiesInQuery.map((cityId) => {
+              if (!cityId) return;
+              const city = cities.find((city) => city.id == +cityId);
+              if (!city) return;
+              return (
+                <CityFilterSelectedItem
+                  removeFromShouldBeAdd={removeFromShouldBeAdd}
+                  key={`city-selected-item-xz-${cityId}`}
+                  city={city}
+                />
+              );
+            })
+          ) : citiesInQuery &&
+            cities.find((city) => city.id == +citiesInQuery) ? (
+            <CityFilterSelectedItem
+              removeFromShouldBeAdd={removeFromShouldBeAdd}
+              key={`city-selected-item-xz-single-`}
+              city={cities.find((city) => city.id == +citiesInQuery)!}
+            />
+          ) : null}
+        </div>
       </div>
-
       {/* Put this part before </body> tag */}
-      <input type="checkbox" id={id} className="modal-toggle z-50" />
+      <input type="checkbox" id={id} className="modal-toggle" />
       <div className="modal">
         <div className=" modal-box p-0 max-h-[550px] ">
           <div className="pt-5 pb-3 px-8 bg-white w-full">

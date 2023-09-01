@@ -8,7 +8,7 @@ export const CATEGORY = {
   ZANAN: "متخصص زنان‌و‌زایمان",
   GOOSH: "متخصص گوش و حلق و بینی",
   UPDATED: " بروزترین دسته‌بندی‌ها",
-  POPULAR: "محبوب‌ترین دسته‌بندی‌ها",
+  POPULAR: "دسته‌بندی‌ها به ترتیب بیشترین آیتم",
 };
 
 export const ITEM = {

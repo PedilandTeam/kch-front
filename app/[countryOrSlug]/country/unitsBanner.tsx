@@ -16,7 +16,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
         <div className="mod-header sm:col-span-4 flex flex-wrap items-center">
           <div className="border-r-[4px] sm:border-r-[5px] border-pink-600 pr-3 sm:pr-5 pl-3 sm:pl-0">
             <h2 className="text-[20px] sm:text-[24px] font-bold mb-1">
-              بیزینس دایرکتوری کـوچـا
+              راهنمای مشاغل کـوچـا
             </h2>
             <p className="mb-4 text-[17px] text-slate-600 font-medium">
               یک ابزار ساده اما کاربردی
@@ -28,7 +28,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
                 اطلاعات منسجم و معتبر در این زمینه مواجه شدی.
               </p>
               <p className="mb-2">
-                بیزینس دایرکتوری کـوچـا که در دو دسته مشاغل و پزشکان فـارسـی
+                راهنمای مشاغل کـوچـا که در دو دسته مشاغل و پزشکان فـارسـی
                 زبـان طبقه‌بندی شده، تصمیم داره این مشکل بزرگ رو حل کنه. در همین
                 راستا به تمام مشاغلی که خارج از ایران فعالیت قانونی خودشون رو به
                 زبـان فارسـی هم ارائه می‌کنن؛ این امکان رو میده تا با ایجاد یک
@@ -48,7 +48,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
                     src={"/images/modules/mod-business-01.webp"}
                     width={400}
                     height={560}
-                    alt="test"
+                    alt="Some Business People"
                     className="rounded-md group-hover:scale-110 transition-all duration-500 cursor-pointer h-[300px] sm:h-auto object-cover"
                   />
                   <div className="info absolute bottom-0 w-full px-4 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md text-[20px] bg-gradient-to-t from-black text-white font-medium">
@@ -64,7 +64,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
                     src={"/images/modules/mod-doctors-01.webp"}
                     width={400}
                     height={560}
-                    alt="test"
+                    alt="a doctor"
                     className="rounded-md group-hover:scale-110 transition-all duration-500 cursor-pointer h-[300px] sm:h-auto object-cover"
                   />
                   <div className="info absolute bottom-0 w-full px-4 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md text-[20px] bg-gradient-to-t from-black text-white font-medium">

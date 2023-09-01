@@ -13,7 +13,7 @@ type PagesListProps = {
   country: Country;
   unit: UnitType;
   pageNumber: number;
-  city: number | number[]
+  city: number | number[];
 };
 
 async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
@@ -31,23 +31,34 @@ async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
   return cities;
 }
 
-export default async function CategoryList({ category, country, unit, pageNumber, city }: PagesListProps) {
-
-  if (!country) return notFound()
+export default async function CategoryList({
+  category,
+  country,
+  unit,
+  pageNumber,
+  city,
+}: PagesListProps) {
+  if (!country) return notFound();
   const cities = await fetchCities(country?.code);
-  let pages: PageNamespace.GET | undefined
-  let isNotFound = false
+  let pages: PageNamespace.GET | undefined;
+  let isNotFound = false;
 
   try {
-    pages = await (await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 30, { countryCode: country.code, unitId: unit.id, cityIds: city, categoryIds: category.id })).json()
+    pages = await (
+      await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 30, {
+        countryCode: country.code,
+        unitId: unit.id,
+        cityIds: city,
+        categoryIds: category.id,
+      })
+    ).json();
   } catch (e) {
-    isNotFound = true 
+    isNotFound = true;
   }
 
   if (pages && pages.items.length == 0) {
-    isNotFound = true
+    isNotFound = true;
   }
-
 
   return (
     <div className="component mt-5 page-list">
@@ -65,14 +76,11 @@ export default async function CategoryList({ category, country, unit, pageNumber
             <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">
               لیست {category?.name} فارسی زبان در {country?.name}
             </h1>
-            {
-              isNotFound
-                ?
-                <h4>با فیلترهای وارد شده چیزی یافت نشد </h4>
-                :
-                <CardsList pages={pages!} category={category} country={country} />
-
-            }
+            {isNotFound ? (
+              <h4>با فیلترهای وارد شده چیزی یافت نشد </h4>
+            ) : (
+              <CardsList pages={pages!} category={category} country={country} />
+            )}
           </div>
         </div>
       </div>

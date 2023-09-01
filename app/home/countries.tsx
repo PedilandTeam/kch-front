@@ -10,7 +10,7 @@ export const HomeCountries = () => {
       <div className="mod-home-countries mx-3 sm:mx-0 pt-4" id="select-country">
         <div className="mod-header pr-3 pl-3 sm:pr-4 sm:pl-0 mb-5 sm:mb-7 border-r-[4px] sm:border-r-[5px] border-pink-600">
           <h2 className="text-[20px] sm:text-[22px] font-semibold">
-            محبوب ترین کشورها:
+            {_TXT.COUNTRY.POPULAR}
           </h2>
         </div>
         <div className="wrap grid grid-cols-1 sm:grid-cols-3 gap-1">
@@ -20,11 +20,11 @@ export const HomeCountries = () => {
                 src="/images/modules/mod-austria-min.jpg"
                 width="400"
                 height="250"
-                alt=""
+                alt="یک تصویر از کشور اتریش"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
-              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md text-[20px] bg-gradient-to-t from-black text-white">
-                {_TXT.COUNTRY.AUSTRIA}
+              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
+                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.AUSTRIA}<span className="font-normal mr-1">(156)</span></h3>
               </div>
             </Link>
           </div>
@@ -34,11 +34,11 @@ export const HomeCountries = () => {
                 src="/images/modules/mod-france-min.jpg"
                 width="400"
                 height="250"
-                alt=""
+                alt="یک تصویر از کشور فرانسه"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
-              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md text-[20px] bg-gradient-to-t from-black text-white">
-                {_TXT.COUNTRY.FRANCE}
+              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
+                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.FRANCE}<span className="font-normal mr-1">(156)</span></h3>
               </div>
             </Link>
           </div>
@@ -48,11 +48,11 @@ export const HomeCountries = () => {
                 src="/images/modules/mod-germany-min.jpg"
                 width="400"
                 height="250"
-                alt=""
+                alt="یک تصویر از کشور آلمان"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
-              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md text-[20px] bg-gradient-to-t from-black text-white">
-                {_TXT.COUNTRY.GERMANY}
+              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
+                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.GERMANY}<span className="font-normal mr-1">(156)</span></h3>
               </div>
             </Link>
           </div>
@@ -62,11 +62,11 @@ export const HomeCountries = () => {
                 src="/images/modules/mod-denmark-min.jpg"
                 width="400"
                 height="250"
-                alt=""
+                alt="یک تصویر از کشور دانمارک"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
-              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md text-[20px] bg-gradient-to-t from-black text-white">
-                {_TXT.COUNTRY.DENMARK}
+              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
+                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.DENMARK}<span className="font-normal mr-1">(156)</span></h3>
               </div>
             </Link>
           </div>
@@ -76,11 +76,11 @@ export const HomeCountries = () => {
                 src="/images/modules/mod-england-min.jpg"
                 width="400"
                 height="250"
-                alt=""
+                alt="یک تصویر از کشور انگلستان"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
-              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md text-[20px] bg-gradient-to-t from-black text-white">
-                {_TXT.COUNTRY.ENGLAND}
+              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
+                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.ENGLAND}<span className="font-normal mr-1">(156)</span></h3>
               </div>
             </Link>
           </div>
@@ -90,11 +90,11 @@ export const HomeCountries = () => {
                 src="/images/modules/mod-georgia-min.jpg"
                 width="400"
                 height="250"
-                alt=""
+                alt="یک تصویر از کشور گرجستان"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
-              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md text-[20px] bg-gradient-to-t from-black text-white">
-                {_TXT.COUNTRY.GEORGIA}
+              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
+                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.GEORGIA}<span className="font-normal mr-1">(156)</span></h3>
               </div>
             </Link>
           </div>

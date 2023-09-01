@@ -11,18 +11,13 @@ type ListFilterProps = {
 };
 export default function CategoryListFilter({ cities }: ListFilterProps) {
   return (
-    <div className="filter-wrap">
+    <>
+      {/* <div className="filter-body pt-4 hidden md:block">
+          <CategoryFilter categories={categories} />
+        </div> */}
+      <CityFilter id="category-cities-filter" cities={cities?.items} />
+
       <FilterMobile cities={cities.items} />
-
-      <div className="filter-title w-full hidden md:flex md:items-center border-b-[2px] border-b-gray-200 pb-2">
-        <FunnelIcon className="h-4 w-4 ml-2" />
-        <span className="font-semibold">{_TXT.FILTER._S}</span>
-      </div>
-
-      <div className="filter-body pt-4 hidden md:block">
-        <CityFilter id="category-cities-filter" cities={cities?.items} />
-        {/* <CategoryFilter categories={categories} /> */}
-      </div>
-    </div>
+    </>
   );
 }
