@@ -123,7 +123,7 @@ export default function CityFilter({ cities, id }: CityFilterType) {
 
   return (
     <div className="filter-wrap">
-      <div className="filter-section sticky p-5">
+      <div className="filter-section">
         <div className="filter-title w-full hidden md:flex md:items-center border-b-[2px] border-b-gray-200 pb-2 mb-4">
           <FunnelIcon className="h-4 w-4 ml-2" />
           <span className="font-semibold">{_TXT.FILTER._S}</span>

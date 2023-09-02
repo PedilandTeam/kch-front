@@ -12,10 +12,10 @@ type ListFilterProps = {
 export default function CategoryListFilter({ cities }: ListFilterProps) {
   return (
     <>
-      {/* <div className="filter-body pt-4 hidden md:block">
-          <CategoryFilter categories={categories} />
-        </div> */}
-      <CityFilter id="category-cities-filter" cities={cities?.items} />
+      <div className="filter-body pt-4 hidden md:block">
+        {/* <CategoryFilter categories={categories} /> */}
+        <CityFilter id="category-cities-filter" cities={cities?.items} />
+      </div>
 
       <FilterMobile cities={cities.items} />
     </>

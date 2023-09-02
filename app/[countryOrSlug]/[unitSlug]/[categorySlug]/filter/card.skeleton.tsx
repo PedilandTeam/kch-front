@@ -3,7 +3,7 @@ import ContentLoader from "react-content-loader";
 export default function CardSkeleton() {
   return (
     <div className="skeleton min-h-[500px]">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 sm:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-4 sm:gap-4">
         {Array.from({ length: 12 }).map((skeleton: any, index) => {
           return (
             <ContentLoader

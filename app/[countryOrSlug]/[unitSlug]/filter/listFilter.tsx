@@ -13,13 +13,8 @@ type ListFilterProps = {
 };
 export default function ListFilter({ cities, categories }: ListFilterProps) {
   return (
-    <div className="filter-wrap">
+    <div className="filter-w">
       <FilterMobile cities={cities.items} categories={categories} />
-
-      <div className="filter-title w-full hidden md:flex md:items-center border-b-[2px] border-b-gray-200 pb-2">
-        <FunnelIcon className="h-4 w-4 ml-2" />
-        <span className="font-semibold">{_TXT.FILTER._S}</span>
-      </div>
 
       <div className="filter-body pt-4 hidden md:block">
         <CityFilter id="cityfilter-modal" cities={cities?.items} />

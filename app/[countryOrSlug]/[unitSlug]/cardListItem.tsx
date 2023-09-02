@@ -25,9 +25,9 @@ export default function ({ page, country, variant }: cardListItem) {
           />
         </Link>
       </figure>
-      <div className="card-body p-5">
+      <div className="card-body px-4 py-5">
         <Link href={`/${page.slug}`}>
-          <h2 className="card-title text-slate-700 hover:text-pink-800 justify-center">
+          <h2 className="card-title text-slate-700 hover:text-pink-800 justify-center truncate">
             {page.title}
           </h2>
         </Link>
@@ -67,7 +67,7 @@ export default function ({ page, country, variant }: cardListItem) {
         </div>
 
         <div className="flex justify-center w-full card-tools text-[15px] mb-1 text-gray-600">
-          <div className="flex ml-5">
+          <div className="flex ml-2">
             <CircleFlag
               alt={`پرچم کشور ${country.name}`}
               width={5}
@@ -76,12 +76,12 @@ export default function ({ page, country, variant }: cardListItem) {
               className="w-5 ml-1"
               title={page?.country?.name}
             />
-            <p className=" truncate">{page?.city?.name}</p>
+            <p className="truncate">{page?.city?.name}</p>
           </div>
           <div className="flex justify-center content-center">
             <FolderIcon className="w-5 ml-1 text-gray-400" />
             {variant == "category" ? (
-              <span>{page?.category?.name}</span>
+              <span className="truncate">{page?.category?.name}</span>
             ) : (
               <Link
                 href={categoryPathGenerator(
@@ -90,7 +90,7 @@ export default function ({ page, country, variant }: cardListItem) {
                   page.category.slug
                 )}
               >
-                <span>{page?.category?.name}</span>
+                <span className="truncate">{page?.category?.name}</span>
               </Link>
             )}
           </div>

@@ -35,4 +35,6 @@ export const GENERAL = {
   PERSIAN: "فارسی زبان",
   LOADING: "درحال بارگذاری",
   LOAD_MORE: "مشاهده موارد بیشتر",
+  NEXT: "بعدی",
+  PREVIOUS: "قبلی",
 };

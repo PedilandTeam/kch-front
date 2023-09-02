@@ -26,13 +26,10 @@ export type checkHandlerType = (value: string | number) => boolean | undefined;
 
 export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   const [modifiedCategories, setModifiedCategories] = useState(categories);
-  
 
-  
   const categorySearchHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    
     if (!categories) return;
     const find = categories.filter((category) =>
       category.name.includes(event.currentTarget.value)
@@ -53,15 +50,11 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
     arrayFormat: "comma",
   }).city;
 
-
   const [parsedSearchParams, setParsedSearchParams] =
     useState<ParsedSearchParamsType>({});
 
   const [isParsedSearchParamsAdded, setIsParsedSearchParamsAdded] =
     useState(false);
-
-
-
 
   // filters that should be added
   const [shouldBeAdd, setShouldBeAdd] = useState<string[]>([]);
@@ -69,29 +62,26 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   const addToShouldBeAdd: addToShouldBeAddType = (item: string) => {
     if (shouldBeAdd.includes(item)) return;
     setShouldBeAdd((old) => [...old, item]);
-  };  
-  
-    const removeFromShouldBeAdd: removeFromShouldBeAddType = (item: string) => {      
-      setShouldBeAdd((old) => {
-        if(!old.includes(item)){
-          return [...old, item]
-        }else{
-          return old.filter(n => n !== item);
-        }
-        // const index = old.indexOf(item);
-        // if (index != -1) {
-        //   old.splice(index, 1);
-        // }
-        // return [...old];
-      });
-    };
-  
+  };
 
-    const clearShouldBeAdd = () => {
-      setShouldBeAdd([]);
-    };
+  const removeFromShouldBeAdd: removeFromShouldBeAddType = (item: string) => {
+    setShouldBeAdd((old) => {
+      if (!old.includes(item)) {
+        return [...old, item];
+      } else {
+        return old.filter((n) => n !== item);
+      }
+      // const index = old.indexOf(item);
+      // if (index != -1) {
+      //   old.splice(index, 1);
+      // }
+      // return [...old];
+    });
+  };
 
-
+  const clearShouldBeAdd = () => {
+    setShouldBeAdd([]);
+  };
 
   useEffect(() => {
     if (isParsedSearchParamsAdded) return;
@@ -129,98 +119,100 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
     //   shouldBeAdd.find((n) => console.log(n))
     // })
     const hasItem = shouldBeAdd.some((n) => n == value);
-    return hasItem
+    return hasItem;
   };
 
   return (
-    <div className="filter-section mb-4">
-      {/* <h3 className="font-medium">{GENERAL.CATEGORY}</h3> */}
+    <div className="filter-wrap">
+      <div className="filter-section mb-4">
+        {/* <h3 className="font-medium">{GENERAL.CATEGORY}</h3> */}
 
-      {/* The button to open modal */}
-      <label htmlFor={id} className={`btn btn-outline btn-primary w-full`}>
-        {citiesInQuery ? _TXT.CATEGORY.SELECT : _TXT.CATEGORY.SELECT}
-      </label>
-      <div className="mt-3 px-3">
-
-
-        {Array.isArray(categoriesInQuery) ? (
-          categoriesInQuery.map((categoryId) => {
-            if (!categoryId) return;
-            const category = categories.find(
-              (category) => category.id == +categoryId
-            );
-            if (!category) return;
-            return (
-              <CategoryFilterSelectedItem
-                key={`category-in-query-${category.slug}`}
-                removeFromShouldBeAdd={removeFromShouldBeAdd}
-                category={category}
-              />
-            );
-          })
-        ) : categoriesInQuery &&
-          categories.find((category) => category.id == +categoriesInQuery) ? (
-          <CategoryFilterSelectedItem
-            removeFromShouldBeAdd={removeFromShouldBeAdd}
-            category={
-              categories.find((category) => category.id == +categoriesInQuery)!
-            }
-          />
-        ) : null}
-
-        
-      </div>
-
-      {/* Put this part before </body> tag */}
-      <input type="checkbox" id={id} className="modal-toggle" />
-      <div className="modal">
-        <div className=" modal-box p-0 max-h-[550px] ">
-          <div className="pt-5 pb-3 px-8 bg-white w-full">
-            <h3 className="flex justify-between content-center text-lg font-bold">
-              انتخاب دسته بندی
-              {categoriesInQuery ? (
-                <span
-                  onClick={deleteAllCategoryHandler}
-                  className="cursor-pointer text-[15px] font-normal text-pink-800"
-                >
-                  {_TXT.GENERAL.DELETE_ALL}
-                </span>
-              ) : null}
-            </h3>
-            <p className="py-3">
-              دسته بندی یا دسته بندی های مورد نظر خود را انتخاب نمایید.
-            </p>
-            <input
-              onChange={categorySearchHandler}
-              type="text"
-              placeholder="جستجو در لیست دسته بندی ها"
-              className="input input-bordered w-full"
-            />
-          </div>
-          <div className="px-8 h-[16rem] overflow-y-scroll">
-            {modifiedCategories?.map((category: CategoryNamespace.category) => {
+        {/* The button to open modal */}
+        <label htmlFor={id} className={`btn btn-outline btn-primary w-full`}>
+          {citiesInQuery ? _TXT.CATEGORY.SELECT : _TXT.CATEGORY.SELECT}
+        </label>
+        <div className="mt-3 px-3">
+          {Array.isArray(categoriesInQuery) ? (
+            categoriesInQuery.map((categoryId) => {
+              if (!categoryId) return;
+              const category = categories.find(
+                (category) => category.id == +categoryId
+              );
+              if (!category) return;
               return (
-                <CategoryFilterItem
-                  key={`category-filter-item-in-x-${category.name}`}
+                <CategoryFilterSelectedItem
+                  key={`category-in-query-${category.slug}`}
                   removeFromShouldBeAdd={removeFromShouldBeAdd}
-                  parsedSearchParams={parsedSearchParams}
-                  checkHandler={checkHandler}
-                  shouldBeAdd={shouldBeAdd}
-                  addToShouldBeAdd={addToShouldBeAdd}
                   category={category}
                 />
               );
-            })}
-          </div>
+            })
+          ) : categoriesInQuery &&
+            categories.find((category) => category.id == +categoriesInQuery) ? (
+            <CategoryFilterSelectedItem
+              removeFromShouldBeAdd={removeFromShouldBeAdd}
+              category={
+                categories.find(
+                  (category) => category.id == +categoriesInQuery
+                )!
+              }
+            />
+          ) : null}
+        </div>
 
-          <div className="modal-action box-border w-full pt-3 pb-5 px-8 mt-3 flex justify-between items-center bg-white shadow-2xl">
-            <label
-              onClick={applyFilters}
-              htmlFor={id}
-              className="btn btn-primary w-full"
-            >
-              {_TXT.GENERAL.CONFIRM}
-            </label>
+        {/* Put this part before </body> tag */}
+        <input type="checkbox" id={id} className="modal-toggle" />
+        <div className="modal">
+          <div className=" modal-box p-0 max-h-[550px] ">
+            <div className="pt-5 pb-3 px-8 bg-white w-full">
+              <h3 className="flex justify-between content-center text-lg font-bold">
+                انتخاب دسته بندی
+                {categoriesInQuery ? (
+                  <span
+                    onClick={deleteAllCategoryHandler}
+                    className="cursor-pointer text-[15px] font-normal text-pink-800"
+                  >
+                    {_TXT.GENERAL.DELETE_ALL}
+                  </span>
+                ) : null}
+              </h3>
+              <p className="py-3">
+                دسته بندی یا دسته بندی های مورد نظر خود را انتخاب نمایید.
+              </p>
+              <input
+                onChange={categorySearchHandler}
+                type="text"
+                placeholder="جستجو در لیست دسته بندی ها"
+                className="input input-bordered w-full"
+              />
+            </div>
+            <div className="px-8 h-[16rem] overflow-y-scroll">
+              {modifiedCategories?.map(
+                (category: CategoryNamespace.category) => {
+                  return (
+                    <CategoryFilterItem
+                      key={`category-filter-item-in-x-${category.name}`}
+                      removeFromShouldBeAdd={removeFromShouldBeAdd}
+                      parsedSearchParams={parsedSearchParams}
+                      checkHandler={checkHandler}
+                      shouldBeAdd={shouldBeAdd}
+                      addToShouldBeAdd={addToShouldBeAdd}
+                      category={category}
+                    />
+                  );
+                }
+              )}
+            </div>
+
+            <div className="modal-action box-border w-full pt-3 pb-5 px-8 mt-3 flex justify-between items-center bg-white shadow-2xl">
+              <label
+                onClick={applyFilters}
+                htmlFor={id}
+                className="btn btn-primary w-full"
+              >
+                {_TXT.GENERAL.CONFIRM}
+              </label>
+            </div>
           </div>
         </div>
       </div>
