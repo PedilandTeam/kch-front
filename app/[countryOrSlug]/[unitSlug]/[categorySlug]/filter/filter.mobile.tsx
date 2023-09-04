@@ -39,6 +39,11 @@ export default function FilterMobile({ cities }: FilterMobileProps) {
             <span className="font-semibold">{_TXT.FILTER._S}</span>
           </div>
           <div className="py-4">
+            <input
+              type="text"
+              placeholder="جستجو"
+              className="input input-bordered w-full mb-3"
+            />
             <CityFilter
               id="mobile-categoryList-cityfilter-modal"
               cities={cities}
