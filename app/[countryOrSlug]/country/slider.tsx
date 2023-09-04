@@ -62,7 +62,7 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
             راهنمای مشاغل کـوچـا رو جستجو کن!
           </h2>
 
-          <div className="search-sec mt-4 mb-5 w-10/12 sm:w-1/2 mx-auto">
+          <div className="search-sec mt-4 mb-5 w-full px-4 sm:px-0 sm:w-1/2 mx-auto">
             <input
               type="text"
               placeholder="اینجا تایپ کن"

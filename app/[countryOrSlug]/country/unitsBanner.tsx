@@ -10,7 +10,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
   return (
     <div className="container mx-auto max-w-[1144px]">
       <div
-        className="mod-units4 grid sm:grid-cols-7 gap-10 mb-8 mt-6 pt-6 mx-3 sm:mb-28 sm:mt-14 sm:pt-14 sm:mx-0"
+        className="mod-units4 grid sm:grid-cols-7 gap-6 sm:gap-10 mb-8 mt-6 pt-6 mx-3 sm:mb-28 sm:mt-14 sm:pt-14 sm:mx-0"
         id="select-unit"
       >
         <div className="mod-header sm:col-span-4 flex flex-wrap items-center">
@@ -49,7 +49,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
                     width={400}
                     height={560}
                     alt="Some Business People"
-                    className="rounded-md group-hover:scale-110 transition-all duration-500 cursor-pointer h-[300px] sm:h-auto object-cover"
+                    className="rounded-md group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-auto object-cover"
                   />
                   <div className="info absolute bottom-0 w-full px-4 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md text-[20px] bg-gradient-to-t from-black text-white font-medium">
                     {_TXT.MENU.BUSINESSES}
@@ -65,7 +65,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
                     width={400}
                     height={560}
                     alt="a doctor"
-                    className="rounded-md group-hover:scale-110 transition-all duration-500 cursor-pointer h-[300px] sm:h-auto object-cover"
+                    className="rounded-md group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-auto object-cover"
                   />
                   <div className="info absolute bottom-0 w-full px-4 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md text-[20px] bg-gradient-to-t from-black text-white font-medium">
                     {_TXT.MENU.DOCTORS}

@@ -101,7 +101,7 @@ export const HomeCountries = () => {
         </div>
         <div className="mt-12 text-center">
           <button
-            className="btn btn-wide"
+            className="btn btn-wide text-[15px]"
             onClick={() => {
               if (document) {
                 (
