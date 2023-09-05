@@ -21,9 +21,9 @@ export const Footer = () => {
   // }, []);
 
   return (
-    <div className="pt-10 pb-5 sm:pb-8 mt-5 sm:mt-10 bg-blue-950 text-gray-50">
-      <footer className="footer footer-center container mx-auto max-w-[1144px]">
-        <div className="grid grid-flow-col gap-3 sm:gap-4 text-[15px]">
+    <div className="pt-10 pb-6 sm:pb-8 mt-5 sm:mt-10 bg-blue-950 text-gray-50">
+      <footer className="footer footer-center container px-3 mx-auto max-w-[1144px]">
+        <div className="grid sm:grid-flow-col gap-3 sm:gap-4 text-[15px]">
           <Link href={"/about"} className="link link-hover">
             {_TXT.MENU.ABOUT}
           </Link>
@@ -128,7 +128,7 @@ export const Footer = () => {
           <p className="font-light">
             {_TXT.FOOTER.COPYRIGHT_TEXT1}
             <Link href="/" className="inline-flex mx-1 link link-hover">
-              {_TXT.GENERAL.KOOCHAA}، {_TXT.GENERAL.KOOCHAA_SLOGAN}
+              {_TXT.GENERAL.KOOCHAA}
             </Link>
             {_TXT.FOOTER.COPYRIGHT_TEXT2}
           </p>
