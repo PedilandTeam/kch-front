@@ -125,7 +125,7 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     <div className="filter-wrap">
       <div className="filter-section">
         <label
-          htmlFor="category-cities-filter"
+          htmlFor={id}
           className="btn btn-primary btn-outline w-full"
         >
           {_TXT.CITY.SELECT}

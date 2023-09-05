@@ -1,10 +1,35 @@
-"use client";
-
 import { _TXT } from "@/app/text";
+import { API_ROUTES } from "@/routes";
+import { CountryNamespace } from "@/types/country";
 import Image from "next/image";
 import Link from "next/link";
+import CountryModalBtn from "./countryModalBtn";
 
-export const HomeCountries = () => {
+
+async function fetchCountries() {
+
+  let countries: CountryNamespace.GET[]
+  try{
+    countries = await (await API_ROUTES.COUNTRIES.GET_ALL()).json()
+  }catch(e){
+    throw new Error("error in get countries")
+  }
+  return countries
+}
+
+
+export const HomeCountries = async () => {
+
+
+  const countries: CountryNamespace.GET[] = await fetchCountries()
+  console.log(countries);
+  
+
+  const getCount = (countryCode: string) => {
+    return countries.find((country: CountryNamespace.GET) => country.code == countryCode)?.pageCount
+  }
+
+
   return (
     <div className="container mx-auto max-w-[1144px] my-12 sm:mt-18 sm:mb-24">
       <div className="mod-home-countries mx-3 sm:mx-0 pt-4" id="select-country">
@@ -24,7 +49,7 @@ export const HomeCountries = () => {
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
               <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
-                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.AUSTRIA}<span className="font-normal mr-1">(156)</span></h3>
+                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.AUSTRIA}<span className="font-normal mr-1">({getCount("at")})</span></h3>
               </div>
             </Link>
           </div>
@@ -38,7 +63,7 @@ export const HomeCountries = () => {
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
               <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
-                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.FRANCE}<span className="font-normal mr-1">(156)</span></h3>
+                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.FRANCE}<span className="font-normal mr-1">({getCount("fr")})</span></h3>
               </div>
             </Link>
           </div>
@@ -52,7 +77,7 @@ export const HomeCountries = () => {
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
               <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
-                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.GERMANY}<span className="font-normal mr-1">(156)</span></h3>
+                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.GERMANY}<span className="font-normal mr-1">({getCount("de")})</span></h3>
               </div>
             </Link>
           </div>
@@ -66,7 +91,7 @@ export const HomeCountries = () => {
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
               <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
-                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.DENMARK}<span className="font-normal mr-1">(156)</span></h3>
+                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.DENMARK}<span className="font-normal mr-1">({getCount("dk")})</span></h3>
               </div>
             </Link>
           </div>
@@ -80,7 +105,7 @@ export const HomeCountries = () => {
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
               <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
-                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.ENGLAND}<span className="font-normal mr-1">(156)</span></h3>
+                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.ENGLAND}<span className="font-normal mr-1">({getCount("uk")})</span></h3>
               </div>
             </Link>
           </div>
@@ -94,25 +119,12 @@ export const HomeCountries = () => {
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
               <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
-                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.GEORGIA}<span className="font-normal mr-1">(156)</span></h3>
+                <h3 className="text-[20px] font-semibold">{_TXT.COUNTRY.GEORGIA}<span className="font-normal mr-1">({getCount("ge")})</span></h3>
               </div>
             </Link>
           </div>
         </div>
-        <div className="mt-12 text-center">
-          <button
-            className="btn btn-wide text-[15px]"
-            onClick={() => {
-              if (document) {
-                (
-                  document.getElementById("modal_country") as HTMLFormElement
-                ).showModal();
-              }
-            }}
-          >
-            {_TXT.COUNTRY.ALL_VIEW}
-          </button>
-        </div>
+        <CountryModalBtn/>
       </div>
     </div>
   );
