@@ -31,11 +31,27 @@ async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
   return cities;
 }
 
+
+async function fetchCategories(countryCode: string, unitId: number): Promise<CategoryNamespace.GET> {
+  
+  let categories: CategoryNamespace.GET | undefined
+  try{
+      categories = await (await API_ROUTES.CATEGOREIS.BY_COUNTRY(countryCode, {page: 1, limit: 100, unitId})).json()
+  }catch(e){
+    console.log(e);
+    throw new Error("Error in get Categories fetchCategories")
+  }
+
+  return categories!
+
+}
+
 export default async function UntiList({unit, country, pageNumber, city, category}: PagesListProps) {
   const cities = await fetchCities(country.code);
-  const categories: CategoryNamespace.category[] = unit.categories;
+  const categories: CategoryNamespace.category[] = await (await fetchCategories(country.code, unit.id)).items
   let isNotFound = false
   let pages: PageNamespace.GET | undefined = undefined
+  
 
 
   try{

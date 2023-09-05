@@ -39,6 +39,7 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  
 
   //category=1,2 -> [1,2] or category=3 -> "3"
   const categoriesInQuery = queryString.parse(searchParams.toString(), {

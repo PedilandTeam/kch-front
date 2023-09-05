@@ -13,6 +13,18 @@ type requestType = {
     headers?: HeadersInit
 }
 
+namespace FetchCategoryFiltersNamespace {
+    
+    export interface byCountry {
+        limit: number,
+        page: number,
+        slug?: string,
+        cityId?: number,
+        unitId?: number
+    }
+
+}
+
 const baseFetch = async ({path, method = "GET", params, body, headers}: requestType, {cache, revalidate}: configType): Promise<Response> => {
     
     return new Promise((resolve, reject) => {
@@ -86,6 +98,9 @@ export const API_ROUTES = {
         },
         MOST_USED: (countryCode?: string, limit: number = 1, revalidate?: number, cache?: requestCacheType) => {
             return baseFetch({path: "categories/mostUsed", params:{limit, ...countryCode && {countryCode}}}, {...cache && {cache}, ...revalidate && {revalidate}})
+        },
+        BY_COUNTRY: (countryCode: string, filter: FetchCategoryFiltersNamespace.byCountry) => {
+            return baseFetch({path: `categories/country/${countryCode}`, params: {page: filter.page, limit: filter.limit, ...filter.cityId && {cityId: filter.cityId}, ...filter.slug && {slug: filter.slug}, ...filter.unitId && {unitId: filter.unitId}}}, {revalidate: 10})
         }
     },
     STATS: {
