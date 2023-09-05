@@ -2,9 +2,9 @@
 
 export default function InstagramIcon() {
     return (
-        <div className="sc-instagram group inline-flex ml-4">
+        <div className="sc-instagram group">
             <svg
-                className="w-6 h-6 text-pink-600 group-hover:text-pink-700 group-hover:cursor-pointer fill-current"
+                className="w-[26px] h-[26px] text-pink-600 group-hover:text-pink-700 group-hover:cursor-pointer fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
             >

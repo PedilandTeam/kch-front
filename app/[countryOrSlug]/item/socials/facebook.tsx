@@ -1,8 +1,8 @@
 export default function FacebookIcon() {
   return (
-    <div className="sc-facebook group inline-flex ml-4">
+    <div className="sc-facebook group">
       <svg
-        className="w-6 h-6 text-blue-500 group-hover:text-blue-600 group-hover:cursor-pointer fill-current"
+        className="w-[26px] h-[26px] text-blue-500 group-hover:text-blue-600 group-hover:cursor-pointer fill-current"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >
