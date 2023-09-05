@@ -16,20 +16,21 @@ type PagesListProps = {
   city: number | number[];
 };
 
-async function fetchCities(countryCode: string): Promise<CityNamespace.GET> {
+async function fetchCities(countryCode: string, categoryId: number): Promise<CityNamespace.GET> {
   let cities: CityNamespace.GET;
 
   try {
     cities = await (
-      await API_ROUTES.CITIES.GET_ALL(1, 100, countryCode, 20)
+      await API_ROUTES.CITIES.BY_COUNTRY(countryCode, {page:1, limit: 100, categoryId})
     ).json();
   } catch (e) {
-    console.log(e);
+    console.log(await e);
     throw new Error("error in get cities fetchCities");
   }
 
   return cities;
 }
+
 
 export default async function CategoryList({
   category,
@@ -39,7 +40,7 @@ export default async function CategoryList({
   city,
 }: PagesListProps) {
   if (!country) return notFound();
-  const cities = await fetchCities(country?.code);
+  const cities = await fetchCities(country.code, category.id);
   let pages: PageNamespace.GET | undefined;
   let isNotFound = false;
 
