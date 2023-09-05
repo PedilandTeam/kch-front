@@ -13,7 +13,7 @@ type requestType = {
     headers?: HeadersInit
 }
 
-namespace FetchCategoryFiltersNamespace {
+namespace CategoryFiltersNamespace {
     
     export interface byCountry {
         limit: number,
@@ -21,6 +21,18 @@ namespace FetchCategoryFiltersNamespace {
         slug?: string,
         cityId?: number,
         unitId?: number
+    }
+
+}
+
+namespace CityFiltersNamespace {
+
+    export interface byCountry {
+        limit: number,
+        page: number,
+        slug?: string,
+        unitId?: number
+        categoryId?: number
     }
 
 }
@@ -48,7 +60,7 @@ const baseFetch = async ({path, method = "GET", params, body, headers}: requestT
             .then((res: Response) => {
                 if(!res.ok){
                     res.json().then(res => console.log(res))
-                    reject()
+                    reject(res.json())
                 }
                 resolve(res)
             })
@@ -82,6 +94,9 @@ export const API_ROUTES = {
     CITIES: {
         GET_ALL: (page: number = 1, limit: number = 20, countryCode?: string ,revalidate?: number, cache?: requestCacheType) => {
             return baseFetch({path: "cities", method: "GET", params:{page, limit, ...countryCode && {countryCode}}}, {...cache && {cache}, ...revalidate && {revalidate}})
+        },
+        BY_COUNTRY: (countryCode: string, filter: CityFiltersNamespace.byCountry) => {
+            return baseFetch({path: `cities/country/${countryCode}`, params: {page: filter.page, limit: filter.limit, ...filter.slug && {slug: filter.slug}, ...filter.unitId && {unitId: filter.unitId}, ...filter.categoryId && {categoryId: filter.categoryId}}}, {revalidate: 10})
         }
     },
     UNITS: {
@@ -99,7 +114,7 @@ export const API_ROUTES = {
         MOST_USED: (countryCode?: string, limit: number = 1, revalidate?: number, cache?: requestCacheType) => {
             return baseFetch({path: "categories/mostUsed", params:{limit, ...countryCode && {countryCode}}}, {...cache && {cache}, ...revalidate && {revalidate}})
         },
-        BY_COUNTRY: (countryCode: string, filter: FetchCategoryFiltersNamespace.byCountry) => {
+        BY_COUNTRY: (countryCode: string, filter: CategoryFiltersNamespace.byCountry) => {
             return baseFetch({path: `categories/country/${countryCode}`, params: {page: filter.page, limit: filter.limit, ...filter.cityId && {cityId: filter.cityId}, ...filter.slug && {slug: filter.slug}, ...filter.unitId && {unitId: filter.unitId}}}, {revalidate: 10})
         }
     },
