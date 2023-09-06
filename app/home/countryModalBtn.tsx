@@ -1,24 +1,22 @@
-"use client"
+"use client";
 
 import { _TXT } from "../text";
 
-
-
 export default () => {
-    return (
-        <div className="mt-12 text-center">
-        <button
-          className="btn btn-wide"
-          onClick={() => {
-            if (document) {
-              (
-                document.getElementById("modal_country") as HTMLFormElement
-              ).showModal();
-            }
-          }}
-        >
-          {_TXT.COUNTRY.ALL_VIEW}
-        </button>
-      </div>
-    )
-}
+  return (
+    <div className="mt-12 text-center">
+      <button
+        className="btn btn-wide"
+        onClick={() => {
+          if (document) {
+            (
+              document.getElementById("modal_country") as HTMLFormElement
+            ).showModal();
+          }
+        }}
+      >
+        {_TXT.COUNTRY.ALL_VIEW}
+      </button>
+    </div>
+  );
+};

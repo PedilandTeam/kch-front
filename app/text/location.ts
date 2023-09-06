@@ -8,6 +8,7 @@ export const COUNTRY = {
   FRANCE: "فرانسه",
   GEORGIA: "گرجستان",
   GERMANY: "آلمان",
+  TURKEY: "ترکیه",
 };
 
 export const CITY = {
