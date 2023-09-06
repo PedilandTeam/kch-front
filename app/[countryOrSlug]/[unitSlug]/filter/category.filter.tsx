@@ -27,6 +27,11 @@ export type checkHandlerType = (value: string | number) => boolean | undefined;
 export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   const [modifiedCategories, setModifiedCategories] = useState(categories);
 
+
+  useEffect(() => {
+    setModifiedCategories(categories)
+  },[categories])
+
   const categorySearchHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {

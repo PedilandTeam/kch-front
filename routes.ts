@@ -19,8 +19,8 @@ namespace CategoryFiltersNamespace {
         limit: number,
         page: number,
         slug?: string,
-        cityId?: number,
-        unitId?: number
+        cityIds?: string,
+        unitIds?: string
     }
 
 }
@@ -31,7 +31,7 @@ namespace CityFiltersNamespace {
         limit: number,
         page: number,
         slug?: string,
-        unitId?: number
+        unitIds?: number
         categoryIds?: string
     }
 
@@ -96,7 +96,7 @@ export const API_ROUTES = {
             return baseFetch({path: "cities", method: "GET", params:{page, limit, ...countryCode && {countryCode}}}, {...cache && {cache}, ...revalidate && {revalidate}})
         },
         BY_COUNTRY: (countryCode: string, filter: CityFiltersNamespace.byCountry) => {
-            return baseFetch({path: `cities/country/${countryCode}`, params: {page: filter.page, limit: filter.limit, ...filter.slug && {slug: filter.slug}, ...filter.unitId && {unitId: filter.unitId}, ...filter.categoryIds && {categoryIds: filter.categoryIds}}}, {revalidate: 10})
+            return baseFetch({path: `cities/country/${countryCode}`, params: {page: filter.page, limit: filter.limit, ...filter.slug && {slug: filter.slug}, ...filter.unitIds && {unitIds: filter.unitIds}, ...filter.categoryIds && {categoryIds: filter.categoryIds}}}, {revalidate: 10})
         }
     },
     UNITS: {
@@ -115,7 +115,7 @@ export const API_ROUTES = {
             return baseFetch({path: "categories/mostUsed", params:{limit, ...countryCode && {countryCode}}}, {...cache && {cache}, ...revalidate && {revalidate}})
         },
         BY_COUNTRY: (countryCode: string, filter: CategoryFiltersNamespace.byCountry) => {
-            return baseFetch({path: `categories/country/${countryCode}`, params: {page: filter.page, limit: filter.limit, ...filter.cityId && {cityId: filter.cityId}, ...filter.slug && {slug: filter.slug}, ...filter.unitId && {unitId: filter.unitId}}}, {revalidate: 10})
+            return baseFetch({path: `categories/country/${countryCode}`, params: {page: filter.page, limit: filter.limit, ...filter.cityIds && {cityIds: filter.cityIds}, ...filter.slug && {slug: filter.slug}, ...filter.unitIds && {unitIds: filter.unitIds}}}, {revalidate: 10})
         }
     },
     STATS: {

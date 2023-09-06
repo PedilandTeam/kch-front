@@ -19,11 +19,11 @@ type PagesListProps = {
   category: number | number[];
 };
 
-async function fetchCities(countryCode: string, unitId: number, categoryIds: number | number[]): Promise<CityNamespace.GET> {
+async function fetchCities(countryCode: string, unitIds: number, categoryIds: number | number[]): Promise<CityNamespace.GET> {
   let cities: CityNamespace.GET;
   try {
     cities = await (
-      await API_ROUTES.CITIES.BY_COUNTRY(countryCode, {page:1, limit: 100, unitId: unitId, categoryIds: joiner(categoryIds)})
+      await API_ROUTES.CITIES.BY_COUNTRY(countryCode, {page:1, limit: 100, unitIds: unitIds, categoryIds: joiner(categoryIds)})
     ).json();
   } catch (e) {
     console.log(await e);
@@ -34,11 +34,11 @@ async function fetchCities(countryCode: string, unitId: number, categoryIds: num
 }
 
 
-async function fetchCategories(countryCode: string, unitId: number): Promise<CategoryNamespace.GET> {
+async function fetchCategories(countryCode: string, unitIds: number | number[], cityIds: number | number[]): Promise<CategoryNamespace.GET> {
   
   let categories: CategoryNamespace.GET | undefined
   try{
-      categories = await (await API_ROUTES.CATEGOREIS.BY_COUNTRY(countryCode, {page: 1, limit: 100, unitId})).json()
+      categories = await (await API_ROUTES.CATEGOREIS.BY_COUNTRY(countryCode, {page: 1, limit: 100, unitIds: joiner(unitIds), cityIds: joiner(cityIds)})).json()
   }catch(e){
     console.log(e);
     throw new Error("Error in get Categories fetchCategories")
@@ -51,10 +51,9 @@ async function fetchCategories(countryCode: string, unitId: number): Promise<Cat
 export default async function UntiList({unit, country, pageNumber, city, category}: PagesListProps) {  
 
   const cities = await fetchCities(country.code, unit.id, category);
-  const categories: CategoryNamespace.category[] = await (await fetchCategories(country.code, unit.id)).items
+  const categories: CategoryNamespace.category[] =  (await fetchCategories(country.code, unit.id, city)).items
   let isNotFound = false
   let pages: PageNamespace.GET | undefined = undefined
-
 
 
   try{
