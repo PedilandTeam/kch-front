@@ -79,7 +79,7 @@ export default function CountryCategoriesItems({
                 <div className="w-full mt-4 mb-5 sm:text-center group-hover:text-pink-900 flex sm:justify-center items-center h-[48px]">
                   {category.name}
                 </div>
-                <span className="flex justify-end sm:justify-center items-center sm:items-end text-left sm:text-center group-hover:text-blue-900 group-hover:font-bold border border-l-white sm:border-l-gray-200 sm:border-b-white sm:group-hover:border-b-white group-hover:border-pink-200 group-hover:border-l-white sm:group-hover:border-l-pink-200 -ml-[1px] sm:-mb-[1px] rounded-tr-full rounded-br-full sm:rounded-br-none sm:rounded-tl-full group-hover:bg-white h-[42px] sm:h-[34px] min-w-[38px] sm:min-w-[42px] sm:leading-none text-[18px] pt-[4px] sm:pt-0">
+                <span className="flex justify-center items-center min-w-[42px] h-[42px] sm:h-[34px] border text-[18px] pt-[4px] sm:pt-0 ml-5 bg-gray-100 group-hover:bg-pink-50 sm:bg-white sm:group-hover:bg-white sm:items-end group-hover:text-blue-900 group-hover:font-bold sm:border-b-white sm:group-hover:border-b-white group-hover:border-pink-200 sm:group-hover:border-l-pink-200 sm:-mb-[1px] rounded-full sm:rounded-br-none sm:rounded-bl-none sm:min-w-[42px] sm:leading-none">
                   {category.pageCount}
                 </span>
               </div>

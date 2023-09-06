@@ -21,13 +21,13 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
   return (
     <div className="top-section h-full">
       <div className="container mx-auto max-w-[1144px] h-full">
-        <div className="flex flex-col sm:flex-row items-center sm:items-end py-10 sm:pb-10 h-full">
+        <div className="flex flex-col sm:flex-row items-center sm:items-end pt-8 sm:pb-10 h-full">
           <ItemProfilePicture
-            className="rounded-full w-full sm:w-40 h-full sm:h-40 drop-shadow-sm"
+            className="rounded-full w-[240px] h-[240px] sm:w-40 sm:h-40 drop-shadow-sm mb-5 sm:mb-0"
             pageData={pageData}
           />
 
-          <div className="item-details sm:mr-5">
+          <div className="item-details flex-1 sm:mr-5">
             <h1 className="text-[28px] font-semibold text-center sm:text-right text-slate-700">
               {pageData?.title}
             </h1>
@@ -58,7 +58,8 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
               <span>{pageData?.city?.name}</span>
             </div>
           </div>
-          <div className="ittem-top-buttons flex-1 flex justify-end content-end">
+
+          <div className="item-top-socials flex justify-center bg-slate-200 p-4 w-full sm:w-auto [&>a]:ml-4 [&>a:last-child]:ml-0 sm:rounded-md">
             {/* {pageData?.socials &&
               Object.keys(pageData.socials).map(
                 (social: string, index: number) => {
@@ -113,10 +114,6 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                 <YoutubeIcon />
               </Link>
             ) : null}
-
-            <div className="sc-share group inline-flex">
-              <ShareIcon className="w-5 h-5 text-gray-400 group-hover:text-blue-800 group-hover:cursor-pointer mt-[2px]" />
-            </div>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 export default function LinkedinIcon() {
     return (
-        <div className="sc-linkedin group inline-flex ml-4">
+        <div className="sc-linkedin group">
             <svg
                 className="w-6 h-6 text-sky-600 group-hover:text-sky-700 group-hover:cursor-pointer fill-current"
                 xmlns="http://www.w3.org/2000/svg"

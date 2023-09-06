@@ -1,8 +1,16 @@
+"use client";
+
 import { PageNamespace } from "@/types/page";
 import {
   ArrowTopRightOnSquareIcon,
   PhoneArrowUpRightIcon,
   HomeModernIcon,
+  ShareIcon,
+  GlobeAltIcon,
+  PhoneIcon,
+  ArrowUturnRightIcon,
+  HandRaisedIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
@@ -33,7 +41,7 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
     return null;
   }
   return (
-    <div className="flex justify-between items-center py-3 border-b last:border-b-0 border-gray-200">
+    <div className="item-address text-left">
       {Array.isArray(Images) &&
         Images.map((image, index) => {
           return (
@@ -67,23 +75,71 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
             </Link>
           );
         })}
-      <span className="text-left font-PinarLT">{text}</span>
+      <span className="font-PinarLT">{text}</span>
     </div>
   );
 }
 
 export function ItemSideInfo({ pageData }: ItemSideInfoType) {
-
-
-  const websiteWithoutProtocol = pageData?.socials?.website?.match(/^(https?:\/\/)?(?:www\d?\.)?([^/]+)/i)?.[2]
-
+  const websiteWithoutProtocol = pageData?.socials?.website?.match(
+    /^(https?:\/\/)?(?:www\d?\.)?([^/]+)/i
+  )?.[2];
 
   return (
     <div className="item-side sm:col-span-4 sm:col-end-13 mx-3 sm:mr-3 sm:ml-0">
-      <div className="rounded-md border border-gray-200 px-5 py-3 mb-3">
-        <div className="item-contact">
-
-          {pageData?.socials?.website ? (
+      <div className="item-contact grid grid-cols-3 gap-3 mb-4">
+        <div className="group border-l">
+          <Link
+            href={"httpd://www.koochaa.com"}
+            rel="nofollow noopener"
+            className="grid grid-rows-2 gap-2 text-center"
+          >
+            <GlobeAltIcon className="w-[26px] h-[26px] mx-auto group-hover:text-pink-800 transition duration-300 ease-in-out" />
+            <span className="group-hover:text-pink-800 transition duration-300 ease-in-out font-medium">
+              وب سایت
+            </span>
+          </Link>
+          {/* 
+          IF THERE IS NO WEBSITE
+          <div className="grid grid-rows-2 gap-2 text-center">
+            <GlobeAltIcon className="text-gray-300 w-[26px] h-[26px] mx-auto" />
+            <span className="text-gray-300">وب سایت</span>
+          </div> */}
+        </div>
+        <div className="group grid grid-rows-2 gap-2 text-center border-l hover:cursor-pointer">
+          <PhoneIcon className="w-[26px] h-[26px] mx-auto group-hover:text-pink-800 transition duration-300 ease-in-out" />
+          <span className="group-hover:text-pink-800 transition duration-300 ease-in-out font-medium">
+            تماس
+          </span>
+        </div>
+        <div
+          className="group grid grid-rows-2 gap-2 text-center"
+          // onClick={() => {
+          //   if (document) {
+          //     (
+          //       document.getElementById("modal_share") as HTMLFormElement
+          //     ).showModal();
+          //   }
+          // }}
+        >
+          <ShareIcon className="text-gray-300 w-[26px] h-[26px] mx-auto transition duration-300 ease-in-out" />
+          <span className="text-gray-300 transition duration-300 ease-in-out font-medium">
+            اشتراک
+          </span>
+        </div>
+      </div>
+      <div className="rounded-md border border-gray-200 p-4 mb-3">
+        <ItemSideInfoItem
+          text={`${
+            pageData?.address?.address ? pageData?.address?.address : ""
+          } ${
+            pageData?.city?.englishName
+              ? pageData.city.englishName
+              : pageData?.city?.name
+          }`}
+        />
+        <div>
+          {/* {pageData?.socials?.website ? (
             <ItemSideInfoItem
               text={websiteWithoutProtocol}
               Icons={[
@@ -131,56 +187,70 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
                 href: `tel:${pageData.contact?.phone}`,
               },
             ]}
-          />
+          /> */}
 
-          <ItemSideInfoItem
-            text={`${pageData?.address?.address ? pageData?.address?.address : ""} ${
-              pageData?.city?.englishName
-                ? pageData.city.englishName
-                : pageData?.city?.name
-            }`}
-          />
-
-          {/* <div className="ct-address flex justify-between pt-3 pb-5">
-            <ArrowUturnRightIcon className="w-[22px] h-[22px] text-gray-500" />
-            <p className="whitespace-pre font-PinarLT text-left" dir="ltr">
-              <span>Rathenauerplatz 1</span>
-              <br />
-              <span>50674</span>, <span>Frankfurt</span>
-            </p>
-          </div>
-
-          <Button
-            variant="solid"
-            colorScheme="gray"
-            width="100%"
-            rightIcon={<HandRaisedIcon className="w-[22px] h-[22px]" />}
-          >
-            درخواست تغییر در این صفحه
-          </Button> */}
+          {/* <button className="btn">درخواست تغییر در این صفحه</button> */}
         </div>
       </div>
-      {/* <div className="rounded-md border border-gray-200 p-4">
-        <div className="mb-7 flex justify-between">
+      <div className="rounded-md border border-gray-200 p-5 mb-3 bg-blue-50 border-l-[4px] border-l-yellow-500 rounded-tl-none rounded-bl-none">
+        <div className="flex content-center items-center mb-3">
           <Image
             alt="telegram"
             src={"/images/icon/verified-badge-100.png"}
-            width={40}
-            height={40}
-            className="ml-2"
+            width={36}
+            height={36}
+            className="ml-1"
           />
-          <XMarkIcon className="w-[22px] h-[22px] text-gray-500 mt-1 hover:cursor-pointer hover:text-gray-800" />
+          <h6 className="text-[18px] font-semibold">
+            اگر شما مالک این صفحه هستید!
+          </h6>
         </div>
-        <h6 className="font-semibold mb-2">آیا شما مالک این صفحه هستید؟</h6>
-        <p className="text-[14px] leading-6 text-gray-700 mb-5">
-          با احراز هویت تیک آبی دریافت کنید. مدیریت اطلاعات صفحه خود را به عهده
-          بگیرید، با مخاطبان خود در تماس باشید و از سایر امکانات کوچا برای دیده
-          شدن صفحه خود استفاده کنید.
+        <p className="text-[15px] leading-7 text-justify text-gray-700 mb-4">
+          با احراز هویت می‌تونید تیک آبی دریافت کنید، مدیریت اطلاعات این صفحه رو
+          به عهده بگیرید و از امکانات کوچا برای راهبری و توسعه کسب‌و‌کارتون
+          استفاده کنید.
         </p>
-        <Button variant="outline" colorScheme="gray">
+        <button
+          className="btn btn-active btn-secondary w-full"
+          onClick={() => {
+            if (document) {
+              (
+                document.getElementById("modal_claim") as HTMLFormElement
+              ).showModal();
+            }
+          }}
+        >
           دریافت مالکیت صفحه
-        </Button>
-      </div> */}
+        </button>
+      </div>
+
+      {/* Share Modal */}
+      <dialog id="modal_share" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg flex items-center">
+            <ShareIcon className="w-[22px] h-[22px] ml-2" />
+            اشتراک گذاری
+          </h3>
+          <p className="pt-2">
+            با اشتراک گذاری این صفحه در صفحات اجتماعی به دیده شدنش کمک کنید.
+          </p>
+          <div className="share-links"></div>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+
+      {/* Claim Modal */}
+      <dialog id="modal_claim" className="modal">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Hello!</h3>
+          <p className="py-4">Press ESC key or click outside to close</p>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </div>
   );
 }
