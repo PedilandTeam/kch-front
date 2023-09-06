@@ -4,6 +4,7 @@ import { CountryNamespace } from "@/types/country";
 import { CursorArrowRippleIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
+import PagesSearch from "./pages.search";
 
 type SliderHomeProps = {
   currentCountry: CountryNamespace.GET;
@@ -62,13 +63,8 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
             راهنمای مشاغل کـوچـا رو جستجو کن!
           </h2>
 
-          <div className="search-sec mt-4 mb-5 w-full px-4 sm:px-0 sm:w-1/2 mx-auto">
-            <input
-              type="text"
-              placeholder="اینجا تایپ کن"
-              className="input rounded-full text-center h-[54px] text-[18px] font-medium w-full opacity-75 hover:opacity-[.85] focus:opacity-[.85]"
-            />
-          </div>
+          <PagesSearch countryCode={currentCountry.code}/>
+
           <Link href={"#select-unit"} scroll>
             <button className="btn mx-auto px-3 sm:mx-0 text-[15px] bg-lime-300 border-lime-300 text-lime-900 hover:bg-lime-400 hover:border-lime-400 hover:text-lime-950">
               و یا از اینجا شروع کن
