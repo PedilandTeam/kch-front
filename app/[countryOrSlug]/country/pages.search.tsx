@@ -30,7 +30,7 @@ export default ({countryCode}: CountryPagesSearch) => {
                 className="input rounded-full text-center h-[54px] text-[18px] font-medium w-full opacity-75 hover:opacity-[.85] focus:opacity-[.85]"
             />
             {
-                pages &&
+                search && pages &&
                 <ul tabIndex={0} className="sm:w-1/2 lg:w-full dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box">
                     {
                         pages.items?.map(page => {
