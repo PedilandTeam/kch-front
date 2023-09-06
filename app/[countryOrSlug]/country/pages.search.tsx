@@ -10,12 +10,12 @@ type CountryPagesSearch = {
     countryCode: string;
 }
 
-export default ({countryCode}: CountryPagesSearch) => {
+export default ({ countryCode }: CountryPagesSearch) => {
 
 
     const [search, setSearch] = useState<string>()
 
-    const {data: pages, isLoading, error} = usePages(1, search ? 10 : 5, countryCode, undefined, undefined, undefined, search ? search: undefined)
+    const { data: pages, isLoading, error } = usePages(1, search ? 10 : 5, countryCode, undefined, undefined, undefined, search ? search : undefined)
 
     const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value)
@@ -33,16 +33,22 @@ export default ({countryCode}: CountryPagesSearch) => {
                 search && pages &&
                 <ul tabIndex={0} className="sm:w-1/2 lg:w-full dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box">
                     {
-                        pages.items?.map(page => {
-                            return (
-                                <li>
-                                    <Link className="flex justify-start" href={`/${page.slug}`}>
-                                        <ItemProfilePicture pageData={page} height={30} width={30} />
-                                        <p>{page.title}</p>
-                                    </Link>
-                                </li>
-                            )
-                        })
+                        pages.meta.itemCount > 0
+                            ?
+                            pages.items?.map(page => {
+                                return (
+                                    <li>
+                                        <Link className="flex justify-start" href={`/${page.slug}`}>
+                                            <ItemProfilePicture pageData={page} height={30} width={30} />
+                                            <p>{page.title}</p>
+                                        </Link>
+                                    </li>
+                                )
+                            })
+                            :
+                            <li>
+                                <p>چیزی یافت نشد</p>
+                            </li>
                     }
                 </ul>
             }
