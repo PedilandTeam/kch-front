@@ -18,6 +18,9 @@ import TelegramIcon from "./socials/telegram";
 
 export type ItemTopInfoType = { pageData: PageNamespace.Page };
 export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
+
+  const haveSocial = pageData.socials && Object.keys(pageData?.socials).length > 0
+
   return (
     <div className="top-section h-full">
       <div className="container mx-auto max-w-[1144px] h-full">
@@ -59,25 +62,16 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
             </div>
           </div>
 
-          <div className="item-top-socials flex justify-center bg-slate-200 p-4 w-full sm:w-auto [&>a]:ml-4 [&>a:last-child]:ml-0 sm:rounded-md">
-            {/* {pageData?.socials &&
-              Object.keys(pageData.socials).map(
-                (social: string, index: number) => {
-                  return (
-                    <SocialLink
-                      key={`social-link-${index}`}
-                      name={social as socialsType}
-                      link={
-                        pageData?.socials?.[social]?.replace(
-                          /^https?:\/\//,
-                          ""
-                        ) || null
-                      }
-                    />
-                  );
-                }
-              )} */}
-              <p>شبکه اجتماعی ثبت نشده است.</p>
+          <div className={`item-top-socials flex justify-center bg-slate-200 p-4 w-full sm:w-auto [&>a]:ml-4 [&>a:last-child]:ml-0 sm:rounded-md`}>
+
+            {
+              !haveSocial
+                ?
+                <p>شبکه اجتماعی ثبت نشده است.</p>
+                :
+                null
+            }
+            
             {pageData?.socials?.telegram ? (
               <Link
                 href={`https://t.me/${pageData?.socials?.telegram}`}
