@@ -1,4 +1,5 @@
 import { CityNamespace } from "./city";
+import { CountryNamespace } from "./country";
 
 
 
@@ -30,7 +31,7 @@ export namespace PageNamespace {
         unit: Category;
         category: Category;
         city: CityNamespace.city;
-        country: Country;
+        country: CountryNamespace.GET;
     }
 
 }

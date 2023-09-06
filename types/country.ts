@@ -8,5 +8,6 @@ export namespace CountryNamespace {
         pageCount: number
         status: boolean
         availability: boolean
+        areaCode: number
     }
 }

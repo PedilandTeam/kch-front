@@ -18,7 +18,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { MouseEvent } from "react";
-import useDaisyToast from "@/hooks/swr/useDaisyToast";
 import { toast } from "react-hot-toast";
 
 interface ItemSideInfoType {
@@ -112,7 +111,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
     } else if (type == "telephone") {
 
       if (agent.device?.type == "desktop") {
-        navigator.clipboard.writeText(pageData.contact.telephone!)
+        navigator.clipboard.writeText(`${pageData.country.areaCode}${pageData.contact.telephone!}`)
         toast.success("کپی شد")
       } else {
         window.open(`tel:${pageData.contact.telephone}`, "_blank", 'noopener, noreferrer')
@@ -130,9 +129,6 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
     }
   }
 
-  const websiteWithoutProtocol = pageData?.socials?.website?.match(
-    /^(https?:\/\/)?(?:www\d?\.)?([^/]+)/i
-  )?.[2];
 
   return (
     <div className="item-side sm:col-span-4 sm:col-end-13 mx-3 sm:mr-3 sm:ml-0">
