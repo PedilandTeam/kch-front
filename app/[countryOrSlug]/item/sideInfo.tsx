@@ -229,6 +229,10 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         </button>
       </div>
 
+      <div className="rounded-md border border-gray-200 px-5 py-4 mb-3 text-[15px]">
+        <p>این صفحه توسط ادمین کوچا مدیریت می‌شود.</p>
+      </div>
+
       {/* Share Modal */}
       <dialog id="modal_share" className="modal">
         <div className="modal-box">
