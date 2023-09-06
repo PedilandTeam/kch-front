@@ -1,7 +1,9 @@
 "use client";
 
 import { PageNamespace } from "@/types/page";
+import DeviceDetector from "device-detector-js";
 import {
+
   ArrowTopRightOnSquareIcon,
   PhoneArrowUpRightIcon,
   HomeModernIcon,
@@ -14,7 +16,10 @@ import {
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { usePathname, useRouter } from "next/navigation";
+import React, { MouseEvent } from "react";
+import useDaisyToast from "@/hooks/swr/useDaisyToast";
+import { toast } from "react-hot-toast";
 
 interface ItemSideInfoType {
   pageData: PageNamespace.Page;
@@ -37,6 +42,8 @@ interface ItemSideInfoItemType {
 }
 
 function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
+
+
   if (!text) {
     return null;
   }
@@ -80,7 +87,49 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
   );
 }
 
+
+
 export function ItemSideInfo({ pageData }: ItemSideInfoType) {
+
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const linkHandler = (e: MouseEvent<HTMLButtonElement>) => {
+
+    const type = e.currentTarget.dataset.type
+    const regexp = /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/igm.exec(pageData?.socials?.website!)
+    if (!regexp || !Array.isArray(regexp) || !regexp[1]) {
+      return
+    }
+    const detector = new DeviceDetector()
+    const agent = detector.parse(navigator.userAgent)
+
+
+    if (type == "website") {
+
+      window.open(`https://${regexp[0]}`, "_blank", 'noopener, noreferrer')
+
+    } else if (type == "telephone") {
+
+      if (agent.device?.type == "desktop") {
+        navigator.clipboard.writeText(pageData.contact.telephone!)
+        toast.success("کپی شد")
+      } else {
+        window.open(`tel:${pageData.contact.telephone}`, "_blank", 'noopener, noreferrer')
+      }
+
+    }else if(type == "share"){
+
+      if (agent.device?.type == "desktop") {
+        navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`)
+        toast.success("کپی شد")
+      } else {
+        navigator.share({url: `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`})
+      }
+
+    }
+  }
+
   const websiteWithoutProtocol = pageData?.socials?.website?.match(
     /^(https?:\/\/)?(?:www\d?\.)?([^/]+)/i
   )?.[2];
@@ -88,109 +137,65 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
   return (
     <div className="item-side sm:col-span-4 sm:col-end-13 mx-3 sm:mr-3 sm:ml-0">
       <div className="item-contact grid grid-cols-3 gap-3 mb-4">
-        <div className="group border-l">
-          <Link
-            href={"httpd://www.koochaa.com"}
-            rel="nofollow noopener"
-            className="grid grid-rows-2 gap-2 text-center"
-          >
-            <GlobeAltIcon className="w-[26px] h-[26px] mx-auto group-hover:text-pink-800 transition duration-300 ease-in-out" />
+
+
+        <div className="group grid grid-rows-1 gap-2 text-center border-l hover:cursor-pointer">
+          {
+
+            pageData?.socials?.website ?
+              <button onClick={linkHandler} data-type="website" className="grid grid-rows-2 gap-2 text-center">
+                <GlobeAltIcon className="w-[26px] h-[26px] mx-auto group-hover:text-pink-800 transition duration-300 ease-in-out" />
+                <span className="group-hover:text-pink-800 transition duration-300 ease-in-out font-medium">
+                  وب سایت
+                </span>
+              </button>
+              :
+              <button className="grid grid-rows-2 gap-2 text-center">
+                <GlobeAltIcon className="text-gray-300 w-[26px] h-[26px] mx-auto" />
+                <span className="text-gray-300">وب سایت</span>
+              </button>
+          }
+
+        </div>
+
+        <div className="group grid grid-rows-1 gap-2 text-center border-l hover:cursor-pointer">
+          {
+            pageData?.contact?.telephone ?
+              <button onClick={linkHandler} data-type="telephone" className="grid grid-rows-2 gap-2 text-center">
+                <PhoneIcon className="w-[26px] h-[26px] mx-auto group-hover:text-pink-800 transition duration-300 ease-in-out" />
+                <span className="group-hover:text-pink-800 transition duration-300 ease-in-out font-medium">
+                  تماس
+                </span>
+              </button>
+              :
+              <>
+                <PhoneIcon className="text-gray-300 w-[26px] h-[26px] mx-auto" />
+                <span className="text-gray-300">تماس</span>
+
+              </>
+            // </div>
+          }
+
+        </div>
+
+        <div className="group grid grid-rows-1 gap-2 text-center">
+          <button onClick={linkHandler} data-type="share" className="grid grid-rows-2 gap-2 text-center">
+            <ShareIcon className="w-[26px] h-[26px] mx-auto group-hover:text-pink-800 transition duration-300 ease-in-out" />
             <span className="group-hover:text-pink-800 transition duration-300 ease-in-out font-medium">
-              وب سایت
+              اشتراک
             </span>
-          </Link>
-          {/* 
-          IF THERE IS NO WEBSITE
-          <div className="grid grid-rows-2 gap-2 text-center">
-            <GlobeAltIcon className="text-gray-300 w-[26px] h-[26px] mx-auto" />
-            <span className="text-gray-300">وب سایت</span>
-          </div> */}
+          </button>
         </div>
-        <div className="group grid grid-rows-2 gap-2 text-center border-l hover:cursor-pointer">
-          <PhoneIcon className="w-[26px] h-[26px] mx-auto group-hover:text-pink-800 transition duration-300 ease-in-out" />
-          <span className="group-hover:text-pink-800 transition duration-300 ease-in-out font-medium">
-            تماس
-          </span>
-        </div>
-        <div
-          className="group grid grid-rows-2 gap-2 text-center"
-          // onClick={() => {
-          //   if (document) {
-          //     (
-          //       document.getElementById("modal_share") as HTMLFormElement
-          //     ).showModal();
-          //   }
-          // }}
-        >
-          <ShareIcon className="text-gray-300 w-[26px] h-[26px] mx-auto transition duration-300 ease-in-out" />
-          <span className="text-gray-300 transition duration-300 ease-in-out font-medium">
-            اشتراک
-          </span>
-        </div>
+
       </div>
       <div className="rounded-md border border-gray-200 p-4 mb-3">
         <ItemSideInfoItem
-          text={`${
-            pageData?.address?.address ? pageData?.address?.address : ""
-          } ${
-            pageData?.city?.englishName
+          text={`${pageData?.address?.address ? pageData?.address?.address : ""
+            } ${pageData?.city?.englishName
               ? pageData.city.englishName
               : pageData?.city?.name
-          }`}
+            }`}
         />
-        <div>
-          {/* {pageData?.socials?.website ? (
-            <ItemSideInfoItem
-              text={websiteWithoutProtocol}
-              Icons={[
-                {
-                  Component: (
-                    <ArrowTopRightOnSquareIcon className="w-[22px] h-[22px] text-gray-500 hover:text-pink-900" />
-                  ),
-                  href: `https://${websiteWithoutProtocol}`,
-                },
-              ]}
-            />
-          ) : (
-            <ItemSideInfoItem
-              text={pageData?.contact?.email}
-              Icons={[
-                {
-                  Component: (
-                    <ArrowTopRightOnSquareIcon className="w-[22px] h-[22px] text-gray-500" />
-                  ),
-                  href: pageData?.socials?.website,
-                },
-              ]}
-            />
-          )}
-
-          <ItemSideInfoItem
-            text={pageData?.contact?.telephone}
-            Icons={[
-              {
-                Component: (
-                  <PhoneArrowUpRightIcon className="w-[22px] h-[22px] text-gray-500 hover:text-green-600" />
-                ),
-                href: `tel:${pageData.contact?.telephone}`,
-              },
-            ]}
-          />
-
-          <ItemSideInfoItem
-            text={pageData?.contact?.phone}
-            Icons={[
-              {
-                Component: (
-                  <PhoneArrowUpRightIcon className="w-[22px] h-[22px] text-gray-500 hover:text-green-600" />
-                ),
-                href: `tel:${pageData.contact?.phone}`,
-              },
-            ]}
-          /> */}
-
-          {/* <button className="btn">درخواست تغییر در این صفحه</button> */}
-        </div>
       </div>
       <div className="rounded-md border border-gray-200 p-5 mb-3 bg-blue-50 border-l-[4px] border-l-yellow-500 rounded-tl-none rounded-bl-none">
         <div className="flex content-center items-center mb-3">

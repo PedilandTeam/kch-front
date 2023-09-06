@@ -9,6 +9,7 @@ import { Providers } from "@client-packages/react-redux/provider";
 import Script from "next/script";
 import isBetweenZeroAndOne from "@/utils/isBetweenZeroAndOne";
 import { Metadata } from "next";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "وبسایت کوچا",
@@ -40,6 +41,7 @@ export default async function RootLayout({
           <Header>
             <ModalCountry countries={countries} />
           </Header>
+          <Toaster />
           {children}
           <Footer />
         </Providers>
