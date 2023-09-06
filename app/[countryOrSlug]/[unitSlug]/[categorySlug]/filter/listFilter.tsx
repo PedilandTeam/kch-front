@@ -4,6 +4,7 @@ import { FunnelIcon } from "@client-packages/heroicons/components";
 import FilterMobile from "./filter.mobile";
 import { CityNamespace } from "@/types/city";
 import CityFilter from "../../filter/city.filter";
+import PageSearch from "../../filter/page.search";
 
 type ListFilterProps = {
   cities: CityNamespace.GET;
@@ -17,12 +18,7 @@ export default function CategoryListFilter({ cities }: ListFilterProps) {
         <span className="font-semibold">{_TXT.FILTER._S}</span>
       </div>
       <div className="filter-body hidden md:block">
-        <input
-          type="text"
-          placeholder="جستجو"
-          className="input input-bordered w-full mb-3"
-        />
-        {/* <CategoryFilter categories={categories} /> */}
+        <PageSearch/>
         <CityFilter id="category-cities-filter" cities={cities?.items} />
       </div>
 

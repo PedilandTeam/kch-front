@@ -6,6 +6,7 @@ import CityFilter from "./city.filter";
 import CategoryFilter from "./category.filter";
 import { CityNamespace } from "@/types/city";
 import { CategoryNamespace } from "@/types/category";
+import PagesSearch from "../[categorySlug]/filter/pages.search";
 
 type FilterMobileProps = {
   cities: CityNamespace.city[];
@@ -42,11 +43,7 @@ export default function FilterMobile({
             <span className="font-semibold">{_TXT.FILTER._S}</span>
           </div>
           <div className="py-4">
-            <input
-              type="text"
-              placeholder="جستجو"
-              className="input input-bordered w-full mb-3"
-            />
+            <PagesSearch/>
             <CityFilter id="mobile-cityfilter-modal" cities={cities} />
             <CategoryFilter
               id="mobile-categoryfilter-modal"

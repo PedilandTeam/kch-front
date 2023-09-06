@@ -6,7 +6,7 @@ import { CityNamespace } from "@/types/city";
 import { CategoryNamespace } from "@/types/category";
 import CityFilter from "./city.filter";
 import CategoryFilter from "./category.filter";
-import CitySearch from "./city.search";
+import PageSearch from "./page.search";
 
 type ListFilterProps = {
   cities: CityNamespace.GET;
@@ -21,7 +21,7 @@ export default function ListFilter({ cities, categories }: ListFilterProps) {
       </div>
 
       <div className="filter-body hidden md:block">
-        <CitySearch/>
+        <PageSearch/>
         <CityFilter id="cityfilter-modal" cities={cities?.items} />
         <CategoryFilter id="categoryfilter-modal" categories={categories} />
       </div>

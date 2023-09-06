@@ -32,12 +32,6 @@ export default () => {
         parsedSearchParams.search && setSearch(parsedSearchParams.search)
     }, [parsedSearchParams]);
 
-
-    useEffect(() => {
-        console.log("parsed searchParams", parsedSearchParams);
-
-    }, [parsedSearchParams])
-
     useEffect(() => {
 
         const timeOut = setTimeout(() => {
@@ -68,7 +62,7 @@ export default () => {
         <input
             type="text"
             onChange={searchChangeHandler}
-            value={search}
+            value={search || ""}
             placeholder="جستجو"
             className="input input-bordered w-full mb-3"
         />

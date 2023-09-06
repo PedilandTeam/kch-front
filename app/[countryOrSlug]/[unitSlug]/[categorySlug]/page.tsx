@@ -10,7 +10,7 @@ import queryString from "query-string";
 
 
 
-type ParsedSearchParams = {page?: number | number[], city?: any}
+type ParsedSearchParams = {page?: number | number[], city?: any, search: string}
 
 const pathGenerator = async (countryOrSlug: string, unitSlug: string, categorySlug: string): Promise<PathGeneratorType> => {
 
@@ -72,7 +72,7 @@ export default async function CategoryPage({params: { countryOrSlug, unitSlug, c
   let pathInfo: PathGeneratorType;
 
   parsedSearchParams = queryString.parse(queryString.stringify(searchParams ?? {}), {arrayFormat:"comma", parseNumbers: true}) as ParsedSearchParams
-  const {page: pageNumber, city} = parsedSearchParams
+  const {page: pageNumber, city, search} = parsedSearchParams
 
 
   try {
@@ -83,7 +83,7 @@ export default async function CategoryPage({params: { countryOrSlug, unitSlug, c
 
   if (pathInfo.type) {
     //@ts-expect-error
-    return <CategoryList {...pathInfo.props} pageNumber={pageNumber} city={city} />;
+    return <CategoryList {...pathInfo.props} pageNumber={pageNumber} city={city} search={search} />;
   } else {
     notFound();
   }

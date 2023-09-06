@@ -5,6 +5,7 @@ import { FunnelIcon } from "@heroicons/react/24/solid";
 // import CityFilter from "./city.filter";
 import { CityNamespace } from "@/types/city";
 import CityFilter from "../../filter/city.filter";
+import PagesSearch from "./pages.search";
 
 type FilterMobileProps = {
   cities: CityNamespace.city[];
@@ -39,11 +40,7 @@ export default function FilterMobile({ cities }: FilterMobileProps) {
             <span className="font-semibold">{_TXT.FILTER._S}</span>
           </div>
           <div className="py-4">
-            <input
-              type="text"
-              placeholder="جستجو"
-              className="input input-bordered w-full mb-3"
-            />
+            <PagesSearch/> 
             <CityFilter
               id="mobile-categoryList-cityfilter-modal"
               cities={cities}

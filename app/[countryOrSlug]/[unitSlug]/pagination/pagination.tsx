@@ -35,9 +35,6 @@ export default function ({ pages }: PaginationProps) {
     );
   }, [searchParams]);
 
-  useEffect(() => {
-    console.log(parsedSearchParams);
-  }, [parsedSearchParams]);
 
   /**
    * if totalPages are equal or lower than standard(usually 6) then all pages appear in pagination

@@ -7,7 +7,7 @@ import joiner from "@/utils/joiner";
 import { notFound } from "next/navigation";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { CardsList } from "./cardsList";
-import ListFilter from "./filter/categoryListFilter";
+import ListFilter from "./filter/listFilter";
 
 type PagesListProps = {
   category: CategoryNamespace.category;
@@ -15,6 +15,7 @@ type PagesListProps = {
   unit: UnitType;
   pageNumber: number;
   city: number | number[];
+  search: string
 };
 
 async function fetchCities(countryCode: string, categoryId: number): Promise<CityNamespace.GET> {
@@ -39,6 +40,7 @@ export default async function CategoryList({
   unit,
   pageNumber,
   city,
+  search
 }: PagesListProps) {
   if (!country) return notFound();
   const cities = await fetchCities(country.code, category.id);
@@ -52,6 +54,7 @@ export default async function CategoryList({
         unitId: unit.id,
         cityIds: city,
         categoryIds: category.id,
+        search
       })
     ).json();
   } catch (e) {
