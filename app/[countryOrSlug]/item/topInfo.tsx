@@ -77,6 +77,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                   );
                 }
               )} */}
+              <p>شبکه اجتماعی ثبت نشده است.</p>
             {pageData?.socials?.telegram ? (
               <Link
                 href={`https://t.me/${pageData?.socials?.telegram}`}
