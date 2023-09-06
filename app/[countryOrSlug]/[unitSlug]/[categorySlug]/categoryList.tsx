@@ -3,6 +3,7 @@ import { CategoryNamespace } from "@/types/category";
 import { CityNamespace } from "@/types/city";
 import { Country, PageNamespace } from "@/types/page";
 import { UnitType } from "@/types/unit";
+import joiner from "@/utils/joiner";
 import { notFound } from "next/navigation";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { CardsList } from "./cardsList";
@@ -21,7 +22,7 @@ async function fetchCities(countryCode: string, categoryId: number): Promise<Cit
 
   try {
     cities = await (
-      await API_ROUTES.CITIES.BY_COUNTRY(countryCode, {page:1, limit: 100, categoryId})
+      await API_ROUTES.CITIES.BY_COUNTRY(countryCode, {page:1, limit: 100, categoryIds: joiner(categoryId)})
     ).json();
   } catch (e) {
     console.log(await e);
