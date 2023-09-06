@@ -28,7 +28,6 @@ export const CardsList = ({ unit, country, pages }: CardsListType) => {
                 key={`unit-preview-item-${page.id}`}
                 variant="unit"
                 page={page}
-                unit={unit}
                 country={country}
               />
             );

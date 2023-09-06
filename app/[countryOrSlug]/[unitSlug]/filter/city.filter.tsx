@@ -25,15 +25,16 @@ export type checkHandlerType = (value: string | number) => boolean | undefined;
 
 export default function CityFilter({ cities, id }: CityFilterType) {
   const [modifiedCities, setModifiedCities] = useState(cities);
-  // const [shouldBeAdd, setShouldBeAdd] = useState<string[]>([])
-  // const [shouldBeRemove, setShouldBeRemove] = useState<string[]>([])
-
   const searchParams = useSearchParams() as unknown as URLSearchParams;
   const pathname = usePathname();
   const [parsedSearchParams, setParsedSearchParams] =
     useState<ParsedSearchParamsType>({});
   const [isParsedSearchParamsAdded, setIsParsedSearchParamsAdded] =
     useState(false);
+
+  useEffect(() => {
+    setModifiedCities(cities)
+  }, [cities])
 
   const [shouldBeAdd, setShouldBeAdd] = useState<string[]>([]);
 
@@ -57,6 +58,7 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   };
 
   useEffect(() => {
+    //parse query params to array
     setParsedSearchParams(
       queryString.parse(searchParams.toString(), { arrayFormat: "comma" })
     );
@@ -65,6 +67,9 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   useEffect(() => {
     if (isParsedSearchParamsAdded) return;
     if (!parsedSearchParams?.city) return;
+
+    //this condition is because if city filter be a single number we give number
+    //and if we have multiple cities we give an Array
     if (Array.isArray(parsedSearchParams.city)) {
       parsedSearchParams.city.forEach((cityId) => {
         addToShouldBeAdd(cityId);
@@ -76,7 +81,7 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   }, [parsedSearchParams]);
 
   const createQueryString = useCreateQueryString();
-  const deleteQueryString = useDeleteQueryString();
+
 
   const applyFilters = () => {
     router.replace(`${pathname}?${createQueryString("city", shouldBeAdd)}`);
@@ -155,13 +160,17 @@ export default function CityFilter({ cities, id }: CityFilterType) {
           ) : null}
         </div>
       </div>
-      {/* Put this part before </body> tag */}
+
+
+      {/* the modal */}
       <input type="checkbox" id={id} className="modal-toggle" />
       <div className="modal">
         <div className=" modal-box p-0 max-h-[550px] ">
           <div className="pt-5 pb-3 px-8 bg-white w-full">
             <h3 className="flex justify-between content-center text-lg font-bold">
               {_TXT.CITY.SELECT}
+
+              {/* delete text */}
               {citiesInQuery ? (
                 <span
                   onClick={deleteAllCityHandler}

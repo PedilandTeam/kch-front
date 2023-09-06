@@ -32,7 +32,7 @@ namespace CityFiltersNamespace {
         page: number,
         slug?: string,
         unitId?: number
-        categoryId?: number
+        categoryIds?: string
     }
 
 }
@@ -60,7 +60,7 @@ const baseFetch = async ({path, method = "GET", params, body, headers}: requestT
             .then((res: Response) => {
                 if(!res.ok){
                     res.json().then(res => console.log(res))
-                    reject(res.json())
+                    reject(res)
                 }
                 resolve(res)
             })
@@ -96,7 +96,7 @@ export const API_ROUTES = {
             return baseFetch({path: "cities", method: "GET", params:{page, limit, ...countryCode && {countryCode}}}, {...cache && {cache}, ...revalidate && {revalidate}})
         },
         BY_COUNTRY: (countryCode: string, filter: CityFiltersNamespace.byCountry) => {
-            return baseFetch({path: `cities/country/${countryCode}`, params: {page: filter.page, limit: filter.limit, ...filter.slug && {slug: filter.slug}, ...filter.unitId && {unitId: filter.unitId}, ...filter.categoryId && {categoryId: filter.categoryId}}}, {revalidate: 10})
+            return baseFetch({path: `cities/country/${countryCode}`, params: {page: filter.page, limit: filter.limit, ...filter.slug && {slug: filter.slug}, ...filter.unitId && {unitId: filter.unitId}, ...filter.categoryIds && {categoryIds: filter.categoryIds}}}, {revalidate: 10})
         }
     },
     UNITS: {

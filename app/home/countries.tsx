@@ -22,9 +22,6 @@ export const HomeCountries = async () => {
 
 
   const countries: CountryNamespace.GET[] = await fetchCountries()
-  console.log(countries);
-  
-
   const getCount = (countryCode: string) => {
     return countries.find((country: CountryNamespace.GET) => country.code == countryCode)?.pageCount
   }

@@ -1,27 +1,29 @@
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CityNamespace } from "@/types/city";
+import { CountryNamespace } from "@/types/country";
 import { Country, PageNamespace } from "@/types/page";
 import { UnitType } from "@/types/unit";
+import joiner from "@/utils/joiner";
 import { notFound } from "next/navigation";
+import queryString from "query-string";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { CardsList } from "./cardsList";
 import ListFilter from "./filter/listFilter";
 
 type PagesListProps = {
   unit: UnitType;
-  country: Country;
+  country: CountryNamespace.GET;
   pageNumber?: number;
   city?: number | number[];
   category: number | number[];
 };
 
-async function fetchCities(countryCode: string, unitId: number): Promise<CityNamespace.GET> {
+async function fetchCities(countryCode: string, unitId: number, categoryIds: number | number[]): Promise<CityNamespace.GET> {
   let cities: CityNamespace.GET;
-
   try {
     cities = await (
-      await API_ROUTES.CITIES.BY_COUNTRY(countryCode, {page:1, limit: 100, unitId: unitId})
+      await API_ROUTES.CITIES.BY_COUNTRY(countryCode, {page:1, limit: 100, unitId: unitId, categoryIds: joiner(categoryIds)})
     ).json();
   } catch (e) {
     console.log(await e);
@@ -46,13 +48,13 @@ async function fetchCategories(countryCode: string, unitId: number): Promise<Cat
 
 }
 
-export default async function UntiList({unit, country, pageNumber, city, category}: PagesListProps) {
-  
-  const cities = await fetchCities(country.code, unit.id);
+export default async function UntiList({unit, country, pageNumber, city, category}: PagesListProps) {  
+
+  const cities = await fetchCities(country.code, unit.id, category);
   const categories: CategoryNamespace.category[] = await (await fetchCategories(country.code, unit.id)).items
   let isNotFound = false
   let pages: PageNamespace.GET | undefined = undefined
-  
+
 
 
   try{
