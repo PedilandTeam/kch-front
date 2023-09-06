@@ -8,7 +8,7 @@ export default function useDeleteQueryString(){
 
     const searchParams = useSearchParams()
     return useCallback(
-        (name: string, value: string) => {
+        (name: string, value?: string) => {
           const params = queryString.parse(searchParams.toString(), {
             arrayFormat: "comma",
           });

@@ -1,6 +1,6 @@
 
 
-export default (value: number | number[]): string | undefined => {
+export default (value: number | number[] | undefined): string | undefined => {
 
     if(!value)
         return undefined

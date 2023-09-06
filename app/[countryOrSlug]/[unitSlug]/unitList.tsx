@@ -16,10 +16,11 @@ type PagesListProps = {
   country: CountryNamespace.GET;
   pageNumber?: number;
   city?: number | number[];
-  category: number | number[];
+  category?: number | number[];
+  search?: string
 };
 
-async function fetchCities(countryCode: string, unitIds: number, categoryIds: number | number[]): Promise<CityNamespace.GET> {
+async function fetchCities(countryCode: string, unitIds: number, categoryIds?: number | number[]): Promise<CityNamespace.GET> {
   let cities: CityNamespace.GET;
   try {
     cities = await (
@@ -34,7 +35,7 @@ async function fetchCities(countryCode: string, unitIds: number, categoryIds: nu
 }
 
 
-async function fetchCategories(countryCode: string, unitIds: number | number[], cityIds: number | number[]): Promise<CategoryNamespace.GET> {
+async function fetchCategories(countryCode: string, unitIds: number | number[], cityIds?: number | number[]): Promise<CategoryNamespace.GET> {
   
   let categories: CategoryNamespace.GET | undefined
   try{
@@ -48,7 +49,7 @@ async function fetchCategories(countryCode: string, unitIds: number | number[], 
 
 }
 
-export default async function UntiList({unit, country, pageNumber, city, category}: PagesListProps) {  
+export default async function UntiList({unit, country, pageNumber, city, category, search}: PagesListProps) {  
 
   const cities = await fetchCities(country.code, unit.id, category);
   const categories: CategoryNamespace.category[] =  (await fetchCategories(country.code, unit.id, city)).items
@@ -57,7 +58,7 @@ export default async function UntiList({unit, country, pageNumber, city, categor
 
 
   try{
-    pages = await (await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 30, {countryCode: country.code, unitId: unit.id, categoryIds: category, cityIds: city})).json()
+    pages = await (await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 30, {countryCode: country.code, unitId: unit.id, categoryIds: category, cityIds: city, search})).json()
   }catch(e: any){
     isNotFound = true
 

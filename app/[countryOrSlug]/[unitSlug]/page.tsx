@@ -65,7 +65,7 @@ export const generateMetadata = async ({params: { countryOrSlug, unitSlug }}: ge
 };
 
 type Param =  number | undefined;
-type ParsedSearchParams = {page?: number | number[], category?: number | number[], city?: any}
+type ParsedSearchParams = {page?: number | number[], category?: number | number[], city?: any, search: string}
 
 
 export default async function UnitPage({params: { countryOrSlug, unitSlug }, searchParams}: {params: { countryOrSlug: string; unitSlug: string }, searchParams:{ [key: string]: string | string[] | undefined }}) {
@@ -75,7 +75,7 @@ export default async function UnitPage({params: { countryOrSlug, unitSlug }, sea
   let pathInfo: PathGeneratorType;
 
   parsedSearchParams = queryString.parse(queryString.stringify(searchParams ?? {}), {arrayFormat:"comma", parseNumbers: true}) as ParsedSearchParams
-  const {page: pageNumber, category, city} = parsedSearchParams
+  const {page: pageNumber, category, city, search} = parsedSearchParams
 
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug);
@@ -85,7 +85,7 @@ export default async function UnitPage({params: { countryOrSlug, unitSlug }, sea
 
   if (pathInfo.type) {
     //@ts-expect-error
-    return <UnitList {...pathInfo.props} city={city} category={category} pageNumber={pageNumber} />;
+    return <UnitList {...pathInfo.props} city={city} category={category} pageNumber={pageNumber} search={search} />;
   } else {
     notFound();
   }
