@@ -19,7 +19,7 @@ export namespace PageNamespace {
         id: number;
         slug: string;
         createdDate: Date;
-        updatedDate: Date;
+        updateDate: Date;
         title: string;
         description: string;
         address: Address;
