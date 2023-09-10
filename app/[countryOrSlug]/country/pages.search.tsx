@@ -37,7 +37,7 @@ const PagesSearch = ({ countryCode }: CountryPagesSearch) => {
                 search && pages &&
                 <ul tabIndex={0} className="sm:w-1/2 lg:w-full dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box">
                     {
-                        pages.meta.itemCount > 0
+                        pages?.meta?.itemCount > 0
                             ?
                             pages.items?.map(page => {
                                 return (
