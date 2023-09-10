@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChangeEvent, useEffect, useState } from "react"
 import ItemProfilePicture from "../item/itemProfilePicture";
-import pagesSearch from "../[unitSlug]/[categorySlug]/filter/pages.search";
 
 type CountryPagesSearch = {
     countryCode: string;
@@ -18,8 +17,12 @@ const PagesSearch = ({ countryCode }: CountryPagesSearch) => {
 
     const { data: pages, isLoading, error } = usePages(1, search ? 10 : 5, countryCode, undefined, undefined, undefined, search ? search : undefined)
 
+    let timeoutPointer: NodeJS.Timeout
     const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setSearch(e.target.value)
+        clearTimeout(timeoutPointer)
+        timeoutPointer = setTimeout(() => {
+            setSearch(e.target.value)            
+        }, 1000);
     }
 
     return (
@@ -31,10 +34,10 @@ const PagesSearch = ({ countryCode }: CountryPagesSearch) => {
                 className="input rounded-full text-center h-[54px] text-[18px] font-medium w-full opacity-75 hover:opacity-[.85] focus:opacity-[.85]"
             />
             {
-                search && !isLoading &&
+                search && pages &&
                 <ul tabIndex={0} className="sm:w-1/2 lg:w-full dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box">
                     {
-                        pages.meta?.itemCount > 0
+                        pages.meta.itemCount > 0
                             ?
                             pages.items?.map(page => {
                                 return (
@@ -59,4 +62,4 @@ const PagesSearch = ({ countryCode }: CountryPagesSearch) => {
 }
 
 
-export default pagesSearch
+export default PagesSearch
