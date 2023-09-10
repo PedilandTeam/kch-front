@@ -5,12 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChangeEvent, useEffect, useState } from "react"
 import ItemProfilePicture from "../item/itemProfilePicture";
+import pagesSearch from "../[unitSlug]/[categorySlug]/filter/pages.search";
 
 type CountryPagesSearch = {
     countryCode: string;
 }
 
-export default ({ countryCode }: CountryPagesSearch) => {
+const PagesSearch = ({ countryCode }: CountryPagesSearch) => {
 
 
     const [search, setSearch] = useState<string>()
@@ -30,14 +31,14 @@ export default ({ countryCode }: CountryPagesSearch) => {
                 className="input rounded-full text-center h-[54px] text-[18px] font-medium w-full opacity-75 hover:opacity-[.85] focus:opacity-[.85]"
             />
             {
-                search && pages &&
+                search && !isLoading &&
                 <ul tabIndex={0} className="sm:w-1/2 lg:w-full dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box">
                     {
-                        pages.meta.itemCount > 0
+                        pages.meta?.itemCount > 0
                             ?
                             pages.items?.map(page => {
                                 return (
-                                    <li>
+                                    <li key={page.id}>
                                         <Link className="flex justify-start" href={`/${page.slug}`}>
                                             <ItemProfilePicture pageData={page} height={30} width={30} />
                                             <p>{page.title}</p>
@@ -56,3 +57,6 @@ export default ({ countryCode }: CountryPagesSearch) => {
     )
 
 }
+
+
+export default pagesSearch
