@@ -5,7 +5,7 @@ import { UnitType } from "@/types/unit";
 import { MetadataRoute } from "next";
 import type { PageNamespace } from "types/page";
 
-const baseUrl = `https://koochaa.com`
+const baseUrl = process.env.FRONT_URL
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     let countriesSiteMap: MetadataRoute.Sitemap = [],
