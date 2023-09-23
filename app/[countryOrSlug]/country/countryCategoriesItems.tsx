@@ -54,11 +54,12 @@ export default function CountryCategoriesItems({
           );
         })}
       </div>
-      <div className="content mt-8 grid sm:grid-cols-6 gap-4 mx-3 sm:mx-0">
+      <div className="content mt-8 flex flex-wrap justify-center gap-4 mx-3 sm:mx-0">
         {recentlyUpdatedCategories[`${activeTab}`].map((category, index) => {
           return (
             <Link
               scroll
+              className="w-full  sm:basis-1/6"
               key={"country-category" + category.id}
               href={`/${currentCountry.code}/${
                 unitFinder(category.unitId)?.slug

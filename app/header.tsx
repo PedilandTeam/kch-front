@@ -96,12 +96,16 @@ export const Header = ({ children }: HeaderProps) => {
       className="w-full bg-white py-[10px]"
     >
       <div className="container mx-auto max-w-[1144px]">
-        <div className="flex justify-between mx-3 sm:mx-0">
-          <LogoTop />
-          <TopTools isMainPage={isMainPage} countryCode={countryCode} />
+        <div>
+          <div className="flex justify-between mx-3 sm:mx-0">
+            <LogoTop />
+            <TopTools isMainPage={isMainPage} countryCode={countryCode} />
+          </div>
         </div>
       </div>
+
       <OffCanvas countryCode={countryCode} />
+
       {children}
     </header>
   );
