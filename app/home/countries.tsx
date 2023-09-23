@@ -16,8 +16,7 @@ async function fetchCountries() {
 }
 
 export const HomeCountries = async () => {
-
-  const countries: CountryNamespace.GET[] = await fetchCountries()
+  const countries: CountryNamespace.GET[] = await fetchCountries();
 
   const getCount = (countryCode: string) => {
     return countries.find(
@@ -33,8 +32,8 @@ export const HomeCountries = async () => {
             {_TXT.COUNTRY.POPULAR}
           </h2>
         </div>
-        <div className="wrap grid grid-cols-1 sm:grid-cols-3 gap-1">
-          <div className="group relative h-min overflow-hidden">
+        <div className="wrap grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
+          <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/at"}>
               <Image
                 src="/images/modules/mod-austria-min.jpg"
@@ -43,15 +42,15 @@ export const HomeCountries = async () => {
                 alt="یک تصویر از کشور اتریش"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
-              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
-                <h3 className="text-[20px] font-semibold">
+              <div className="info absolute bottom-0 w-full px-5 py-8 group-hover:py-10 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer bg-gradient-to-t from-black text-white">
+                <h3 className="text-[20px] font-semibold text-center">
                   {_TXT.COUNTRY.AUSTRIA}
                   <span className="font-normal mr-1">({getCount("at")})</span>
                 </h3>
               </div>
             </Link>
           </div>
-          <div className="group relative h-min overflow-hidden">
+          <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/fr"}>
               <Image
                 src="/images/modules/mod-france-min.jpg"
@@ -60,15 +59,15 @@ export const HomeCountries = async () => {
                 alt="یک تصویر از کشور فرانسه"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
-              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
-                <h3 className="text-[20px] font-semibold">
+              <div className="info absolute bottom-0 w-full px-5 py-8 group-hover:py-10 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer bg-gradient-to-t from-black text-white">
+                <h3 className="text-[20px] font-semibold text-center">
                   {_TXT.COUNTRY.FRANCE}
                   <span className="font-normal mr-1">({getCount("fr")})</span>
                 </h3>
               </div>
             </Link>
           </div>
-          <div className="group relative h-min overflow-hidden">
+          <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/de"}>
               <Image
                 src="/images/modules/mod-germany-min.jpg"
@@ -77,15 +76,15 @@ export const HomeCountries = async () => {
                 alt="یک تصویر از کشور آلمان"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
-              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
-                <h3 className="text-[20px] font-semibold">
+              <div className="info absolute bottom-0 w-full px-5 py-8 group-hover:py-10 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer bg-gradient-to-t from-black text-white">
+                <h3 className="text-[20px] font-semibold text-center">
                   {_TXT.COUNTRY.GERMANY}
                   <span className="font-normal mr-1">({getCount("de")})</span>
                 </h3>
               </div>
             </Link>
           </div>
-          <div className="group relative h-min overflow-hidden">
+          <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/tr"}>
               <Image
                 src="/images/modules/mod-turkey-min.jpg"
@@ -94,15 +93,15 @@ export const HomeCountries = async () => {
                 alt="یک تصویر از کشور ترکیه"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
-              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
-                <h3 className="text-[20px] font-semibold">
+              <div className="info absolute bottom-0 w-full px-5 py-8 group-hover:py-10 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer bg-gradient-to-t from-black text-white">
+                <h3 className="text-[20px] font-semibold text-center">
                   {_TXT.COUNTRY.TURKEY}
                   <span className="font-normal mr-1">({getCount("tr")})</span>
                 </h3>
               </div>
             </Link>
           </div>
-          <div className="group relative h-min overflow-hidden">
+          <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/uk"}>
               <Image
                 src="/images/modules/mod-england-min.jpg"
@@ -111,15 +110,15 @@ export const HomeCountries = async () => {
                 alt="یک تصویر از کشور انگلستان"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
-              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
-                <h3 className="text-[20px] font-semibold">
+              <div className="info absolute bottom-0 w-full px-5 py-8 group-hover:py-10 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer bg-gradient-to-t from-black text-white">
+                <h3 className="text-[20px] font-semibold text-center">
                   {_TXT.COUNTRY.ENGLAND}
                   <span className="font-normal mr-1">({getCount("uk")})</span>
                 </h3>
               </div>
             </Link>
           </div>
-          <div className="group relative h-min overflow-hidden">
+          <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/dk"}>
               <Image
                 src="/images/modules/mod-denmark-min.jpg"
@@ -128,8 +127,8 @@ export const HomeCountries = async () => {
                 alt="یک تصویر از کشور دانمارک"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
               />
-              <div className="info absolute bottom-0 w-full px-5 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md bg-gradient-to-t from-black text-white">
-                <h3 className="text-[20px] font-semibold">
+              <div className="info absolute bottom-0 w-full px-5 py-8 group-hover:py-10 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer bg-gradient-to-t from-black text-white">
+                <h3 className="text-[20px] font-semibold text-center">
                   {_TXT.COUNTRY.DENMARK}
                   <span className="font-normal mr-1">({getCount("dk")})</span>
                 </h3>
