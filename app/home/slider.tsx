@@ -4,17 +4,17 @@ import Link from "next/link";
 
 export const SliderMainHome = () => {
   return (
-    <div className="slider h-[520px] flex justify-center content-center mx-3 sm:mx-auto relative">
+    <div className="slider h-[520px] flex justify-center content-center mx-3 sm:mx-auto relative bg-slate-500 rounded-xl">
       <Image
         className="rounded-xl brightness-[.50] object-cover hidden sm:block"
-        src={"/images/slide/home-slider-04-min.jpg"}
+        src={"/images/slide/home/hs-01.webp"}
         width={1700}
         height={520}
         alt="a Woman working with laptop"
       />
       <Image
         className="rounded-xl brightness-[.75] object-cover sm:hidden"
-        src={"/images/slide/home/hsm-01.jpg"}
+        src={"/images/slide/home/hsm-01.webp"}
         width={430}
         height={600}
         alt="a Woman working with laptop"
