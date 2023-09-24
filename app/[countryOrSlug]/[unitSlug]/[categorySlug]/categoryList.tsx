@@ -82,7 +82,7 @@ export default async function CategoryList({
               لیست {category?.name} فارسی زبان در {country?.name}
             </h1>
             {isNotFound ? (
-              <h4>با فیلترهای وارد شده چیزی یافت نشد </h4>
+              <h4>متاسفانه، نتیجه‌ای برای جستجو شما یافت نشد.</h4>
             ) : (
               <CardsList pages={pages!} category={category} country={country} />
             )}

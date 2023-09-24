@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const SliderMainHome = () => {
   return (
-    <div className="slider h-[520px] flex justify-center content-center mx-3 sm:mx-auto relative bg-slate-500 rounded-xl">
+    <div className="slider h-[520px] flex justify-center content-center mx-3 sm:mx-auto relative rounded-xl">
       <Image
         className="rounded-xl brightness-[.50] object-cover hidden sm:block"
         src={"/images/slide/home/hs-01.webp"}
