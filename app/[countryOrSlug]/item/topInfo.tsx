@@ -69,7 +69,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                 ?
                 <p className="text-[14px]">هیچ رسانه اجتماعی ثبت نشده است.</p>
                 :
-                <p className="text-[14px]">هیچ رسانه اجتماعی ثبت نشده است.</p>
+                null
             }
             
             {pageData?.socials?.telegram ? (

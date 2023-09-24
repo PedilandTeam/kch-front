@@ -29,21 +29,21 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
   const units = UNITS_LIST_ARRAY;
 
   return (
-    <div className="slider h-[520px] flex justify-center content-center mx-3 sm:mx-auto sm:max-w-[95%] relative">
+    <div className="slider h-[520px] flex justify-center content-center mx-3 sm:mx-auto sm:max-w-[95%] relative bg-slate-500 rounded-xl">
       <Image
-        className="rounded-xl brightness-[.60] object-cover"
+        className="rounded-xl brightness-[.60] object-cover hidden sm:block"
         src={`/images/slide/home/${currentCountry.code}.webp`}
         width={1700}
         height={520}
         alt={`یک تصویر از کشور ${currentCountry.name}`}
       />
-      {/* <Typewriter
-            options={{
-              strings: ["Hello", "World"],
-              autoStart: true,
-              loop: true,
-            }}
-      /> */}
+      <Image
+        className="rounded-xl brightness-[.70] object-cover sm:hidden"
+        src={`/images/slide/home/${currentCountry.code}-m.webp`}
+        width={430}
+        height={600}
+        alt={`یک تصویر از کشور ${currentCountry.name}`}
+      />
       <div className="max-w-[1144px] sm:m-auto absolute w-auto bottom-[10%] sm:bottom-[15%] sm:left-0 sm:right-0 sm:w-full">
         <div className="wrap text-center">
           <h3 className="sm:inline-block text-gray-300 bg-pink-700 bg-opacity-70 p-3 sm:pt-1 sm:pb-[40px] px-3 sm:px-[44px] text-[18px] sm:text-[21px] leading-[30px] sm:leading-[36px] sm:rounded-lg">
@@ -63,7 +63,7 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
             راهنمای مشاغل کـوچـا رو جستجو کن!
           </h2>
 
-          <PagesSearch countryCode={currentCountry.code}/>
+          <PagesSearch countryCode={currentCountry.code} />
 
           <Link href={"#select-unit"} scroll>
             <button className="btn mx-auto px-3 sm:mx-0 text-[15px] bg-lime-300 border-lime-300 text-lime-900 hover:bg-lime-400 hover:border-lime-400 hover:text-lime-950">

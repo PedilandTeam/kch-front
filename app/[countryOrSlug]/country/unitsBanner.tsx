@@ -28,11 +28,11 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
                 اطلاعات منسجم و معتبر در این زمینه مواجه شدی.
               </p>
               <p className="mb-2">
-                راهنمای مشاغل کـوچـا که در دو دسته مشاغل و پزشکان فـارسـی
-                زبـان طبقه‌بندی شده، تصمیم داره این مشکل بزرگ رو حل کنه. در همین
-                راستا به تمام مشاغلی که خارج از ایران فعالیت قانونی خودشون رو به
-                زبـان فارسـی هم ارائه می‌کنن؛ این امکان رو میده تا با ایجاد یک
-                پروفایل حرفه‌ای، به‌سادگی خدمات و محصولات‌شون رو در دسترس سایر
+                راهنمای مشاغل کـوچـا که در دو دسته مشاغل و پزشکان فـارسـی زبـان
+                طبقه‌بندی شده، تصمیم داره این مشکل بزرگ رو حل کنه. در همین راستا
+                به تمام مشاغلی که خارج از ایران فعالیت قانونی خودشون رو به زبـان
+                فارسـی هم ارائه می‌کنن؛ این امکان رو میده تا با ایجاد یک پروفایل
+                حرفه‌ای، به‌سادگی خدمات و محصولات‌شون رو در دسترس سایر
                 فارسی‌زبانان دنیا قرار بدن.
               </p>
             </div>
@@ -41,17 +41,24 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
 
         <div className="mod-items sm:col-span-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 sm:gap-6 ">
-            <div className="item group flex mb-4 sm:mb-0">
+            <div className="item group flex mb-3 sm:mb-0">
               <Link href={`/${currentCountry.code}/businesses`}>
-                <div className="image relative h-min overflow-hidden rounded-md">
+                <div className="image relative h-min overflow-hidden rounded-xl">
                   <Image
                     src={"/images/modules/mod-business-01.webp"}
                     width={400}
                     height={560}
                     alt="Some Business People"
-                    className="rounded-md group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-auto object-cover"
+                    className="rounded-xl group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-auto object-cover hidden sm:block"
                   />
-                  <div className="info absolute bottom-0 w-full px-4 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md text-[20px] bg-gradient-to-t from-black text-white font-medium">
+                  <Image
+                    src={"/images/modules/mod-business-01-m.webp"}
+                    width={430}
+                    height={300}
+                    alt="Some Business People"
+                    className="rounded-xl group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-auto object-cover sm:hidden"
+                  />
+                  <div className="info absolute bottom-0 w-full px-4 py-10 group-hover:py-12 sm:py-8 sm:group-hover:py-10 transition-all duration-500 cursor-pointer rounded-b-md text-center text-[24px] sm:text-[20px] bg-gradient-to-t from-black text-white font-medium">
                     {_TXT.MENU.BUSINESSES}
                   </div>
                 </div>
@@ -59,15 +66,22 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
             </div>
             <div className="item group flex mb-4 sm:mb-0">
               <Link href={`/${currentCountry.code}/doctors`}>
-                <div className="image relative h-min overflow-hidden rounded-md">
+                <div className="image relative h-min overflow-hidden rounded-xl">
                   <Image
                     src={"/images/modules/mod-doctors-01.webp"}
                     width={400}
                     height={560}
                     alt="a doctor"
-                    className="rounded-md group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-auto object-cover"
+                    className="rounded-xl group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-auto object-cover hidden sm:block"
                   />
-                  <div className="info absolute bottom-0 w-full px-4 py-10 group-hover:py-12 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer rounded-b-md text-[20px] bg-gradient-to-t from-black text-white font-medium">
+                  <Image
+                    src={"/images/modules/mod-doctor-01-m.webp"}
+                    width={430}
+                    height={300}
+                    alt="a doctor"
+                    className="rounded-xl group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-auto object-cover sm:hidden"
+                  />
+                  <div className="info absolute bottom-0 w-full px-4 py-10 group-hover:py-12 sm:py-8 sm:group-hover:py-10 transition-all duration-500 cursor-pointer rounded-b-md text-center text-[24px] sm:text-[20px] bg-gradient-to-t from-black text-white font-medium">
                     {_TXT.MENU.DOCTORS}
                   </div>
                 </div>
