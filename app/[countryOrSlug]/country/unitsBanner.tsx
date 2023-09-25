@@ -68,7 +68,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
               <Link href={`/${currentCountry.code}/doctors`}>
                 <div className="image relative h-min overflow-hidden rounded-xl">
                   <Image
-                    src={"/images/modules/mod-doctors-01.webp"}
+                    src={"/images/modules/mod-doctor-01.webp"}
                     width={400}
                     height={560}
                     alt="a doctor"

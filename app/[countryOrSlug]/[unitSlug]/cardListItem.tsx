@@ -27,7 +27,7 @@ export default function ({ page, country, variant }: cardListItem) {
       </figure>
       <div className="card-body px-4 py-5">
         <Link href={`/${page.slug}`}>
-          <h2 className="card-title text-slate-700 hover:text-pink-800 justify-center truncate">
+          <h2 className="card-title text-slate-700 hover:text-pink-800 justify-center truncate text-[18px]">
             {page.title}
           </h2>
         </Link>
