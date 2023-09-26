@@ -111,7 +111,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
     } else if (type == "telephone") {
 
       if (agent.device?.type == "desktop") {
-        navigator.clipboard.writeText(`${pageData.country.areaCode}${pageData.contact.telephone!}`)
+        navigator.clipboard.writeText(`00${pageData.country.areaCode ? pageData.country.areaCode : ''}${pageData.contact.telephone!}`)
         toast.success("کپی شد")
       } else {
         window.open(`tel:${pageData.contact.telephone}`, "_blank", 'noopener, noreferrer')
