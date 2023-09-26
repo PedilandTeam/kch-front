@@ -19,7 +19,10 @@ import TelegramIcon from "./socials/telegram";
 export type ItemTopInfoType = { pageData: PageNamespace.Page };
 export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
 
-  const haveSocial = pageData.socials && Object.keys(pageData?.socials).length > 0
+
+  const socials = {...pageData.socials}
+  delete socials.website
+  const haveSocial = pageData.socials && Object.keys(socials).length > 0
 
   return (
     <div className="top-section h-full">
