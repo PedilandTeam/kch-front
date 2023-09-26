@@ -111,7 +111,9 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
     } else if (type == "telephone") {
 
       if (agent.device?.type == "desktop") {
-        navigator.clipboard.writeText(`00${pageData.country.areaCode ? pageData.country.areaCode : ''}${pageData.contact.telephone!}`)
+        const number = `00${pageData.country.areaCode ? pageData.country.areaCode : ''}${pageData.contact.telephone!}`
+        navigator.clipboard.writeText(number)
+        e.currentTarget.dataset.tip = number
         toast.success("کپی شد")
       } else {
         window.open(`tel:${pageData.contact.telephone}`, "_blank", 'noopener, noreferrer')
@@ -157,7 +159,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         <div className="group grid grid-rows-1 gap-2 text-center border-l hover:cursor-pointer">
           {
             pageData?.contact?.telephone ?
-              <button onClick={linkHandler} data-type="telephone" className="grid grid-rows-2 gap-2 text-center">
+              <button onClick={linkHandler} data-type="telephone" data-tip='' className="grid grid-rows-2 gap-2 text-center tooltip focus:tooltip-open ">
                 <PhoneIcon className="w-[26px] h-[26px] mx-auto group-hover:text-pink-800 transition duration-300 ease-in-out" />
                 <span className="group-hover:text-pink-800 transition duration-300 ease-in-out font-medium">
                   تماس
