@@ -67,7 +67,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
             {
               !haveSocial
                 ?
-                <p>شبکه اجتماعی ثبت نشده است.</p>
+                <p className="text-[14px]">هیچ رسانه اجتماعی ثبت نشده است.</p>
                 :
                 null
             }

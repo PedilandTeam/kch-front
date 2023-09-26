@@ -193,7 +193,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
             }`}
         />
       </div>
-      <div className="rounded-md border border-gray-200 p-5 mb-3 bg-blue-50 border-l-[4px] border-l-yellow-500 rounded-tl-none rounded-bl-none">
+      {/* <div className="rounded-md border border-gray-200 p-5 mb-3 bg-blue-50 border-l-[4px] border-l-yellow-500 rounded-tl-none rounded-bl-none">
         <div className="flex content-center items-center mb-3">
           <Image
             alt="telegram"
@@ -213,17 +213,17 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         </p>
         <button
           className="btn btn-active btn-secondary w-full"
-          onClick={() => {
-            if (document) {
-              (
-                document.getElementById("modal_claim") as HTMLFormElement
-              ).showModal();
-            }
-          }}
+          // onClick={() => {
+          //   if (document) {
+          //     (
+          //       document.getElementById("modal_claim") as HTMLFormElement
+          //     ).showModal();
+          //   }
+          // }}
         >
           دریافت مالکیت صفحه
         </button>
-      </div>
+      </div> */}
 
       <div className="rounded-md border border-gray-200 px-5 py-4 mb-3 text-[15px]">
         <p>این صفحه توسط ادمین کوچا مدیریت می‌شود.</p>
