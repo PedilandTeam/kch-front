@@ -19,6 +19,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { MouseEvent } from "react";
 import { toast } from "react-hot-toast";
+import { upperCaseFirst } from "upper-case-first";
 
 interface ItemSideInfoType {
   pageData: PageNamespace.Page;
@@ -111,7 +112,9 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
     } else if (type == "telephone") {
 
       if (agent.device?.type == "desktop") {
-        navigator.clipboard.writeText(`00${pageData.country.areaCode ? pageData.country.areaCode : ''}${pageData.contact.telephone!}`)
+        const number = `00${pageData.country.areaCode ? pageData.country.areaCode : ''}${pageData.contact.telephone!}`
+        navigator.clipboard.writeText(number)
+        e.currentTarget.dataset.tip = number
         toast.success("کپی شد")
       } else {
         window.open(`tel:${pageData.contact.telephone}`, "_blank", 'noopener, noreferrer')
@@ -157,7 +160,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         <div className="group grid grid-rows-1 gap-2 text-center border-l hover:cursor-pointer">
           {
             pageData?.contact?.telephone ?
-              <button onClick={linkHandler} data-type="telephone" className="grid grid-rows-2 gap-2 text-center">
+              <button onClick={linkHandler} data-type="telephone" data-tip='' className="grid grid-rows-2 gap-2 text-center tooltip focus:tooltip-open ">
                 <PhoneIcon className="w-[26px] h-[26px] mx-auto group-hover:text-pink-800 transition duration-300 ease-in-out" />
                 <span className="group-hover:text-pink-800 transition duration-300 ease-in-out font-medium">
                   تماس
@@ -187,9 +190,9 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
       <div className="rounded-md border border-gray-200 p-4 mb-3">
         <ItemSideInfoItem
           text={`${pageData?.address?.address ? pageData?.address?.address : ""
-            } ${pageData?.city?.englishName
-              ? pageData.city.englishName
-              : pageData?.city?.name
+            }, ${pageData?.city?.englishName
+              ? upperCaseFirst(pageData.city.englishName)
+              : upperCaseFirst(pageData?.city?.name)
             }`}
         />
       </div>
