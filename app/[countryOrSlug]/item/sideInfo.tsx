@@ -19,6 +19,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { MouseEvent } from "react";
 import { toast } from "react-hot-toast";
+import { upperCaseFirst } from "upper-case-first";
 
 interface ItemSideInfoType {
   pageData: PageNamespace.Page;
@@ -189,9 +190,9 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
       <div className="rounded-md border border-gray-200 p-4 mb-3">
         <ItemSideInfoItem
           text={`${pageData?.address?.address ? pageData?.address?.address : ""
-            } ${pageData?.city?.englishName
-              ? pageData.city.englishName
-              : pageData?.city?.name
+            }, ${pageData?.city?.englishName
+              ? upperCaseFirst(pageData.city.englishName)
+              : upperCaseFirst(pageData?.city?.name)
             }`}
         />
       </div>
