@@ -21,7 +21,7 @@ export const Footer = () => {
   // }, []);
 
   return (
-    <div className="pt-10 pb-6 sm:pb-8 mt-5 sm:mt-10 bg-blue-950 text-gray-50">
+    <div className="pt-10 pb-6 sm:pb-8 mt-5 sm:mt-10 bg-[#1c39bb] text-gray-50">
       <footer className="footer footer-center container px-3 mx-auto max-w-[1144px]">
         <div className="grid sm:grid-flow-col gap-3 sm:gap-4 text-[15px]">
           <Link href={"/about"} className="link link-hover">
@@ -42,7 +42,7 @@ export const Footer = () => {
             <Link
               href={"https://www.instagram.com/_koochaa"}
               target="_blank"
-              className="bg-slate-500 p-2 rounded hover:bg-pink-900"
+              className="bg-[#4961c9] p-2 rounded hover:bg-[#d8aa3c]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +59,7 @@ export const Footer = () => {
             <Link
               href={"https://www.linkedin.com/company/koochaa"}
               target="_blank"
-              className="bg-slate-500 p-2 rounded hover:bg-pink-900"
+              className="bg-[#4961c9] p-2 rounded hover:bg-[#d8aa3c]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +79,7 @@ export const Footer = () => {
             <Link
               href={"https://www.facebook.com/koochaa.fb"}
               target="_blank"
-              className="bg-slate-500 p-2 rounded hover:bg-pink-900"
+              className="bg-[#4961c9] p-2 rounded hover:bg-[#d8aa3c]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +107,7 @@ export const Footer = () => {
             <Link
               href={"https://twitter.com/_koochaa"}
               target="_blank"
-              className="bg-slate-500 p-2 rounded hover:bg-pink-900"
+              className="bg-[#4961c9] p-2 rounded hover:bg-[#d8aa3c]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
