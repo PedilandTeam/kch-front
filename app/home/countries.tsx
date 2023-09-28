@@ -4,6 +4,12 @@ import { CountryNamespace } from "@/types/country";
 import Image from "next/image";
 import Link from "next/link";
 import CountryModalBtn from "./countryModalBtn";
+import atImage from "../../public/images/modules/mod-austria-min.jpg";
+import frImage from "../../public/images/modules/mod-france-min.jpg";
+import deImage from "../../public/images/modules/mod-germany-min.jpg";
+import trImage from "../../public/images/modules/mod-turkey-min.jpg";
+import ukImage from "../../public/images/modules/mod-england-min.jpg";
+import dkImage from "../../public/images/modules/mod-denmark-min.jpg";
 
 async function fetchCountries() {
   let countries: CountryNamespace.GET[];
@@ -36,11 +42,13 @@ export const HomeCountries = async () => {
           <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/at"}>
               <Image
-                src="/images/modules/mod-austria-min.jpg"
+                src={atImage}
+                placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور اتریش"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
+                priority
               />
               <div className="info absolute bottom-0 w-full px-5 py-8 group-hover:py-10 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer bg-gradient-to-t from-black text-white">
                 <h3 className="text-[20px] font-semibold text-center">
@@ -53,11 +61,13 @@ export const HomeCountries = async () => {
           <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/fr"}>
               <Image
-                src="/images/modules/mod-france-min.jpg"
+                src={frImage}
+                placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور فرانسه"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
+                priority
               />
               <div className="info absolute bottom-0 w-full px-5 py-8 group-hover:py-10 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer bg-gradient-to-t from-black text-white">
                 <h3 className="text-[20px] font-semibold text-center">
@@ -70,11 +80,13 @@ export const HomeCountries = async () => {
           <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/de"}>
               <Image
-                src="/images/modules/mod-germany-min.jpg"
+                src={deImage}
+                placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور آلمان"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
+                priority
               />
               <div className="info absolute bottom-0 w-full px-5 py-8 group-hover:py-10 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer bg-gradient-to-t from-black text-white">
                 <h3 className="text-[20px] font-semibold text-center">
@@ -87,11 +99,13 @@ export const HomeCountries = async () => {
           <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/tr"}>
               <Image
-                src="/images/modules/mod-turkey-min.jpg"
+                src={trImage}
+                placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور ترکیه"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
+                priority
               />
               <div className="info absolute bottom-0 w-full px-5 py-8 group-hover:py-10 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer bg-gradient-to-t from-black text-white">
                 <h3 className="text-[20px] font-semibold text-center">
@@ -104,11 +118,13 @@ export const HomeCountries = async () => {
           <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/uk"}>
               <Image
-                src="/images/modules/mod-england-min.jpg"
+                src={ukImage}
+                placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور انگلستان"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
+                priority
               />
               <div className="info absolute bottom-0 w-full px-5 py-8 group-hover:py-10 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer bg-gradient-to-t from-black text-white">
                 <h3 className="text-[20px] font-semibold text-center">
@@ -121,11 +137,13 @@ export const HomeCountries = async () => {
           <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/dk"}>
               <Image
-                src="/images/modules/mod-denmark-min.jpg"
+                src={dkImage}
+                placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور دانمارک"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
+                priority
               />
               <div className="info absolute bottom-0 w-full px-5 py-8 group-hover:py-10 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer bg-gradient-to-t from-black text-white">
                 <h3 className="text-[20px] font-semibold text-center">

@@ -1,5 +1,6 @@
 import PageHead from "./page-head";
 import { Metadata } from "next";
+import TextSec from "./text";
 
 export const metadata: Metadata = {
   title: "کوچا | درباره ما",
@@ -12,8 +13,9 @@ export const metadata: Metadata = {
 
 const AboutPage = () => {
   return (
-    <div className="page-wrap">
+    <div className="page-wrap static">
       <PageHead />
+      <TextSec />
     </div>
   );
 };

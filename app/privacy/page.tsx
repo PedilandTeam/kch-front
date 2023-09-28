@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 const PrivacyPage = () => {
   return (
-    <div className="page-wrap">
+    <div className="page-wrap static">
       <PageHead />
       <TermsText />
     </div>

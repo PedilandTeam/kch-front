@@ -1,20 +1,23 @@
 import Image from "next/image";
+import phImage from "../../public/images/phead/ph-about-01.webp";
 
 const PageHead = () => {
   return (
-    <div className="page-head h-[300px] bg-[#e8dabd]">
-      <div className="container mx-auto max-w-[1144px] flex justify-between items-center">
-        <div className="wrap text-amber-800">
-          <h1 className=" font-bold text-[36px] mb-3">درباره کـوچـا</h1>
-          <h2 className="font-normal text-[22px]">خواهان لبخندتـون هستیم!</h2>
+    <div className="page-head">
+      <Image
+        className="rounded-xl brightness-[.60] object-cover h-[300px]"
+        src={phImage}
+        placeholder="blur"
+        width={1700}
+        height={300}
+        alt=""
+        priority
+      />
+      <div className="content">
+        <div className="wrap text-white">
+          <h1>درباره کـوچـا</h1>
+          <h2>خواهان لبخندتـون هستیم!</h2>
         </div>
-        <Image
-          className="h-[300px]"
-          src={`/images/phead/ph-about-01.png`}
-          width={760}
-          height={300}
-          alt="a boy is laughing"
-        />
       </div>
     </div>
   );
