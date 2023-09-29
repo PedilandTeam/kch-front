@@ -14,11 +14,9 @@ export const metadata: Metadata = {
 
 const ContactPage = () => {
   return (
-    <div className="page-wrap">
+    <div className="page-wrap static">
       <PageHead />
-
       <CardsGroup />
-
       <ContactForm />
     </div>
   );

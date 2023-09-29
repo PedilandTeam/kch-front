@@ -10,7 +10,7 @@ const ContactForm = () => {
             <input
               type="text"
               placeholder="* نام کامل"
-              className="input input-bordered w-full"
+              className="input input-bordered focus:input-secondary w-full"
               required
             />
           </div>
@@ -18,7 +18,7 @@ const ContactForm = () => {
             <input
               type="text"
               placeholder="* کشور"
-              className="input input-bordered w-full"
+              className="input input-bordered focus:input-secondary w-full"
               required
             />
           </div>
@@ -26,7 +26,7 @@ const ContactForm = () => {
             <input
               type="text"
               placeholder="* شهر"
-              className="input input-bordered w-full"
+              className="input input-bordered focus:input-secondary w-full"
               required
             />
           </div>
@@ -34,7 +34,7 @@ const ContactForm = () => {
             <input
               type="email"
               placeholder="* ایمیل"
-              className="input input-bordered w-full"
+              className="input input-bordered focus:input-secondary w-full"
               required
             />
           </div>
@@ -42,13 +42,13 @@ const ContactForm = () => {
             <input
               type="text"
               placeholder="* موضوع"
-              className="input input-bordered w-full"
+              className="input input-bordered focus:input-secondary w-full"
               required
             />
           </div>
           <div className="col-span-6 sm:col-span-6">
             <textarea
-              className="textarea textarea-bordered w-full"
+              className="textarea input-bordered focus:textarea-secondary w-full"
               placeholder="متن پیام"
               rows={8}
               required
