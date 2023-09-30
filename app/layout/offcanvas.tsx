@@ -16,11 +16,11 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
   const ref = useRef<HTMLInputElement>(null)
 
   return (
-    <div className="drawer drawer-end z-10">
-      <input ref={ref} id="my-drawer" type="checkbox" className="drawer-toggle" />
+    <div dir="rtl" className="drawer drawer-end z-10">
+      <input ref={ref} id="main-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content"></div>
       <div className="drawer-side">
-        <label htmlFor="my-drawer" className="drawer-overlay"></label>
+        <label htmlFor="main-drawer" className="drawer-overlay"></label>
 
         <div className="menu p-4 w-80 h-full bg-gray-50 text-base-content">
           <div className="logo mb-5 w-[180px] h-[56px] sm:w-[170px] sm:h-[50px] relative">

@@ -8,6 +8,7 @@
   }
 }
 
+  
 /* Static Pages Style */
 .page-wrap.static .text-wrap h2 {
   @apply text-lg font-semibold mb-1 mt-8 first:mt-0;

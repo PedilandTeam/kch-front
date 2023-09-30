@@ -34,7 +34,7 @@ export const TopTools = ({countryCode, isMainPage}: TopToolsProps) => {
         {
           !isMainPage ?
             <div className="menu-icon mr-3">
-              <label className="btn btn-circle swap swap-rotate" htmlFor="my-drawer">
+              <label className="btn btn-circle swap swap-rotate" htmlFor="main-drawer">
                 <input type="checkbox" />
                 {/* Hamburger icon */}
                 <svg
