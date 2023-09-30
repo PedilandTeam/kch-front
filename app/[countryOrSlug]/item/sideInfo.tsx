@@ -19,7 +19,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { MouseEvent } from "react";
 import { toast } from "react-hot-toast";
-import { upperCaseFirst } from "upper-case-first";
+import upperCaseFirst from "@/utils/upperCaseFirst";
 
 interface ItemSideInfoType {
   pageData: PageNamespace.Page;
