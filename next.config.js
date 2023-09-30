@@ -11,7 +11,8 @@ const nextConfig = {
   output: "standalone",
   images:{
     domains:[
-      "dl.koochaa.com"
+      "dl.koochaa.com",
+      "www.koochaa.com"
     ]
   }
 }
