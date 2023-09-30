@@ -9,8 +9,8 @@ export const LogoTop = () => {
       <Link href="/">
         <Image
           src="/images/logo.svg"
-          width={180}
-          height={56}
+          width={217}
+          height={60}
           priority={true}
           alt="Pediland Logo"
         />
