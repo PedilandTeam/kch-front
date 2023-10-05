@@ -22,6 +22,7 @@ export namespace PageNamespace {
         updateDate: Date;
         title: string;
         description: string;
+        haveAvatar: boolean;
         address: Address;
         socials?: Partial<Socials>;
         contact: Partial<Contact>;
