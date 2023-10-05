@@ -9,7 +9,7 @@ export const SliderMainHome = () => {
       <Image
         className="rounded-xl brightness-[.50] object-cover hidden sm:block"
         src={sliderImage}
-        placeholder="blur"
+        // placeholder="blur"
         width={1700}
         height={520}
         alt="a Woman working with laptop"

@@ -16,6 +16,7 @@ async function fetchCountries() {
   try {
     countries = await (await API_ROUTES.COUNTRIES.GET_ALL()).json();
   } catch (e) {
+    console.log(e);
     throw new Error("error in get countries");
   }
   return countries;
@@ -43,7 +44,7 @@ export const HomeCountries = async () => {
             <Link href={"/at"}>
               <Image
                 src={atImage}
-                placeholder="blur"
+                // placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور اتریش"
@@ -62,7 +63,7 @@ export const HomeCountries = async () => {
             <Link href={"/fr"}>
               <Image
                 src={frImage}
-                placeholder="blur"
+                // placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور فرانسه"
@@ -81,7 +82,7 @@ export const HomeCountries = async () => {
             <Link href={"/de"}>
               <Image
                 src={deImage}
-                placeholder="blur"
+                // placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور آلمان"
@@ -100,7 +101,7 @@ export const HomeCountries = async () => {
             <Link href={"/tr"}>
               <Image
                 src={trImage}
-                placeholder="blur"
+                // placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور ترکیه"
@@ -119,7 +120,7 @@ export const HomeCountries = async () => {
             <Link href={"/uk"}>
               <Image
                 src={ukImage}
-                placeholder="blur"
+                // placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور انگلستان"
@@ -138,7 +139,7 @@ export const HomeCountries = async () => {
             <Link href={"/dk"}>
               <Image
                 src={dkImage}
-                placeholder="blur"
+                // placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور دانمارک"
