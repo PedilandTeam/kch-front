@@ -7,7 +7,6 @@ const PageHead = () => {
       <Image
         className="rounded-xl brightness-[.60] object-cover h-[300px]"
         src={phImage}
-        placeholder="blur"
         width={1700}
         height={300}
         alt=""
