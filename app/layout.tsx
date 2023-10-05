@@ -30,6 +30,8 @@ export default async function RootLayout({
     countries = await (await API_ROUTES.COUNTRIES.GET_ALL(1, 20)).json();
   } catch (e) {
     console.log(e);
+    console.log(` this is ${process.env.API_URL}`);
+    
     throw new Error("error in get country");
   }
 
