@@ -1,5 +1,15 @@
 {
   "next": {
     "modifyConfig": false
-  }
+  },
+  "disks": [
+    {
+      "name": "temp",
+      "mountTo": "/tmp"
+    },
+    {
+      "name": "app-dir",
+      "mountTo": ".next/server/app"
+    }
+  ]
 }
