@@ -11,9 +11,10 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="component page-home sm:mx-auto w-full sm:max-w-[95%]">
-      <SliderMainHome />
-      <HomeCountries />
-      <HomeBottom />
+      <p>test of koochaa</p>
+      {/* <SliderMainHome /> */}
+      {/* <HomeCountries /> */}
+      {/* <HomeBottom /> */}
     </div>
   );
 }
