@@ -48,7 +48,7 @@ export default function PageSearch() {
                     }
                   );
             }
-        }, 400);
+        }, 700);
 
         return () => {
             clearTimeout(timeOut)

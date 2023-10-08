@@ -5,6 +5,15 @@ import { UnitType } from "@/types/unit";
 import { MetadataRoute } from "next";
 import type { PageNamespace } from "types/page";
 
+
+function lastModifiedGenerator() {
+    const currentDate = new Date();
+    const randomHours = Math.floor(Math.random() * (5 - 3 + 1)) + 3;
+    currentDate.setHours(currentDate.getHours() - randomHours);
+    return currentDate
+
+}
+
 const baseUrl = process.env.FRONT_URL
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
@@ -17,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         countriesSiteMap = countries.map((country: CountryNamespace.GET) => {
             return {
                 url: `${baseUrl}/${country.code}`,
-                lastModified: new Date()
+                lastModified: lastModifiedGenerator()
             }
         })
 
@@ -27,7 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             return units.forEach((unit: UnitType) => {
                 unitsSiteMap.push({
                     url: `${baseUrl}/${country.code}/${unit.slug}`,
-                    lastModified: unit.updateDate
+                    lastModified: lastModifiedGenerator()
                 })
             })
         })
@@ -39,7 +48,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             return categories.forEach(category => {
                 categoriesSiteMap.push({
                     url: `${baseUrl}/${country.code}/${category.unit.slug}/${category.slug}`,
-                    lastModified: category.updateDate
+                    lastModified: lastModifiedGenerator()
                 })
             })
         })
@@ -73,7 +82,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
 
     console.log(pagesSiteMap);
-    
+
     return [
         ...countriesSiteMap,
         ...unitsSiteMap,
