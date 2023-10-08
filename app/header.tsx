@@ -1,6 +1,5 @@
 "use client";
 
-import { LogoTop } from "./layout/logo";
 import { TopTools } from "./layout/toptools";
 import { OffCanvas } from "./layout/offcanvas";
 import { storeType } from "@/store/store";
@@ -8,6 +7,8 @@ import { countryCodeList } from "@/utils/countryCodeList";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Link from "next/link";
+import Image from "next/image";
 
 type HeaderProps = {
   children: React.ReactNode;
@@ -88,18 +89,30 @@ export const Header = ({ children }: HeaderProps) => {
 
   return (
     <header
-      // className={`fixed z-10 top-0 w-full bg-white transition-all ${
-      //   scrollingDown
-      //     ? "transform -translate-y-full"
-      //     : "transform translate-y-0"
-      // } ${isTop ? "py-[10px]" : "py-[6px] shadow"} duration-200`}
-      className="w-full bg-white py-[10px]"
+      className={`fixed z-10 top-0 w-full bg-white transition-all ${
+        scrollingDown
+          ? "transform -translate-y-full"
+          : "transform translate-y-0"
+      } ${isTop ? "py-[10px]" : "py-[8px] shadow"} duration-200`}
+      // className="w-full bg-white py-[10px]"
     >
       <div className="container mx-auto max-w-[1144px]">
         <div>
           <div className="flex justify-between mx-3 sm:mx-0">
-            <LogoTop />
             <TopTools isMainPage={isMainPage} countryCode={countryCode} />
+
+            <div className="logo">
+              <Link href="/">
+                <Image
+                  src="/images/logo.svg"
+                  width={isTop ? 195 : 174}
+                  height={isTop ? 54 : 48}
+                  priority={true}
+                  alt="Pediland Logo"
+                  className="transition-all duration-75"
+                />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

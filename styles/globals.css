@@ -8,7 +8,6 @@
   }
 }
 
-  
 /* Static Pages Style */
 .page-wrap.static .text-wrap h2 {
   @apply text-lg font-semibold mb-1 mt-8 first:mt-0;
@@ -44,35 +43,32 @@
   @apply font-medium text-[21px] sm:text-[22px] text-center sm:text-right;
 }
 
-.checkbox {
-  direction: ltr;
+/* Main Scroll Style */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f7eed8;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d8aa3c;
+  border-radius: 5px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a4b0e4;
 }
 
 * {
   scroll-behavior: smooth !important;
 }
 
-/* width */
-::-webkit-scrollbar {
-  width: 9px;
+.checkbox {
+  direction: ltr;
 }
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #9d174d;
-  border-radius: 5px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
 .checkbox:checked {
   background-image: linear-gradient(
       -45deg,
@@ -89,4 +85,9 @@
       transparent 40.99%
     ),
     linear-gradient(-45deg, hsl(var(--chkfg)) 50%, hsl(var(--chkbg)) 50.99%) !important;
+}
+
+/* Button Styles */
+.btn-lime {
+  @apply px-3 bg-lime-300 border-lime-300 text-lime-900 hover:bg-lime-400 hover:border-lime-400 hover:text-lime-950;
 }
