@@ -12,7 +12,8 @@ type cardListItem = {
   variant: "category" | "unit";
 };
 
-export default function CardListItem({ page, country, variant }: cardListItem) {
+export default function CardListItem({ page, country, variant }: cardListItem) {  
+
   return (
     <div key={`cardlist-page-index-${page.slug}`} className="card shadow-lg border border-gray-100 hover:border-gray-300">
       <figure className="pt-5">

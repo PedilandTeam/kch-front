@@ -10,6 +10,8 @@ import queryString from "query-string";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { CardsList } from "./cardsList";
 import ListFilter from "./filter/listFilter";
+import { Suspense } from "react";
+import Loading from "./_loading";
 
 type PagesListProps = {
   unit: UnitType;
@@ -24,7 +26,7 @@ async function fetchCities(countryCode: string, unitIds: number, categoryIds?: n
   let cities: CityNamespace.GET;
   try {
     cities = await (
-      await API_ROUTES.CITIES.BY_COUNTRY(countryCode, {page:1, limit: 100, unitIds: unitIds, categoryIds: joiner(categoryIds)})
+      await API_ROUTES.CITIES.BY_COUNTRY(countryCode, { page: 1, limit: 100, unitIds: unitIds, categoryIds: joiner(categoryIds) })
     ).json();
   } catch (e) {
     console.log(await e);
@@ -36,11 +38,11 @@ async function fetchCities(countryCode: string, unitIds: number, categoryIds?: n
 
 
 async function fetchCategories(countryCode: string, unitIds: number | number[], cityIds?: number | number[]): Promise<CategoryNamespace.GET> {
-  
+
   let categories: CategoryNamespace.GET | undefined
-  try{
-      categories = await (await API_ROUTES.CATEGOREIS.BY_COUNTRY(countryCode, {page: 1, limit: 100, unitIds: joiner(unitIds), cityIds: joiner(cityIds)})).json()
-  }catch(e){
+  try {
+    categories = await (await API_ROUTES.CATEGOREIS.BY_COUNTRY(countryCode, { page: 1, limit: 100, unitIds: joiner(unitIds), cityIds: joiner(cityIds) })).json()
+  } catch (e) {
     console.log(e);
     throw new Error("Error in get Categories fetchCategories")
   }
@@ -49,24 +51,10 @@ async function fetchCategories(countryCode: string, unitIds: number | number[], 
 
 }
 
-export default async function UntiList({unit, country, pageNumber, city, category, search}: PagesListProps) {  
+export default async function UntiList({ unit, country, pageNumber, city, category, search }: PagesListProps) {
 
   const cities = await fetchCities(country.code, unit.id, category);
-  const categories: CategoryNamespace.category[] =  (await fetchCategories(country.code, unit.id, city)).items
-  let isNotFound = false
-  let pages: PageNamespace.GET | undefined = undefined
-
-
-  try{
-    pages = await (await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 30, {countryCode: country.code, unitId: unit.id, categoryIds: category, cityIds: city, search})).json()
-  }catch(e: any){
-    isNotFound = true
-
-  }
-
-  if(pages && pages.items.length == 0){
-    isNotFound = true
-  }
+  const categories: CategoryNamespace.category[] = (await fetchCategories(country.code, unit.id, city)).items
 
   return (
     <div className="component mt-5 page-list">
@@ -83,13 +71,11 @@ export default async function UntiList({unit, country, pageNumber, city, categor
             <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">
               لیست {unit?.name} فارسی زبان در {country?.name}
             </h1>
-            {
-              isNotFound 
-              ? 
-              <h4>متاسفانه، نتیجه‌ای برای جستجو شما یافت نشد.</h4>
-              :
-              <CardsList pages={pages!} unit={unit} country={country} />
-            }
+
+            <Suspense fallback={<Loading />} key={`unit-cardlist-${search}-${city}-${category}`}>
+              <CardsList unit={unit} country={country} category={category} search={search} pageNumber={pageNumber} city={city} />
+            </Suspense>
+            
           </div>
         </div>
       </div>

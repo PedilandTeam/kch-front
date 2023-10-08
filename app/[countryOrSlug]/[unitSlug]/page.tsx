@@ -75,6 +75,7 @@ export default async function UnitPage({params: { countryOrSlug, unitSlug }, sea
   let pathInfo: PathGeneratorType;
 
   parsedSearchParams = queryString.parse(queryString.stringify(searchParams ?? {}), {arrayFormat:"comma", parseNumbers: true}) as ParsedSearchParams
+  //get filters from query
   const {page: pageNumber, category, city, search} = parsedSearchParams
 
   try {
@@ -84,7 +85,6 @@ export default async function UnitPage({params: { countryOrSlug, unitSlug }, sea
   }
 
   if (pathInfo.type) {
-    //@ts-expect-error
     return <UnitList {...pathInfo.props} city={city} category={category} pageNumber={pageNumber} search={search} />;
   } else {
     notFound();

@@ -36,15 +36,19 @@ export default function PageSearch() {
 
         const timeOut = setTimeout(() => {
             if(search){
-                router.replace(
-                    `${pathname}?${createQueryString("search", [search])}`
+                router.push(
+                    `${pathname}?${createQueryString("search", [search])}`,{
+                        scroll: true
+                    }
                   );
             }else if(!search && parsedSearchParams.search){
-                router.replace(
-                    `${pathname}?${deleteQueryString("search")}`
+                router.push(
+                    `${pathname}?${deleteQueryString("search")}`, {
+                        scroll: true
+                    }
                   );
             }
-        }, 400);
+        }, 0);
 
         return () => {
             clearTimeout(timeOut)
