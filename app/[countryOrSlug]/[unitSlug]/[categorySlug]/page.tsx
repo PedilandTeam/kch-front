@@ -82,7 +82,6 @@ export default async function CategoryPage({params: { countryOrSlug, unitSlug, c
   }
 
   if (pathInfo.type) {
-    //@ts-expect-error
     return <CategoryList {...pathInfo.props} pageNumber={pageNumber} city={city} search={search} />;
   } else {
     notFound();

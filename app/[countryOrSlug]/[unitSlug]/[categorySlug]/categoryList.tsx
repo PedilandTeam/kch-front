@@ -8,10 +8,13 @@ import { notFound } from "next/navigation";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { CardsList } from "./cardsList";
 import ListFilter from "./filter/listFilter";
+import { CountryNamespace } from "@/types/country";
+import { Suspense } from "react";
+import Loading from "../_loading";
 
 type PagesListProps = {
   category: CategoryNamespace.category;
-  country: Country;
+  country: CountryNamespace.GET;
   unit: UnitType;
   pageNumber: number;
   city: number | number[];
@@ -44,26 +47,6 @@ export default async function CategoryList({
 }: PagesListProps) {
   if (!country) return notFound();
   const cities = await fetchCities(country.code, category.id);
-  let pages: PageNamespace.GET | undefined;
-  let isNotFound = false;
-
-  try {
-    pages = await (
-      await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 30, {
-        countryCode: country.code,
-        unitId: unit.id,
-        cityIds: city,
-        categoryIds: category.id,
-        search
-      })
-    ).json();
-  } catch (e) {
-    isNotFound = true;
-  }
-
-  if (pages && pages.items.length == 0) {
-    isNotFound = true;
-  }
 
   return (
     <div className="component mt-5 page-list">
@@ -81,11 +64,9 @@ export default async function CategoryList({
             <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">
               لیست {category?.name} فارسی زبان در {country?.name}
             </h1>
-            {isNotFound ? (
-              <h4>متاسفانه، نتیجه‌ای برای جستجو شما یافت نشد.</h4>
-            ) : (
-              <CardsList pages={pages!} category={category} country={country} />
-            )}
+            <Suspense fallback={<Loading />} key={`unit-cardlist-${search}-${city}-${category}`}>
+              <CardsList category={category} country={country} pageNumber={pageNumber} city={city} search={search} />
+            </Suspense>
           </div>
         </div>
       </div>
