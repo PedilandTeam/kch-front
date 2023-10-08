@@ -23,7 +23,7 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
         <label htmlFor="main-drawer" className="drawer-overlay"></label>
 
         <div className="menu p-4 w-80 h-full bg-gray-50 text-base-content">
-          <div className="logo mb-5 w-[180px] h-[56px] sm:w-[170px] sm:h-[50px] relative">
+          <div className="logo mb-5 w-[180px] h-[50px] relative">
             <Link href="/">
               <Image src="/images/logo.svg" fill={true} loading="lazy" alt="Koochaa Logo" />
             </Link>

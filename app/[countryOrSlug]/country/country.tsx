@@ -12,7 +12,7 @@ type CountryProps = {
 };
 export default function Country({ currentCountry, categories }: CountryProps) {
   return (
-    <div className="component page-country">
+    <div className="component page-country pt-[74px]">
       {/** @ts-expect-error server component */}
       <SliderHome currentCountry={currentCountry} />
       <UnitsBanner currentCountry={currentCountry} />

@@ -14,9 +14,9 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        mytheme: {
-          primary: "rgb(157, 23, 77)",
-          secondary: "rgb(23, 37, 84)",
+        koochaa: {
+          primary: "#1c39bb",
+          secondary: "#d8aa3c",
           accent: "#1dcdbc",
           neutral: "#2b3440",
           "base-100": "#ffffff",
@@ -27,7 +27,7 @@ module.exports = {
         },
       },
     ],
-    rtl: true
+    rtl: true,
   },
   important: true,
   plugins: [require("daisyui")],

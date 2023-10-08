@@ -1,7 +1,8 @@
 export const COUNTRY = {
   ALL: "همه کشورها",
-  ALL_VIEW: "مشاهده تمام کشورها",
+  ALL_VIEW: "مشاهده لیست کشورها",
   POPULAR: "کشورها به ترتیب بیشترین آیتم",
+  SELECT: "انتخاب کشور",
   AUSTRIA: "اتریش",
   DENMARK: "دانمارک",
   ENGLAND: "انگلستان",

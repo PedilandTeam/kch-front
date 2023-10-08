@@ -6,7 +6,7 @@ export default () => {
   return (
     <div className="mt-12 text-center">
       <button
-        className="btn btn-wide"
+        className="btn btn-secondary"
         onClick={() => {
           if (document) {
             (
