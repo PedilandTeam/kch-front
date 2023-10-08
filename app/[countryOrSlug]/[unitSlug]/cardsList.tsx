@@ -65,8 +65,13 @@ export const CardsList = async ({ unit, country, category, pageNumber, city, sea
             })}
           </div>
         </div>
-
-        <Pagination pages={pages!} />
+        {
+          pages?.meta?.totalPages! > 1
+          ?
+          <Pagination pages={pages!} />
+          :
+          null
+        }
       </div>
   );
 };
