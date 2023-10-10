@@ -8,7 +8,6 @@ const nextConfig = {
     ignoreBuildErrors: true
   },
   reactStrictMode: true,
-  output: "standalone",
   images:{
     domains:[
       "dl.koochaa.com",
