@@ -14,7 +14,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
         id="select-unit"
       >
         <div className="mod-header sm:col-span-4 flex flex-wrap items-center">
-          <div className="border-r-[4px] sm:border-r-[5px] border-pink-600 pr-3 sm:pr-5 pl-3 sm:pl-0">
+          <div className="border-r-[4px] sm:border-r-[5px] border-secondary pr-3 sm:pr-5 pl-3 sm:pl-0">
             <h2 className="text-[20px] sm:text-[24px] font-bold mb-1">
               راهنمای مشاغل کـوچـا
             </h2>

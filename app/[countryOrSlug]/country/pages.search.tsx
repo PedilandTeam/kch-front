@@ -41,12 +41,12 @@ const PagesSearch = ({ countryCode }: CountryPagesSearch) => {
         onChange={inputChangeHandler}
         type="text"
         placeholder="اینجا تایپ کن"
-        className="input rounded-md text-center h-[54px] text-[18px] font-medium w-full opacity-80 hover:opacity-100 focus:opacity-100"
+        className="input rounded-xl text-center h-[54px] text-[18px] font-medium w-full opacity-80 hover:opacity-100 focus:opacity-100"
       />
       {search && pages && (
         <ul
           tabIndex={0}
-          className="w-11/12 sm:w-full mt-1 dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-md"
+          className="w-11/12 sm:w-full mt-1 dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-xl"
         >
           {pages?.meta?.itemCount > 0 ? (
             pages.items?.map((page) => {

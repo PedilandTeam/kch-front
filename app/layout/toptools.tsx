@@ -55,34 +55,16 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
       {isMainPage ? null : (
         <div>
           <div className="main-nav mr-3">
-            <ul className="flex font-medium">
-              {/* <li>
-                <Link href="#" className="btn btn-outline btn-primary">
-                  کـوچـا بـیـزیـنـس
-                </Link>
-              </li> */}
+            <ul className="font-medium hidden lg:flex">
               <li>
-                <Link href="#" className="btn btn-link no-underline text-base">
+                <Link
+                  href="#select-unit"
+                  className="btn btn-link no-underline text-base"
+                >
                   راهنمای مشاغل
                 </Link>
               </li>
             </ul>
-            {/* <div className="navbar-center hidden lg:flex">
-              <ul className="menu menu-horizontal px-1">
-                <li>
-                  <details>
-                    <summary className="text-base font-medium">
-                      راهنمای مشاغل
-                    </summary>
-                    <div className="fixed top-[72px] w-full right-0 left-0 mx-auto bg-white">
-                      <div className="container mx-auto bg-red-100 h-[200px] max-w-[1144px]">
-                        <div className="p-5">test</div>
-                      </div>
-                    </div>
-                  </details>
-                </li>
-              </ul>
-            </div> */}
           </div>
 
           <div className="menu-icon mr-3 sm:hidden">
