@@ -58,7 +58,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
             <ul className="font-medium hidden lg:flex">
               <li>
                 <Link
-                  href="/businesses"
+                  href={`/${countryCode}/businesses`}
                   className="btn btn-link no-underline text-base"
                 >
                   {_TXT.MENU.BUSINESSES}
@@ -66,7 +66,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
               </li>
               <li>
                 <Link
-                  href="/doctors"
+                  href={`/${countryCode}/doctors`}
                   className="btn btn-link no-underline text-base"
                 >
                   {_TXT.MENU.DOCTORS}

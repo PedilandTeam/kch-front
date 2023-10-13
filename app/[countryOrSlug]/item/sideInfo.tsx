@@ -102,10 +102,10 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
       if (agent.device?.type == "desktop") {
         const number = `00${
           pageData.country.areaCode ? pageData.country.areaCode : ""
-        }${pageData.contact.telephone!}`;
+        }${pageData.contact.phone!}`;
         navigator.clipboard.writeText(number);
         e.currentTarget.dataset.tip = number;
-        toast.success("شماره تلفن کپی شد.");
+        toast.success("شماره همراه کپی شد.");
       } else {
         window.open(
           `tel:${pageData.contact.telephone}`,
@@ -123,6 +123,21 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         navigator.share({
           url: `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`,
         });
+      }
+    }else if(type == 'phone'){
+      if (agent.device?.type == "desktop") {
+        const number = `${
+          pageData.country.areaCode ? pageData.country.areaCode : ""
+        }${pageData.contact.telephone!}`;
+        navigator.clipboard.writeText(number);
+        e.currentTarget.dataset.tip = number;
+        toast.success("شماره تلفن کپی شد.");
+      } else {
+        window.open(
+          `tel:${pageData.contact.telephone}`,
+          "_blank",
+          "noopener, noreferrer"
+        );
       }
     }
   };
@@ -152,10 +167,10 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
 
         <div className="group grid grid-rows-1 gap-2 text-center border-l hover:cursor-pointer">
           {
-            pageData?.contact?.telephone ? (
+            pageData?.contact?.phone ? (
               <button
                 onClick={linkHandler}
-                data-type="telephone"
+                data-type="phone"
                 data-tip="کلیک کنید"
                 className="grid grid-rows-2 gap-2 text-center tooltip"
               >
