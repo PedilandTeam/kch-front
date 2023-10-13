@@ -3,16 +3,10 @@
 import { PageNamespace } from "@/types/page";
 import DeviceDetector from "device-detector-js";
 import {
-
-  ArrowTopRightOnSquareIcon,
-  PhoneArrowUpRightIcon,
-  HomeModernIcon,
   ShareIcon,
   GlobeAltIcon,
   PhoneIcon,
-  ArrowUturnRightIcon,
-  HandRaisedIcon,
-  XMarkIcon,
+  DevicePhoneMobileIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,6 +14,7 @@ import { usePathname, useRouter } from "next/navigation";
 import React, { MouseEvent } from "react";
 import { toast } from "react-hot-toast";
 import upperCaseFirst from "@/utils/upperCaseFirst";
+import { _TXT } from "@/app/text";
 
 interface ItemSideInfoType {
   pageData: PageNamespace.Page;
@@ -42,8 +37,6 @@ interface ItemSideInfoItemType {
 }
 
 function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
-
-
   if (!text) {
     return null;
   }
@@ -87,113 +80,146 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
   );
 }
 
-
-
 export function ItemSideInfo({ pageData }: ItemSideInfoType) {
-
-  const router = useRouter()
-  const pathname = usePathname()
+  const router = useRouter();
+  const pathname = usePathname();
 
   const linkHandler = (e: MouseEvent<HTMLButtonElement>) => {
-
-    const type = e.currentTarget.dataset.type
-    const regexp = /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/igm.exec(pageData?.socials?.website!)
+    const type = e.currentTarget.dataset.type;
+    const regexp =
+      /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/gim.exec(
+        pageData?.socials?.website!
+      );
     if (!regexp || !Array.isArray(regexp) || !regexp[1]) {
-      return
+      return;
     }
-    const detector = new DeviceDetector()
-    const agent = detector.parse(navigator.userAgent)
-
+    const detector = new DeviceDetector();
+    const agent = detector.parse(navigator.userAgent);
 
     if (type == "website") {
-
-      window.open(`https://${regexp[0]}`, "_blank", 'noopener, noreferrer')
-
+      window.open(`https://${regexp[0]}`, "_blank", "noopener, noreferrer");
     } else if (type == "telephone") {
-
       if (agent.device?.type == "desktop") {
-        const number = `00${pageData.country.areaCode ? pageData.country.areaCode : ''}${pageData.contact.telephone!}`
-        navigator.clipboard.writeText(number)
-        e.currentTarget.dataset.tip = number
-        toast.success("کپی شد")
+        const number = `00${
+          pageData.country.areaCode ? pageData.country.areaCode : ""
+        }${pageData.contact.telephone!}`;
+        navigator.clipboard.writeText(number);
+        e.currentTarget.dataset.tip = number;
+        toast.success("شماره تلفن کپی شد.");
       } else {
-        window.open(`tel:${pageData.contact.telephone}`, "_blank", 'noopener, noreferrer')
+        window.open(
+          `tel:${pageData.contact.telephone}`,
+          "_blank",
+          "noopener, noreferrer"
+        );
       }
-
-    }else if(type == "share"){
-
+    } else if (type == "share") {
       if (agent.device?.type == "desktop") {
-        navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`)
-        toast.success("کپی شد")
+        navigator.clipboard.writeText(
+          `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`
+        );
+        toast.success("آدرس این صفحه کپی شد.");
       } else {
-        navigator.share({url: `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`})
+        navigator.share({
+          url: `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`,
+        });
       }
-
     }
-  }
-
+  };
 
   return (
     <div className="item-side sm:col-span-4 sm:col-end-13 mx-3 sm:mr-3 sm:ml-0">
-      <div className="item-contact grid grid-cols-3 gap-3 mb-4">
-
-
+      <div className="item-contact grid grid-cols-4 mb-4">
         <div className="group grid grid-rows-1 gap-2 text-center border-l hover:cursor-pointer">
-          {
-
-            pageData?.socials?.website ?
-              <button onClick={linkHandler} data-type="website" className="grid grid-rows-2 gap-2 text-center">
-                <GlobeAltIcon className="w-[26px] h-[26px] mx-auto group-hover:text-pink-800 transition duration-300 ease-in-out" />
-                <span className="group-hover:text-pink-800 transition duration-300 ease-in-out font-medium">
-                  وب سایت
-                </span>
-              </button>
-              :
-              <button className="grid grid-rows-2 gap-2 text-center">
-                <GlobeAltIcon className="text-gray-300 w-[26px] h-[26px] mx-auto" />
-                <span className="text-gray-300">وب سایت</span>
-              </button>
-          }
-
+          {pageData?.socials?.website ? (
+            <button
+              onClick={linkHandler}
+              data-type="website"
+              className="grid grid-rows-2 gap-2 text-center"
+            >
+              <GlobeAltIcon className="w-[26px] h-[26px] mx-auto group-hover:text-yellow-900 transition duration-300 ease-in-out" />
+              <span className="group-hover:text-yellow-900 transition duration-300 ease-in-out font-medium">
+                {_TXT.GENERAL.WEBSITE}
+              </span>
+            </button>
+          ) : (
+            <button className="grid grid-rows-2 gap-2 text-center">
+              <GlobeAltIcon className="text-gray-300 w-[26px] h-[26px] mx-auto" />
+              <span className="text-gray-300">{_TXT.GENERAL.WEBSITE}</span>
+            </button>
+          )}
         </div>
 
         <div className="group grid grid-rows-1 gap-2 text-center border-l hover:cursor-pointer">
           {
-            pageData?.contact?.telephone ?
-              <button onClick={linkHandler} data-type="telephone" data-tip='' className="grid grid-rows-2 gap-2 text-center tooltip focus:tooltip-open ">
-                <PhoneIcon className="w-[26px] h-[26px] mx-auto group-hover:text-pink-800 transition duration-300 ease-in-out" />
-                <span className="group-hover:text-pink-800 transition duration-300 ease-in-out font-medium">
-                  تماس
+            pageData?.contact?.telephone ? (
+              <button
+                onClick={linkHandler}
+                data-type="telephone"
+                data-tip="کلیک کنید"
+                className="grid grid-rows-2 gap-2 text-center tooltip"
+              >
+                <DevicePhoneMobileIcon className="w-[26px] h-[26px] mx-auto group-hover:text-yellow-900 transition duration-300 ease-in-out" />
+                <span className="group-hover:text-yellow-900 transition duration-300 ease-in-out font-medium">
+                  {_TXT.GENERAL.MOBILE}
                 </span>
               </button>
-              :
+            ) : (
               <>
-                <PhoneIcon className="text-gray-300 w-[26px] h-[26px] mx-auto" />
-                <span className="text-gray-300">تماس</span>
-
+                <DevicePhoneMobileIcon className="text-gray-300 w-[26px] h-[26px] mx-auto" />
+                <span className="text-gray-300">{_TXT.GENERAL.MOBILE}</span>
               </>
+            )
             // </div>
           }
+        </div>
 
+        <div className="group grid grid-rows-1 gap-2 text-center border-l hover:cursor-pointer">
+          {
+            pageData?.contact?.telephone ? (
+              <button
+                onClick={linkHandler}
+                data-type="telephone"
+                data-tip="کلیک کنید"
+                className="grid grid-rows-2 gap-2 text-center tooltip"
+              >
+                <PhoneIcon className="w-[26px] h-[26px] mx-auto group-hover:text-yellow-900 transition duration-300 ease-in-out" />
+                <span className="group-hover:text-yellow-900 transition duration-300 ease-in-out font-medium">
+                  {_TXT.GENERAL.PHONE}
+                </span>
+              </button>
+            ) : (
+              <>
+                <PhoneIcon className="text-gray-300 w-[26px] h-[26px] mx-auto" />
+                <span className="text-gray-300">{_TXT.GENERAL.PHONE}</span>
+              </>
+            )
+            // </div>
+          }
         </div>
 
         <div className="group grid grid-rows-1 gap-2 text-center">
-          <button onClick={linkHandler} data-type="share" className="grid grid-rows-2 gap-2 text-center">
-            <ShareIcon className="w-[26px] h-[26px] mx-auto group-hover:text-pink-800 transition duration-300 ease-in-out" />
-            <span className="group-hover:text-pink-800 transition duration-300 ease-in-out font-medium">
+          <button
+            onClick={linkHandler}
+            data-type="share"
+            className="grid grid-rows-2 gap-2 text-center"
+          >
+            <ShareIcon className="w-[26px] h-[26px] mx-auto group-hover:text-yellow-900 transition duration-300 ease-in-out" />
+            <span className="group-hover:text-yellow-900 transition duration-300 ease-in-out font-medium">
               اشتراک
             </span>
           </button>
         </div>
-
       </div>
       <div className="rounded-md border border-gray-200 p-4 mb-3">
         <ItemSideInfoItem
-          text={`${pageData?.address?.address ? pageData?.address?.address : ""
-            }, ${pageData?.city?.englishName
+          text={`${
+            pageData?.address?.address ? pageData?.address?.address : ""
+          }, ${
+            pageData?.city?.englishName
               ? upperCaseFirst(pageData.city.englishName)
               : upperCaseFirst(pageData?.city?.name)
-            }`}
+          }`}
         />
       </div>
       {/* <div className="rounded-md border border-gray-200 p-5 mb-3 bg-blue-50 border-l-[4px] border-l-yellow-500 rounded-tl-none rounded-bl-none">

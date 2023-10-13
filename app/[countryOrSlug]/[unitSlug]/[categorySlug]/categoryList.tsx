@@ -49,7 +49,7 @@ export default async function CategoryList({
   const cities = await fetchCities(country.code, category.id);
 
   return (
-    <div className="component mt-5 page-list">
+    <div className="component mt-5 page-list pt-[74px]">
       <div className="container mx-auto max-w-[1144px]">
         <div className="grid grid-cols-1 sm:grid-cols-8 gap-y-4 sm:gap-8 px-3 sm:px-0">
           <div className="sidebar sm:col-span-2">

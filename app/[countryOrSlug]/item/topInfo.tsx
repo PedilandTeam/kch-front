@@ -18,11 +18,9 @@ import TelegramIcon from "./socials/telegram";
 
 export type ItemTopInfoType = { pageData: PageNamespace.Page };
 export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
-
-
-  const socials = {...pageData.socials}
-  delete socials.website
-  const haveSocial = pageData.socials && Object.keys(socials).length > 0
+  const socials = { ...pageData.socials };
+  delete socials.website;
+  const haveSocial = pageData.socials && Object.keys(socials).length > 0;
 
   return (
     <div className="top-section h-full">
@@ -65,54 +63,51 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
             </div>
           </div>
 
-          <div className={`item-top-socials flex justify-center bg-slate-200 p-4 w-full sm:w-auto [&>a]:ml-4 [&>a:last-child]:ml-0 sm:rounded-md`}>
+          {!haveSocial ? (
+            <p className="text-[14px] text-slate-600">هیچ رسانه اجتماعی ثبت نشده است.</p>
+          ) : (
+            <div
+              className={`item-top-socials flex justify-center bg-slate-200 sm:bg-transparent py-4 sm:py-0 w-full sm:w-auto [&>a]:ml-4 [&>a:last-child]:ml-0 sm:rounded-lg`}
+            >
+              {pageData?.socials?.telegram ? (
+                <Link
+                  href={`https://t.me/${pageData?.socials?.telegram}`}
+                  target="_blank"
+                  rel="nofollow noopener"
+                >
+                  <TelegramIcon />
+                </Link>
+              ) : null}
+              {pageData.socials?.instagram ? (
+                <Link
+                  href={`https://www.instagram.com/${pageData.socials?.instagram}`}
+                  target="_blank"
+                  rel="nofollow noopener"
+                >
+                  <InstagramIcon />
+                </Link>
+              ) : null}
+              {pageData.socials?.facebook ? (
+                <Link
+                  href={`https://www.facebook.com/${pageData.socials?.facebook}`}
+                  target="_blank"
+                  rel="nofollow noopener"
+                >
+                  <FacebookIcon />
+                </Link>
+              ) : null}
 
-            {
-              !haveSocial
-                ?
-                <p className="text-[14px]">هیچ رسانه اجتماعی ثبت نشده است.</p>
-                :
-                null
-            }
-            
-            {pageData?.socials?.telegram ? (
-              <Link
-                href={`https://t.me/${pageData?.socials?.telegram}`}
-                target="_blank"
-                rel="nofollow noopener"
-              >
-                <TelegramIcon />
-              </Link>
-            ) : null}
-            {pageData.socials?.instagram ? (
-              <Link
-                href={`https://www.instagram.com/${pageData.socials?.instagram}`}
-                target="_blank"
-                rel="nofollow noopener"
-              >
-                <InstagramIcon />
-              </Link>
-            ) : null}
-            {pageData.socials?.facebook ? (
-              <Link
-                href={`https://www.facebook.com/${pageData.socials?.facebook}`}
-                target="_blank"
-                rel="nofollow noopener"
-              >
-                <FacebookIcon />
-              </Link>
-            ) : null}
-
-            {pageData.socials?.youtube ? (
-              <Link
-                href={`https://www.youtube.com/${pageData.socials?.youtube}`}
-                target="_blank"
-                rel="nofollow noopener"
-              >
-                <YoutubeIcon />
-              </Link>
-            ) : null}
-          </div>
+              {pageData.socials?.youtube ? (
+                <Link
+                  href={`https://www.youtube.com/${pageData.socials?.youtube}`}
+                  target="_blank"
+                  rel="nofollow noopener"
+                >
+                  <YoutubeIcon />
+                </Link>
+              ) : null}
+            </div>
+          )}
         </div>
       </div>
     </div>

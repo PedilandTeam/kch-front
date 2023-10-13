@@ -58,10 +58,18 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
             <ul className="font-medium hidden lg:flex">
               <li>
                 <Link
-                  href="#select-unit"
+                  href="/businesses"
                   className="btn btn-link no-underline text-base"
                 >
-                  راهنمای مشاغل
+                  {_TXT.MENU.BUSINESSES}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/doctors"
+                  className="btn btn-link no-underline text-base"
+                >
+                  {_TXT.MENU.DOCTORS}
                 </Link>
               </li>
             </ul>

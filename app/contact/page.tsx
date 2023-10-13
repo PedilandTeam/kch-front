@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 const ContactPage = () => {
   return (
-    <div className="page-wrap static">
+    <div className="page-wrap static pt-[74px]">
       <PageHead />
       <CardsGroup />
       <ContactForm />

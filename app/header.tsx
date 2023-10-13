@@ -92,7 +92,7 @@ export const Header = ({ children }: HeaderProps) => {
       className={`fixed z-10 top-0 w-full bg-white transition-all ${
         scrollingDown
           ? "transform -translate-y-full"
-          : "transform translate-y-0"
+          : "transform translate-y-0 z-50"
       } ${isTop ? "py-[10px]" : "py-[8px] shadow"} duration-200`}
       // className="w-full bg-white py-[10px]"
     >
