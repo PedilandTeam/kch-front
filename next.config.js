@@ -11,7 +11,8 @@ const nextConfig = {
   images:{
     domains:[
       "dl.koochaa.com",
-      "www.koochaa.com"
+      "www.koochaa.com",
+      "d11h29rvzk0dwa.cloudfront.net"
     ]
   }
 }
