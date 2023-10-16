@@ -7,7 +7,6 @@ import { API_ROUTES } from "@/routes";
 import { ModalCountry } from "./layout/modalcountry";
 import { Providers } from "@client-packages/react-redux/provider";
 import Script from "next/script";
-import isBetweenZeroAndOne from "@/utils/isBetweenZeroAndOne";
 import { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 
@@ -15,9 +14,9 @@ export const metadata: Metadata = {
   title: "وبسایت کوچا",
   description: "کوچا جامعه ایرانیان مقیم همه‌جا",
   viewport: "width=device-width, initial-scale=1",
-  alternates:{
-    canonical: process.env.FRONT_URL
-  }
+  alternates: {
+    canonical: process.env.FRONT_URL,
+  },
 };
 
 export default async function RootLayout({
@@ -31,7 +30,7 @@ export default async function RootLayout({
   } catch (e) {
     console.log(e);
     console.log(` this is ${process.env.API_URL}`);
-    
+
     throw new Error("error in get country");
   }
 

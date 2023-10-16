@@ -44,7 +44,7 @@ export const HomeCountries = async () => {
             <Link href={"/at"}>
               <Image
                 src={atImage}
-                // placeholder="blur"
+                placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور اتریش"
@@ -59,11 +59,12 @@ export const HomeCountries = async () => {
               </div>
             </Link>
           </div>
+
           <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/fr"}>
               <Image
                 src={frImage}
-                // placeholder="blur"
+                placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور فرانسه"
@@ -78,11 +79,12 @@ export const HomeCountries = async () => {
               </div>
             </Link>
           </div>
+
           <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/de"}>
               <Image
                 src={deImage}
-                // placeholder="blur"
+                placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور آلمان"
@@ -97,30 +99,12 @@ export const HomeCountries = async () => {
               </div>
             </Link>
           </div>
-          <div className="group relative h-min overflow-hidden rounded-xl">
-            <Link href={"/tr"}>
-              <Image
-                src={trImage}
-                // placeholder="blur"
-                width="400"
-                height="250"
-                alt="یک تصویر از کشور ترکیه"
-                className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
-                priority
-              />
-              <div className="info absolute bottom-0 w-full px-5 py-8 group-hover:py-10 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer bg-gradient-to-t from-black text-white">
-                <h3 className="text-[20px] font-semibold text-center">
-                  {_TXT.COUNTRY.TURKEY}
-                  <span className="font-normal mr-1">({getCount("tr")})</span>
-                </h3>
-              </div>
-            </Link>
-          </div>
+
           <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/uk"}>
               <Image
                 src={ukImage}
-                // placeholder="blur"
+                placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور انگلستان"
@@ -135,11 +119,32 @@ export const HomeCountries = async () => {
               </div>
             </Link>
           </div>
+
+          <div className="group relative h-min overflow-hidden rounded-xl">
+            <Link href={"/tr"}>
+              <Image
+                src={trImage}
+                placeholder="blur"
+                width="400"
+                height="250"
+                alt="یک تصویر از کشور ترکیه"
+                className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
+                priority
+              />
+              <div className="info absolute bottom-0 w-full px-5 py-8 group-hover:py-10 sm:py-5 sm:group-hover:py-8 transition-all duration-500 cursor-pointer bg-gradient-to-t from-black text-white">
+                <h3 className="text-[20px] font-semibold text-center">
+                  {_TXT.COUNTRY.TURKEY}
+                  <span className="font-normal mr-1">({getCount("tr")})</span>
+                </h3>
+              </div>
+            </Link>
+          </div>
+
           <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/dk"}>
               <Image
                 src={dkImage}
-                // placeholder="blur"
+                placeholder="blur"
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور دانمارک"

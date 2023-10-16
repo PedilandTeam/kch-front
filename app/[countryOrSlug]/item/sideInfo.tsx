@@ -105,7 +105,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         }${pageData.contact.telephone!}`;
         navigator.clipboard.writeText(number);
         e.currentTarget.dataset.tip = number;
-        toast.success("شماره همراه کپی شد.");
+        toast.success("شماره تلفن کپی شد.");
       } else {
         window.open(
           `tel:${pageData.contact.telephone}`,
@@ -127,12 +127,12 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
       }
     }else if(type == 'phone'){
       if (agent.device?.type == "desktop") {
-        const number = `${
+        const number = `00${
           pageData.country.areaCode ? pageData.country.areaCode : ""
         }${pageData.contact.phone!}`;
         navigator.clipboard.writeText(number);
         e.currentTarget.dataset.tip = number;
-        toast.success("شماره تلفن کپی شد.");
+        toast.success("شماره همراه کپی شد.");
       } else {
         window.open(
           `tel:${pageData.contact.phone}`,
