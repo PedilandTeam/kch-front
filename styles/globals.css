@@ -10,7 +10,7 @@
 
 /* Static Pages Style */
 .page-wrap.static .text-wrap h2 {
-  @apply text-base font-semibold mb-1 mt-8 first:mt-0;
+  @apply text-lg font-semibold text-primary mb-2 mt-8 first:mt-0;
 }
 .page-wrap.static .text-wrap p {
   @apply leading-7;
@@ -25,7 +25,7 @@
   @apply mb-2;
 }
 .page-wrap.static .text-wrap .section {
-  @apply border border-r-4 border-r-slate-400 rounded-tl-lg rounded-bl-lg p-8 bg-slate-50 mb-8 last:mb-0;
+  @apply border border-r-4 border-blue-100 rounded-tl-lg rounded-bl-lg p-8 bg-slate-50 mb-8 last:mb-0;
 }
 .page-wrap.static .text-wrap .section p {
   @apply mb-2;
