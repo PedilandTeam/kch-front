@@ -15,6 +15,9 @@
 .page-wrap.static .text-wrap p {
   @apply leading-7;
 }
+.page-wrap.static .text-wrap a {
+  @apply text-primary underline hover:text-secondary hover:no-underline;
+}
 .page-wrap.static .text-wrap strong {
   @apply font-semibold;
 }
@@ -23,6 +26,9 @@
 }
 .page-wrap.static .text-wrap ul li {
   @apply mb-2;
+}
+.page-wrap.static .text-wrap ol li {
+  @apply text-lg font-semibold mb-2 mt-8 first:mt-0 mr-5;
 }
 .page-wrap.static .text-wrap .section {
   @apply border border-r-4 border-blue-100 rounded-tl-lg rounded-bl-lg p-8 bg-slate-50 mb-8 last:mb-0;
