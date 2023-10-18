@@ -12,10 +12,12 @@ type cardListItem = {
   variant: "category" | "unit";
 };
 
-export default function CardListItem({ page, country, variant }: cardListItem) {  
-
+export default function CardListItem({ page, country, variant }: cardListItem) {
   return (
-    <div key={`cardlist-page-index-${page.slug}`} className="card shadow-lg border border-gray-100 hover:border-gray-300">
+    <div
+      key={`cardlist-page-index-${page.slug}`}
+      className="card shadow-lg border border-gray-100 hover:border-gray-300"
+    >
       <figure className="pt-5">
         <Link href={`/${page.slug}`}>
           <ItemProfilePicture
@@ -28,7 +30,7 @@ export default function CardListItem({ page, country, variant }: cardListItem) {
       </figure>
       <div className="card-body px-4 py-5">
         <Link href={`/${page.slug}`}>
-          <h2 className="card-title text-slate-700 hover:text-pink-800 justify-center truncate text-[18px]">
+          <h2 className="card-title font-PinarLT text-slate-700 hover:text-pink-800 text-lg block text-center truncate hover:overflow-visible">
             {page.title}
           </h2>
         </Link>
