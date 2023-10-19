@@ -45,7 +45,7 @@ export default function CountryCategoriesItems({
             <a
               onClick={() => activeTabChangeHandler(unit.id)}
               key={`unit-${unit.id}`}
-              className={`tab tab-bordered border-b-[3px] px-6 font-medium h-16 text-[18px] ${
+              className={`tab tab-bordered border-b-[3px] px-3 sm:px-6 font-medium h-16 text-[18px] ${
                 activeTab == unit.id ? "tab-active border-secondary" : ""
               } `}
             >
