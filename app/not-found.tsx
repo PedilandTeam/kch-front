@@ -9,14 +9,21 @@ export default function NotFound() {
         <div className="wrap">
           <div className="flex justify-center">
             <Image
-              src="/images/not-found.png"
+              src="/images/not-found-01.png"
               alt="404 Error Iamge"
-              width={420}
-              height={266}
+              width={260}
+              height={200}
             />
           </div>
-          <h1 className="text-[26px] font-bold text-center mt-4 text-pink-900">متاسفانه صفحه موردنظرتون پیدا نشد.</h1>
-          <p>ممکن است این صفحه حذف شده باشد یا وجود نداشته باشد</p>
+          <h1 className="text-lg sm:text-2xl font-semibold text-center mt-4 text-yellow-900">
+            متاسفانه چنین صفحه‌ای وجود نداره!
+          </h1>
+          <p className="text-blue-900 sm:text-lg my-3 text-center px-5 sm:px-0">
+            و یا ممکنه بخاطر تغییرات وب‌سایت جدید کـوچـا آدرسش تغییر کرده باشه.
+          </p>
+          <p className="text-gray-600 text-center sm:text-lg font-light px-8 sm:px-0">
+            با انتخاب کشور مورد نظرت می‌تونی به جستجو ادامه بدی.
+          </p>
         </div>
       </div>
     </div>

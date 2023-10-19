@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 const TermsPage = () => {
   return (
-    <div className="page-wrap static pt-[74px]">
+    <div className="page-wrap static">
       <PageHead />
       <TermsText />
     </div>

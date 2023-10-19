@@ -10,7 +10,7 @@ export type PageItemProps = {
 
 export default function PageItem({ pageData }: PageItemProps) {
   return (
-    <div className="component page-item pt-[74px]">
+    <div className="component page-item">
       <CountryUpdater pageData={pageData} />
 
       <div className="bg-slate-50 bg-[url('/images/pattern-02.png')] bg-center sm:h-[280px] mb-4 sm:mb-4">
