@@ -57,7 +57,7 @@ export default async function UntiList({ unit, country, pageNumber, city, catego
   const categories: CategoryNamespace.category[] = (await fetchCategories(country.code, unit.id, city)).items
 
   return (
-    <div className="component mt-5 page-list pt-[74px]">
+    <div className="component mt-5 page-list">
       <div className="container mx-auto max-w-[1144px]">
         <div className="grid grid-cols-1 sm:grid-cols-8 gap-y-4 sm:gap-8 px-3 sm:px-0">
           <div className="sidebar sm:col-span-2">

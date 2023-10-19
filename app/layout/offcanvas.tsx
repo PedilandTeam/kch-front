@@ -12,20 +12,24 @@ type OffCanvasProps = {
 };
 
 export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
-
-  const ref = useRef<HTMLInputElement>(null)
+  const ref = useRef<HTMLInputElement>(null);
 
   return (
     <div dir="rtl" className="drawer drawer-end z-10">
-      <input ref={ref} id="main-drawer" type="checkbox" className="drawer-toggle" />
+      <input
+        ref={ref}
+        id="main-drawer"
+        type="checkbox"
+        className="drawer-toggle"
+      />
       <div className="drawer-content"></div>
       <div className="drawer-side">
         <label htmlFor="main-drawer" className="drawer-overlay"></label>
 
-        <div className="menu p-4 w-80 h-full bg-gray-50 text-base-content">
-          <div className="logo mb-5 w-[180px] h-[50px] relative">
+        <div className="menu p-4 w-80 h-full bg-blue-50 text-base-content">
+          <div className="logo flex justify-end w-full mb-5 relative">
             <Link href="/">
-              <Image src="/images/logo.svg" fill={true} loading="lazy" alt="Koochaa Logo" />
+              <Image src="/images/logo.svg" width={180} height={50} loading="lazy" alt="Koochaa Logo" />
             </Link>
           </div>
           <ul>

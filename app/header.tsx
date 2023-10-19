@@ -89,12 +89,12 @@ export const Header = ({ children }: HeaderProps) => {
 
   return (
     <header
-      className={`fixed z-10 top-0 w-full bg-white transition-all ${
-        scrollingDown
-          ? "transform -translate-y-full"
-          : "transform translate-y-0 z-50"
-      } ${isTop ? "py-[10px]" : "py-[8px] shadow"} duration-200`}
-      // className="w-full bg-white py-[10px]"
+      // className={`fixed z-10 top-0 w-full bg-white transition-all ${
+      //   scrollingDown
+      //     ? "transform -translate-y-full"
+      //     : "transform translate-y-0 z-50"
+      // } ${isTop ? "py-[10px]" : "py-[8px] shadow"} duration-200`}
+      className="w-full bg-white py-3"
     >
       <div className="container mx-auto max-w-[1144px]">
         <div>
@@ -105,8 +105,10 @@ export const Header = ({ children }: HeaderProps) => {
               <Link href="/">
                 <Image
                   src="/images/logo.svg"
-                  width={isTop ? 195 : 174}
-                  height={isTop ? 54 : 48}
+                  // width={isTop ? 195 : 174}
+                  // height={isTop ? 54 : 48}
+                  width={195}
+                  height={54}
                   priority={true}
                   alt="Pediland Logo"
                   className="transition-all duration-75"

@@ -49,6 +49,11 @@
   @apply font-medium text-[21px] sm:text-[22px] text-center sm:text-right;
 }
 
+/* Off-Canvas */
+.menu ul li a {
+  @apply text-blue-900 hover:text-white font-medium border border-dashed border-blue-300 mb-3 hover:bg-blue-300 focus:bg-blue-300;
+}
+
 /* Main Scroll Style */
 /* width */
 ::-webkit-scrollbar {

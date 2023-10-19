@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const AboutPage = () => {
   return (
-    <div className="page-wrap static pt-[74px]">
+    <div className="page-wrap static">
       <PageHead />
       <TextSec />
     </div>

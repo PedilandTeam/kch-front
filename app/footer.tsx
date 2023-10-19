@@ -1,24 +1,24 @@
 "use client";
 import Link from "next/link";
 import { _TXT } from "@/app/text";
-import { RocketLaunchIcon } from "@heroicons/react/24/outline";
+import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
 
 export const Footer = () => {
-  // useEffect(() => {
-  //   if (typeof window == "undefined") return;
-  //   var toTopDiv = document.getElementById("toTopDiv");
-  //   if (!toTopDiv) return;
-  //   window.addEventListener("scroll", function () {
-  //     var toTopDiv = document.getElementById("toTopDiv");
-  //     if (window.scrollY > 600) {
-  //       // Change the value as needed
-  //       toTopDiv!.classList.remove("hidden");
-  //     } else {
-  //       toTopDiv!.classList.add("hidden");
-  //     }
-  //   });
-  // }, []);
+  useEffect(() => {
+    if (typeof window == "undefined") return;
+    var toTopDiv = document.getElementById("toTopDiv");
+    if (!toTopDiv) return;
+    window.addEventListener("scroll", function () {
+      var toTopDiv = document.getElementById("toTopDiv");
+      if (window.scrollY > 600) {
+        // Change the value as needed
+        toTopDiv!.classList.remove("hidden");
+      } else {
+        toTopDiv!.classList.add("hidden");
+      }
+    });
+  }, []);
 
   return (
     <div className="pt-10 pb-6 sm:pb-8 mt-5 sm:mt-10 bg-[#1c39bb] text-gray-50">
@@ -134,14 +134,14 @@ export const Footer = () => {
           </p>
         </div>
       </footer>
-      {/* <Link
+      <Link
         href={"#top"}
         scroll
-        className="hidden fixed bottom-[10px] sm:bottom-[50px] right-0 sm:right-[50px] p-3 rounded-full"
+        className="hidden fixed bottom-[10px] sm:bottom-[50px] -right-10 sm:right-[50px]"
         id="toTopDiv"
       >
-        <RocketLaunchIcon className="w-[36px] h-[36px] -rotate-45 stroke-gray-400" />
-      </Link> */}
+        <ChevronUpIcon className="w-[36px] h-[36px] stroke-blue-100" />
+      </Link>
     </div>
   );
 };
