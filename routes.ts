@@ -61,14 +61,7 @@ const baseFetch = async ({path, method = "GET", params, body, headers}: requestT
             .then((res: Response) => {
                 if(!res.ok){
                     res.json().then(res => console.log(res))
-                    reject(res)
-                    console.log(`
-                    
-                    not ok res:
-                    ${res}
-                    
-                    `);
-                    
+                    reject(res)                    
                 }
                 resolve(res)
             })
