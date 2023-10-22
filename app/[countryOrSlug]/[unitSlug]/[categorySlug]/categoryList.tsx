@@ -62,7 +62,7 @@ export default async function CategoryList({
               country={{ name: country.name, code: country.code }}
             />
             <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">
-              لیست {category?.seoTitle ? category.seoTitle : category.name} فارسی زبان در {country?.name}
+              لیست {category?.seoTitle ? category.seoTitle : `${category.name} فارسی زبان`} در {country?.name}
             </h1>
             <Suspense fallback={<Loading />} key={`unit-cardlist-${search}-${city}-${category}`}>
               <CardsList category={category} country={country} pageNumber={pageNumber} city={city} search={search} />
