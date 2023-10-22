@@ -12,6 +12,13 @@ import queryString from "query-string";
 
 type ParsedSearchParams = { page?: number | number[], city?: any, search: string }
 
+/**
+ * 
+ * @param countryOrSlug get country with [countryOrSlug]
+ * @param unitSlug get unit of category to check is entered category part of current unit
+ * @param categorySlug get targeted category by Slug
+ * @returns 
+ */
 const pathGenerator = async (countryOrSlug: string, unitSlug: string, categorySlug: string): Promise<PathGeneratorType> => {
 
   // const units = await (await API_ROUTES.UNITS.GET_ALL(2000)).json();
