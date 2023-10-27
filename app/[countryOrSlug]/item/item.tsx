@@ -28,7 +28,7 @@ export default function PageItem({ pageData }: PageItemProps) {
             <div className="item-description py-6 sm:py-8 border-b border-gray-200">
               <h3 className="font-bold mb-4 sm:mb-5">{_TXT.ITEM.DESCRIPTION}</h3>
               <p className="text-[15px] text-gray-500">
-                توضیحاتی در مورد این واحد ثبت نشده است.
+                {pageData.description ? pageData.description : 'توضیحاتی در مورد این واحد ثبت نشده است.'}
               </p>
             </div>
 
