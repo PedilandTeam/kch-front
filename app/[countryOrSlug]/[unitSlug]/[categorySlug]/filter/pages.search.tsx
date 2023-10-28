@@ -64,7 +64,7 @@ export default () => {
             onChange={searchChangeHandler}
             value={search || ""}
             placeholder="جستجو"
-            className="input input-bordered w-full mb-3"
+            className="input input-bordered w-full mb-4"
         />
     )
 }

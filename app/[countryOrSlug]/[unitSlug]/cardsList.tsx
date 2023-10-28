@@ -44,7 +44,7 @@ export const CardsList = async ({ unit, country, category, pageNumber, city, sea
   if(isNotFound){
     return (
       <div className="w-full min-h-[60vh] flex justify-center items-center">
-        <h3 className="text-2xl font-bold">با فیلترهای انتخابی چیزی یافت نشد :)</h3>
+        <h3 className="text-lg font-medium text-gray-500">موردی مطابق با فیلترهای انتخابی یافت نشد.</h3>
       </div>
     )
   }

@@ -15,7 +15,7 @@ export default function FilterMobile({ cities }: FilterMobileProps) {
   return (
     <>
       <div
-        className="filter-title w-full flex md:hidden pt-1"
+        className="filter-title w-full flex md:hidden pt-1 border"
         onClick={() => {
           if (document) {
             (

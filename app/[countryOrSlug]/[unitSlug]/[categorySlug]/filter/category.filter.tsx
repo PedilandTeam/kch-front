@@ -54,7 +54,7 @@ export default function CategoryFilter({ categories }: CategoryFilterType) {
       >
         {citiesInQuery ? _TXT.CATEGORY.SELECT : _TXT.CATEGORY.SELECT}
       </label>
-      <div className="mt-3 px-3">
+      <div className="mt-3 py-3">
         {Array.isArray(categoriesInQuery) ? (
           categoriesInQuery.map((categoryId) => {
             if (!categoryId) return;

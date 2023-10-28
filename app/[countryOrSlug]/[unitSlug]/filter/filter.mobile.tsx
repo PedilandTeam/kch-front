@@ -20,7 +20,7 @@ export default function FilterMobile({
   return (
     <>
       <div
-        className="filter-title w-full flex md:hidden pt-1"
+        className="filter-title w-full flex md:hidden border p-3 bg-slate-50 rounded-xl"
         onClick={() => {
           if (document) {
             (
@@ -30,7 +30,7 @@ export default function FilterMobile({
         }}
       >
         <FunnelIcon className="h-5 w-5 ml-2" />
-        <span className="font-semibold">{_TXT.FILTER._S}</span>
+        <span className="font-semibold">{_TXT.FILTER.SELECT}</span>
       </div>
 
       <dialog id="modal_unit_filter" className="modal">
@@ -38,12 +38,12 @@ export default function FilterMobile({
           method="dialog"
           className="modal-box w-full max-h-full h-full rounded-none"
         >
-          <div className="filter-title flex w-full border-b-[2px] border-b-gray-200 pb-2">
+          <div className="filter-title flex w-full border-b-[2px] border-b-gray-200 pb-2 mb-4">
             <FunnelIcon className="h-4 w-4 ml-2" />
             <span className="font-semibold">{_TXT.FILTER._S}</span>
           </div>
-          <div className="py-4">
-            <PagesSearch/>
+          <div>
+            <PagesSearch />
             <CityFilter id="mobile-cityfilter-modal" cities={cities} />
             <CategoryFilter
               id="mobile-categoryfilter-modal"

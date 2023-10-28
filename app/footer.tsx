@@ -21,7 +21,7 @@ export const Footer = () => {
   }, []);
 
   return (
-    <div className="pt-10 pb-6 sm:pb-8 mt-5 sm:mt-10 bg-[#1c39bb] text-gray-50">
+    <div className="pt-10 pb-6 sm:pb-8 mt-5 sm:mt-10 bg-[#1c39bb] text-gray-50 rounded-tl-3xl rounded-tr-3xl sm:rounded-none">
       <footer className="footer footer-center container px-3 mx-auto max-w-[1144px]">
         <div className="grid sm:grid-flow-col gap-3 sm:gap-4 text-[15px]">
           <Link href={"/about"} className="link link-hover">

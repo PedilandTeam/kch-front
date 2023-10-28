@@ -1,7 +1,6 @@
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CityNamespace } from "@/types/city";
-import { Country, PageNamespace } from "@/types/page";
 import { UnitType } from "@/types/unit";
 import joiner from "@/utils/joiner";
 import { notFound } from "next/navigation";
@@ -11,6 +10,9 @@ import ListFilter from "./filter/listFilter";
 import { CountryNamespace } from "@/types/country";
 import { Suspense } from "react";
 import Loading from "../_loading";
+import { FunnelIcon } from "@heroicons/react/24/solid";
+import { _TXT } from "@/app/text";
+import SideBanner from "@/app/banners/side-banner";
 
 type PagesListProps = {
   category: CategoryNamespace.category;
@@ -18,15 +20,22 @@ type PagesListProps = {
   unit: UnitType;
   pageNumber: number;
   city: number | number[];
-  search: string
+  search: string;
 };
 
-async function fetchCities(countryCode: string, categoryId: number): Promise<CityNamespace.GET> {
+async function fetchCities(
+  countryCode: string,
+  categoryId: number
+): Promise<CityNamespace.GET> {
   let cities: CityNamespace.GET;
 
   try {
     cities = await (
-      await API_ROUTES.CITIES.BY_COUNTRY(countryCode, {page:1, limit: 100, categoryIds: joiner(categoryId)})
+      await API_ROUTES.CITIES.BY_COUNTRY(countryCode, {
+        page: 1,
+        limit: 100,
+        categoryIds: joiner(categoryId),
+      })
     ).json();
   } catch (e) {
     console.log(await e);
@@ -36,37 +45,78 @@ async function fetchCities(countryCode: string, categoryId: number): Promise<Cit
   return cities;
 }
 
-
 export default async function CategoryList({
   category,
   country,
   unit,
   pageNumber,
   city,
-  search
+  search,
 }: PagesListProps) {
   if (!country) return notFound();
   const cities = await fetchCities(country.code, category.id);
 
   return (
-    <div className="component mt-5 page-list">
+    <div className="component sm:mt-3 page-list">
       <div className="container mx-auto max-w-[1144px]">
-        <div className="grid grid-cols-1 sm:grid-cols-8 gap-y-4 sm:gap-8 px-3 sm:px-0">
-          <div className="sidebar sm:col-span-2">
+        <div className="grid grid-cols-1 sm:grid-cols-8 gap-y-4 sm:gap-8">
+          <div className="sidebar hidden sm:block sm:col-span-2">
             <ListFilter cities={cities} />
           </div>
+
           <div className="page-content sm:col-span-6">
-            <ItemBreadCrumb
-              unit={unit}
-              category={category}
-              country={{ name: country.name, code: country.code }}
-            />
-            <h1 className="text-[20px] font-bold mt-3 mb-5 text-pink-800">
-              لیست {category?.seoTitle ? category.seoTitle : `${category.name} فارسی زبان`} در {country?.name}
-            </h1>
-            <Suspense fallback={<Loading />} key={`unit-cardlist-${search}-${city}-${category}`}>
-              <CardsList category={category} country={country} pageNumber={pageNumber} city={city} search={search} />
-            </Suspense>
+            <div className="flex flex-wrap">
+              <div className="sm:order-2 w-full sm:mb-2">
+                <ItemBreadCrumb
+                  unit={unit}
+                  category={category}
+                  country={{ name: country.name, code: country.code }}
+                />
+              </div>
+
+              <div className="page-header sm:order-1 w-full px-3 sm:px-0">
+                <h1 className="text-xl font-semibold my-4 sm:mt-0 sm:mb-3 text-pink-800">
+                  لیست{" "}
+                  {category?.seoTitle
+                    ? category.seoTitle
+                    : `${category.name} فارسی زبان`}{" "}
+                  در {country?.name}{" "}
+                </h1>
+              </div>
+            </div>
+            <div className="px-3 sm:px-0">
+              <div
+                className="filter-title w-full flex md:hidden border p-3 bg-slate-50 rounded-xl mb-3"
+                // onClick={() => {
+                //   if (document) {
+                //     (
+                //       document.getElementById(
+                //         "modal_unit_filter"
+                //       ) as HTMLFormElement
+                //     ).showModal();
+                //   }
+                // }}
+              >
+                <FunnelIcon className="h-5 w-5 ml-2" />
+                <span className="font-semibold">{_TXT.FILTER.SELECT}</span>
+              </div>
+              <Suspense
+                fallback={<Loading />}
+                key={`unit-cardlist-${search}-${city}-${category}`}
+              >
+                <CardsList
+                  category={category}
+                  country={country}
+                  pageNumber={pageNumber}
+                  city={city}
+                  search={search}
+                />
+              </Suspense>
+            </div>
+          </div>
+
+          <div className="sm:hidden mt-5 mx-3">
+            <SideBanner />
           </div>
         </div>
       </div>

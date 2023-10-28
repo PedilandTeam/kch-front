@@ -24,6 +24,7 @@ export const ITEM = {
 
 export const FILTER = {
   _S: "فیلترها",
+  SELECT: "انتخاب فیلترها",
   APPLY: "اعمال فیلترها",
   SELECT_PLEASE: "لطفا فیلترهای خود را انتخاب کنید",
   RESAULT_NO: "با فیلتر اعمال شده نتیجه‌ای یافت نشد.",

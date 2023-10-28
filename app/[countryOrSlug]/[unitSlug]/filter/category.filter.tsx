@@ -137,7 +137,7 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
         <label htmlFor={id} className={`btn btn-outline btn-primary w-full`}>
           {citiesInQuery ? _TXT.CATEGORY.SELECT : _TXT.CATEGORY.SELECT}
         </label>
-        <div className="mt-3 px-3">
+        <div className="px-3 my-3">
           {Array.isArray(categoriesInQuery) ? (
             categoriesInQuery.map((categoryId) => {
               if (!categoryId) return;

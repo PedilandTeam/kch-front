@@ -135,7 +135,7 @@ export default function CityFilter({ cities, id }: CityFilterType) {
         >
           {_TXT.CITY.SELECT}
         </label>
-        <div className="px-3 mt-3">
+        <div className="px-3 my-3">
           {Array.isArray(citiesInQuery) ? (
             // if city is multiple number, find all of that from cities
             citiesInQuery.map((cityId) => {

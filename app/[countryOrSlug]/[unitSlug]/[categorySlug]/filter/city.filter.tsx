@@ -127,11 +127,11 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   }).city;
 
   return (
-    <div className="filter-section mb-4">
+    <div className="filter-section">
       <label htmlFor={id} className="btn btn-primary btn-outline btn-wide">
         {_TXT.CITY.SELECT}
       </label>
-      <div className="px-3 mt-3">
+      <div className="px-3 my-3">
         {Array.isArray(citiesInQuery) ? (
           // if city is multiple number, find all of that from cities
           citiesInQuery.map((cityId) => {
