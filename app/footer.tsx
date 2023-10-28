@@ -38,16 +38,16 @@ export const Footer = () => {
           </Link>
         </div>
         <div>
-          <div className="grid grid-flow-col gap-3">
+          <div className="grid grid-flow-col gap-4">
             <Link
               href={"https://www.instagram.com/_koochaa"}
               target="_blank"
-              className="bg-[#4961c9] p-2 rounded hover:bg-[#d8aa3c]"
+              className="bg-[#4961c9] p-3 rounded-full hover:bg-[#d8aa3c]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
+                width="22"
+                height="22"
                 fill="currentColor"
                 className="fill-current"
                 viewBox="0 0 16 16"
@@ -59,12 +59,12 @@ export const Footer = () => {
             <Link
               href={"https://www.linkedin.com/company/koochaa"}
               target="_blank"
-              className="bg-[#4961c9] p-2 rounded hover:bg-[#d8aa3c]"
+              className="bg-[#4961c9] p-3 rounded-full hover:bg-[#d8aa3c]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
+                width="22"
+                height="22"
                 viewBox="0 0 24 24"
                 className="fill-current"
               >
@@ -79,12 +79,12 @@ export const Footer = () => {
             <Link
               href={"https://www.facebook.com/koochaa.fb"}
               target="_blank"
-              className="bg-[#4961c9] p-2 rounded hover:bg-[#d8aa3c]"
+              className="bg-[#4961c9] p-3 rounded-full hover:bg-[#d8aa3c]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
+                width="22"
+                height="22"
                 viewBox="0 0 24 24"
                 className="fill-current"
               >
@@ -95,8 +95,8 @@ export const Footer = () => {
             {/* <Link href={"https://www.youtube.com"} target="_blank">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
+                width="22"
+                height="22"
                 viewBox="0 0 24 24"
                 className="fill-current"
               >
@@ -107,12 +107,12 @@ export const Footer = () => {
             <Link
               href={"https://twitter.com/_koochaa"}
               target="_blank"
-              className="bg-[#4961c9] p-2 rounded hover:bg-[#d8aa3c]"
+              className="bg-[#4961c9] p-3 rounded-full hover:bg-[#d8aa3c]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
+                width="22"
+                height="22"
                 viewBox="0 0 24 24"
                 className="fill-current"
               >
