@@ -1,3 +1,4 @@
+
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CityNamespace } from "@/types/city";
@@ -12,6 +13,8 @@ import Loading from "./_loading";
 import SideBanner from "@/app/banners/side-banner";
 import { FunnelIcon } from "@heroicons/react/24/solid";
 import { _TXT } from "@/app/text";
+import FilterMobile from "./filter/filter.mobile";
+import FilterModalMobile from "./filter/filterModal.mobile";
 
 type PagesListProps = {
   unit: UnitType;
@@ -81,6 +84,8 @@ export default async function UntiList({
     await fetchCategories(country.code, unit.id, city)
   ).items;
 
+
+
   return (
     <div className="component sm:mt-3 page-list">
       <div className="container mx-auto max-w-[1144px]">
@@ -106,21 +111,12 @@ export default async function UntiList({
             </div>
 
             <div className="px-3 sm:px-0">
-              <div
-                className="filter-title w-full flex md:hidden border p-3 bg-slate-50 rounded-xl mb-3"
-                // onClick={() => {
-                //   if (document) {
-                //     (
-                //       document.getElementById(
-                //         "modal_unit_filter"
-                //       ) as HTMLFormElement
-                //     ).showModal();
-                //   }
-                // }}
-              >
-                <FunnelIcon className="h-5 w-5 ml-2" />
-                <span className="font-semibold">{_TXT.FILTER.SELECT}</span>
+
+              <div className="md:hidden">
+                <FilterMobile/>
+                <FilterModalMobile cities={cities.items} categories={categories} />
               </div>
+              
               <Suspense
                 fallback={<Loading />}
                 key={`unit-cardlist-${search}-${city}-${category}`}

@@ -1,13 +1,13 @@
 "use client";
 import { _TXT } from "@/app/text";
 import { FunnelIcon } from "@client-packages/heroicons/components";
-import FilterMobile from "./filter.mobile";
 import { CityNamespace } from "@/types/city";
 import { CategoryNamespace } from "@/types/category";
 import CityFilter from "./city.filter";
 import CategoryFilter from "./category.filter";
 import PageSearch from "./page.search";
 import SideBanner from "@/app/banners/side-banner";
+import FilterModalMobile from "./filterModal.mobile";
 
 type ListFilterProps = {
   cities: CityNamespace.GET;
@@ -30,8 +30,6 @@ export default function ListFilter({ cities, categories }: ListFilterProps) {
       <div className="hidden sm:block">
         <SideBanner />
       </div>
-
-      <FilterMobile cities={cities.items} categories={categories} />
     </div>
   );
 }

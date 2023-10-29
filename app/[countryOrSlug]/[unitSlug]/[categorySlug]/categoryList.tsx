@@ -13,6 +13,8 @@ import Loading from "../_loading";
 import { FunnelIcon } from "@heroicons/react/24/solid";
 import { _TXT } from "@/app/text";
 import SideBanner from "@/app/banners/side-banner";
+import FilterMobile from "./filter/filter.mobile";
+import FilterModalMobile from "./filter/filterModal.mobile";
 
 type PagesListProps = {
   category: CategoryNamespace.category;
@@ -85,21 +87,12 @@ export default async function CategoryList({
               </div>
             </div>
             <div className="px-3 sm:px-0">
-              <div
-                className="filter-title w-full flex md:hidden border p-3 bg-slate-50 rounded-xl mb-3"
-                // onClick={() => {
-                //   if (document) {
-                //     (
-                //       document.getElementById(
-                //         "modal_unit_filter"
-                //       ) as HTMLFormElement
-                //     ).showModal();
-                //   }
-                // }}
-              >
-                <FunnelIcon className="h-5 w-5 ml-2" />
-                <span className="font-semibold">{_TXT.FILTER.SELECT}</span>
+
+              <div className="md:hidden">
+                <FilterMobile />
+                <FilterModalMobile cities={cities.items} />
               </div>
+
               <Suspense
                 fallback={<Loading />}
                 key={`unit-cardlist-${search}-${city}-${category}`}

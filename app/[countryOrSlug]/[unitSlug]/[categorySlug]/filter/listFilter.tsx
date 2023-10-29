@@ -1,7 +1,7 @@
 "use client";
 import { _TXT } from "@app/text/index";
 import { FunnelIcon } from "@client-packages/heroicons/components";
-import FilterMobile from "./filter.mobile";
+import FilterMobile from "./filterModal.mobile";
 import { CityNamespace } from "@/types/city";
 import CityFilter from "../../filter/city.filter";
 import PageSearch from "../../filter/page.search";
@@ -27,8 +27,6 @@ export default function CategoryListFilter({ cities }: ListFilterProps) {
       <div className="hidden sm:block">
         <SideBanner />
       </div>
-
-      <FilterMobile cities={cities.items} />
     </div>
   );
 }
