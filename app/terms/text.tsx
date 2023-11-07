@@ -5,7 +5,7 @@ const TermsText = () => {
   return (
     <div className="container max-w-[1144px] mx-auto mt-10 px-3 sm:px-0">
       <div className="text-wrap">
-        <p className="font-semibold">با سلام، به وب سایت "کوچا" خوش اومدید.</p>
+        <p className="font-semibold">به وب سایت "کوچا" خوش اومدید.</p>
         <p>
           این صفحه حاوی مجموعه قوانین و مقرراتیه که به منظور ایجاد فضایی سالم و
           منصفانه، توسط تیم مدیریتی کوچا وضع شده تا علاوه بر رعایت حقوق شما
