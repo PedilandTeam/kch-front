@@ -1,4 +1,7 @@
+'use client'
+
 import Link from "next/link";
+import Accordion from "../client-packages/daisy/accordion";
 
 const JobsText = () => {
   return (
@@ -47,9 +50,7 @@ const JobsText = () => {
           </p>
         </div>
 
-        <div>
-         Accordion
-        </div>
+        <Accordion title="سلام" content="خوبی داداشم" className="bg-base-200 rounded-xl my-5"/>
 
         <div className="section">
           <h2>دوست داری هم تیمی ما بشی؟</h2>
