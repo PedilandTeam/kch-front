@@ -31,10 +31,22 @@
   @apply text-lg font-semibold mb-2 mt-8 first:mt-0 mr-5;
 }
 .page-wrap.static .text-wrap .section {
-  @apply border border-r-4 border-blue-100 rounded-tl-lg rounded-bl-lg p-8 bg-slate-50 mb-8 last:mb-0;
+  @apply border border-r-4 border-blue-100 rounded-tl-xl rounded-bl-xl p-5 sm:p-8 bg-slate-50 mb-8 last:mb-0;
+}
+.page-wrap.static .text-wrap .section h2 {
+  @apply text-lg mb-3;
 }
 .page-wrap.static .text-wrap .section p {
-  @apply mb-2;
+  @apply leading-8;
+}
+.page-wrap.static .text-wrap .item h3 {
+  @apply font-semibold text-lg text-primary;
+}
+.page-wrap.static .text-wrap .item ul {
+  @apply mb-8 pr-0 sm:pr-3;
+}
+.page-wrap.static .text-wrap .item ul li {
+  @apply sm:list-disc sm:list-inside;
 }
 .page-wrap.static .page-head {
   @apply flex justify-center content-center mx-3 sm:mx-auto sm:max-w-[95%] relative;

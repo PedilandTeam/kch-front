@@ -29,7 +29,13 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
         <div className="menu p-4 w-80 h-full bg-blue-50 text-base-content">
           <div className="logo flex justify-end w-full mb-5 relative">
             <Link href="/">
-              <Image src="/images/logo.svg" width={180} height={50} loading="lazy" alt="Koochaa Logo" />
+              <Image
+                src="/images/logo.svg"
+                width={180}
+                height={50}
+                loading="lazy"
+                alt="Koochaa Logo"
+              />
             </Link>
           </div>
           <ul>
@@ -52,6 +58,11 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
             <li onClick={() => ref.current?.click()}>
               <Link href={`/about`} className="p-3 text-[16px]">
                 {_TXT.MENU.ABOUT}
+              </Link>
+            </li>
+            <li onClick={() => ref.current?.click()}>
+              <Link href={`/jobs`} className="p-3 text-[16px]">
+                {_TXT.MENU.JOBS}
               </Link>
             </li>
           </ul>

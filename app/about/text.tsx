@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const TextSec = () => {
   return (
-    <div className="container max-w-[1144px] mx-auto mt-10 px-3 sm:px-0">
+    <div className="container max-w-[1144px] mx-auto mt-6 sm:mt-10 px-3 sm:px-0">
       <div className="text-wrap">
         <div className="section">
           <h2>کوچا، تلاشی برای رفع نیازهای فارسی‌زبانان مهاجر</h2>

@@ -27,9 +27,9 @@ export const Footer = () => {
           <Link href={"/about"} className="link link-hover">
             {_TXT.MENU.ABOUT}
           </Link>
-          {/* <Link href={"/privacy"} className="link link-hover">
-            {_TXT.MENU.PRIVACY_POLICIES}
-          </Link> */}
+          <Link href={"/jobs"} className="link link-hover">
+            {_TXT.MENU.JOBS}
+          </Link>
           <Link href={"/terms"} className="link link-hover">
             {_TXT.MENU.TERMS_AND_CONDITIONS}
           </Link>
