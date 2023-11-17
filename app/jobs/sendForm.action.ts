@@ -8,7 +8,7 @@ type sendFormAction = {
   city: string;
   email: string;
   whatsapp: string;
-  file: File | null;
+  file: any | null;
   message: string
 }
 export default async function sendFormAction(data: sendFormAction, fileFormData: FormData, token: string | null) {
@@ -18,7 +18,7 @@ export default async function sendFormAction(data: sendFormAction, fileFormData:
     throw new Error('فایل الزامی است')
   }
 
-  const file = fileFormData.get('file') as File;
+  const file = fileFormData.get('file') as any;
 
   // Check file size (limit to 5 MB)
   const maxSize = 5 * 1024 * 1024; // 5 MB in bytes
