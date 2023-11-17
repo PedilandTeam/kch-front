@@ -4,7 +4,19 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import sendFormAction from "./sendForm.action";
+
+
+interface IFormValues {
+  name: string;
+  birthday: string;
+  city: string;
+  email: string;
+  whatsapp: string;
+  file: File | null;
+  message: string
+}
 
 const ApplyForm = () => {
   const [sent, setSent] = useState(false);
@@ -12,26 +24,32 @@ const ApplyForm = () => {
   const recaptchaTokenHandler = (token: string) => {
     setRecaptchaToken(token);
   };
+  const [loading, setLoading] = useState<boolean>(false)
 
-  const formik = useFormik({
+  const formik = useFormik<IFormValues>({
     initialValues: {
       name: "",
-      country: "",
+      birthday: "",
       city: "",
       email: "",
-      subject: "",
+      whatsapp: "",
+      file: null,
       message: "",
     },
     validationSchema: Yup.object().shape({
       name: Yup.string().required(),
-      country: Yup.string().required(),
+      birthday: Yup.string().required(),
       city: Yup.string().required(),
       email: Yup.string().email().required(),
-      subject: Yup.string().required(),
+      whatsapp: Yup.string().required(),
+      file: Yup.mixed().required('رزومه الزامی است'),
       message: Yup.string().required(),
     }),
     onSubmit: async (values) => {
-      await sendFormAction(values, recaptchaToken)
+      setLoading(true)
+      const formData = new FormData()
+      formData.append('file', values.file!)
+      await sendFormAction(values, formData, recaptchaToken)
         .then((res) => {
           toast.success(
             "پیام شما دریافت شد و بزودی با شما ارتباط خواهیم گرفت",
@@ -41,13 +59,17 @@ const ApplyForm = () => {
           );
           setSent(true);
         })
-        .catch((e) => {
-          toast.error("کپچا مورد تایید نیست");
-        });
+        .catch((e: any) => {
+          toast.error(e?.message);
+        })
+        .finally(() => {
+          setLoading(false)
+        })
     },
     validateOnMount: false,
     validateOnBlur: false,
   });
+
 
   if (sent) {
     return (
@@ -64,15 +86,14 @@ const ApplyForm = () => {
       <h3 className="text-secondary font-semibold mb-6 text-xl text-center">
         فـرم ثـبـت درخـواسـت فـرصـت شـغـلـی
       </h3>
-      <form>
+      <form onSubmit={formik.handleSubmit}>
         <div className="row grid sm:grid-cols-6 gap-3">
           <div className="col-span-6 sm:col-span-2">
             <input
               type="text"
               placeholder="* نام کامل"
-              className={`input ${
-                formik.errors.name && "input-error"
-              } input-bordered focus:input-secondary w-full`}
+              className={`input ${formik.errors.name && "input-error"
+                } input-bordered focus:input-secondary w-full`}
               name="name"
               onChange={formik.handleChange}
             />
@@ -81,10 +102,9 @@ const ApplyForm = () => {
             <input
               type="text"
               placeholder="* تاریخ تولد"
-              className={`input ${
-                formik.errors.country && "input-error"
-              } input-bordered focus:input-secondary w-full`}
-              name="country"
+              className={`input ${formik.errors.birthday && "input-error"
+                } input-bordered focus:input-secondary w-full`}
+              name="birthday"
               onChange={formik.handleChange}
             />
           </div>
@@ -92,9 +112,8 @@ const ApplyForm = () => {
             <input
               type="text"
               placeholder="* شهر محل سکونت"
-              className={`input ${
-                formik.errors.city && "input-error"
-              } input-bordered focus:input-secondary w-full`}
+              className={`input ${formik.errors.city && "input-error"
+                } input-bordered focus:input-secondary w-full`}
               name="city"
               onChange={formik.handleChange}
             />
@@ -103,9 +122,8 @@ const ApplyForm = () => {
             <input
               type="email"
               placeholder="* ایمیل"
-              className={`input ${
-                formik.errors.email && "input-error"
-              } input-bordered focus:input-secondary w-full`}
+              className={`input ${formik.errors.email && "input-error"
+                } input-bordered focus:input-secondary w-full`}
               name="email"
               onChange={formik.handleChange}
             />
@@ -114,7 +132,8 @@ const ApplyForm = () => {
             <input
               type="text"
               placeholder="* شماره واتس‌آپ"
-              className={`input input-bordered focus:input-secondary w-full`}
+              className={`input ${formik.errors.email && "input-error"
+                } input-bordered focus:input-secondary w-full`}
               name="whatsapp"
               onChange={formik.handleChange}
             />
@@ -132,18 +151,27 @@ const ApplyForm = () => {
               </label>
               <input
                 type="file"
-                className="file-input file-input-bordered w-full"
+                name="file"
+                className={`input ${formik.errors.email && "input-error"
+                  } input-bordered focus:input-secondary w-full`}
+                onChange={(event) => {
+                  formik.setFieldValue('file', event.currentTarget.files?.[0]);
+                }}
               />
               <label className="label">
                 <span className="label-text text-gray-500">
                   لطفا فقط با فرمت PDF و JPG فایل‌هاتون رو برامون بفرستید.
+                  <br />
+                  حجم فایل باید کمتر از ۵ مگابایت باشد
                 </span>
               </label>
             </div>
           </div>
           <div className="col-span-6 sm:col-span-6">
             <textarea
-              className="textarea input-bordered focus:textarea-secondary text-base w-full"
+              className={` ${
+                formik.errors.message && " textarea-error"
+              } textarea input-bordered focus:textarea-secondary text-base w-full`}
               placeholder="* متن انگیزه نامه"
               rows={8}
               name="message"
@@ -162,7 +190,7 @@ const ApplyForm = () => {
                 type="submit"
                 className="btn btn-outline btn-secondary w-full sm:w-1/2 text-base"
               >
-                ثـبـت فـرم
+                {loading ? '...درحال ارسال' : 'ارسال فرم'}
               </button>
             </div>
           </div>
