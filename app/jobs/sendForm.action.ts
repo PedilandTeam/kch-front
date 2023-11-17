@@ -14,7 +14,7 @@ type sendFormAction = {
 export default async function sendFormAction(data: sendFormAction, fileFormData: FormData, token: string | null) {
 
 
-  if (!(fileFormData.get('file') instanceof File)) {
+  if (!(fileFormData.get('file'))) {
     throw new Error('فایل الزامی است')
   }
 
