@@ -54,8 +54,7 @@ const pathGenerator = async (
         const pageData = await (
           await API_ROUTES.PAGES.GET_ALL(1, 1, {slug: countryOrSlug}, undefined, 'no-store')
         ).json();
-        console.log(pageData);
-        
+
         if (!pageData?.items) {
           return NOT_FOUND;
         }
