@@ -149,11 +149,11 @@ const ApplyForm = () => {
               <label className="label">
                 <span className="label-text font-medium">آپلود فایل رزومه</span>
               </label>
-              <input
+              <input 
                 type="file"
                 name="file"
-                className={`input ${formik.errors.email && "input-error"
-                  } input-bordered focus:input-secondary w-full`}
+                className={`file-input ${formik.errors.email && "input-error"
+                  } file-input-bordered focus:file-input-secondary w-full`}
                 onChange={(event) => {
                   formik.setFieldValue('file', event.currentTarget.files?.[0]);
                 }}
