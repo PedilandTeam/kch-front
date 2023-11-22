@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 type itemProfilePictureType = {
-  pageData: PageNamespace.Page;
+  pageData: Pick<PageNamespace.Page , "id" | 'haveAvatar' | 'profile'>;
   height?: number;
   width?: number;
   className?: string;
@@ -18,7 +18,7 @@ export default function ItemProfilePicture ({
     <Image
       loading="lazy"
       alt="logo"
-      src={pageData.haveAvatar ? `${process.env.NEXT_PUBLIC_DL_URL}/pages/${pageData.id}/avatar.webp` : "/images/list/logo/logo-placeholder.webp"}
+      src={`${process.env.NEXT_PUBLIC_DL_URL}/pages/${pageData.id}/${pageData.profile}`}
       width={width ?? 160}
       height={height ?? 160}
       className={className}
