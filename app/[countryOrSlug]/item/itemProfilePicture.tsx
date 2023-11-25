@@ -18,7 +18,7 @@ export default function ItemProfilePicture ({
     <Image
       loading="lazy"
       alt="logo"
-      src={`${process.env.NEXT_PUBLIC_DL_URL}/pages/${pageData.id}/${pageData.profile}`}
+      src={pageData.profile ? `${process.env.NEXT_PUBLIC_DL_URL}/pages/${pageData.id}/${pageData.profile}` : '/images/list/logo/logo-placeholder.webp'}
       width={width ?? 160}
       height={height ?? 160}
       className={className}
