@@ -151,6 +151,7 @@ const ApplyForm = () => {
               </label>
               <input 
                 type="file"
+                accept="application/pdf, image/jpeg"
                 name="file"
                 className={`file-input ${formik.errors.email && "input-error"
                   } file-input-bordered focus:file-input-secondary w-full`}
