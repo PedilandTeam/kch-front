@@ -121,7 +121,7 @@ export default function RegisterForm({
               placeholder="نام"
               bordered={true}
               isInvalid={!!formik.errors.name}
-              errorMessage="نام را درست وارد کنید"
+              endContent={<FaceSmileIcon className="h-7 w-7 text-gray-400" />}
             />
             <Input
               name="lastname"
@@ -132,7 +132,7 @@ export default function RegisterForm({
               placeholder="نام خانوادگی"
               bordered={true}
               isInvalid={!!formik.errors.lastname}
-              errorMessage="نام خانوادگی را درست وارد کنید"
+              endContent={<FaceSmileIcon className="h-7 w-7 text-gray-400" />}
             />
             <Input
               name="username"
@@ -143,7 +143,11 @@ export default function RegisterForm({
               placeholder="نام کاربری"
               bordered={true}
               isInvalid={!!formik.errors.username}
-              errorMessage="یوزرنیم را درست وارد کنید"
+              errorMessage={
+                !!formik.errors.username &&
+                "یوزرنیم فقط میتواند شامل عدد، حروف انگلیسی و علامت های نقطه(.) و خط تیره (-) باشد"
+              }
+              endContent={<UserIcon className="h-7 w-7 text-gray-400" />}
             />
             <Input
               name="email"
@@ -155,6 +159,7 @@ export default function RegisterForm({
               bordered={true}
               isInvalid={!!formik.errors.email}
               errorMessage="ایمیل را درست وارد کنید"
+              endContent={<EnvelopeIcon className="h-7 w-7 text-gray-400" />}            
             />
             <Input
               name="password"
@@ -166,6 +171,8 @@ export default function RegisterForm({
               bordered={true}
               isInvalid={!!formik.errors.password}
               errorMessage="رمز باید حداقل ۸ کارکتر و شامل حداقل یک حرف بزرگ و یک عدد باشد"
+              endContent={<LockClosedIcon className="h-7 w-7 text-gray-400" />}
+
             />
           </div>
 
