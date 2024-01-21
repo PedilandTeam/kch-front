@@ -16,6 +16,7 @@ import {
   FaceSmileIcon, LockClosedIcon,
   UserIcon
 } from "@heroicons/react/24/outline";
+import Button from "@/components/daisy/button";
 // import HeaderSimple from "../layout/header-sm";
 
 export type FormikValues = {
@@ -167,13 +168,9 @@ export default function RegisterForm({
               errorMessage="رمز باید حداقل ۸ کارکتر و شامل حداقل یک حرف بزرگ و یک عدد باشد"
             />
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary my-6 w-full"
-            color="primary"
-          >
-            ثبت نام کاربر {loading ? <div className="loading loading-spinner loading-ms"></div> : ''}
-          </button>
+
+          <Button isLoading={loading} className="btn btn-primary my-6 w-full" />
+
           <p className="text-[15px]">
             حساب کاربری دارید؟{" "}
             <Link href={"/login"} className="font-medium">
