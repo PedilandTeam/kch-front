@@ -36,10 +36,19 @@ export default function Input({
                     {...inputProps}
                 />
             </div>
-            <label className="label">
-                <span className="label-text min-h-[1 ch]">{label ? label : ''}</span>
-                <span className="label-text-alt text-error min-h-[1 ch]">{isInvalid && errorMessage ? errorMessage : ''}</span>
-            </label>
+            {
+                errorMessage || label ? 
+                    <label className="label">
+                        {label && (
+                            <span className="label-text min-h-[1 ch]">{label}</span>                
+                        )}
+                        {isInvalid && errorMessage && (
+                            <span className="label-text-alt text-error min-h-[1 ch]">{errorMessage}</span>
+                        )}
+                    </label>        
+
+                : ''
+            }
         </div>
     );
 }
