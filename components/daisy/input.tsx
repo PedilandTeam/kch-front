@@ -2,7 +2,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     endContent?: React.ReactNode;
     startContent?: React.ReactNode;
     isInvalid?: boolean;
-    errorMessage?: string;
+    errorMessage?: string | boolean;
     bordered?: boolean;
     label?: string
 }
@@ -12,7 +12,7 @@ export default function Input({
     endContent,
     className,
     isInvalid,
-    errorMessage,
+    errorMessage = false,
     bordered,
     label,
     ...inputProps
@@ -38,7 +38,7 @@ export default function Input({
             </div>
             <label className="label">
                 <span className="label-text min-h-[1 ch]">{label ? label : ''}</span>
-                <span className="label-text-alt text-error min-h-[1 ch]">{isInvalid ? errorMessage : ''}</span>
+                <span className="label-text-alt text-error min-h-[1 ch]">{isInvalid && errorMessage ? errorMessage : ''}</span>
             </label>
         </div>
     );
