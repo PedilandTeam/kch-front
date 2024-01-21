@@ -38,7 +38,7 @@ export default function CountryCategoriesItems({
     <>
       <div className="text-center">
         {units.map((unit) => {
-          if (recentlyUpdatedCategories[`${unit.id}`].length == 0) {
+          if (recentlyUpdatedCategories[`${unit.id}`]?.length == 0) {
             return;
           }
           return (
@@ -55,7 +55,7 @@ export default function CountryCategoriesItems({
         })}
       </div>
       <div className="content mt-8 flex flex-wrap justify-center gap-4 mx-3 sm:mx-0">
-        {recentlyUpdatedCategories[`${activeTab}`].map((category, index) => {
+        {recentlyUpdatedCategories[`${activeTab}`]?.map((category, index) => {
           return (
             <Link
               scroll
