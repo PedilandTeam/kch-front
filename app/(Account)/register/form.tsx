@@ -10,9 +10,16 @@ import * as Yup from "yup";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Input from "@/components/daisy/input";
+import {
+  EnvelopeIcon,
+  FaceSmileIcon, LockClosedIcon,
+  UserIcon
+} from "@heroicons/react/24/outline";
 // import HeaderSimple from "../layout/header-sm";
 
 export type FormikValues = {
+  firstname: string;
   username: string;
   password: string;
   name: string;
@@ -37,6 +44,7 @@ export default function RegisterForm({
       name: "",
       lastname: "",
       email: "",
+      firstname: "",
     },
     validationSchema: Yup.object().shape({
       username: Yup.string().matches(REGEX.USERNAME).required(),
@@ -49,7 +57,7 @@ export default function RegisterForm({
     onSubmit: async ({
       username,
       password,
-      name,
+      firstname,
       lastname,
       email,
     }: FormikValues) => {
@@ -61,7 +69,7 @@ export default function RegisterForm({
         method: "POST",
         withCredentials: true,
         data: {
-          name,
+          firstname,
           username,
           email,
           password,
@@ -103,44 +111,60 @@ export default function RegisterForm({
         <h1 className="mb-4 font-semibold text-lg">ثبت حساب کاربری جدید</h1>
         <form onSubmit={formik.handleSubmit}>
           <div className="grid grid-cols-4 gap-3">
-            <input
+            <Input
               name="name"
               autoComplete="organization-title"
               onChange={formik.handleChange}
-              className="input-bordered input col-span-4 sm:col-span-2"
+              className="col-span-4 sm:col-span-2"
               type="text"
               placeholder="نام"
+              bordered={true}
+              isInvalid={!!formik.errors.name}
+              errorMessage="نام را درست وارد کنید"
             />
-            <input
+            <Input
               name="lastname"
               autoComplete="organization-title"
               onChange={formik.handleChange}
-              className="input-bordered input col-span-4 sm:col-span-2"
+              className="col-span-4 sm:col-span-2"
               type="text"
               placeholder="نام خانوادگی"
+              bordered={true}
+              isInvalid={!!formik.errors.lastname}
+              errorMessage="نام خانوادگی را درست وارد کنید"
             />
-            <input
+            <Input
               name="username"
               autoComplete="new-username"
               onChange={formik.handleChange}
-              className="input-bordered input col-span-4 sm:col-span-2"
+              type="text"
+              className="col-span-4 sm:col-span-2"
               placeholder="نام کاربری"
+              bordered={true}
+              isInvalid={!!formik.errors.username}
+              errorMessage="یوزرنیم را درست وارد کنید"
             />
-            <input
+            <Input
               name="email"
               autoComplete="new-email"
-              onChange={formik.handleChange}
-              className="input-bordered input col-span-4 sm:col-span-2"
+              onChange={formik.handleChange}            
+              className="col-span-4 sm:col-span-2"
               type="email"
               placeholder="ایمیل"
+              bordered={true}
+              isInvalid={!!formik.errors.email}
+              errorMessage="ایمیل را درست وارد کنید"
             />
-            <input
+            <Input
               name="password"
               autoComplete="new-password"
               onChange={formik.handleChange}
               type="password"
-              className="input-bordered input col-span-4"
+              className="col-span-4"
               placeholder="رمز عبور"
+              bordered={true}
+              isInvalid={!!formik.errors.password}
+              errorMessage="رمزعبور را درست وارد کنید"
             />
           </div>
           <button
