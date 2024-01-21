@@ -164,7 +164,7 @@ export default function RegisterForm({
               placeholder="رمز عبور"
               bordered={true}
               isInvalid={!!formik.errors.password}
-              errorMessage="رمزعبور را درست وارد کنید"
+              errorMessage="رمز باید حداقل ۸ کارکتر و شامل حداقل یک حرف بزرگ و یک عدد باشد"
             />
           </div>
           <button
