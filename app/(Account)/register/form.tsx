@@ -180,7 +180,7 @@ export default function RegisterForm({
 
           <p className="text-[15px]">
             حساب کاربری دارید؟{" "}
-            <Link href={"/login"} className="font-medium">
+            <Link href={"/login"} className="font-medium text-blue-700">
               اینجا کلیک کنید
             </Link>
           </p>
