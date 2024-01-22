@@ -4,7 +4,6 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     isInvalid?: boolean;
     errorMessage?: string | boolean;
     bordered?: boolean;
-    label?: string
 }
 
 export default function Input({
@@ -14,7 +13,6 @@ export default function Input({
     isInvalid,
     errorMessage = false,
     bordered,
-    label,
     ...inputProps
 }: InputProps) {
 
@@ -37,11 +35,11 @@ export default function Input({
                 />
             </div>
             {
-                errorMessage || label ? 
+                !!errorMessage && isInvalid ? 
                     <label className="label">
-                        {label && (
+                        {/* {label && (
                             <span className="label-text min-h-[1 ch]">{label}</span>                
-                        )}
+                        )} */}
                         {isInvalid && errorMessage && (
                             <span className="label-text-alt text-error min-h-[1 ch]">{errorMessage}</span>
                         )}

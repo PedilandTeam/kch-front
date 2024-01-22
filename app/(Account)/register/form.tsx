@@ -5,7 +5,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { useFormik } from "formik";
 import { useReCaptcha } from "next-recaptcha-v3";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -17,82 +17,57 @@ import {
   UserIcon
 } from "@heroicons/react/24/outline";
 import Button from "@/components/daisy/button";
+import useRegisterUser from "./useRegisterUser";
+import Select from "@/components/daisy/select";
+import useSWR from "swr";
+import { fetcher } from "@/app/swr/fetcher";
+import { CountryNamespace } from "@/types/country";
+import Option from "@/components/daisy/option";
 // import HeaderSimple from "../layout/header-sm";
 
 export type FormikValues = {
   firstname: string;
   username: string;
   password: string;
-  name: string;
   lastname: string;
   email: string;
+  countryId: string | number;
 };
-export default function RegisterForm({
-  slug,
-  claimWay,
-}: {
-  slug?: string;
-  claimWay?: string;
-}) {
-  const { executeRecaptcha } = useReCaptcha();
-  const [loading, setLoading] = useState<boolean>(false);
-  const router = useRouter();
+export default function RegisterForm() {
+
+
+  const {data: countries, isLoading: countriesLoading, error: countriesError} = useSWR<CountryNamespace.GET[]>(`${process.env.NEXT_PUBLIC_API_URL}/countries`, fetcher)
+
+  useEffect(() => {
+    console.log(countries);
+  }, [countries])
+
+  const { executeRecaptcha } = useReCaptcha(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
+  const { registerUser, registerUserLoading } = useRegisterUser()
 
   const formik = useFormik<FormikValues>({
     initialValues: {
       username: "",
       password: "",
-      name: "",
+      firstname: "",
       lastname: "",
       email: "",
-      firstname: "",
+      countryId: "",
     },
     validationSchema: Yup.object().shape({
       username: Yup.string().matches(REGEX.USERNAME).required(),
       email: Yup.string().email().required(),
       password: Yup.string().matches(REGEX.PASSWORD).required(),
-      name: Yup.string().required(),
+      firstname: Yup.string().required(),
       lastname: Yup.string().required(),
+      countryId: Yup.mixed().required()
     }),
     validateOnMount: false,
-    onSubmit: async ({
-      username,
-      password,
-      firstname,
-      lastname,
-      email,
-    }: FormikValues) => {
-      setLoading(true);
-      const token = await executeRecaptcha("business_signup");
-
-      let config: AxiosRequestConfig = {
-        url: `${process.env.NEXT_PUBLIC_API_URL}/auth/business/signup`,
-        method: "POST",
-        withCredentials: true,
-        data: {
-          firstname,
-          username,
-          email,
-          password,
-          token,
-          ...(slug && { slug }),
-          ...(claimWay && { claimWay }),
-          lastname,
-        },
-      };
-      await axios(config)
-        .then((res) => {
-          toast.success(res.data?.message);
-          if (!claimWay && !slug) {
-            router.push("/home");
-            return;
-          }
-          router.push("/home");
-        })
-        .catch((e) => {
-          toast.error(e?.response?.data?.message || "خطایی رخ داده است");
-        });
-      setLoading(false);
+    onSubmit: async (values) => {
+      console.log(values);      
+      // const captchaToken = await executeRecaptcha("user_signup");
+      // console.log(captchaToken);      
+      await registerUser(values, 'captchaToken')
     },
   });
 
@@ -113,14 +88,14 @@ export default function RegisterForm({
         <form onSubmit={formik.handleSubmit}>
           <div className="grid grid-cols-4 gap-3">
             <Input
-              name="name"
+              name="firstname"
               autoComplete="organization-title"
               onChange={formik.handleChange}
               className="col-span-4 sm:col-span-2"
               type="text"
               placeholder="نام"
               bordered={true}
-              isInvalid={!!formik.errors.name}
+              isInvalid={!!formik.errors.firstname}
               endContent={<FaceSmileIcon className="h-7 w-7 text-gray-400" />}
             />
             <Input
@@ -152,31 +127,39 @@ export default function RegisterForm({
             <Input
               name="email"
               autoComplete="new-email"
-              onChange={formik.handleChange}            
+              onChange={formik.handleChange}
               className="col-span-4 sm:col-span-2"
               type="email"
               placeholder="ایمیل"
               bordered={true}
               isInvalid={!!formik.errors.email}
               errorMessage="ایمیل را درست وارد کنید"
-              endContent={<EnvelopeIcon className="h-7 w-7 text-gray-400" />}            
+              endContent={<EnvelopeIcon className="h-7 w-7 text-gray-400" />}
             />
             <Input
               name="password"
               autoComplete="new-password"
               onChange={formik.handleChange}
               type="password"
-              className="col-span-4"
+              className="col-span-2"
               placeholder="رمز عبور"
               bordered={true}
               isInvalid={!!formik.errors.password}
               errorMessage="رمز باید حداقل ۸ کارکتر و شامل حداقل یک حرف بزرگ و یک عدد باشد"
               endContent={<LockClosedIcon className="h-7 w-7 text-gray-400" />}
-
             />
+            <Select items={countries} value={formik.values.countryId} isInvalid={!!formik.errors.countryId} errorMessage='لطفا کشور خود را انتخاب کنید' bordered className="col-span-2">
+              {
+                (country: any) => (
+                  <Option onClick={() => formik.setFieldValue('countryId', country.id)} key={country.code} value={country.name}>{country.name}</Option>
+                )
+              }
+            </Select>
           </div>
 
-          <Button isLoading={loading} className="btn btn-primary my-6 w-full" />
+          <Button type="submit" onClick={() => formik.handleSubmit()} isLoading={registerUserLoading}  className="btn btn-primary my-6 w-full" >
+            ثبت نام کاربر
+          </Button>
 
           <p className="text-[15px]">
             حساب کاربری دارید؟{" "}
@@ -189,4 +172,3 @@ export default function RegisterForm({
     </div>
   );
 }
- 
