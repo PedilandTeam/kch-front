@@ -1,7 +1,7 @@
 'use client'
 
-import { Dispatch, ReactNode, SetStateAction, useEffect, useRef, useState } from "react";
-import { Option } from "./option";
+import { Dispatch, SetStateAction, useState } from "react";
+import {ChevronDownIcon} from '@heroicons/react/24/outline'
 
 interface Select extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
   children: (item: any, setSelectedValue: Dispatch<SetStateAction<any>>) => React.ReactNode;
@@ -12,6 +12,7 @@ interface Select extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> 
   value?: any;
   items: any[] | undefined  ;
   name?: string;
+  isLoading?: boolean;
 }
 export default function Select({
   className,
@@ -23,6 +24,7 @@ export default function Select({
   items = [],
   children,
   name,
+  isLoading = false,
   ...selectProps
 }: Select) {
 
@@ -39,8 +41,12 @@ const clickHandler = (e: React.MouseEvent<HTMLLIElement>) => {
   return (
     <div className={`form-control w-full max-w-full ${className}`}>
       <div className="dropdown dropdown-bottom w-full select-none" onClick={() => setOpen(!open)}>
-        <div tabIndex={0} role="button" className={`input ${bordered && 'input-bordered'} ${isInvalid && 'input-error'} flex justify-start items-center`}>{selectedValue ? selectedValue : 'انتخاب کشور'}</div>
-        <ul tabIndex={0} className={` ${!open ? 'opacity-0 invisible' : 'opacity-1 visible'} duration-300 transform-cpu dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-full`}>    
+        <div tabIndex={0} role="button" className={`input ${bordered && 'input-bordered'} ${isInvalid && 'input-error'} flex justify-between items-center`}>
+          <p>{selectedValue ? selectedValue : 'انتخاب کشور'}</p>
+          {isLoading ? <span className="loading loading-spinner loading-md text-gray-500"></span> : <ChevronDownIcon className="w-5 h-5 ml-2" />}
+        </div>
+
+        <ul tabIndex={0} className={` ${!open || isLoading ? 'opacity-0 invisible' : 'opacity-1 visible'} duration-300 transform-cpu dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-full`}>    
           {
             items.map((item, index) => (
               <li key={index} onClick={clickHandler}>
