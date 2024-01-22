@@ -23,6 +23,7 @@ import useSWR from "swr";
 import { fetcher } from "@/app/swr/fetcher";
 import { CountryNamespace } from "@/types/country";
 import Option from "@/components/daisy/option";
+import { CircleFlag } from "next-circle-flags";
 // import HeaderSimple from "../layout/header-sm";
 
 export type FormikValues = {
@@ -151,7 +152,7 @@ export default function RegisterForm() {
             <Select items={countries} value={formik.values.countryId} isInvalid={!!formik.errors.countryId} errorMessage='لطفا کشور خود را انتخاب کنید' bordered className="col-span-2">
               {
                 (country: any) => (
-                  <Option onClick={() => formik.setFieldValue('countryId', country.id)} key={country.code} value={country.name}>{country.name}</Option>
+                  <Option startContent={<CircleFlag countryCode={country.code} width={20} height={20}/>} onClick={() => formik.setFieldValue('countryId', country.id)} key={country.code} value={country.name}>{country.name}</Option>
                 )
               }
             </Select>
