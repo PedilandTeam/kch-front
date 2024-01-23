@@ -24,6 +24,7 @@ import { fetcher } from "@/app/swr/fetcher";
 import { CountryNamespace } from "@/types/country";
 import Option from "@/components/daisy/option";
 import { CircleFlag } from "next-circle-flags";
+import SelectWithFetching from "@/components/daisy/selectWithFetching";
 // import HeaderSimple from "../layout/header-sm";
 
 export type FormikValues = {
@@ -38,10 +39,6 @@ export default function RegisterForm() {
 
 
   const {data: countries, isLoading: countriesLoading, error: countriesError} = useSWR<CountryNamespace.GET[]>(`${process.env.NEXT_PUBLIC_API_URL}/countries`, fetcher)
-
-  useEffect(() => {
-    console.log(countries);
-  }, [countries])
 
   const { executeRecaptcha } = useReCaptcha(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
   const { registerUser, registerUserLoading } = useRegisterUser()
@@ -71,7 +68,6 @@ export default function RegisterForm() {
       await registerUser(values, 'captchaToken')
     },
   });
-
   return (
     <div className="min-h-full flex flex-wrap items-baseline sm:items-center bg-simple-1 sm:relative">
       {/* <HeaderSimple /> */}
@@ -137,25 +133,22 @@ export default function RegisterForm() {
               errorMessage="ایمیل را درست وارد کنید"
               endContent={<EnvelopeIcon className="h-7 w-7 text-gray-400" />}
             />
+
+            <SelectWithFetching bordered value={formik.values.countryId} circleFlag className="col-span-2" route="/countries" label="انتخاب کشور" name="countryId" setFieldValue={formik.setFieldValue} formErrors={formik.errors} />
+            <SelectWithFetching bordered value={formik.values.countryId} circleFlag className="col-span-2" route="/countries" label="انتخاب کشور" name="countryId" setFieldValue={formik.setFieldValue} formErrors={formik.errors} />
+
             <Input
               name="password"
               autoComplete="new-password"
               onChange={formik.handleChange}
               type="password"
-              className="col-span-2"
+              className="col-span-4"
               placeholder="رمز عبور"
               bordered={true}
               isInvalid={!!formik.errors.password}
               errorMessage="رمز باید حداقل ۸ کارکتر و شامل حداقل یک حرف بزرگ و یک عدد باشد"
               endContent={<LockClosedIcon className="h-7 w-7 text-gray-400" />}
             />
-            <Select items={countries} value={formik.values.countryId} isInvalid={!!formik.errors.countryId} errorMessage='لطفا کشور خود را انتخاب کنید' bordered className="col-span-2">
-              {
-                (country: any) => (
-                  <Option startContent={<CircleFlag countryCode={country.code} width={20} height={20}/>} onClick={() => formik.setFieldValue('countryId', country.id)} key={country.code} value={country.name}>{country.name}</Option>
-                )
-              }
-            </Select>
           </div>
 
           <Button type="submit" onClick={() => formik.handleSubmit()} isLoading={registerUserLoading}  className="btn btn-primary my-6 w-full" >
