@@ -31,6 +31,9 @@
       ],
       "@text/*": [
         "./app/text/*"
+      ],
+      "@daisyComponents/*": [
+        "./components/daisy/*"
       ]
     },
     "plugins": [
