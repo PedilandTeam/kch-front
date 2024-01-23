@@ -3,7 +3,7 @@ import { forwardRef, useRef } from 'react'
 export interface Option extends React.LiHTMLAttributes<HTMLLIElement> {
 
     className?: string,
-    children: React.ReactNode,
+    children?: React.ReactNode,
     value: string | number,
     startContent?: React.ReactNode,
     endContent?: React.ReactNode
@@ -29,6 +29,7 @@ export default function Option({
 
         <span
             ref={ref}
+            data-value={value}
             className={`option relative hover:bg-gray-100 active:scale-95 duration-75 select-none rounded-md py-3 px-1 ${className}`}
             {...optionProps}
         >
@@ -42,7 +43,7 @@ export default function Option({
                     {endContent}
                 </span>
             )}
-            {value}
+            {children}
         </span>
     );
 }
