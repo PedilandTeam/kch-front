@@ -54,8 +54,6 @@ export default function Select({
     if (isDisabled) return;
     setOpen(!open)
   }
-  
-
   /**
    * Update the selected value if it has changed in another component
    */
@@ -70,6 +68,11 @@ export default function Select({
       })
     })  
   }, [value])
+
+
+  useEffect(() => {
+    setSelectedValue(null)
+  }, [items])
 
   return (
     <div className={`form-control w-full max-w-full ${className}`}>
