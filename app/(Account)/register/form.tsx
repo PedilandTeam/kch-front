@@ -34,11 +34,12 @@ export type FormikValues = {
   lastname: string;
   email: string;
   countryId: string | number;
+  cityId: string | number;
 };
 export default function RegisterForm() {
 
 
-  const {data: countries, isLoading: countriesLoading, error: countriesError} = useSWR<CountryNamespace.GET[]>(`${process.env.NEXT_PUBLIC_API_URL}/countries`, fetcher)
+  const { data: countries, isLoading: countriesLoading, error: countriesError } = useSWR<CountryNamespace.GET[]>(`${process.env.NEXT_PUBLIC_API_URL}/countries`, fetcher)
 
   const { executeRecaptcha } = useReCaptcha(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
   const { registerUser, registerUserLoading } = useRegisterUser()
@@ -51,6 +52,7 @@ export default function RegisterForm() {
       lastname: "",
       email: "",
       countryId: "",
+      cityId: "",
     },
     validationSchema: Yup.object().shape({
       username: Yup.string().matches(REGEX.USERNAME).required(),
@@ -58,11 +60,14 @@ export default function RegisterForm() {
       password: Yup.string().matches(REGEX.PASSWORD).required(),
       firstname: Yup.string().required(),
       lastname: Yup.string().required(),
-      countryId: Yup.mixed().required()
+      countryId: Yup.string().required('انتخاب کشور ضروری است'),
+      cityId: Yup.string().required('انتخاب شهر ضروری است')
     }),
+    validateOnChange: false,
+    validateOnBlur: false,
     validateOnMount: false,
     onSubmit: async (values) => {
-      console.log(values);      
+      console.log(values);
       // const captchaToken = await executeRecaptcha("user_signup");
       // console.log(captchaToken);      
       await registerUser(values, 'captchaToken')
@@ -135,7 +140,8 @@ export default function RegisterForm() {
             />
 
             <SelectWithFetching bordered value={formik.values.countryId} circleFlag className="col-span-2" route="/countries" label="انتخاب کشور" name="countryId" setFieldValue={formik.setFieldValue} formErrors={formik.errors} />
-            <SelectWithFetching bordered value={formik.values.countryId} circleFlag className="col-span-2" route="/countries" label="انتخاب کشور" name="countryId" setFieldValue={formik.setFieldValue} formErrors={formik.errors} />
+            {/* <SelectWithFetching bordered value={formik.values.countryId} circleFlag className="col-span-2" route="/countries" label="انتخاب کشور" name="countryId" setFieldValue={formik.setFieldValue} formErrors={formik.errors} /> */}
+            <SelectWithFetching bordered value={formik.values.cityId} className="col-span-2" route={formik.values?.countryId ? `/cities?page=1&limit=100&countryId=${formik.values?.countryId}` : ''} label="شهر" name="cityId" isDisabled={!formik.values?.countryId} paginated setFieldValue={formik.setFieldValue} formErrors={formik.errors} />
 
             <Input
               name="password"
@@ -151,7 +157,7 @@ export default function RegisterForm() {
             />
           </div>
 
-          <Button type="submit" onClick={() => formik.handleSubmit()} isLoading={registerUserLoading}  className="btn btn-primary my-6 w-full" >
+          <Button type="submit" onClick={() => formik.handleSubmit()} isLoading={registerUserLoading} className="btn btn-primary my-6 w-full" >
             ثبت نام کاربر
           </Button>
 
