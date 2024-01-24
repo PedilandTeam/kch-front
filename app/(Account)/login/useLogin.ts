@@ -8,13 +8,13 @@ export default function useLogin() {
 
     const router = useRouter()
     const [loading, setLoading] = useState<boolean>(false)
-    const login = async (username: string, password: string) => {
+    const login = async (usernameOrEmail: string, password: string) => {
         setLoading(true)
 
-        return await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/business/login`, {
+        return await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/user/login`, {
             method: 'POST',
             body: JSON.stringify({
-                username,
+                usernameOrEmail: usernameOrEmail,
                 password
             }),
             headers: {
