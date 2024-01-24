@@ -9,18 +9,16 @@ export default function useRegisterUser() {
         setLoading(true)
         await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/user/signup`, {
             ...data,
-            captchaToken
+            token: captchaToken
         }, {
             withCredentials: true
         })
             .then(res => {
                 toast.success(res.data?.message)
-                console.log(res.data);
 
             })
             .catch(err => {
                 toast.error(err.response.data?.message || 'خطایی در هنگام ثبت‌نام پیش آمد')
-                console.log(err);
             })
             .finally(() => {
                 setLoading(false)
