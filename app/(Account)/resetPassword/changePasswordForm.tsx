@@ -1,8 +1,9 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { REGEX } from "@/utils/regex";
 import useChangePassword from "./useChangePassword";
 import Input from "@/components/daisy/input";
 import Button from "@/components/daisy/button";
+import toast from "react-hot-toast";
 
 
 type ChangePasswordForm = {
@@ -10,10 +11,10 @@ type ChangePasswordForm = {
   email: string
 }
 
-export default function ChangePasswordForm({token, email}: ChangePasswordForm) {
+export default function ChangePasswordForm({ token, email }: ChangePasswordForm) {
   const [newPassword, setNewPassword] = useState<string>("");
   const [repeatPassword, setRepeatPassword] = useState<string>("");
-  
+
   const [isPasswordValid, setIsPasswordValid] = useState<boolean>()
   const isPasswordSame = repeatPassword === newPassword;
 
@@ -27,13 +28,20 @@ export default function ChangePasswordForm({token, email}: ChangePasswordForm) {
     setRepeatPassword(e.currentTarget.value);
   };
 
-  const {changePassword, loading} = useChangePassword()
+  const { changePassword, loading, error } = useChangePassword()
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     changePassword(token, email, newPassword)
     // Add logic for form submission here
   };
+
+  useEffect(() => {
+    if(!error) return;
+    const data = error?.response?.data as {message?: string}
+    toast.error(data?.message || 'خطایی پیش آمد')
+  }, [error])
+
 
   return (
     <form className="h-full flex items-center" onSubmit={handleSubmit}>
@@ -59,7 +67,7 @@ export default function ChangePasswordForm({token, email}: ChangePasswordForm) {
           />
         </div>
         <div className="">
-          <Button  type="submit" className="my-6 w-full btn-primary" color="primary" isLoading={loading} isDisabled={!isPasswordValid || !isPasswordSame}>
+          <Button type="submit" className="my-6 w-full btn-primary" color="primary" isLoading={loading} isDisabled={!isPasswordValid || !isPasswordSame}>
             ارسال
           </Button>
         </div>
