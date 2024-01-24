@@ -32,9 +32,6 @@ export type FormikValues = {
 };
 export default function RegisterForm() {
 
-
-  const { data: countries, isLoading: countriesLoading, error: countriesError } = useSWR<CountryNamespace.GET[]>(`${process.env.NEXT_PUBLIC_API_URL}/countries`, fetcher)
-
   const {executeRecaptcha} = useRecaptchaV3()
 
 
