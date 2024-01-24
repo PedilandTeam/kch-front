@@ -5,7 +5,7 @@ import axios from "axios";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation"; 
 
-const Register = async (param?: {
+const RegisterPage = async (param?: {
   searchParams?: { slug?: string; claimWay: string };
 }) => {
   const cookieStore = cookies();
@@ -31,4 +31,4 @@ const Register = async (param?: {
   }
   return <RegisterForm />;
 };
-export default Register;
+export default RegisterPage;
