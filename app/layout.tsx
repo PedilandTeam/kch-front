@@ -7,17 +7,21 @@ import { API_ROUTES } from "@/routes";
 import { ModalCountry } from "./layout/modalcountry";
 import { Providers } from "@client-packages/react-redux/provider";
 import Script from "next/script";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "وبسایت کوچا",
   description: "کوچا جامعه ایرانیان مقیم همه‌جا",
-  viewport: "width=device-width, initial-scale=1",
   alternates: {
     canonical: process.env.FRONT_URL,
   },
 };
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1
+}
 
 export default async function RootLayout({
   children,
