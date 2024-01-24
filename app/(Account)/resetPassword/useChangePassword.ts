@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import signOutAction from "@/actions/signOut.action";
 
 
 
@@ -10,6 +10,7 @@ export default function useChangePassword() {
 
     const [loading, setLoading] = useState<boolean>(false)
     const [error, setError] = useState<AxiosError>()
+    const router = useRouter()
     const changePassword = (token: string, email: string, newPassword: string) => {
         setLoading(true)
         axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/resetPassword?type=user`, undefined, {
@@ -22,7 +23,7 @@ export default function useChangePassword() {
         })
         .then(res => {
             toast.success(`${res.data.message}\n با رمز جدید وارد شوید`, )
-            signOutAction()
+            router.push('/login')
         })
         .catch(e => {
             setError(e)
