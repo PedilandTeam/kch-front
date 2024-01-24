@@ -36,7 +36,7 @@ const LoginForm = () => {
                     if (!res.ok) {
                         return toast.error(json.message);
                     }
-                    router.replace("/home");
+                    router.replace("/account");
                     toast.success(json.message);
                 })
                 .catch((e) => {
