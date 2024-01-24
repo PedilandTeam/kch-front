@@ -1,14 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useSendResetPassword from "./useSendResetPassword";
 import EmailSent from "./emailSent";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Input from "@/components/daisy/input";
 import Button from "@/components/daisy/button";
+import toast from "react-hot-toast";
 
 export default function SendLinkForm() {
-  const { loading, sendResetPassword, emailSent } = useSendResetPassword();
+  const { loading, sendResetPassword, emailSent, error } = useSendResetPassword();
   const [email, setEmail] = useState<string>();
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
 
@@ -20,6 +21,12 @@ export default function SendLinkForm() {
     const isValidEmail = /\S+@\S+\.\S+/.test(newEmail);
     setIsEmailValid(isValidEmail);
   };
+
+  useEffect(() => {
+    if(!error) return;
+    const data = error?.response?.data as {message?: string}
+    toast.error(data?.message || 'خطایی پیش آمد')
+  }, [error])
 
   if (emailSent) {
     return <EmailSent />;
@@ -42,7 +49,7 @@ export default function SendLinkForm() {
         <p className="mb-4 text-gray-500">
           لینک ایجاد رمز عبور جدید به ایمیل شما ارسال خواهد شد.
         </p>
-        <form>
+        <form onClick={(e) => e.preventDefault()}>
           <Input
             onChange={emailChangeHandler}
             placeholder="ایمیل"
