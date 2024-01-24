@@ -144,7 +144,7 @@ const ContactForm = () => {
           <div className=" flex justify-center items-center flex-col col-span-6 sm:col-span-2 sm:col-start-3">
             <ReCAPTCHA
               className="mb-4"
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY_V2!}
               onChange={(token) => setRecaptchaToken(token)}
             />
             <button

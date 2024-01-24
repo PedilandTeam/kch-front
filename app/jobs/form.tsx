@@ -184,7 +184,7 @@ const ApplyForm = () => {
             <div className="flex justify-center flex-col items-center">
               <ReCAPTCHA
                 className="mb-4"
-                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY_V2!}
                 onChange={(token) => setRecaptchaToken(token)}
               />
               <button
