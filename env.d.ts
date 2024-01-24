@@ -1,21 +1,22 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      PORT: string;
+      API_KEY: string;
       API_URL: string;
-      TEL_BOT_TOKEN: string;
-      TEL_API_URL: string;
+      FRONT_URL: string;
       NEXT_PUBLIC_API_URL: string;
       NEXT_PUBLIC_DL_URL: string;
       NEXT_PUBLIC_FRONT_URL: string;
-      NEXT_PUBLIC_RECAPTCHA_SITE_KEY: string;
-      RECAPTCHA_SECRET_KEY: string;
-      NOTIFER_URL: string;
+      NEXT_PUBLIC_RECAPTCHA_SITE_KEY_V2: string;
+      NEXT_PUBLIC_RECAPTCHA_SITE_KEY_V3: string;
       NOTIFER_KEY: string;
-      REVALIDATE_DEFAULT: string;
+      NOTIFER_URL: string;
+      PORT: string;
+      RECAPTCHA_SECRET_KEY: string;
       REDIS_URL: string;
-      API_KEY: string;
-      FRONT_URL: string;
+      REVALIDATE_DEFAULT: string;
+      TEL_API_URL: string;
+      TEL_BOT_TOKEN: string;
     }
   }
 }
