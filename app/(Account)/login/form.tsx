@@ -88,7 +88,7 @@ const LoginForm = () => {
             </p>
             <Button
               type="submit"
-              className="my-6 w-full bg-blue-800 text-white"
+              className="my-6 w-full btn-primary text-white"
               color="primary"
               isLoading={loading}
             >
