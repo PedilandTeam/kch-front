@@ -19,6 +19,7 @@ import { CountryNamespace } from "@/types/country";
 import SelectWithFetching from "@/components/daisy/selectWithFetching";
 import useRecaptchaV3 from "@/hooks/useRecaptchaV3";
 import { useEffect } from "react";
+import { ReCaptchaV3Provider } from "@/components/global/recaptchaV3Provider";
 
 export type FormikValues = {
   firstname: string;
@@ -34,7 +35,7 @@ export default function RegisterForm() {
 
   const { data: countries, isLoading: countriesLoading, error: countriesError } = useSWR<CountryNamespace.GET[]>(`${process.env.NEXT_PUBLIC_API_URL}/countries`, fetcher)
 
-  const {token , executeRecaptcha} = useRecaptchaV3()
+  const {executeRecaptcha} = useRecaptchaV3()
 
 
   // const { executeRecaptcha } = useReCaptcha('user_signup');
@@ -63,12 +64,12 @@ export default function RegisterForm() {
     validateOnBlur: false,
     validateOnMount: false,
     onSubmit: async (values) => {
-      console.log(values);
-      const captchaToken = await executeRecaptcha("user_signup");
-      await registerUser(values, captchaToken)
+      const token = await executeRecaptcha("user_signup");
+      await registerUser(values, token)
     },
   });
   return (
+    <ReCaptchaV3Provider>
       <div className="min-h-full flex flex-wrap items-baseline sm:items-center bg-simple-1 sm:relative">
         {/* <HeaderSimple /> */}
 
@@ -165,5 +166,6 @@ export default function RegisterForm() {
           </form>
         </div>
       </div>
+    </ReCaptchaV3Provider>
   );
 }
