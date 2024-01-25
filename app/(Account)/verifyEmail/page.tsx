@@ -23,7 +23,7 @@ export default async function VerifyEmailPage() {
     }
 
     if (userModule.verified()) {
-        redirect('/account?verified')
+        redirect('/account?alreadyVerified')
     }
 
     if(userModule.user?.email)
