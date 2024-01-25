@@ -40,12 +40,14 @@ export default async function RootLayout({
     <html lang="fa" dir="rtl" className="scroll-smooth">
       <body className="min-h-screen">
         <Providers>
-          <Fonts />
-          <Header>
-            <ModalCountry countries={countries} />
-          </Header>
-          <Toaster />
-          {children}
+          <div className="container mx-auto">
+            <Fonts />
+            <Header>
+              <ModalCountry countries={countries} />
+            </Header>
+            <Toaster />
+            {children}
+          </div>
           <Footer />
         </Providers>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD" />
