@@ -23,9 +23,7 @@ export default async function VerifyEmailPage() {
     }
 
     if (userModule.verified()) {
-        return (
-            <h1>حساب شما تایید شده است</h1>
-        )
+        redirect('/account?verified')
     }
 
     if(userModule.user?.email)

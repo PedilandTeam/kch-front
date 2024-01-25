@@ -23,8 +23,8 @@ export default function SendLinkForm() {
   };
 
   useEffect(() => {
-    if(!error) return;
-    const data = error?.response?.data as {message?: string}
+    if (!error) return;
+    const data = error?.response?.data as { message?: string }
     toast.error(data?.message || 'خطایی پیش آمد')
   }, [error])
 
@@ -33,10 +33,10 @@ export default function SendLinkForm() {
   }
 
   return (
-    <div className="h-full flex flex-wrap items-baseline sm:items-center bg-simple-1 sm:relative">
+    <div className="lg:h-[80vh] mt-24 lg:mt-0 flex flex-wrap items-baseline sm:items-center bg-simple-1 sm:relative">
       {/* <HeaderSimple /> */}
 
-      <div className="sm:w-1/3 mx-3 sm:mx-auto bg-white p-6 sm:p-8 rounded-xl shadow border border-t-[4px] border-t-yellow-500 relative">
+      <div className="w-full sm:w-2/4 md:w-2/4 lg:w-4/12 mx-3 sm:mx-auto bg-white p-6 sm:p-8 rounded-xl shadow border border-t-[4px] border-t-yellow-500 relative">
         <div className="absolute left-10 -top-[52px]">
           <Image
             src={"/images/bird-symbol.png"}
@@ -64,7 +64,7 @@ export default function SendLinkForm() {
             className="my-3 w-full btn-primary"
             color="primary"
             isLoading={loading}
-            isDisabled={!isEmailValid}            
+            isDisabled={!isEmailValid}
           >
             ارسال لینک
           </Button>

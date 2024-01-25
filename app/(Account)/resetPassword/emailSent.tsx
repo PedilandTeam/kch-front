@@ -3,7 +3,8 @@ import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
 export default function EmailSent() {
   return (
-    <div className="bg-simple-1 w-full h-full flex justify-center items-center">
+    
+    <div className="lg:h-[80vh] mt-24 lg:mt-0  bg-simple-1 w-full h-full flex justify-center items-center">
       <div className="mx-3 sm:mx-auto text-center bg-white p-6 sm:p-8 border shadow rounded-xl">
         <CheckCircleIcon className=" text-green-500 h-16 mx-auto mb-3" />
         <div className=" flex flex-col gap-y-3">

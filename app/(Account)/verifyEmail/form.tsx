@@ -21,8 +21,8 @@ export default function VerifyEmailForm({email}: VerifyEmailForm) {
   }
 
   return (
-    <form onSubmit={e => e.preventDefault()} className="h-full flex items-center">
-      <div className="w-2/6 mx-auto">
+    <form onSubmit={e => e.preventDefault()} className="lg:h-[80vh] mt-24 lg:mt-0 px-3 h-full flex items-center justify-center ">
+      <div className="w-full sm:w-2/4 md:w-2/4 lg:w-4/12 mx-auto">
         <h1 className="font-semibold">تایید ایمیل</h1>
         <p className="mb-3">لطفا کد تایید ارسالی به ایمیل {email} را وارد کنید</p>
         <div className="grid gap-3">
