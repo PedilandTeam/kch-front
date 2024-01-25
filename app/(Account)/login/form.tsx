@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { REGEX } from "@/utils/regex";
@@ -11,10 +11,12 @@ import useLogin from "./useLogin";
 import { LockClosedIcon, UserIcon } from "@heroicons/react/24/outline";
 import Input from "@/components/daisy/input";
 import Button from "@/components/daisy/button";
+import { useEffect } from "react";
 
 const LoginForm = () => {
     const { login, loading } = useLogin();
     const router = useRouter();
+    const searchParams = useSearchParams()
 
     const formik = useFormik({
         initialValues: {
@@ -44,6 +46,13 @@ const LoginForm = () => {
                 });
         },
     });
+
+
+    useEffect(() => {        
+        if (searchParams.has('notAuthenticated')) {
+            toast.error('لطفا ابتدا وارد حساب کاربری خود شوید')
+        }
+    }, [searchParams])
 
     return (
         <div className="h-full flex flex-wrap items-baseline sm:items-center bg-simple-1 sm:relative">
