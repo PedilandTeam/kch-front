@@ -4,20 +4,17 @@ import { useSearchParams } from "next/navigation"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import toast from "react-hot-toast"
+import { useParamsChecker } from "./useParamsChecker"
 
 
 export default function Account() {
 
-    const searchParams = useSearchParams()
-    const router = useRouter()
-    useEffect(() => {
-        if (searchParams.has('alreadyVerified')) {
-            toast.success('ایمیل شما قبلا تایید شده است')
-            router.replace('/account')
-        }
-    }, [searchParams, router])
+    // Check params for messages
+    useParamsChecker()
 
     return (
-        <div>This is Account section</div>
+        <div>
+            account
+        </div>
     )
 }

@@ -13,6 +13,7 @@ export default async function VerifyEmailPage() {
     const userModule = new UserModule(token || null)
     await userModule.fetchUser()
     .catch(e => {
+        console.log(e);        
         if (e.response?.status === 401) {
             redirect('/login')
         }
