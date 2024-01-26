@@ -18,7 +18,7 @@ export class UserModule {
             this._user = res.data;
         } catch (e: AxiosError | any) {
             console.log(e?.message)
-            throw new Error(e);
+            throw e
         }
     }
 
