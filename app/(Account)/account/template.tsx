@@ -1,33 +1,40 @@
+'use client'
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SideMenu from "@app/layout/sideMenu";
+import { usePathname } from "next/navigation";
 import { SideMenuList } from "@app/layout/sideMenuList";
-import { UserModule } from "@/modules/user.module";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import useAuthCheck from "@/hooks/useAuthCheck";
 // import SideMenu from "../layout/side-menu";
 
 
-export default async function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
 
+  const pathname = usePathname()
+  const router = useRouter()
+  const [firstCheckPassed, setFirstCheckPassed] = useState<boolean>(false)
 
-  const cookieStore = cookies()
-  const token = cookieStore.get('token')?.value
-  const userModule = new UserModule(token || null)
-  await userModule.fetchUser().
-  catch(e => {
-    if (e.response?.status === 401) {
-      redirect('/login?notAuthenticated')
+  const { isLoading, user, isNotVerified, isAuthenticated, error } = useAuthCheck()
+
+  useEffect(() => {
+    if (typeof isAuthenticated == 'undefined' || isLoading) return
+    if (!isAuthenticated) {
+      toast.error('لطفا وارد شوید')
+      router.push('/login')
+    } else {
+      setFirstCheckPassed(true)
     }
-  })
+  }, [isAuthenticated, isLoading, router])
 
-  if (!userModule.authenticated) {
-    redirect('/login?notAuthenticated')
-  }
-
-  if (!userModule.verified) {
-    redirect('/account?notVerified')
-  }
+  useEffect(() => {
+    if (typeof isNotVerified == 'undefined' || isLoading) return
+    if (isNotVerified) {
+      toast.error('باید اول ایمیل خودرا تایید کنید')
+      router.push('verifyEmail')
+    }
+  }, [isNotVerified, isLoading, router])
 
   return (
     <div className={`grid grid-cols-5 gap-5`}>
@@ -37,7 +44,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
             <SideMenu SideMenuList={SideMenuList} />
             {/* <SideMenu /> */}
           </div>
-          <div className={`col-span-3`}>
+          <div className={`${firstCheckPassed && (isLoading || !isAuthenticated) ? 'blur-md' : ''}  col-span-3`}>
             {children}
           </div>
         </div>

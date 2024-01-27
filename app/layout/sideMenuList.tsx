@@ -9,17 +9,17 @@ import {
 export const SideMenuList: SideMenuItem[] = [
     { 
         title: 'خانه',
-        path: '/home',
+        path: '/account',
         icon: <HomeIcon className="w-6 h-6 ml-2" />
     }, 
     {
-        title: 'کسب و کارهای من',
-        path: '/home/mybiz',
+        title: 'آگهی‌های من',
+        path: '/account/ads',
         icon: <BriefcaseIcon className="w-6 h-6 ml-2"/>
     },
     {
-        title: 'نظرات کاربران',
-        path: '/home/comments',
+        title: 'آمار',
+        path: '/account/stats',
         icon: <ChatBubbleBottomCenterTextIcon className="w-6 h-6 ml-2"/>
     }
 ]
