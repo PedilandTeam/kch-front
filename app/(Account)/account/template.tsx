@@ -7,14 +7,15 @@ import { SideMenuList } from "@app/layout/sideMenuList";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import useAuthCheck from "@/hooks/useAuthCheck";
+import { useUser } from "@/store/useUser";
 // import SideMenu from "../layout/side-menu";
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 
-  const pathname = usePathname()
   const router = useRouter()
   const [firstCheckPassed, setFirstCheckPassed] = useState<boolean>(false)
+  const { setUser } = useUser()
 
   const { isLoading, user, isNotVerified, isAuthenticated, error } = useAuthCheck()
 
@@ -35,6 +36,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       router.push('verifyEmail')
     }
   }, [isNotVerified, isLoading, router])
+
+  useEffect(() => {
+    setUser(user)
+  }, [user, setUser])
 
   return (
     <div className={`grid grid-cols-5 gap-5`}>
