@@ -46,7 +46,9 @@ export default async function RootLayout({
               <ModalCountry countries={countries} />
             </Header>
             <Toaster />
-            {children}
+            <main className="min-h-[70vh]">
+              {children}
+            </main>
           </div>
           <Footer />
         </Providers>
