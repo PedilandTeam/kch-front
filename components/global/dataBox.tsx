@@ -9,7 +9,7 @@ type DataBox = {
 };
 export default function DataBox({ title, data, link, linkText }: DataBox) {
   return (
-    <div className='min-w-1/12 text-2 grid h-32 grid-cols-5 grid-rows-1 items-center justify-items-center rounded-xl border-2 px-2 text-gray-600 duration-300 hover:bg-blue-600 hover:text-white sm:grid-rows-2 lg:max-w-[40%]'>
+    <div className='w-full text-2 grid h-32 grid-cols-5 grid-rows-1 items-center justify-items-center rounded-xl border-2 px-2 text-gray-600 duration-300 hover:bg-blue-600 hover:text-white sm:grid-rows-2 lg:max-w-[40%]'>
       <p className='col-span-full row-start-1 font-medium sm:col-span-2  sm:row-span-full'>
         {title}
       </p>
@@ -38,7 +38,7 @@ function Balance({ balance }: { balance: number | string }) {
 
   return (
     <p
-      className={`balance col-span-1 row-span-full px-2 text-center font-bold truncate max-w-[20ch] ${sizeClass}`}
+      className={`balance col-span-1 row-span-full max-w-[20ch] truncate px-2 text-center font-bold ${sizeClass}`}
     >
       {balance}
     </p>
