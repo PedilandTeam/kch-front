@@ -51,7 +51,7 @@
     "components/elements/badgenew.jsx",
     "components/elements/badgenew.jsx",
     ".next/types/**/*.ts"
-, "app/layout/backtotop.jsx", "app/jobs/text.tsx", "app/jobs/page.tsx"  ],
+, "app/layout/backtotop.jsx", "app/jobs/text.tsx", "app/jobs/page.tsx", "app/(Account)/account/components/overview.tsx"  ],
   "exclude": [
     "node_modules"
   ]
