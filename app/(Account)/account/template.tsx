@@ -52,11 +52,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="hidden lg:block">
             <UserDetails/>
             <SideMenu SideMenuList={SideMenuList} />
-            {/* <SideMenu /> */}
         </div>
       </div>
       <div className="lg:col-span-9">
-        <div className={`${firstCheckPassed && (isLoading || !isAuthenticated) ? 'blur-md' : ''}  col-span-4 bg-red-50 lg:col-span-3`}>
+        <div className={`${firstCheckPassed && (isLoading || !isAuthenticated) ? 'blur-md' : ''}  col-span-4 lg:col-span-3`}>
           {children}
         </div>
       </div>
