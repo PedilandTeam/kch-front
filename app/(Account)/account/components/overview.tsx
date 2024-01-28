@@ -14,7 +14,7 @@ export default function Overview() {
       <p>از اینجا میتونی یکسری اطلاعات راجب آگهی‌هات ببینی</p>
 
       <div className='mt-12'></div>
-      <div className='flex w-full flex-col  gap-x-2 lg:flex-row'>
+      <div className='flex w-full flex-col gap-2 lg:flex-row'>
         <DataBox
           title='کل آگهی های تایید شده شما:'
           data={user?.ads?.length || 0}
@@ -23,7 +23,7 @@ export default function Overview() {
         />
         <DataBox
           title='اعتبار'
-          data={40000}
+          data={30}
           link={'/account/balance'}
           linkText={'مدیریت‌مالی'}
         />
