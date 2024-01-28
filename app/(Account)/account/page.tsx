@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { useParamsChecker } from './components/useParamsChecker';
 import { useUser } from '@/store/useUser';
 import Overview from './components/overview';
+import NoAds from './components/noAds';
 
 export default function Account() {
   // Check params for messages
@@ -16,7 +17,7 @@ export default function Account() {
   if (user)
     return (
       <div className='w-full'>
-        {user?.ads?.length > 0 ? <Overview /> : <div>dont have ads</div>}
+        {user.ads?.length > 0 ? <Overview /> : <NoAds/>}
       </div>
     );
 }
