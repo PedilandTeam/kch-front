@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import useAuthCheck from "@/hooks/useAuthCheck";
 import { useUser } from "@/store/useUser";
+import UserDetails from "./components/userDetails";
 // import SideMenu from "../layout/side-menu";
 
 
@@ -16,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const [firstCheckPassed, setFirstCheckPassed] = useState<boolean>(false)
   const { setUser } = useUser()
-
+  const [lastId, setLastId] = useState<string>('')
   const { isLoading, user, isNotVerified, isAuthenticated, error } = useAuthCheck()
 
   useEffect(() => {
@@ -38,23 +39,27 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   }, [isNotVerified, isLoading, router])
 
   useEffect(() => {
-    setUser(user)
-  }, [user, setUser])
+    if(!user) return;
+    if (lastId != user.id) {
+      setLastId(user?.id)
+      setUser(user)
+    }
+  }, [user, setUser, setLastId, lastId])
 
   return (
-    <div className={`grid grid-cols-5 gap-5`}>
-      <div className="col-span-4">
-        <div className="grid grid-cols-4 gap-5">
-          <div className="col-span-1">
+    <div className={`grid lg:grid-cols-12 gap-5`}>
+      <div className="lg:col-span-3">
+          <div className="hidden lg:block">
+            <UserDetails/>
             <SideMenu SideMenuList={SideMenuList} />
             {/* <SideMenu /> */}
-          </div>
-          <div className={`${firstCheckPassed && (isLoading || !isAuthenticated) ? 'blur-md' : ''}  col-span-3`}>
-            {children}
-          </div>
         </div>
       </div>
-      <div className="col-span-1"></div>
+      <div className="lg:col-span-9">
+        <div className={`${firstCheckPassed && (isLoading || !isAuthenticated) ? 'blur-md' : ''}  col-span-4 bg-red-50 lg:col-span-3`}>
+          {children}
+        </div>
+      </div>
     </div>
   )
 
