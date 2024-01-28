@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { CategoryNamespace } from "@/types/category";
-import React, { useEffect, useRef, useState } from "react";
+import { CategoryNamespace } from '@/types/category';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   addToShouldBeAddType,
   checkHandlerType,
   removeFromShouldBeAddType,
-} from "./city.filter";
+} from './city.filter';
 
 type CategoryFilterItemProps = {
   category: CategoryNamespace.category;
@@ -52,18 +52,18 @@ export default function CategoryFilterItem({
     <label
       key={`my-category-filter-item-${category.name}`}
       htmlFor={`category-select-${category.name}`}
-      className="item flex items-center border-b-[1px] py-3"
+      className='item flex items-center border-b-[1px] py-3'
     >
       <input
         ref={ref}
-        className="checkbox checkbox-secondary checkbox-sm ml-3"
+        className='checkbox-secondary checkbox checkbox-sm ml-3'
         onChange={inputClickHandler}
         id={`category-select-${category.name}`}
         value={category.id}
-        type="checkbox"
+        type='checkbox'
         checked={isChecked}
       />
-      <label htmlFor={`category-select-${category.name}`} className="text-md">
+      <label htmlFor={`category-select-${category.name}`} className='text-md'>
         {category.name}
       </label>
     </label>

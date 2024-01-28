@@ -1,10 +1,8 @@
-
-
 export const koochaaConfig = {
-    modules: {
-        status: {
-            enabled: true,
-            exclude: []
-        }
-    }
-}
+  modules: {
+    status: {
+      enabled: true,
+      exclude: [],
+    },
+  },
+};

@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { usePages } from "@/hooks/swr/usePages";
-import Image from "next/image";
-import Link from "next/link";
-import { ChangeEvent, useEffect, useState } from "react";
-import ItemProfilePicture from "../item/itemProfilePicture";
+import { usePages } from '@/hooks/swr/usePages';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ChangeEvent, useEffect, useState } from 'react';
+import ItemProfilePicture from '../item/itemProfilePicture';
 
 type CountryPagesSearch = {
   countryCode: string;
@@ -36,23 +36,23 @@ const PagesSearch = ({ countryCode }: CountryPagesSearch) => {
   };
 
   return (
-    <div className="dropdown mt-4 mb-5 w-full px-4 sm:px-0 sm:w-[600px] mx-auto block">
+    <div className='dropdown mx-auto mb-5 mt-4 block w-full px-4 sm:w-[600px] sm:px-0'>
       <input
         onChange={inputChangeHandler}
-        type="text"
-        placeholder="اینجا تایپ کن"
-        className="input rounded-xl text-center h-[54px] text-[18px] font-medium w-full opacity-80 hover:opacity-100 focus:opacity-100"
+        type='text'
+        placeholder='اینجا تایپ کن'
+        className='input h-[54px] w-full rounded-xl text-center text-[18px] font-medium opacity-80 hover:opacity-100 focus:opacity-100'
       />
       {search && pages && (
         <ul
           tabIndex={0}
-          className="w-11/12 sm:w-full mt-1 dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-xl"
+          className='menu dropdown-content z-[1] mt-1 w-11/12 rounded-xl bg-base-100 p-2 shadow sm:w-full'
         >
           {pages?.meta?.itemCount > 0 ? (
             pages.items?.map((page) => {
               return (
                 <li key={page.id}>
-                  <Link className="flex justify-start" href={`/${page.slug}`}>
+                  <Link className='flex justify-start' href={`/${page.slug}`}>
                     <ItemProfilePicture
                       pageData={page}
                       height={30}
@@ -65,7 +65,7 @@ const PagesSearch = ({ countryCode }: CountryPagesSearch) => {
             })
           ) : (
             <li>
-              <p className="justify-center">متاسفانه، موردی پیدا نشد.</p>
+              <p className='justify-center'>متاسفانه، موردی پیدا نشد.</p>
             </li>
           )}
         </ul>

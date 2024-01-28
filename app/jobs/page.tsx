@@ -1,10 +1,10 @@
-import PageHead from "./page-head";
-import JobsText from "./text";
-import { Metadata } from "next";
+import PageHead from './page-head';
+import JobsText from './text';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "کوچا | فرصت‌های شغلی",
-  description: "",
+  title: 'کوچا | فرصت‌های شغلی',
+  description: '',
   alternates: {
     canonical: `/terms`,
   },
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 const Jobs = () => {
   return (
-    <div className="page-wrap static">
+    <div className='page-wrap static'>
       <PageHead />
       <JobsText />
     </div>

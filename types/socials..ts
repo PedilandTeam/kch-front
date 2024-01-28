@@ -1,2 +1,8 @@
-
-export type socials = "instagram" | "telegram" | "facebook" | "youtube" | "twitter" | "linkedin" | "website"
+export type socials =
+  | 'instagram'
+  | 'telegram'
+  | 'facebook'
+  | 'youtube'
+  | 'twitter'
+  | 'linkedin'
+  | 'website';

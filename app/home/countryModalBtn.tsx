@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { _TXT } from "../text";
+import { _TXT } from '../text';
 
 export default () => {
   return (
-    <div className="mt-12 text-center">
+    <div className='mt-12 text-center'>
       <button
-        className="btn btn-secondary"
+        className='btn btn-secondary'
         onClick={() => {
           if (document) {
             (
-              document.getElementById("modal_country") as HTMLFormElement
+              document.getElementById('modal_country') as HTMLFormElement
             ).showModal();
           }
         }}

@@ -1,4 +1,4 @@
-import { CountryNamespace } from "@/types/country";
+import { CountryNamespace } from '@/types/country';
 
 type SeoTextProps = {
   currentCountry: CountryNamespace.GET;
@@ -6,9 +6,9 @@ type SeoTextProps = {
 
 export const SeoText = async ({ currentCountry }: SeoTextProps) => {
   return (
-    <div className="container mx-auto max-w-[1144px]">
-      <div className="seo-text my-8 sm:my-20 text-center">
-        <h1 className="text-gray-600 text-[16px] inline-block sm:text-[20px] font-semibold">
+    <div className='container mx-auto max-w-[1144px]'>
+      <div className='seo-text my-8 text-center sm:my-20'>
+        <h1 className='inline-block text-[16px] font-semibold text-gray-600 sm:text-[20px]'>
           {`کـوچـا، جامعه ایرانیان مهاجر مقیم ${currentCountry.name}!`}
         </h1>
         <p></p>

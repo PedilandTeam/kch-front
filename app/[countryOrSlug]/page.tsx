@@ -1,11 +1,11 @@
-import { API_ROUTES } from "@/routes";
-import { CountryNamespace } from "@/types/country";
-import PageItem from "./item/item";
-import { notFound } from "next/navigation";
-import Country from "./country/country";
-import { metadata } from "../layout";
+import { API_ROUTES } from '@/routes';
+import { CountryNamespace } from '@/types/country';
+import PageItem from './item/item';
+import { notFound } from 'next/navigation';
+import Country from './country/country';
+import { metadata } from '../layout';
 
-export type PathsType = "country" | "unit" | "category" | "item";
+export type PathsType = 'country' | 'unit' | 'category' | 'item';
 export type PathGeneratorType = {
   type: PathsType | null;
   props?: any;
@@ -40,7 +40,7 @@ const pathGenerator = async (
 
     if (currentCountry && countryOrSlug) {
       return {
-        type: "country",
+        type: 'country',
         props: {
           currentCountry,
           categories,
@@ -52,14 +52,20 @@ const pathGenerator = async (
     if (countryOrSlug) {
       try {
         const pageData = await (
-          await API_ROUTES.PAGES.GET_ALL(1, 1, {slug: countryOrSlug}, undefined, 'no-store')
+          await API_ROUTES.PAGES.GET_ALL(
+            1,
+            1,
+            { slug: countryOrSlug },
+            undefined,
+            'no-store'
+          )
         ).json();
 
         if (!pageData?.items) {
           return NOT_FOUND;
         }
         return {
-          type: "item",
+          type: 'item',
           props: {
             pageData: pageData.items,
           },
@@ -86,24 +92,24 @@ export async function generateMetadata({ params, searchParams }: Props) {
   }
 
   switch (pathInfo.type) {
-    case "country":
+    case 'country':
       return {
         ...metadata,
         title: `کوچا | جامعه ایرانیان مهاجر مقیم ${pathInfo?.props?.currentCountry?.name}`,
         description: `به جامعه مجازی ایرانیان مهاجر مقیم ${pathInfo?.props?.currentCountry?.name} خوش آمدید. کوچا همراه شماست تا بتوانید نیازهای خود را به زبان مادری و به سادگی رفع کنید. اطلاعات بیشتر در این صفحه`,
-        alternates:{
-          canonical: `${process.env.FRONT_URL}/${pathInfo?.props.currentCountry?.code}`
-        }
+        alternates: {
+          canonical: `${process.env.FRONT_URL}/${pathInfo?.props.currentCountry?.code}`,
+        },
       };
 
-    case "item":
+    case 'item':
       return {
         ...metadata,
         title: `${pathInfo?.props?.pageData?.title} - ${pathInfo?.props.pageData.city.name}، ${pathInfo?.props.pageData.country.name} | کوچا`,
         description: `این صفحه پروفایل اختصاصی ${pathInfo?.props?.pageData?.title} در پلتفرم کوچاست که شامل بروزترین و کاملترین اطلاعات موجود در فضای اینترنت درباره ایشان می باشد.`,
-        alternates:{
-          canonical: `${process.env.FRONT_URL}/${pathInfo?.props.pageData?.slug}`
-        }
+        alternates: {
+          canonical: `${process.env.FRONT_URL}/${pathInfo?.props.pageData?.slug}`,
+        },
       };
 
     default:
@@ -128,14 +134,14 @@ export default async function CenterPage({
 
   let availability: boolean = true;
   switch (pathInfo.type) {
-    case "country":
+    case 'country':
       availability = pathInfo.props?.currentCountry.availability;
       if (!availability) {
         return notFound();
       }
       return <Country {...pathInfo.props} />;
 
-    case "item":
+    case 'item':
       availability = pathInfo.props?.pageData?.availability;
       if (!availability) {
         return notFound();

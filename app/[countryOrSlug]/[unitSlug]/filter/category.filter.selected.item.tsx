@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import useCreateQueryString from "@/hooks/useCreateQueryString";
-import useDeleteQueryString from "@/hooks/useDeleteQueryString";
-import { CategoryNamespace } from "@/types/category";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import queryString from "query-string";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { removeFromShouldBeAddType } from "./city.filter";
+import useCreateQueryString from '@/hooks/useCreateQueryString';
+import useDeleteQueryString from '@/hooks/useDeleteQueryString';
+import { CategoryNamespace } from '@/types/category';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import queryString from 'query-string';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { removeFromShouldBeAddType } from './city.filter';
 
 type CategoryFilterSelectedItemProps = {
   category: CategoryNamespace.category;
@@ -22,10 +22,6 @@ export default function CategoryFilterSelectedItem({
   category,
   removeFromShouldBeAdd,
 }: CategoryFilterSelectedItemProps) {
-
-
-
-
   const router = useRouter();
   const searchParams = useSearchParams() as unknown as URLSearchParams;
   const pathname = usePathname();
@@ -35,7 +31,7 @@ export default function CategoryFilterSelectedItem({
 
   useEffect(() => {
     setParsedSearchParams(
-      queryString.parse(searchParams.toString(), { arrayFormat: "comma" })
+      queryString.parse(searchParams.toString(), { arrayFormat: 'comma' })
     );
   }, [searchParams]);
 
@@ -45,45 +41,46 @@ export default function CategoryFilterSelectedItem({
   const inputClickHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const currentTarget = event.currentTarget;
     if (!currentTarget.checked) {
-      removeFromShouldBeAdd(currentTarget.value)
+      removeFromShouldBeAdd(currentTarget.value);
       return router.replace(
-        `${pathname}?${deleteQueryString("category", currentTarget.value)}`
+        `${pathname}?${deleteQueryString('category', currentTarget.value)}`
       );
     }
   };
 
-  const isChecked = useCallback((parsedSearchParams: ParsedSearchParamsType) => {
-    return parsedSearchParams.category
-      ? Array.isArray(parsedSearchParams.category)
-        ? !!parsedSearchParams.category.find(
-          (param) => +param == category.id
-        )
-        : +parsedSearchParams.category == category.id
-      : false
-  }, [category.id])
+  const isChecked = useCallback(
+    (parsedSearchParams: ParsedSearchParamsType) => {
+      return parsedSearchParams.category
+        ? Array.isArray(parsedSearchParams.category)
+          ? !!parsedSearchParams.category.find((param) => +param == category.id)
+          : +parsedSearchParams.category == category.id
+        : false;
+    },
+    [category.id]
+  );
 
-  const id = useRef(`category-3413-select-${category.id}`)
-
+  const id = useRef(`category-3413-select-${category.id}`);
 
   return (
-
-    <div className="flex justify-right items-center" key={`cate-gory-filter-slected--${category.id}`}>
+    <div
+      className='justify-right flex items-center'
+      key={`cate-gory-filter-slected--${category.id}`}
+    >
       <input
         ref={ref}
-        className="checkbox checkbox-secondary checkbox-sm ml-3"
+        className='checkbox-secondary checkbox checkbox-sm ml-3'
         onChange={inputClickHandler}
         id={id.current}
         value={category.id}
-        type="checkbox"
+        type='checkbox'
         checked={isChecked(parsedSearchParams)}
       />
       <p
         onClick={() => ref.current?.click()}
-        className="item flex items-center py-2 cursor-pointer"
+        className='item flex cursor-pointer items-center py-2'
       >
         {category.name}
       </p>
-
     </div>
   );
 }

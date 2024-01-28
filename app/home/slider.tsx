@@ -1,44 +1,44 @@
-import { CursorArrowRippleIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
-import Link from "next/link";
-import sliderImage from "../../public/images/slide/home/hs-02.webp";
-import sliderImageMobile from "../../public/images/slide/home/hsm-01.webp";
+import { CursorArrowRippleIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
+import Link from 'next/link';
+import sliderImage from '../../public/images/slide/home/hs-02.webp';
+import sliderImageMobile from '../../public/images/slide/home/hsm-01.webp';
 
 export const SliderMainHome = () => {
   return (
-    <div className="slider h-[520px] flex justify-center content-center mx-3 sm:mx-auto relative rounded-xl">
+    <div className='slider relative mx-3 flex h-[520px] content-center justify-center rounded-xl sm:mx-auto'>
       <Image
-        className="rounded-xl brightness-[.50] object-cover hidden sm:block"
+        className='hidden rounded-xl object-cover brightness-[.50] sm:block'
         src={sliderImage}
-        placeholder="blur"
+        placeholder='blur'
         width={1700}
         height={520}
-        alt="a Woman working with a laptop"
+        alt='a Woman working with a laptop'
         priority
       />
       <Image
-        className="rounded-xl brightness-[.75] object-cover sm:hidden"
+        className='rounded-xl object-cover brightness-[.75] sm:hidden'
         src={sliderImageMobile}
-        placeholder="blur"
+        placeholder='blur'
         width={430}
         height={600}
-        alt="a Woman is holding a globe"
+        alt='a Woman is holding a globe'
         priority
       />
-      <div className="max-w-[1144px] sm:m-auto absolute w-auto bottom-[12%] sm:bottom-[20%] sm:left-0 sm:right-0 sm:w-full">
+      <div className='absolute bottom-[12%] w-auto max-w-[1144px] sm:bottom-[20%] sm:left-0 sm:right-0 sm:m-auto sm:w-full'>
         <div>
-          <h3 className="text-gray-300 font-medium bg-blue-900 bg-opacity-60 inline-flex flex-wrap text-[20px] sm:text-[24px] px-2">
+          <h3 className='inline-flex flex-wrap bg-blue-900 bg-opacity-60 px-2 text-[20px] font-medium text-gray-300 sm:text-[24px]'>
             هـر کـجـای جـهـان کـه زنـدگی مـی‌کـنـیـد،
           </h3>
-          <h2 className="text-white font-bold text-[28px] sm:text-[34px] leading-[48px] sm:leading-[54px] max-w-[310px] sm:max-w-[600px] mt-2 mb-5 drop-shadow">
+          <h2 className='mb-5 mt-2 max-w-[310px] text-[28px] font-bold leading-[48px] text-white drop-shadow sm:max-w-[600px] sm:text-[34px] sm:leading-[54px]'>
             به راحتی مـشـاغـل و پـزشـکـان فـارسـی زبـان اطـراف‌تـون رو پـیـدا
             کـنـیـد!
           </h2>
         </div>
-        <Link href={"#select-country"} scroll>
-          <button className="btn btn-accent">
+        <Link href={'#select-country'} scroll>
+          <button className='btn btn-accent'>
             از اینجا شروع کنید
-            <CursorArrowRippleIcon className="w-7 h-7" />
+            <CursorArrowRippleIcon className='h-7 w-7' />
           </button>
         </Link>
       </div>

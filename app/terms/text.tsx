@@ -1,30 +1,30 @@
-import { ArrowPathIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+import { ArrowPathIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 const TermsText = () => {
   return (
-    <div className="container max-w-[1144px] mx-auto mt-10 px-3 sm:px-0">
-      <div className="text-wrap">
-        <p className="font-semibold">به وب سایت "کوچا" خوش اومدید.</p>
+    <div className='container mx-auto mt-10 max-w-[1144px] px-3 sm:px-0'>
+      <div className='text-wrap'>
+        <p className='font-semibold'>به وب سایت "کوچا" خوش اومدید.</p>
         <p>
           این صفحه حاوی مجموعه قوانین و مقرراتیه که به منظور ایجاد فضایی سالم و
           منصفانه، توسط تیم مدیریتی کوچا وضع شده تا علاوه بر رعایت حقوق شما
-          عزیزان، تجربه خوشایندی رو در اینجا براتون رقم بزنیم.{" "}
-          <span className="font-medium">
+          عزیزان، تجربه خوشایندی رو در اینجا براتون رقم بزنیم.{' '}
+          <span className='font-medium'>
             از اونجایی که رعایت این قوانین برای تمام کاربران الزامیه و ثبت نام،
             ورود به پنل کاربری و استفاده از خدمات سایت به منزله مطالعه و موافقت
             شماست، صمیمانه توصیه می‌کنیم که این قوانین رو به دقت مطالعه کنید.
-          </span>{" "}
-          <span className="text-red-500 text-[15px]">
+          </span>{' '}
+          <span className='text-[15px] text-red-500'>
             (با توجه به اینکه قوانین در طول زمان کامل‌تر میشن، به تاریخ
             بروزرسانی اون دقت کنید)
           </span>
         </p>
-        <p className="my-6 text-gray-600 flex items-center">
-          <ArrowPathIcon className="w-4 h-4 ml-2" />
+        <p className='my-6 flex items-center text-gray-600'>
+          <ArrowPathIcon className='ml-2 h-4 w-4' />
           بروز شده در مهرماه 1402
         </p>
-        <ol className="list-decimal mb-10">
+        <ol className='mb-10 list-decimal'>
           <li>حریم خصوصی کاربران</li>
           <p>
             حفاظت از اطلاعات و حریم خصوصی کاربران جزو ارزش‌های اصلی کـوچـاست، از
@@ -57,8 +57,8 @@ const TermsText = () => {
           <p>
             کـوچـا اختیار دارد در هر زمان و در راستای بهبود خدماتش قوانین و
             مقررات خود را تغییر دهد. آخرین نسخه از قوانین با ذکر تاریخ بروزرسانی
-            همیشه در همین صفحه به آدرس{" "}
-            <Link href={"/terms"}>www.koochaa.com/terms</Link> قابل دسترس
+            همیشه در همین صفحه به آدرس{' '}
+            <Link href={'/terms'}>www.koochaa.com/terms</Link> قابل دسترس
             می‌باشد. توجه بفرمایید که ثبت نام، ورود به پنل کاربری و استفاده از
             خدمات سایت به منزله مطالعه و موافقت شما با آخرین بروزرسانی قوانین
             است.
@@ -68,8 +68,8 @@ const TermsText = () => {
           <p>
             در صورت بروز هرگونه پرسش یا ابهام در مورد قوانین و مقررات، می‌توانید
             با تیم پشتیبانی کـوچـا تماس بگیرید. روش‌ها و اطلاعات بروز برقراری
-            ارتباط با ما همیشه در صفحه تماس با ما به آدرس{" "}
-            <Link href={"/contact"}>www.koochaa.com/contact</Link> قرار دارد.
+            ارتباط با ما همیشه در صفحه تماس با ما به آدرس{' '}
+            <Link href={'/contact'}>www.koochaa.com/contact</Link> قرار دارد.
           </p>
         </ol>
         <p>

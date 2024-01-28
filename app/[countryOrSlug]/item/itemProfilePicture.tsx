@@ -1,14 +1,14 @@
-import { PageNamespace } from "@/types/page";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { PageNamespace } from '@/types/page';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
 
 type itemProfilePictureType = {
-  pageData: Pick<PageNamespace.Page , "id" | 'haveAvatar' | 'profile'>;
+  pageData: Pick<PageNamespace.Page, 'id' | 'haveAvatar' | 'profile'>;
   height?: number;
   width?: number;
   className?: string;
 };
-export default function ItemProfilePicture ({
+export default function ItemProfilePicture({
   pageData,
   height,
   width,
@@ -16,9 +16,13 @@ export default function ItemProfilePicture ({
 }: itemProfilePictureType) {
   return (
     <Image
-      loading="lazy"
-      alt="logo"
-      src={pageData.profile ? `${process.env.NEXT_PUBLIC_DL_URL}/pages/${pageData.id}/${pageData.profile}` : '/images/list/logo/logo-placeholder.webp'}
+      loading='lazy'
+      alt='logo'
+      src={
+        pageData.profile
+          ? `${process.env.NEXT_PUBLIC_DL_URL}/pages/${pageData.id}/${pageData.profile}`
+          : '/images/list/logo/logo-placeholder.webp'
+      }
       width={width ?? 160}
       height={height ?? 160}
       className={className}

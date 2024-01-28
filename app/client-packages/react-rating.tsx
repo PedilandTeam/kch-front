@@ -1,5 +1,5 @@
-"use client"
+'use client';
 
-import Rating from "react-rating";
+import Rating from 'react-rating';
 
-export default Rating
+export default Rating;

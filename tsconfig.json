@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,27 +16,17 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "@app/*": [
-        "./app/*"
-      ],
-      "@client-packages/*": [
-        "./app/client-packages/*"
-      ],
-      "@text/*": [
-        "./app/text/*"
-      ],
-      "@daisyComponents/*": [
-        "./components/daisy/*"
-      ]
+      "@/*": ["./*"],
+      "@app/*": ["./app/*"],
+      "@client-packages/*": ["./app/client-packages/*"],
+      "@text/*": ["./app/text/*"],
+      "@daisyComponents/*": ["./components/daisy/*"],
     },
     "plugins": [
       {
-        "name": "next"
-      }
-    ]
+        "name": "next",
+      },
+    ],
   },
   "include": [
     "next-env.d.ts",
@@ -50,9 +36,11 @@
     "app/header.tsx",
     "components/elements/badgenew.jsx",
     "components/elements/badgenew.jsx",
-    ".next/types/**/*.ts"
-, "app/layout/backtotop.jsx", "app/jobs/text.tsx", "app/jobs/page.tsx", "app/(Account)/account/components/overview.tsx"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    ".next/types/**/*.ts",
+    "app/layout/backtotop.jsx",
+    "app/jobs/text.tsx",
+    "app/jobs/page.tsx",
+    "app/(Account)/account/components/overview.tsx",
+  ],
+  "exclude": ["node_modules"],
 }

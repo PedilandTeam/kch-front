@@ -1,8 +1,8 @@
-import { _TXT } from "@/app/text";
-import { API_ROUTES } from "@/routes";
-import { CategoryNamespace } from "@/types/category";
-import { CountryNamespace } from "@/types/country";
-import CountryCategoriesItems from "./countryCategoriesItems";
+import { _TXT } from '@/app/text';
+import { API_ROUTES } from '@/routes';
+import { CategoryNamespace } from '@/types/category';
+import { CountryNamespace } from '@/types/country';
+import CountryCategoriesItems from './countryCategoriesItems';
 
 async function getMostUsedCategories(countryCode: string) {
   let result: CategoryNamespace.MOST_USED;
@@ -13,7 +13,7 @@ async function getMostUsedCategories(countryCode: string) {
     return result;
   } catch (e) {
     console.log(e);
-    throw new Error("error in getMostUsedCategories");
+    throw new Error('error in getMostUsedCategories');
   }
 }
 
@@ -39,10 +39,10 @@ export const CountryCategories = async ({
   // const units = await getUnits()
 
   return (
-    <div className="container mx-auto max-w-[1144px]">
-      <div className="mod-categories my-8 sm:my-16">
-        <div className="mod-header text-center">
-          <h2 className="text-[20px] inline-block sm:text-[24px] font-semibold mb-5">
+    <div className='container mx-auto max-w-[1144px]'>
+      <div className='mod-categories my-8 sm:my-16'>
+        <div className='mod-header text-center'>
+          <h2 className='mb-5 inline-block text-[20px] font-semibold sm:text-[24px]'>
             {_TXT.CATEGORY.POPULAR}
           </h2>
         </div>

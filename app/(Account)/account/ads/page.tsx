@@ -1,9 +1,3 @@
-
-
 export default function Ads() {
-    return (
-        <div>
-            ads
-        </div>
-    )
+  return <div>ads</div>;
 }

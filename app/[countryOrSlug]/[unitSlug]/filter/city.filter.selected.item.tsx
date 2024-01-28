@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import useCreateQueryString from "@/hooks/useCreateQueryString";
-import useDeleteQueryString from "@/hooks/useDeleteQueryString";
-import { CityNamespace } from "@/types/city";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import queryString from "query-string";
-import React, { memo, useCallback, useEffect, useRef, useState } from "react";
-import { removeFromShouldBeAddType } from "./city.filter";
+import useCreateQueryString from '@/hooks/useCreateQueryString';
+import useDeleteQueryString from '@/hooks/useDeleteQueryString';
+import { CityNamespace } from '@/types/city';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import queryString from 'query-string';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { removeFromShouldBeAddType } from './city.filter';
 
 type CityFilterItemProps = {
   city: CityNamespace.city;
@@ -30,7 +30,7 @@ function CityFilterSelectedItem({
 
   useEffect(() => {
     setParsedSearchParams(
-      queryString.parse(searchParams.toString(), { arrayFormat: "comma" })
+      queryString.parse(searchParams.toString(), { arrayFormat: 'comma' })
     );
   }, [searchParams]);
 
@@ -42,43 +42,44 @@ function CityFilterSelectedItem({
     if (!currentTarget.checked) {
       removeFromShouldBeAdd(currentTarget.value);
       return router.replace(
-        `${pathname}?${deleteQueryString("city", currentTarget.value)}`
+        `${pathname}?${deleteQueryString('city', currentTarget.value)}`
       );
     }
   };
 
-  const isChecked = useCallback((parsedSearchParams: ParsedSearchParamsType) => {
-    return parsedSearchParams.city
-      ? Array.isArray(parsedSearchParams.city)
-        ? !!parsedSearchParams.city.find(
-          (param) => +param == city.id
-        )
-        : +parsedSearchParams.city == city.id
-      : false
-  }, [city.id])
+  const isChecked = useCallback(
+    (parsedSearchParams: ParsedSearchParamsType) => {
+      return parsedSearchParams.city
+        ? Array.isArray(parsedSearchParams.city)
+          ? !!parsedSearchParams.city.find((param) => +param == city.id)
+          : +parsedSearchParams.city == city.id
+        : false;
+    },
+    [city.id]
+  );
 
-
-  const id = useRef(`category-3413-select-${city.id}`)
+  const id = useRef(`category-3413-select-${city.id}`);
 
   return (
-
-    <div className="flex justify-right items-center" key={`cate-gory-filter-slected--${city.id}`}>
+    <div
+      className='justify-right flex items-center'
+      key={`cate-gory-filter-slected--${city.id}`}
+    >
       <input
         ref={ref}
-        className="checkbox checkbox-secondary checkbox-sm ml-3"
+        className='checkbox-secondary checkbox checkbox-sm ml-3'
         onChange={inputClickHandler}
         id={id.current}
         value={city.id}
-        type="checkbox"
+        type='checkbox'
         checked={isChecked(parsedSearchParams)}
       />
       <p
         onClick={() => ref.current?.click()}
-        className="item flex items-center py-2 cursor-pointer"
+        className='item flex cursor-pointer items-center py-2'
       >
         {city.name}
       </p>
-
     </div>
   );
 }

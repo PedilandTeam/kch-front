@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { _TXT } from "@/app/text";
-import { CategoryNamespace } from "@/types/category";
-import CategoryFilterItem from "./category.filter.item";
-import { useEffect, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
-import queryString from "query-string";
-import { useRouter } from "next/navigation";
-import CategoryFilterSelectedItem from "./category.filter.selected.item";
-import useCreateQueryString from "@/hooks/useCreateQueryString";
-import useDeleteQueryString from "@/hooks/useDeleteQueryString";
+import { _TXT } from '@/app/text';
+import { CategoryNamespace } from '@/types/category';
+import CategoryFilterItem from './category.filter.item';
+import { useEffect, useState } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
+import queryString from 'query-string';
+import { useRouter } from 'next/navigation';
+import CategoryFilterSelectedItem from './category.filter.selected.item';
+import useCreateQueryString from '@/hooks/useCreateQueryString';
+import useDeleteQueryString from '@/hooks/useDeleteQueryString';
 
 type CategoryFilterType = {
   categories: CategoryNamespace.category[];
@@ -27,10 +27,9 @@ export type checkHandlerType = (value: string | number) => boolean | undefined;
 export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   const [modifiedCategories, setModifiedCategories] = useState(categories);
 
-
   useEffect(() => {
-    setModifiedCategories(categories)
-  },[categories])
+    setModifiedCategories(categories);
+  }, [categories]);
 
   const categorySearchHandler = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -44,16 +43,15 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  
 
   //category=1,2 -> [1,2] or category=3 -> "3"
   const categoriesInQuery = queryString.parse(searchParams.toString(), {
-    arrayFormat: "comma",
+    arrayFormat: 'comma',
   }).category;
 
   // city=1,2 -> [1,2] or city=1 -> "1"
   const citiesInQuery = queryString.parse(searchParams.toString(), {
-    arrayFormat: "comma",
+    arrayFormat: 'comma',
   }).city;
 
   const [parsedSearchParams, setParsedSearchParams] =
@@ -104,7 +102,7 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
 
   useEffect(() => {
     setParsedSearchParams(
-      queryString.parse(searchParams.toString(), { arrayFormat: "comma" })
+      queryString.parse(searchParams.toString(), { arrayFormat: 'comma' })
     );
   }, [searchParams]);
 
@@ -112,7 +110,7 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   const deleteQueryString = useDeleteQueryString();
 
   const applyFilters = () => {
-    router.replace(`${pathname}?${createQueryString("category", shouldBeAdd)}`);
+    router.replace(`${pathname}?${createQueryString('category', shouldBeAdd)}`);
   };
 
   const deleteAllCategoryHandler = () => {
@@ -129,15 +127,15 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   };
 
   return (
-    <div className="filter-wrap">
-      <div className="filter-section mb-4">
+    <div className='filter-wrap'>
+      <div className='filter-section mb-4'>
         {/* <h3 className="font-medium">{GENERAL.CATEGORY}</h3> */}
 
         {/* The button to open modal */}
         <label htmlFor={id} className={`btn btn-outline btn-primary w-full`}>
           {citiesInQuery ? _TXT.CATEGORY.SELECT : _TXT.CATEGORY.SELECT}
         </label>
-        <div className="px-3 my-3">
+        <div className='my-3 px-3'>
           {Array.isArray(categoriesInQuery) ? (
             categoriesInQuery.map((categoryId) => {
               if (!categoryId) return;
@@ -167,32 +165,32 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
         </div>
 
         {/* Put this part before </body> tag */}
-        <input type="checkbox" id={id} className="modal-toggle" />
-        <div className="modal">
-          <div className=" modal-box p-0 max-h-[550px] ">
-            <div className="pt-5 pb-3 px-8 bg-white w-full">
-              <h3 className="flex justify-between content-center text-lg font-bold">
+        <input type='checkbox' id={id} className='modal-toggle' />
+        <div className='modal'>
+          <div className=' modal-box max-h-[550px] p-0 '>
+            <div className='w-full bg-white px-8 pb-3 pt-5'>
+              <h3 className='flex content-center justify-between text-lg font-bold'>
                 انتخاب دسته بندی
                 {categoriesInQuery ? (
                   <span
                     onClick={deleteAllCategoryHandler}
-                    className="cursor-pointer text-[15px] font-normal text-pink-800"
+                    className='cursor-pointer text-[15px] font-normal text-pink-800'
                   >
                     {_TXT.GENERAL.DELETE_ALL}
                   </span>
                 ) : null}
               </h3>
-              <p className="py-3">
+              <p className='py-3'>
                 دسته بندی یا دسته بندی های مورد نظر خود را انتخاب نمایید.
               </p>
               <input
                 onChange={categorySearchHandler}
-                type="text"
-                placeholder="جستجو در لیست دسته بندی ها"
-                className="input input-bordered w-full"
+                type='text'
+                placeholder='جستجو در لیست دسته بندی ها'
+                className='input input-bordered w-full'
               />
             </div>
-            <div className="px-8 h-[16rem] overflow-y-scroll">
+            <div className='h-[16rem] overflow-y-scroll px-8'>
               {modifiedCategories?.map(
                 (category: CategoryNamespace.category) => {
                   return (
@@ -210,11 +208,11 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
               )}
             </div>
 
-            <div className="modal-action box-border w-full pt-3 pb-5 px-8 mt-3 flex justify-between items-center bg-white shadow-2xl">
+            <div className='modal-action mt-3 box-border flex w-full items-center justify-between bg-white px-8 pb-5 pt-3 shadow-2xl'>
               <label
                 onClick={applyFilters}
                 htmlFor={id}
-                className="btn btn-primary w-full"
+                className='btn btn-primary w-full'
               >
                 {_TXT.GENERAL.CONFIRM}
               </label>

@@ -1,10 +1,10 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 const TextSec = () => {
   return (
-    <div className="container max-w-[1144px] mx-auto mt-6 sm:mt-10 px-3 sm:px-0">
-      <div className="text-wrap">
-        <div className="section">
+    <div className='container mx-auto mt-6 max-w-[1144px] px-3 sm:mt-10 sm:px-0'>
+      <div className='text-wrap'>
+        <div className='section'>
           <h2>کوچا، تلاشی برای رفع نیازهای فارسی‌زبانان مهاجر</h2>
           <p>
             در چند دهه گذشته بواسطه شرایط نامساعد زندگی در کشورهای فارسی‌زبان
@@ -23,7 +23,7 @@ const TextSec = () => {
           </p>
         </div>
 
-        <div className="section">
+        <div className='section'>
           <h2>اقدام ما!</h2>
           <p>
             ما جمعی از متخصصان حوزه تکنولوژی هستیم که جمعا نزدیک به 3 دهه تجربه
@@ -43,9 +43,9 @@ const TextSec = () => {
           </p>
         </div>
 
-        <div className="section">
+        <div className='section'>
           <h2>هدف ما!</h2>
-          <p className="text-secondary font-bold">
+          <p className='font-bold text-secondary'>
             هـدف اصـلـی مـا افـزایـش کـیـفـیـت و سـهـولـت زنـدگی فـارسـی
             زبـانـان مـهـاجـره!
           </p>
@@ -69,7 +69,7 @@ const TextSec = () => {
           </p>
         </div>
 
-        <div className="section">
+        <div className='section'>
           <h2>ارزش های ما!</h2>
           <p>
             <strong>حفظ حریم شخصی:</strong> ما به حریم شخصی مخاطبان‌مون احترام

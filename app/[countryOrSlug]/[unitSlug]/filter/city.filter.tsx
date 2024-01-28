@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { _TXT } from "@/app/text";
-import { CityNamespace } from "@/types/city";
-import CityFilterItem from "./city.filter.item";
-import { useEffect, useRef, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
-import queryString from "query-string";
-import { useRouter } from "next/navigation";
-import CityFilterSelectedItem from "./city.filter.selected.item";
-import useCreateQueryString from "@/hooks/useCreateQueryString";
-import useDeleteQueryString from "@/hooks/useDeleteQueryString";
-import { FunnelIcon } from "@heroicons/react/24/solid";
+import { _TXT } from '@/app/text';
+import { CityNamespace } from '@/types/city';
+import CityFilterItem from './city.filter.item';
+import { useEffect, useRef, useState } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
+import queryString from 'query-string';
+import { useRouter } from 'next/navigation';
+import CityFilterSelectedItem from './city.filter.selected.item';
+import useCreateQueryString from '@/hooks/useCreateQueryString';
+import useDeleteQueryString from '@/hooks/useDeleteQueryString';
+import { FunnelIcon } from '@heroicons/react/24/solid';
 
 type CityFilterType = {
   cities: CityNamespace.city[];
@@ -33,8 +33,8 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     useState(false);
 
   useEffect(() => {
-    setModifiedCities(cities)
-  }, [cities])
+    setModifiedCities(cities);
+  }, [cities]);
 
   const [shouldBeAdd, setShouldBeAdd] = useState<string[]>([]);
 
@@ -60,7 +60,7 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   useEffect(() => {
     //parse query params to array
     setParsedSearchParams(
-      queryString.parse(searchParams.toString(), { arrayFormat: "comma" })
+      queryString.parse(searchParams.toString(), { arrayFormat: 'comma' })
     );
   }, [searchParams]);
 
@@ -82,9 +82,8 @@ export default function CityFilter({ cities, id }: CityFilterType) {
 
   const createQueryString = useCreateQueryString();
 
-
   const applyFilters = () => {
-    router.replace(`${pathname}?${createQueryString("city", shouldBeAdd)}`);
+    router.replace(`${pathname}?${createQueryString('city', shouldBeAdd)}`);
   };
 
   const deleteAllCityHandler = () => {
@@ -123,19 +122,16 @@ export default function CityFilter({ cities, id }: CityFilterType) {
    * if city query have multiple numbers it's return Array[]
    */
   const citiesInQuery = queryString.parse(searchParams.toString(), {
-    arrayFormat: "comma",
+    arrayFormat: 'comma',
   }).city;
 
   return (
-    <div className="filter-wrap">
-      <div className="filter-section">
-        <label
-          htmlFor={id}
-          className="btn btn-primary btn-outline w-full"
-        >
+    <div className='filter-wrap'>
+      <div className='filter-section'>
+        <label htmlFor={id} className='btn btn-outline btn-primary w-full'>
           {_TXT.CITY.SELECT}
         </label>
-        <div className="px-3 my-3">
+        <div className='my-3 px-3'>
           {Array.isArray(citiesInQuery) ? (
             // if city is multiple number, find all of that from cities
             citiesInQuery.map((cityId) => {
@@ -161,35 +157,34 @@ export default function CityFilter({ cities, id }: CityFilterType) {
         </div>
       </div>
 
-
       {/* the modal */}
-      <input type="checkbox" id={id} className="modal-toggle" />
-      <div className="modal">
-        <div className=" modal-box p-0 max-h-[550px] ">
-          <div className="pt-5 pb-3 px-8 bg-white w-full">
-            <h3 className="flex justify-between content-center text-lg font-bold">
+      <input type='checkbox' id={id} className='modal-toggle' />
+      <div className='modal'>
+        <div className=' modal-box max-h-[550px] p-0 '>
+          <div className='w-full bg-white px-8 pb-3 pt-5'>
+            <h3 className='flex content-center justify-between text-lg font-bold'>
               {_TXT.CITY.SELECT}
 
               {/* delete text */}
               {citiesInQuery ? (
                 <span
                   onClick={deleteAllCityHandler}
-                  className="cursor-pointer text-[15px] font-normal text-pink-800"
+                  className='cursor-pointer text-[15px] font-normal text-pink-800'
                 >
                   {_TXT.GENERAL.DELETE_ALL}
                 </span>
               ) : null}
             </h3>
-            <p className="py-3">{_TXT.CITY.SELECT_MULTI}</p>
+            <p className='py-3'>{_TXT.CITY.SELECT_MULTI}</p>
             <input
               onChange={citySearchHandler}
-              type="text"
+              type='text'
               placeholder={_TXT.CITY.SEARCH_IN_LIST}
-              className="input input-bordered w-full"
+              className='input input-bordered w-full'
               ref={inputRef}
             />
           </div>
-          <div className="px-8 h-[16rem] overflow-y-scroll">
+          <div className='h-[16rem] overflow-y-scroll px-8'>
             {modifiedCities?.map((city: CityNamespace.city) => {
               return (
                 <CityFilterItem
@@ -204,12 +199,12 @@ export default function CityFilter({ cities, id }: CityFilterType) {
               );
             })}
           </div>
-          <div className="flex">
-            <div className="modal-action box-border w-full pt-3 pb-5 px-8 mt-3 flex justify-between items-center ">
+          <div className='flex'>
+            <div className='modal-action mt-3 box-border flex w-full items-center justify-between px-8 pb-5 pt-3 '>
               <label
                 onClick={applyFilters}
                 htmlFor={id}
-                className="btn btn-primary w-full"
+                className='btn btn-primary w-full'
               >
                 {_TXT.GENERAL.CONFIRM}
               </label>

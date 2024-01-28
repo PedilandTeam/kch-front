@@ -1,9 +1,9 @@
-"use client";
-import { _TXT } from "@/app/text";
-import { CircleFlag } from "next-circle-flags";
-import Link from "next/link";
-import { CountryNamespace } from "@/types/country";
-import { useRef } from "react";
+'use client';
+import { _TXT } from '@/app/text';
+import { CircleFlag } from 'next-circle-flags';
+import Link from 'next/link';
+import { CountryNamespace } from '@/types/country';
+import { useRef } from 'react';
 
 type ModalCountryProps = {
   countries: CountryNamespace.GET[];
@@ -12,15 +12,15 @@ export const ModalCountry = ({ countries }: ModalCountryProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <dialog id="modal_country" className="modal">
-      <form method="dialog" className="modal-box sm:max-w-[50%] md:p-8">
-        <h3 className="mb-6 font-medium">{_TXT.MODAL.COUNTRY_TITLE}</h3>
-        <div className="grid grid-cols-3 gap-5 md:grid-cols-7 md:gap-5 place-content-center country-list">
+    <dialog id='modal_country' className='modal'>
+      <form method='dialog' className='modal-box sm:max-w-[50%] md:p-8'>
+        <h3 className='mb-6 font-medium'>{_TXT.MODAL.COUNTRY_TITLE}</h3>
+        <div className='country-list grid grid-cols-3 place-content-center gap-5 md:grid-cols-7 md:gap-5'>
           {countries?.map((country) => {
             return (
               <button
                 key={`country-modal-country-code${country.id}`}
-                className="group"
+                className='group'
               >
                 <Link
                   href={`/${country.code}`}
@@ -30,11 +30,11 @@ export const ModalCountry = ({ countries }: ModalCountryProps) => {
                     width={80}
                     height={80}
                     countryCode={country.code}
-                    className="opacity-40 group-hover:opacity-100 group-hover:cursor-pointer transition duration-200 mx-auto w-[54px] h-[54px] 2xl:w-[74px] 2xl:h-[74px]"
+                    className='mx-auto h-[54px] w-[54px] opacity-40 transition duration-200 group-hover:cursor-pointer group-hover:opacity-100 2xl:h-[74px] 2xl:w-[74px]'
                     alt={country.name}
                     title={country.name}
                   />
-                  <p className="text-[15px] text-center mt-3 group-hover:font-semibold transition duration-200">
+                  <p className='mt-3 text-center text-[15px] transition duration-200 group-hover:font-semibold'>
                     {country.name}
                   </p>
                 </Link>
@@ -43,7 +43,7 @@ export const ModalCountry = ({ countries }: ModalCountryProps) => {
           })}
         </div>
       </form>
-      <form method="dialog" className="modal-backdrop">
+      <form method='dialog' className='modal-backdrop'>
         <button ref={buttonRef}>close</button>
       </form>
     </dialog>

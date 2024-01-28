@@ -1,10 +1,5 @@
-import CardSkeleton from "./cards.skeleton";
+import CardSkeleton from './cards.skeleton';
 
-
-export default function Loading(){
-
-    return (
-        <CardSkeleton/>
-    )
-
+export default function Loading() {
+  return <CardSkeleton />;
 }

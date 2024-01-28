@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, {
   useMemo,
@@ -9,10 +9,10 @@ import React, {
   createContext,
   useDebugValue,
   useRef,
-} from "react";
-import Script, { ScriptProps } from "next/script.js";
-import type { IReCaptcha } from "@/types/recaptcha.types";
-import { getRecaptchaScriptSrc } from "@/utils/recaptchaUtil";
+} from 'react';
+import Script, { ScriptProps } from 'next/script.js';
+import type { IReCaptcha } from '@/types/recaptcha.types';
+import { getRecaptchaScriptSrc } from '@/utils/recaptchaUtil';
 
 interface ReCaptchaContextProps {
   /** reCAPTCHA_site_key */
@@ -34,13 +34,15 @@ const ReCaptchaContext = createContext<ReCaptchaContextProps>({
 
 const useReCaptchaContext = () => {
   const values = useContext(ReCaptchaContext);
-  useDebugValue(`grecaptcha available: ${values?.loaded ? "Yes" : "No"}`);
-  useDebugValue(`ReCaptcha Script: ${values?.loaded ? "Loaded" : "Not Loaded"}`);
-  useDebugValue(`Failed to load Script: ${values?.error ? "Yes" : "No"}`);
+  useDebugValue(`grecaptcha available: ${values?.loaded ? 'Yes' : 'No'}`);
+  useDebugValue(
+    `ReCaptcha Script: ${values?.loaded ? 'Loaded' : 'Not Loaded'}`
+  );
+  useDebugValue(`Failed to load Script: ${values?.error ? 'Yes' : 'No'}`);
   return values;
 };
 
-interface ReCaptchaProviderProps extends Partial<Omit<ScriptProps, "onLoad">> {
+interface ReCaptchaProviderProps extends Partial<Omit<ScriptProps, 'onLoad'>> {
   reCaptchaKey?: string;
   language?: string;
   useRecaptchaNet?: boolean;
@@ -57,8 +59,8 @@ const ReCaptchaV3Provider: React.FC<ReCaptchaProviderProps> = ({
   language,
   children,
 
-  id = "google-recaptcha-v3",
-  strategy = "afterInteractive",
+  id = 'google-recaptcha-v3',
+  strategy = 'afterInteractive',
 
   src: passedSrc,
   onLoad: passedOnLoad,
@@ -70,11 +72,17 @@ const ReCaptchaV3Provider: React.FC<ReCaptchaProviderProps> = ({
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
 
-  const reCaptchaKey = passedReCaptchaKey || process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY_V3;
+  const reCaptchaKey =
+    passedReCaptchaKey || process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY_V3;
 
   const src =
     passedSrc ||
-    getRecaptchaScriptSrc({ reCaptchaKey, language, useRecaptchaNet, useEnterprise }) ||
+    getRecaptchaScriptSrc({
+      reCaptchaKey,
+      language,
+      useRecaptchaNet,
+      useEnterprise,
+    }) ||
     null;
 
   // Reset state when script src is changed
@@ -90,7 +98,9 @@ const ReCaptchaV3Provider: React.FC<ReCaptchaProviderProps> = ({
   // Handle script load
   const onLoad = useCallback(
     (e?: any) => {
-      const grecaptcha = useEnterprise ? window?.grecaptcha?.enterprise : window?.grecaptcha;
+      const grecaptcha = useEnterprise
+        ? window?.grecaptcha?.enterprise
+        : window?.grecaptcha;
 
       if (grecaptcha) {
         grecaptcha.ready(() => {
@@ -100,7 +110,7 @@ const ReCaptchaV3Provider: React.FC<ReCaptchaProviderProps> = ({
         });
       }
     },
-    [passedOnLoad, useEnterprise],
+    [passedOnLoad, useEnterprise]
   );
 
   // Run 'onLoad' function once just in case if grecaptcha is already globally available in window
@@ -112,20 +122,27 @@ const ReCaptchaV3Provider: React.FC<ReCaptchaProviderProps> = ({
       setError(true);
       passedOnError?.(e);
     },
-    [passedOnError],
+    [passedOnError]
   );
 
   // Prevent unnecessary rerenders
   const value = useMemo(
     () => ({ reCaptchaKey, grecaptcha, loaded, error }),
-    [reCaptchaKey, grecaptcha, loaded, error],
+    [reCaptchaKey, grecaptcha, loaded, error]
   );
 
   return (
     <ReCaptchaContext.Provider value={value}>
       {children}
       {/* @ts-expect-error: Why are you making my life so hard, Typescript? */}
-      <Script id={id} src={src} strategy={strategy} onLoad={onLoad} onError={onError} {...props} />
+      <Script
+        id={id}
+        src={src}
+        strategy={strategy}
+        onLoad={onLoad}
+        onError={onError}
+        {...props}
+      />
     </ReCaptchaContext.Provider>
   );
 };

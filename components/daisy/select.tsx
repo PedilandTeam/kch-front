@@ -1,10 +1,14 @@
-'use client'
+'use client';
 
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import { ChevronDownIcon } from '@heroicons/react/24/outline'
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
-interface Select extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children' | 'onChange'> {
-  children: (item: any, setSelectedValue: Dispatch<SetStateAction<any>>) => React.ReactNode;
+interface Select
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children' | 'onChange'> {
+  children: (
+    item: any,
+    setSelectedValue: Dispatch<SetStateAction<any>>
+  ) => React.ReactNode;
   isDisabled?: boolean;
   bordered?: boolean;
   isInvalid?: boolean;
@@ -31,77 +35,91 @@ export default function Select({
   onChange,
   ...selectProps
 }: Select) {
-
-  const [open, setOpen] = useState(false)
-  const [selectedValue, setSelectedValue] = useState<string | null>('')
-  const ulRef = useRef<HTMLUListElement>(null)
+  const [open, setOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState<string | null>('');
+  const ulRef = useRef<HTMLUListElement>(null);
 
   /**
    * Handles the click event on the item.
    *
    * @param {React.MouseEvent<HTMLLIElement>} e - The mouse event
-   * @return {void} 
+   * @return {void}
    */
   const itemClickHandler = (e: React.MouseEvent<HTMLLIElement>) => {
     if (isDisabled) return;
     setOpen((old) => !old);
     const target = e.target as HTMLLIElement;
     setSelectedValue(target.textContent || null);
-    if(typeof onChange == 'function') onChange(e, target.dataset?.value);
-  }
+    if (typeof onChange == 'function') onChange(e, target.dataset?.value);
+  };
 
   const onOpen = () => {
     if (isDisabled) return;
-    setOpen(!open)
-  }
+    setOpen(!open);
+  };
   /**
    * Update the selected value if it has changed in another component
    */
   useEffect(() => {
-    if(!ulRef.current) return;
+    if (!ulRef.current) return;
     const ul = ulRef.current as HTMLSpanElement;
-    Array.from((ul.children)).map((item: any) => {
-      Array.from((item.children as HTMLCollectionOf<HTMLSpanElement>)).map((child: HTMLSpanElement) => {
+    Array.from(ul.children).map((item: any) => {
+      Array.from(item.children as HTMLCollectionOf<HTMLSpanElement>).map(
+        (child: HTMLSpanElement) => {
           if (child.dataset.value == value) {
-            setSelectedValue(child.textContent || null)
+            setSelectedValue(child.textContent || null);
           }
-      })
-    })  
-  }, [value])
-
+        }
+      );
+    });
+  }, [value]);
 
   useEffect(() => {
-    setSelectedValue(null)
-  }, [items])
+    setSelectedValue(null);
+  }, [items]);
 
   return (
     <div className={`form-control w-full max-w-full ${className}`}>
-      <div className={`dropdown dropdown-bottom w-full select-none`} onClick={onOpen}>
-        <div tabIndex={0} role="button" className={`input ${bordered && 'input-bordered'} ${isInvalid && 'input-error'} flex justify-between items-center ${isDisabled && 'bg-gray-200 border-0 cursor-not-allowed'}`}>
+      <div
+        className={`dropdown dropdown-bottom w-full select-none`}
+        onClick={onOpen}
+      >
+        <div
+          tabIndex={0}
+          role='button'
+          className={`input ${bordered && 'input-bordered'} ${isInvalid && 'input-error'} flex items-center justify-between ${isDisabled && 'cursor-not-allowed border-0 bg-gray-200'}`}
+        >
           <p>{selectedValue ? selectedValue : label}</p>
-          {(isLoading ? <span className="loading loading-spinner loading-md text-gray-500"></span> : !isDisabled && <ChevronDownIcon className="w-5 h-5 ml-2" />)}
+          {isLoading ? (
+            <span className='loading loading-spinner loading-md text-gray-500'></span>
+          ) : (
+            !isDisabled && <ChevronDownIcon className='ml-2 h-5 w-5' />
+          )}
         </div>
 
-        <ul ref={ulRef} tabIndex={0} className={` ${!open || isLoading ? 'opacity-0 invisible' : 'opacity-1 visible'} duration-300 transform-cpu dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-full`}>
-          {
-            items.map((item, index) => (
-              <li key={index} onClick={itemClickHandler}>
-                {children(item, setSelectedValue)}
-              </li>
-            ))
-          }
+        <ul
+          ref={ulRef}
+          tabIndex={0}
+          className={` ${!open || isLoading ? 'invisible opacity-0' : 'opacity-1 visible'} menu dropdown-content z-[1] w-full transform-cpu rounded-box bg-base-100 p-2 shadow duration-300`}
+        >
+          {items.map((item, index) => (
+            <li key={index} onClick={itemClickHandler}>
+              {children(item, setSelectedValue)}
+            </li>
+          ))}
         </ul>
       </div>
-      {
-        !!errorMessage && isInvalid ?
-          <label className="label">
-            {isInvalid && errorMessage && (
-              <span className="label-text-alt text-error min-h-[1 ch]">{errorMessage}</span>
-            )}
-          </label>
-
-          : ''
-      }
+      {!!errorMessage && isInvalid ? (
+        <label className='label'>
+          {isInvalid && errorMessage && (
+            <span className='min-h-[1 ch] label-text-alt text-error'>
+              {errorMessage}
+            </span>
+          )}
+        </label>
+      ) : (
+        ''
+      )}
     </div>
   );
 }

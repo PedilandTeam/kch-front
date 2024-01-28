@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation';
 
 export default function () {
-  redirect("/de/businesses/restaurant");
+  redirect('/de/businesses/restaurant');
 }

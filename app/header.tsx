@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { TopTools } from "./layout/toptools";
-import { OffCanvas } from "./layout/offcanvas";
-import { storeType } from "@/store/store";
-import { countryCodeList } from "@/utils/countryCodeList";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import Link from "next/link";
-import Image from "next/image";
+import { TopTools } from './layout/toptools';
+import { OffCanvas } from './layout/offcanvas';
+import { storeType } from '@/store/store';
+import { countryCodeList } from '@/utils/countryCodeList';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import Link from 'next/link';
+import Image from 'next/image';
 
 type HeaderProps = {
   children: React.ReactNode;
@@ -19,7 +19,7 @@ export const Header = ({ children }: HeaderProps) => {
   const country = useSelector((state: storeType) => state.stateSlice.country);
 
   const [countryCodeFromParams, setCountryCodeFromParams] =
-    useState<string>("");
+    useState<string>('');
   const [isMainPage, setIsMainPage] = useState(false);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export const Header = ({ children }: HeaderProps) => {
       return;
     }
     setIsMainPage(true);
-    setCountryCodeFromParams("");
+    setCountryCodeFromParams('');
   }, [params]);
 
   // useEffect(() => {
@@ -51,18 +51,18 @@ export const Header = ({ children }: HeaderProps) => {
     return countryCodeList.some((code) => code == countryOrSlug);
   };
 
-  const [countryCode, setCountryCode] = useState("");
+  const [countryCode, setCountryCode] = useState('');
   useEffect(() => {
     setCountryCode(
       isMainPage
-        ? "un"
+        ? 'un'
         : haveCountry(params?.countryOrSlug as string)
-        ? (params.countryOrSlug as string)
-        : country
-        ? country
-        : isPathHaveCountry
-        ? countryCodeFromParams
-        : "un"
+          ? (params.countryOrSlug as string)
+          : country
+            ? country
+            : isPathHaveCountry
+              ? countryCodeFromParams
+              : 'un'
     );
   }, [params, country, isMainPage, isPathHaveCountry, countryCodeFromParams]);
 
@@ -72,7 +72,7 @@ export const Header = ({ children }: HeaderProps) => {
   const [prevScrollY, setPrevScrollY] = useState(0);
 
   const handleScroll = () => {
-    if (typeof window == "undefined") return;
+    if (typeof window == 'undefined') return;
     const currentScrollY = window.scrollY;
     setScrollingDown(currentScrollY > prevScrollY);
     setIsTop(currentScrollY === 0); // Check if scroll is at the top
@@ -80,10 +80,10 @@ export const Header = ({ children }: HeaderProps) => {
   };
 
   useEffect(() => {
-    if (typeof window == "undefined") return;
-    window.addEventListener("scroll", handleScroll);
+    if (typeof window == 'undefined') return;
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [prevScrollY]);
 
@@ -94,24 +94,24 @@ export const Header = ({ children }: HeaderProps) => {
       //     ? "transform -translate-y-full"
       //     : "transform translate-y-0 z-50"
       // } ${isTop ? "py-[10px]" : "py-[8px] shadow"} duration-200`}
-      className="w-full bg-white py-3"
+      className='w-full bg-white py-3'
     >
-      <div className="container mx-auto max-w-[1144px]">
+      <div className='container mx-auto max-w-[1144px]'>
         <div>
-          <div className="flex justify-between mx-3 sm:mx-0">
+          <div className='mx-3 flex justify-between sm:mx-0'>
             <TopTools isMainPage={isMainPage} countryCode={countryCode} />
 
-            <div className="logo">
-              <Link href="/">
+            <div className='logo'>
+              <Link href='/'>
                 <Image
-                  src="/images/logo.svg"
+                  src='/images/logo.svg'
                   // width={isTop ? 195 : 174}
                   // height={isTop ? 54 : 48}
                   width={195}
                   height={54}
                   priority={true}
-                  alt="Pediland Logo"
-                  className="transition-all duration-75"
+                  alt='Pediland Logo'
+                  className='transition-all duration-75'
                 />
               </Link>
             </div>

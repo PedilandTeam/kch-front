@@ -1,16 +1,16 @@
-import { _TXT } from "@/app/text";
-import { PageNamespace } from "@/types/page";
-import Link from "next/link";
+import { _TXT } from '@/app/text';
+import { PageNamespace } from '@/types/page';
+import Link from 'next/link';
 
 type ItemBreadCrumbProps = {
   pageData: PageNamespace.Page;
 };
 export const ItemBreadCrumb = ({ pageData }: ItemBreadCrumbProps) => {
   return (
-    <div className=" text-sm breadcrumbs">
+    <div className=' breadcrumbs text-sm'>
       <ul>
         <li>
-          <Link href={"/"}>{_TXT.GENERAL.HOME}</Link>
+          <Link href={'/'}>{_TXT.GENERAL.HOME}</Link>
         </li>
         <li>
           <Link href={`/${pageData?.country?.code}`}>

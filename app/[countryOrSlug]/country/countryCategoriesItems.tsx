@@ -1,10 +1,10 @@
-"use client";
-import { UNITS_LIST_ARRAY } from "@/routes";
-import { CategoryNamespace } from "@/types/category";
-import { CountryNamespace } from "@/types/country";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
+'use client';
+import { UNITS_LIST_ARRAY } from '@/routes';
+import { CategoryNamespace } from '@/types/category';
+import { CountryNamespace } from '@/types/country';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
 
 type CountryCategoriesItemsProps = {
   recentlyUpdatedCategories: CategoryNamespace.MOST_USED;
@@ -36,7 +36,7 @@ export default function CountryCategoriesItems({
 
   return (
     <>
-      <div className="text-center">
+      <div className='text-center'>
         {units.map((unit) => {
           if (recentlyUpdatedCategories[`${unit.id}`]?.length == 0) {
             return;
@@ -45,8 +45,8 @@ export default function CountryCategoriesItems({
             <a
               onClick={() => activeTabChangeHandler(unit.id)}
               key={`unit-${unit.id}`}
-              className={`tab tab-bordered border-b-[3px] px-3 sm:px-6 font-medium h-16 text-[18px] ${
-                activeTab == unit.id ? "tab-active border-secondary" : ""
+              className={`tab-bordered tab h-16 border-b-[3px] px-3 text-[18px] font-medium sm:px-6 ${
+                activeTab == unit.id ? 'tab-active border-secondary' : ''
               } `}
             >
               {unit.name} فارسی زبان
@@ -54,33 +54,33 @@ export default function CountryCategoriesItems({
           );
         })}
       </div>
-      <div className="content mt-8 flex flex-wrap justify-center gap-4 mx-3 sm:mx-0">
+      <div className='content mx-3 mt-8 flex flex-wrap justify-center gap-4 sm:mx-0'>
         {recentlyUpdatedCategories[`${activeTab}`]?.map((category, index) => {
           return (
             <Link
               scroll
-              className="w-full  sm:basis-1/6"
-              key={"country-category" + category.id}
+              className='w-full  sm:basis-1/6'
+              key={'country-category' + category.id}
               href={`/${currentCountry.code}/${
                 unitFinder(category.unitId)?.slug
               }/${category.slug}`}
             >
               <div
                 key={`country-category-list-${category.id}${index}`}
-                className="cat-card group border border-gray-200 hover:border-blue-300 hover:bg-blue-100 hover:bg-opacity-20 rounded-md
-                flex justify-center items-center sm:flex-wrap sm:flex-row font-medium sm:font-normal sm:hover:font-medium transition-all pr-4 pl-0 py-3 sm:pl-4 sm:pb-0"
+                className='cat-card group flex items-center justify-center rounded-md border border-gray-200
+                py-3 pl-0 pr-4 font-medium transition-all hover:border-blue-300 hover:bg-blue-100 hover:bg-opacity-20 sm:flex-row sm:flex-wrap sm:pb-0 sm:pl-4 sm:font-normal sm:hover:font-medium'
               >
                 <Image
-                  src="/images/icon/category.svg"
+                  src='/images/icon/category.svg'
                   height={40}
                   width={40}
-                  alt=""
-                  className="ml-4 sm:ml-0"
+                  alt=''
+                  className='ml-4 sm:ml-0'
                 />
-                <div className="w-full mt-4 mb-5 sm:text-center group-hover:text-blue-900 flex sm:justify-center items-center h-[48px]">
+                <div className='mb-5 mt-4 flex h-[48px] w-full items-center group-hover:text-blue-900 sm:justify-center sm:text-center'>
                   {category.name}
                 </div>
-                <span className="flex justify-center items-center min-w-[42px] h-[42px] sm:h-[34px] border text-[18px] pt-[4px] sm:pt-0 ml-5 bg-white sm:group-hover:bg-white sm:items-end group-hover:text-blue-900 group-hover:font-bold sm:border-b-white sm:group-hover:border-b-white group-hover:border-blue-300 sm:group-hover:border-l-blue-300 sm:-mb-[1px] rounded-full sm:rounded-br-none sm:rounded-bl-none sm:min-w-[42px] sm:leading-none">
+                <span className='ml-5 flex h-[42px] min-w-[42px] items-center justify-center rounded-full border bg-white pt-[4px] text-[18px] group-hover:border-blue-300 group-hover:font-bold group-hover:text-blue-900 sm:-mb-[1px] sm:h-[34px] sm:min-w-[42px] sm:items-end sm:rounded-bl-none sm:rounded-br-none sm:border-b-white sm:pt-0 sm:leading-none sm:group-hover:border-b-white sm:group-hover:border-l-blue-300 sm:group-hover:bg-white'>
                   {category.pageCount}
                 </span>
               </div>

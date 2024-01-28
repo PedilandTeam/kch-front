@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import Accordion from "../client-packages/daisy/accordion";
-import ApplyForm from "./form";
+import Link from 'next/link';
+import Accordion from '../client-packages/daisy/accordion';
+import ApplyForm from './form';
 
 const JobsText = () => {
   return (
-    <div className="container max-w-[1144px] mx-auto mt-6 sm:mt-10 px-3 sm:px-0">
-      <div className="text-wrap">
-        <div className="section">
+    <div className='container mx-auto mt-6 max-w-[1144px] px-3 sm:mt-10 sm:px-0'>
+      <div className='text-wrap'>
+        <div className='section'>
           <h2>تجربه همراه شدن با تیمی که تفاوت ایجاد می‌کنه!</h2>
           <p>
             اگه جزو اون دسته از آدمایی هستی که همیشه در حال رشد کردن هستن و دوست
@@ -21,8 +21,8 @@ const JobsText = () => {
             شما هستیم.
           </p>
           <h2>چرا کـوچـا؟</h2>
-          <p className="mb-8">
-            <span className="font-semibold">تأثیرگذاری اجتماعی:</span> در
+          <p className='mb-8'>
+            <span className='font-semibold'>تأثیرگذاری اجتماعی:</span> در
             کـوچـا، تو هم بخشی از یه تحول بزرگ هستی. اینجا کارمون معنا و هدفی
             داره که فراتر از یک شغل معمولیه. همه ما برای بهبود کیفیت زندگی بخشی
             از جامعه ایران که به هر دلیل و روشی مهاجرت کرده تلاش می‌کنیم و تاثیر
@@ -31,8 +31,8 @@ const JobsText = () => {
             بتونن با سرعت بیشتر هزینه کمتر با فرهنگ و جامعه جدیدشون ادغام بشن و
             این چیزیه که به ما انگیزه میده.
           </p>
-          <p className="mb-8">
-            <span className="font-semibold">محیط کاری پویا:</span> به عنوان عضوی
+          <p className='mb-8'>
+            <span className='font-semibold'>محیط کاری پویا:</span> به عنوان عضوی
             از خانواده کـوچـا، در مرکز نوآوری قرار می‌گیری. محیط کاری ما پویا و
             منعطفه و همین باعث میشه هر روز با چالش‌های جدید و هیجان‌انگیزی روبرو
             بشیم. فرصت داری در کنار همکارانی که هرکدام‌شون در زمینه کاری خودشون
@@ -41,7 +41,7 @@ const JobsText = () => {
             قبلاً تصورش رو هم نمی‌کردی.
           </p>
           <p>
-            <span className="font-semibold">فرصت‌های یادگیری و رشد شخصی:</span>{" "}
+            <span className='font-semibold'>فرصت‌های یادگیری و رشد شخصی:</span>{' '}
             ما باور داریم که یادگیری یک سفر همیشگیه و همین باور رو در محیط
             کاری‌مون هم پیاده‌سازی کردیم. ما برات فضا و منابع لازم یادگیری مستمر
             و ارتقا مهارت‌های شخصی و حرفه‌ایت رو فراهم می‌کنیم تا نه تنها تو
@@ -52,10 +52,10 @@ const JobsText = () => {
         </div>
 
         <Accordion
-          title="کارشناس موفقیت مشتری - کارآموزی"
+          title='کارشناس موفقیت مشتری - کارآموزی'
           content={
-            <div className="mb-3">
-              <p className="mb-3 leading-8">
+            <div className='mb-3'>
+              <p className='mb-3 leading-8'>
                 کارشناس موفقیت مشتری، فردیه که در زمینه پشتیبانی و خدمات مشتریان
                 مهارت داره و روی ارائه راهکارهای موثر برای افزایش رضایت‌مندی و
                 موفقیت مشتریان تمرکز می‌کنه. این فرد مسئول شناسایی نیازها و
@@ -68,7 +68,7 @@ const JobsText = () => {
                 شرکت از جمله مهارت‌هاییه که در پیشرفت مسیر شغلی به یک کارشناس
                 موفقیت مشتری کمک می‌کنه.
               </p>
-              <p className="mb-8 leading-8">
+              <p className='mb-8 leading-8'>
                 با توجه به اینکه حوزه فعالیت ما کشورهای مختلف هست و ارتباط با
                 مشتریان‌مون ظرافت‌های خاص خودش رو داره ترجیح دادیم از طریق آموزش
                 و تربیت کارآموز، نیروی انسانی مطلوب‌مون رو تامین کنیم. در همین
@@ -124,12 +124,12 @@ const JobsText = () => {
               </ul>
             </div>
           }
-          className="item bg-yellow-100 mb-8 rounded-tl-xl rounded-bl-xl border-r-4 border-yellow-500"
+          className='item mb-8 rounded-bl-xl rounded-tl-xl border-r-4 border-yellow-500 bg-yellow-100'
         />
 
-        <div className="section">
+        <div className='section'>
           <h2>دوست داری هم تیمی ما بشی؟</h2>
-          <p className="mb-3">
+          <p className='mb-3'>
             عـالـیـه! اگه احساس می‌کنی اینجا همون جاییه که ممکنه توش خوشحال باشی
             و تو همون فردی هستی که ما دنبالش هستیم و دلت می‌خواد با ایده‌ها و
             انرژیت به ما کمک کنی تا کـوچـا رو به یه جامعه کاربردی برای ایرانیای
@@ -140,11 +140,11 @@ const JobsText = () => {
             کنی، فایل رزومه‌ات رو آپلود کنی و توی یک یا چند پاراگراف از
             انگیزه‌ات برای به دست آوردن موقعیت شغلی مورد نظرت بنویسی. ما دوست
             داریم بهمون بگی چرا تمایل داری توی تیم ما کار کنی و فکر میکنی که
-            چطوری میتونی تاثیرگذار باشی. اگر هم سوالی داری و یا
-            فقط میخوای باهامون سلام و احوالپرسی کنی،{" "}
-            <Link href={"https://t.me/koochaa_support"} target="_blank">
+            چطوری میتونی تاثیرگذار باشی. اگر هم سوالی داری و یا فقط میخوای
+            باهامون سلام و احوالپرسی کنی،{' '}
+            <Link href={'https://t.me/koochaa_support'} target='_blank'>
               آیدی تلگرام
-            </Link>{" "}
+            </Link>{' '}
             بهترین انتخابه. با اشتیاق منتظر شنیدن صدای گرم‌تون هستیم و برای
             شناختن همسفرامون در این مسیر هیجان‌انگیز لحظه شماری می‌کنیم.
           </p>

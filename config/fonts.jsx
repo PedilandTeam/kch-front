@@ -1,5 +1,5 @@
-"use client"
-import { Global } from "@emotion/react";
+'use client';
+import { Global } from '@emotion/react';
 
 const Fonts = () => (
   <Global

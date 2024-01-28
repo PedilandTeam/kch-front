@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { PageNamespace } from "@/types/page";
-import DeviceDetector from "device-detector-js";
+import { PageNamespace } from '@/types/page';
+import DeviceDetector from 'device-detector-js';
 import {
   ShareIcon,
   GlobeAltIcon,
   PhoneIcon,
   DevicePhoneMobileIcon,
-} from "@heroicons/react/24/outline";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import React, { MouseEvent } from "react";
-import { toast } from "react-hot-toast";
-import upperCaseFirst from "@/utils/upperCaseFirst";
-import { _TXT } from "@/app/text";
+} from '@heroicons/react/24/outline';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import React, { MouseEvent } from 'react';
+import { toast } from 'react-hot-toast';
+import upperCaseFirst from '@/utils/upperCaseFirst';
+import { _TXT } from '@/app/text';
 
 interface ItemSideInfoType {
   pageData: PageNamespace.Page;
@@ -41,23 +41,23 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
     return null;
   }
   return (
-    <div className="item-address text-left">
+    <div className='item-address text-left'>
       {Array.isArray(Images) &&
         Images.map((image, index) => {
           return (
             <Link
               key={`side-info-${index}`}
-              href={image.href || "#"}
-              target="_blank"
-              rel="nofollow noopener"
+              href={image.href || '#'}
+              target='_blank'
+              rel='nofollow noopener'
             >
               <Image
                 key={image.href}
-                alt="social icon"
+                alt='social icon'
                 src={image.src}
                 width={20}
                 height={20}
-                className="ml-2"
+                className='ml-2'
               />
             </Link>
           );
@@ -67,15 +67,15 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
           return (
             <Link
               key={`side-info-icons-${index}`}
-              href={Icon.href || "#"}
-              target="_blank"
-              rel="nofollow noopener"
+              href={Icon.href || '#'}
+              target='_blank'
+              rel='nofollow noopener'
             >
               {Icon.Component}
             </Link>
           );
         })}
-      <span className="font-PinarLT">{text}</span>
+      <span className='font-PinarLT'>{text}</span>
     </div>
   );
 }
@@ -96,141 +96,141 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
     const detector = new DeviceDetector();
     const agent = detector.parse(navigator.userAgent);
 
-    if (type == "website") {
-      window.open(`https://${regexp[0]}`, "_blank", "noopener, noreferrer");
-    } else if (type == "telephone") {
-      if (agent.device?.type == "desktop") {
+    if (type == 'website') {
+      window.open(`https://${regexp[0]}`, '_blank', 'noopener, noreferrer');
+    } else if (type == 'telephone') {
+      if (agent.device?.type == 'desktop') {
         const number = `00${
-          pageData.country.areaCode ? pageData.country.areaCode : ""
+          pageData.country.areaCode ? pageData.country.areaCode : ''
         }${pageData.contact.telephone!}`;
         navigator.clipboard.writeText(number);
         e.currentTarget.dataset.tip = number;
-        toast.success("شماره تلفن کپی شد.");
+        toast.success('شماره تلفن کپی شد.');
       } else {
         window.open(
           `tel:${pageData.contact.telephone}`,
-          
-          "_blank",
-          "noopener, noreferrer"
+
+          '_blank',
+          'noopener, noreferrer'
         );
       }
-    } else if (type == "share") {
-      if (agent.device?.type == "desktop") {
+    } else if (type == 'share') {
+      if (agent.device?.type == 'desktop') {
         navigator.clipboard.writeText(
           `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`
         );
-        toast.success("آدرس این صفحه کپی شد.");
+        toast.success('آدرس این صفحه کپی شد.');
       } else {
         navigator.share({
           url: `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`,
         });
       }
-    }else if(type == 'phone'){
-      if (agent.device?.type == "desktop") {
+    } else if (type == 'phone') {
+      if (agent.device?.type == 'desktop') {
         const number = `00${
-          pageData.country.areaCode ? pageData.country.areaCode : ""
+          pageData.country.areaCode ? pageData.country.areaCode : ''
         }${pageData.contact.phone!}`;
         navigator.clipboard.writeText(number);
         e.currentTarget.dataset.tip = number;
-        toast.success("شماره همراه کپی شد.");
+        toast.success('شماره همراه کپی شد.');
       } else {
         window.open(
           `tel:${pageData.contact.phone}`,
-          "_blank",
-          "noopener, noreferrer"
+          '_blank',
+          'noopener, noreferrer'
         );
       }
     }
   };
 
   return (
-    <div className="item-side sm:col-span-4 sm:col-end-13 mx-3 sm:mr-3 sm:ml-0">
-      <div className="item-contact grid grid-cols-4 mb-4">
-        <div className="group grid grid-rows-1 gap-2 text-center border-l hover:cursor-pointer">
+    <div className='item-side mx-3 sm:col-span-4 sm:col-end-13 sm:ml-0 sm:mr-3'>
+      <div className='item-contact mb-4 grid grid-cols-4'>
+        <div className='group grid grid-rows-1 gap-2 border-l text-center hover:cursor-pointer'>
           {pageData?.socials?.website ? (
             <button
               onClick={linkHandler}
-              data-type="website"
-              className="grid grid-rows-2 gap-2 text-center"
+              data-type='website'
+              className='grid grid-rows-2 gap-2 text-center'
             >
-              <GlobeAltIcon className="w-[26px] h-[26px] mx-auto group-hover:text-yellow-900 transition duration-300 ease-in-out" />
-              <span className="group-hover:text-yellow-900 transition duration-300 ease-in-out font-medium">
+              <GlobeAltIcon className='mx-auto h-[26px] w-[26px] transition duration-300 ease-in-out group-hover:text-yellow-900' />
+              <span className='font-medium transition duration-300 ease-in-out group-hover:text-yellow-900'>
                 {_TXT.GENERAL.WEBSITE}
               </span>
             </button>
           ) : (
-            <button className="grid grid-rows-2 gap-2 text-center">
-              <GlobeAltIcon className="text-gray-300 w-[26px] h-[26px] mx-auto" />
-              <span className="text-gray-300">{_TXT.GENERAL.WEBSITE}</span>
+            <button className='grid grid-rows-2 gap-2 text-center'>
+              <GlobeAltIcon className='mx-auto h-[26px] w-[26px] text-gray-300' />
+              <span className='text-gray-300'>{_TXT.GENERAL.WEBSITE}</span>
             </button>
           )}
         </div>
 
-        <div className="group grid grid-rows-1 gap-2 text-center border-l hover:cursor-pointer">
+        <div className='group grid grid-rows-1 gap-2 border-l text-center hover:cursor-pointer'>
           {
             pageData?.contact?.phone ? (
               <button
                 onClick={linkHandler}
-                data-type="phone"
-                data-tip="کلیک کنید"
-                className="grid grid-rows-2 gap-2 text-center tooltip"
+                data-type='phone'
+                data-tip='کلیک کنید'
+                className='tooltip grid grid-rows-2 gap-2 text-center'
               >
-                <DevicePhoneMobileIcon className="w-[26px] h-[26px] mx-auto group-hover:text-yellow-900 transition duration-300 ease-in-out" />
-                <span className="group-hover:text-yellow-900 transition duration-300 ease-in-out font-medium">
+                <DevicePhoneMobileIcon className='mx-auto h-[26px] w-[26px] transition duration-300 ease-in-out group-hover:text-yellow-900' />
+                <span className='font-medium transition duration-300 ease-in-out group-hover:text-yellow-900'>
                   {_TXT.GENERAL.MOBILE}
                 </span>
               </button>
             ) : (
               <>
-                <DevicePhoneMobileIcon className="text-gray-300 w-[26px] h-[26px] mx-auto" />
-                <span className="text-gray-300">{_TXT.GENERAL.MOBILE}</span>
+                <DevicePhoneMobileIcon className='mx-auto h-[26px] w-[26px] text-gray-300' />
+                <span className='text-gray-300'>{_TXT.GENERAL.MOBILE}</span>
               </>
             )
             // </div>
           }
         </div>
 
-        <div className="group grid grid-rows-1 gap-2 text-center border-l hover:cursor-pointer">
+        <div className='group grid grid-rows-1 gap-2 border-l text-center hover:cursor-pointer'>
           {
             pageData?.contact?.telephone ? (
               <button
                 onClick={linkHandler}
-                data-type="telephone"
-                data-tip="کلیک کنید"
-                className="grid grid-rows-2 gap-2 text-center tooltip"
+                data-type='telephone'
+                data-tip='کلیک کنید'
+                className='tooltip grid grid-rows-2 gap-2 text-center'
               >
-                <PhoneIcon className="w-[26px] h-[26px] mx-auto group-hover:text-yellow-900 transition duration-300 ease-in-out" />
-                <span className="group-hover:text-yellow-900 transition duration-300 ease-in-out font-medium">
+                <PhoneIcon className='mx-auto h-[26px] w-[26px] transition duration-300 ease-in-out group-hover:text-yellow-900' />
+                <span className='font-medium transition duration-300 ease-in-out group-hover:text-yellow-900'>
                   {_TXT.GENERAL.PHONE}
                 </span>
               </button>
             ) : (
               <>
-                <PhoneIcon className="text-gray-300 w-[26px] h-[26px] mx-auto" />
-                <span className="text-gray-300">{_TXT.GENERAL.PHONE}</span>
+                <PhoneIcon className='mx-auto h-[26px] w-[26px] text-gray-300' />
+                <span className='text-gray-300'>{_TXT.GENERAL.PHONE}</span>
               </>
             )
             // </div>
           }
         </div>
 
-        <div className="group grid grid-rows-1 gap-2 text-center">
+        <div className='group grid grid-rows-1 gap-2 text-center'>
           <button
             onClick={linkHandler}
-            data-type="share"
-            className="grid grid-rows-2 gap-2 text-center"
+            data-type='share'
+            className='grid grid-rows-2 gap-2 text-center'
           >
-            <ShareIcon className="w-[26px] h-[26px] mx-auto group-hover:text-yellow-900 transition duration-300 ease-in-out" />
-            <span className="group-hover:text-yellow-900 transition duration-300 ease-in-out font-medium">
+            <ShareIcon className='mx-auto h-[26px] w-[26px] transition duration-300 ease-in-out group-hover:text-yellow-900' />
+            <span className='font-medium transition duration-300 ease-in-out group-hover:text-yellow-900'>
               اشتراک
             </span>
           </button>
         </div>
       </div>
-      <div className="rounded-md border border-gray-200 p-4 mb-3">
+      <div className='mb-3 rounded-md border border-gray-200 p-4'>
         <ItemSideInfoItem
           text={`${
-            pageData?.address?.address ? pageData?.address?.address : ""
+            pageData?.address?.address ? pageData?.address?.address : ''
           }, ${
             pageData?.city?.englishName
               ? upperCaseFirst(pageData.city.englishName)
@@ -270,34 +270,34 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         </button>
       </div> */}
 
-      <div className="rounded-md border border-gray-200 px-5 py-4 mb-3 text-[15px]">
+      <div className='mb-3 rounded-md border border-gray-200 px-5 py-4 text-[15px]'>
         <p>این صفحه توسط ادمین کوچا مدیریت می‌شود.</p>
       </div>
 
       {/* Share Modal */}
-      <dialog id="modal_share" className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg flex items-center">
-            <ShareIcon className="w-[22px] h-[22px] ml-2" />
+      <dialog id='modal_share' className='modal'>
+        <div className='modal-box'>
+          <h3 className='flex items-center text-lg font-bold'>
+            <ShareIcon className='ml-2 h-[22px] w-[22px]' />
             اشتراک گذاری
           </h3>
-          <p className="pt-2">
+          <p className='pt-2'>
             با اشتراک گذاری این صفحه در صفحات اجتماعی به دیده شدنش کمک کنید.
           </p>
-          <div className="share-links"></div>
+          <div className='share-links'></div>
         </div>
-        <form method="dialog" className="modal-backdrop">
+        <form method='dialog' className='modal-backdrop'>
           <button>close</button>
         </form>
       </dialog>
 
       {/* Claim Modal */}
-      <dialog id="modal_claim" className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">Press ESC key or click outside to close</p>
+      <dialog id='modal_claim' className='modal'>
+        <div className='modal-box'>
+          <h3 className='text-lg font-bold'>Hello!</h3>
+          <p className='py-4'>Press ESC key or click outside to close</p>
         </div>
-        <form method="dialog" className="modal-backdrop">
+        <form method='dialog' className='modal-backdrop'>
           <button>close</button>
         </form>
       </dialog>

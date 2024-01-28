@@ -1,10 +1,10 @@
-import { CountryStats } from "./countryStats";
-import { CountryCategories } from "./countryCategories";
-import { SliderHome } from "./slider";
-import { CountryNamespace } from "@/types/country";
-import { CategoryNamespace } from "@/types/category";
-import { UnitsBanner } from "./unitsBanner";
-import { SeoText } from "./seoText";
+import { CountryStats } from './countryStats';
+import { CountryCategories } from './countryCategories';
+import { SliderHome } from './slider';
+import { CountryNamespace } from '@/types/country';
+import { CategoryNamespace } from '@/types/category';
+import { UnitsBanner } from './unitsBanner';
+import { SeoText } from './seoText';
 
 type CountryProps = {
   currentCountry: CountryNamespace.GET;
@@ -12,7 +12,7 @@ type CountryProps = {
 };
 export default function Country({ currentCountry, categories }: CountryProps) {
   return (
-    <div className="component page-country">
+    <div className='component page-country'>
       <SliderHome currentCountry={currentCountry} />
       <UnitsBanner currentCountry={currentCountry} />
       <CountryStats currentCountry={currentCountry} />

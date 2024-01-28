@@ -1,49 +1,49 @@
-import { _TXT } from "@app/text/index";
-import { ItemBreadCrumb } from "./breadcrumb";
-import { ItemSideInfo } from "./sideInfo";
-import { ItemTopInfo } from "./topInfo";
-import { PageNamespace } from "@/types/page";
-import CountryUpdater from "./countryUpdater";
+import { _TXT } from '@app/text/index';
+import { ItemBreadCrumb } from './breadcrumb';
+import { ItemSideInfo } from './sideInfo';
+import { ItemTopInfo } from './topInfo';
+import { PageNamespace } from '@/types/page';
+import CountryUpdater from './countryUpdater';
 export type PageItemProps = {
   pageData: PageNamespace.Page;
 };
 
 export default function PageItem({ pageData }: PageItemProps) {
   return (
-    <div className="component page-item">
+    <div className='component page-item'>
       <CountryUpdater pageData={pageData} />
 
-      <div className="bg-slate-50 bg-[url('/images/pattern-02.png')] bg-center sm:h-[280px] mb-4 sm:mb-4">
+      <div className="mb-4 bg-slate-50 bg-[url('/images/pattern-02.png')] bg-center sm:mb-4 sm:h-[280px]">
         <ItemTopInfo pageData={pageData} />
       </div>
 
-      <div className="container mx-auto max-w-[1144px]">
-        <div className="grid grid-cols-1 sm:grid-cols-12 sm:gap-4">
+      <div className='container mx-auto max-w-[1144px]'>
+        <div className='grid grid-cols-1 sm:grid-cols-12 sm:gap-4'>
           <ItemSideInfo pageData={pageData} />
 
-          <div className="item-main sm:col-span-8 sm:col-start-1 sm:row-start-1 px-3 sm:pl-3 sm:pr-0">
+          <div className='item-main px-3 sm:col-span-8 sm:col-start-1 sm:row-start-1 sm:pl-3 sm:pr-0'>
             <ItemBreadCrumb pageData={pageData} />
 
             {/* Description Section */}
-            <div className="item-description py-6 sm:py-8 border-b border-gray-200">
-              <h3 className="font-bold mb-4 sm:mb-5">
+            <div className='item-description border-b border-gray-200 py-6 sm:py-8'>
+              <h3 className='mb-4 font-bold sm:mb-5'>
                 {_TXT.ITEM.DESCRIPTION}
               </h3>
               <p
                 className={`text-[15px] leading-8 ${
-                  pageData.description ? "text-black" : "text-gray-500"
+                  pageData.description ? 'text-black' : 'text-gray-500'
                 }`}
               >
                 {pageData.description
                   ? pageData.description
-                  : "توضیحاتی در مورد این واحد ثبت نشده است."}
+                  : 'توضیحاتی در مورد این واحد ثبت نشده است.'}
               </p>
             </div>
 
             {/* Facilities Section */}
-            <div className="item-description py-6 sm:py-8 border-b border-gray-200">
-              <h3 className="font-bold mb-4 sm:mb-5">{_TXT.ITEM.FACILITIES}</h3>
-              <p className="text-[15px] text-gray-500">
+            <div className='item-description border-b border-gray-200 py-6 sm:py-8'>
+              <h3 className='mb-4 font-bold sm:mb-5'>{_TXT.ITEM.FACILITIES}</h3>
+              <p className='text-[15px] text-gray-500'>
                 {_TXT.ITEM.FACILITIES_NO}
               </p>
             </div>
@@ -131,11 +131,11 @@ export default function PageItem({ pageData }: PageItemProps) {
             </div> */}
 
             {/* Comment Section */}
-            <div className="item-description py-6 sm:py-8">
-              <h3 className="font-bold mb-4 sm:mb-5">
+            <div className='item-description py-6 sm:py-8'>
+              <h3 className='mb-4 font-bold sm:mb-5'>
                 {_TXT.ITEM.USERS_COMMENTS}
               </h3>
-              <p className="text-[15px] text-gray-500">
+              <p className='text-[15px] text-gray-500'>
                 {_TXT.ITEM.USERS_COMMENTS_DISABLE}
               </p>
             </div>

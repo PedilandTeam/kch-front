@@ -1,20 +1,20 @@
-import { API_ROUTES } from "@/routes";
-import { CategoryNamespace } from "@/types/category";
-import { CityNamespace } from "@/types/city";
-import { UnitType } from "@/types/unit";
-import joiner from "@/utils/joiner";
-import { notFound } from "next/navigation";
-import { ItemBreadCrumb } from "./breadcrumb";
-import { CardsList } from "./cardsList";
-import ListFilter from "./filter/listFilter";
-import { CountryNamespace } from "@/types/country";
-import { Suspense } from "react";
-import Loading from "../_loading";
-import { FunnelIcon } from "@heroicons/react/24/solid";
-import { _TXT } from "@/app/text";
-import SideBanner from "@/app/banners/side-banner";
-import FilterMobile from "./filter/filter.mobile";
-import FilterModalMobile from "./filter/filterModal.mobile";
+import { API_ROUTES } from '@/routes';
+import { CategoryNamespace } from '@/types/category';
+import { CityNamespace } from '@/types/city';
+import { UnitType } from '@/types/unit';
+import joiner from '@/utils/joiner';
+import { notFound } from 'next/navigation';
+import { ItemBreadCrumb } from './breadcrumb';
+import { CardsList } from './cardsList';
+import ListFilter from './filter/listFilter';
+import { CountryNamespace } from '@/types/country';
+import { Suspense } from 'react';
+import Loading from '../_loading';
+import { FunnelIcon } from '@heroicons/react/24/solid';
+import { _TXT } from '@/app/text';
+import SideBanner from '@/app/banners/side-banner';
+import FilterMobile from './filter/filter.mobile';
+import FilterModalMobile from './filter/filterModal.mobile';
 
 type PagesListProps = {
   category: CategoryNamespace.category;
@@ -41,7 +41,7 @@ async function fetchCities(
     ).json();
   } catch (e) {
     console.log(await e);
-    throw new Error("error in get cities fetchCities");
+    throw new Error('error in get cities fetchCities');
   }
 
   return cities;
@@ -59,16 +59,16 @@ export default async function CategoryList({
   const cities = await fetchCities(country.code, category.id);
 
   return (
-    <div className="component sm:mt-3 page-list">
-      <div className="container mx-auto max-w-[1144px]">
-        <div className="grid grid-cols-1 sm:grid-cols-8 gap-y-4 sm:gap-8">
-          <div className="sidebar hidden sm:block sm:col-span-2">
+    <div className='component page-list sm:mt-3'>
+      <div className='container mx-auto max-w-[1144px]'>
+        <div className='grid grid-cols-1 gap-y-4 sm:grid-cols-8 sm:gap-8'>
+          <div className='sidebar hidden sm:col-span-2 sm:block'>
             <ListFilter cities={cities} />
           </div>
 
-          <div className="page-content sm:col-span-6">
-            <div className="flex flex-wrap">
-              <div className="sm:order-2 w-full sm:mb-2">
+          <div className='page-content sm:col-span-6'>
+            <div className='flex flex-wrap'>
+              <div className='w-full sm:order-2 sm:mb-2'>
                 <ItemBreadCrumb
                   unit={unit}
                   category={category}
@@ -76,19 +76,18 @@ export default async function CategoryList({
                 />
               </div>
 
-              <div className="page-header sm:order-1 w-full px-3 sm:px-0">
-                <h1 className="text-xl font-semibold my-4 sm:mt-0 sm:mb-3 text-pink-800">
-                  لیست{" "}
+              <div className='page-header w-full px-3 sm:order-1 sm:px-0'>
+                <h1 className='my-4 text-xl font-semibold text-pink-800 sm:mb-3 sm:mt-0'>
+                  لیست{' '}
                   {category?.seoTitle
                     ? category.seoTitle
-                    : `${category.name} فارسی زبان`}{" "}
-                  در {country?.name}{" "}
+                    : `${category.name} فارسی زبان`}{' '}
+                  در {country?.name}{' '}
                 </h1>
               </div>
             </div>
-            <div className="px-3 sm:px-0">
-
-              <div className="md:hidden">
+            <div className='px-3 sm:px-0'>
+              <div className='md:hidden'>
                 <FilterMobile />
                 <FilterModalMobile cities={cities.items} />
               </div>
@@ -108,7 +107,7 @@ export default async function CategoryList({
             </div>
           </div>
 
-          <div className="sm:hidden mt-5 mx-3">
+          <div className='mx-3 mt-5 sm:hidden'>
             <SideBanner />
           </div>
         </div>

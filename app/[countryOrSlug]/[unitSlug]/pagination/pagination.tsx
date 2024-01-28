@@ -1,10 +1,10 @@
-"use client";
-import { _TXT } from "@/app/text";
-import { PageNamespace } from "@/types/page";
-import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import queryString from "query-string";
-import React, { useCallback, useEffect, useState, useTransition } from "react";
+'use client';
+import { _TXT } from '@/app/text';
+import { PageNamespace } from '@/types/page';
+import Link from 'next/link';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import queryString from 'query-string';
+import React, { useCallback, useEffect, useState, useTransition } from 'react';
 
 type ParsedSearchParams = {
   page?: number;
@@ -31,10 +31,9 @@ export default function ({ pages }: PaginationProps) {
 
   useEffect(() => {
     setParsedSearchParams(
-      queryString.parse(searchParams.toString(), { arrayFormat: "comma" })
+      queryString.parse(searchParams.toString(), { arrayFormat: 'comma' })
     );
   }, [searchParams]);
-
 
   /**
    * if totalPages are equal or lower than standard(usually 6) then all pages appear in pagination
@@ -85,7 +84,7 @@ export default function ({ pages }: PaginationProps) {
   };
 
   useEffect(() => {
-    const pageInSearchParams = searchParams.get("page");
+    const pageInSearchParams = searchParams.get('page');
     if (!pageInSearchParams) return;
     setPageNumber(+pageInSearchParams);
   }, [searchParams]);
@@ -98,7 +97,7 @@ export default function ({ pages }: PaginationProps) {
     router.replace(
       `${pathname}?page=${page}&${queryString.stringify(
         parsedSearchParams || {},
-        { arrayFormat: "comma" }
+        { arrayFormat: 'comma' }
       )}`,
       { scroll: true }
     );
@@ -129,33 +128,33 @@ export default function ({ pages }: PaginationProps) {
   const isPrevOrNext = useCallback(
     (num: number) => {
       return num > pageNumber
-        ? { rel: "next" }
+        ? { rel: 'next' }
         : num < pageNumber
-        ? { rel: "prev" }
-        : num == pageNumber
-        ? {}
-        : {};
+          ? { rel: 'prev' }
+          : num == pageNumber
+            ? {}
+            : {};
     },
     [pageNumber]
   );
 
   return (
-    <div className="flex justify-center items-center mt-9">
+    <div className='mt-9 flex items-center justify-center'>
       <Link
-        rel="next"
+        rel='next'
         href={`${pathname}?page=${pageNumber + 1}`}
         onClick={buttonLinkHandler}
       >
         <button
           onClick={nextButtonClickHandler}
-          className={`join-item btn ml-2 ${
-            pageNumber == totalPages && "btn-active"
+          className={`btn join-item ml-2 ${
+            pageNumber == totalPages && 'btn-active'
           } `}
         >
           {_TXT.GENERAL.NEXT}
         </button>
       </Link>
-      <div className="join" dir="ltr">
+      <div className='join' dir='ltr'>
         <Link
           {...isPrevOrNext(1)}
           href={`${pathname}?page=1`}
@@ -163,7 +162,7 @@ export default function ({ pages }: PaginationProps) {
         >
           <button
             onClick={paginationButtonClickHandler}
-            className={`join-item btn ${pageNumber == 1 && "btn-active"} `}
+            className={`btn join-item ${pageNumber == 1 && 'btn-active'} `}
           >
             {1}
           </button>
@@ -179,8 +178,8 @@ export default function ({ pages }: PaginationProps) {
             >
               <button
                 onClick={paginationButtonClickHandler}
-                className={`join-item btn ${
-                  pageNumber == number && "btn-active"
+                className={`btn join-item ${
+                  pageNumber == number && 'btn-active'
                 } `}
               >
                 {number}
@@ -196,8 +195,8 @@ export default function ({ pages }: PaginationProps) {
           >
             <button
               onClick={paginationButtonClickHandler}
-              className={`join-item btn ${
-                pageNumber == totalPages && "btn-active"
+              className={`btn join-item ${
+                pageNumber == totalPages && 'btn-active'
               }`}
             >
               {totalPages}
@@ -206,15 +205,13 @@ export default function ({ pages }: PaginationProps) {
         ) : null}
       </div>
       <Link
-        rel="prev"
+        rel='prev'
         href={`${pathname}?page=${pageNumber - 1}`}
         onClick={buttonLinkHandler}
       >
         <button
           onClick={prevButtonClickHandler}
-          className={`join-item btn mr-2 ${
-            pageNumber == 1 && "btn-disabled"
-          } `}
+          className={`btn join-item mr-2 ${pageNumber == 1 && 'btn-disabled'} `}
         >
           {_TXT.GENERAL.PREVIOUS}
         </button>
