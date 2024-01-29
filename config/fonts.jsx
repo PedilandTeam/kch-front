@@ -2,8 +2,8 @@
 import { Global } from '@emotion/react';
 
 const Fonts = () => (
-  <Global
-    styles={`
+    <Global
+        styles={`
       @font-face {
         font-family: "Pinar";
         src: url("/fonts/Pinar-FD-VF.woff2") format('woff2 supports variations'),
@@ -17,7 +17,7 @@ const Fonts = () => (
         font-display: fallback;
       }
       `}
-  />
+    />
 );
 
 export default Fonts;

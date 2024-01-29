@@ -26,7 +26,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             toast.error('لطفا وارد شوید');
             router.push('/login');
         } else {
-            setFirstCheckPassed(true)
+            setFirstCheckPassed(true);
         }
     }, [isAuthenticated, isLoading, router]);
 
@@ -36,7 +36,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             toast.error('باید اول ایمیل خودرا تایید کنید');
             router.push('verifyEmail');
         } else {
-            setFirstCheckPassed(true)
+            setFirstCheckPassed(true);
         }
     }, [isNotVerified, isLoading, router]);
 
@@ -64,7 +64,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <div className={`w-full grid gap-5 lg:grid-cols-12`}>
+        <div className={`grid w-full gap-5 lg:grid-cols-12`}>
             <div className='lg:col-span-3'>
                 <div className='hidden lg:block'>
                     <UserDetails />
@@ -72,7 +72,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </div>
             </div>
             <div className='lg:col-span-9'>
-            <div
+                <div
                     className={`${firstCheckPassed && (isLoading || !isAuthenticated) ? 'blur-md' : ''}  col-span-4 lg:col-span-3`}
                 >
                     {children}

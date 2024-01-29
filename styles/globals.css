@@ -3,128 +3,128 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    font-family: 'Pinar', system-ui, sans-serif;
-  }
+    html {
+        font-family: 'Pinar', system-ui, sans-serif;
+    }
 }
 
 /* Static Pages Style */
 .page-wrap.static .text-wrap h2 {
-  @apply mb-2 mt-8 text-lg font-semibold text-primary first:mt-0;
+    @apply mb-2 mt-8 text-lg font-semibold text-primary first:mt-0;
 }
 .page-wrap.static .text-wrap p {
-  @apply leading-7;
+    @apply leading-7;
 }
 .page-wrap.static .text-wrap a {
-  @apply text-primary underline hover:text-secondary hover:no-underline;
+    @apply text-primary underline hover:text-secondary hover:no-underline;
 }
 .page-wrap.static .text-wrap strong {
-  @apply font-semibold;
+    @apply font-semibold;
 }
 .page-wrap.static .text-wrap ul {
-  @apply my-3 pr-3;
+    @apply my-3 pr-3;
 }
 .page-wrap.static .text-wrap ul li {
-  @apply mb-2;
+    @apply mb-2;
 }
 .page-wrap.static .text-wrap ol li {
-  @apply mb-2 mr-5 mt-8 text-lg font-semibold first:mt-0;
+    @apply mb-2 mr-5 mt-8 text-lg font-semibold first:mt-0;
 }
 .page-wrap.static .text-wrap .section {
-  @apply mb-8 rounded-bl-xl rounded-tl-xl border border-r-4 border-blue-100 bg-slate-50 p-5 last:mb-0 sm:p-8;
+    @apply mb-8 rounded-bl-xl rounded-tl-xl border border-r-4 border-blue-100 bg-slate-50 p-5 last:mb-0 sm:p-8;
 }
 .page-wrap.static .text-wrap .section h2 {
-  @apply mb-3 text-lg;
+    @apply mb-3 text-lg;
 }
 .page-wrap.static .text-wrap .section p {
-  @apply leading-8;
+    @apply leading-8;
 }
 .page-wrap.static .text-wrap .item h3 {
-  @apply text-lg font-semibold text-primary;
+    @apply text-lg font-semibold text-primary;
 }
 .page-wrap.static .text-wrap .item ul {
-  @apply mb-8 pr-0 sm:pr-3;
+    @apply mb-8 pr-0 sm:pr-3;
 }
 .page-wrap.static .text-wrap .item ul li {
-  @apply sm:list-inside sm:list-disc;
+    @apply sm:list-inside sm:list-disc;
 }
 .page-wrap.static .page-head {
-  @apply relative mx-3 flex content-center justify-center sm:mx-auto sm:max-w-[95%];
+    @apply relative mx-3 flex content-center justify-center sm:mx-auto sm:max-w-[95%];
 }
 .page-wrap.static .page-head .content {
-  @apply absolute left-0 right-0 top-0 mx-auto flex h-full w-full max-w-[1144px] flex-wrap items-center justify-center sm:justify-start;
+    @apply absolute left-0 right-0 top-0 mx-auto flex h-full w-full max-w-[1144px] flex-wrap items-center justify-center sm:justify-start;
 }
 .page-wrap.static .page-head .content .wrap h1 {
-  @apply mb-1 text-center text-[34px] font-bold sm:mb-3 sm:text-right sm:text-[38px];
+    @apply mb-1 text-center text-[34px] font-bold sm:mb-3 sm:text-right sm:text-[38px];
 }
 .page-wrap.static .page-head .content .wrap h2 {
-  @apply text-center text-[21px] font-medium sm:text-right sm:text-[22px];
+    @apply text-center text-[21px] font-medium sm:text-right sm:text-[22px];
 }
 
 /* Off-Canvas */
 .menu ul li a {
-  @apply mb-3 border border-dashed border-blue-300 font-medium text-blue-900 hover:bg-blue-300 hover:text-white focus:bg-blue-300;
+    @apply mb-3 border border-dashed border-blue-300 font-medium text-blue-900 hover:bg-blue-300 hover:text-white focus:bg-blue-300;
 }
 
 /* Main Scroll Style */
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+    width: 10px;
 }
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f7eed8;
+    background: #f7eed8;
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #d8aa3c;
-  border-radius: 5px;
+    background: #d8aa3c;
+    border-radius: 5px;
 }
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #a4b0e4;
+    background: #a4b0e4;
 }
 
 * {
-  scroll-behavior: smooth !important;
+    scroll-behavior: smooth !important;
 }
 
 .checkbox {
-  direction: ltr;
+    direction: ltr;
 }
 .checkbox:checked {
-  background-image: linear-gradient(
-      -45deg,
-      transparent 65%,
-      hsl(var(--chkbg)) 65.99%
-    ),
-    linear-gradient(45deg, transparent 75%, hsl(var(--chkbg)) 75.99%),
-    linear-gradient(-45deg, hsl(var(--chkbg)) 40%, transparent 40.99%),
-    linear-gradient(
-      45deg,
-      hsl(var(--chkbg)) 30%,
-      hsl(var(--chkfg)) 30.99%,
-      hsl(var(--chkfg)) 40%,
-      transparent 40.99%
-    ),
-    linear-gradient(-45deg, hsl(var(--chkfg)) 50%, hsl(var(--chkbg)) 50.99%) !important;
+    background-image: linear-gradient(
+            -45deg,
+            transparent 65%,
+            hsl(var(--chkbg)) 65.99%
+        ),
+        linear-gradient(45deg, transparent 75%, hsl(var(--chkbg)) 75.99%),
+        linear-gradient(-45deg, hsl(var(--chkbg)) 40%, transparent 40.99%),
+        linear-gradient(
+            45deg,
+            hsl(var(--chkbg)) 30%,
+            hsl(var(--chkfg)) 30.99%,
+            hsl(var(--chkfg)) 40%,
+            transparent 40.99%
+        ),
+        linear-gradient(-45deg, hsl(var(--chkfg)) 50%, hsl(var(--chkbg)) 50.99%) !important;
 }
 
 /* Button Styles */
 .btn-lime {
-  @apply border-lime-300 bg-lime-300 px-3 text-lime-900 hover:border-lime-400 hover:bg-lime-400 hover:text-lime-950;
+    @apply border-lime-300 bg-lime-300 px-3 text-lime-900 hover:border-lime-400 hover:bg-lime-400 hover:text-lime-950;
 }
 
 .shadow-blx {
-  box-shadow: 0 3px 0 black;
+    box-shadow: 0 3px 0 black;
 }
 .shadow-tlx {
-  text-shadow: 0 2px 0 black;
+    text-shadow: 0 2px 0 black;
 }
 
 .breadcrumbs ul li {
-  @apply text-blue-700;
+    @apply text-blue-700;
 }
 .breadcrumbs ul li a {
-  @apply text-blue-900;
+    @apply text-blue-900;
 }

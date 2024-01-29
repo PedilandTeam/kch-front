@@ -1,8 +1,8 @@
 export type socials =
-  | 'instagram'
-  | 'telegram'
-  | 'facebook'
-  | 'youtube'
-  | 'twitter'
-  | 'linkedin'
-  | 'website';
+    | 'instagram'
+    | 'telegram'
+    | 'facebook'
+    | 'youtube'
+    | 'twitter'
+    | 'linkedin'
+    | 'website';

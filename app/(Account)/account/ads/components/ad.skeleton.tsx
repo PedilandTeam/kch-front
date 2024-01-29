@@ -1,10 +1,13 @@
-import { memo } from "react";
+import { memo } from 'react';
 
 function AdSkeleton() {
     return (
         <>
             {Array.from({ length: 4 }).map((_, index) => (
-                <div key={index} className='flex w-11/12 shrink-0 flex-col justify-between gap-y-6 rounded-lg border px-5 py-5 md:h-36 md:w-7/12 md:flex-row '>
+                <div
+                    key={index}
+                    className='flex w-11/12 shrink-0 flex-col justify-between gap-y-6 rounded-lg border px-5 py-5 md:h-36 md:w-7/12 md:flex-row '
+                >
                     <div className='flex items-center'>
                         <div className='skeleton relative h-28 w-28 overflow-hidden rounded-lg'></div>
                         <div className='flex h-full flex-col items-start justify-center pr-4'>
@@ -25,4 +28,4 @@ function AdSkeleton() {
     );
 }
 
-export default memo(AdSkeleton)
+export default memo(AdSkeleton);

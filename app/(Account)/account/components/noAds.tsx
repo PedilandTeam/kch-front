@@ -1,6 +1,6 @@
 import Button from '@/components/daisy/button';
 import Image from 'next/image';
-import { PlusIcon } from '@heroicons/react/24/solid'
+import { PlusIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 
 export default function NoAds() {
@@ -12,9 +12,13 @@ export default function NoAds() {
                 height={250}
                 alt='پیدا نشد'
             />
-            <p className='text-4xl font-medium text-center'>شما هنوز هیچ آگهی‌ای ندارید!</p>
+            <p className='text-center text-4xl font-medium'>
+                شما هنوز هیچ آگهی‌ای ندارید!
+            </p>
             <Link href={'/account/ads'}>
-                <Button className='btn-primary btn-lg'>افزودن آگهی جدید <PlusIcon className='h-6 w-6'/></Button>
+                <Button className='btn-primary btn-lg'>
+                    افزودن آگهی جدید <PlusIcon className='h-6 w-6' />
+                </Button>
             </Link>
         </div>
     );

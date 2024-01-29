@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
-import { HomeCountries } from './home/countries';
-import { SliderMainHome } from './home/slider';
-import HomeBottom from './home/bottom';
+import { HomeCountries } from '@/app/(Site)/home/countries';
+import { SliderMainHome } from '@app/(Site)/home/slider';
+import HomeBottom from '@app/(Site)/home/bottom';
 
 export const metadata: Metadata = {
   title: 'کوچا | جامعه ایرانیان مهاجر مقیم همه جا',

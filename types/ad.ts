@@ -1,12 +1,9 @@
-import { AdCategoryNamepace } from "./adCategory";
-import { CityNamespace } from "./city";
-import { CountryNamespace } from "./country";
-import { IUser } from "./user";
-
-
+import { AdCategoryNamepace } from './adCategory';
+import { CityNamespace } from './city';
+import { CountryNamespace } from './country';
+import { IUser } from './user';
 
 export namespace AdNamespace {
-
     export interface IAd {
         id: string;
         title: string;
@@ -23,20 +20,20 @@ export namespace AdNamespace {
     }
 
     export type GET = {
-        items: IAd[],
+        items: IAd[];
         meta: {
-          currentPage: number,
-          itemCount: number,
-          itemsPerPage: number,
-          totalItems: number,
-          totalPages: number
-        }
-    }
+            currentPage: number;
+            itemCount: number;
+            itemsPerPage: number;
+            totalItems: number;
+            totalPages: number;
+        };
+    };
 
-    export interface UPDATE extends Partial<Omit<IAd, 'city' | 'country' | 'category'>>{
+    export interface UPDATE
+        extends Partial<Omit<IAd, 'city' | 'country' | 'category'>> {
         countryId?: number;
         cityId?: number;
-        categoryId?: number
+        categoryId?: number;
     }
-
 }

@@ -10,14 +10,14 @@ import Overview from './components/overview';
 import NoAds from './components/noAds';
 
 export default function Account() {
-  // Check params for messages
-  useParamsChecker();
-  const { user } = useUser();
+    // Check params for messages
+    useParamsChecker();
+    const { user } = useUser();
 
-  if (user)
-    return (
-      <div className='w-full'>
-        {user.ads?.length > 0 ? <Overview /> : <NoAds/>}
-      </div>
-    );
+    if (user)
+        return (
+            <div className='w-full'>
+                {user.ads?.length > 0 ? <Overview /> : <NoAds />}
+            </div>
+        );
 }
