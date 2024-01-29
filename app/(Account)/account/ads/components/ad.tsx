@@ -2,12 +2,9 @@ import Button from '@/components/daisy/button';
 import { AdNamespace } from '@/types/ad';
 import moment from 'moment';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Ad({ data }: { data: AdNamespace.IAd }) {
-
-    console.log(data);
-    
-
     return (
         <div className='flex flex-col md:flex-row md:h-36 gap-y-6 w-11/12 md:w-7/12 shrink-0 justify-between rounded-lg border px-5 py-5 '>
             <div className='flex items-center'>
@@ -30,9 +27,11 @@ export default function Ad({ data }: { data: AdNamespace.IAd }) {
                     </div>
                 </div>
             </div>
-            <div className='flex flex-col gap-y-2 justify-center items-center'>
+            <div className='flex flex-col gap-y-2 justify-center items-center '>
                 <p>وضعیت: {data.availability ? <span className='text-green-700'>منتشر شده</span> : <span className='text-red-500'>تعلیق</span>}</p>
-                <Button className='btn-outline btn-primary w-full'>ویرایش آگهی</Button>
+                <Link className='w-full' href={`/account/ads/${data.id}`}>
+                    <Button className='btn-outline btn-primary w-full'>ویرایش آگهی</Button>
+                </Link>
             </div>
         </div>
     );
