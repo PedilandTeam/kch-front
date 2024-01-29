@@ -3,16 +3,17 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Button from '@/components/daisy/button';
-import { ArrowLeftIcon } from '@heroicons/react/20/solid';
-import { usePathname, useRouter } from 'next/navigation';
-import titles from '../../account/titles';
+import { usePathname } from 'next/navigation';
 import HeaderMobile from './header.mobile';
+import titles from '../../account/titles';
 
 type HeaderProps = {
     children?: React.ReactNode;
 };
 
 export const Header = ({ children }: HeaderProps) => {
+    const pathname = usePathname();
+
     return (
         <header className='flex h-16 w-full items-center justify-between border-b bg-white px-4 py-3 shadow-sm lg:border-0 lg:px-6 lg:shadow-none'>
             <HeaderMobile />
@@ -41,14 +42,16 @@ export const Header = ({ children }: HeaderProps) => {
                     </Button>
                 </Link>
 
-                <Link href={'/account/ads/new'}>
-                    <Button
-                        className='btn-primary btn-md px-5
+                {!pathname.startsWith('/account/ads/new') ? (
+                    <Link href={'/account/ads/new'}>
+                        <Button
+                            className='btn-primary btn-md px-5
                     '
-                    >
-                        ثبت آگهی
-                    </Button>
-                </Link>
+                        >
+                            ثبت آگهی
+                        </Button>
+                    </Link>
+                ) : null}
             </div>
         </header>
     );
