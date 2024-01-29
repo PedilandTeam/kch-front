@@ -6,7 +6,7 @@ import { isNumber } from 'lodash';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import queryString from 'query-string';
-import { PathGeneratorType } from '../page';
+import { PathGeneratorType } from '../country/page';
 import UnitList from './unitList';
 
 const pathGenerator = async (

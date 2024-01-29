@@ -1,9 +1,9 @@
 import { API_ROUTES } from '@/routes';
 import { CountryNamespace } from '@/types/country';
-import PageItem from './item/item';
+import PageItem from '../item/item';
 import { notFound } from 'next/navigation';
-import Country from './country/country';
-import { metadata } from '@app/layout';
+import Country from './country';
+import { metadata } from '@app/(Site)/layout';
 
 export type PathsType = 'country' | 'unit' | 'category' | 'item';
 export type PathGeneratorType = {

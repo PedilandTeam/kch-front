@@ -1,7 +1,7 @@
 'use client';
 
-import { TopTools } from './layout/toptools';
-import { OffCanvas } from './layout/offcanvas';
+import { TopTools } from '../layout/toptools';
+import { OffCanvas } from '../layout/offcanvas';
 import { storeType } from '@/store/store';
 import { countryCodeList } from '@/utils/countryCodeList';
 import { useParams } from 'next/navigation';

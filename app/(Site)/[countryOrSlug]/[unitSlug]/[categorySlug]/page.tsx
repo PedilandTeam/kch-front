@@ -5,7 +5,7 @@ import { UnitType } from '@/types/unit';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import CategoryList from './categoryList';
-import { PathGeneratorType } from '../../page';
+import { PathGeneratorType } from '../../country/page';
 import queryString from 'query-string';
 
 type ParsedSearchParams = {
