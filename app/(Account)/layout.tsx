@@ -1,4 +1,4 @@
-import { Header } from '../(Site)/header';
+import { Header } from './components/header/header';
 import { Footer } from '../footer';
 import '@/styles/globals.css';
 import Fonts from '@/config/fonts';
@@ -33,10 +33,11 @@ export default async function RootLayout({
         <html lang='fa' dir='rtl' className='scroll-smooth'>
             <body className='min-h-screen'>
                 <Providers>
-                    <div className='container mx-auto'>
+                    <div className='lg:container mx-auto'>
                         <Fonts />
+                        <Header/>
                         <Toaster />
-                        <main className='min-h-[70vh]'>{children}</main>
+                        <main className='min-h-[70vh] pt-4'>{children}</main>
                     </div>
                     <Footer />
                 </Providers>
