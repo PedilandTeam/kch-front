@@ -8,6 +8,7 @@ export type SideMenuItem = {
   title: string;
   icon: React.ReactElement;
   path: string;
+  isMain: boolean
 };
 type SideMenu = {
   SideMenuList: SideMenuItem[];
@@ -25,7 +26,7 @@ export default function SideMenu({ SideMenuList }: SideMenu) {
           <li className='group mb-1' key={`menuItem-${index}`}>
             <Link
               href={item.path}
-              className={pathname == item.path ? activeClass : notActiveClass}
+              className={item.isMain ? (pathname == item.path ? activeClass : notActiveClass) : pathname.includes(item.path) ? activeClass : notActiveClass}
             >
               {item.icon}
               <span>{item.title}</span>
