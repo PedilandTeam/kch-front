@@ -4,6 +4,7 @@ import { fetcher } from "@/app/swr/fetcher"
 import { AdNamespace } from "@/types/ad"
 import useSWR from "swr"
 import Ad from "./components/ad"
+import AdSkeleton from "./components/ad.skeleton"
 
 export default function Ads() {
   const { data: ads, isLoading: isAdsLoading, error: adsError } = useSWR<AdNamespace.GET>(`${process.env.NEXT_PUBLIC_API_URL}/ads?limit=100&page=1`, fetcher)
@@ -11,7 +12,9 @@ export default function Ads() {
 
   if (isAdsLoading) {
     return (
-      <div className="skeleton w-32 h-32"></div>
+      <div className="flex flex-col gap-y-2 justify-center items-center">
+        <AdSkeleton/>
+      </div>
     )
   }
 
