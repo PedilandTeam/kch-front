@@ -14,12 +14,8 @@ import {
 } from '@heroicons/react/24/outline';
 import Button from '@/components/daisy/button';
 import useRegisterUser from './useRegisterUser';
-import useSWR from 'swr';
-import { fetcher } from '@/app/swr/fetcher';
-import { CountryNamespace } from '@/types/country';
 import SelectWithFetching from '@/components/daisy/selectWithFetching';
 import useRecaptchaV3 from '@/hooks/useRecaptchaV3';
-import { useEffect } from 'react';
 import { ReCaptchaV3Provider } from '@/components/global/recaptchaV3Provider';
 
 export type FormikValues = {

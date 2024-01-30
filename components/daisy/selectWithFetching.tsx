@@ -1,6 +1,6 @@
 'use client';
 import { fetcher } from '@/app/swr/fetcher';
-import { memo, startTransition, useEffect } from 'react';
+import { memo } from 'react';
 import useSWR from 'swr';
 import { CircleFlag } from 'next-circle-flags';
 import Select from '@daisyComponents/select';
