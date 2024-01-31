@@ -6,6 +6,7 @@ import Button from '@/components/daisy/button';
 import { usePathname } from 'next/navigation';
 import HeaderMobile from './header.mobile';
 import titles from '../../account/titles';
+import { useState, useEffect } from 'react';
 
 type HeaderProps = {
     children?: React.ReactNode;
@@ -14,8 +15,28 @@ type HeaderProps = {
 export const Header = ({ children }: HeaderProps) => {
     const pathname = usePathname();
 
+    const [isVisible, setIsVisible] = useState(true);
+
+    useEffect(() => {
+        if (!window) return;
+        const toggleVisibility = () => {
+            
+            if (window.scrollY > 100) {
+                setIsVisible(false);
+            } else {
+                setIsVisible(true);
+            }
+        };
+
+        window.addEventListener('scroll', toggleVisibility);
+
+        return () => window.removeEventListener('scroll', toggleVisibility);
+    }, []);
+
     return (
-        <header className='flex h-16 w-full items-center justify-between border-b bg-white px-4 py-3 shadow-sm lg:border-0 lg:px-6 lg:shadow-none'>
+        <header
+            className={`fixed top-0 z-30 bg-white transition-all duration-300 ${isVisible ? 'visible opacity-100' : 'invisible opacity-0'} flex h-16 w-full items-center justify-between border-b bg-white px-4 py-3 shadow-sm lg:border-0 lg:px-6 lg:shadow-none`}
+        >
             <HeaderMobile />
 
             <Link className='hidden lg:block' href='/'>

@@ -39,7 +39,7 @@ export default async function RootLayout({
                         <Toaster />
                         <main className='min-h-[70vh] pt-4'>{children}</main>
                     </div>
-                    <Footer />
+                    {/* <Footer /> */}
                 </Providers>
                 <Script src='https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD' />
                 <Script id='google-analytics'>
