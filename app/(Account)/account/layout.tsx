@@ -73,7 +73,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
             <div className='lg:col-span-9'>
                 <div
-                    className={`${firstCheckPassed && (isLoading || !isAuthenticated) ? 'blur-md' : ''}  col-span-4 lg:col-span-3`}
+                    className={`${firstCheckPassed && (isLoading || !isAuthenticated) ? 'blur-md' : ''}  col-span-5 lg:col-span-3`}
                 >
                     {children}
                 </div>
