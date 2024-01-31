@@ -4,6 +4,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     isInvalid?: boolean;
     errorMessage?: string | boolean;
     bordered?: boolean;
+    label?: string;
 }
 
 export default function Input({
@@ -13,12 +14,20 @@ export default function Input({
     isInvalid,
     errorMessage = false,
     bordered,
+    label,
     ...inputProps
 }: InputProps) {
     return (
         <div className={`form-control w-full max-w-full ${className}`}>
+            {label ? (
+                <label className='label'>
+                    <span className='min-h-[1 ch] label-text font-bold text-md'>
+                        {label}
+                    </span>
+                </label>
+            ) : null}
             <div
-                className={`input relative overflow-hidden ${className} ${bordered ? 'input-bordered' : ''} ${isInvalid ? 'input-error' : ''}`}
+                className={`input relative overflow-hidden w-full ${bordered ? 'input-bordered' : ''} ${isInvalid ? 'input-error' : ''}`}
             >
                 {startContent && (
                     <span
@@ -38,9 +47,6 @@ export default function Input({
             </div>
             {!!errorMessage && isInvalid ? (
                 <label className='label'>
-                    {/* {label && (
-                            <span className="label-text min-h-[1 ch]">{label}</span>                
-                        )} */}
                     {isInvalid && errorMessage && (
                         <span className='min-h-[1 ch] label-text-alt text-error'>
                             {errorMessage}
