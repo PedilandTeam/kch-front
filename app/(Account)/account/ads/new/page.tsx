@@ -1,11 +1,10 @@
+import PictureUploader from '@/components/global/pictureUploader/pictureUploader';
+import Pictures from './pictures';
 
-
-export default function NewAd() {
-
+export default function NewAdPage() {
     return (
-        <div>
-            dfs
+        <div className='flex w-full flex-col items-center justify-center'>
+          <Pictures/>
         </div>
-    )
-
+    );
 }
