@@ -50,8 +50,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
     if (!firstCheckPassed) {
         if (isLoading || !isAuthenticated || isNotVerified) {
-            console.log(isLoading || !isAuthenticated || isNotVerified);
-
             return (
                 <div className='flex h-[70vh] w-full flex-col items-center justify-center gap-y-4'>
                     <p className='animate-pulse text-2xl font-bold text-primary'>
@@ -73,7 +71,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
             <div className='lg:col-span-9'>
                 <div
-                    className={`${firstCheckPassed && (isLoading || !isAuthenticated) ? 'blur-md' : ''}  col-span-5 lg:col-span-3`}
+                    className={`${firstCheckPassed && (isLoading || !isAuthenticated) ? 'blur-md' : ''} col-span-5 flex flex-col items-center justify-center lg:col-span-3 lg:block`}
                 >
                     {children}
                 </div>

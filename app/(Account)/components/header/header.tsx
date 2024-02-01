@@ -20,7 +20,6 @@ export const Header = ({ children }: HeaderProps) => {
     useEffect(() => {
         if (!window) return;
         const toggleVisibility = () => {
-            
             if (window.scrollY > 100) {
                 setIsVisible(false);
             } else {
@@ -35,7 +34,7 @@ export const Header = ({ children }: HeaderProps) => {
 
     return (
         <header
-            className={`fixed top-0 z-30 bg-white transition-all duration-300 ${isVisible ? 'visible opacity-100' : 'invisible opacity-0'} flex h-16 w-full items-center justify-between border-b bg-white px-4 py-3 shadow-sm lg:border-0 lg:px-6 lg:shadow-none`}
+            className={`fixed top-0 z-30 bg-white transition-all duration-300 lg:flex ${isVisible ? 'visible opacity-100' : 'invisible opacity-0 lg:visible lg:opacity-100'} flex h-16 w-full items-center justify-between border-b bg-white px-4 py-3 shadow-sm lg:border-0 lg:px-6 lg:shadow-none`}
         >
             <HeaderMobile />
 
