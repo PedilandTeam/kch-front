@@ -1,6 +1,6 @@
 'use client';
 import { fetcher } from '@/app/swr/fetcher';
-import { memo } from 'react';
+import { memo, useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { CircleFlag } from 'next-circle-flags';
 import Select from '@daisyComponents/select';
@@ -18,6 +18,7 @@ type SelectWithFetching = {
     className?: string;
     value?: any;
     bordered?: boolean;
+    searchAble?: boolean;
 };
 export default memo(function SelectWithFetching<T extends { items: any }>({
     route,
@@ -31,9 +32,15 @@ export default memo(function SelectWithFetching<T extends { items: any }>({
     className,
     value,
     bordered,
+    searchAble = false
 }: SelectWithFetching) {
+
+
+    const [search, setSearch] = useState('');
+    
+
     const { data, isLoading, error } = useSWR<T>(
-        route ? `${process.env.NEXT_PUBLIC_API_URL}${route}` : null,
+        route ? `${process.env.NEXT_PUBLIC_API_URL}${route}${search ? `&search=${search}` : ''}` : null,
         fetcher
     );
 
@@ -43,13 +50,14 @@ export default memo(function SelectWithFetching<T extends { items: any }>({
             dir='ltr'
             items={data ? (paginated ? data?.items : data) : []}
             onChange={(e, value) => setFieldValue(name, value)}
-            isLoading={isLoading}
+            // isLoading={isLoading}
             isDisabled={isDisabled}
             errorMessage={formErrors![name]}
             isInvalid={!!formErrors![name] ? true : false}
             label={label}
             value={value}
             bordered={bordered}
+            setSearch={searchAble ? setSearch : undefined}
         >
             {(item: any) => (
                 <Option
@@ -66,7 +74,7 @@ export default memo(function SelectWithFetching<T extends { items: any }>({
                         ) : null
                     }
                 >
-                    {item.name}
+                    {item.name || item.title}
                 </Option>
             )}
         </Select>

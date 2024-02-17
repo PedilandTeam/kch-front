@@ -1,7 +1,15 @@
 'use client';
 
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import {
+    Dispatch,
+    SetStateAction,
+    memo,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import SelectSearch from './selectSearch';
 
 interface Select
     extends Omit<
@@ -22,8 +30,9 @@ interface Select
     isLoading?: boolean;
     label: string;
     onChange?: (e: React.MouseEvent<HTMLLIElement>, value: any) => void;
+    setSearch?: Dispatch<SetStateAction<string>>;
 }
-export default function Select({
+function Select({
     className,
     isDisabled = false,
     bordered = false,
@@ -36,11 +45,13 @@ export default function Select({
     label,
     isLoading = false,
     onChange,
+    setSearch,
     ...selectProps
 }: Select) {
     const [open, setOpen] = useState(false);
     const [selectedValue, setSelectedValue] = useState<string | null>('');
     const ulRef = useRef<HTMLUListElement>(null);
+
 
     /**
      * Handles the click event on the item.
@@ -84,7 +95,7 @@ export default function Select({
     return (
         <div className={`form-control w-full max-w-full ${className}`}>
             <div
-                className={`dropdown dropdown-bottom w-full select-none`}
+                className={`dropdown dropdown-bottom w-full select-none p-0`}
                 onClick={onOpen}
             >
                 <div
@@ -105,13 +116,25 @@ export default function Select({
                 <ul
                     ref={ulRef}
                     tabIndex={0}
-                    className={` ${!open || isLoading ? 'invisible opacity-0' : 'opacity-1 visible'} menu dropdown-content z-[1] w-full transform-cpu rounded-box bg-base-100 p-2 shadow duration-300`}
+                    className={` ${!open || isLoading ? 'invisible opacity-0' : 'opacity-1 visible'} scrollbar-hide menu dropdown-content z-[1] grid h-64 w-full transform-cpu grid-cols-1 place-content-start overflow-y-scroll rounded-box bg-base-100 p-0  shadow duration-300`}
                 >
-                    {items.map((item, index) => (
-                        <li key={index} onClick={itemClickHandler}>
-                            {children(item, setSelectedValue)}
-                        </li>
-                    ))}
+                    {!!setSearch && <SelectSearch setSearch={setSearch} />}
+
+                    <div className='p-2'>
+                        {[...items].map((item, index) => (
+                            <li
+                                className='w-full'
+                                key={index}
+                                onClick={itemClickHandler}
+                            >
+                                {children(item, setSelectedValue)}
+                            </li>
+                        ))}
+                    </div>
+                    {/* <li>
+                        پیدا نشد؟
+                    </li> */}
+                    { Array.isArray(items) && items.length > 5 ? <div className='sticky bottom-0 z-10 h-5 w-full bg-gradient-to-t from-black/5 to-slate-50/10 backdrop-blur-[2px] '></div> : null}
                 </ul>
             </div>
             {!!errorMessage && isInvalid ? (
@@ -128,3 +151,5 @@ export default function Select({
         </div>
     );
 }
+
+export default memo(Select);
