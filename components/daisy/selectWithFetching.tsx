@@ -1,10 +1,11 @@
 'use client';
 import { fetcher } from '@/app/swr/fetcher';
-import { memo, useEffect, useState } from 'react';
+import { FormEvent, memo, useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { CircleFlag } from 'next-circle-flags';
 import Select from '@daisyComponents/select';
 import Option from '@daisyComponents/option';
+import { useInView } from 'react-intersection-observer';
 
 type SelectWithFetching = {
     route: string;
@@ -19,6 +20,8 @@ type SelectWithFetching = {
     value?: any;
     bordered?: boolean;
     searchAble?: boolean;
+    infiniteScroll?: boolean;
+    url?: string;
 };
 export default memo(function SelectWithFetching<T extends { items: any }>({
     route,
@@ -32,15 +35,27 @@ export default memo(function SelectWithFetching<T extends { items: any }>({
     className,
     value,
     bordered,
-    searchAble = false
+    searchAble = false,
+    infiniteScroll = false,
+    url
 }: SelectWithFetching) {
 
+    const { ref: lastItemRef, inView, entry } = useInView({
+        threshold: 0.5 
+   });
 
+   const [page, setPage] = useState(1)
+
+   useEffect(() => {
+       if (inView) {
+           setPage(old => old + 1)
+       }
+   }, [inView])
     const [search, setSearch] = useState('');
     
 
     const { data, isLoading, error } = useSWR<T>(
-        route ? `${process.env.NEXT_PUBLIC_API_URL}${route}${search ? `&search=${search}` : ''}` : null,
+        url ? url : route ? `${process.env.NEXT_PUBLIC_API_URL}${route}${search ? `&search=${search}` : ''}${infiniteScroll ? `&page=${page}` : ''}` : null,
         fetcher
     );
 
@@ -58,6 +73,7 @@ export default memo(function SelectWithFetching<T extends { items: any }>({
             value={value}
             bordered={bordered}
             setSearch={searchAble ? setSearch : undefined}
+            ref={lastItemRef}
         >
             {(item: any) => (
                 <Option
