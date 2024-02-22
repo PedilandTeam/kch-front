@@ -8,7 +8,7 @@ import Option from '@daisyComponents/option';
 import { useInView } from 'react-intersection-observer';
 
 type SelectWithFetching = {
-    route: string;
+    route?: string;
     label: string;
     paginated?: boolean;
     name: string;
@@ -21,7 +21,6 @@ type SelectWithFetching = {
     bordered?: boolean;
     searchAble?: boolean;
     infiniteScroll?: boolean;
-    url?: string;
 };
 export default memo(function SelectWithFetching<T extends { items: any }>({
     route,
@@ -37,7 +36,6 @@ export default memo(function SelectWithFetching<T extends { items: any }>({
     bordered,
     searchAble = false,
     infiniteScroll = false,
-    url
 }: SelectWithFetching) {
 
     const { ref: lastItemRef, inView, entry } = useInView({
@@ -52,10 +50,9 @@ export default memo(function SelectWithFetching<T extends { items: any }>({
        }
    }, [inView])
     const [search, setSearch] = useState('');
-    
 
     const { data, isLoading, error } = useSWR<T>(
-        url ? url : route ? `${process.env.NEXT_PUBLIC_API_URL}${route}${search ? `&search=${search}` : ''}${infiniteScroll ? `&page=${page}` : ''}` : null,
+        route ? `${process.env.NEXT_PUBLIC_API_URL}${route}${search ? `&search=${search}` : ''}${infiniteScroll ? `&page=${page}` : ''}` : null,
         fetcher
     );
 
