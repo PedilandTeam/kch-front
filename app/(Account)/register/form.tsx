@@ -17,6 +17,9 @@ import useRegisterUser from './useRegisterUser';
 import SelectWithFetching from '@/components/daisy/selectWithFetching';
 import useRecaptchaV3 from '@/hooks/useRecaptchaV3';
 import { ReCaptchaV3Provider } from '@/components/global/recaptchaV3Provider';
+import SelectCity from '@/components/daisy/selectCity';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export type FormikValues = {
     firstname: string;
@@ -25,10 +28,12 @@ export type FormikValues = {
     lastname: string;
     email: string;
     countryId: string | number;
-    cityId: string | number;
+    cityObject: string | number;
 };
 export default function RegisterForm() {
     const { executeRecaptcha } = useRecaptchaV3();
+    
+    const router = useRouter()
 
     // const { executeRecaptcha } = useReCaptcha('user_signup');
     const { registerUser, registerUserLoading } = useRegisterUser();
@@ -41,7 +46,7 @@ export default function RegisterForm() {
             lastname: '',
             email: '',
             countryId: '',
-            cityId: '',
+            cityObject: '',
         },
         validationSchema: Yup.object().shape({
             username: Yup.string().matches(REGEX.USERNAME).required(),
@@ -50,7 +55,7 @@ export default function RegisterForm() {
             firstname: Yup.string().required(),
             lastname: Yup.string().required(),
             countryId: Yup.string().required('انتخاب کشور ضروری است'),
-            cityId: Yup.string().required('انتخاب شهر ضروری است'),
+            cityObject: Yup.mixed().required('انتخاب شهر ضروری است'),
         }),
         validateOnChange: false,
         validateOnBlur: false,
@@ -58,8 +63,10 @@ export default function RegisterForm() {
         onSubmit: async (values) => {
             const token = await executeRecaptcha('user_signup');
             await registerUser(values, token);
+            router.push('/account');
         },
     });
+
     return (
         <ReCaptchaV3Provider>
             <div className='bg-simple-1 mt-24 flex flex-wrap items-baseline sm:relative sm:items-center lg:mt-0 lg:h-[80vh]'>
@@ -149,21 +156,18 @@ export default function RegisterForm() {
                                 formErrors={formik.errors}
                             />
                             {/* <SelectWithFetching bordered value={formik.values.countryId} circleFlag className="col-span-2" route="/countries" label="انتخاب کشور" name="countryId" setFieldValue={formik.setFieldValue} formErrors={formik.errors} /> */}
-                            <SelectWithFetching
+                            <SelectCity
                                 bordered
-                                value={formik.values.cityId}
+                                value={formik.values.cityObject}
                                 className='col-span-2'
-                                route={
-                                    formik.values?.countryId
-                                        ? `/cities?page=1&limit=100&countryId=${formik.values?.countryId}`
-                                        : ''
-                                }
                                 label='شهر'
-                                name='cityId'
+                                name='cityObject'
                                 isDisabled={!formik.values?.countryId}
                                 paginated
                                 setFieldValue={formik.setFieldValue}
                                 formErrors={formik.errors}
+                                searchAble
+                                infiniteScroll
                             />
 
                             <Input
