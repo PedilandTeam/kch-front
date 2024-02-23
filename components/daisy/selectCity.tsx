@@ -57,7 +57,7 @@ export default memo(function SelectCity<T extends { items: any }>({
     
 
     const { data, isLoading, error } = useSWR<T>(
-        apiService == "HERE" && search ? `${process.env.NEXT_PUBLIC_HERE_API_URL}/autocomplete?q=${search}&types=city&apiKey=${process.env.NEXT_PUBLIC_HERE_API_KEY}` : null,
+        apiService == "HERE" && search ? `${process.env.NEXT_PUBLIC_HERE_API_URL}/autocomplete?q=${search}&apiKey=${process.env.NEXT_PUBLIC_HERE_API_KEY}` : null,
         fetcher
     );
 
