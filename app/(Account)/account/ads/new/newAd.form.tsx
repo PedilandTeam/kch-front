@@ -7,19 +7,32 @@ import SelectWithFetching from '@/components/daisy/selectWithFetching';
 import { useFormik } from 'formik';
 import Button from '@/components/daisy/button';
 import { useEffect } from 'react';
+import SelectCity from '@/components/daisy/selectCity';
+import useCreateAd from './useCreateAd';
 
 export default function NewAdForm() {
+
+    const {createAd, createAdLoading} = useCreateAd()
+
     const formik = useFormik({
         initialValues: {
             countryId: '',
-            cityId: '',
+            cityObject: {},
             title: '',
             description: '',
             price: '',
             priceName: '',
+            categoryId: '',
+            parentCategoryId: '',
         },
-        onSubmit: () => {},
+        onSubmit: (values) => {
+            createAd(values)
+        },
     });
+
+    useEffect(() => {
+        console.log(formik.values);
+    }, [formik.values]);
 
     return (
         <div className='mb-5 flex w-full max-w-lg flex-col items-center justify-center gap-y-2 px-2 '>
@@ -53,7 +66,7 @@ export default function NewAdForm() {
                     placeholder='قیمت، ماهانه و..'
                     type='text'
                     bordered
-                    label='متن قیمت'
+                    label='متن قیمت( اجاره، شهریه.. )'
                     className='w-1/2'
                 />
             </div>
@@ -70,19 +83,45 @@ export default function NewAdForm() {
                     formErrors={formik.errors}
                 />
                 {/* <SelectWithFetching bordered value={formik.values.countryId} circleFlag className="col-span-2" route="/countries" label="انتخاب کشور" name="countryId" setFieldValue={formik.setFieldValue} formErrors={formik.errors} /> */}
-                <SelectWithFetching
+                <SelectCity
                     bordered
-                    value={formik.values.cityId}
+                    value={formik.values.cityObject}
                     className='col-span-2'
-                    route={
-                        formik.values?.countryId
-                            ? `/cities?page=1&limit=100&countryId=${formik.values?.countryId}`
-                            : ''
-                    }
                     label='شهر'
-                    name='cityId'
+                    name='cityObject'
                     isDisabled={!formik.values?.countryId}
                     paginated
+                    setFieldValue={formik.setFieldValue}
+                    formErrors={formik.errors}
+                    searchAble
+                    infiniteScroll
+                />
+            </div>
+
+            <div className='mt-5 flex w-full gap-x-1'>
+                <SelectWithFetching
+                    bordered
+                    value={formik.values.parentCategoryId}
+                    className='col-span-2'
+                    route='/ad-categories?justMain=true'
+                    label='دسته‌بندی اصلی'
+                    name='parentCategoryId'
+                    setFieldValue={formik.setFieldValue}
+                    formErrors={formik.errors}
+                />
+                {/* <SelectWithFetching bordered value={formik.values.countryId} circleFlag className="col-span-2" route="/countries" label="انتخاب کشور" name="countryId" setFieldValue={formik.setFieldValue} formErrors={formik.errors} /> */}
+                <SelectWithFetching
+                    bordered
+                    value={formik.values.categoryId}
+                    className='col-span-2'
+                    route={
+                        formik.values?.parentCategoryId
+                            ? `/ad-categories?parentId=${formik.values?.parentCategoryId}`
+                            : ''
+                    }
+                    label='دسته بندی'
+                    name='categoryId'
+                    isDisabled={!formik.values?.parentCategoryId}
                     setFieldValue={formik.setFieldValue}
                     formErrors={formik.errors}
                 />
@@ -93,6 +132,7 @@ export default function NewAdForm() {
                 onClick={() => {
                     formik.handleSubmit();
                 }}
+                isLoading={createAdLoading}
             >
                 ثبت آگهی
             </Button>

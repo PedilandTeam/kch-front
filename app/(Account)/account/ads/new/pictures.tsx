@@ -4,8 +4,8 @@ import PictureUploader from '@/components/global/pictureUploader/pictureUploader
 import useAdPicture from '@/store/useAdPicture';
 import { TrashIcon } from '@heroicons/react/24/solid';
 import Picture from './picture';
-import { useEffect } from 'react';
-export default function Pictures() {
+import { memo, useEffect } from 'react';
+function Pictures() {
     const { pictures, removePicture } = useAdPicture();
 
     return (
@@ -23,3 +23,6 @@ export default function Pictures() {
         </div>
     );
 }
+
+
+export default memo(Pictures)
