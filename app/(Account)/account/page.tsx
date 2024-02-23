@@ -17,7 +17,7 @@ export default function Account() {
     if (user)
         return (
             <div className='w-full'>
-                {user.ads?.length > 0 ? <Overview /> : <NoAds />}
+                <Overview />
             </div>
         );
 }

@@ -15,8 +15,8 @@ export default function NoAds() {
             <p className='text-center text-4xl font-medium'>
                 شما هنوز هیچ آگهی‌ای ندارید!
             </p>
-            <Link href={'/account/ads'}>
-                <Button className='btn-primary btn-lg'>
+            <Link href={'/account/ads/new'}>
+                <Button className='btn-primary btn-md'>
                     افزودن آگهی جدید <PlusIcon className='h-6 w-6' />
                 </Button>
             </Link>

@@ -5,6 +5,8 @@ import { AdNamespace } from '@/types/ad';
 import useSWR from 'swr';
 import Ad from './components/ad';
 import AdSkeleton from './components/ad.skeleton';
+import { useUser } from '@/store/useUser';
+import NoAds from '../components/noAds';
 
 export default function Ads() {
     const {
@@ -16,6 +18,8 @@ export default function Ads() {
         fetcher
     );
 
+    const { user } = useUser();
+
     if (isAdsLoading) {
         return (
             <div className='flex flex-col items-center justify-center gap-y-2'>
@@ -24,11 +28,16 @@ export default function Ads() {
         );
     }
 
-    return (
-        <div className='flex flex-col items-center justify-center gap-y-2'>
-            {ads?.items?.map((ad) => {
-                return <Ad key={ad.id} data={ad} />;
-            })}
-        </div>
-    );
+    if (user)
+        return (
+            <div className='flex flex-col items-center justify-center gap-y-2'>
+                {user.ads?.length > 0 ? (
+                    ads?.items?.map((ad) => {
+                        return <Ad key={ad.id} data={ad} />;
+                    })
+                ) : (
+                    <NoAds />
+                )}
+            </div>
+        );
 }
