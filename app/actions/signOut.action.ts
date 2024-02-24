@@ -13,6 +13,6 @@ const cookieConfig = {
 
 export default async function signOutAction() {
     const cookieStore = cookies();
-    cookieStore.set('token', '', cookieConfig as any);
+    cookieStore.delete('token')
     redirect('/');
 }
