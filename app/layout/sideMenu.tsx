@@ -20,7 +20,7 @@ export default function SideMenu({ SideMenuList }: SideMenu) {
         'flex items-center group-hover:bg-gray-100 p-3 rounded-md border border-dashed border-white hover:border-gray-200 transition-all duration-300';
     const pathname = usePathname();
     return (
-        <ul className='font-medium'>
+        <ul className='font-medium w-full'>
             {SideMenuList.map((item, index) => {
                 return (
                     <li className='group mb-1' key={`menuItem-${index}`}>

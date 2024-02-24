@@ -48,10 +48,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
     return (
         <div className={`grid w-full gap-5 lg:grid-cols-12`}>
-            <div className='lg:col-span-3'>
-                <div className='hidden lg:block'>
-                    <UserDetails />
+            <div className='lg:col-span-3 w-full'>
+                <div className='hidden lg:flex lg:justify-center lg:items-center lg:flex-col w-full lg:h-[calc(100vh-140px)]'>
                     <SideMenu SideMenuList={SideMenuList} />
+                    <UserDetails className='mt-auto'/>
                 </div>
             </div>
             <div className='lg:col-span-9'>

@@ -1,11 +1,11 @@
 import { useUser } from '@/store/useUser';
 import { UserIcon } from '@heroicons/react/24/outline';
 
-export default function UserDetails() {
+export default function UserDetails({className}: {className?: string}) {
     const { user } = useUser();
 
     return (
-        <div className='mb-4 grid h-16 grid-cols-9 grid-rows-1 items-center gap-x-10 rounded-xl px-2 duration-75 hover:bg-gray-100'>
+        <div className={`${className ? className : ''} mb-4 grid h-16 grid-cols-9 grid-rows-1 items-center gap-x-10 rounded-xl px-2 duration-75 hover:bg-gray-100`}>
             <div className='col-span-1'>
                 <UserIcon className='h-7 w-7 text-slate-600' />
             </div>
