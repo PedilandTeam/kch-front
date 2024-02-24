@@ -11,9 +11,15 @@ interface useCreateAdProps extends Omit<AdNamespace.IAd, 'country' | 'city' | 'p
 }
 export default function useCreateAd() {
     const [loading, setLoading] = useState<boolean>(false);
-    const createAd = async (data: any) => {
+    /**
+     * Asynchronously creates an ad using the provided data.
+     *
+     * @param {any} data - the data to be used for creating the ad
+     * @return {Promise<any>} a Promise that resolves with the ID of the created ad
+     */
+    const createAd = async (data: any): Promise<any> => {
         setLoading(true);
-        await axios
+        return await axios
             .post(
                 `${process.env.NEXT_PUBLIC_API_URL}/ads`,
                 {
@@ -24,7 +30,7 @@ export default function useCreateAd() {
                 }
             )
             .then((res) => {
-                toast.success(res.data?.message || 'با موفقیت ثبت شد');
+                return res.data?.id
             })
             .catch((err) => {
                 toast.error(

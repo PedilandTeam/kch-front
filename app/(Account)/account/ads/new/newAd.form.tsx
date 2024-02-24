@@ -13,6 +13,9 @@ import { mutate } from 'swr';
 import { useRouter } from 'next/navigation';
 import * as Yup from 'yup'
 import toast from 'react-hot-toast';
+import useAdPicture from '@/store/useAdPicture';
+import axios, { AxiosError } from 'axios';
+import useUploadAdPictures from './useUploadAdPictures';
 
 type NewAdForm = {
     countryId: string | number;
@@ -31,6 +34,8 @@ export default function NewAdForm() {
     const {createAd, createAdLoading} = useCreateAd()
     const router = useRouter()
 
+
+    const {uploadAdPictures, uploadAdPicturesLoading} = useUploadAdPictures()
 
     const validationSchema = Yup.object().shape({
         countryId: Yup.string().required('لطفا کشور محل سکونت را انتخاب کنید'),
@@ -59,16 +64,28 @@ export default function NewAdForm() {
         validateOnChange: false,
         validateOnMount: false,
         onSubmit: async (values) => {
+
+            // Delete pricename if not specified
             if (!values.priceName) {
                 delete values.priceName
             }
             await validationSchema.validate(values)
+
+            // Check City
             if (!values.cityObject?.address?.city) {
                 toast.error('لطفا یک شهر انتخاب کنید. ایالت یا استان مورد قبول نیست')
                 return;
             }
-            createAd(values).then(() => {
-                mutate(process.env.NEXT_PUBLIC_CHECKAUTH_URL).then(() => {
+            await createAd(values).then(async (id) => {
+
+
+                // Upload ad pictures
+                await uploadAdPictures(id)
+                
+
+                // Mutate user data to Update ads
+                await mutate(process.env.NEXT_PUBLIC_CHECKAUTH_URL).then(() => {
+                    toast.success('آگهی شما با موفقیت ثبت شد')
                     router.push('/account/ads')
                 })
             })
@@ -175,7 +192,7 @@ export default function NewAdForm() {
                 onClick={() => {
                     formik.handleSubmit();
                 }}
-                isLoading={createAdLoading}
+                isLoading={createAdLoading || uploadAdPicturesLoading}
             >
                 ثبت آگهی
             </Button>
