@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import useAuthCheck from '@/hooks/useAuthCheck';
 import toast from 'react-hot-toast';
 import { mutate } from 'swr';
+import Loading from '@/app/(Account)/components/global/loading';
 
 const LoginPage = () => {
 
@@ -23,6 +24,11 @@ const LoginPage = () => {
         }
     }, [isAuthenticated, isLoading, router])
 
+    if(isLoading) {
+        return <Loading/>
+    }
+
+    if(!isAuthenticated)
     return <LoginForm />;
 };
 export default LoginPage;
