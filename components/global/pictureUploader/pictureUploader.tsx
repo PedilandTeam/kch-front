@@ -16,6 +16,7 @@ export default function PictureUploader() {
         fileReader.onload = (event: ProgressEvent<FileReader>) => {
             const blob = new Blob([event.target?.result as BlobPart], { type: file.type })
             addPicture(blob, file)
+            e.target.value = ''
         }
     };
 
