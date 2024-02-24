@@ -24,13 +24,15 @@ export default function useCreateAd() {
                 }
             )
             .then((res) => {
-                toast.success(res.data?.message);
+                toast.success(res.data?.message || 'با موفقیت ثبت شد');
             })
             .catch((err) => {
                 toast.error(
                     err.response.data?.message ||
                         'خطایی در هنگام ثبت‌نام پیش آمد'
                 );
+
+                throw Error('خطایی در هنگام ثبت‌نام پیش آمد')
             })
             .finally(() => {
                 setLoading(false);
