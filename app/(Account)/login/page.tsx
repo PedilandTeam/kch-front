@@ -1,33 +1,28 @@
+'use client'
+
+import { useUser } from '@/store/useUser';
 import LoginForm from './form';
 import axios from 'axios';
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import useAuthCheck from '@/hooks/useAuthCheck';
+import toast from 'react-hot-toast';
+import { mutate } from 'swr';
 
-const LoginPage = async (param?: {
-    searchParams?: { slug?: string; claimWay: string };
-}) => {
-    const cookieStore = cookies();
-    const token = cookieStore.get('token')?.value;
-    let haveAccess: boolean = true;
+const LoginPage = () => {
 
-    if (token) {
-        await axios
-            .get(`${process.env.NEXT_PUBLIC_API_URL}/auth/user/check`, {
-                headers: {
-                    Cookie: `token=${token}`,
-                },
+    const {isAuthenticated, isLoading} = useAuthCheck()
+    const router = useRouter()
+
+    useEffect(() => {
+        if(!isLoading && isAuthenticated){
+            mutate(process.env.NEXT_PUBLIC_CHECKAUTH_URL).then(() => {
+                router.push('/account')
             })
-            .then((res) => {
-                haveAccess = false;
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-    }
+        }
+    }, [isAuthenticated, isLoading, router])
 
-    if (!haveAccess) {
-        redirect('/account');
-    }
     return <LoginForm />;
 };
 export default LoginPage;

@@ -12,6 +12,7 @@ import { LockClosedIcon, UserIcon } from '@heroicons/react/24/outline';
 import Input from '@/components/daisy/input';
 import Button from '@/components/daisy/button';
 import { useEffect } from 'react';
+import { mutate } from 'swr';
 
 const LoginForm = () => {
     const { login, loading } = useLogin();
@@ -37,9 +38,13 @@ const LoginForm = () => {
                     const { json, res } = response;
                     if (!res.ok) {
                         return toast.error(json.message);
-                    }
-                    router.replace('/account');
-                    toast.success(json.message);
+                    }                    
+                    mutate(process.env.NEXT_PUBLIC_CHECKAUTH_URL).then(() => {
+                        router.push('/account')
+                    }).then(() => {
+                        toast.success('ورود موفق');
+                        router.replace('/account');
+                    })
                 })
                 .catch((e) => {
                     toast.error('خطایی رخ داد');
