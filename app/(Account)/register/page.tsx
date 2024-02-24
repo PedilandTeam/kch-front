@@ -1,34 +1,30 @@
+'use client'
+
+import useAuthCheck from '@/hooks/useAuthCheck';
 import RegisterForm from './form';
-import { API_ROUTES } from '@/routes';
-import axios from 'axios';
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { mutate } from 'swr';
+import Loading from '../components/global/loading';
 
-const RegisterPage = async (param?: {
-    searchParams?: { slug?: string; claimWay: string };
-}) => {
-    const cookieStore = cookies();
-    const token = cookieStore.get('token')?.value;
-    let haveAccess: boolean = true;
 
-    if (token) {
-        await axios
-            .get(`${process.env.NEXT_PUBLIC_API_URL}/auth/user/check`, {
-                headers: {
-                    Cookie: `token=${token}`,
-                },
+const RegisterPage =  () => {
+    const {isAuthenticated, isLoading} = useAuthCheck()
+    const router = useRouter()
+
+    useEffect(() => {
+        if(!isLoading && isAuthenticated){
+            mutate(process.env.NEXT_PUBLIC_CHECKAUTH_URL).then(() => {
+                router.push('/account')
             })
-            .then((res) => {
-                haveAccess = false;
-            })
-            .catch((e) => {
-                console.log(e);
-            });
+        }
+    }, [isAuthenticated, isLoading, router])
+
+    if(isLoading) {
+        return <Loading/>
     }
 
-    if (!haveAccess) {
-        redirect('/account');
-    }
+    if(!isAuthenticated)
     return <RegisterForm />;
 };
 export default RegisterPage;
