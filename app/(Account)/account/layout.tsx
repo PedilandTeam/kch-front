@@ -11,6 +11,7 @@ import UserDetails from './components/userDetails';
 import Overview from './components/overview';
 import NoAds from './components/noAds';
 import Button from '@/components/daisy/button';
+import Loading from '@/app/(Account)/components/global/loading';
 // import SideMenu from "../layout/side-menu";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -41,12 +42,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
     if (isLoading || !isAuthenticated || !isVerified) {
         return (
-            <div className='flex h-[70vh] w-full flex-col items-center justify-center gap-y-4'>
-                <p className='animate-pulse text-2xl font-bold text-primary'>
-                    درحال بارگذاری...
-                </p>
-                <div className='loading loading-dots loading-lg animate-pulse text-primary'></div>
-            </div>
+            <Loading/>
         );
     }
 
