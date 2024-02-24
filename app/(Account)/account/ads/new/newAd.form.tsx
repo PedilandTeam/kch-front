@@ -9,12 +9,41 @@ import Button from '@/components/daisy/button';
 import { useEffect } from 'react';
 import SelectCity from '@/components/daisy/selectCity';
 import useCreateAd from './useCreateAd';
+import { mutate } from 'swr';
+import { useRouter } from 'next/navigation';
+import * as Yup from 'yup'
+import toast from 'react-hot-toast';
+
+type NewAdForm = {
+    countryId: string | number;
+    cityObject: any;
+    title: string;
+    description: string;
+    price: string;
+    priceName?: string;
+    parentCategoryId: string | number;
+    categoryId: string | number;
+};
+
 
 export default function NewAdForm() {
 
     const {createAd, createAdLoading} = useCreateAd()
+    const router = useRouter()
 
-    const formik = useFormik({
+
+    const validationSchema = Yup.object().shape({
+        countryId: Yup.string().required('لطفا کشور محل سکونت را انتخاب کنید'),
+        cityObject: Yup.object().required('لطفا شهر محل سکونت را انتخاب کنید'),
+        title: Yup.string().required('لطفا عنوان آگهی را وارد کنید'),
+        description: Yup.string().required('لطفا توضیحات آگهی را وارد کنید'),
+        price: Yup.string(),
+        priceName: Yup.string(),
+        parentCategoryId: Yup.string().required('لطفا دسته بندی اصلی را انتخاب کنید'),
+        categoryId: Yup.string().required('لطفا دسته بندی را انتخاب کنید'),
+    })
+
+    const formik = useFormik<NewAdForm>({
         initialValues: {
             countryId: '',
             cityObject: {},
@@ -25,14 +54,26 @@ export default function NewAdForm() {
             categoryId: '',
             parentCategoryId: '',
         },
-        onSubmit: (values) => {
-            createAd(values)
+        validationSchema,
+        validateOnBlur: false,
+        validateOnChange: false,
+        validateOnMount: false,
+        onSubmit: async (values) => {
+            if (!values.priceName) {
+                delete values.priceName
+            }
+            await validationSchema.validate(values)
+            if (!values.cityObject?.address?.city) {
+                toast.error('لطفا یک شهر انتخاب کنید. ایالت یا استان مورد قبول نیست')
+                return;
+            }
+            createAd(values).then(() => {
+                mutate(process.env.NEXT_PUBLIC_CHECKAUTH_URL).then(() => {
+                    router.push('/account/ads')
+                })
+            })
         },
     });
-
-    useEffect(() => {
-        console.log(formik.values);
-    }, [formik.values]);
 
     return (
         <div className='mb-5 flex w-full max-w-lg flex-col items-center justify-center gap-y-2 px-2 '>
@@ -43,6 +84,7 @@ export default function NewAdForm() {
                 placeholder='عنوان آگهی'
                 bordered
                 label='عنوان آگهی'
+                isInvalid={!!formik.errors.title}
             />
             <Textarea
                 name='description'
@@ -59,6 +101,7 @@ export default function NewAdForm() {
                     bordered
                     label='قیمت'
                     className='w-1/2'
+                    isInvalid={!!formik.errors.price}
                 />
                 <Input
                     name='priceName'
@@ -68,6 +111,7 @@ export default function NewAdForm() {
                     bordered
                     label='متن قیمت( اجاره، شهریه.. )'
                     className='w-1/2'
+                    isInvalid={!!formik.errors.priceName}
                 />
             </div>
             <div className='mt-5 flex w-full gap-x-1'>
