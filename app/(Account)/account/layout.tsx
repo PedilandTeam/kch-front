@@ -10,55 +10,44 @@ import { useUser } from '@/store/useUser';
 import UserDetails from './components/userDetails';
 import Overview from './components/overview';
 import NoAds from './components/noAds';
+import Button from '@/components/daisy/button';
 // import SideMenu from "../layout/side-menu";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const router = useRouter();
-    const [firstCheckPassed, setFirstCheckPassed] = useState<boolean>(false);
     const { setUser } = useUser();
-    const [lastId, setLastId] = useState<string>('');
-    const { isLoading, user, isNotVerified, isAuthenticated, error } =
-        useAuthCheck();
+    const { user, isVerified, isLoading, isAuthenticated, error } = useAuthCheck();
 
     useEffect(() => {
-        if (typeof isAuthenticated == 'undefined' || isLoading) return;
-        if (!isAuthenticated) {
+        if (isLoading) return;
+        if (error && !isAuthenticated) {
             toast.error('لطفا وارد شوید');
             router.push('/login');
-        } else {
-            setFirstCheckPassed(true);
         }
-    }, [isAuthenticated, isLoading, router]);
+    }, [error, isAuthenticated, isLoading, router]);
 
     useEffect(() => {
-        if (typeof isNotVerified == 'undefined' || isLoading) return;
-        if (isNotVerified) {
+        if (isLoading) return;
+        if (user && !isVerified) {
             toast.error('باید اول ایمیل خودرا تایید کنید');
             router.push('verifyEmail');
-        } else {
-            setFirstCheckPassed(true);
         }
-    }, [isNotVerified, isLoading, router]);
+    }, [isVerified, isLoading, router, user]);
 
     useEffect(() => {
         if (!user) return;
-        if (lastId != user.id) {
-            setLastId(user?.id);
             setUser(user);
-        }
-    }, [user, setUser, setLastId, lastId]);
+    }, [user, setUser]);
 
-    if (!firstCheckPassed) {
-        if (isLoading || !isAuthenticated || isNotVerified) {
-            return (
-                <div className='flex h-[70vh] w-full flex-col items-center justify-center gap-y-4'>
-                    <p className='animate-pulse text-2xl font-bold text-primary'>
-                        درحال بارگذاری...
-                    </p>
-                    <div className='loading loading-dots loading-lg animate-pulse text-primary'></div>
-                </div>
-            );
-        }
+    if (isLoading || !isAuthenticated || !isVerified) {
+        return (
+            <div className='flex h-[70vh] w-full flex-col items-center justify-center gap-y-4'>
+                <p className='animate-pulse text-2xl font-bold text-primary'>
+                    درحال بارگذاری...
+                </p>
+                <div className='loading loading-dots loading-lg animate-pulse text-primary'></div>
+            </div>
+        );
     }
 
     return (
@@ -71,7 +60,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
             <div className='lg:col-span-9'>
                 <div
-                    className={`${firstCheckPassed && (isLoading || !isAuthenticated) ? 'blur-md' : ''} col-span-5 flex flex-col items-center justify-center lg:col-span-3 lg:block`}
+                // className={`${firstCheckPassed && (isLoading || !isAuthenticated) ? 'blur-md' : ''} col-span-5 flex flex-col items-center justify-center lg:col-span-3 lg:block`}
                 >
                     {children}
                 </div>
