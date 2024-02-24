@@ -109,7 +109,6 @@ export default function NewAdForm() {
                     setFieldValue={formik.setFieldValue}
                     formErrors={formik.errors}
                 />
-                {/* <SelectWithFetching bordered value={formik.values.countryId} circleFlag className="col-span-2" route="/countries" label="انتخاب کشور" name="countryId" setFieldValue={formik.setFieldValue} formErrors={formik.errors} /> */}
                 <SelectWithFetching
                     bordered
                     value={formik.values.categoryId}

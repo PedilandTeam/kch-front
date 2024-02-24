@@ -1,4 +1,4 @@
 
 export const fetcher = (
     ...args: [RequestInfo] | [URL, init?: RequestInit] | any[]
-) => fetch(...args).then((res) => res.json());
+) => fetch(...args, {credentials: true}).then((res) => res.json());
