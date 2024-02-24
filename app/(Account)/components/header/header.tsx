@@ -5,8 +5,9 @@ import Image from 'next/image';
 import Button from '@/components/daisy/button';
 import { usePathname } from 'next/navigation';
 import HeaderMobile from './header.mobile';
-import titles from '../../account/titles';
+import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/solid'
 import { useState, useEffect } from 'react';
+import signOutAction from '@/app/actions/signOut.action';
 
 type HeaderProps = {
     children?: React.ReactNode;
@@ -53,6 +54,9 @@ export const Header = ({ children }: HeaderProps) => {
             {children}
 
             <div className='hidden gap-x-2 lg:flex'>
+                <Button onClick={() => signOutAction()} className='btn-ghost' >
+                    <ArrowLeftOnRectangleIcon className='h-5 w-5' /> خروج
+                </Button>
                 <Link href={'/'}>
                     <Button
                         className='btn-ghost btn-md px-5
