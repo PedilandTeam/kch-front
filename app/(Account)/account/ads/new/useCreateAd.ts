@@ -3,12 +3,6 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-interface useCreateAdProps extends Omit<AdNamespace.IAd, 'country' | 'city' | 'pictures' | 'createdDate' | 'updatedDate' | 'availability'> {
-    countryId: string | number;
-    cityId: string | number;
-    categoryId: string | number;
-    pictures: File[];
-}
 export default function useCreateAd() {
     const [loading, setLoading] = useState<boolean>(false);
     /**

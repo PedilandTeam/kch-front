@@ -1,6 +1,6 @@
 'use client';
 
-import Pictures from './pictures';
+import Pictures from '../components/pictures';
 import Input from '@/components/daisy/input';
 import Textarea from '@/components/daisy/textarea';
 import SelectWithFetching from '@/components/daisy/selectWithFetching';
