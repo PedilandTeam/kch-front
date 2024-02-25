@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Button from '@/components/daisy/button';
 import { usePathname } from 'next/navigation';
 import HeaderMobile from './header.mobile';
-import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/solid'
+import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/solid';
 import { useState, useEffect } from 'react';
 import signOutAction from '@/app/actions/signOut.action';
 
@@ -35,7 +35,8 @@ export const Header = ({ children }: HeaderProps) => {
 
     return (
         <header
-            className={`fixed right-0 top-0 z-30 bg-white transition-all duration-300 lg:static lg:flex ${isVisible ? 'visible opacity-100' : 'invisible opacity-0 lg:visible lg:opacity-100'} flex h-16 w-full items-center justify-between border-b bg-white px-4 py-3 shadow-sm lg:border-0 lg:px-6 lg:shadow-none`}
+            id='header'
+            className={` fixed right-0 top-0 z-30 bg-white transition-all duration-300 lg:static lg:flex ${isVisible ? 'visible opacity-100' : 'invisible opacity-0 lg:visible lg:opacity-100'} flex h-16 w-full items-center justify-between border-b bg-white px-4 py-3 shadow-sm lg:border-0 lg:px-6 lg:shadow-none`}
         >
             <HeaderMobile />
 
@@ -54,7 +55,7 @@ export const Header = ({ children }: HeaderProps) => {
             {children}
 
             <div className='hidden gap-x-2 lg:flex'>
-                <Button onClick={() => signOutAction()} className='btn-ghost' >
+                <Button onClick={() => signOutAction()} className='btn-ghost'>
                     <ArrowLeftOnRectangleIcon className='h-5 w-5' /> خروج
                 </Button>
                 <Link href={'/'}>

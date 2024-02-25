@@ -30,7 +30,7 @@ export default function Ads() {
 
     if (user)
         return (
-            <div className='flex flex-col items-center justify-center gap-y-2'>
+            <div className='flex w-full flex-col items-center justify-center gap-y-2'>
                 {user.ads?.length > 0 ? (
                     ads?.items?.map((ad) => {
                         return <Ad key={ad.id} data={ad} />;

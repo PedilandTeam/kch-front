@@ -18,6 +18,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     const router = useRouter();
     const { setUser } = useUser();
     const { user, isVerified, isLoading, isAuthenticated, error } = useAuthCheck();
+    const headerRef: React.MutableRefObject<HTMLDivElement | null> = useRef<(HTMLDivElement) | null>(null)
+    const [headerHeight, setHeaderHeight] = useState<number>()
 
     useEffect(() => {
         if (isLoading) return;
@@ -40,16 +42,25 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             setUser(user);
     }, [user, setUser]);
 
+    useEffect(() => {
+        if (!document) return
+        const header = document.getElementById('header') as HTMLDivElement
+        if (header) {
+            setHeaderHeight(header.clientHeight)
+        }
+    }, [])
+
     if (isLoading || !isAuthenticated || !isVerified) {
         return (
             <Loading/>
         );
     }
 
+
     return (
         <div className={`grid w-full gap-5 lg:grid-cols-12`}>
-            <div className='lg:col-span-3 w-full'>
-                <div className='hidden lg:flex lg:justify-center lg:items-center lg:flex-col w-full lg:h-[calc(100vh-140px)]'>
+            <div className='lg:col-span-3 w-full bg-gray-100/30'>
+                <div className={`hidden pb-4 lg:flex lg:justify-center lg:items-center lg:flex-col w-full ${headerHeight ? `lg:h-[calc(100vh-${headerHeight}px)]` : `lg:h-[calc(100vh-100px)]`}`}>
                     <SideMenu SideMenuList={SideMenuList} />
                     <UserDetails className='mt-auto'/>
                 </div>

@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function Ad({ data }: { data: AdNamespace.IAd }) {
     return (
-        <div className='flex w-11/12 shrink-0 flex-col justify-between gap-y-6 rounded-lg border px-5 py-5 md:h-36 md:w-7/12 md:flex-row '>
+        <div className='flex w-11/12 shrink-0 flex-col justify-between gap-y-6 rounded-lg border px-5 py-5 md:h-36 md:w-7/12 md:flex-row lg:min-h-full lg:w-10/12 lg:px-10 lg:py-10 '>
             <div className='flex items-center'>
                 <div className='relative h-28 w-28 overflow-hidden rounded-lg'>
                     <Image
