@@ -115,10 +115,9 @@ const Select = forwardRef<HTMLDivElement, Select>(
 
         useEffect(() => {
             if (!defaultValue) return;
-
             const defaultItem = items.find((item) => item.id == defaultValue);
             if (defaultItem) {
-                setSelectedValue(defaultItem.name);
+                setSelectedValue(defaultItem.name || defaultItem.title);
             }
 
         }, [defaultValue, items])
