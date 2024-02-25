@@ -24,9 +24,9 @@ type SelectWithFetching = {
     searchAble?: boolean;
     infiniteScroll?: boolean;
     apiService?: CityApiService,
+    defaultValue?: any;
 };
 export default memo(function SelectCity<T extends { items: any }>({
-    paginated = false,
     name,
     isDisabled = false,
     formErrors,
@@ -35,8 +35,9 @@ export default memo(function SelectCity<T extends { items: any }>({
     value,
     bordered,
     searchAble = false,
-    infiniteScroll = false,
     apiService = "HERE",
+    defaultValue,
+    label,
 }: SelectWithFetching) {
 
 
@@ -70,10 +71,11 @@ export default memo(function SelectCity<T extends { items: any }>({
             isDisabled={isDisabled}
             errorMessage={formErrors![name]}
             isInvalid={!!formErrors![name] ? true : false}
-            label={'انتخاب شهر'}
+            label={label}
             value={value}
             bordered={bordered}
             setSearch={searchAble ? setSearch : undefined}
+            defaultValue={defaultValue}
         >
             {(item: any) => (
                 <Option
