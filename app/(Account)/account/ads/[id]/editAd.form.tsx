@@ -6,16 +6,17 @@ import Textarea from '@/components/daisy/textarea';
 import SelectWithFetching from '@/components/daisy/selectWithFetching';
 import { useFormik } from 'formik';
 import Button from '@/components/daisy/button';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import SelectCity from '@/components/daisy/selectCity';
 // import useCreateAd from './useCreateAd';
-import { mutate } from 'swr';
+import useSWR, { mutate } from 'swr';
 import { useParams, useRouter } from 'next/navigation';
-import * as Yup from 'yup'
+import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import useAdPicture from '@/store/useAdPicture';
 import axios, { AxiosError } from 'axios';
 import useFetchAd from '../hooks/useFetchAd';
+import { axiosFetcher } from '@/app/swr/axiosFetcher';
 // import useUploadAdPictures from './useUploadAdPictures';
 
 type EditAdForm = {
@@ -30,23 +31,19 @@ type EditAdForm = {
     categoryId: string | number;
 };
 
-
 export default function EditAdForm() {
-
     // const {createAd, createAdLoading} = useCreateAd()
-    const router = useRouter()
+    const router = useRouter();
 
-
-    const params = useParams()
-    useEffect(() => {
-        console.log(params);
-    }, [params])
-    const {fetchAd, fetchAdLoading} = useFetchAd()
-
-
-
-
-    // const {uploadAdPictures, uploadAdPicturesLoading} = useUploadAdPictures()
+    const params = useParams();
+    const {
+        data: ad,
+        isLoading: adLoading,
+        error: adError,
+    } = useSWR(
+        `${process.env.NEXT_PUBLIC_API_URL}/ads/${params.id as string}`,
+        axiosFetcher
+    );
 
     const validationSchema = Yup.object().shape({
         countryId: Yup.string().required('لطفا کشور محل سکونت را انتخاب کنید'),
@@ -54,10 +51,12 @@ export default function EditAdForm() {
         title: Yup.string().required('لطفا عنوان آگهی را وارد کنید'),
         description: Yup.string().required('لطفا توضیحات آگهی را وارد کنید'),
         price: Yup.string(),
-        priceName: Yup.string(),
-        parentCategoryId: Yup.string().required('لطفا دسته بندی اصلی را انتخاب کنید'),
+        priceName: Yup.string().notRequired(),
+        parentCategoryId: Yup.string().required(
+            'لطفا دسته بندی اصلی را انتخاب کنید'
+        ),
         categoryId: Yup.string().required('لطفا دسته بندی را انتخاب کنید'),
-    })
+    });
 
     const formik = useFormik<EditAdForm>({
         initialValues: {
@@ -77,24 +76,22 @@ export default function EditAdForm() {
         validateOnMount: false,
         onSubmit: async (values) => {
 
+            console.log(values);
+            
+
             // Delete pricename if not specified
             // if (!values.priceName) {
             //     delete values.priceName
             // }
             // await validationSchema.validate(values)
-
             // // Check City
             // if (!values.cityObject?.address?.city) {
             //     toast.error('لطفا یک شهر انتخاب کنید. ایالت یا استان مورد قبول نیست')
             //     return;
             // }
             // await createAd(values).then(async (id) => {
-
-
             //     // Upload ad pictures
             //     await uploadAdPictures(id)
-                
-
             //     // Mutate user data to Update ads
             //     await mutate(process.env.NEXT_PUBLIC_CHECKAUTH_URL).then(() => {
             //         toast.success('آگهی شما با موفقیت ثبت شد')
@@ -105,38 +102,22 @@ export default function EditAdForm() {
     });
 
     useEffect(() => {
-        async function fetchAdData() {
-            if (params.id && formik && fetchAd) {
-                await fetchAd(params.id as string).then(async data => {
-                    console.log(data);
-                    // description: data.description,
-                    // price: data.price,
-                    // priceName: data.priceName,
-                    // parentCategoryId: data.parentCategoryId,
-                    // categoryId: data.category.id,
-                    // id: data.id,
-                    // countryId: data.country.id,
-                    // cityObject: data.city
-                    
-                    await formik.setFieldValue('title', data.title)
-                    await formik.setFieldValue('description', data.description)
-                    await formik.setFieldValue('price', data.price)
-                    await formik.setFieldValue('priceName', data.priceName)
-                    await formik.setFieldValue('parentCategoryId', data.parentCategoryId)
-                    await formik.setFieldValue('categoryId', data.category.id)
-                    await formik.setFieldValue('id', data.id)
-                    await formik.setFieldValue('countryId', data.country.id)
-                    await formik.setFieldValue('cityObject', data.city)
-                })
-            }
-        }
-        fetchAdData()
-    }, [params.id])
 
-    useEffect(() => {
-        console.log(formik.values);
-        
-    }, [formik])
+        if (params.id && formik && ad) {
+            formik.setValues({
+                title: ad.title,
+                description: ad.description,
+                price: ad.price,
+                priceName: ad.priceName,
+                parentCategoryId: ad.category?.parent?.id,
+                categoryId: ad.category.id,
+                id: ad.id,
+                countryId: ad.country.id,
+                cityObject: ad.city,
+            });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ad, params.id]);
 
     return (
         <div className='mb-5 flex w-full max-w-lg flex-col items-center justify-center gap-y-2 px-2 '>
@@ -199,7 +180,7 @@ export default function EditAdForm() {
                     bordered
                     value={formik.values.cityObject}
                     className='col-span-2'
-                    label='شهر'
+                    label={ad?.city?.name ? ad?.city?.name : 'انتخاب شهر'}
                     name='cityObject'
                     isDisabled={!formik.values?.countryId}
                     paginated
@@ -207,7 +188,7 @@ export default function EditAdForm() {
                     formErrors={formik.errors}
                     searchAble
                     infiniteScroll
-                    // defaultValue={formik.values.cityObject.id}
+                    defaultValue={ad?.city?.name}
                 />
             </div>
 
@@ -221,6 +202,7 @@ export default function EditAdForm() {
                     name='parentCategoryId'
                     setFieldValue={formik.setFieldValue}
                     formErrors={formik.errors}
+                    defaultValue={formik.values.parentCategoryId}
                 />
                 <SelectWithFetching
                     bordered
@@ -236,6 +218,7 @@ export default function EditAdForm() {
                     isDisabled={!formik.values?.parentCategoryId}
                     setFieldValue={formik.setFieldValue}
                     formErrors={formik.errors}
+                    defaultValue={formik.values.categoryId}
                 />
             </div>
 
