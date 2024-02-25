@@ -1,7 +1,9 @@
+import EditAdForm from "./editAd.form";
+
 export default function AdPage() {
     return (
-        <div>
-            <h1>صفحه اطلاعات آگهی</h1>
+        <div className="w-full flex justify-center items-center">
+            <EditAdForm/>
         </div>
     );
 }
