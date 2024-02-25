@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     const { setUser } = useUser();
     const { user, isVerified, isLoading, isAuthenticated, error } = useAuthCheck();
     const headerRef: React.MutableRefObject<HTMLDivElement | null> = useRef<(HTMLDivElement) | null>(null)
-    const [headerHeight, setHeaderHeight] = useState<number>()
+    const [headerHeight, setHeaderHeight] = useState<string>('h-[calc(100vh-4rem)]')
 
     useEffect(() => {
         if (isLoading) return;
@@ -46,7 +46,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         if (!document) return
         const header = document.getElementById('header') as HTMLDivElement
         if (header) {
-            setHeaderHeight(header.clientHeight)
+            setHeaderHeight(`h-[calc(100vh-${header.clientHeight}px)]`)
         }
     }, [])
 
@@ -56,11 +56,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         );
     }
 
-
+ 
     return (
         <div className={`grid w-full gap-5 lg:grid-cols-12`}>
             <div className='lg:col-span-3 w-full bg-gray-100/30'>
-                <div className={`hidden pb-4 lg:flex lg:justify-center lg:items-center lg:flex-col w-full ${headerHeight ? `lg:h-[calc(100vh-${headerHeight}px)]` : `lg:h-[calc(100vh-100px)]`}`}>
+                <div className={`hidden lg:flex lg:justify-center lg:items-center lg:flex-col w-full h-[calc(100vh-96px)]`}>
                     <SideMenu SideMenuList={SideMenuList} />
                     <UserDetails className='mt-auto'/>
                 </div>

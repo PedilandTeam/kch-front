@@ -36,7 +36,7 @@ export const Header = ({ children }: HeaderProps) => {
     return (
         <header
             id='header'
-            className={` fixed right-0 top-0 z-30 bg-white transition-all duration-300 lg:static lg:flex ${isVisible ? 'visible opacity-100' : 'invisible opacity-0 lg:visible lg:opacity-100'} flex h-16 w-full items-center justify-between border-b bg-white px-4 py-3 shadow-sm lg:border-0 lg:px-6 lg:shadow-none`}
+            className={` fixed right-0 top-0 z-30 bg-white transition-all duration-300 lg:static lg:flex ${isVisible ? 'visible opacity-100' : 'invisible opacity-0 lg:visible lg:opacity-100'} flex h-24 w-full items-center justify-between border-b bg-white px-4 py-3 shadow-sm lg:border-0 lg:px-6 lg:shadow-none`}
         >
             <HeaderMobile />
 
