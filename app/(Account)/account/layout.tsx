@@ -55,9 +55,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </div>
             </div>
             <div className='lg:col-span-9'>
-                <div
-                // className={`${firstCheckPassed && (isLoading || !isAuthenticated) ? 'blur-md' : ''} col-span-5 flex flex-col items-center justify-center lg:col-span-3 lg:block`}
-                >
+                <div className='w-full'>
                     {children}
                 </div>
             </div>
