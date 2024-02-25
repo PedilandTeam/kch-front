@@ -39,18 +39,6 @@ export default memo(function SelectCity<T extends { items: any }>({
     apiService = "HERE",
 }: SelectWithFetching) {
 
-    const { ref: lastItemRef, inView, entry } = useInView({
-        threshold: 0.5 
-   });
-
-   const [page, setPage] = useState(1)
-
-   useEffect(() => {
-       if (inView) {
-           setPage(old => old + 1)
-       }
-   }, [inView])
-
 
     const [search, setSearch] = useState('');
     const [selectedCityId, setSelectedCityId] = useState()
@@ -86,7 +74,6 @@ export default memo(function SelectCity<T extends { items: any }>({
             value={value}
             bordered={bordered}
             setSearch={searchAble ? setSearch : undefined}
-            ref={lastItemRef}
         >
             {(item: any) => (
                 <Option

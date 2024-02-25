@@ -35,6 +35,7 @@ interface Select
     label: string;
     onChange?: (e: React.MouseEvent<HTMLLIElement>, value: any) => void;
     setSearch?: Dispatch<SetStateAction<string>>;
+    defaultValue?: any
 }
 const Select = forwardRef<HTMLDivElement, Select>(
     (
@@ -52,6 +53,7 @@ const Select = forwardRef<HTMLDivElement, Select>(
             isLoading = false,
             onChange,
             setSearch,
+            defaultValue,
             ...selectProps
         },
         lastItemRef
@@ -59,6 +61,7 @@ const Select = forwardRef<HTMLDivElement, Select>(
         const [open, setOpen] = useState(false);
         const [selectedValue, setSelectedValue] = useState<string | null>('');
         const ulRef = useRef<HTMLUListElement>(null);
+        const divRef = useRef<HTMLDivElement>(null)
 
         /**
          * Handles the click event on the item.
@@ -68,10 +71,17 @@ const Select = forwardRef<HTMLDivElement, Select>(
          */
         const itemClickHandler = (e: React.MouseEvent<HTMLLIElement>) => {
             if (isDisabled) return;
+
+            // Close Dropdown
+            (document?.activeElement as HTMLElement)?.blur()
+
             e.stopPropagation()
-            setOpen(false);
+
+            // Set the selected value
             const target = e.target as HTMLLIElement;
             setSelectedValue(target.textContent || null);
+
+            // Trigger onChange Props
             if (typeof onChange == 'function')
                 onChange(e, target.dataset?.value);
         };
@@ -81,12 +91,7 @@ const Select = forwardRef<HTMLDivElement, Select>(
             e.stopPropagation()
             setOpen(true);
         };
-
-        const onBlur = (e: FocusEvent<HTMLDivElement>) => {
-            if (isDisabled) return;
-            e.stopPropagation()
-            setOpen((old) => !old);
-        }
+    
         /**
          * Update the selected value if it has changed in another component
          */
@@ -108,12 +113,21 @@ const Select = forwardRef<HTMLDivElement, Select>(
             setSelectedValue(null);
         }, [items]);
 
+        useEffect(() => {
+            if (!defaultValue) return;
+
+            const defaultItem = items.find((item) => item.id == defaultValue);
+            if (defaultItem) {
+                setSelectedValue(defaultItem.name);
+            }
+
+        }, [defaultValue, items])
+
         return (
-            <div className={`form-control w-full max-w-full ${className}`}>
+            <div className={`form-control w-full max-w-full ${className}`} data-type='container'>
                 <div
+                    ref={divRef}
                     className={`dropdown dropdown-bottom w-full select-none p-0`}
-                    onClick={onOpen}
-                    onAbort={onBlur}
                 >
                     <div
                         tabIndex={0}
@@ -131,26 +145,16 @@ const Select = forwardRef<HTMLDivElement, Select>(
                     </div>
 
                     <ul
-                        ref={ulRef}
                         tabIndex={0}
-                        className={` ${!open || isLoading ? 'invisible opacity-0' : 'opacity-1 visible'} scrollbar-hide menu dropdown-content z-[1] grid h-64 w-full transform-cpu grid-cols-1 place-content-start overflow-y-scroll rounded-box bg-base-100 p-0  shadow duration-300`}
+                        className={` scrollbar-hide menu dropdown-content z-[1] grid h-64 w-full transform-cpu grid-cols-1 place-content-start overflow-y-scroll rounded-box bg-base-100 p-0  shadow duration-300`}
                     >
                         {!!setSearch && <SelectSearch setSearch={setSearch} />}
 
                         <div className='p-2'>
                             {[...items].map((item, index) => {
-                                if (index + 1 == items.length) {                                    
-                                    return <li
-                                        ref={lastItemRef as LegacyRef<HTMLLIElement>}
-                                        className='w-full'
-                                        key={index}
-                                        onClick={itemClickHandler}
-                                    >
-                                        {children(item, setSelectedValue)}
-                                    </li>;
-                                }
                                 return (
                                     <li
+                                        data-value={item.id}
                                         className='w-full'
                                         key={index}
                                         onClick={itemClickHandler}

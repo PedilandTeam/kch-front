@@ -21,6 +21,7 @@ type SelectWithFetching = {
     bordered?: boolean;
     searchAble?: boolean;
     infiniteScroll?: boolean;
+    defaultValue?: any;
 };
 export default memo(function SelectWithFetching<T extends { items: any }>({
     route,
@@ -36,23 +37,13 @@ export default memo(function SelectWithFetching<T extends { items: any }>({
     bordered,
     searchAble = false,
     infiniteScroll = false,
+    defaultValue,
 }: SelectWithFetching) {
 
-    const { ref: lastItemRef, inView, entry } = useInView({
-        threshold: 0.5 
-   });
-
-   const [page, setPage] = useState(1)
-
-   useEffect(() => {
-       if (inView) {
-           setPage(old => old + 1)
-       }
-   }, [inView])
     const [search, setSearch] = useState('');
 
     const { data, isLoading, error } = useSWR<T>(
-        route ? `${process.env.NEXT_PUBLIC_API_URL}${route}${search ? `&search=${search}` : ''}${infiniteScroll ? `&page=${page}` : ''}` : null,
+        route ? `${process.env.NEXT_PUBLIC_API_URL}${route}${search ? `&search=${search}` : ''}` : null,
         fetcher
     );
 
@@ -70,10 +61,11 @@ export default memo(function SelectWithFetching<T extends { items: any }>({
             value={value}
             bordered={bordered}
             setSearch={searchAble ? setSearch : undefined}
-            ref={lastItemRef}
+            defaultValue={defaultValue}
         >
             {(item: any) => (
                 <Option
+                    // {...defaultValue == item.id ? { defaultSelected: true } : {}}
                     key={item.id}
                     value={item.id}
                     startContent={
