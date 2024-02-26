@@ -17,6 +17,9 @@ import useAdPicture from '@/store/useAdPicture';
 import axios, { AxiosError } from 'axios';
 import useFetchAd from '../hooks/useFetchAd';
 import { axiosFetcher } from '@/app/swr/axiosFetcher';
+import useCreateAd from '../hooks/useAdManagement';
+import useUploadAdPictures from '../hooks/useUploadAdPictures';
+import useAdManagement from '../hooks/useAdManagement';
 // import useUploadAdPictures from './useUploadAdPictures';
 
 type EditAdForm = {
@@ -35,8 +38,12 @@ export default function EditAdForm() {
     // const {createAd, createAdLoading} = useCreateAd()
     const router = useRouter();
 
+    const { updateAd, updateAdLoading } = useAdManagement();
+    const { uploadAdPictures, uploadAdPicturesLoading } = useUploadAdPictures();
+
     const params = useParams();
-    const {addPicture} = useAdPicture()
+    const adId = params.id as string
+    const { addPicture, pictures } = useAdPicture();
     const {
         data: ad,
         isLoading: adLoading,
@@ -48,7 +55,7 @@ export default function EditAdForm() {
 
     const validationSchema = Yup.object().shape({
         countryId: Yup.string().required('لطفا کشور محل سکونت را انتخاب کنید'),
-        cityObject: Yup.object().required('لطفا شهر محل سکونت را انتخاب کنید'),
+        cityObject: Yup.object().notRequired(),
         title: Yup.string().required('لطفا عنوان آگهی را وارد کنید'),
         description: Yup.string().required('لطفا توضیحات آگهی را وارد کنید'),
         price: Yup.string(),
@@ -76,35 +83,35 @@ export default function EditAdForm() {
         validateOnChange: false,
         validateOnMount: false,
         onSubmit: async (values) => {
-
-            console.log(values);
-            
-
             // Delete pricename if not specified
-            // if (!values.priceName) {
-            //     delete values.priceName
-            // }
-            // await validationSchema.validate(values)
-            // // Check City
-            // if (!values.cityObject?.address?.city) {
-            //     toast.error('لطفا یک شهر انتخاب کنید. ایالت یا استان مورد قبول نیست')
-            //     return;
-            // }
-            // await createAd(values).then(async (id) => {
-            //     // Upload ad pictures
-            //     await uploadAdPictures(id)
-            //     // Mutate user data to Update ads
-            //     await mutate(process.env.NEXT_PUBLIC_CHECKAUTH_URL).then(() => {
-            //         toast.success('آگهی شما با موفقیت ثبت شد')
-            //         router.push('/account/ads')
-            //     })
-            // })
+            if (!values.priceName) {
+                delete values.priceName;
+            }
+            await validationSchema.validate(values);
+            // Check City
+            if (values.cityObject) {
+                if (!values.cityObject?.address?.city) {
+                    toast.error(
+                        'لطفا یک شهر انتخاب کنید. ایالت یا استان مورد قبول نیست'
+                    );
+                    return;
+                }
+            }
+            await updateAd(adId, values).then(async () => {
+                // Upload ad pictures if new pictures added
+                if (pictures.length > 0)
+                    await uploadAdPictures(adId);
+
+                // Mutate user data to Update ads
+                await mutate(process.env.NEXT_PUBLIC_CHECKAUTH_URL).then(() => {
+                    toast.success('آگهی شما با موفقیت ثبت شد');
+                    router.push('/account/ads');
+                });
+            });
         },
     });
 
     useEffect(() => {
-
-        
         if (params.id && formik && ad) {
             formik.setValues({
                 title: ad.title,
@@ -115,7 +122,7 @@ export default function EditAdForm() {
                 categoryId: ad.category.id,
                 id: ad.id,
                 countryId: ad.country.id,
-                cityObject: ad.city,
+                cityObject: undefined,
             });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -123,7 +130,10 @@ export default function EditAdForm() {
 
     return (
         <div className='mb-5 flex w-full max-w-lg flex-col items-center justify-center gap-y-2 px-2 '>
-            <Pictures currentPicturesPath={ad?.pictures} adId={params.id as string} />
+            <Pictures
+                currentPicturesPath={ad?.pictures}
+                adId={params.id as string}
+            />
             <Input
                 name='title'
                 onChange={formik.handleChange}
@@ -229,9 +239,9 @@ export default function EditAdForm() {
                 onClick={() => {
                     formik.handleSubmit();
                 }}
-                // isLoading={createAdLoading || uploadAdPicturesLoading}
+                isLoading={updateAdLoading || uploadAdPicturesLoading}
             >
-                ثبت آگهی
+                آپدیت آگهی
             </Button>
         </div>
     );
