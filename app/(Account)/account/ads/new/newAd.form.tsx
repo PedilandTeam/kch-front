@@ -8,14 +8,15 @@ import { useFormik } from 'formik';
 import Button from '@/components/daisy/button';
 import { useEffect } from 'react';
 import SelectCity from '@/components/daisy/selectCity';
-import useCreateAd from './useCreateAd';
+import useCreateAd from '../hooks/useAdManagement';
 import { mutate } from 'swr';
 import { useRouter } from 'next/navigation';
 import * as Yup from 'yup'
 import toast from 'react-hot-toast';
 import useAdPicture from '@/store/useAdPicture';
 import axios, { AxiosError } from 'axios';
-import useUploadAdPictures from './useUploadAdPictures';
+import useUploadAdPictures from '../hooks/useUploadAdPictures';
+import useAdManagement from '../hooks/useAdManagement';
 
 type NewAdForm = {
     countryId: string | number;
@@ -31,7 +32,7 @@ type NewAdForm = {
 
 export default function NewAdForm() {
 
-    const {createAd, createAdLoading} = useCreateAd()
+    const {createAd, createAdLoading} = useAdManagement()
     const router = useRouter()
 
 
