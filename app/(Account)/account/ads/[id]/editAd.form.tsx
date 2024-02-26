@@ -36,6 +36,7 @@ export default function EditAdForm() {
     const router = useRouter();
 
     const params = useParams();
+    const {addPicture} = useAdPicture()
     const {
         data: ad,
         isLoading: adLoading,
@@ -103,6 +104,7 @@ export default function EditAdForm() {
 
     useEffect(() => {
 
+        
         if (params.id && formik && ad) {
             formik.setValues({
                 title: ad.title,
@@ -121,7 +123,7 @@ export default function EditAdForm() {
 
     return (
         <div className='mb-5 flex w-full max-w-lg flex-col items-center justify-center gap-y-2 px-2 '>
-            <Pictures />
+            <Pictures currentPicturesPath={ad?.pictures} adId={params.id as string} />
             <Input
                 name='title'
                 onChange={formik.handleChange}
