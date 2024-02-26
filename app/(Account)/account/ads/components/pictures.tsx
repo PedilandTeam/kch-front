@@ -5,7 +5,16 @@ import useAdPicture from '@/store/useAdPicture';
 import Picture from './picture';
 import { memo, useEffect } from 'react';
 import PictureWithLink from './pictureWithLink';
-function Pictures({ currentPicturesPath = [], adId }: { currentPicturesPath?: string[], adId: string }) {
+
+
+/**
+ * Renders a component for displaying and uploading pictures related to an ad.
+ *
+ * @param {string[]} currentPicturesPath - An array of paths to the current pictures
+ * @param {string} adId - The ID of the ad
+ * @return {JSX.Element} A React element representing the component
+ */
+function Pictures({ currentPicturesPath = [], adId }: { currentPicturesPath?: string[], adId?: string }) {
     const { pictures, removePicture } = useAdPicture();
 
     return (
@@ -28,7 +37,7 @@ function Pictures({ currentPicturesPath = [], adId }: { currentPicturesPath?: st
                     currentPicturesPath?.length > 0 &&
                     currentPicturesPath.map((picPath, index) => (
                         <PictureWithLink
-                            adId={adId}
+                            adId={adId!}
                             pictureId={picPath}
                             key={index}
                         />
