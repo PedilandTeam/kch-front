@@ -35,7 +35,7 @@ export default function NewAdForm() {
     const {createAd, createAdLoading} = useAdManagement()
     const router = useRouter()
 
-    const { clearPictures } = useAdPicture()
+    const { clearPictures, pictures } = useAdPicture()
 
 
     const {uploadAdPictures, uploadAdPicturesLoading} = useUploadAdPictures()
@@ -67,6 +67,10 @@ export default function NewAdForm() {
         validateOnChange: false,
         validateOnMount: false,
         onSubmit: async (values) => {
+            if (pictures.length <= 0) {
+                toast.error('لطفا حداقل یک عکس انتخاب کنید')
+                return
+            }
 
             // Delete pricename if not specified
             if (!values.priceName) {
