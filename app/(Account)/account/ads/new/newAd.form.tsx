@@ -35,6 +35,8 @@ export default function NewAdForm() {
     const {createAd, createAdLoading} = useAdManagement()
     const router = useRouter()
 
+    const { clearPictures } = useAdPicture()
+
 
     const {uploadAdPictures, uploadAdPicturesLoading} = useUploadAdPictures()
 
@@ -92,6 +94,11 @@ export default function NewAdForm() {
             })
         },
     });
+
+
+    useEffect(() => {
+        return () => clearPictures()
+    }, [])
 
     return (
         <div className='mb-5 flex w-full max-w-lg flex-col items-center justify-center gap-y-2 px-2 '>

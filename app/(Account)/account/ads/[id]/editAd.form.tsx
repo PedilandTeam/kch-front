@@ -131,6 +131,10 @@ export default function EditAdForm() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ad, params.id]);
 
+    useEffect(() => {
+     return () => clearPictures()
+    }, [])
+
     return (
         <div className='mb-5 flex w-full max-w-lg flex-col items-center justify-center gap-y-2 px-2 '>
             <Pictures
