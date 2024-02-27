@@ -54,6 +54,19 @@ export default function EditAdForm() {
         axiosFetcher
     );
 
+    useEffect(() => {
+        if (!adError) return;
+        if (adError?.statusCode == 404) {
+            toast.error('آگهی مورد نظر یافت نشد');
+            router.push('/account/ads');
+            return
+        }else{
+            toast.error(adError?.message || 'خطایی در دریافت اطلاعات رخ داده است')
+            router.push('/account/ads');
+        }
+        
+    },[adError])
+
     const validationSchema = Yup.object().shape({
         countryId: Yup.string().required('لطفا کشور محل سکونت را انتخاب کنید'),
         cityObject: Yup.object().notRequired(),
@@ -135,6 +148,7 @@ export default function EditAdForm() {
         return () => clearPictures();
     }, []);
 
+    if (ad)
     return (
         <div className='mb-5 flex w-full max-w-lg flex-col items-center justify-center gap-y-2 px-2 '>
             <Pictures
