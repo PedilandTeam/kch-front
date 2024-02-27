@@ -19,6 +19,7 @@ declare global {
       TEL_BOT_TOKEN: string;
       NEXT_PUBLIC_HERE_API_URL: string;
       NEXT_PUBLIC_HERE_API_KEY: string;
+      MAX_FILE_ACCEPT: string;
       NEXT_PUBLIC_CHECKAUTH_URL: string;
     }
   }
