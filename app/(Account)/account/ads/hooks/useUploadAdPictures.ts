@@ -16,9 +16,6 @@ export default function useUploadAdPictures() {
             form.append('images', picture.file);
         }
 
-        // Delete Pictures From memory
-        clearPictures();
-
         setLoading(true);
         return await axios
             .post(
