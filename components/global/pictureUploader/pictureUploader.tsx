@@ -41,6 +41,7 @@ export default function PictureUploader() {
                 type='file'
                 className='hidden'
                 multiple
+                max={process.env.NEXT_PUBLIC_MAX_FILE_ACCEPT}
             />
         </>
     );
