@@ -20,6 +20,7 @@ import { axiosFetcher } from '@/app/swr/axiosFetcher';
 import useCreateAd from '../hooks/useAdManagement';
 import useUploadAdPictures from '../hooks/useUploadAdPictures';
 import useAdManagement from '../hooks/useAdManagement';
+import DeleteAdModal from '../components/deleteAd.modal';
 // import useUploadAdPictures from './useUploadAdPictures';
 
 type EditAdForm = {
@@ -42,7 +43,7 @@ export default function EditAdForm() {
     const { uploadAdPictures, uploadAdPicturesLoading } = useUploadAdPictures();
 
     const params = useParams();
-    const adId = params.id as string
+    const adId = params.id as string;
     const { clearPictures, pictures } = useAdPicture();
     const {
         data: ad,
@@ -99,16 +100,15 @@ export default function EditAdForm() {
             }
             await updateAd(adId, values).then(async () => {
                 // Upload ad pictures if new pictures added
-                if (pictures.length > 0)
-                    await uploadAdPictures(adId);
+                if (pictures.length > 0) await uploadAdPictures(adId);
 
                 // Mutate user data to Update ads
                 await mutate(process.env.NEXT_PUBLIC_CHECKAUTH_URL).then(() => {
                     toast.success('آگهی شما با موفقیت ثبت شد');
-                    router.push('/account/ads')
+                    router.push('/account/ads');
 
                     // Clear pictures
-                    clearPictures()
+                    clearPictures();
                 });
             });
         },
@@ -132,8 +132,8 @@ export default function EditAdForm() {
     }, [ad, params.id]);
 
     useEffect(() => {
-     return () => clearPictures()
-    }, [])
+        return () => clearPictures();
+    }, []);
 
     return (
         <div className='mb-5 flex w-full max-w-lg flex-col items-center justify-center gap-y-2 px-2 '>
@@ -241,15 +241,20 @@ export default function EditAdForm() {
                 />
             </div>
 
-            <Button
-                className='btn-primary mt-5 w-full'
-                onClick={() => {
-                    formik.handleSubmit();
-                }}
-                isLoading={updateAdLoading || uploadAdPicturesLoading}
-            >
-                آپدیت آگهی
-            </Button>
+            <DeleteAdModal adId={adId}/>
+
+            <div className='flex items-center justify-center gap-x-1 w-full'>
+                <label htmlFor='delete_ad_modal' className='btn btn-ghost hover:bg-red-500 hover:text-white mt-5 w-3/12'>حذف اگهی</label>
+                <Button
+                    className='btn-primary mt-5 w-9/12'
+                    onClick={() => {
+                        formik.handleSubmit();
+                    }}
+                    isLoading={updateAdLoading || uploadAdPicturesLoading}
+                >
+                    آپدیت آگهی
+                </Button>
+            </div>
         </div>
     );
 }
