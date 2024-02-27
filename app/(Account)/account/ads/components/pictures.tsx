@@ -39,7 +39,7 @@ function Pictures({ currentPicturesPath = [], adId }: { currentPicturesPath?: st
                         <PictureWithLink
                             adId={adId!}
                             pictureId={picPath}
-                            key={index}
+                            key={picPath}
                         />
                     ))
                 }

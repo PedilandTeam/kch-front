@@ -43,7 +43,7 @@ export default function EditAdForm() {
 
     const params = useParams();
     const adId = params.id as string
-    const { addPicture, pictures } = useAdPicture();
+    const { clearPictures, pictures } = useAdPicture();
     const {
         data: ad,
         isLoading: adLoading,
@@ -105,7 +105,10 @@ export default function EditAdForm() {
                 // Mutate user data to Update ads
                 await mutate(process.env.NEXT_PUBLIC_CHECKAUTH_URL).then(() => {
                     toast.success('آگهی شما با موفقیت ثبت شد');
-                    router.push('/account/ads');
+                    router.push('/account/ads')
+
+                    // Clear pictures
+                    clearPictures()
                 });
             });
         },

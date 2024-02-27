@@ -12,7 +12,7 @@ export default function PictureWithLink({link, adId, pictureId }: {link?: string
 
     const deletePictureHandler = async() => {
         setDeleteLoading(true)
-        toast.promise(
+        await toast.promise(
             axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/ads/${adId}/pictures/${pictureId}`, {
                 withCredentials: true,
             })
