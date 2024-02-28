@@ -12,4 +12,7 @@ export interface IUser {
     city: CityNamespace.city | null;
     ads: any[];
     lastAd: Date | null;
+    balance: number;
+    currency: string;
+    currencyName: string;
 }

@@ -7,5 +7,7 @@ export namespace CountryNamespace {
         status: boolean;
         availability: boolean;
         areaCode: number;
+        currency: string;
+        currencyName: string
     };
 }
