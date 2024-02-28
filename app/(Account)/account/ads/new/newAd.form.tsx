@@ -11,12 +11,13 @@ import SelectCity from '@/components/daisy/selectCity';
 import useCreateAd from '../hooks/useAdManagement';
 import { mutate } from 'swr';
 import { useRouter } from 'next/navigation';
-import * as Yup from 'yup'
+import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import useAdPicture from '@/store/useAdPicture';
 import axios, { AxiosError } from 'axios';
 import useUploadAdPictures from '../hooks/useUploadAdPictures';
 import useAdManagement from '../hooks/useAdManagement';
+import { useUser } from '@/store/useUser';
 
 type NewAdForm = {
     countryId: string | number;
@@ -29,16 +30,13 @@ type NewAdForm = {
     categoryId: string | number;
 };
 
-
 export default function NewAdForm() {
+    const { createAd, createAdLoading } = useAdManagement();
+    const router = useRouter();
 
-    const {createAd, createAdLoading} = useAdManagement()
-    const router = useRouter()
+    const { clearPictures, pictures } = useAdPicture();
 
-    const { clearPictures, pictures } = useAdPicture()
-
-
-    const {uploadAdPictures, uploadAdPicturesLoading} = useUploadAdPictures()
+    const { uploadAdPictures, uploadAdPicturesLoading } = useUploadAdPictures();
 
     const validationSchema = Yup.object().shape({
         countryId: Yup.string().required('لطفا کشور محل سکونت را انتخاب کنید'),
@@ -47,9 +45,11 @@ export default function NewAdForm() {
         description: Yup.string().required('لطفا توضیحات آگهی را وارد کنید'),
         price: Yup.string(),
         priceName: Yup.string(),
-        parentCategoryId: Yup.string().required('لطفا دسته بندی اصلی را انتخاب کنید'),
+        parentCategoryId: Yup.string().required(
+            'لطفا دسته بندی اصلی را انتخاب کنید'
+        ),
         categoryId: Yup.string().required('لطفا دسته بندی را انتخاب کنید'),
-    })
+    });
 
     const formik = useFormik<NewAdForm>({
         initialValues: {
@@ -68,41 +68,40 @@ export default function NewAdForm() {
         validateOnMount: false,
         onSubmit: async (values) => {
             if (pictures.length <= 0) {
-                toast.error('لطفا حداقل یک عکس انتخاب کنید')
-                return
+                toast.error('لطفا حداقل یک عکس انتخاب کنید');
+                return;
             }
 
             // Delete pricename if not specified
             if (!values.priceName) {
-                delete values.priceName
+                delete values.priceName;
             }
-            await validationSchema.validate(values)
+            await validationSchema.validate(values);
 
             // Check City
             if (!values.cityObject?.address?.city) {
-                toast.error('لطفا یک شهر انتخاب کنید. ایالت یا استان مورد قبول نیست')
+                toast.error(
+                    'لطفا یک شهر انتخاب کنید. ایالت یا استان مورد قبول نیست'
+                );
                 return;
             }
             await createAd(values).then(async (id) => {
-
-
                 // Upload ad pictures
-                await uploadAdPictures(id)
-                
+                await uploadAdPictures(id);
 
                 // Mutate user data to Update ads
                 await mutate(process.env.NEXT_PUBLIC_CHECKAUTH_URL).then(() => {
-                    toast.success('آگهی شما با موفقیت ثبت شد')
-                    router.push('/account/ads')
-                })
-            })
+                    toast.success('آگهی شما با موفقیت ثبت شد');
+                    router.push('/account/ads');
+                });
+            });
         },
     });
 
 
     useEffect(() => {
-        return () => clearPictures()
-    }, [])
+        return () => clearPictures();
+    }, []);
 
     return (
         <div className='mb-5 flex w-full max-w-lg flex-col items-center justify-center gap-y-2 px-2 '>
@@ -121,29 +120,7 @@ export default function NewAdForm() {
                 label='توضیحات آگهی'
                 placeholder='توضیحات آگهی'
             />
-            <div className='flex w-full gap-x-1'>
-                <Input
-                    name='price'
-                    onChange={formik.handleChange}
-                    placeholder='قیمت'
-                    type='number'
-                    bordered
-                    label='قیمت'
-                    className='w-1/2'
-                    isInvalid={!!formik.errors.price}
-                />
-                <Input
-                    name='priceName'
-                    onChange={formik.handleChange}
-                    placeholder='قیمت، ماهانه و..'
-                    type='text'
-                    bordered
-                    label='متن قیمت( اجاره، شهریه.. )'
-                    className='w-1/2'
-                    isInvalid={!!formik.errors.priceName}
-                />
-            </div>
-            <div className='mt-5 flex w-full gap-x-1'>
+            <div className='my-5 flex w-full gap-x-1'>
                 <SelectWithFetching
                     bordered
                     value={formik.values.countryId}
@@ -168,6 +145,28 @@ export default function NewAdForm() {
                     formErrors={formik.errors}
                     searchAble
                     infiniteScroll
+                />
+            </div>
+            <div className='flex w-full gap-x-1'>
+                <Input
+                    name='price'
+                    onChange={formik.handleChange}
+                    placeholder='قیمت'
+                    type='number'
+                    bordered
+                    label={`قیمت`}
+                    className='w-1/2'
+                    isInvalid={!!formik.errors.price}
+                />
+                <Input
+                    name='priceName'
+                    onChange={formik.handleChange}
+                    placeholder='قیمت، ماهانه و..'
+                    type='text'
+                    bordered
+                    label='متن قیمت( اجاره، شهریه.. )'
+                    className='w-1/2'
+                    isInvalid={!!formik.errors.priceName}
                 />
             </div>
 
