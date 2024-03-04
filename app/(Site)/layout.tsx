@@ -50,16 +50,18 @@ export default async function RootLayout({
                     </div>
                     <Footer />
                 </Providers>
-                <Script src='https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD' />
-                <Script id='google-analytics'>
-                    {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
- 
-          gtag('config', 'G-EED4RG3GPD');
-        `}
-                </Script>
+                {
+                    process.env.NODE_ENV == 'production' ?
+                        (
+                            <>
+
+                                <Script src='https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD' />
+                                <Script id='google-analytics'>
+                                </Script>
+                            </>
+                        )
+                        : null
+                }
             </body>
         </html>
     );
