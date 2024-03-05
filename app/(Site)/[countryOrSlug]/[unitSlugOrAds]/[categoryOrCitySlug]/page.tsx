@@ -5,19 +5,21 @@ import { notFound } from 'next/navigation';
 import CategoryList from './businessList/categoryList';
 import { PathGeneratorType } from '../../country/page';
 import queryString from 'query-string';
-import pathGenerator from './businessList/_pathGenerator';
+import pathGenerator from './_pathGenerator';
 import fetchCountry from '@/modules/fetchCountry';
-import CityAds from './adsList/cityAds';
+import AdsList from './adsList/adsList';
 type ParsedSearchParams = {
     page?: number | number[];
     city?: any;
     search: string;
 };
 
-
-
 type generateMetadata = {
-    params: { countryOrSlug: string; unitSlugOrAds: string; categoryOrCitySlug: string };
+    params: {
+        countryOrSlug: string;
+        unitSlugOrAds: string;
+        categoryOrCitySlug: string;
+    };
 };
 export const generateMetadata = async ({
     params: { countryOrSlug, unitSlugOrAds, categoryOrCitySlug },
@@ -25,12 +27,18 @@ export const generateMetadata = async ({
     let pathInfo: PathGeneratorType;
 
     try {
-        pathInfo = await pathGenerator(countryOrSlug, unitSlugOrAds, categoryOrCitySlug);
+        pathInfo = await pathGenerator(
+            countryOrSlug,
+            unitSlugOrAds,
+            categoryOrCitySlug
+        );
     } catch (e: any) {
         throw Error(e);
     }
 
-    const currentCountry = (await fetchCountry({ code: countryOrSlug, revalidate: 200 }))?.[0]
+    const currentCountry = (
+        await fetchCountry({ code: countryOrSlug, revalidate: 200 })
+    )?.[0];
 
     return {
         title: `لیست ${pathInfo?.props?.category?.name} فارسی زبان در ${
@@ -51,7 +59,11 @@ export default async function CategoryPage({
     params: { countryOrSlug, unitSlugOrAds, categoryOrCitySlug },
     searchParams,
 }: {
-    params: { countryOrSlug: string; unitSlugOrAds: string; categoryOrCitySlug: string };
+    params: {
+        countryOrSlug: string;
+        unitSlugOrAds: string;
+        categoryOrCitySlug: string;
+    };
     searchParams: { [key: string]: string | string[] | undefined };
 }) {
     let parsedSearchParams: ParsedSearchParams;
@@ -64,13 +76,23 @@ export default async function CategoryPage({
     const { page: pageNumber, city, search } = parsedSearchParams;
 
     try {
-        pathInfo = await pathGenerator(countryOrSlug, unitSlugOrAds, categoryOrCitySlug);
+        pathInfo = await pathGenerator(
+            countryOrSlug,
+            unitSlugOrAds,
+            categoryOrCitySlug
+        );
     } catch (e: any) {
         throw Error(e);
     }
 
     if (pathInfo.type == 'ads') {
-        return <CityAds city={pathInfo.props.city} />
+        return (
+            <AdsList
+                {...pathInfo.props}
+                pageNumber={pageNumber}
+                search={search}
+            />
+        );
     }
 
     if (pathInfo.type == 'category') {
@@ -84,6 +106,5 @@ export default async function CategoryPage({
         );
     }
 
-
-    notFound()
+    notFound();
 }
