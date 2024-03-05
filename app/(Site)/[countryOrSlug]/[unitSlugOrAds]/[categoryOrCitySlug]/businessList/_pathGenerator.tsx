@@ -1,5 +1,5 @@
 import fetchCountry from "@/modules/fetchCountry";
-import { PathGeneratorType } from "../../country/page";
+import { PathGeneratorType } from "../../../country/page";
 import fetchUnits from "@/modules/fetchUnit";
 import fetchCategories from "@/modules/fetchCategories";
 import fetchCities from "@/modules/fetchCities";

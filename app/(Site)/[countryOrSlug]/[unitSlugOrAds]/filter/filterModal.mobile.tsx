@@ -6,7 +6,7 @@ import CityFilter from './city.filter';
 import CategoryFilter from './category.filter';
 import { CityNamespace } from '@/types/city';
 import { CategoryNamespace } from '@/types/category';
-import PagesSearch from '../[categoryOrCitySlug]/filter/pages.search';
+import PagesSearch from '../[categoryOrCitySlug]/businessList/filter/pages.search';
 
 type FilterMobileProps = {
     cities: CityNamespace.city[];

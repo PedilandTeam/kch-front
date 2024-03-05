@@ -10,7 +10,7 @@ type ParsedSearchParamsType = {
     category?: string[] | string;
     search?: string;
 };
-export default () => {
+export default function PagesSearch(){
     const [parsedSearchParams, setParsedSearchParams] =
         useState<ParsedSearchParamsType>({});
     const searchParams = useSearchParams() as unknown as URLSearchParams;

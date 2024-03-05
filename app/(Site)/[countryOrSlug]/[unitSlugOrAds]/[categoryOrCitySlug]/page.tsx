@@ -2,12 +2,12 @@ import { API_ROUTES } from '@/routes';
 import { CountryNamespace } from '@/types/country';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import CategoryList from './categoryList';
+import CategoryList from './businessList/categoryList';
 import { PathGeneratorType } from '../../country/page';
 import queryString from 'query-string';
-import pathGenerator from './_pathGenerator';
+import pathGenerator from './businessList/_pathGenerator';
 import fetchCountry from '@/modules/fetchCountry';
-import CityAds from './cityAds/cityAds';
+import CityAds from './adsList/cityAds';
 type ParsedSearchParams = {
     page?: number | number[];
     city?: any;

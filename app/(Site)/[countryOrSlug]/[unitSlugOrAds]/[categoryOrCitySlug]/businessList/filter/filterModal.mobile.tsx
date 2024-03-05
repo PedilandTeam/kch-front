@@ -4,7 +4,7 @@ import { _TXT } from '@app/text/index';
 import { FunnelIcon } from '@heroicons/react/24/solid';
 // import CityFilter from "./city.filter";
 import { CityNamespace } from '@/types/city';
-import CityFilter from '../../filter/city.filter';
+import CityFilter from '../../../filter/city.filter';
 import PagesSearch from './pages.search';
 
 type FilterMobileProps = {

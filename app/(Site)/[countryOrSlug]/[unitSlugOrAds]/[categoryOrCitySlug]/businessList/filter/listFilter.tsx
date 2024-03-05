@@ -3,8 +3,8 @@ import { _TXT } from '@app/text/index';
 import { FunnelIcon } from '@client-packages/heroicons/components';
 import FilterMobile from './filterModal.mobile';
 import { CityNamespace } from '@/types/city';
-import CityFilter from '../../filter/city.filter';
-import PageSearch from '../../filter/page.search';
+import CityFilter from '../../../filter/city.filter';
+import PageSearch from '../../../filter/page.search';
 import SideBanner from '@/app/banners/side-banner';
 
 type ListFilterProps = {

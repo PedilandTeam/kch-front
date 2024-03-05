@@ -9,7 +9,7 @@ import { CardsList } from './cardsList';
 import ListFilter from './filter/listFilter';
 import { CountryNamespace } from '@/types/country';
 import { Suspense } from 'react';
-import Loading from '../_loading';
+import Loading from '../../_loading';
 import { FunnelIcon } from '@heroicons/react/24/solid';
 import { _TXT } from '@/app/text';
 import SideBanner from '@/app/banners/side-banner';
