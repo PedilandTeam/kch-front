@@ -1,26 +1,21 @@
-import { metadata } from '@/app/layout';
 import { API_ROUTES } from '@/routes';
 import { CountryNamespace } from '@/types/country';
-import { UnitType } from '@/types/unit';
-import { isNumber } from 'lodash';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import queryString from 'query-string';
 import { PathGeneratorType } from '../country/page';
 import UnitList from './unitList';
+import fetchCountry from '@/modules/fetchCountry';
+import fetchUnits from '@/modules/fetchUnit';
 
 const pathGenerator = async (
     countryOrSlug: string,
     unitSlug: string
 ): Promise<PathGeneratorType> => {
-    const units = await (await API_ROUTES.UNITS.GET_ALL(2000)).json();
-    const currentUnit = units.find((unit: UnitType) => unit.slug == unitSlug);
-    const countryList = await (
-        await API_ROUTES.COUNTRIES.GET_ALL(false, 20)
-    ).json();
-    const currentCountry = countryList.find(
-        (country: CountryNamespace.GET) => country.code == countryOrSlug
-    );
+
+    const currentUnit = await fetchUnits({ slug: unitSlug, revalidate: 2000 })
+    const currentCountry = await fetchCountry({ code: countryOrSlug, revalidate: 200 })
+
 
     if (!currentUnit || !currentCountry) {
         return {
@@ -56,21 +51,17 @@ export const generateMetadata = async ({
         (country: CountryNamespace.GET) => country.code == countryOrSlug
     );
     return {
-        title: `لیست ${pathInfo?.props?.unit?.name} فارسی زبان در ${
-            countryOrSlug && currentCountry && currentCountry.name
-        } | کوچا`,
-        description: `به جامعه مجازی ایرانیان مهاجر مقیم ${
-            countryOrSlug && currentCountry && currentCountry.name
-        } خوش آمدید. در این صفحه لیست کاملی از ${
-            pathInfo?.props?.unit?.name
-        } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
+        title: `لیست ${pathInfo?.props?.unit?.name} فارسی زبان در ${countryOrSlug && currentCountry && currentCountry.name
+            } | کوچا`,
+        description: `به جامعه مجازی ایرانیان مهاجر مقیم ${countryOrSlug && currentCountry && currentCountry.name
+            } خوش آمدید. در این صفحه لیست کاملی از ${pathInfo?.props?.unit?.name
+            } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
         alternates: {
             canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${pathInfo?.props?.unit?.slug}`,
         },
     };
 };
 
-type Param = number | undefined;
 type ParsedSearchParams = {
     page?: number | number[];
     category?: number | number[];
