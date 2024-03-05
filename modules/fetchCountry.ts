@@ -24,7 +24,7 @@ export default async function fetchCountry({ code, revalidate }: { code: string,
             return json
         })
         .catch((e: WretchError) => {
-            console.error(`Error Accourd in fetchCountry. params {code: ${code}}`, e.json())
+            console.error(`Error Accourd in fetchCountry. params {code: ${code}}`, e?.json, e.message)
             return null;
         })
 }
