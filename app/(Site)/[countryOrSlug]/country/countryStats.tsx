@@ -51,13 +51,6 @@ const cacheView = async (currentCountry: CountryNamespace.GET) => {
 export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
     let views: string | number | null = null;
     let stats: StatsNamespace.COUNTRY_STATS;
-
-    try {
-        views = await cacheView(currentCountry);
-    } catch (e) {
-        console.error(e);
-    }
-
     try {
         stats = await getStats(currentCountry.code);
     } catch (e) {
