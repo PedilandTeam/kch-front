@@ -13,8 +13,8 @@ const pathGenerator = async (
     unitSlug: string
 ): Promise<PathGeneratorType> => {
 
-    const currentUnit = await fetchUnits({ slug: unitSlug, revalidate: 2000 })
-    const currentCountry = await fetchCountry({ code: countryOrSlug, revalidate: 200 })
+    const currentUnit = (await fetchUnits({ slug: unitSlug, revalidate: 2000 }))?.[0]
+    const currentCountry = (await fetchCountry({ code: countryOrSlug, revalidate: 200 }))?.[0]
 
 
     if (!currentUnit || !currentCountry) {
@@ -44,12 +44,7 @@ export const generateMetadata = async ({
         throw Error(e);
     }
 
-    const countries = await (
-        await API_ROUTES.COUNTRIES.GET_ALL(false, 120)
-    ).json();
-    const currentCountry: CountryNamespace.GET | undefined = countries.find(
-        (country: CountryNamespace.GET) => country.code == countryOrSlug
-    );
+    const currentCountry = (await fetchCountry({ code: countryOrSlug, revalidate: 200 }))?.[0]
     return {
         title: `لیست ${pathInfo?.props?.unit?.name} فارسی زبان در ${countryOrSlug && currentCountry && currentCountry.name
             } | کوچا`,
