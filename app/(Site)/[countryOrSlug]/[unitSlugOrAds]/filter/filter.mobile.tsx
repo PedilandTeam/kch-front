@@ -2,7 +2,7 @@
 
 import { _TXT } from '@/app/text';
 import { FunnelIcon } from '@heroicons/react/24/outline';
-import PagesSearch from '../[categorySlug]/filter/pages.search';
+import PagesSearch from '../[categoryOrCitySlug]/filter/pages.search';
 
 export default function FilterMobile() {
     const openFilters = () => {

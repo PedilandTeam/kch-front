@@ -23,7 +23,7 @@ export default async function fetchUnits({ slug, revalidate }: { slug: string, r
             return json
         })
         .catch((e: WretchError) => {
-            console.error(`Error Accourd in fetchCountry. params {slug: ${slug}}`, e?.json, e.message)
+            console.error(`Error Accourd in fetchUnit. params {slug: ${slug}}`, e?.json, e.message)
             return null;
         })
 

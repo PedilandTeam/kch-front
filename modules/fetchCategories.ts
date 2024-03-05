@@ -27,7 +27,7 @@ export default async function fetchCategories({ limit = 300, page = 1, slug, rev
             return json
         })
         .catch((e: WretchError) => {
-            console.error(`Error Accourd in fetchCountry. params {limit: ${limit}, page: ${page}, slug: ${slug}}`, e.json, e.message)
+            console.error(`Error Accourd in fetchCategory. params {limit: ${limit}, page: ${page}, slug: ${slug}}`, e.json, e.message)
             return null;
         })
 }
