@@ -1,45 +1,22 @@
-import { API_ROUTES } from '@/routes';
-import { CountryNamespace } from '@/types/country';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import queryString from 'query-string';
 import { PathGeneratorType } from '../country/page';
 import UnitList from './unitList';
 import fetchCountry from '@/modules/fetchCountry';
-import fetchUnits from '@/modules/fetchUnit';
-
-const pathGenerator = async (
-    countryOrSlug: string,
-    unitSlug: string
-): Promise<PathGeneratorType> => {
-
-    const currentUnit = (await fetchUnits({ slug: unitSlug, revalidate: 2000 }))?.[0]
-    const currentCountry = (await fetchCountry({ code: countryOrSlug, revalidate: 200 }))?.[0]
+import pathGenerator from './_pathGenerator';
+import AdsPage from './ads/ads';
 
 
-    if (!currentUnit || !currentCountry) {
-        return {
-            type: null,
-        };
-    }
 
-    return {
-        type: 'unit',
-        props: {
-            unit: currentUnit,
-            country: currentCountry,
-        },
-    };
-};
-
-type generateMetadata = { params: { countryOrSlug: string; unitSlug: string } };
+type generateMetadata = { params: { countryOrSlug: string; unitSlugOrAds: string } };
 export const generateMetadata = async ({
-    params: { countryOrSlug, unitSlug },
+    params: { countryOrSlug, unitSlugOrAds },
 }: generateMetadata): Promise<Metadata> => {
     let pathInfo: PathGeneratorType;
 
     try {
-        pathInfo = await pathGenerator(countryOrSlug, unitSlug);
+        pathInfo = await pathGenerator(countryOrSlug, unitSlugOrAds);
     } catch (e: any) {
         throw Error(e);
     }
@@ -65,10 +42,10 @@ type ParsedSearchParams = {
 };
 
 export default async function UnitPage({
-    params: { countryOrSlug, unitSlug },
+    params: { countryOrSlug, unitSlugOrAds },
     searchParams,
 }: {
-    params: { countryOrSlug: string; unitSlug: string };
+    params: { countryOrSlug: string; unitSlugOrAds: string };
     searchParams: { [key: string]: string | string[] | undefined };
 }) {
     let parsedSearchParams: ParsedSearchParams;
@@ -82,12 +59,18 @@ export default async function UnitPage({
     const { page: pageNumber, category, city, search } = parsedSearchParams;
 
     try {
-        pathInfo = await pathGenerator(countryOrSlug, unitSlug);
+        pathInfo = await pathGenerator(countryOrSlug, unitSlugOrAds);
     } catch (e: any) {
         throw Error(e);
     }
 
-    if (pathInfo.type) {
+    if (pathInfo.type == 'ads') {
+        return (
+            <AdsPage/>
+        );
+    }
+    
+    if (pathInfo.type == 'unit') {
         return (
             <UnitList
                 {...pathInfo.props}

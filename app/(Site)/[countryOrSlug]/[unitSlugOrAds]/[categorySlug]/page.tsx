@@ -17,13 +17,13 @@ type ParsedSearchParams = {
 /**
  *
  * @param countryOrSlug get country with [countryOrSlug]
- * @param unitSlug get unit of category to check is entered category part of current unit
+ * @param unitSlugOrAds get unit of category to check is entered category part of current unit
  * @param categorySlug get targeted category by Slug
  * @returns
  */
 const pathGenerator = async (
     countryOrSlug: string,
-    unitSlug: string,
+    unitSlugOrAds: string,
     categorySlug: string
 ): Promise<PathGeneratorType> => {
     // const units = await (await API_ROUTES.UNITS.GET_ALL(2000)).json();
@@ -33,7 +33,7 @@ const pathGenerator = async (
             console.log(e);
         });
     const currentUnit: UnitType = units.find(
-        (unit: UnitType) => unit.slug == unitSlug
+        (unit: UnitType) => unit.slug == unitSlugOrAds
     );
     // const countryList = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 20)).json();
     const countryList = await API_ROUTES.COUNTRIES.GET_ALL(false, 20)
@@ -74,15 +74,15 @@ const pathGenerator = async (
 };
 
 type generateMetadata = {
-    params: { countryOrSlug: string; unitSlug: string; categorySlug: string };
+    params: { countryOrSlug: string; unitSlugOrAds: string; categorySlug: string };
 };
 export const generateMetadata = async ({
-    params: { countryOrSlug, unitSlug, categorySlug },
+    params: { countryOrSlug, unitSlugOrAds, categorySlug },
 }: generateMetadata): Promise<Metadata> => {
     let pathInfo: PathGeneratorType;
 
     try {
-        pathInfo = await pathGenerator(countryOrSlug, unitSlug, categorySlug);
+        pathInfo = await pathGenerator(countryOrSlug, unitSlugOrAds, categorySlug);
     } catch (e: any) {
         throw Error(e);
     }
@@ -103,16 +103,16 @@ export const generateMetadata = async ({
             pathInfo?.props?.category?.name
         } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
         alternates: {
-            canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${unitSlug}/${pathInfo?.props?.category?.slug}`,
+            canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${unitSlugOrAds}/${pathInfo?.props?.category?.slug}`,
         },
     };
 };
 
 export default async function CategoryPage({
-    params: { countryOrSlug, unitSlug, categorySlug },
+    params: { countryOrSlug, unitSlugOrAds, categorySlug },
     searchParams,
 }: {
-    params: { countryOrSlug: string; unitSlug: string; categorySlug: string };
+    params: { countryOrSlug: string; unitSlugOrAds: string; categorySlug: string };
     searchParams: { [key: string]: string | string[] | undefined };
 }) {
     let parsedSearchParams: ParsedSearchParams;
@@ -125,7 +125,7 @@ export default async function CategoryPage({
     const { page: pageNumber, city, search } = parsedSearchParams;
 
     try {
-        pathInfo = await pathGenerator(countryOrSlug, unitSlug, categorySlug);
+        pathInfo = await pathGenerator(countryOrSlug, unitSlugOrAds, categorySlug);
     } catch (e: any) {
         throw Error(e);
     }

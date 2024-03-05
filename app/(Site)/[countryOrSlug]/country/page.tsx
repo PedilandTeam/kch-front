@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import Country from './country';
 import { metadata } from '@app/(Site)/layout';
 
-export type PathsType = 'country' | 'unit' | 'category' | 'item';
+export type PathsType = 'country' | 'unit' | 'category' | 'item' | 'ads';
 export type PathGeneratorType = {
     type: PathsType | null;
     props?: any;
