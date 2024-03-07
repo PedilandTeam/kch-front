@@ -5,7 +5,7 @@ import wretch from 'wretch';
 import { WretchError } from "wretch/resolver";
 
 
-export default async function fetchAds({ page=1, limit= 35, coutnryCode, cityIds, revalidate }: { page?: number, limit?: number, coutnryCode?: string, cityIds?: number[], revalidate?: number }): Promise<AdNamespace.GET> {
+export default async function fetchAds({ page=1, limit= 30, coutnryCode, cityIds, revalidate }: { page?: number, limit?: number, coutnryCode?: string, cityIds?: number[], revalidate?: number }): Promise<AdNamespace.GET> {
     const urlObject = new URL(`${process.env.API_URL}/ads`)
 
     if (page) urlObject.searchParams.append('page', String(page))
