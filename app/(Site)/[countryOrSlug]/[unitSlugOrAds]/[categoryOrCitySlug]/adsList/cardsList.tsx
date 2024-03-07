@@ -8,11 +8,12 @@ import { API_ROUTES } from '@/routes';
 import { AdNamespace } from '@/types/ad';
 import fetchAds from '@/modules/fetchAds';
 import { ApiErrorResponse } from '@/modules/fetch';
+import { CityNamespace } from '@/types/city';
 
 type CardsListType = {
     country: CountryNamespace.GET;
     pageNumber?: number;
-    city?: number | number[];
+    city: CityNamespace.city;
     category?: CategoryNamespace.category;
     search?: string;
 };
@@ -32,6 +33,7 @@ export const CardsList = async ({
     try {
         ads = await fetchAds({
             revalidate: 200,
+            cityIds: [city.id],
         });
     }
     catch(e: ApiErrorResponse | any) {
@@ -40,9 +42,6 @@ export const CardsList = async ({
         }
         isNotFound = true
     }
-
-
-    console.log(ads);
     
     if (ads && ads.items?.length == 0) {
         isNotFound = true;
