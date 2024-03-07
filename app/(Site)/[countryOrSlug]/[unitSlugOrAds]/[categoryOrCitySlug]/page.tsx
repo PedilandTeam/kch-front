@@ -21,12 +21,23 @@ type generateMetadata = {
         categoryOrCitySlug: string;
     };
 };
+/**
+ * Generate metadata based on the provided parameters.
+ * 
+ *
+ * @param {generateMetadata} params - Object containing country, unit, and category information
+ * @return {Promise<Metadata>} A promise that resolves to the generated metadata
+ */
 export const generateMetadata = async ({
     params: { countryOrSlug, unitSlugOrAds, categoryOrCitySlug },
 }: generateMetadata): Promise<Metadata> => {
     let pathInfo: PathGeneratorType;
 
     try {
+
+
+        // Call path generator with the country, unit, and category slug
+        // to get information about the path.
         pathInfo = await pathGenerator(
             countryOrSlug,
             unitSlugOrAds,
@@ -41,7 +52,7 @@ export const generateMetadata = async ({
     )?.[0];
 
     return {
-        title: `لیست ${pathInfo?.props?.category?.name} فارسی زبان در ${
+        title: `لیست ${pathInfo?.props?.category?.title} فارسی زبان در ${
             countryOrSlug && currentCountry && currentCountry.name
         } | کوچا`,
         description: `به جامعه مجازی ایرانیان مهاجر مقیم ${

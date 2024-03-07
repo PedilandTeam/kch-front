@@ -5,19 +5,19 @@ import { Suspense } from 'react';
 import Loading from '../../_loading';
 import SideBanner from '@/app/banners/side-banner';
 import fetchAdCategories from '@/modules/fetchAdCategories';
+import { AdNamespace } from '@/types/ad';
+import { CityNamespace } from '@/types/city';
 
 type PagesListProps = {
-    unit: UnitType;
     country: CountryNamespace.GET;
     pageNumber?: number;
-    city?: number | number[];
     category?: number | number[];
     search?: string;
+    city: CityNamespace.city;
 };
 
 
 export default async function AdsList({
-    unit,
     country,
     pageNumber,
     city,
@@ -26,6 +26,8 @@ export default async function AdsList({
 }: PagesListProps) {
 
     const categories = await fetchAdCategories({ justMain: true, revalidate: 200 });
+
+    
 
     return (
         <div className='component page-list sm:mt-3'>
@@ -49,8 +51,7 @@ export default async function AdsList({
 
                             <div className='page-header w-full px-3 sm:order-1 sm:px-0'>
                                 <h1 className='my-4 text-xl font-semibold text-pink-800 sm:mb-3 sm:mt-0'>
-                                    لیست {unit?.name} فارسی زبان در{' '}
-                                    {country?.name}
+                                    لیست تبلیغات در {city?.name} کشور {country.name}
                                 </h1>
                             </div>
                         </div>
@@ -65,7 +66,7 @@ export default async function AdsList({
 
                             <Suspense
                                 fallback={<Loading />}
-                                key={`unit-cardlist-${search}-${city}-${category}`}
+                                key={`ads-${city?.name}`}
                             >
                                 <CardsList
                                     country={country}
