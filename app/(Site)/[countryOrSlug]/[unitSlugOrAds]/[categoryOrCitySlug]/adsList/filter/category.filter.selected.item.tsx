@@ -77,7 +77,10 @@ export default function CategoryFilterSelectedItem({
                 type='checkbox'
                 checked={isChecked(parsedSearchParams)}
             />
-            <p className='item flex cursor-pointer items-center py-2'>
+            <p
+                onClick={() => ref.current?.click()}
+                className='item flex cursor-pointer items-center py-2'
+            >
                 {category.name}
             </p>
         </div>

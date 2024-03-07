@@ -6,7 +6,7 @@ import { CityNamespace } from '@/types/city';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import queryString from 'query-string';
-import React, { memo, useEffect, useRef, useState } from 'react';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { removeFromShouldBeAddType } from './city.filter';
 
 type CityFilterItemProps = {
@@ -47,31 +47,42 @@ function CityFilterSelectedItem({
         }
     };
 
+    const isChecked = useCallback(
+        (parsedSearchParams: ParsedSearchParamsType) => {
+            return parsedSearchParams.city
+                ? Array.isArray(parsedSearchParams.city)
+                    ? !!parsedSearchParams.city.find(
+                          (param) => +param == city.id
+                      )
+                    : +parsedSearchParams.city == city.id
+                : false;
+        },
+        [city.id]
+    );
+
+    const id = useRef(`category-3413-select-${city.id}`);
+
     return (
-        <label
-            key={'selected-cityxc-filter-item-' + city.name}
-            htmlFor={`city-select-${city.name}`}
-            className='item flex cursor-pointer items-center py-2'
+        <div
+            className='justify-right flex items-center'
+            key={`cate-gory-filter-slected--${city.id}`}
         >
             <input
                 ref={ref}
                 className='checkbox-secondary checkbox checkbox-sm ml-3'
                 onChange={inputClickHandler}
-                id={`city-select-${city.name}`}
+                id={id.current}
                 value={city.id}
                 type='checkbox'
-                checked={
-                    parsedSearchParams.city
-                        ? Array.isArray(parsedSearchParams.city)
-                            ? !!parsedSearchParams.city.find(
-                                  (param) => +param == city.id
-                              )
-                            : +parsedSearchParams.city == city.id
-                        : false
-                }
+                checked={isChecked(parsedSearchParams)}
             />
-            <label htmlFor={`city-select-${city.name}`}>{city.name}</label>
-        </label>
+            <p
+                onClick={() => ref.current?.click()}
+                className='item flex cursor-pointer items-center py-2'
+            >
+                {city.name}
+            </p>
+        </div>
     );
 }
 

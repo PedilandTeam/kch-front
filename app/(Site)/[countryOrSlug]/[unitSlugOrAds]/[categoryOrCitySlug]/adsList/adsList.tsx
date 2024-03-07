@@ -1,52 +1,45 @@
-import { API_ROUTES } from '@/routes';
-import { CategoryNamespace } from '@/types/category';
-import { CityNamespace } from '@/types/city';
-import { UnitType } from '@/types/unit';
-import joiner from '@/utils/joiner';
-import { notFound } from 'next/navigation';
-import { ItemBreadCrumb } from './breadcrumb';
-import { CardsList } from './cardsList';
-import ListFilter from './filter/listFilter';
 import { CountryNamespace } from '@/types/country';
+import { UnitType } from '@/types/unit';
+import { CardsList } from './cardsList';
 import { Suspense } from 'react';
 import Loading from '../../_loading';
-import { FunnelIcon } from '@heroicons/react/24/solid';
-import { _TXT } from '@/app/text';
 import SideBanner from '@/app/banners/side-banner';
-import FilterMobile from './filter/filter.mobile';
-import FilterModalMobile from './filter/filterModal.mobile';
+import fetchAdCategories from '@/modules/fetchAdCategories';
 
 type PagesListProps = {
-    category: CategoryNamespace.category;
-    country: CountryNamespace.GET;
     unit: UnitType;
-    pageNumber: number;
-    city: CityNamespace.city
-    search: string;
+    country: CountryNamespace.GET;
+    pageNumber?: number;
+    city?: number | number[];
+    category?: number | number[];
+    search?: string;
 };
 
+
 export default async function AdsList({
+    unit,
     country,
     pageNumber,
     city,
+    category,
     search,
 }: PagesListProps) {
-    if (!country) return notFound();
+
+    const categories = await fetchAdCategories({ justMain: true, revalidate: 200 });
 
     return (
         <div className='component page-list sm:mt-3'>
             <div className='container mx-auto max-w-[1144px]'>
                 <div className='grid grid-cols-1 gap-y-4 sm:grid-cols-8 sm:gap-8'>
                     <div className='sidebar hidden sm:col-span-2 sm:block'>
-                        {/* <ListFilter cities={cities} /> */}
+                        {/* <ListFilter categories={categories} /> */}
                     </div>
 
                     <div className='page-content sm:col-span-6'>
                         <div className='flex flex-wrap'>
                             <div className='w-full sm:order-2 sm:mb-2'>
                                 {/* <ItemBreadCrumb
-                                    unit={unit}
-                                    category={category}
+                                    unit={{ name: unit.name, slug: unit.slug }}
                                     country={{
                                         name: country.name,
                                         code: country.code,
@@ -56,29 +49,31 @@ export default async function AdsList({
 
                             <div className='page-header w-full px-3 sm:order-1 sm:px-0'>
                                 <h1 className='my-4 text-xl font-semibold text-pink-800 sm:mb-3 sm:mt-0'>
-                                    لیست{' '}
-                                    تبلیغات در شهر {city.name} کشور {country.name} 
+                                    لیست {unit?.name} فارسی زبان در{' '}
+                                    {country?.name}
                                 </h1>
                             </div>
                         </div>
+
                         <div className='px-3 sm:px-0'>
                             <div className='md:hidden'>
-                                <FilterMobile />
-                                {/* <FilterModalMobile cities={cities.items} /> */}
+                                {/* <FilterMobile />
+                                <FilterModalMobile
+                                    categories={categories}
+                                /> */}
                             </div>
 
-                            {/* <Suspense
+                            <Suspense
                                 fallback={<Loading />}
                                 key={`unit-cardlist-${search}-${city}-${category}`}
                             >
                                 <CardsList
-                                    category={category}
                                     country={country}
+                                    search={search}
                                     pageNumber={pageNumber}
                                     city={city}
-                                    search={search}
                                 />
-                            </Suspense> */}
+                            </Suspense>
                         </div>
                     </div>
 

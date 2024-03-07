@@ -1,15 +1,16 @@
+import { AdNamespace } from '@/types/ad';
 import { PageNamespace } from '@/types/page';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 type itemProfilePictureType = {
-    pageData: Pick<PageNamespace.Page, 'id' | 'haveAvatar' | 'profile'>;
+    adData: AdNamespace.IAd
     height?: number;
     width?: number;
     className?: string;
 };
 export default function ItemProfilePicture({
-    pageData,
+    adData,
     height,
     width,
     className,
@@ -19,8 +20,8 @@ export default function ItemProfilePicture({
             loading='lazy'
             alt='logo'
             src={
-                pageData.profile
-                    ? `${process.env.NEXT_PUBLIC_DL_URL}/pages/${pageData.id}/${pageData.profile}`
+                adData.pictures?.length > 0
+                    ? `${process.env.NEXT_PUBLIC_DL_URL}/ads/${adData.id}/${adData.pictures[0]}`
                     : '/images/list/logo/logo-placeholder.webp'
             }
             width={width ?? 160}

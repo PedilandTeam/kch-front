@@ -5,6 +5,9 @@ import CardListItem from '../../cardListItem';
 import Pagination from '../../pagination/pagination';
 import { UnitType } from '@/types/unit';
 import { API_ROUTES } from '@/routes';
+import { AdNamespace } from '@/types/ad';
+import fetchAds from '@/modules/fetchAds';
+import { ApiErrorResponse } from '@/modules/fetch';
 
 type CardsListType = {
     country: CountryNamespace.GET;
@@ -17,29 +20,31 @@ type CardsListType = {
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const CardsList = async ({
-    category,
     country,
     pageNumber,
     city,
     search,
 }: CardsListType) => {
-    let pages: PageNamespace.GET | undefined;
+    let ads: AdNamespace.GET | undefined
     let isNotFound = false;
 
+
     try {
-        pages = await (
-            await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 30, {
-                countryCode: country.code,
-                cityIds: city,
-                categoryIds: category?.id,
-                search,
-            })
-        ).json();
-    } catch (e) {
-        isNotFound = true;
+        ads = await fetchAds({
+            revalidate: 200,
+        });
+    }
+    catch(e: ApiErrorResponse | any) {
+        if (e?.statusCode != 404) {
+            console.error(e)
+        }
+        isNotFound = true
     }
 
-    if (pages && pages.items.length == 0) {
+
+    console.log(ads);
+    
+    if (ads && ads.items?.length == 0) {
         isNotFound = true;
     }
 
@@ -56,13 +61,13 @@ export const CardsList = async ({
         <div className='flex flex-col items-center justify-center'>
             <div className='list-card min-h-[500px] w-full'>
                 <div className='grid grid-cols-1 gap-y-4 sm:grid-cols-3 sm:gap-6'>
-                    {pages?.items?.map(
-                        (page: PageNamespace.Page, index: number) => {
+                    {ads?.items?.map(
+                        (ad: AdNamespace.IAd, index: number) => {
                             return (
                                 <CardListItem
-                                    key={`unit-preview-item-${page.id}`}
+                                    key={ad.id}
                                     variant='unit'
-                                    page={page}
+                                    ad={ad}
                                     country={country}
                                 />
                             );
@@ -70,8 +75,8 @@ export const CardsList = async ({
                     )}
                 </div>
             </div>
-            {pages?.meta?.totalPages! > 1 ? (
-                <Pagination pages={pages!} />
+            {ads?.meta?.totalPages! > 1 ? (
+                <Pagination ads={ads!} />
             ) : null}
         </div>
     );

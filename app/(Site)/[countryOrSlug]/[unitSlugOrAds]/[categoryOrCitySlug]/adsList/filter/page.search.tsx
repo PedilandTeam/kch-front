@@ -10,7 +10,7 @@ type ParsedSearchParamsType = {
     category?: string[] | string;
     search?: string;
 };
-export default function PagesSearch(){
+export default function PageSearch() {
     const [parsedSearchParams, setParsedSearchParams] =
         useState<ParsedSearchParamsType>({});
     const searchParams = useSearchParams() as unknown as URLSearchParams;
@@ -33,13 +33,18 @@ export default function PagesSearch(){
     useEffect(() => {
         const timeOut = setTimeout(() => {
             if (search) {
-                router.replace(
-                    `${pathname}?${createQueryString('search', [search])}`
+                router.push(
+                    `${pathname}?${createQueryString('search', [search])}`,
+                    {
+                        scroll: true,
+                    }
                 );
             } else if (!search && parsedSearchParams.search) {
-                router.replace(`${pathname}?${deleteQueryString('search')}`);
+                router.push(`${pathname}?${deleteQueryString('search')}`, {
+                    scroll: true,
+                });
             }
-        }, 400);
+        }, 700);
 
         return () => {
             clearTimeout(timeOut);
@@ -56,7 +61,7 @@ export default function PagesSearch(){
             onChange={searchChangeHandler}
             value={search || ''}
             placeholder='جستجو'
-            className='input input-bordered mb-4 w-full'
+            className='input input-bordered mb-3 w-full'
         />
     );
-};
+}

@@ -1,17 +1,19 @@
 'use client';
-import { _TXT } from '@app/text/index';
+import { _TXT } from '@/app/text';
 import { FunnelIcon } from '@client-packages/heroicons/components';
-import FilterMobile from './filterModal.mobile';
 import { CityNamespace } from '@/types/city';
-import CityFilter from '../../../filter/city.filter';
-import PageSearch from '../../../filter/page.search';
+import { CategoryNamespace } from '@/types/category';
+import CityFilter from './city.filter';
+import CategoryFilter from './category.filter';
+import PageSearch from './page.search';
 import SideBanner from '@/app/banners/side-banner';
+import FilterModalMobile from './filterModal.mobile';
+import { AdCategoryNamepace } from '@/types/adCategory';
 
 type ListFilterProps = {
-    cities: CityNamespace.GET;
-    // categories: CategoryNamespace.category[]
+    categories: AdCategoryNamepace.IAdCategory[];
 };
-export default function CategoryListFilter({ cities }: ListFilterProps) {
+export default function ListFilter({ categories }: ListFilterProps) {
     return (
         <div className='filter-unit z-20 sm:sticky sm:top-4'>
             <div className='filter-title mb-4 hidden w-full border-b-[2px] border-b-gray-200 pb-2 md:flex md:items-center'>
@@ -21,9 +23,10 @@ export default function CategoryListFilter({ cities }: ListFilterProps) {
 
             <div className='filter-body hidden md:block'>
                 <PageSearch />
-                <CityFilter
-                    id='category-cities-filter'
-                    cities={cities?.items}
+                {/* <CityFilter id='cityfilter-modal' cities={cities?.items} /> */}
+                <CategoryFilter
+                    id='categoryfilter-modal'
+                    categories={categories}
                 />
             </div>
 

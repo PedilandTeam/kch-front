@@ -1,32 +1,35 @@
 'use client';
 
-import { _TXT } from '@app/text/index';
+import { _TXT } from '@/app/text';
 import { FunnelIcon } from '@heroicons/react/24/solid';
-// import CityFilter from "./city.filter";
+import CityFilter from './city.filter';
+import CategoryFilter from './category.filter';
 import { CityNamespace } from '@/types/city';
-import CityFilter from '../../../filter/city.filter';
-import PagesSearch from './pages.search';
+import { CategoryNamespace } from '@/types/category';
+import PagesSearch from '../../businessList/filter/pages.search';
 
 type FilterMobileProps = {
-    cities: CityNamespace.city[];
+    categories: CategoryNamespace.category[];
 };
 
-export default function FilterModalMobile({ cities }: FilterMobileProps) {
+export default function FilterModalMobile({
+    categories,
+}: FilterMobileProps) {
     return (
         <>
-            <dialog id='modal_category_filter' className='modal'>
+            <dialog id='modal_unit_filter' className='modal'>
                 <form
                     method='dialog'
                     className='modal-box h-full max-h-full w-full rounded-none'
                 >
-                    <div className='filter-title flex w-full border-b-[2px] border-b-gray-200 pb-2'>
+                    <div className='filter-title mb-4 flex w-full border-b-[2px] border-b-gray-200 pb-2'>
                         <FunnelIcon className='ml-2 h-4 w-4' />
                         <span className='font-semibold'>{_TXT.FILTER._S}</span>
                     </div>
-                    <div className='py-4'>
-                        <CityFilter
-                            id='mobile-categoryList-cityfilter-modal'
-                            cities={cities}
+                    <div>
+                        <CategoryFilter
+                            id='mobile-categoryfilter-modal'
+                            categories={categories}
                         />
                     </div>
                     <div className='modal-action'>

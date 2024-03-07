@@ -1,6 +1,6 @@
 'use client';
 
-import { _TXT } from '@app/text/index';
+import { _TXT } from '@/app/text';
 import { CityNamespace } from '@/types/city';
 import CityFilterItem from './city.filter.item';
 import { useEffect, useRef, useState } from 'react';
@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import CityFilterSelectedItem from './city.filter.selected.item';
 import useCreateQueryString from '@/hooks/useCreateQueryString';
 import useDeleteQueryString from '@/hooks/useDeleteQueryString';
+import { FunnelIcon } from '@heroicons/react/24/solid';
 
 type CityFilterType = {
     cities: CityNamespace.city[];
@@ -24,15 +25,16 @@ export type checkHandlerType = (value: string | number) => boolean | undefined;
 
 export default function CityFilter({ cities, id }: CityFilterType) {
     const [modifiedCities, setModifiedCities] = useState(cities);
-    // const [shouldBeAdd, setShouldBeAdd] = useState<string[]>([])
-    // const [shouldBeRemove, setShouldBeRemove] = useState<string[]>([])
-
     const searchParams = useSearchParams() as unknown as URLSearchParams;
     const pathname = usePathname();
     const [parsedSearchParams, setParsedSearchParams] =
         useState<ParsedSearchParamsType>({});
     const [isParsedSearchParamsAdded, setIsParsedSearchParamsAdded] =
         useState(false);
+
+    useEffect(() => {
+        setModifiedCities(cities);
+    }, [cities]);
 
     const [shouldBeAdd, setShouldBeAdd] = useState<string[]>([]);
 
@@ -56,6 +58,7 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     };
 
     useEffect(() => {
+        //parse query params to array
         setParsedSearchParams(
             queryString.parse(searchParams.toString(), { arrayFormat: 'comma' })
         );
@@ -64,6 +67,9 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     useEffect(() => {
         if (isParsedSearchParamsAdded) return;
         if (!parsedSearchParams?.city) return;
+
+        //this condition is because if city filter be a single number we give number
+        //and if we have multiple cities we give an Array
         if (Array.isArray(parsedSearchParams.city)) {
             parsedSearchParams.city.forEach((cityId) => {
                 addToShouldBeAdd(cityId);
@@ -75,7 +81,6 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     }, [parsedSearchParams]);
 
     const createQueryString = useCreateQueryString();
-    const deleteQueryString = useDeleteQueryString();
 
     const applyFilters = () => {
         router.replace(`${pathname}?${createQueryString('city', shouldBeAdd)}`);
@@ -109,14 +114,8 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     };
 
     const inputRef = useRef<HTMLInputElement>(null);
-    /**
-     * auto focusing on search input
-     */
-    // useEffect(() => {
-    //   if (inputRef.current) inputRef.current.focus();
-    // }, [inputRef]);
-
     const router = useRouter();
+
     /**
      * save cities that are in city query
      * if city query have a single number it's return string
@@ -127,51 +126,63 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     }).city;
 
     return (
-        <div className='filter-section'>
-            <label
-                htmlFor={id}
-                className='btn btn-outline btn-primary btn-wide'
-            >
-                {_TXT.CITY.SELECT}
-            </label>
-            <div className='my-3 px-3'>
-                {Array.isArray(citiesInQuery) ? (
-                    // if city is multiple number, find all of that from cities
-                    citiesInQuery.map((cityId) => {
-                        if (!cityId) return;
-                        const city = cities.find((city) => city.id == +cityId);
-                        if (!city) return;
-                        return (
-                            <CityFilterSelectedItem
-                                removeFromShouldBeAdd={removeFromShouldBeAdd}
-                                key={`city-selected-item-xz-${cityId}`}
-                                city={city}
-                            />
-                        );
-                    })
-                ) : citiesInQuery &&
-                  cities.find((city) => city.id == +citiesInQuery) ? (
-                    <CityFilterSelectedItem
-                        removeFromShouldBeAdd={removeFromShouldBeAdd}
-                        key={`city-selected-item-xz-single-`}
-                        city={cities.find((city) => city.id == +citiesInQuery)!}
-                    />
-                ) : null}
+        <div className='filter-wrap'>
+            <div className='filter-section'>
+                <label
+                    htmlFor={id}
+                    className='btn btn-outline btn-primary w-full'
+                >
+                    {_TXT.CITY.SELECT}
+                </label>
+                <div className='my-3 px-3'>
+                    {Array.isArray(citiesInQuery) ? (
+                        // if city is multiple number, find all of that from cities
+                        citiesInQuery.map((cityId) => {
+                            if (!cityId) return;
+                            const city = cities.find(
+                                (city) => city.id == +cityId
+                            );
+                            if (!city) return;
+                            return (
+                                <CityFilterSelectedItem
+                                    removeFromShouldBeAdd={
+                                        removeFromShouldBeAdd
+                                    }
+                                    key={`city-selected-item-xz-${cityId}`}
+                                    city={city}
+                                />
+                            );
+                        })
+                    ) : citiesInQuery &&
+                      cities.find((city) => city.id == +citiesInQuery) ? (
+                        <CityFilterSelectedItem
+                            removeFromShouldBeAdd={removeFromShouldBeAdd}
+                            key={`city-selected-item-xz-single-`}
+                            city={
+                                cities.find(
+                                    (city) => city.id == +citiesInQuery
+                                )!
+                            }
+                        />
+                    ) : null}
+                </div>
             </div>
 
-            {/* Put this part before </body> tag */}
-            <input type='checkbox' id={id} className='modal-toggle z-50' />
+            {/* the modal */}
+            <input type='checkbox' id={id} className='modal-toggle' />
             <div className='modal'>
                 <div className=' modal-box max-h-[550px] p-0 '>
                     <div className='w-full bg-white px-8 pb-3 pt-5'>
                         <h3 className='flex content-center justify-between text-lg font-bold'>
                             {_TXT.CITY.SELECT}
+
+                            {/* delete text */}
                             {citiesInQuery ? (
                                 <span
                                     onClick={deleteAllCityHandler}
                                     className='cursor-pointer text-[15px] font-normal text-pink-800'
                                 >
-                                    {_TXT.CITY.DELETE_ALL}
+                                    {_TXT.GENERAL.DELETE_ALL}
                                 </span>
                             ) : null}
                         </h3>
@@ -179,7 +190,7 @@ export default function CityFilter({ cities, id }: CityFilterType) {
                         <input
                             onChange={citySearchHandler}
                             type='text'
-                            placeholder='جستجو در لیست شهرها'
+                            placeholder={_TXT.CITY.SEARCH_IN_LIST}
                             className='input input-bordered w-full'
                             ref={inputRef}
                         />

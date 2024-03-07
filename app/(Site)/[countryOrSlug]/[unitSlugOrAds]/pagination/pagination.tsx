@@ -1,5 +1,6 @@
 'use client';
 import { _TXT } from '@/app/text';
+import { AdNamespace } from '@/types/ad';
 import { PageNamespace } from '@/types/page';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -12,10 +13,10 @@ type ParsedSearchParams = {
     category?: number | number[];
 };
 type PaginationProps = {
-    pages: PageNamespace.GET;
+    ads: AdNamespace.GET;
 };
-export default function Pagination({ pages }: PaginationProps) {
-    let totalPages = pages.meta.totalPages;
+export default function Pagination({ ads }: PaginationProps) {
+    let totalPages = ads.meta.totalPages;
     const paginationLimit = 9;
     const staticPaginations = 2;
     const [isPagesLengthBiggerThanSix, setisPagesLengthBiggerThanSix] =
