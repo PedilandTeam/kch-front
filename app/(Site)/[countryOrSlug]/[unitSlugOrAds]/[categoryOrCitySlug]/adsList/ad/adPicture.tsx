@@ -1,5 +1,4 @@
 import { AdNamespace } from '@/types/ad';
-import { PageNamespace } from '@/types/page';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
@@ -9,7 +8,7 @@ type itemProfilePictureType = {
     width?: number;
     className?: string;
 };
-export default function ItemProfilePicture({
+export default function AdPicture({
     adData,
     height,
     width,

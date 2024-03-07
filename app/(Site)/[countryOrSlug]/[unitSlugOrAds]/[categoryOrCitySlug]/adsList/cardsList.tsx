@@ -1,14 +1,11 @@
-import { Category, PageNamespace } from '@/types/page';
 import { CountryNamespace } from '@/types/country';
 import { CategoryNamespace } from '@/types/category';
-import CardListItem from '../../cardListItem';
 import Pagination from '../../pagination/pagination';
-import { UnitType } from '@/types/unit';
-import { API_ROUTES } from '@/routes';
 import { AdNamespace } from '@/types/ad';
 import fetchAds from '@/modules/fetchAds';
 import { ApiErrorResponse } from '@/modules/fetch';
 import { CityNamespace } from '@/types/city';
+import CardListItem from './carsListItem';
 
 type CardsListType = {
     country: CountryNamespace.GET;
@@ -76,7 +73,7 @@ export const CardsList = async ({
                 </div>
             </div>
             {ads?.meta?.totalPages! > 1 ? (
-                <Pagination ads={ads!} />
+                <Pagination totalPages={ads!.meta.totalPages} />
             ) : null}
         </div>
     );

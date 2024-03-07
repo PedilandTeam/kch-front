@@ -13,10 +13,9 @@ type ParsedSearchParams = {
     category?: number | number[];
 };
 type PaginationProps = {
-    ads: AdNamespace.GET;
+    totalPages: number
 };
-export default function Pagination({ ads }: PaginationProps) {
-    let totalPages = ads.meta.totalPages;
+export default function Pagination({ totalPages }: PaginationProps) {
     const paginationLimit = 9;
     const staticPaginations = 2;
     const [isPagesLengthBiggerThanSix, setisPagesLengthBiggerThanSix] =

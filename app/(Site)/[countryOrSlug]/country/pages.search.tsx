@@ -4,7 +4,7 @@ import { usePages } from '@/hooks/swr/usePages';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChangeEvent, useEffect, useState } from 'react';
-import ItemProfilePicture from '../item/itemProfilePicture';
+import ItemProfilePicture from '../[unitSlugOrAds]/[categoryOrCitySlug]/businessList/item/itemProfilePicture';
 
 type CountryPagesSearch = {
     countryCode: string;
