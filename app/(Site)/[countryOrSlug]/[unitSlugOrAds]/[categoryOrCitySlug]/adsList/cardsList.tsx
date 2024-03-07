@@ -32,6 +32,7 @@ export const CardsList = async ({
 
     try {
         ads = await fetchAds({
+            page: pageNumber ? pageNumber : 1,
             revalidate: 200,
             cityIds: [city.id],
         });
