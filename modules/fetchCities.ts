@@ -12,13 +12,13 @@ export default async function fetchCities({
     search,
     revalidate,
 }: {
-    slug: string;
+    slug?: string;
     page?: number | string;
     limit?: number | string;
     countryCode?: string;
-    countryId?: string;
+    countryId?: number | string;
     search?: string;
-    revalidate: number;
+    revalidate?: number;
 }): Promise<CityNamespace.GET> {
     const urlObject = new URL(`${process.env.API_URL}/cities`);
 
@@ -26,7 +26,7 @@ export default async function fetchCities({
     if (page) urlObject.searchParams.append('page', page.toString());
     if (limit) urlObject.searchParams.append('limit', limit.toString());
     if (countryCode) urlObject.searchParams.append('countryCode', countryCode);
-    if (countryId) urlObject.searchParams.append('countryId', countryId);
+    if (countryId) urlObject.searchParams.append('countryId', String(countryId));
     if (search) urlObject.searchParams.append('search', search);
 
     const url = urlObject.toString();

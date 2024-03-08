@@ -1,7 +1,4 @@
 import { AdNamespace } from '@/types/ad';
-import { AdCategoryNamepace } from '@/types/adCategory';
-import { CategoryNamespace } from '@/types/category';
-import { filter } from 'lodash';
 import wretch from 'wretch';
 import { WretchError } from 'wretch/resolver';
 
@@ -23,7 +20,7 @@ export default async function fetchAds(filters: Filters): Promise<AdNamespace.GE
     if (!filters.page) filters.page = 1
 
     Object.keys(filters).forEach(filter => {
-        const value = filters[filter];
+        const value = filters[filter];        
         if (value) urlObject.searchParams.append(filter, String(value));
     })
 
