@@ -57,6 +57,7 @@ export default async function CategoryList({
 }: PagesListProps) {
     if (!country) return notFound();
     const cities = await fetchCities(country.code, category.id);
+    
 
     return (
         <div className='component page-list sm:mt-3'>

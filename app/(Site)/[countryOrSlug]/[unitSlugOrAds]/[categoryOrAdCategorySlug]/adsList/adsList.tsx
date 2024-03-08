@@ -1,13 +1,13 @@
 import { CountryNamespace } from '@/types/country';
-import { UnitType } from '@/types/unit';
 import { CardsList } from './cardsList';
 import { Suspense } from 'react';
 import Loading from '../../_loading';
 import SideBanner from '@/app/banners/side-banner';
-import fetchAdCategories from '@/modules/fetchAdCategories';
-import { AdNamespace } from '@/types/ad';
 import { CityNamespace } from '@/types/city';
 import { AdCategoryNamepace } from '@/types/adCategory';
+import ListFilter from './filter/listFilter';
+import fetchAdCategories from '@/modules/fetchAdCategories';
+import fetchCities from '@/modules/fetchCities';
 
 type PagesListProps = {
     country: CountryNamespace.GET;
@@ -26,13 +26,16 @@ export default async function AdsList({
     search,
 }: PagesListProps) {
     
+    const categories = await fetchAdCategories({ revalidate: 200 })
+    const cities = await fetchCities({countryId: country.id})
+
 
     return (
         <div className='component page-list sm:mt-3'>
             <div className='container mx-auto max-w-[1144px]'>
                 <div className='grid grid-cols-1 gap-y-4 sm:grid-cols-8 sm:gap-8'>
                     <div className='sidebar hidden sm:col-span-2 sm:block'>
-                        {/* <ListFilter categories={categories} /> */}
+                        <ListFilter categories={categories} cities={cities} />
                     </div>
 
                     <div className='page-content sm:col-span-6'>
@@ -71,6 +74,7 @@ export default async function AdsList({
                                     search={search}
                                     pageNumber={pageNumber}
                                     category={category}
+                                    city={city}
                                 />
                             </Suspense>
                         </div>

@@ -13,6 +13,7 @@ type CardsListType = {
     pageNumber?: number;
     category: AdCategoryNamepace.IAdCategory
     search?: string;
+    city: number[]
 };
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -22,20 +23,24 @@ export const CardsList = async ({
     pageNumber,
     category,
     search,
+    city,
 }: CardsListType) => {
     let ads: AdNamespace.GET | undefined
     let isNotFound = false;
 
 
-
+    console.log(city);
+    
     try {
         ads = await fetchAds({
             page: pageNumber ? pageNumber : 1,
             categorySlug: category.slug,
-            search,
+            ...search && {search},
             coutnryCode: country.code,
+            ...city && { cityIds: city },
             revalidate: 200,
         });
+        
     }
     catch(e: ApiErrorResponse | any) {
         if (e?.statusCode != 404) {

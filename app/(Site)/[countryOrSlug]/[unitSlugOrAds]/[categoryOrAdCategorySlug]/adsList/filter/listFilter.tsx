@@ -12,8 +12,9 @@ import { AdCategoryNamepace } from '@/types/adCategory';
 
 type ListFilterProps = {
     categories: AdCategoryNamepace.IAdCategory[];
+    cities: CityNamespace.GET
 };
-export default function ListFilter({ categories }: ListFilterProps) {
+export default function ListFilter({ categories, cities }: ListFilterProps) {
     return (
         <div className='filter-unit z-20 sm:sticky sm:top-4'>
             <div className='filter-title mb-4 hidden w-full border-b-[2px] border-b-gray-200 pb-2 md:flex md:items-center'>
@@ -23,11 +24,11 @@ export default function ListFilter({ categories }: ListFilterProps) {
 
             <div className='filter-body hidden md:block'>
                 <PageSearch />
-                {/* <CityFilter id='cityfilter-modal' cities={cities?.items} /> */}
-                <CategoryFilter
+                <CityFilter id='cityfilter-modal' cities={cities?.items} />
+                {/* <CategoryFilter
                     id='categoryfilter-modal'
                     categories={categories}
-                />
+                /> */}
             </div>
 
             <div className='hidden sm:block'>

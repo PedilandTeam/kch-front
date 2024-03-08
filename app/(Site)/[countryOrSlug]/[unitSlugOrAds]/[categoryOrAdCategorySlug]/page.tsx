@@ -102,6 +102,7 @@ export default async function CategoryPage({
                 {...pathInfo.props}
                 pageNumber={pageNumber}
                 search={search}
+                city={city}
             />
         );
     }
