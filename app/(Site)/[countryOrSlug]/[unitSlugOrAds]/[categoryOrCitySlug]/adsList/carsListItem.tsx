@@ -16,7 +16,7 @@ type cardListItem = {
 export default function CardListItem({ ad, country, variant }: cardListItem) {
     return (
         <div
-            key={`cardlist-page-index-${ad.id}`}
+            key={ad.id}
             className='card border border-gray-100 shadow-lg hover:border-gray-300'
         >
             <figure className='pt-5'>

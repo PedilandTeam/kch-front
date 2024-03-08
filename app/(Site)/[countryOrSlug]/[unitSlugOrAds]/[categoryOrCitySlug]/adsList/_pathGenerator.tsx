@@ -3,6 +3,7 @@ import { PathGeneratorType } from "../../../country/page";
 import fetchUnits from "@/modules/fetchUnit";
 import fetchCategories from "@/modules/fetchCategories";
 import fetchCities from "@/modules/fetchCities";
+import fetchAdCategories from "@/modules/fetchAdCategories";
 
 const INVALID_PATH = {
     type: null
@@ -28,16 +29,16 @@ const pathGenerator = async (
         return INVALID_PATH
     }
     
-    const currentCity = (await fetchCities({ slug: categoryOrCitySlug, revalidate: 200, countryCode: currentCountry.code }))?.items?.[0]
+    const currentAdCategory = (await fetchAdCategories({ slug: categoryOrCitySlug, revalidate: 200 }))[0]
     const isAdsPage = unitSlugOrAds == 'ads'
     if (isAdsPage) {
-        if (!currentCity) {
+        if (!currentAdCategory) {
             return INVALID_PATH
         }
         return {
             type: 'ads',
             props: {
-                city: currentCity
+                category: currentAdCategory
             }
         }
     }

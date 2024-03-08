@@ -7,13 +7,14 @@ import SideBanner from '@/app/banners/side-banner';
 import fetchAdCategories from '@/modules/fetchAdCategories';
 import { AdNamespace } from '@/types/ad';
 import { CityNamespace } from '@/types/city';
+import { AdCategoryNamepace } from '@/types/adCategory';
 
 type PagesListProps = {
     country: CountryNamespace.GET;
     pageNumber?: number;
-    category?: number | number[];
+    category: AdCategoryNamepace.IAdCategory;
     search?: string;
-    city: CityNamespace.city;
+    city?: CityNamespace.city;
 };
 
 
@@ -24,9 +25,6 @@ export default async function AdsList({
     category,
     search,
 }: PagesListProps) {
-
-    const categories = await fetchAdCategories({ justMain: true, revalidate: 200 });
-
     
 
     return (
@@ -72,7 +70,7 @@ export default async function AdsList({
                                     country={country}
                                     search={search}
                                     pageNumber={pageNumber}
-                                    city={city}
+                                    category={category}
                                 />
                             </Suspense>
                         </div>

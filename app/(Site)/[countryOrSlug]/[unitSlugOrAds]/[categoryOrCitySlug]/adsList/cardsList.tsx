@@ -6,12 +6,12 @@ import fetchAds from '@/modules/fetchAds';
 import { ApiErrorResponse } from '@/modules/fetch';
 import { CityNamespace } from '@/types/city';
 import CardListItem from './carsListItem';
+import { AdCategoryNamepace } from '@/types/adCategory';
 
 type CardsListType = {
     country: CountryNamespace.GET;
     pageNumber?: number;
-    city: CityNamespace.city;
-    category?: CategoryNamespace.category;
+    category: AdCategoryNamepace.IAdCategory
     search?: string;
 };
 
@@ -20,7 +20,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const CardsList = async ({
     country,
     pageNumber,
-    city,
+    category,
     search,
 }: CardsListType) => {
     let ads: AdNamespace.GET | undefined
@@ -30,8 +30,9 @@ export const CardsList = async ({
     try {
         ads = await fetchAds({
             page: pageNumber ? pageNumber : 1,
+            categorySlug: category.slug,
+            search,
             revalidate: 200,
-            cityIds: [city.id],
         });
     }
     catch(e: ApiErrorResponse | any) {
