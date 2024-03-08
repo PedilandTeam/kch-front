@@ -82,7 +82,7 @@ export const CardsList = async ({
                 </div>
             </div>
             {pages?.meta?.totalPages! > 1 ? (
-                <Pagination pages={pages!} />
+                <Pagination totalPages={pages!.meta.totalPages} />
             ) : null}
         </div>
     );

@@ -1,6 +1,6 @@
 import { API_ROUTES } from '@/routes';
 import { CountryNamespace } from '@/types/country';
-import PageItem from '../[unitSlugOrAds]/[categoryOrCitySlug]/businessList/item/item';
+import PageItem from '../[unitSlugOrAds]/[categoryOrAdCategorySlug]/businessList/item/item';
 import { notFound } from 'next/navigation';
 import Country from './country';
 import { metadata } from '@app/(Site)/layout';

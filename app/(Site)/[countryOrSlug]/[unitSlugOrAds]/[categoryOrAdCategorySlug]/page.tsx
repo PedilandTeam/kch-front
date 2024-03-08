@@ -18,7 +18,7 @@ type generateMetadata = {
     params: {
         countryOrSlug: string;
         unitSlugOrAds: string;
-        categoryOrCitySlug: string;
+        categoryOrAdCategorySlug: string;
     };
 };
 /**
@@ -29,7 +29,7 @@ type generateMetadata = {
  * @return {Promise<Metadata>} A promise that resolves to the generated metadata
  */
 export const generateMetadata = async ({
-    params: { countryOrSlug, unitSlugOrAds, categoryOrCitySlug },
+    params: { countryOrSlug, unitSlugOrAds, categoryOrAdCategorySlug },
 }: generateMetadata): Promise<Metadata> => {
     let pathInfo: PathGeneratorType;
 
@@ -41,7 +41,7 @@ export const generateMetadata = async ({
         pathInfo = await pathGenerator(
             countryOrSlug,
             unitSlugOrAds,
-            categoryOrCitySlug
+            categoryOrAdCategorySlug
         );
     } catch (e: any) {
         throw Error(e);
@@ -67,13 +67,13 @@ export const generateMetadata = async ({
 };
 
 export default async function CategoryPage({
-    params: { countryOrSlug, unitSlugOrAds, categoryOrCitySlug },
+    params: { countryOrSlug, unitSlugOrAds, categoryOrAdCategorySlug },
     searchParams,
 }: {
     params: {
         countryOrSlug: string;
         unitSlugOrAds: string;
-        categoryOrCitySlug: string;
+        categoryOrAdCategorySlug: string;
     };
     searchParams: { [key: string]: string | string[] | undefined };
 }) {
@@ -90,7 +90,7 @@ export default async function CategoryPage({
         pathInfo = await pathGenerator(
             countryOrSlug,
             unitSlugOrAds,
-            categoryOrCitySlug
+            categoryOrAdCategorySlug
         );
     } catch (e: any) {
         throw Error(e);

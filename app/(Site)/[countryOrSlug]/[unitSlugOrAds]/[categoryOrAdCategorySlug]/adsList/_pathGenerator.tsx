@@ -14,13 +14,13 @@ const INVALID_PATH = {
  *
  * @param countryOrSlug get country with [countryOrSlug]
  * @param unitSlugOrAds get unit of category to check is entered category part of current unit
- * @param categoryOrCitySlug get targeted category by Slug
+ * @param categoryOrAdCategorySlug get targeted category by Slug
  * @returns
  */
 const pathGenerator = async (
     countryOrSlug: string,
     unitSlugOrAds: string,
-    categoryOrCitySlug: string
+    categoryOrAdCategorySlug: string
 ): Promise<PathGeneratorType> => {
 
 
@@ -29,7 +29,7 @@ const pathGenerator = async (
         return INVALID_PATH
     }
     
-    const currentAdCategory = (await fetchAdCategories({ slug: categoryOrCitySlug, revalidate: 200 }))[0]
+    const currentAdCategory = (await fetchAdCategories({ slug: categoryOrAdCategorySlug, revalidate: 200 }))[0]
     const isAdsPage = unitSlugOrAds == 'ads'
     if (isAdsPage) {
         if (!currentAdCategory) {
@@ -38,14 +38,15 @@ const pathGenerator = async (
         return {
             type: 'ads',
             props: {
-                category: currentAdCategory
+                category: currentAdCategory,
+                country: currentCountry,
             }
         }
     }
 
 
     const currentUnit = (await fetchUnits({ slug: unitSlugOrAds, revalidate: 2000 }))?.[0]
-    const currentCategory = (await fetchCategories({slug: categoryOrCitySlug, revalidate: 200 }))?.items?.[0]
+    const currentCategory = (await fetchCategories({slug: categoryOrAdCategorySlug, revalidate: 200 }))?.items?.[0]
 
     if (currentCategory?.unit?.id != currentUnit?.id) {
         return INVALID_PATH

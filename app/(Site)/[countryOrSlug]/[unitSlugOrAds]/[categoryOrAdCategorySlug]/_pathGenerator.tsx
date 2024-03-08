@@ -1,8 +1,10 @@
 import fetchCountry from "@/modules/fetchCountry";
-import { PathGeneratorType } from "../../country/page";
+
 import fetchUnits from "@/modules/fetchUnit";
 import fetchCategories from "@/modules/fetchCategories";
 import fetchCities from "@/modules/fetchCities";
+import fetchAdCategories from "@/modules/fetchAdCategories";
+import { PathGeneratorType } from "../../country/page";
 
 const INVALID_PATH = {
     type: null
@@ -13,13 +15,13 @@ const INVALID_PATH = {
  *
  * @param countryOrSlug get country with [countryOrSlug]
  * @param unitSlugOrAds get unit of category to check is entered category part of current unit
- * @param categoryOrCitySlug get targeted category by Slug
+ * @param categoryOrAdCategorySlug get targeted category by Slug
  * @returns
  */
 const pathGenerator = async (
     countryOrSlug: string,
     unitSlugOrAds: string,
-    categoryOrCitySlug: string
+    categoryOrAdCategorySlug: string
 ): Promise<PathGeneratorType> => {
 
 
@@ -28,24 +30,25 @@ const pathGenerator = async (
         return INVALID_PATH
     }
     
-    const currentCity = (await fetchCities({ slug: categoryOrCitySlug, revalidate: 200, countryCode: currentCountry.code }))?.items?.[0]
+    const currentAdCategory = (await fetchAdCategories({ slug: categoryOrAdCategorySlug, revalidate: 200 }))[0]
     const isAdsPage = unitSlugOrAds == 'ads'
     if (isAdsPage) {
-        if (!currentCity) {
+        if (!currentAdCategory) {
             return INVALID_PATH
         }
         return {
             type: 'ads',
             props: {
-                city: currentCity,
+                category: currentAdCategory,
                 country: currentCountry,
             }
         }
     }
-    
-    
+
+
     const currentUnit = (await fetchUnits({ slug: unitSlugOrAds, revalidate: 2000 }))?.[0]
-    const currentCategory = (await fetchCategories({slug: categoryOrCitySlug, revalidate: 200 }))?.items?.[0]
+    const currentCategory = (await fetchCategories({slug: categoryOrAdCategorySlug, revalidate: 200 }))?.items?.[0]
+
     if (currentCategory?.unit?.id != currentUnit?.id) {
         return INVALID_PATH
     }

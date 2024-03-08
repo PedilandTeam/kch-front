@@ -27,11 +27,13 @@ export const CardsList = async ({
     let isNotFound = false;
 
 
+
     try {
         ads = await fetchAds({
             page: pageNumber ? pageNumber : 1,
             categorySlug: category.slug,
             search,
+            coutnryCode: country.code,
             revalidate: 200,
         });
     }

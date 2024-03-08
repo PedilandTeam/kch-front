@@ -1,6 +1,7 @@
 import { AdNamespace } from '@/types/ad';
 import { AdCategoryNamepace } from '@/types/adCategory';
 import { CategoryNamespace } from '@/types/category';
+import { filter } from 'lodash';
 import wretch from 'wretch';
 import { WretchError } from 'wretch/resolver';
 
@@ -17,6 +18,9 @@ interface Filters {
 }
 export default async function fetchAds(filters: Filters): Promise<AdNamespace.GET> {
     const urlObject = new URL(`${process.env.API_URL}/ads`);
+
+    if (!filters.limit) filters.limit = 30
+    if (!filters.page) filters.page = 1
 
     Object.keys(filters).forEach(filter => {
         const value = filters[filter];
