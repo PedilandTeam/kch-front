@@ -23,23 +23,26 @@ export default function SubMenu({ items, basePath }: SubMenu) {
         [path, basePath]
     );
 
-    const isInBasePath = useMemo(() => path !== basePath, [path, basePath])
+    const isInBasePath = useMemo(() => path !== basePath, [path, basePath]);
 
     return (
         <ul className='menu my-4 flex w-full items-center justify-center rounded-box'>
             {isInBasePath && (
                 <Link
-                    className='w-full hover:bg-transparent hover:text-black'
+                    className='w-full hover:bg-transparent text-black/60'
                     href={`${basePath}`}
                 >
-                    <li className='w-full flex flex-row items-center'><ArrowRightIcon className='w-6 mx-0 px-1 hover:bg-transparent'/>همه آگهی‌ها</li>
+                    <li className='flex w-full flex-row items-center text-black/60 hover:text-black'>
+                        <ArrowRightIcon className='mx-0 w-6 px-1 hover:bg-transparent' />
+                        همه آگهی‌ها
+                    </li>
                 </Link>
             )}
             {items?.map((item) => {
                 if (item.parent) return;
                 return (
                     <Link
-                        className='w-full'
+                        className='w-full hover:bg-transparent active:bg-transparent'
                         href={`${basePath}/${item.slug}`}
                         key={item.name}
                     >
@@ -58,11 +61,11 @@ export default function SubMenu({ items, basePath }: SubMenu) {
 
                                         return (
                                             <li
-                                                className='w-full'
+                                                className='w-full bg-transparent hover:bg-transparent active:bg-transparent'
                                                 key={subItem.name}
                                             >
                                                 <Link
-                                                    className={`my-1 h-fit w-full border-0 py-1 text-xs hover:bg-transparent hover:text-black ${isOpen(subItem) ? 'text-black' : 'text-black/60'}`}
+                                                    className={`my-1 h-fit w-full border-0 bg-transparent py-1 text-xs  hover:bg-transparent hover:text-black active:bg-transparent ${isOpen(subItem) ? 'text-black' : 'text-black/60'}`}
                                                     href={`${basePath}/${subItem.slug}`}
                                                 >
                                                     {subItem.name}
