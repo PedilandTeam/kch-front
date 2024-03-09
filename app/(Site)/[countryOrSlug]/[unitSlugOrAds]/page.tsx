@@ -66,7 +66,7 @@ export default async function UnitPage({
 
     if (pathInfo.type == 'ads') {
         return (
-            <AdsPage/>
+            <AdsPage {...pathInfo.props} pageNumber={pageNumber} country={pathInfo.props.country}/>
         );
     }
     

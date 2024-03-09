@@ -31,6 +31,9 @@ const pathGenerator = async (
     if (isAdsPage) {
         return {
             type: 'ads',
+            props: {
+                country: currentCountry
+            }
         };   
     }
 
