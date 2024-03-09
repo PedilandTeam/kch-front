@@ -32,7 +32,7 @@ export const CardsList = async ({
             page: pageNumber ? pageNumber : 1,
             categorySlug: category.slug,
             ...search && {search},
-            coutnryCode: country.code,
+            countryCode: country.code,
             ...city && { cityIds: city },
             revalidate: 200,
         });
