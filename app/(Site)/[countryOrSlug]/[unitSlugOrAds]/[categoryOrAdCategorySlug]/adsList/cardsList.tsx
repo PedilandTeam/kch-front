@@ -27,10 +27,6 @@ export const CardsList = async ({
 }: CardsListType) => {
     let ads: AdNamespace.GET | undefined
     let isNotFound = false;
-
-
-    console.log(city);
-    
     try {
         ads = await fetchAds({
             page: pageNumber ? pageNumber : 1,
