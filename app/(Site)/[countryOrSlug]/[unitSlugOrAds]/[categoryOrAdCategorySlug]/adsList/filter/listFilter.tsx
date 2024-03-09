@@ -9,12 +9,15 @@ import PageSearch from './page.search';
 import SideBanner from '@/app/banners/side-banner';
 import FilterModalMobile from './filterModal.mobile';
 import { AdCategoryNamepace } from '@/types/adCategory';
+import SubMenu from '@/app/(Site)/components/categoriesMeny/subMenu';
+import { CountryNamespace } from '@/types/country';
 
 type ListFilterProps = {
     categories: AdCategoryNamepace.IAdCategory[];
-    cities: CityNamespace.GET
+    cities: CityNamespace.GET,
+    country: CountryNamespace.GET
 };
-export default function ListFilter({ categories, cities }: ListFilterProps) {
+export default function ListFilter({ categories, cities, country }: ListFilterProps) {
     return (
         <div className='filter-unit z-20 sm:sticky sm:top-4'>
             <div className='filter-title mb-4 hidden w-full border-b-[2px] border-b-gray-200 pb-2 md:flex md:items-center'>
@@ -29,6 +32,7 @@ export default function ListFilter({ categories, cities }: ListFilterProps) {
                     id='categoryfilter-modal'
                     categories={categories}
                 /> */}
+                <SubMenu items={categories} basePath={`/${country.code}/ads`}/>
             </div>
 
             <div className='hidden sm:block'>

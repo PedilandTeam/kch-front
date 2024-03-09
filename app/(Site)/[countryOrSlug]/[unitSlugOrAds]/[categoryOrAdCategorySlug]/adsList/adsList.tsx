@@ -35,7 +35,7 @@ export default async function AdsList({
             <div className='container mx-auto max-w-[1144px]'>
                 <div className='grid grid-cols-1 gap-y-4 sm:grid-cols-8 sm:gap-8'>
                     <div className='sidebar hidden sm:col-span-2 sm:block'>
-                        <ListFilter categories={categories} cities={cities} />
+                        <ListFilter country={country} categories={categories} cities={cities} />
                     </div>
 
                     <div className='page-content sm:col-span-6'>

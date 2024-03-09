@@ -37,6 +37,7 @@ export const CardsList = async ({
             revalidate: 200,
         });
         
+        
     }
     catch(e: ApiErrorResponse | any) {
         if (e?.statusCode != 404) {

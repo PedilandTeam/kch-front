@@ -8,6 +8,7 @@ import { AdCategoryNamepace } from '@/types/adCategory';
 import ListFilter from './filter/listFilter';
 import fetchAdCategories from '@/modules/fetchAdCategories';
 import fetchCities from '@/modules/fetchCities';
+import SubMenu from '@/app/(Site)/components/categoriesMeny/subMenu';
 
 type PagesListProps = {
     country: CountryNamespace.GET;
@@ -35,7 +36,7 @@ export default async function AdsList({
             <div className='container mx-auto max-w-[1144px]'>
                 <div className='grid grid-cols-1 gap-y-4 sm:grid-cols-8 sm:gap-8'>
                     <div className='sidebar hidden sm:col-span-2 sm:block'>
-                        <ListFilter categories={categories} cities={cities} />
+                        <ListFilter categories={categories} cities={cities} country={country} />
                     </div>
 
                     <div className='page-content sm:col-span-6'>
