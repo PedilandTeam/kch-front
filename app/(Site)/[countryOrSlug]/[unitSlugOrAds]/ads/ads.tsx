@@ -15,7 +15,7 @@ type PagesListProps = {
     pageNumber?: number;
     category: AdCategoryNamepace.IAdCategory;
     search?: string;
-    city?: CityNamespace.city;
+    city?: number[];
 };
 
 
@@ -36,7 +36,7 @@ export default async function AdsList({
             <div className='container mx-auto max-w-[1144px]'>
                 <div className='grid grid-cols-1 gap-y-4 sm:grid-cols-8 sm:gap-8'>
                     <div className='sidebar hidden sm:col-span-2 sm:block'>
-                        <ListFilter categories={categories} cities={cities} country={country} />
+                        <ListFilter categories={categories} cities={cities} country={country} city={city} />
                     </div>
 
                     <div className='page-content sm:col-span-6'>
@@ -53,7 +53,7 @@ export default async function AdsList({
 
                             <div className='page-header w-full px-3 sm:order-1 sm:px-0'>
                                 <h1 className='my-4 text-xl font-semibold text-pink-800 sm:mb-3 sm:mt-0'>
-                                    لیست تبلیغات در {city?.name} کشور {country.name}
+                                    لیست تبلیغات در sdfکشور {country.name}
                                 </h1>
                             </div>
                         </div>
@@ -68,7 +68,7 @@ export default async function AdsList({
 
                             <Suspense
                                 fallback={<Loading />}
-                                key={`ads-${city?.name}`}
+                                key={`ads-${city}`}
                             >
                                 <CardsList
                                     country={country}

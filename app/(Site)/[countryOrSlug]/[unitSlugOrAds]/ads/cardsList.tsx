@@ -13,7 +13,7 @@ type CardsListType = {
     pageNumber?: number;
     category: AdCategoryNamepace.IAdCategory
     search?: string;
-    city: number[]
+    city?: number[]
 };
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -32,6 +32,7 @@ export const CardsList = async ({
             page: pageNumber ? pageNumber : 1,
             ...search && {search},
             coutnryCode: country.code,
+            cityIds: city,
             revalidate: 200,
         });
     }
