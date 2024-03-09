@@ -52,14 +52,14 @@ export default function CardListItem({ ad, country, variant }: cardListItem) {
                         <FolderIcon className='ml-1 w-5 text-gray-400' />
                         {variant == 'category' ? (
                             <span className='truncate'>
-                                {ad?.category?.title}
+                                {ad?.category?.name}
                             </span>
                         ) : (
                             <Link
                                 href={`/ads/${ad.id}`}
                             >
                                 <span className='truncate'>
-                                    {ad?.category?.title}
+                                    {ad?.category?.name}
                                 </span>
                             </Link>
                         )}
