@@ -5,8 +5,9 @@ import { AdNamespace } from '@/types/ad';
 import fetchAds from '@/modules/fetchAds';
 import { ApiErrorResponse } from '@/modules/fetch';
 import { CityNamespace } from '@/types/city';
-import CardListItem from './carsListItem';
+import CardListItem from './cardListItem';
 import { AdCategoryNamepace } from '@/types/adCategory';
+import CardsListClient from './cardsList.client';
 
 type CardsListType = {
     country: CountryNamespace.GET;
@@ -78,7 +79,7 @@ export const CardsList = async ({
                 </div>
             </div>
             {ads?.meta?.totalPages! > 1 ? (
-                <Pagination totalPages={ads!.meta.totalPages} />
+                <CardsListClient category={category} country={country} limit={30} />
             ) : null}
         </div>
     );
