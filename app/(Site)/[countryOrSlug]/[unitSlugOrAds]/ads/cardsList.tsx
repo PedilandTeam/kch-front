@@ -5,8 +5,10 @@ import { AdNamespace } from '@/types/ad';
 import fetchAds from '@/modules/fetchAds';
 import { ApiErrorResponse } from '@/modules/fetch';
 import { CityNamespace } from '@/types/city';
-import CardListItem from './carsListItem';
+import CardListItem from './cardListItem';
 import { AdCategoryNamepace } from '@/types/adCategory';
+import { useState } from 'react';
+import CardsListClient from './cardsList.client';
 
 type CardsListType = {
     country: CountryNamespace.GET;
@@ -20,7 +22,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const CardsList = async ({
     country,
-    pageNumber,
+    pageNumber = 1,
     category,
     search,
     city,
@@ -29,7 +31,7 @@ export const CardsList = async ({
     let isNotFound = false;
     try {
         ads = await fetchAds({
-            page: pageNumber ? pageNumber : 1,
+            page: pageNumber,
             ...search && {search},
             coutnryCode: country.code,
             cityIds: city,
@@ -57,26 +59,29 @@ export const CardsList = async ({
         );
     }
     return (
-        <div className='flex flex-col items-center justify-center'>
-            <div className='list-card min-h-[500px] w-full'>
-                <div className='grid grid-cols-1 gap-y-4 sm:grid-cols-3 sm:gap-6'>
-                    {ads?.items?.map(
-                        (ad: AdNamespace.IAd, index: number) => {
-                            return (
-                                <CardListItem
-                                    key={ad.id}
-                                    variant='unit'
-                                    ad={ad}
-                                    country={country}
-                                />
-                            );
-                        }
-                    )}
+        <>
+            <div className='flex flex-col items-center justify-center'>
+                <div className='list-card min-h-[500px] w-full'>
+                    <div className='grid grid-cols-1 gap-y-4 sm:grid-cols-3 sm:gap-6'>
+                        {ads?.items?.map(
+                            (ad: AdNamespace.IAd, index: number) => {
+                                return (
+                                    <CardListItem
+                                        key={ad.id}
+                                        variant='unit'
+                                        ad={ad}
+                                        country={country}
+                                    />
+                                );
+                            }
+                        )}
+                    </div>
                 </div>
             </div>
             {ads?.meta?.totalPages! > 1 ? (
-                <Pagination totalPages={ads!.meta.totalPages} />
+                    // <Pagination totalPages={ads!.meta.totalPages} />
+                    <CardsListClient pageNumber={pageNumber} country={country} limit={30} />
             ) : null}
-        </div>
+        </>
     );
 };
