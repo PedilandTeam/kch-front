@@ -9,6 +9,8 @@ import ListFilter from './filter/listFilter';
 import fetchAdCategories from '@/modules/fetchAdCategories';
 import fetchCities from '@/modules/fetchCities';
 import SubMenu from '@/app/(Site)/components/categoriesMeny/subMenu';
+import { ItemBreadCrumb } from './breadcrumb';
+import AdCategoryMobileFilter from './filter/adCategory.filter.mobile';
 
 type PagesListProps = {
     country: CountryNamespace.GET;
@@ -18,7 +20,6 @@ type PagesListProps = {
     city?: number[];
 };
 
-
 export default async function AdsList({
     country,
     pageNumber,
@@ -26,29 +27,33 @@ export default async function AdsList({
     category,
     search,
 }: PagesListProps) {
-    
-    const categories = await fetchAdCategories({ revalidate: 200 })
-    const cities = await fetchCities({countryId: country.id})
-
+    const categories = await fetchAdCategories({ revalidate: 200 });
+    const cities = await fetchCities({ countryId: country.id });
 
     return (
         <div className='component page-list sm:mt-3'>
             <div className='container mx-auto max-w-[1144px]'>
                 <div className='grid grid-cols-1 gap-y-4 sm:grid-cols-8 sm:gap-8'>
                     <div className='sidebar hidden sm:col-span-2 sm:block'>
-                        <ListFilter categories={categories} cities={cities} country={country} />
+                        <ListFilter
+                            categories={categories}
+                            cities={cities}
+                            country={country}
+                        />
                     </div>
 
                     <div className='page-content sm:col-span-6'>
                         <div className='flex flex-wrap'>
                             <div className='w-full sm:order-2 sm:mb-2'>
-                                {/* <ItemBreadCrumb
-                                    unit={{ name: unit.name, slug: unit.slug }}
-                                    country={{
-                                        name: country.name,
-                                        code: country.code,
-                                    }}
-                                /> */}
+                                <ItemBreadCrumb
+                                    items={[
+                                        {
+                                            path: `/${country.code}/ads`,
+                                            name: `آگهی های ${country.name}`,
+                                        },
+                                    ]}
+                                    />
+                                    <AdCategoryMobileFilter country={country}/>
                             </div>
 
                             <div className='page-header w-full px-3 sm:order-1 sm:px-0'>
