@@ -1,10 +1,9 @@
 'use client';
 import { _TXT } from '@/app/text';
-import { UnitType } from '@/types/unit';
 import Link from 'next/link';
 
 type PathItem = {
-    path: string,
+    path?: string,
     name?: string
 }
 type ItemBreadCrumbType = {
@@ -22,7 +21,7 @@ export const ItemBreadCrumb = ({ items }: ItemBreadCrumbType) => {
                 {
                     items?.map(item => {
                         return <li key={item.path}>
-                            <Link href={item.path} >{item.name ? item.name : item.path}</Link>
+                            <Link href={item.path || ''} >{item.name ? item.name : item.path}</Link>
                         </li>
                     })
                 }
