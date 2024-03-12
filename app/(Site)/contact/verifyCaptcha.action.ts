@@ -9,6 +9,7 @@ export async function verifyCaptchaAction(
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'api-key': process.env.API_KEY,
             },
         }
     )

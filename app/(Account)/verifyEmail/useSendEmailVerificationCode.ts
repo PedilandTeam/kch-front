@@ -11,6 +11,9 @@ export default function useSendEmailVerificationCode() {
             {
                 method: 'POST',
                 credentials: 'include',
+                headers: {
+                    'api-key': process.env.API_KEY
+                }
             }
         )
             .then(async (res) => {

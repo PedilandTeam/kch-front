@@ -33,6 +33,7 @@ export default async function sendFormAction(
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'api-key': process.env.API_KEY,
         },
         body: JSON.stringify({
             key: process.env.NOTIFER_KEY,

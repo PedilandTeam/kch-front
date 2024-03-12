@@ -18,6 +18,7 @@ export default function useLogin() {
                 }),
                 headers: {
                     'Content-Type': 'application/json',
+                    'api-key': process.env.API_KEY
                 },
                 credentials: 'include',
             }

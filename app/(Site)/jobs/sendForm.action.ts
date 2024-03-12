@@ -70,6 +70,7 @@ export default async function sendFormAction(
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'api-key': process.env.API_KEY,
                     },
                     body: JSON.stringify({
                         chat_id: chatId,
@@ -100,6 +101,9 @@ export default async function sendFormAction(
                 {
                     method: 'POST',
                     body: formData,
+                    headers: {
+                        'api-key': process.env.API_KEY,
+                    }
                 }
             );
             if (!response.ok) {
