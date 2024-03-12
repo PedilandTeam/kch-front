@@ -9,7 +9,7 @@ import PageSearch from './page.search';
 import SideBanner from '@/app/banners/side-banner';
 import FilterModalMobile from './filterModal.mobile';
 import { AdCategoryNamepace } from '@/types/adCategory';
-import SubMenu from '@/app/(Site)/components/categoriesMeny/subMenu';
+import SubMenu from '@/app/(Site)/components/categoriesMenu/subMenu';
 import { CountryNamespace } from '@/types/country';
 
 type ListFilterProps = {

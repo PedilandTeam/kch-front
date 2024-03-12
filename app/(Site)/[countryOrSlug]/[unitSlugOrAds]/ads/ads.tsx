@@ -8,7 +8,7 @@ import { AdCategoryNamepace } from '@/types/adCategory';
 import ListFilter from './filter/listFilter';
 import fetchAdCategories from '@/modules/fetchAdCategories';
 import fetchCities from '@/modules/fetchCities';
-import SubMenu from '@/app/(Site)/components/categoriesMeny/subMenu';
+import SubMenu from '@/app/(Site)/components/categoriesMenu/subMenu';
 import { ItemBreadCrumb } from './breadcrumb';
 import AdCategoryMobileFilter from './filter/adCategory.filter.mobile';
 
