@@ -1,33 +1,12 @@
-import { CategoryNamespace } from "@/types/category";
-import { CountryNamespace } from "@/types/country";
-import { UnitType } from "@/types/unit";
-import { AxiosError } from "axios";
-import { notFound } from "next/navigation";
-import wretch from 'wretch'
-import { WretchError } from "wretch/resolver";
+import { CategoryNamespace } from '@/types/category';
+import fetchWrapper from './fetchWrapper';
 
-
-export default async function fetchCategories({ limit = 300, page = 1, slug, revalidate }: { page?: number | string, limit?: number | string, slug?: string, revalidate: number }): Promise<CategoryNamespace.GET> {
-    const urlObject = new URL(`${process.env.API_URL}/categories`)
-
-    if (limit) urlObject.searchParams.append('limit', limit.toString())
-    if (page) urlObject.searchParams.append('page', page.toString())
-    if (slug) urlObject.searchParams.append('slug', slug.toString())
-
-    const url = urlObject.toString()
-    const OPTIONS = {
-        next: {
-            revalidate
-        }
-    }
-    return await wretch(url)
-        .options(OPTIONS)
-        .get()
-        .json(json => {
-            return json
-        })
-        .catch((e: WretchError) => {
-            console.error(`Error Accourd in fetchCategory. params {limit: ${limit}, page: ${page}, slug: ${slug}}`, e.json, e.message)
-            return null;
-        })
+export type FetchCategories = {
+    page?: number | string;
+    limit?: number | string;
+    slug?: string;
+    revalidate: number;
+};
+export default async function fetchCategories(filters: FetchCategories, revalidate?: number): Promise<CategoryNamespace.GET> {
+    return await fetchWrapper<CategoryNamespace.GET, FetchCategories>('/categories', { filters: filters, isPaginated: true, revalidate: revalidate });
 }

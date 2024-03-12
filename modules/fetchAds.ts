@@ -1,6 +1,5 @@
 import { AdNamespace } from '@/types/ad';
-import wretch from 'wretch';
-import { WretchError } from 'wretch/resolver';
+import fetchWrapper from './fetchWrapper';
 
 interface Filters {
     [key: string]: any;
@@ -13,38 +12,6 @@ interface Filters {
     categorySlug?: string;
     search?: string
 }
-export default async function fetchAds(filters: Filters): Promise<AdNamespace.GET> {
-    const urlObject = new URL(`${process.env.API_URL}/ads`);
-
-    if (!filters.limit) filters.limit = 30
-    if (!filters.page) filters.page = 1
-
-    Object.keys(filters).forEach(filter => {
-        const value = filters[filter];        
-        if (value) urlObject.searchParams.append(filter, String(value));
-    })
-
-    const url = urlObject.toString();
-
-    const { revalidate } = filters
-    const OPTIONS = revalidate ? { next: {revalidate}} : {}
-
-    return await wretch(url)
-        .options(OPTIONS)
-        .get()
-        .json((json) => {
-            return json;
-        })
-        .catch((e: WretchError) => {
-            console.error(
-                `Error Accourd in fetchAds. params:`,
-                filters,
-                e.json,
-                e.message
-            );
-            if (e.json) {
-                return e.json;
-            }
-            return null;
-        });
+export default async function fetchAds(filters: Filters, revalidate?: number): Promise<AdNamespace.GET> {
+    return await fetchWrapper<AdNamespace.GET, Filters>('/ads', { filters, isPaginated: true, revalidate: revalidate });
 }
