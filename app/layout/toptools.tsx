@@ -52,7 +52,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
         </div>
       )}
 
-      {isMainPage ? null : (
+      {isMainPage || countryCode === 'un' ? null : (
         <div>
           <div className="main-nav mr-3">
             <ul className="font-medium hidden lg:flex">
