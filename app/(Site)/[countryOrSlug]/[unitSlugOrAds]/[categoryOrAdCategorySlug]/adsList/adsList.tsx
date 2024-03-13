@@ -16,7 +16,7 @@ type PagesListProps = {
     pageNumber?: number;
     category: AdCategoryNamepace.IAdCategory;
     search?: string;
-    city?: CityNamespace.city;
+    city?: number[];
 };
 
 export default async function AdsList({
@@ -28,7 +28,7 @@ export default async function AdsList({
 }: PagesListProps) {
     const categories = await fetchAdCategories({ revalidate: 200 });
     const cities = await fetchCities({ countryId: country.id });
-
+    
     return (
         <div className='component page-list sm:mt-3'>
             <div className='container mx-auto max-w-[1144px]'>
