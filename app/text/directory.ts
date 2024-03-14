@@ -14,6 +14,7 @@ export const CATEGORY = {
 export const ITEM = {
   _: "آیتم",
   DESCRIPTION: "توضیحات",
+  DESCRIPTION_PLACEHOLDER: "توضیحاتی در مورد این واحد ثبت نشده است.",
   FACILITIES: "امکانات",
   FACILITIES_NO: "امکانات این واحد لیست نشده است.",
   IMAGES: "تصاویر",
