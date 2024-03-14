@@ -30,19 +30,19 @@ const pathGenerator = async (countryOrSlug: string, unitSlug: string, categorySl
   const currentUnit: UnitType = units.find((unit: UnitType) => unit.slug == unitSlug);
   // const countryList = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 20)).json();
   const countryList = await API_ROUTES.COUNTRIES.GET_ALL(false, 20)
-  .then(res => res.json())
-  .catch(e => {
-    console.log(e);
-  })
+    .then(res => res.json())
+    .catch(e => {
+      console.log(e);
+    })
   const currentCountry = countryList.find((country: CountryNamespace.GET) => country.code == countryOrSlug);
 
   // const categories: CategoryNamespace.GET = await (await API_ROUTES.CATEGOREIS.GET_ALL(1, 1, categorySlug)).json();
   const categories: CategoryNamespace.GET = await API_ROUTES.CATEGOREIS.GET_ALL(1, 1, categorySlug)
-  .then(res => res.json())
-  .catch(e => {
-    console.log(e);
-    throw new Error('error in get categories categorySlug/page')
-  })
+    .then(res => res.json())
+    .catch(e => {
+      console.log(e);
+      throw new Error('error in get categories categorySlug/page')
+    })
 
   const currentCategory = categories?.items[0];
 
@@ -71,6 +71,14 @@ export const generateMetadata = async ({ params: { countryOrSlug, unitSlug, cate
     pathInfo = await pathGenerator(countryOrSlug, unitSlug, categorySlug);
   } catch (e: any) {
     throw Error(e);
+  }
+
+  const category = pathInfo.props?.category;
+  if (!category) {
+    return {
+      title: 'پیدا نشد!',
+      description: 'این صفحه در کوچا موجود نیست'
+    }
   }
 
   const countries = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 120)).json();

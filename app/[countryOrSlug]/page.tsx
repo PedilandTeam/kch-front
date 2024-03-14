@@ -107,6 +107,12 @@ export async function generateMetadata({ params, searchParams }: Props) {
       };
 
     default:
+
+      return {
+        ...metadata,
+        title: 'پیدا نشد!',
+        description: 'این صفحه در کوچا موجود نیست'
+      }
       notFound();
 
     // }

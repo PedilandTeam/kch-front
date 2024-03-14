@@ -65,12 +65,9 @@ const baseFetch = async ({path, method = "GET", params, body, headers}: requestT
                 }
                 resolve(res)
             })
-            .catch(error => {
-                console.log(`
+            .catch((error: any) => {
+                console.log('error', error);
                 
-                catch r
-                
-                `);
                 reject(error)
             })
     })

@@ -10,14 +10,7 @@ import Script from "next/script";
 import { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 
-export const metadata: Metadata = {
-  title: "وبسایت کوچا",
-  description: "کوچا جامعه ایرانیان مقیم همه‌جا",
-  viewport: "width=device-width, initial-scale=1",
-  alternates: {
-    canonical: process.env.FRONT_URL,
-  },
-};
+
 
 export default async function RootLayout({
   children,

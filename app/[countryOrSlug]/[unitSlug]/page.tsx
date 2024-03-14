@@ -47,6 +47,14 @@ export const generateMetadata = async ({params: { countryOrSlug, unitSlug }}: ge
     throw Error(e);
   }
 
+  const unit = pathInfo.props?.unit;
+  if (!unit) {
+    return {
+      title: 'پیدا نشد!',
+      description: 'این صفحه در کوچا موجود نیست'
+    }
+  }
+  
   const countries = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 120)).json();
   const currentCountry: CountryNamespace.GET | undefined = countries.find((country: CountryNamespace.GET) => country.code == countryOrSlug);
   return {
