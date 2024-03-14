@@ -37,7 +37,7 @@ export default async function RootLayout({
       <body className="min-h-screen">
         <Providers>
           <Fonts />
-          <Header>
+          <Header countries={countries}>
             <ModalCountry countries={countries} />
           </Header>
           <Toaster />
