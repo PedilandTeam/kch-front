@@ -2,13 +2,12 @@
 
 import { TopTools } from './layout/toptools';
 import { OffCanvas } from './layout/offcanvas';
-import { storeType } from '@/store/store';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import Image from 'next/image';
 import { CountryNamespace } from '@/types/country';
+import { useHeader } from '@/store/useHeader';
 
 type HeaderProps = {
     children: React.ReactNode;
@@ -17,7 +16,8 @@ type HeaderProps = {
 
 export const Header = ({ children, countries }: HeaderProps) => {
     const params = useParams();
-    const country = useSelector((state: storeType) => state.stateSlice.country);
+    
+    const { countryCode: contryCodeInStore, isNotFound } = useHeader()
 
     const [countryCode, setCountryCode] = useState('');
 
@@ -25,15 +25,20 @@ export const Header = ({ children, countries }: HeaderProps) => {
         const countryOrSlug = params.countryOrSlug as string;
         const isMainPage = !countryOrSlug || !countries.find(c => c.code === countryOrSlug);
         const countryCodeFromParams = isMainPage ? '' : countryOrSlug;
-        setCountryCode(isMainPage ? 'un' : countryCodeFromParams ||  country || 'un');
-    }, [params, countries, country]);
+        setCountryCode(isMainPage ? 'un' : countryCodeFromParams ||  contryCodeInStore || 'un');
+    }, [params, countries, contryCodeInStore]);
+
+    
+    const isMainPage = !contryCodeInStore && (countryCode == 'un' || !countryCode);
+    
+
     
     return (
         <header className='w-full bg-white py-3'>
             <div className='container mx-auto max-w-[1144px]'>
                 <div>
                     <div className='mx-3 flex justify-between sm:mx-0'>
-                        <TopTools isMainPage={countryCode === 'un' || !countryCode} countryCode={countryCode} />
+                        <TopTools isMainPage={isMainPage} countryCode={contryCodeInStore || countryCode} />
 
                         <div className='logo'>
                             <Link href='/'>

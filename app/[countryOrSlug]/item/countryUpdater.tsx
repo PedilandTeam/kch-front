@@ -1,13 +1,18 @@
 'use client'
-
-import { setCountry } from "@/store/stateSlice";
+import { useHeader } from "@/store/useHeader";
 import { PageNamespace } from "@/types/page";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 type countryUpdater = { pageData: PageNamespace.Page };
-export default function({pageData}: countryUpdater) {
-    const dis = useDispatch();
-    dis(setCountry(pageData?.country?.code));
+export default function CountryUpdater({pageData}: countryUpdater) {
+    const {setCountryCode} = useHeader();
+
+    useEffect(() => {
+        setCountryCode(pageData?.country?.code);
+        return () => {
+            setCountryCode('')
+        }
+    }, [pageData?.country?.code])
     return (
         <></>
     )

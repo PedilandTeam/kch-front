@@ -14,7 +14,7 @@ type ParsedSearchParams = {
 type PaginationProps = {
   pages: PageNamespace.GET;
 };
-export default function ({ pages }: PaginationProps) {
+export default function Pagination ({ pages }: PaginationProps) {
   let totalPages = pages.meta.totalPages;
   const paginationLimit = 9;
   const staticPaginations = 2;
@@ -143,7 +143,7 @@ export default function ({ pages }: PaginationProps) {
     <div className="flex justify-center items-center mt-9">
       <Link
         rel="next"
-        href={`${pathname}?page=${pageNumber + 1}`}
+        href={pageNumber == totalPages ? '#' : `${pathname}?page=${pageNumber + 1}`}
         onClick={buttonLinkHandler}
       >
         <button
@@ -207,7 +207,7 @@ export default function ({ pages }: PaginationProps) {
       </div>
       <Link
         rel="prev"
-        href={`${pathname}?page=${pageNumber - 1}`}
+        href={pageNumber == 1 ? '#' : `${pathname}?page=${pageNumber - 1}`}
         onClick={buttonLinkHandler}
       >
         <button
