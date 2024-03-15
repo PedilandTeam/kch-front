@@ -3,7 +3,7 @@ import { CountryNamespace } from "@/types/country";
 import PageItem from "./item/item";
 import { notFound } from "next/navigation";
 import Country from "./country/country";
-import { metadata } from "../layout";
+import { metadata } from "../page";
 
 export type PathsType = "country" | "unit" | "category" | "item";
 export type PathGeneratorType = {

@@ -5,12 +5,9 @@ import Fonts from "../config/fonts";
 import { CountryNamespace } from "@/types/country";
 import { API_ROUTES } from "@/routes";
 import { ModalCountry } from "./layout/modalcountry";
-import { Providers } from "@client-packages/react-redux/provider";
 import Script from "next/script";
 import { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
-
-
 
 export default async function RootLayout({
   children,
@@ -28,15 +25,13 @@ export default async function RootLayout({
   return (
     <html lang="fa" dir="rtl" className="scroll-smooth">
       <body className="min-h-screen">
-        <Providers>
-          <Fonts />
-          <Header countries={countries}>
-            <ModalCountry countries={countries} />
-          </Header>
-          <Toaster />
-          {children}
-          <Footer />
-        </Providers>
+        <Fonts />
+        <Header countries={countries}>
+          <ModalCountry countries={countries} />
+        </Header>
+        <Toaster />
+        {children}
+        <Footer />
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD" />
         <Script id="google-analytics">
           {`
