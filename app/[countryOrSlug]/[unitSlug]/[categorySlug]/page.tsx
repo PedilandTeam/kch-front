@@ -8,41 +8,54 @@ import CategoryList from "./categoryList";
 import { PathGeneratorType } from "../../page";
 import queryString from "query-string";
 
-
-
-type ParsedSearchParams = { page?: number | number[], city?: any, search: string }
+type ParsedSearchParams = {
+  page?: number | number[];
+  city?: any;
+  search: string;
+};
 
 /**
- * 
+ *
  * @param countryOrSlug get country with [countryOrSlug]
  * @param unitSlug get unit of category to check is entered category part of current unit
  * @param categorySlug get targeted category by Slug
- * @returns 
+ * @returns
  */
-const pathGenerator = async (countryOrSlug: string, unitSlug: string, categorySlug: string): Promise<PathGeneratorType> => {
-
+const pathGenerator = async (
+  countryOrSlug: string,
+  unitSlug: string,
+  categorySlug: string
+): Promise<PathGeneratorType> => {
   // const units = await (await API_ROUTES.UNITS.GET_ALL(2000)).json();
   const units = await API_ROUTES.UNITS.GET_ALL(2000)
-    .then(async res => await res.json())
-    .catch(e => {
+    .then(async (res) => await res.json())
+    .catch((e) => {
       console.log(e);
-    })
-  const currentUnit: UnitType = units.find((unit: UnitType) => unit.slug == unitSlug);
+    });
+  const currentUnit: UnitType = units.find(
+    (unit: UnitType) => unit.slug == unitSlug
+  );
   // const countryList = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 20)).json();
   const countryList = await API_ROUTES.COUNTRIES.GET_ALL(false, 20)
-    .then(res => res.json())
-    .catch(e => {
+    .then((res) => res.json())
+    .catch((e) => {
       console.log(e);
-    })
-  const currentCountry = countryList.find((country: CountryNamespace.GET) => country.code == countryOrSlug);
+    });
+  const currentCountry = countryList.find(
+    (country: CountryNamespace.GET) => country.code == countryOrSlug
+  );
 
   // const categories: CategoryNamespace.GET = await (await API_ROUTES.CATEGOREIS.GET_ALL(1, 1, categorySlug)).json();
-  const categories: CategoryNamespace.GET = await API_ROUTES.CATEGOREIS.GET_ALL(1, 1, categorySlug)
-    .then(res => res.json())
-    .catch(e => {
+  const categories: CategoryNamespace.GET = await API_ROUTES.CATEGOREIS.GET_ALL(
+    1,
+    1,
+    categorySlug
+  )
+    .then((res) => res.json())
+    .catch((e) => {
       console.log(e);
-      throw new Error('error in get categories categorySlug/page')
-    })
+      throw new Error("error in get categories categorySlug/page");
+    });
 
   const currentCategory = categories?.items[0];
 
@@ -63,8 +76,12 @@ const pathGenerator = async (countryOrSlug: string, unitSlug: string, categorySl
   // return <CategoryList category={currentCategory} country={currentCountry} />
 };
 
-type generateMetadata = { params: { countryOrSlug: string; unitSlug: string; categorySlug: string } }
-export const generateMetadata = async ({ params: { countryOrSlug, unitSlug, categorySlug } }: generateMetadata): Promise<Metadata> => {
+type generateMetadata = {
+  params: { countryOrSlug: string; unitSlug: string; categorySlug: string };
+};
+export const generateMetadata = async ({
+  params: { countryOrSlug, unitSlug, categorySlug },
+}: generateMetadata): Promise<Metadata> => {
   let pathInfo: PathGeneratorType;
 
   try {
@@ -76,33 +93,48 @@ export const generateMetadata = async ({ params: { countryOrSlug, unitSlug, cate
   const category = pathInfo.props?.category;
   if (!category) {
     return {
-      title: 'پیدا نشد!',
-      description: 'این صفحه در کوچا موجود نیست'
-    }
+      title: "صفحه مورد نظر پیدا وجود ندارد | کوچا",
+      description:
+        "متاسفانه چنین صفحه‌ای وجود نداره و یا ممکنه بخاطر تغییرات وب‌سایت جدید کـوچـا آدرسش تغییر کرده باشه.",
+    };
   }
 
-  const countries = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 120)).json();
-  const currentCountry: CountryNamespace.GET | undefined = countries.find((country: CountryNamespace.GET) => country.code == countryOrSlug);
+  const countries = await (
+    await API_ROUTES.COUNTRIES.GET_ALL(false, 120)
+  ).json();
+  const currentCountry: CountryNamespace.GET | undefined = countries.find(
+    (country: CountryNamespace.GET) => country.code == countryOrSlug
+  );
   return {
-    title: `لیست ${pathInfo?.props?.category?.name} فارسی زبان در ${countryOrSlug && currentCountry && currentCountry.name
-      } | کوچا`,
-    description: `به جامعه مجازی ایرانیان مهاجر مقیم ${countryOrSlug && currentCountry && currentCountry.name
-      } خوش آمدید. در این صفحه لیست کاملی از ${pathInfo?.props?.category?.name
-      } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
+    title: `لیست ${pathInfo?.props?.category?.name} فارسی زبان در ${
+      countryOrSlug && currentCountry && currentCountry.name
+    } | کوچا`,
+    description: `به جامعه مجازی ایرانیان مهاجر مقیم ${
+      countryOrSlug && currentCountry && currentCountry.name
+    } خوش آمدید. در این صفحه لیست کاملی از ${
+      pathInfo?.props?.category?.name
+    } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
     alternates: {
-      canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${unitSlug}/${pathInfo?.props?.category?.slug}`
-    }
+      canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${unitSlug}/${pathInfo?.props?.category?.slug}`,
+    },
   };
 };
 
-export default async function CategoryPage({ params: { countryOrSlug, unitSlug, categorySlug }, searchParams }: { params: { countryOrSlug: string; unitSlug: string; categorySlug: string }, searchParams: { [key: string]: string | string[] | undefined } }) {
-
-  let parsedSearchParams: ParsedSearchParams
+export default async function CategoryPage({
+  params: { countryOrSlug, unitSlug, categorySlug },
+  searchParams,
+}: {
+  params: { countryOrSlug: string; unitSlug: string; categorySlug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  let parsedSearchParams: ParsedSearchParams;
   let pathInfo: PathGeneratorType;
 
-  parsedSearchParams = queryString.parse(queryString.stringify(searchParams ?? {}), { arrayFormat: "comma", parseNumbers: true }) as ParsedSearchParams
-  const { page: pageNumber, city, search } = parsedSearchParams
-
+  parsedSearchParams = queryString.parse(
+    queryString.stringify(searchParams ?? {}),
+    { arrayFormat: "comma", parseNumbers: true }
+  ) as ParsedSearchParams;
+  const { page: pageNumber, city, search } = parsedSearchParams;
 
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug, categorySlug);
@@ -111,7 +143,14 @@ export default async function CategoryPage({ params: { countryOrSlug, unitSlug, 
   }
 
   if (pathInfo.type) {
-    return <CategoryList {...pathInfo.props} pageNumber={pageNumber} city={city} search={search} />;
+    return (
+      <CategoryList
+        {...pathInfo.props}
+        pageNumber={pageNumber}
+        city={city}
+        search={search}
+      />
+    );
   } else {
     notFound();
   }
