@@ -63,8 +63,8 @@ const pathGenerator = async (countryOrSlug: string, unitSlug: string, categorySl
   // return <CategoryList category={currentCategory} country={currentCountry} />
 };
 
-type generateMetadata = { params: { countryOrSlug: string; unitSlug: string; categorySlug: string } }
-export const generateMetadata = async ({ params: { countryOrSlug, unitSlug, categorySlug } }: generateMetadata): Promise<Metadata> => {
+type generateMetadata = { params: { countryOrSlug: string; unitSlug: string; categorySlug: string }, searchParams: { [key: string]: string | string[] | undefined } }
+export const generateMetadata = async ({ params: { countryOrSlug, unitSlug, categorySlug }, searchParams }: generateMetadata): Promise<Metadata> => {
   let pathInfo: PathGeneratorType;
 
   try {
@@ -83,6 +83,9 @@ export const generateMetadata = async ({ params: { countryOrSlug, unitSlug, cate
 
   const countries = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 120)).json();
   const currentCountry: CountryNamespace.GET | undefined = countries.find((country: CountryNamespace.GET) => country.code == countryOrSlug);
+
+  const pageSearchParams = searchParams?.page;
+
   return {
     title: `لیست ${pathInfo?.props?.category?.name} فارسی زبان در ${countryOrSlug && currentCountry && currentCountry.name
       } | کوچا`,
@@ -90,7 +93,7 @@ export const generateMetadata = async ({ params: { countryOrSlug, unitSlug, cate
       } خوش آمدید. در این صفحه لیست کاملی از ${pathInfo?.props?.category?.name
       } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
     alternates: {
-      canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${unitSlug}/${pathInfo?.props?.category?.slug}`
+      canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${unitSlug}/${pathInfo?.props?.category?.slug}${pageSearchParams ? `?page=${pageSearchParams}` : ''}`
     }
   };
 };

@@ -1,4 +1,3 @@
-import { metadata } from "@/app/layout";
 import { API_ROUTES } from "@/routes";
 import { CountryNamespace } from "@/types/country";
 import { UnitType } from "@/types/unit";
@@ -8,6 +7,7 @@ import { notFound } from "next/navigation";
 import queryString from "query-string";
 import { PathGeneratorType } from "../page";
 import UnitList from "./unitList";
+import { headers } from "next/headers";
 
 const pathGenerator = async (
   countryOrSlug: string,
@@ -37,10 +37,10 @@ const pathGenerator = async (
   };
 };
 
-type generateMetadata = {params: { countryOrSlug: string; unitSlug: string }}
-export const generateMetadata = async ({params: { countryOrSlug, unitSlug }}: generateMetadata): Promise<Metadata> => {
-  let pathInfo: PathGeneratorType;
+type generateMetadata = {params: { countryOrSlug: string; unitSlug: string }, searchParams: { [key: string]: string | string[] | undefined }}
+export const generateMetadata = async ({params: { countryOrSlug, unitSlug }, searchParams}: generateMetadata): Promise<Metadata> => {
 
+  let pathInfo: PathGeneratorType;
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug);
   } catch (e: any) {
@@ -57,6 +57,9 @@ export const generateMetadata = async ({params: { countryOrSlug, unitSlug }}: ge
   
   const countries = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 120)).json();
   const currentCountry: CountryNamespace.GET | undefined = countries.find((country: CountryNamespace.GET) => country.code == countryOrSlug);
+
+  const pageSearchParams = searchParams?.page;
+
   return {
     title: `لیست ${pathInfo?.props?.unit?.name} فارسی زبان در ${
       countryOrSlug && currentCountry && currentCountry.name
@@ -67,7 +70,7 @@ export const generateMetadata = async ({params: { countryOrSlug, unitSlug }}: ge
       pathInfo?.props?.unit?.name
     } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
     alternates:{
-      canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${pathInfo?.props?.unit?.slug}`
+      canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${pathInfo?.props?.unit?.slug}${pageSearchParams ? `?page=${pageSearchParams}` : ''}`
     }
   };
 };
