@@ -51,7 +51,7 @@ export const generateMetadata = async ({params: { countryOrSlug, unitSlug }, sea
   const unit = pathInfo.props?.unit;
   if (!unit) {
     return {
-      title: "صفحه مورد نظر پیدا وجود ندارد | کوچا",
+      title: "صفحه مورد نظر وجود ندارد | کوچا",
       description:
         "متاسفانه چنین صفحه‌ای وجود نداره و یا ممکنه بخاطر تغییرات وب‌سایت جدید کـوچـا آدرسش تغییر کرده باشه.",
     };
