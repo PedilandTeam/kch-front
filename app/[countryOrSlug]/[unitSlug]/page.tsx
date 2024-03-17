@@ -32,7 +32,7 @@ const pathGenerator = async (
     type: "unit",
     props: {
       unit: currentUnit,
-      country: currentCountry,z
+      country: currentCountry
     },
   };
 };
