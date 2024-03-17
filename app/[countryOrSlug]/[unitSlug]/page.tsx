@@ -11,7 +11,7 @@ import { headers } from "next/headers";
 
 const pathGenerator = async (
   countryOrSlug: string,
-  unitSlug: string,
+  unitSlug: string
 ): Promise<PathGeneratorType> => {
   const units = await (await API_ROUTES.UNITS.GET_ALL(2000)).json();
   const currentUnit = units.find((unit: UnitType) => unit.slug == unitSlug);
@@ -32,10 +32,11 @@ const pathGenerator = async (
     type: "unit",
     props: {
       unit: currentUnit,
-      country: currentCountry,
+      country: currentCountry,z
     },
   };
 };
+
 
 type generateMetadata = {params: { countryOrSlug: string; unitSlug: string }, searchParams: { [key: string]: string | string[] | undefined }}
 export const generateMetadata = async ({params: { countryOrSlug, unitSlug }, searchParams}: generateMetadata): Promise<Metadata> => {
@@ -50,10 +51,12 @@ export const generateMetadata = async ({params: { countryOrSlug, unitSlug }, sea
   const unit = pathInfo.props?.unit;
   if (!unit) {
     return {
-      title: 'پیدا نشد!',
-      description: 'این صفحه در کوچا موجود نیست'
-    }
+      title: "صفحه مورد نظر وجود ندارد | کوچا",
+      description:
+        "متاسفانه چنین صفحه‌ای وجود نداره و یا ممکنه بخاطر تغییرات وب‌سایت جدید کـوچـا آدرسش تغییر کرده باشه.",
+    };
   }
+
   
   const countries = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 120)).json();
   const currentCountry: CountryNamespace.GET | undefined = countries.find((country: CountryNamespace.GET) => country.code == countryOrSlug);
@@ -75,19 +78,30 @@ export const generateMetadata = async ({params: { countryOrSlug, unitSlug }, sea
   };
 };
 
-type Param =  number | undefined;
-type ParsedSearchParams = {page?: number | number[], category?: number | number[], city?: any, search: string}
+type Param = number | undefined;
+type ParsedSearchParams = {
+  page?: number | number[];
+  category?: number | number[];
+  city?: any;
+  search: string;
+};
 
-
-export default async function UnitPage({params: { countryOrSlug, unitSlug }, searchParams}: {params: { countryOrSlug: string; unitSlug: string }, searchParams:{ [key: string]: string | string[] | undefined }}) {
-
-  
-  let parsedSearchParams: ParsedSearchParams
+export default async function UnitPage({
+  params: { countryOrSlug, unitSlug },
+  searchParams,
+}: {
+  params: { countryOrSlug: string; unitSlug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  let parsedSearchParams: ParsedSearchParams;
   let pathInfo: PathGeneratorType;
 
-  parsedSearchParams = queryString.parse(queryString.stringify(searchParams ?? {}), {arrayFormat:"comma", parseNumbers: true}) as ParsedSearchParams
+  parsedSearchParams = queryString.parse(
+    queryString.stringify(searchParams ?? {}),
+    { arrayFormat: "comma", parseNumbers: true }
+  ) as ParsedSearchParams;
   //get filters from query
-  const {page: pageNumber, category, city, search} = parsedSearchParams
+  const { page: pageNumber, category, city, search } = parsedSearchParams;
 
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug);
@@ -96,7 +110,15 @@ export default async function UnitPage({params: { countryOrSlug, unitSlug }, sea
   }
 
   if (pathInfo.type) {
-    return <UnitList {...pathInfo.props} city={city} category={category} pageNumber={pageNumber} search={search} />;
+    return (
+      <UnitList
+        {...pathInfo.props}
+        city={city}
+        category={category}
+        pageNumber={pageNumber}
+        search={search}
+      />
+    );
   } else {
     notFound();
   }
