@@ -1,8 +1,21 @@
 "use client";
 
+import { useHeader } from "@/store/useHeader";
+import { Metadata } from "next";
 import Image from "next/image";
+import { useEffect } from "react";
+
 
 export default function NotFound() {
+
+  const {setIsNotFound} = useHeader()
+  useEffect(() => {
+    setIsNotFound(true)
+    return () => {
+      setIsNotFound(false)
+    }
+  }, [])
+
   return (
     <div className="container max-w-[1144px] mx-auto mt-8">
       <div className="not-found min-h-[500px] flex flex-wrap justify-center items-center">

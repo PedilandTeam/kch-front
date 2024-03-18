@@ -3,7 +3,7 @@ import { CountryNamespace } from "@/types/country";
 import PageItem from "./item/item";
 import { notFound } from "next/navigation";
 import Country from "./country/country";
-import { metadata } from "../layout";
+import { metadata } from "../page";
 
 export type PathsType = "country" | "unit" | "category" | "item";
 export type PathGeneratorType = {
@@ -52,7 +52,13 @@ const pathGenerator = async (
     if (countryOrSlug) {
       try {
         const pageData = await (
-          await API_ROUTES.PAGES.GET_ALL(1, 1, {slug: countryOrSlug}, undefined, 'no-store')
+          await API_ROUTES.PAGES.GET_ALL(
+            1,
+            1,
+            { slug: countryOrSlug },
+            undefined,
+            "no-store"
+          )
         ).json();
 
         if (!pageData?.items) {
@@ -91,9 +97,9 @@ export async function generateMetadata({ params, searchParams }: Props) {
         ...metadata,
         title: `کوچا | جامعه ایرانیان مهاجر مقیم ${pathInfo?.props?.currentCountry?.name}`,
         description: `به جامعه مجازی ایرانیان مهاجر مقیم ${pathInfo?.props?.currentCountry?.name} خوش آمدید. کوچا همراه شماست تا بتوانید نیازهای خود را به زبان مادری و به سادگی رفع کنید. اطلاعات بیشتر در این صفحه`,
-        alternates:{
-          canonical: `${process.env.FRONT_URL}/${pathInfo?.props.currentCountry?.code}`
-        }
+        alternates: {
+          canonical: `${process.env.FRONT_URL}/${pathInfo?.props.currentCountry?.code}`,
+        },
       };
 
     case "item":
@@ -101,12 +107,18 @@ export async function generateMetadata({ params, searchParams }: Props) {
         ...metadata,
         title: `${pathInfo?.props?.pageData?.title} - ${pathInfo?.props.pageData.city.name}، ${pathInfo?.props.pageData.country.name} | کوچا`,
         description: `این صفحه پروفایل اختصاصی ${pathInfo?.props?.pageData?.title} در پلتفرم کوچاست که شامل بروزترین و کاملترین اطلاعات موجود در فضای اینترنت درباره ایشان می باشد.`,
-        alternates:{
-          canonical: `${process.env.FRONT_URL}/${pathInfo?.props.pageData?.slug}`
-        }
+        alternates: {
+          canonical: `${process.env.FRONT_URL}/${pathInfo?.props.pageData?.slug}`,
+        },
       };
 
     default:
+      return {
+        ...metadata,
+        title: "صفحه مورد نظر وجود ندارد | کوچا",
+        description:
+          "متاسفانه چنین صفحه‌ای وجود نداره و یا ممکنه بخاطر تغییرات وب‌سایت جدید کـوچـا آدرسش تغییر کرده باشه.",
+      };
       notFound();
 
     // }
