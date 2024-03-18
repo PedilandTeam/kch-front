@@ -19,8 +19,12 @@ export const ITEM = {
   FACILITIES_NO: "امکانات این واحد لیست نشده است.",
   IMAGES: "تصاویر",
   IMAGES_NO: "تصویری برای این واحد وجود ندارد.",
+  COMMENT: "نظر",
+  COMMENTS: "نظرات",
+  WHITOUT: "بدون",
   USERS_COMMENTS: "نظرات کاربران",
   USERS_COMMENTS_DISABLE: "امکان ثبت نظرات برای این واحد فعال نشده است.",
+  NO_SOCIAL_MEDIA: "هیچ رسانه اجتماعی ثبت نشده است.",
 };
 
 export const FILTER = {

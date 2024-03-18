@@ -15,8 +15,6 @@ import React, { MouseEvent } from "react";
 import { toast } from "react-hot-toast";
 import upperCaseFirst from "@/utils/upperCaseFirst";
 import { _TXT } from "@/app/text";
-import { DAYS } from "@/app/text/calendar";
-import { GENERAL } from "@/app/text/general";
 import ItemTime from "./tools/time";
 import ItemClaim from "./tools/claim";
 

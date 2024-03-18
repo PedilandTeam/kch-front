@@ -14,7 +14,7 @@ export default function PageItem({ pageData }: PageItemProps) {
     <div className="component page-item">
       <CountryUpdater pageData={pageData} />
 
-      <div className="bg-slate-50 bg-[url('/images/pattern-02.png')] bg-center sm:h-[280px] mb-4 sm:mb-4">
+      <div className="bg-[#fbf7ed] bg-[url('/images/pattern-03.png')] bg-center sm:h-[280px] mb-4 sm:mb-4">
         <ItemTopInfo pageData={pageData} />
       </div>
 
