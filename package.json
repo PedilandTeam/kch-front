@@ -12,6 +12,7 @@
     "@emotion/react": "^11.11.1",
     "@heroicons/react": "^2.1.1",
     "@nextui-org/pagination": "^2.0.22",
+    "@phosphor-icons/react": "^2.0.15",
     "@reduxjs/toolkit": "^1.9.6",
     "@types/node": "^20.7.0",
     "@types/react": "^18.2.22",

@@ -7,7 +7,7 @@ type ItemBreadCrumbProps = {
 };
 export const ItemBreadCrumb = ({ pageData }: ItemBreadCrumbProps) => {
   return (
-    <div className=" text-sm breadcrumbs">
+    <div className="p-3 text-sm border-y sm:border border-slate-100 sm:rounded-md breadcrumbs bg-slate-50">
       <ul>
         <li>
           <Link href={"/"}>{_TXT.GENERAL.HOME}</Link>

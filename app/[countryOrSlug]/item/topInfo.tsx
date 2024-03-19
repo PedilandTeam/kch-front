@@ -1,15 +1,20 @@
+"use client";
+
 import { StarIcon } from "@heroicons/react/24/solid";
 import CircleFlag from "@/app/client-packages/circleflag";
 import Rating from "@client-packages/react-rating";
 import { PageNamespace } from "@/types/page";
 import ItemProfilePicture from "./itemProfilePicture";
 import Link from "next/link";
-import InstagramIcon from "./socials/instagram";
-import FacebookIcon from "./socials/facebook";
-import YoutubeIcon from "./socials/youtube";
-import TelegramIcon from "./socials/telegram";
 import { ITEM } from "@/app/text/directory";
 import { COUNTRY } from "@/app/text/location";
+import {
+  FacebookLogo,
+  InstagramLogo,
+  ShareNetwork,
+  TelegramLogo,
+  YoutubeLogo,
+} from "@phosphor-icons/react";
 
 export type ItemTopInfoType = { pageData: PageNamespace.Page };
 export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
@@ -22,7 +27,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
       <div className="container mx-auto max-w-[1144px] h-full">
         <div className="flex flex-col items-center h-full pt-8 sm:flex-row sm:items-end sm:pb-10">
           <ItemProfilePicture
-            className="rounded-full w-[200px] h-[200px] sm:w-40 sm:h-40 drop-shadow-sm mb-5 sm:mb-0"
+            className="w-40 h-40 mb-5 rounded-full drop-shadow-sm sm:mb-0"
             pageData={pageData}
           />
 
@@ -43,7 +48,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                 (<span>{ITEM.WHITOUT}</span> {ITEM.COMMENT})
               </span>
             </div>
-            <div className="flex justify-start mb-6 item-location sm:mb-3">
+            <div className="flex justify-center mb-6 sm:justify-start item-location sm:mb-3">
               <CircleFlag
                 width={1}
                 height={1}
@@ -58,31 +63,26 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
           </div>
 
           <div className="w-full bg-white sm:bg-transparent sm:w-auto">
-            <div className="py-4 mx-3 border-b border-gray-200 sm:border-b-0 sm:mx-0 sm:py-3">
+            <div className="flex justify-center mx-3 border-b border-gray-200 sm:border-b-0 sm:mx-0">
               {!haveSocial ? (
-                <p className="text-[15px] text-slate-400 sm:text-black  w-full text-center">
+                <p className="text-[15px] text-slate-400 sm:text-black ml-3 py-5 sm:py-3">
                   {ITEM.NO_SOCIAL_MEDIA}
                 </p>
               ) : (
                 <div
-                  className={`item-top-socials flex justify-center [&>a]:ml-4 [&>a:last-child]:ml-0`}
+                  className={`item-top-socials flex justify-center [&>a]:ml-5 py-5 sm:py-0`}
                 >
-                  {pageData?.socials?.telegram ? (
-                    <Link
-                      href={`https://t.me/${pageData?.socials?.telegram}`}
-                      target="_blank"
-                      rel="nofollow noopener"
-                    >
-                      <TelegramIcon />
-                    </Link>
-                  ) : null}
                   {pageData.socials?.instagram ? (
                     <Link
                       href={`https://www.instagram.com/${pageData.socials?.instagram}`}
                       target="_blank"
                       rel="nofollow noopener"
                     >
-                      <InstagramIcon />
+                      <InstagramLogo
+                        size={32}
+                        weight="light"
+                        className="text-pink-600 transition duration-300 hover:text-black"
+                      />
                     </Link>
                   ) : null}
                   {pageData.socials?.facebook ? (
@@ -91,21 +91,48 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                       target="_blank"
                       rel="nofollow noopener"
                     >
-                      <FacebookIcon />
+                      <FacebookLogo
+                        size={32}
+                        weight="light"
+                        className="transition duration-300 text-sky-700 hover:text-black"
+                      />
                     </Link>
                   ) : null}
-
                   {pageData.socials?.youtube ? (
                     <Link
                       href={`https://www.youtube.com/${pageData.socials?.youtube}`}
                       target="_blank"
                       rel="nofollow noopener"
                     >
-                      <YoutubeIcon />
+                      <YoutubeLogo
+                        size={32}
+                        weight="light"
+                        className="text-red-600 transition duration-300 hover:text-black"
+                      />
+                    </Link>
+                  ) : null}
+                  {pageData?.socials?.telegram ? (
+                    <Link
+                      href={`https://t.me/${pageData?.socials?.telegram}`}
+                      target="_blank"
+                      rel="nofollow noopener"
+                    >
+                      <TelegramLogo
+                        size={32}
+                        weight="light"
+                        className="transition duration-300 text-sky-600 hover:text-black"
+                      />
                     </Link>
                   ) : null}
                 </div>
               )}
+              <button data-type="share">
+                <ShareNetwork
+                  size={30}
+                  weight="light"
+                  className="text-yellow-800 transition duration-300 hover:text-black"
+                />
+              </button>
             </div>
           </div>
         </div>

@@ -2,21 +2,23 @@
 
 import { PageNamespace } from "@/types/page";
 import DeviceDetector from "device-detector-js";
-import {
-  ShareIcon,
-  GlobeAltIcon,
-  PhoneIcon,
-  DevicePhoneMobileIcon,
-} from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { MouseEvent } from "react";
 import { toast } from "react-hot-toast";
 import upperCaseFirst from "@/utils/upperCaseFirst";
-import { _TXT } from "@/app/text";
 import ItemTime from "./tools/time";
 import ItemClaim from "./tools/claim";
+import {
+  DeviceMobile,
+  GlobeSimple,
+  Phone,
+  TelegramLogo,
+  WhatsappLogo,
+} from "@phosphor-icons/react";
+import { SOCIAL } from "@/app/text/social";
+import { GENERAL } from "@/app/text/general";
 
 interface ItemSideInfoType {
   pageData: PageNamespace.Page;
@@ -107,11 +109,10 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         }${pageData.contact.telephone!}`;
         navigator.clipboard.writeText(number);
         e.currentTarget.dataset.tip = number;
-        toast.success("شماره تلفن کپی شد.");
+        toast.success(GENERAL.PHONE_COPIED);
       } else {
         window.open(
           `tel:${pageData.contact.telephone}`,
-
           "_blank",
           "noopener, noreferrer"
         );
@@ -121,7 +122,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         navigator.clipboard.writeText(
           `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`
         );
-        toast.success("آدرس این صفحه کپی شد.");
+        toast.success(GENERAL.URL_COPIED);
       } else {
         navigator.share({
           url: `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`,
@@ -134,7 +135,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         }${pageData.contact.phone!}`;
         navigator.clipboard.writeText(number);
         e.currentTarget.dataset.tip = number;
-        toast.success("شماره همراه کپی شد.");
+        toast.success(GENERAL.PHONE_COPIED);
       } else {
         window.open(
           `tel:${pageData.contact.phone}`,
@@ -146,94 +147,126 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
   };
 
   return (
-    <div className="mx-3 item-side sm:col-span-4 sm:col-end-13 sm:mr-3 sm:ml-0">
+    <div className="mx-3 sm:mx-0 item-side sm:col-span-4 sm:col-end-13">
       <div className="grid grid-cols-4 mb-4 item-contact">
+        {/* WEBSITE */}
         <div className="grid grid-rows-1 gap-2 text-center border-l group hover:cursor-pointer">
           {pageData?.socials?.website ? (
             <button
               onClick={linkHandler}
               data-type="website"
-              className="grid grid-rows-2 gap-2 text-center"
+              className="grid grid-rows-2 gap-[10px] text-center"
             >
-              <GlobeAltIcon className="w-[26px] h-[26px] mx-auto group-hover:text-yellow-900 transition duration-300 ease-in-out" />
-              <span className="font-medium transition duration-300 ease-in-out group-hover:text-yellow-900">
-                {_TXT.GENERAL.WEBSITE}
+              <GlobeSimple
+                className="w-[26px] h-[26px] mx-auto group-hover:text-blue-900 transition duration-300 ease-in-out"
+                weight="duotone"
+              />
+
+              <span className="text-[15px] font-medium transition duration-300 ease-in-out group-hover:text-blue-900">
+                {GENERAL.WEBSITE}
               </span>
             </button>
           ) : (
-            <button className="grid grid-rows-2 gap-2 text-center">
-              <GlobeAltIcon className="text-gray-300 w-[26px] h-[26px] mx-auto" />
-              <span className="text-gray-300">{_TXT.GENERAL.WEBSITE}</span>
+            <button className="grid grid-rows-2 gap-[10px] text-center">
+              <GlobeSimple
+                className="text-gray-300 w-[26px] h-[26px] mx-auto"
+                weight="duotone"
+              />
+              <span className="text-gray-300">{GENERAL.WEBSITE}</span>
             </button>
           )}
         </div>
-
+        {/* PHONE/MOBILE */}
         <div className="grid grid-rows-1 gap-2 text-center border-l group hover:cursor-pointer">
-          {
-            pageData?.contact?.phone ? (
-              <button
-                onClick={linkHandler}
-                data-type="phone"
-                data-tip="کلیک کنید"
-                className="grid grid-rows-2 gap-2 text-center tooltip"
-              >
-                <DevicePhoneMobileIcon className="w-[26px] h-[26px] mx-auto group-hover:text-yellow-900 transition duration-300 ease-in-out" />
-                <span className="font-medium transition duration-300 ease-in-out group-hover:text-yellow-900">
-                  {_TXT.GENERAL.MOBILE}
-                </span>
-              </button>
-            ) : (
-              <>
-                <DevicePhoneMobileIcon className="text-gray-300 w-[26px] h-[26px] mx-auto" />
-                <span className="text-gray-300">{_TXT.GENERAL.MOBILE}</span>
-              </>
-            )
-            // </div>
-          }
+          {pageData?.contact?.phone ? (
+            <button
+              onClick={linkHandler}
+              data-type="phone"
+              data-tip={GENERAL.CLICK_IT}
+              className="grid grid-rows-2 gap-[10px] text-center tooltip font-PinarLT"
+            >
+              <DeviceMobile
+                className="w-[26px] h-[26px] mx-auto group-hover:text-blue-900 transition duration-300 ease-in-out"
+                weight="duotone"
+              />
+              <span className="text-[15px] font-medium transition duration-300 ease-in-out group-hover:text-blue-900">
+                {GENERAL.MOBILE}
+              </span>
+            </button>
+          ) : (
+            <button className="grid grid-rows-2 gap-[10px] text-center">
+              <DeviceMobile
+                className="text-gray-300 w-[26px] h-[26px] mx-auto"
+                weight="duotone"
+              />
+              <span className="text-gray-300 text-[15px]">
+                {GENERAL.MOBILE}
+              </span>
+            </button>
+          )}
         </div>
-
+        {/* TELEGRAM */}
         <div className="grid grid-rows-1 gap-2 text-center border-l group hover:cursor-pointer">
-          {
-            pageData?.contact?.telephone ? (
-              <button
-                onClick={linkHandler}
-                data-type="telephone"
-                data-tip="کلیک کنید"
-                className="grid grid-rows-2 gap-2 text-center tooltip"
-              >
-                <PhoneIcon className="w-[26px] h-[26px] mx-auto group-hover:text-yellow-900 transition duration-300 ease-in-out" />
-                <span className="font-medium transition duration-300 ease-in-out group-hover:text-yellow-900">
-                  {_TXT.GENERAL.PHONE}
-                </span>
-              </button>
-            ) : (
-              <>
-                <PhoneIcon className="text-gray-300 w-[26px] h-[26px] mx-auto" />
-                <span className="text-gray-300">{_TXT.GENERAL.PHONE}</span>
-              </>
-            )
-            // </div>
-          }
+          {pageData?.contact?.telephone ? (
+            <button
+              onClick={linkHandler}
+              data-type="telegram"
+              className="grid grid-rows-2 gap-[10px] text-center"
+            >
+              <TelegramLogo
+                className="w-[26px] h-[26px] mx-auto group-hover:text-sky-600 transition duration-300 ease-in-out"
+                weight="duotone"
+              />
+              <span className="text-[15px] font-medium transition duration-300 ease-in-out group-hover:text-sky-700">
+                {SOCIAL.TELEGRAM}
+              </span>
+            </button>
+          ) : (
+            <button className="grid grid-rows-2 gap-[10px] text-center">
+              <TelegramLogo
+                className="text-gray-300 w-[26px] h-[26px] mx-auto"
+                weight="duotone"
+              />
+              <span className="text-[15px] text-gray-300">
+                {SOCIAL.TELEGRAM}
+              </span>
+            </button>
+          )}
         </div>
-
-        <div className="grid grid-rows-1 gap-2 text-center group">
-          <button
-            onClick={linkHandler}
-            data-type="share"
-            className="grid grid-rows-2 gap-2 text-center"
-          >
-            <ShareIcon className="w-[26px] h-[26px] mx-auto group-hover:text-yellow-900 transition duration-300 ease-in-out" />
-            <span className="font-medium transition duration-300 ease-in-out group-hover:text-yellow-900">
-              اشتراک
-            </span>
-          </button>
+        {/* WHATSAPP */}
+        <div className="grid grid-rows-1 gap-2 text-center group hover:cursor-pointer">
+          {pageData?.contact?.telephone ? (
+            <button
+              onClick={linkHandler}
+              data-type="whatsapp"
+              className="grid grid-rows-2 gap-[10px] text-center"
+            >
+              <WhatsappLogo
+                className="w-[26px] h-[26px] mx-auto group-hover:text-green-600 transition duration-300 ease-in-out"
+                weight="duotone"
+              />
+              <span className="text-[15px] font-medium transition duration-300 ease-in-out group-hover:text-green-700">
+                {SOCIAL.WHATSAPP}
+              </span>
+            </button>
+          ) : (
+            <button className="grid grid-rows-2 gap-[10px] text-center">
+              <WhatsappLogo
+                className="text-gray-300 w-[26px] h-[26px] mx-auto"
+                weight="duotone"
+              />
+              <span className="text-[15px] text-gray-300">
+                {SOCIAL.WHATSAPP}
+              </span>
+            </button>
+          )}
         </div>
       </div>
       <div className="p-4 mb-3 border border-gray-200 rounded-md">
         <ItemSideInfoItem
           text={`${
             pageData?.address?.address ? pageData?.address?.address : ""
-          }, ${
+          } ${
             pageData?.city?.englishName
               ? upperCaseFirst(pageData.city.englishName)
               : upperCaseFirst(pageData?.city?.name)
@@ -246,7 +279,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
       <ItemTime />
 
       {/* Share Modal */}
-      <dialog id="modal_share" className="modal">
+      {/* <dialog id="modal_share" className="modal">
         <div className="modal-box">
           <h3 className="flex items-center text-lg font-bold">
             <ShareIcon className="w-[22px] h-[22px] ml-2" />
@@ -260,7 +293,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
         </form>
-      </dialog>
+      </dialog> */}
     </div>
   );
 }

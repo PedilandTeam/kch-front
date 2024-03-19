@@ -5,6 +5,7 @@ import { PageNamespace } from "@/types/page";
 import CountryUpdater from "./countryUpdater";
 import { ITEM } from "@/app/text/directory";
 import Image from "next/image";
+import SimilarCat from "./tools/similarCat";
 export type PageItemProps = {
   pageData: PageNamespace.Page;
 };
@@ -14,63 +15,73 @@ export default function PageItem({ pageData }: PageItemProps) {
     <div className="component page-item">
       <CountryUpdater pageData={pageData} />
 
-      <div className="bg-[#fbf7ed] bg-[url('/images/pattern-03.png')] bg-center sm:h-[280px] mb-4 sm:mb-4">
+      <div className="bg-[#fbf7ed] bg-[url('/images/pattern-03.png')] bg-center sm:h-[280px] mb-4">
         <ItemTopInfo pageData={pageData} />
       </div>
 
       <div className="container mx-auto max-w-[1144px]">
-        <div className="grid grid-cols-1 sm:grid-cols-12 sm:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-12 sm:gap-5">
           <ItemSideInfo pageData={pageData} />
 
-          <div className="px-3 item-main sm:col-span-8 sm:col-start-1 sm:row-start-1 sm:pl-3 sm:pr-0">
+          <div className="mt-2 sm:mt-0 item-main sm:col-span-8 sm:col-start-1 sm:row-start-1">
             <ItemBreadCrumb pageData={pageData} />
 
-            {/* Description Section */}
-            <div className="py-6 border-b border-gray-200 sm:py-8">
-              <h3 className="mb-4 font-bold sm:mb-5">{ITEM.DESCRIPTION}</h3>
-              <p
-                className={`text-[15px] leading-8 ${
-                  pageData.description ? "text-black" : "text-gray-500"
-                }`}
-              >
-                {pageData.description
-                  ? pageData.description
-                  : ITEM.DESCRIPTION_PLACEHOLDER}
-              </p>
-            </div>
+            <div className="px-3 sm:px-0">
+              {/* Description Section */}
+              <div className="py-6 border-b border-gray-200 sm:py-8">
+                <h3 className="mb-4 font-bold sm:mb-5">{ITEM.DESCRIPTION}</h3>
+                <p
+                  className={`text-[15px] leading-8 ${
+                    pageData.description ? "text-black" : "text-gray-500"
+                  }`}
+                >
+                  {pageData.description
+                    ? pageData.description
+                    : ITEM.DESCRIPTION_PLACEHOLDER}
+                </p>
+              </div>
 
-            {/* Facilities Section */}
-            <div className="py-6 border-b border-gray-200 sm:py-8">
-              <h3 className="mb-4 font-bold sm:mb-5">{ITEM.FACILITIES}</h3>
-              <p className="text-[15px] text-gray-500">{ITEM.FACILITIES_NO}</p>
-            </div>
+              {/* Facilities Section */}
+              <div className="py-6 border-b border-gray-200 sm:py-8">
+                <h3 className="mb-4 font-bold sm:mb-5">{ITEM.FACILITIES}</h3>
+                <p className="text-[15px] text-gray-500">
+                  {ITEM.FACILITIES_NO}
+                </p>
+              </div>
 
-            {/* Images Section */}
-            <div className="py-6 border-b border-gray-200 sm:py-8">
-              <h3 className="mb-4 font-bold sm:mb-5">{ITEM.IMAGES}</h3>
-              <p className="text-[15px] text-gray-500">{ITEM.IMAGES_NO}</p>
-            </div>
+              {/* Images Section */}
+              <div className="py-6 border-b border-gray-200 sm:py-8">
+                <h3 className="mb-4 font-bold sm:mb-5">{ITEM.IMAGES}</h3>
+                <p className="text-[15px] text-gray-500">{ITEM.IMAGES_NO}</p>
+              </div>
 
-            {/* Comment Section */}
-            <div className="py-6 sm:py-8">
-              <h3 className="mb-4 font-bold sm:mb-5">{ITEM.USERS_COMMENTS}</h3>
-              <p className="text-[15px] text-gray-500">
-                {ITEM.USERS_COMMENTS_DISABLE}
-              </p>
-            </div>
+              {/* Comment Section */}
+              <div className="py-6 sm:py-8">
+                <h3 className="mb-4 font-bold sm:mb-5">
+                  {ITEM.USERS_COMMENTS}
+                </h3>
+                <p className="text-[15px] text-gray-500">
+                  {ITEM.USERS_COMMENTS_DISABLE}
+                </p>
+              </div>
 
-            {/* Advertise Section */}
-            <div className="py-6 sm:py-8">
-              <Image
-                width={745}
-                height={200}
-                src={"/images/banner/demo.jpeg"}
-                alt=""
-                className="rounded-md"
-              />
+              {/* Advertise Section */}
+              <div className="py-6 sm:py-8">
+                <Image
+                  width={756}
+                  height={200}
+                  src={"/images/banner/demo.jpeg"}
+                  alt=""
+                  className="rounded-md"
+                />
+              </div>
             </div>
           </div>
         </div>
+
+        <SimilarCat />
+
+        <SimilarCat />
       </div>
     </div>
   );
