@@ -13,7 +13,7 @@ export default function ItemProfilePicture({
     height,
     width,
     className,
-}: itemProfilePictureType) {
+}: itemProfilePictureType) { 
     return (
         <Image
             loading='lazy'

@@ -134,15 +134,16 @@ const ReCaptchaV3Provider: React.FC<ReCaptchaProviderProps> = ({
     return (
         <ReCaptchaContext.Provider value={value}>
             {children}
-            {/* @ts-expect-error: Why are you making my life so hard, Typescript? */}
-            <Script
-                id={id}
-                src={src}
-                strategy={strategy}
-                onLoad={onLoad}
-                onError={onError}
-                {...props}
-            />
+            {src && (
+                <Script
+                    id={id}
+                    src={src}
+                    strategy={strategy}
+                    onLoad={onLoad}
+                    onError={onError}
+                    {...props}
+                />
+            )}
         </ReCaptchaContext.Provider>
     );
 };
