@@ -1,21 +1,26 @@
+"use client";
+
 import Link from "next/link";
 import ItemProfilePicture from "../itemProfilePicture";
 import { CircleFlag } from "next-circle-flags";
 import { FolderIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import { FolderSimpleStar, ForkKnife } from "@phosphor-icons/react";
 
 const SimilarCat = () => {
   return (
-    <div className="mt-14">
-      <h3 className="pb-3 text-lg font-semibold text-center border-b-2 mb-7">از این دسته بندی</h3>
-      <div className="grid grid-cols-1 sm:grid-cols-4 gap-y-4 sm:gap-6">
+    <div className="my-14">
+      <h3 className="pb-3 text-lg font-semibold text-center border-b-2 mb-7">
+        از این دسته بندی
+      </h3>
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-y-4 sm:gap-5">
         <div className="border border-gray-100 shadow-lg card hover:border-gray-300">
           <figure className="pt-5">
             <Link href={"#"}>
               <Image
                 src={"/images/list/logo/logo-placeholder-03.webp"}
-                width={140}
-                height={140}
+                width={125}
+                height={125}
                 alt=""
                 className="rounded-full"
               />
@@ -28,7 +33,7 @@ const SimilarCat = () => {
               </h2>
             </Link>
 
-            <div className="flex justify-center mt-1 mb-2 card-rating">
+            <div className="flex justify-center card-rating">
               {/* @ts-ignore */}
               <div className="rating">
                 <input
@@ -59,34 +64,38 @@ const SimilarCat = () => {
               </div>
             </div>
 
-            <div className="flex justify-center w-full card-tools text-[15px] mb-1 text-gray-600">
-              <div className="flex ml-2">
+            <div className="flex items-center justify-center w-full gap-3 my-1 text-sm text-gray-600 card-tools">
+              <div className="flex items-center">
                 <CircleFlag
                   alt={"#"}
                   width={5}
                   height={5}
                   countryCode={"de"}
-                  className="w-5 ml-1"
+                  className="w-[18px] ml-[6px]"
                   title={"آلمان"}
                 />
-                <p className="truncate">آلمان</p>
+                <span className="truncate">دوسلدورف</span>
               </div>
-              <div className="flex content-center justify-center">
-                <FolderIcon className="w-5 ml-1 text-gray-400" />
+              <div className="flex items-center">
+                <FolderSimpleStar
+                  size={20}
+                  weight="light"
+                  className="ml-1 text-primary"
+                />
                 <Link href={"#"}>
                   <span className="truncate">رستوران</span>
                 </Link>
               </div>
             </div>
           </div>
-        </div>{" "}
+        </div>
         <div className="border border-gray-100 shadow-lg card hover:border-gray-300">
           <figure className="pt-5">
             <Link href={"#"}>
               <Image
                 src={"/images/list/logo/logo-placeholder-03.webp"}
-                width={140}
-                height={140}
+                width={125}
+                height={125}
                 alt=""
                 className="rounded-full"
               />
@@ -99,7 +108,7 @@ const SimilarCat = () => {
               </h2>
             </Link>
 
-            <div className="flex justify-center mt-1 mb-2 card-rating">
+            <div className="flex justify-center card-rating">
               {/* @ts-ignore */}
               <div className="rating">
                 <input
@@ -130,34 +139,38 @@ const SimilarCat = () => {
               </div>
             </div>
 
-            <div className="flex justify-center w-full card-tools text-[15px] mb-1 text-gray-600">
-              <div className="flex ml-2">
+            <div className="flex items-center justify-center w-full gap-3 my-1 text-sm text-gray-600 card-tools">
+              <div className="flex items-center">
                 <CircleFlag
                   alt={"#"}
                   width={5}
                   height={5}
                   countryCode={"de"}
-                  className="w-5 ml-1"
+                  className="w-[18px] ml-[6px]"
                   title={"آلمان"}
                 />
-                <p className="truncate">آلمان</p>
+                <span className="truncate">دوسلدورف</span>
               </div>
-              <div className="flex content-center justify-center">
-                <FolderIcon className="w-5 ml-1 text-gray-400" />
+              <div className="flex items-center">
+                <FolderSimpleStar
+                  size={20}
+                  weight="light"
+                  className="ml-1 text-primary"
+                />
                 <Link href={"#"}>
                   <span className="truncate">رستوران</span>
                 </Link>
               </div>
             </div>
           </div>
-        </div>{" "}
+        </div>
         <div className="border border-gray-100 shadow-lg card hover:border-gray-300">
           <figure className="pt-5">
             <Link href={"#"}>
               <Image
                 src={"/images/list/logo/logo-placeholder-03.webp"}
-                width={140}
-                height={140}
+                width={125}
+                height={125}
                 alt=""
                 className="rounded-full"
               />
@@ -170,7 +183,7 @@ const SimilarCat = () => {
               </h2>
             </Link>
 
-            <div className="flex justify-center mt-1 mb-2 card-rating">
+            <div className="flex justify-center card-rating">
               {/* @ts-ignore */}
               <div className="rating">
                 <input
@@ -201,34 +214,38 @@ const SimilarCat = () => {
               </div>
             </div>
 
-            <div className="flex justify-center w-full card-tools text-[15px] mb-1 text-gray-600">
-              <div className="flex ml-2">
+            <div className="flex items-center justify-center w-full gap-3 my-1 text-sm text-gray-600 card-tools">
+              <div className="flex items-center">
                 <CircleFlag
                   alt={"#"}
                   width={5}
                   height={5}
                   countryCode={"de"}
-                  className="w-5 ml-1"
+                  className="w-[18px] ml-[6px]"
                   title={"آلمان"}
                 />
-                <p className="truncate">آلمان</p>
+                <span className="truncate">دوسلدورف</span>
               </div>
-              <div className="flex content-center justify-center">
-                <FolderIcon className="w-5 ml-1 text-gray-400" />
+              <div className="flex items-center">
+                <FolderSimpleStar
+                  size={20}
+                  weight="light"
+                  className="ml-1 text-primary"
+                />
                 <Link href={"#"}>
                   <span className="truncate">رستوران</span>
                 </Link>
               </div>
             </div>
           </div>
-        </div>{" "}
+        </div>
         <div className="border border-gray-100 shadow-lg card hover:border-gray-300">
           <figure className="pt-5">
             <Link href={"#"}>
               <Image
                 src={"/images/list/logo/logo-placeholder-03.webp"}
-                width={140}
-                height={140}
+                width={125}
+                height={125}
                 alt=""
                 className="rounded-full"
               />
@@ -241,7 +258,7 @@ const SimilarCat = () => {
               </h2>
             </Link>
 
-            <div className="flex justify-center mt-1 mb-2 card-rating">
+            <div className="flex justify-center card-rating">
               {/* @ts-ignore */}
               <div className="rating">
                 <input
@@ -272,20 +289,24 @@ const SimilarCat = () => {
               </div>
             </div>
 
-            <div className="flex justify-center w-full card-tools text-[15px] mb-1 text-gray-600">
-              <div className="flex ml-2">
+            <div className="flex items-center justify-center w-full gap-3 my-1 text-sm text-gray-600 card-tools">
+              <div className="flex items-center">
                 <CircleFlag
                   alt={"#"}
                   width={5}
                   height={5}
                   countryCode={"de"}
-                  className="w-5 ml-1"
+                  className="w-[18px] ml-[6px]"
                   title={"آلمان"}
                 />
-                <p className="truncate">آلمان</p>
+                <span className="truncate">دوسلدورف</span>
               </div>
-              <div className="flex content-center justify-center">
-                <FolderIcon className="w-5 ml-1 text-gray-400" />
+              <div className="flex items-center">
+                <FolderSimpleStar
+                  size={20}
+                  weight="light"
+                  className="ml-1 text-primary"
+                />
                 <Link href={"#"}>
                   <span className="truncate">رستوران</span>
                 </Link>

@@ -66,20 +66,10 @@ export default function PageItem({ pageData }: PageItemProps) {
               </div>
 
               {/* Advertise Section */}
-              <div className="py-6 sm:py-8">
-                <Image
-                  width={756}
-                  height={200}
-                  src={"/images/banner/demo.jpeg"}
-                  alt=""
-                  className="rounded-md"
-                />
-              </div>
+              <div className="py-6 sm:py-8"></div>
             </div>
           </div>
         </div>
-
-        <SimilarCat />
 
         <SimilarCat />
       </div>
