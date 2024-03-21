@@ -9,7 +9,7 @@ import { FolderSimpleStar, ForkKnife } from "@phosphor-icons/react";
 
 const SimilarCat = () => {
   return (
-    <div className="my-14">
+    <div className="px-3 my-14 sm:px-0">
       <h3 className="pb-3 text-lg font-semibold text-center border-b-2 mb-7">
         از این دسته بندی
       </h3>
