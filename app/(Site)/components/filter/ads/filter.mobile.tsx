@@ -2,8 +2,7 @@
 
 import { _TXT } from '@/app/text';
 import { FunnelIcon } from '@heroicons/react/24/outline';
-import PagesSearch from '../../businessList/filter/pages.search';
-
+import PageSearch from '@/components/page.search'
 export default function FilterMobile() {
     const openFilters = () => {
         if (document) {
@@ -21,7 +20,7 @@ export default function FilterMobile() {
                 <FunnelIcon className='ml-2 h-5 w-5' />
                 <span className='font-semibold'>{_TXT.FILTER.SELECT}</span>
             </button>
-            <PagesSearch />
+            <PageSearch />
         </>
     );
 }

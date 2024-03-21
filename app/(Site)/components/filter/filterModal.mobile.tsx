@@ -6,13 +6,14 @@ import CityFilter from './city.filter';
 import CategoryFilter from './category.filter';
 import { CityNamespace } from '@/types/city';
 import { CategoryNamespace } from '@/types/category';
-import PagesSearch from '../../businessList/filter/pages.search';
 
 type FilterMobileProps = {
-    categories: CategoryNamespace.category[];
+    cities?: CityNamespace.city[];
+    categories?: CategoryNamespace.category[];
 };
 
 export default function FilterModalMobile({
+    cities,
     categories,
 }: FilterMobileProps) {
     return (
@@ -27,10 +28,19 @@ export default function FilterModalMobile({
                         <span className='font-semibold'>{_TXT.FILTER._S}</span>
                     </div>
                     <div>
-                        <CategoryFilter
-                            id='mobile-categoryfilter-modal'
-                            categories={categories}
-                        />
+                        {cities && (
+                            <CityFilter
+                                id='mobile-cityfilter-modal'
+                                cities={cities}
+                            />
+                        )}
+
+                        {categories && (
+                            <CategoryFilter
+                                id='mobile-categoryfilter-modal'
+                                categories={categories}
+                            />
+                        )}
                     </div>
                     <div className='modal-action'>
                         <button className='btn w-full'>

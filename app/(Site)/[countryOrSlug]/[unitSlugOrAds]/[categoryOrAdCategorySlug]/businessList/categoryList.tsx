@@ -4,17 +4,15 @@ import { CityNamespace } from '@/types/city';
 import { UnitType } from '@/types/unit';
 import joiner from '@/utils/joiner';
 import { notFound } from 'next/navigation';
-import { ItemBreadCrumb } from './breadcrumb';
 import { CardsList } from './cardsList';
-import ListFilter from './filter/listFilter';
+import ListFilter from '@/app/(Site)/components/filter/listFilter';
 import { CountryNamespace } from '@/types/country';
 import { Suspense } from 'react';
 import Loading from '../../_loading';
-import { FunnelIcon } from '@heroicons/react/24/solid';
-import { _TXT } from '@/app/text';
 import SideBanner from '@/app/banners/side-banner';
-import FilterMobile from './filter/filter.mobile';
-import FilterModalMobile from './filter/filterModal.mobile';
+import FilterMobile from '@/app/(Site)/components/filter/filter.mobile';
+import FilterModalMobile from '@/app/(Site)/components/filter/filterModal.mobile';
+import { BreadCrumb } from '@/app/(Site)/components/breadcrumb';
 
 type PagesListProps = {
     category: CategoryNamespace.category;
@@ -70,13 +68,23 @@ export default async function CategoryList({
                     <div className='page-content sm:col-span-6'>
                         <div className='flex flex-wrap'>
                             <div className='w-full sm:order-2 sm:mb-2'>
-                                <ItemBreadCrumb
-                                    unit={unit}
-                                    category={category}
-                                    country={{
-                                        name: country.name,
-                                        code: country.code,
-                                    }}
+                                <BreadCrumb
+                                    items={[
+                                        {
+                                            name: country.name,
+                                            path: `/${country.code}`,
+                                        },
+                                        {
+                                            name: unit.name,
+                                            path: `/${country.code}/${unit.slug}`,
+                                        },
+                                        {
+                                            name: category.seoTitle
+                                                ? category.seoTitle
+                                                : `${category.name} فارسی زبان`,
+                                            path: `/${country.code}/${unit.slug}/${category.slug}`,
+                                        },
+                                    ]}
                                 />
                             </div>
 

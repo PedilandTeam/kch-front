@@ -2,8 +2,8 @@
 import { _TXT } from '@/app/text';
 import { FunnelIcon } from '@client-packages/heroicons/components';
 import { CityNamespace } from '@/types/city';
-import CityFilter from './city.filter';
-import PageSearch from './page.search';
+import CityFilter from '@/app/(Site)/components/filter/city.filter';
+import PageSearch from '@/components/page.search';
 import SideBanner from '@/app/banners/side-banner';
 import { AdCategoryNamepace } from '@/types/adCategory';
 import SubMenu from '@/app/(Site)/components/categoriesMenu/subMenu';

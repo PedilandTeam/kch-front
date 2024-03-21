@@ -1,8 +1,6 @@
 import { CircleFlag } from 'next-circle-flags';
 import { FolderIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import categoryPathGenerator from '@/utils/categoryPathGenerator';
-import { PageNamespace } from '@/types/page';
 import { CountryNamespace } from '@/types/country';
 import { AdNamespace } from '@/types/ad';
 import AdPicture from './ad/adPicture';

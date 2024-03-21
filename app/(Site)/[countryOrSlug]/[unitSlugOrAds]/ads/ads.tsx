@@ -3,16 +3,15 @@ import { CardsList } from './cardsList';
 import { Suspense } from 'react';
 import Loading from '../_loading';
 import SideBanner from '@/app/banners/side-banner';
-import { CityNamespace } from '@/types/city';
 import { AdCategoryNamepace } from '@/types/adCategory';
-import ListFilter from './filter/listFilter';
+import ListFilter from '../../../components/filter/ads/listFilter';
 import fetchAdCategories from '@/modules/fetchAdCategories';
 import fetchCities from '@/modules/fetchCities';
-import SubMenu from '@/app/(Site)/components/categoriesMenu/subMenu';
-import { ItemBreadCrumb } from './breadcrumb';
-import AdCategoryMobileFilter from './filter/adCategory.filter.mobile';
-import FilterMobile from '../filter/filter.mobile';
-import FilterModalMobile from '../filter/filterModal.mobile';
+import AdCategoryMobileFilter from '../../../components/filter/ads/adCategory.filter.mobile';
+import FilterMobile from '@/app/(Site)/components/filter/ads/filter.mobile';
+import FilterModalMobile from '@/app/(Site)/components/filter/ads/filterModal.mobile';
+import { BreadCrumb } from '@/app/(Site)/components/breadcrumb';
+
 
 type PagesListProps = {
     country: CountryNamespace.GET;
@@ -47,7 +46,7 @@ export default async function AdsList({
                     <div className='page-content sm:col-span-6'>
                         <div className='flex flex-wrap'>
                             <div className='w-full sm:order-2 sm:mb-2'>
-                                <ItemBreadCrumb
+                                <BreadCrumb
                                     items={[
                                         {
                                             path: `/${country.code}/ads`,

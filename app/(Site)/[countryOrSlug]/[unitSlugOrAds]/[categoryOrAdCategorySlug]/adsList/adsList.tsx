@@ -3,13 +3,12 @@ import { CardsList } from './cardsList';
 import { Suspense } from 'react';
 import Loading from '../../_loading';
 import SideBanner from '@/app/banners/side-banner';
-import { CityNamespace } from '@/types/city';
 import { AdCategoryNamepace } from '@/types/adCategory';
-import ListFilter from './filter/listFilter';
+import ListFilter from '@/app/(Site)/components/filter/ads/listFilter';
 import fetchAdCategories from '@/modules/fetchAdCategories';
 import fetchCities from '@/modules/fetchCities';
-import { ItemBreadCrumb } from './breadcrumb';
-import AdCategoryMobileFilter from './filter/adCategory.filter.mobile';
+import AdCategoryMobileFilter from '@/app/(Site)/components/filter/ads/adCategory.filter.mobile';
+import { BreadCrumb } from '@/app/(Site)/components/breadcrumb';
 
 type PagesListProps = {
     country: CountryNamespace.GET;
@@ -26,7 +25,7 @@ export default async function AdsList({
     category,
     search,
 }: PagesListProps) {
-    const categories = await fetchAdCategories({ revalidate: 200 });
+    const categories = await fetchAdCategories();
     const cities = await fetchCities({ countryId: country.id });
     
     return (
@@ -44,7 +43,7 @@ export default async function AdsList({
                     <div className='page-content sm:col-span-6'>
                         <div className='flex flex-wrap'>
                             <div className='w-full sm:order-2 sm:mb-2'>
-                                <ItemBreadCrumb
+                                <BreadCrumb
                                     items={[
                                         {
                                             path: `/${country.code}/ads`,
@@ -60,7 +59,7 @@ export default async function AdsList({
 
                             <div className='page-header w-full px-3 sm:order-1 sm:px-0'>
                                 <h1 className='my-4 text-xl font-semibold text-pink-800 sm:mb-3 sm:mt-0'>
-                                    لیست تبلیغات در {city?.name} کشور{' '}
+                                    لیست تبلیغات در کشور{' '}
                                     {country.name}
                                 </h1>
                             </div>
@@ -76,7 +75,7 @@ export default async function AdsList({
 
                             <Suspense
                                 fallback={<Loading />}
-                                key={`ads-${city?.name}`}
+                                key={`ads-${country.name}`}
                             >
                                 <CardsList
                                     country={country}

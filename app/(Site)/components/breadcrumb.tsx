@@ -6,12 +6,12 @@ type PathItem = {
     path?: string,
     name?: string
 }
-type ItemBreadCrumbType = {
+type BreadCrumb = {
 
     items: PathItem[]
 
 };
-export const ItemBreadCrumb = ({ items }: ItemBreadCrumbType) => {
+export const BreadCrumb: React.FC<BreadCrumb> = ({ items }) => {
     return (
         <div className='breadcrumbs bg-blue-50 px-4 py-3 text-sm sm:bg-transparent'>
             <ul>

@@ -14,7 +14,7 @@ type CardsListType = {
     pageNumber?: number;
     category: AdCategoryNamepace.IAdCategory
     search?: string;
-    city: number[]
+    city?: number[]
 };
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;

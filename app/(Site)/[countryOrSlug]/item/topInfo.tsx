@@ -1,14 +1,8 @@
 import { _TXT } from '@/app/text';
-import { ShareIcon } from '@heroicons/react/24/outline';
 import { StarIcon } from '@heroicons/react/24/solid';
-import Image from 'next/image';
 import CircleFlag from '@/app/client-packages/circleflag';
 import Rating from '@client-packages/react-rating';
 import { PageNamespace } from '@/types/page';
-import SocialLink from './socials/socialLink';
-import { socials as socialsType } from '@/types/socials.';
-import { useDispatch } from 'react-redux';
-import { setCountry } from '@/store/stateSlice';
 import ItemProfilePicture from './itemProfilePicture';
 import Link from 'next/link';
 import InstagramIcon from './socials/instagram';

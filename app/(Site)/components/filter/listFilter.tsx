@@ -5,13 +5,13 @@ import { CityNamespace } from '@/types/city';
 import { CategoryNamespace } from '@/types/category';
 import CityFilter from './city.filter';
 import CategoryFilter from './category.filter';
-import PageSearch from './page.search';
+import PageSearch from '../../../../components/page.search';
 import SideBanner from '@/app/banners/side-banner';
 import FilterModalMobile from './filterModal.mobile';
 
 type ListFilterProps = {
-    cities: CityNamespace.GET;
-    categories: CategoryNamespace.category[];
+    cities?: CityNamespace.GET;
+    categories?: CategoryNamespace.category[];
 };
 export default function ListFilter({ cities, categories }: ListFilterProps) {
     return (
@@ -23,11 +23,15 @@ export default function ListFilter({ cities, categories }: ListFilterProps) {
 
             <div className='filter-body hidden md:block'>
                 <PageSearch />
-                <CityFilter id='cityfilter-modal' cities={cities?.items} />
-                <CategoryFilter
-                    id='categoryfilter-modal'
-                    categories={categories}
-                />
+                {cities && (
+                    <CityFilter id='cityfilter-modal' cities={cities?.items} />
+                )}
+                {categories && (
+                    <CategoryFilter
+                        id='categoryfilter-modal'
+                        categories={categories}
+                    />
+                )}
             </div>
 
             <div className='hidden sm:block'>

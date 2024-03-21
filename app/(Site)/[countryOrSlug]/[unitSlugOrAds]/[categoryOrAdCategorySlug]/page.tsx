@@ -8,6 +8,7 @@ import queryString from 'query-string';
 import pathGenerator from './_pathGenerator';
 import fetchCountry from '@/modules/fetchCountry';
 import AdsList from './adsList/adsList';
+
 type ParsedSearchParams = {
     page?: number | number[];
     city?: any;
@@ -48,7 +49,7 @@ export const generateMetadata = async ({
     }
 
     const currentCountry = (
-        await fetchCountry({ code: countryOrSlug, revalidate: 200 })
+        await fetchCountry({ code: countryOrSlug })
     )?.[0];
 
     return {

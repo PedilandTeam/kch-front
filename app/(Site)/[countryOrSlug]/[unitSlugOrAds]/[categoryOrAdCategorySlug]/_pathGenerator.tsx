@@ -25,12 +25,12 @@ const pathGenerator = async (
 ): Promise<PathGeneratorType> => {
 
 
-    const currentCountry = (await fetchCountry({ code: countryOrSlug, revalidate: 200 }))?.[0]
+    const currentCountry = (await fetchCountry({ code: countryOrSlug }))?.[0]
     if (!currentCountry) {
         return INVALID_PATH
     }
     
-    const currentAdCategory = (await fetchAdCategories({ slug: categoryOrAdCategorySlug, revalidate: 200 }))[0]
+    const currentAdCategory = (await fetchAdCategories({ slug: categoryOrAdCategorySlug }))[0]
     const isAdsPage = unitSlugOrAds == 'ads'
     if (isAdsPage) {
         if (!currentAdCategory) {
