@@ -6,6 +6,7 @@ import CardListItem from './cardListItem';
 import { AdNamespace } from '@/types/ad';
 import { CountryNamespace } from '@/types/country';
 import wretch from 'wretch';
+import { v4 } from 'uuid'
 
 type Meta = {
     currentPage: number;
@@ -69,7 +70,7 @@ const CardsListClient: React.FC<CardsListClientProps> = ({
                     className='mt-4 grid h-full w-full grid-cols-1 gap-y-4 overflow-y-hidden py-4 sm:grid-cols-3 sm:gap-6'
                     hasMore={hasMore}
                     loadMore={loadMore}
-                    loader={<h4>در حال بارگذاری</h4>}
+                    loader={<h4 key={v4()}>در حال بارگذاری</h4>}
                 >
                     {ads.map((ad: AdNamespace.IAd) => (
                         <CardListItem

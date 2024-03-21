@@ -27,7 +27,7 @@ export default async function AdsList({
     category,
     search,
 }: PagesListProps) {
-    const categories = await fetchAdCategories({ revalidate: 200 });
+    const categories = await fetchAdCategories();
     const cities = await fetchCities({ countryId: country.id });
 
     return (
