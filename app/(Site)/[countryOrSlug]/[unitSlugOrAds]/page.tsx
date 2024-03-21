@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import queryString from 'query-string';
 import { PathGeneratorType } from '../country/page';
-import UnitList from './unitList';
+import UnitList from './businessList/unitList';
 import fetchCountry from '@/modules/fetchCountry';
 import pathGenerator from './_pathGenerator';
 import AdsPage from './ads/ads';
@@ -21,7 +21,7 @@ export const generateMetadata = async ({
         throw Error(e);
     }
 
-    const currentCountry = (await fetchCountry({ code: countryOrSlug, revalidate: 200 }))?.[0]
+    const currentCountry = (await fetchCountry({ code: countryOrSlug }))?.[0]
     return {
         title: `لیست ${pathInfo?.props?.unit?.name} فارسی زبان در ${countryOrSlug && currentCountry && currentCountry.name
             } | کوچا`,

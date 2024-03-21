@@ -4,16 +4,16 @@ import { CityNamespace } from '@/types/city';
 import { CountryNamespace } from '@/types/country';
 import { UnitType } from '@/types/unit';
 import joiner from '@/utils/joiner';
-import { ItemBreadCrumb } from './breadcrumb';
+import { ItemBreadCrumb } from '../breadcrumb';
 import { CardsList } from './cardsList';
-import ListFilter from './filter/listFilter';
+import ListFilter from '../filter/listFilter';
 import { Suspense } from 'react';
-import Loading from './_loading';
+import Loading from '../_loading';
 import SideBanner from '@/app/banners/side-banner';
 import { FunnelIcon } from '@heroicons/react/24/solid';
 import { _TXT } from '@/app/text';
-import FilterMobile from './filter/filter.mobile';
-import FilterModalMobile from './filter/filterModal.mobile';
+import FilterMobile from '../filter/filter.mobile';
+import FilterModalMobile from '../filter/filterModal.mobile';
 
 type PagesListProps = {
     unit: UnitType;

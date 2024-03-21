@@ -1,7 +1,7 @@
 import { Category, PageNamespace } from '@/types/page';
 import { CountryNamespace } from '@/types/country';
 import { CategoryNamespace } from '@/types/category';
-import CardListItem from '../../cardListItem';
+import CardListItem from '../../businessList/cardListItem';
 import Pagination from '../../pagination/pagination';
 import { UnitType } from '@/types/unit';
 import { API_ROUTES } from '@/routes';
