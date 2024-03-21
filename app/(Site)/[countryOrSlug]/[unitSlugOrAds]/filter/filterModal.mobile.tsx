@@ -10,13 +10,9 @@ import PagesSearch from '../[categoryOrAdCategorySlug]/businessList/filter/pages
 
 type FilterMobileProps = {
     cities: CityNamespace.city[];
-    categories: CategoryNamespace.category[];
 };
 
-export default function FilterModalMobile({
-    cities,
-    categories,
-}: FilterMobileProps) {
+export default function FilterModalMobile({cities}: FilterMobileProps) {
     return (
         <>
             <dialog id='modal_unit_filter' className='modal'>
@@ -32,10 +28,6 @@ export default function FilterModalMobile({
                         <CityFilter
                             id='mobile-cityfilter-modal'
                             cities={cities}
-                        />
-                        <CategoryFilter
-                            id='mobile-categoryfilter-modal'
-                            categories={categories}
                         />
                     </div>
                     <div className='modal-action'>

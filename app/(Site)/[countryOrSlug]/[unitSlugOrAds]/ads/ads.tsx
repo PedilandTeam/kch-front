@@ -11,6 +11,8 @@ import fetchCities from '@/modules/fetchCities';
 import SubMenu from '@/app/(Site)/components/categoriesMenu/subMenu';
 import { ItemBreadCrumb } from './breadcrumb';
 import AdCategoryMobileFilter from './filter/adCategory.filter.mobile';
+import FilterMobile from '../filter/filter.mobile';
+import FilterModalMobile from '../filter/filterModal.mobile';
 
 type PagesListProps = {
     country: CountryNamespace.GET;
@@ -53,7 +55,6 @@ export default async function AdsList({
                                         },
                                     ]}
                                     />
-                                    <AdCategoryMobileFilter country={country}/>
                             </div>
 
                             <div className='page-header w-full px-3 sm:order-1 sm:px-0'>
@@ -63,14 +64,12 @@ export default async function AdsList({
                             </div>
                         </div>
 
-                        <div className='px-3 sm:px-0'>
+                        <div className='px-3 w-full sm:px-0'>
                             <div className='md:hidden'>
-                                {/* <FilterMobile />
-                                <FilterModalMobile
-                                    categories={categories}
-                                /> */}
+                                <FilterMobile />
+                                <FilterModalMobile cities={cities.items}/>
                             </div>
-
+                            <AdCategoryMobileFilter country={country}/>
                             <Suspense
                                 fallback={<Loading />}
                                 key={`ads-${city}`}

@@ -23,7 +23,7 @@ export default async function AdCategoryMobileFilter({
     let shouldBeMap = categorySlug ? childs : adCategories;
 
     return (
-        <div className='mx-auto grid w-full grid-cols-4 grid-rows-2 place-items-center justify-center gap-y-3 gap-x-1 px-5 my-10 lg:hidden'>
+        <div className='mx-auto grid w-full grid-cols-4 grid-rows-2 place-items-center justify-center gap-y-3 gap-x-1 lg:px-5 my-2 lg:my-10 lg:hidden'>
             {shouldBeMap?.map((category) => {
                 return (
                     <div

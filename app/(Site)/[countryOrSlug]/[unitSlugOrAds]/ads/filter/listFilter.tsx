@@ -2,12 +2,9 @@
 import { _TXT } from '@/app/text';
 import { FunnelIcon } from '@client-packages/heroicons/components';
 import { CityNamespace } from '@/types/city';
-import { CategoryNamespace } from '@/types/category';
 import CityFilter from './city.filter';
-import CategoryFilter from './category.filter';
 import PageSearch from './page.search';
 import SideBanner from '@/app/banners/side-banner';
-import FilterModalMobile from './filterModal.mobile';
 import { AdCategoryNamepace } from '@/types/adCategory';
 import SubMenu from '@/app/(Site)/components/categoriesMenu/subMenu';
 import { CountryNamespace } from '@/types/country';
@@ -28,10 +25,6 @@ export default function ListFilter({ categories, cities, country }: ListFilterPr
             <div className='filter-body hidden md:block'>
                 <PageSearch />
                 <CityFilter id='cityfilter-modal' cities={cities?.items} />
-                {/* <CategoryFilter
-                    id='categoryfilter-modal'
-                    categories={categories}
-                /> */}
                 <SubMenu basePath={`/${country.code}/ads`} items={categories}/>
             </div>
 
