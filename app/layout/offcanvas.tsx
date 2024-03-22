@@ -15,7 +15,7 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
   const ref = useRef<HTMLInputElement>(null);
 
   return (
-    <div dir="rtl" className="drawer drawer-end z-10">
+    <div dir="rtl" className="z-10 drawer drawer-end">
       <input
         ref={ref}
         id="main-drawer"
@@ -26,8 +26,8 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
       <div className="drawer-side">
         <label htmlFor="main-drawer" className="drawer-overlay"></label>
 
-        <div className="menu p-4 w-80 h-full bg-blue-50 text-base-content">
-          <div className="logo flex justify-end w-full mb-5 relative">
+        <div className="h-full p-4 menu w-80 bg-blue-50 text-base-content">
+          <div className="relative flex justify-end w-full mb-5 logo">
             <Link href="/">
               <Image
                 src="/images/logo.svg"

@@ -3,4 +3,6 @@ export const SOCIAL = {
   INSTAGRAM: "اینستاگرام",
   YOUTUBE: "یوتیوب",
   LINKEDIN: "لینکدین",
+  TELEGRAM: "تلگرام",
+  WHATSAPP: "واتس‌اپ",
 };

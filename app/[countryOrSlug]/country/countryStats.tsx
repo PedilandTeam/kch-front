@@ -8,8 +8,6 @@ import {
 import { API_ROUTES } from "@/routes";
 import { StatsNamespace } from "@/types/stats";
 import { CountryNamespace } from "@/types/country";
-import { createClient, RedisClientType } from "redis";
-
 type CountryStatsProps = {
   currentCountry: CountryNamespace.GET;
 };
@@ -29,34 +27,10 @@ async function getStats(
   return stats;
 }
 
-const cacheView = async (currentCountry: CountryNamespace.GET) => {
-  let client: RedisClientType;
-  let views: number = 1;
 
-  const viewsKey = `${currentCountry.code}_views`;
-
-  try {
-    client = createClient({
-      url: process.env.REDIS_URL,
-    });
-    await client.connect();
-    views = Number(await client.get(viewsKey)) ?? 1;
-    return views;
-  } catch (e) {
-    console.log(e);
-    throw new Error("redis error");
-  }
-};
 
 export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
-  let views: string | number | null = null;
   let stats: StatsNamespace.COUNTRY_STATS;
-
-  try {
-    views = await cacheView(currentCountry);
-  } catch (e) {
-    console.error(e);
-  }
 
   try {
     stats = await getStats(currentCountry.code);

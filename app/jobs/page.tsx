@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   title: "کوچا | فرصت‌های شغلی",
   description: "",
   alternates: {
-    canonical: `/terms`,
+    canonical: `/jobs`,
   },
 };
 
 const Jobs = () => {
   return (
-    <div className="page-wrap static">
+    <div className="static page-wrap">
       <PageHead />
       <JobsText />
     </div>
