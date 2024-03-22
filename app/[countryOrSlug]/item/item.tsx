@@ -6,6 +6,7 @@ import CountryUpdater from "./countryUpdater";
 import { ITEM } from "@/app/text/directory";
 import Image from "next/image";
 import SimilarCat from "./tools/similarCat";
+import { Suspense } from "react";
 export type PageItemProps = {
   pageData: PageNamespace.Page;
 };
@@ -70,8 +71,10 @@ export default function PageItem({ pageData }: PageItemProps) {
             </div>
           </div>
         </div>
-
-        <SimilarCat />
+          
+        <Suspense>
+          <SimilarCat countryCode={pageData.country.code} categoryId={pageData.category.id} />
+        </Suspense>
       </div>
     </div>
   );

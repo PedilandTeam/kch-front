@@ -1,4 +1,3 @@
-import { Skeleton } from "@nextui-org/skeleton";
 import ContentLoader from "react-content-loader";
 
 export default function CardSkeleton() {
