@@ -4,7 +4,7 @@ import Link from 'next/link';
 import categoryPathGenerator from '@/utils/categoryPathGenerator';
 import { PageNamespace } from '@/types/page';
 import { CountryNamespace } from '@/types/country';
-import ItemProfilePicture from '../../../item/itemProfilePicture';
+import ItemProfilePicture from '../../[countryOrSlug]/item/itemProfilePicture';
 
 type cardListItem = {
     page: PageNamespace.Page;

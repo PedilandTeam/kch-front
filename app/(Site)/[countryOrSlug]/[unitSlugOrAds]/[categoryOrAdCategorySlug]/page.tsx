@@ -7,7 +7,7 @@ import { PathGeneratorType } from '../../country/page';
 import queryString from 'query-string';
 import pathGenerator from './_pathGenerator';
 import fetchCountry from '@/modules/fetchCountry';
-import AdsList from './adsList/adsList';
+import AdsList from '../ads/ads';
 
 type ParsedSearchParams = {
     page?: number | number[];

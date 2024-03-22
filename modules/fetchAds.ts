@@ -7,7 +7,6 @@ interface Filters {
     limit?: number;
     coutnryCode?: string;
     cityIds?: number[];
-    revalidate?: number;
     categoryId?: number | string;
     categorySlug?: string;
     search?: string

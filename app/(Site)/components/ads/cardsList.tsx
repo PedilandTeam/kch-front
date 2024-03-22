@@ -1,18 +1,19 @@
 import { CountryNamespace } from '@/types/country';
 import { CategoryNamespace } from '@/types/category';
-import Pagination from '../../pagination/pagination';
+import Pagination from '../../[countryOrSlug]/[unitSlugOrAds]/pagination/pagination';
 import { AdNamespace } from '@/types/ad';
 import fetchAds from '@/modules/fetchAds';
 import { ApiErrorResponse } from '@/modules/fetch';
 import { CityNamespace } from '@/types/city';
 import CardListItem from './cardListItem';
 import { AdCategoryNamepace } from '@/types/adCategory';
+import { useState } from 'react';
 import CardsListClient from './cardsList.client';
 
 type CardsListType = {
     country: CountryNamespace.GET;
     pageNumber?: number;
-    category: AdCategoryNamepace.IAdCategory
+    category?: AdCategoryNamepace.IAdCategory
     search?: string;
     city?: number[]
 };
@@ -21,24 +22,23 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const CardsList = async ({
     country,
-    pageNumber,
+    pageNumber = 1,
     category,
     search,
     city,
 }: CardsListType) => {
     let ads: AdNamespace.GET | undefined
     let isNotFound = false;
+
     try {
         ads = await fetchAds({
-            page: pageNumber ? pageNumber : 1,
-            categorySlug: category.slug,
+            page: pageNumber,
             ...search && {search},
-            countryCode: country.code,
-            ...city && { cityIds: city },
+            ...category?.slug && {categorySlug: category.slug},
+            coutnryCode: country.code,
+            cityIds: city,
             revalidate: 200,
         });
-        
-        
     }
     catch(e: ApiErrorResponse | any) {
         if (e?.statusCode != 404) {
@@ -61,26 +61,29 @@ export const CardsList = async ({
         );
     }
     return (
-        <div className='flex flex-col items-center justify-center'>
-            <div className='list-card min-h-[500px] w-full'>
-                <div className='grid grid-cols-1 gap-y-4 sm:grid-cols-3 sm:gap-6'>
-                    {ads?.items?.map(
-                        (ad: AdNamespace.IAd, index: number) => {
-                            return (
-                                <CardListItem
-                                    key={ad.id}
-                                    variant='unit'
-                                    ad={ad}
-                                    country={country}
-                                />
-                            );
-                        }
-                    )}
+        <>
+            <div className='flex flex-col items-center justify-center'>
+                <div className='list-card min-h-[500px] w-full'>
+                    <div className='grid grid-cols-1 gap-y-4 sm:grid-cols-3 sm:gap-6'>
+                        {ads?.items?.map(
+                            (ad: AdNamespace.IAd, index: number) => {
+                                return (
+                                    <CardListItem
+                                        key={ad.id}
+                                        variant='unit'
+                                        ad={ad}
+                                        country={country}
+                                    />
+                                );
+                            }
+                        )}
+                    </div>
                 </div>
             </div>
             {ads?.meta?.totalPages! > 1 ? (
-                <CardsListClient category={category} country={country} limit={30} />
+                    // <Pagination totalPages={ads!.meta.totalPages} />
+                    <CardsListClient pageNumber={pageNumber} country={country} limit={30} />
             ) : null}
-        </div>
+        </>
     );
 };

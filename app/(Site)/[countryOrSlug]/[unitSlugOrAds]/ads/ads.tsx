@@ -1,5 +1,5 @@
 import { CountryNamespace } from '@/types/country';
-import { CardsList } from './cardsList';
+import { CardsList } from '../../../components/ads/cardsList';
 import { Suspense } from 'react';
 import Loading from '../_loading';
 import SideBanner from '@/app/banners/side-banner';

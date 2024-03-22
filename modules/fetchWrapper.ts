@@ -38,7 +38,6 @@ export default async function fetchWrapper<U, T>(
     const url = urlObject.toString();
 
     const OPTIONS = { next: { revalidate: revalidate ? revalidate : FETCHWRAPPER_DEFAULT_REVALIDATE } };
-
     return await wretch(url)
         .options(OPTIONS)
         .headers({
@@ -51,6 +50,7 @@ export default async function fetchWrapper<U, T>(
         .catch((e: WretchError) => {
             console.error(
                 `Error Accourd in fetchAds. params:`,
+                path,
                 filters,
                 e.json,
                 e.message

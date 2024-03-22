@@ -2,7 +2,7 @@ import { PageNamespace } from '@/types/page';
 import { CountryNamespace } from '@/types/country';
 import { CategoryNamespace } from '@/types/category';
 import CardListItem from './cardListItem';
-import Pagination from '../../pagination/pagination';
+import Pagination from '../../[countryOrSlug]/[unitSlugOrAds]/pagination/pagination';
 import { API_ROUTES } from '@/routes';
 
 type CardsListType = {
@@ -13,7 +13,6 @@ type CardsListType = {
     search?: string;
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const CardsList = async ({
     category,
@@ -60,7 +59,7 @@ export const CardsList = async ({
                             return (
                                 <CardListItem
                                     key={`unit-preview-item-${page.id}`}
-                                    variant='unit'
+                                    variant='category'
                                     page={page}
                                     country={country}
                                 />

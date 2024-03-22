@@ -4,7 +4,7 @@ import { CityNamespace } from '@/types/city';
 import { UnitType } from '@/types/unit';
 import joiner from '@/utils/joiner';
 import { notFound } from 'next/navigation';
-import { CardsList } from './cardsList';
+import { CardsList } from '../../../../components/business/cardsList';
 import ListFilter from '@/app/(Site)/components/filter/listFilter';
 import { CountryNamespace } from '@/types/country';
 import { Suspense } from 'react';
