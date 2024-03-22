@@ -6,10 +6,11 @@ import { PageNamespace } from '@/types/page';
 import { CountryNamespace } from '@/types/country';
 import ItemProfilePicture from '../../[countryOrSlug]/item/itemProfilePicture';
 
+export type CardListItemVariant = 'category' | 'unit';
 type cardListItem = {
     page: PageNamespace.Page;
     country: CountryNamespace.GET;
-    variant: 'category' | 'unit';
+    variant: CardListItemVariant;
 };
 
 export default function CardListItem({ page, country, variant }: cardListItem) {

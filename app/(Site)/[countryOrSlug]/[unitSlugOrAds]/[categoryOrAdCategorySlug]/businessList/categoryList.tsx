@@ -4,7 +4,7 @@ import { CityNamespace } from '@/types/city';
 import { UnitType } from '@/types/unit';
 import joiner from '@/utils/joiner';
 import { notFound } from 'next/navigation';
-import { CardsList } from '../../../../components/business/cardsList';
+import { CardsList } from '@/app/(Site)/components/business/cardsList';
 import ListFilter from '@/app/(Site)/components/filter/listFilter';
 import { CountryNamespace } from '@/types/country';
 import { Suspense } from 'react';
@@ -109,7 +109,8 @@ export default async function CategoryList({
                                 key={`unit-cardlist-${search}-${city}-${category}`}
                             >
                                 <CardsList
-                                    category={category}
+                                    variant='category'
+                                    category={category.id}
                                     country={country}
                                     pageNumber={pageNumber}
                                     city={city}

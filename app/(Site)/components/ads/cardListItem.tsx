@@ -5,7 +5,7 @@ import categoryPathGenerator from '@/utils/categoryPathGenerator';
 import { PageNamespace } from '@/types/page';
 import { CountryNamespace } from '@/types/country';
 import { AdNamespace } from '@/types/ad';
-import AdPicture from '../../[countryOrSlug]/[unitSlugOrAds]/ads/ad/adPicture';
+import AdPicture from './adPicture';
 
 type cardListItem = {
     ad: AdNamespace.IAd,

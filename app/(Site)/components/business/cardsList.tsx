@@ -1,25 +1,30 @@
 import { PageNamespace } from '@/types/page';
 import { CountryNamespace } from '@/types/country';
 import { CategoryNamespace } from '@/types/category';
-import CardListItem from './cardListItem';
-import Pagination from '../../[countryOrSlug]/[unitSlugOrAds]/pagination/pagination';
+import CardListItem, { CardListItemVariant } from './cardListItem';
+import Pagination from '../pagination';
 import { API_ROUTES } from '@/routes';
+import { UnitType } from '@/types/unit';
 
 type CardsListType = {
     country: CountryNamespace.GET;
     pageNumber?: number;
     city?: number | number[];
-    category?: CategoryNamespace.category;
+    category?: number | number[];
     search?: string;
+    variant: CardListItemVariant;
+    unit?: UnitType;
 };
 
 
 export const CardsList = async ({
+    unit,
     category,
     country,
     pageNumber,
     city,
     search,
+    variant
 }: CardsListType) => {
     let pages: PageNamespace.GET | undefined;
     let isNotFound = false;
@@ -29,7 +34,8 @@ export const CardsList = async ({
             await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 30, {
                 countryCode: country.code,
                 cityIds: city,
-                categoryIds: category?.id,
+                unitId: unit?.id,
+                categoryIds: category,
                 search,
             })
         ).json();
@@ -59,7 +65,7 @@ export const CardsList = async ({
                             return (
                                 <CardListItem
                                     key={`unit-preview-item-${page.id}`}
-                                    variant='category'
+                                    variant={variant}
                                     page={page}
                                     country={country}
                                 />

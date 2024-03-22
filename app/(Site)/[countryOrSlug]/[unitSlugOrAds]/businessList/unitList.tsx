@@ -4,7 +4,7 @@ import { CityNamespace } from '@/types/city';
 import { CountryNamespace } from '@/types/country';
 import { UnitType } from '@/types/unit';
 import joiner from '@/utils/joiner';
-import { CardsList } from './cardsList';
+import { CardsList } from '@/app/(Site)/components/business/cardsList';
 import ListFilter from '@/app/(Site)/components/filter/listFilter';
 import { Suspense } from 'react';
 import Loading from '../_loading';
@@ -130,6 +130,7 @@ export default async function UntiList({
                                 <CardsList
                                     unit={unit}
                                     country={country}
+                                    variant='unit'
                                     category={category}
                                     search={search}
                                     pageNumber={pageNumber}
