@@ -1,24 +1,20 @@
 "use client";
 
 import { PageNamespace } from "@/types/page";
-import DeviceDetector from "device-detector-js";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import React, { MouseEvent } from "react";
-import { toast } from "react-hot-toast";
+import React from "react";
 import upperCaseFirst from "@/utils/upperCaseFirst";
 import ItemTime from "./tools/time";
 import ItemClaim from "./tools/claim";
 import {
   DeviceMobile,
-  GlobeSimple,
-  Phone,
-  TelegramLogo,
-  WhatsappLogo,
+  GlobeSimple, TelegramLogo,
+  WhatsappLogo
 } from "@phosphor-icons/react";
 import { SOCIAL } from "@/app/text/social";
 import { GENERAL } from "@/app/text/general";
+import useLinkHandler from "@/hooks/useLinkHandler";
 
 interface ItemSideInfoType {
   pageData: PageNamespace.Page;
@@ -85,66 +81,9 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
 }
 
 export function ItemSideInfo({ pageData }: ItemSideInfoType) {
-  const router = useRouter();
-  const pathname = usePathname();
 
-  const linkHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    const type = e.currentTarget.dataset.type;
-    const regexp =
-      /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/gim.exec(
-        pageData?.socials?.website!
-      );
-    if (!regexp || !Array.isArray(regexp) || !regexp[1]) {
-      return;
-    }
-    const detector = new DeviceDetector();
-    const agent = detector.parse(navigator.userAgent);
+  const linkHandler = useLinkHandler({pageData})
 
-    if (type == "website") {
-      window.open(`https://${regexp[0]}`, "_blank", "noopener, noreferrer");
-    } else if (type == "telephone") {
-      if (agent.device?.type == "desktop") {
-        const number = `00${
-          pageData.country.areaCode ? pageData.country.areaCode : ""
-        }${pageData.contact.telephone!}`;
-        navigator.clipboard.writeText(number);
-        e.currentTarget.dataset.tip = number;
-        toast.success(GENERAL.PHONE_COPIED);
-      } else {
-        window.open(
-          `tel:${pageData.contact.telephone}`,
-          "_blank",
-          "noopener, noreferrer"
-        );
-      }
-    } else if (type == "share") {
-      if (agent.device?.type == "desktop") {
-        navigator.clipboard.writeText(
-          `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`
-        );
-        toast.success(GENERAL.URL_COPIED);
-      } else {
-        navigator.share({
-          url: `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`,
-        });
-      }
-    } else if (type == "phone") {
-      if (agent.device?.type == "desktop") {
-        const number = `00${
-          pageData.country.areaCode ? pageData.country.areaCode : ""
-        }${pageData.contact.phone!}`;
-        navigator.clipboard.writeText(number);
-        e.currentTarget.dataset.tip = number;
-        toast.success(GENERAL.PHONE_COPIED);
-      } else {
-        window.open(
-          `tel:${pageData.contact.phone}`,
-          "_blank",
-          "noopener, noreferrer"
-        );
-      }
-    }
-  };
 
   return (
     <div className="mx-3 sm:mx-0 item-side sm:col-span-4 sm:col-end-13">
@@ -207,7 +146,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         </div>
         {/* TELEGRAM */}
         <div className="grid grid-rows-1 gap-2 text-center border-l group hover:cursor-pointer">
-          {pageData?.contact?.telephone ? (
+          {pageData?.socials?.telegram ? (
             <button
               onClick={linkHandler}
               data-type="telegram"
@@ -235,7 +174,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         </div>
         {/* WHATSAPP */}
         <div className="grid grid-rows-1 gap-2 text-center group hover:cursor-pointer">
-          {pageData?.contact?.telephone ? (
+          {pageData?.contact?.whatsapp ? (
             <button
               onClick={linkHandler}
               data-type="whatsapp"
@@ -265,7 +204,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
       <div className="p-4 mb-3 border border-gray-200 rounded-md">
         <ItemSideInfoItem
           text={`${
-            pageData?.address?.address ? pageData?.address?.address : ""
+            pageData?.address?.address ? `${pageData?.address?.address},` : ""
           } ${
             pageData?.city?.englishName
               ? upperCaseFirst(pageData.city.englishName)

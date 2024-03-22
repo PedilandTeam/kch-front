@@ -15,12 +15,15 @@ import {
   TelegramLogo,
   YoutubeLogo,
 } from "@phosphor-icons/react";
+import useLinkHandler from "@/hooks/useLinkHandler";
 
 export type ItemTopInfoType = { pageData: PageNamespace.Page };
 export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
   const socials = { ...pageData.socials };
   delete socials.website;
   const haveSocial = pageData.socials && Object.keys(socials).length > 0;
+
+  const linkHandler = useLinkHandler({pageData})
 
   return (
     <div className="h-full top-section">
@@ -126,7 +129,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                   ) : null}
                 </div>
               )}
-              <button data-type="share">
+              <button onClick={linkHandler} data-type="share">
                 <ShareNetwork
                   size={30}
                   weight="light"
