@@ -21,7 +21,7 @@ const pathGenerator = async (
     unitSlugOrAds: string
 ): Promise<PathGeneratorType> => {
 
-    const currentCountry = (await fetchCountry({ code: countryOrSlug, revalidate: 200 }))?.[0]
+    const currentCountry = (await fetchCountry({ code: countryOrSlug }))?.[0]
     const isAdsPage = unitSlugOrAds === 'ads'
 
     if (!currentCountry) {

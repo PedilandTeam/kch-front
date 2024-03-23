@@ -1,13 +1,9 @@
 import { CountryNamespace } from '@/types/country';
-import { CategoryNamespace } from '@/types/category';
-import Pagination from '../../[countryOrSlug]/[unitSlugOrAds]/pagination/pagination';
 import { AdNamespace } from '@/types/ad';
 import fetchAds from '@/modules/fetchAds';
 import { ApiErrorResponse } from '@/modules/fetch';
-import { CityNamespace } from '@/types/city';
 import CardListItem from './cardListItem';
 import { AdCategoryNamepace } from '@/types/adCategory';
-import { useState } from 'react';
 import CardsListClient from './cardsList.client';
 
 type CardsListType = {
@@ -17,8 +13,6 @@ type CardsListType = {
     search?: string;
     city?: number[]
 };
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const CardsList = async ({
     country,
@@ -35,10 +29,10 @@ export const CardsList = async ({
             page: pageNumber,
             ...search && {search},
             ...category?.slug && {categorySlug: category.slug},
-            coutnryCode: country.code,
+            countryCode: country.code,
             cityIds: city,
             revalidate: 200,
-        });
+        }) as AdNamespace.GET;
     }
     catch(e: ApiErrorResponse | any) {
         if (e?.statusCode != 404) {
@@ -70,7 +64,6 @@ export const CardsList = async ({
                                 return (
                                     <CardListItem
                                         key={ad.id}
-                                        variant='unit'
                                         ad={ad}
                                         country={country}
                                     />

@@ -8,6 +8,7 @@ import queryString from 'query-string';
 import pathGenerator from './_pathGenerator';
 import fetchCountry from '@/modules/fetchCountry';
 import AdsList from '../ads/ads';
+import AdPage from './ad/ad';
 
 type ParsedSearchParams = {
     page?: number | number[];
@@ -19,7 +20,7 @@ type generateMetadata = {
     params: {
         countryOrSlug: string;
         unitSlugOrAds: string;
-        categoryOrAdCategorySlug: string;
+        categoryOrAdCategorySlugOrAdId: string;
     };
 };
 /**
@@ -30,7 +31,7 @@ type generateMetadata = {
  * @return {Promise<Metadata>} A promise that resolves to the generated metadata
  */
 export const generateMetadata = async ({
-    params: { countryOrSlug, unitSlugOrAds, categoryOrAdCategorySlug },
+    params: { countryOrSlug, unitSlugOrAds, categoryOrAdCategorySlugOrAdId },
 }: generateMetadata): Promise<Metadata> => {
     let pathInfo: PathGeneratorType;
 
@@ -42,7 +43,7 @@ export const generateMetadata = async ({
         pathInfo = await pathGenerator(
             countryOrSlug,
             unitSlugOrAds,
-            categoryOrAdCategorySlug
+            categoryOrAdCategorySlugOrAdId
         );
     } catch (e: any) {
         throw Error(e);
@@ -67,16 +68,20 @@ export const generateMetadata = async ({
     };
 };
 
-export default async function CategoryPage({
-    params: { countryOrSlug, unitSlugOrAds, categoryOrAdCategorySlug },
+
+type CategoryOrAdPage = {
+    countryOrSlug: string;
+    unitSlugOrAds: string;
+    categoryOrAdCategorySlugOrAdId: string;
+}
+type SearchParams = { [key: string]: string | string[] | undefined }
+
+export default async function CategoryOrAdPage({
+    params: { countryOrSlug, unitSlugOrAds, categoryOrAdCategorySlugOrAdId },
     searchParams,
 }: {
-    params: {
-        countryOrSlug: string;
-        unitSlugOrAds: string;
-        categoryOrAdCategorySlug: string;
-    };
-    searchParams: { [key: string]: string | string[] | undefined };
+    params: CategoryOrAdPage
+    searchParams: SearchParams;
 }) {
     let parsedSearchParams: ParsedSearchParams;
     let pathInfo: PathGeneratorType;
@@ -91,7 +96,7 @@ export default async function CategoryPage({
         pathInfo = await pathGenerator(
             countryOrSlug,
             unitSlugOrAds,
-            categoryOrAdCategorySlug
+            categoryOrAdCategorySlugOrAdId
         );
     } catch (e: any) {
         throw Error(e);
@@ -106,6 +111,12 @@ export default async function CategoryPage({
                 city={city}
             />
         );
+    }
+
+    if (pathInfo.type == 'ad') {
+        return (
+            <AdPage ad={pathInfo.props.ad} />
+        )
     }
 
     if (pathInfo.type == 'category') {

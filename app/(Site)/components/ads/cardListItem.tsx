@@ -8,18 +8,17 @@ import { AdNamespace } from '@/types/ad';
 import AdPicture from './adPicture';
 
 type cardListItem = {
-    ad: AdNamespace.IAd,
+    ad: AdNamespace.IAd;
     country: CountryNamespace.GET;
-    variant: 'category' | 'unit';
 };
 
-export default function CardListItem({ ad, country, variant }: cardListItem) {
+
+export default function CardListItem({ ad, country }: cardListItem) {
+    const adPath = `/${country.code}/ads/${ad.id}`
     return (
-        <div
-            className='card border border-gray-100 shadow-lg hover:border-gray-300'
-        >
+        <div className='card border border-gray-100 shadow-lg hover:border-gray-300'>
             <figure className='pt-5'>
-                <Link href={`/${ad.id}`}>
+                <Link href={adPath}>
                     <AdPicture
                         height={140}
                         width={140}
@@ -29,7 +28,7 @@ export default function CardListItem({ ad, country, variant }: cardListItem) {
                 </Link>
             </figure>
             <div className='card-body px-4 py-5'>
-                <Link href={`/${ad.id}`}>
+                <Link href={adPath}>
                     <h2 className='card-title block truncate text-center font-PinarLT text-lg text-slate-700 hover:overflow-visible hover:text-pink-800'>
                         {ad.title}
                     </h2>
@@ -49,19 +48,11 @@ export default function CardListItem({ ad, country, variant }: cardListItem) {
                     </div>
                     <div className='flex content-center justify-center'>
                         <FolderIcon className='ml-1 w-5 text-gray-400' />
-                        {variant == 'category' ? (
+                        <Link href={`/${country.code}/ads/${ad.category.slug}`}>
                             <span className='truncate'>
                                 {ad?.category?.name}
                             </span>
-                        ) : (
-                            <Link
-                                href={`/ads/${ad.id}`}
-                            >
-                                <span className='truncate'>
-                                    {ad?.category?.name}
-                                </span>
-                            </Link>
-                        )}
+                        </Link>
                     </div>
                 </div>
             </div>

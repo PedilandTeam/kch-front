@@ -49,7 +49,7 @@ export default async function fetchWrapper<U, T>(
         })
         .catch((e: WretchError) => {
             console.error(
-                `Error Accourd in fetchAds. params:`,
+                `Error Accourd in fetch. params:`,
                 path,
                 filters,
                 e.json,
