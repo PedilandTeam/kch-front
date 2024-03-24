@@ -40,28 +40,20 @@ export default async function RootLayout({
         <html lang='fa' dir='rtl' className='scroll-smooth'>
             <body className='min-h-screen'>
                 <Providers>
-                    <div className='container mx-auto'>
-                        <Fonts />
-                        <Header>
-                            <ModalCountry countries={countries} />
-                        </Header>
-                        <Toaster />
-                        <main className='min-h-[70vh]'>{children}</main>
-                    </div>
+                    <Fonts />
+                    <Header>
+                        <ModalCountry countries={countries} />
+                    </Header>
+                    <Toaster />
+                    <main className='min-h-[70vh]'>{children}</main>
                     <Footer />
                 </Providers>
-                {
-                    process.env.NODE_ENV == 'production' ?
-                        (
-                            <>
-
-                                <Script src='https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD' />
-                                <Script id='google-analytics'>
-                                </Script>
-                            </>
-                        )
-                        : null
-                }
+                {process.env.NODE_ENV == 'production' ? (
+                    <>
+                        <Script src='https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD' />
+                        <Script id='google-analytics'></Script>
+                    </>
+                ) : null}
             </body>
         </html>
     );

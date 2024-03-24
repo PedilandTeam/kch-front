@@ -58,10 +58,10 @@
     "devDependencies": {
         "@types/react-infinite-scroller": "^1.2.5",
         "autoprefixer": "^10.4.16",
-        "daisyui": "^4.6.0",
+        "daisyui": "^4.7.3",
         "postcss": "^8.4.31",
         "prettier": "^3.2.4",
         "prettier-plugin-tailwindcss": "^0.5.11",
-        "tailwindcss": "^3.3.5"
+        "tailwindcss": "^3.4.1"
     }
 }
