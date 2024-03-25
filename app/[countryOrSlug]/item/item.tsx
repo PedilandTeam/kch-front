@@ -16,7 +16,7 @@ export default function PageItem({ pageData }: PageItemProps) {
     <div className="component page-item">
       <CountryUpdater pageData={pageData} />
 
-      <div className="bg-[#fbf7ed] bg-[url('/images/pattern-03.png')] bg-center sm:h-[280px] mb-4">
+      <div className="bg-[#fbf7ed] bg-[url('/images/pattern-03.png')] bg-center  mb-4">
         <ItemTopInfo pageData={pageData} />
       </div>
 
@@ -32,7 +32,7 @@ export default function PageItem({ pageData }: PageItemProps) {
               <div className="py-6 border-b border-gray-200 sm:py-8">
                 <h3 className="mb-4 font-bold sm:mb-5">{ITEM.DESCRIPTION}</h3>
                 <p
-                  className={`text-[15px] leading-8 ${
+                  className={`leading-8 ${
                     pageData.description ? "text-black" : "text-gray-500"
                   }`}
                 >
@@ -45,7 +45,7 @@ export default function PageItem({ pageData }: PageItemProps) {
               {/* Facilities Section */}
               <div className="py-6 border-b border-gray-200 sm:py-8">
                 <h3 className="mb-4 font-bold sm:mb-5">{ITEM.FACILITIES}</h3>
-                <p className="text-[15px] text-gray-500">
+                <p className="text-gray-500">
                   {ITEM.FACILITIES_NO}
                 </p>
               </div>
@@ -53,7 +53,7 @@ export default function PageItem({ pageData }: PageItemProps) {
               {/* Images Section */}
               <div className="py-6 border-b border-gray-200 sm:py-8">
                 <h3 className="mb-4 font-bold sm:mb-5">{ITEM.IMAGES}</h3>
-                <p className="text-[15px] text-gray-500">{ITEM.IMAGES_NO}</p>
+                <p className="text-gray-500">{ITEM.IMAGES_NO}</p>
               </div>
 
               {/* Comment Section */}
@@ -61,7 +61,7 @@ export default function PageItem({ pageData }: PageItemProps) {
                 <h3 className="mb-4 font-bold sm:mb-5">
                   {ITEM.USERS_COMMENTS}
                 </h3>
-                <p className="text-[15px] text-gray-500">
+                <p className="text-gray-500">
                   {ITEM.USERS_COMMENTS_DISABLE}
                 </p>
               </div>

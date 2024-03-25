@@ -11,6 +11,7 @@ import { COUNTRY } from "@/app/text/location";
 import {
   FacebookLogo,
   InstagramLogo,
+  SealCheck,
   ShareNetwork,
   TelegramLogo,
   YoutubeLogo,
@@ -23,22 +24,30 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
   delete socials.website;
   const haveSocial = pageData.socials && Object.keys(socials).length > 0;
 
-  const linkHandler = useLinkHandler({pageData})
+  const linkHandler = useLinkHandler({ pageData });
 
   return (
-    <div className="h-full top-section">
+    <div className="h-full _top-section">
       <div className="container mx-auto max-w-[1144px] h-full">
-        <div className="flex flex-col items-center h-full pt-8 sm:flex-row sm:items-end sm:pb-10">
+        <div className="flex flex-col items-center h-full pt-8 sm:flex-row sm:items-end sm:py-10">
           <ItemProfilePicture
-            className="w-40 h-40 mb-5 rounded-full drop-shadow-sm sm:mb-0"
+            className="mb-5 rounded-full w-[170px] h-[170px] drop-shadow-sm sm:mb-0"
             pageData={pageData}
           />
 
-          <div className="flex-1 px-3 item-details sm:mr-5">
-            <h1 className="text-[26px] font-semibold text-right text-slate-700">
+          <div className="flex-1 px-3 _item-details sm:mr-5">
+            <h1 className="text-[28px] font-bold text-slate-700 flex items-center justify-center sm:justify-start">
               {pageData?.title}
+              <SealCheck
+                size={28}
+                weight="duotone"
+                className="mr-2 text-sky-600"
+              />
             </h1>
-            <div className="flex items-center my-3 card-rating">
+            {/* <h2 className="mt-2 text-xl font-medium text-center text-primary sm:text-right">
+              زیرعنوان واحد
+            </h2> */}
+            <div className="flex items-center mt-4 mb-8 sm:mb-3 _card-rating">
               {/* @ts-ignore */}
               <Rating
                 initialRating={0}
@@ -51,7 +60,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                 (<span>{ITEM.WHITOUT}</span> {ITEM.COMMENT})
               </span>
             </div>
-            <div className="flex justify-center mb-6 sm:justify-start item-location sm:mb-3">
+            {/* <div className="flex justify-center mb-6 sm:justify-start item-location sm:mb-2">
               <CircleFlag
                 width={1}
                 height={1}
@@ -62,13 +71,13 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
               <span>{pageData?.country?.name}</span>
               <span className="ml-1">،</span>
               <span>{pageData?.city?.name}</span>
-            </div>
+            </div> */}
           </div>
 
           <div className="w-full bg-white sm:bg-transparent sm:w-auto">
             <div className="flex justify-center mx-3 border-b border-gray-200 sm:border-b-0 sm:mx-0">
               {!haveSocial ? (
-                <p className="text-[15px] text-slate-400 sm:text-black ml-3 py-5 sm:py-3">
+                <p className="py-5 ml-3 text-slate-400 sm:text-black sm:py-3">
                   {ITEM.NO_SOCIAL_MEDIA}
                 </p>
               ) : (

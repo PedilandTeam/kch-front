@@ -6,9 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        PinarLT: "Pinar-LT",
-      },
+      // fontFamily: {
+      //   PinarLT: "Pinar-LT",
+      // },
       colors: {
         blue: {
           100: "#d2d8f2",

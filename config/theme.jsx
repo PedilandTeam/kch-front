@@ -5,8 +5,8 @@ import { extendTheme } from "@chakra-ui/react";
 const theme = extendTheme({
   direction: "rtl",
   fonts: {
-    heading: `Pinar, sans-serif`,
-    body: `Pinar, sans-serif`,
+    heading: `AnjomanMaxVF, sans-serif`,
+    body: `AnjomanMaxVF, sans-serif`,
   },
   components: {
     Button: {

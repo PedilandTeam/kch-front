@@ -38,6 +38,6 @@ export const GENERAL = {
   TOOLS: "ابزارها",
   URL_COPIED: "آدرس این صفحه کپی شد.",
   VIEW: "بازدید",
-  WEBSITE: "وب سایت",
+  WEBSITE: "وب‌سایت",
   WORKING_HOURS: "ساعات کاری",
 };

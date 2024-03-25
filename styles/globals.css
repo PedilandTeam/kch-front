@@ -3,67 +3,101 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    font-family: "Pinar", system-ui, sans-serif;
+  body {
+    font-family: "AnjomanMaxVF", AnjomanMax, Tahoma, system-ui, sans-serif;
+    -moz-font-feature-settings: "ss05";
+    -webkit-font-feature-settings: "ss05";
+    font-feature-settings: "ss05";
+    font-variation-settings: "DOTS" 1;
   }
 }
 
+@supports (font-variation-settings: normal) {
+  body {
+    font-family: 'AnjomanMaxVF', tahoma;
+  }
+}
+
+
+
+
+
+
+
+
+
 /* Static Pages Style */
 .page-wrap.static .text-wrap h2 {
-  @apply text-lg font-semibold text-primary mb-2 mt-8 first:mt-0;
+  @apply mt-8 mb-2 text-lg font-semibold text-primary first:mt-0;
 }
+
 .page-wrap.static .text-wrap p {
   @apply leading-7;
 }
+
 .page-wrap.static .text-wrap a {
-  @apply text-primary underline hover:text-secondary hover:no-underline;
+  @apply underline text-primary hover:text-secondary hover:no-underline;
 }
+
 .page-wrap.static .text-wrap strong {
   @apply font-semibold;
 }
+
 .page-wrap.static .text-wrap ul {
-  @apply my-3 pr-3;
+  @apply pr-3 my-3;
 }
+
 .page-wrap.static .text-wrap ul li {
   @apply mb-2;
 }
+
 .page-wrap.static .text-wrap ol li {
-  @apply text-lg font-semibold mb-2 mt-8 first:mt-0 mr-5;
+  @apply mt-8 mb-2 mr-5 text-lg font-semibold first:mt-0;
 }
+
 .page-wrap.static .text-wrap .section {
-  @apply border border-r-4 border-blue-100 rounded-tl-xl rounded-bl-xl p-5 sm:p-8 bg-slate-50 mb-8 last:mb-0;
+  @apply p-5 mb-8 border border-r-4 border-blue-100 rounded-tl-xl rounded-bl-xl sm:p-8 bg-slate-50 last:mb-0;
 }
+
 .page-wrap.static .text-wrap .section h2 {
-  @apply text-lg mb-3;
+  @apply mb-3 text-lg;
 }
+
 .page-wrap.static .text-wrap .section p {
   @apply leading-8;
 }
+
 .page-wrap.static .text-wrap .item h3 {
-  @apply font-semibold text-lg text-primary;
+  @apply text-lg font-semibold text-primary;
 }
+
 .page-wrap.static .text-wrap .item ul {
-  @apply mb-8 pr-0 sm:pr-3;
+  @apply pr-0 mb-8 sm:pr-3;
 }
+
 .page-wrap.static .text-wrap .item ul li {
   @apply sm:list-disc sm:list-inside;
 }
+
 .page-wrap.static .page-head {
   @apply flex justify-center content-center mx-3 sm:mx-auto sm:max-w-[95%] relative;
 }
+
 .page-wrap.static .page-head .content {
   @apply max-w-[1144px] w-full mx-auto absolute top-0 left-0 right-0 h-full flex flex-wrap items-center justify-center sm:justify-start;
 }
+
 .page-wrap.static .page-head .content .wrap h1 {
   @apply font-bold text-[34px] sm:text-[38px] mb-1 sm:mb-3 text-center sm:text-right;
 }
+
 .page-wrap.static .page-head .content .wrap h2 {
   @apply font-medium text-[21px] sm:text-[22px] text-center sm:text-right;
 }
 
 /* Off-Canvas */
 .menu ul li a {
-  @apply text-blue-900 hover:text-white font-medium border border-dashed border-blue-300 mb-3 hover:bg-blue-300 focus:bg-blue-300;
+  @apply mb-3 font-medium text-blue-900 border border-blue-300 border-dashed hover:text-white hover:bg-blue-300 focus:bg-blue-300;
 }
 
 /* Main Scroll Style */
@@ -71,15 +105,18 @@
 ::-webkit-scrollbar {
   width: 10px;
 }
+
 /* Track */
 ::-webkit-scrollbar-track {
   background: #f7eed8;
 }
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #d8aa3c;
   border-radius: 5px;
 }
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #a4b0e4;
@@ -92,21 +129,18 @@
 .checkbox {
   direction: ltr;
 }
+
 .checkbox:checked {
-  background-image: linear-gradient(
-      -45deg,
+  background-image: linear-gradient(-45deg,
       transparent 65%,
-      hsl(var(--chkbg)) 65.99%
-    ),
+      hsl(var(--chkbg)) 65.99%),
     linear-gradient(45deg, transparent 75%, hsl(var(--chkbg)) 75.99%),
     linear-gradient(-45deg, hsl(var(--chkbg)) 40%, transparent 40.99%),
-    linear-gradient(
-      45deg,
+    linear-gradient(45deg,
       hsl(var(--chkbg)) 30%,
       hsl(var(--chkfg)) 30.99%,
       hsl(var(--chkfg)) 40%,
-      transparent 40.99%
-    ),
+      transparent 40.99%),
     linear-gradient(-45deg, hsl(var(--chkfg)) 50%, hsl(var(--chkbg)) 50.99%) !important;
 }
 
@@ -118,13 +152,7 @@
 .shadow-blx {
   box-shadow: 0 3px 0 black;
 }
+
 .shadow-tlx {
   text-shadow: 0 2px 0 black;
-}
-
-.breadcrumbs ul li {
-  @apply text-blue-700;
-}
-.breadcrumbs ul li a {
-  @apply text-blue-900;
 }

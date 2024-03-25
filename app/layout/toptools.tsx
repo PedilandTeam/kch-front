@@ -54,12 +54,12 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
 
       {isMainPage || countryCode === "un" ? null : (
         <div>
-          <div className="mr-3 main-nav">
-            <ul className="hidden font-medium lg:flex">
+          <div className="mr-8 main-nav">
+            <ul className="hidden gap-5 font-bold lg:flex">
               <li>
                 <Link
                   href={`/${countryCode}/businesses`}
-                  className="text-base no-underline btn btn-link"
+                  className="transition divide-purple-300 text-primary hover:text-black"
                 >
                   {_TXT.MENU.BUSINESSES}
                 </Link>
@@ -67,7 +67,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
               <li>
                 <Link
                   href={`/${countryCode}/doctors`}
-                  className="text-base no-underline btn btn-link"
+                  className="transition divide-purple-300 text-primary hover:text-black"
                 >
                   {_TXT.MENU.DOCTORS}
                 </Link>
@@ -76,7 +76,10 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
           </div>
 
           <div className="mr-3 menu-icon sm:hidden">
-            <label htmlFor="main-drawer" className="flex items-center justify-center rounded-full w-[38px] h-[38px] bg-secondary">
+            <label
+              htmlFor="main-drawer"
+              className="flex items-center justify-center rounded-full w-[38px] h-[38px] bg-secondary"
+            >
               <Bars3Icon className="text-white w-7 h-7" />
             </label>
           </div>
