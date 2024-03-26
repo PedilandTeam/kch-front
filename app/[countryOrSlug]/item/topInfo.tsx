@@ -1,22 +1,23 @@
 "use client";
 
 import { StarIcon } from "@heroicons/react/24/solid";
-import CircleFlag from "@/app/client-packages/circleflag";
 import Rating from "@client-packages/react-rating";
 import { PageNamespace } from "@/types/page";
 import ItemProfilePicture from "./itemProfilePicture";
 import Link from "next/link";
 import { ITEM } from "@/app/text/directory";
-import { COUNTRY } from "@/app/text/location";
 import {
+  ArrowsClockwise,
   FacebookLogo,
   InstagramLogo,
-  SealCheck,
   ShareNetwork,
+  ShieldCheck,
+  ShieldWarning,
   TelegramLogo,
   YoutubeLogo,
 } from "@phosphor-icons/react";
 import useLinkHandler from "@/hooks/useLinkHandler";
+import { useState } from "react";
 
 export type ItemTopInfoType = { pageData: PageNamespace.Page };
 export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
@@ -26,6 +27,11 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
 
   const linkHandler = useLinkHandler({ pageData });
 
+  // Modal Consts
+  const [isModalOpen, setModalOpen] = useState(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
   return (
     <div className="h-full _top-section">
       <div className="container mx-auto max-w-[1144px] h-full">
@@ -34,14 +40,50 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
             className="mb-5 rounded-full w-[170px] h-[170px] drop-shadow-sm sm:mb-0"
             pageData={pageData}
           />
-
           <div className="flex-1 px-3 _item-details sm:mr-5">
-            <h1 className="text-[28px] font-bold text-slate-700 flex items-center justify-center sm:justify-start">
+            <h1 className="text-[28px] font-bold text-slate-700 flex items-center justify-center sm:justify-start flex-col-reverse sm:flex-row">
               {pageData?.title}
-              <SealCheck
-                size={28}
+              {/* <ShieldCheck
+                size={30}
                 weight="duotone"
-                className="mr-2 text-sky-600"
+                className="mb-2 mr-2 text-yellow-600 transition duration-300 hover:cursor-pointer hover:text-slate-800 sm:mb-0 sm:mr-2"
+                onClick={() => {
+                  if (document) {
+                    (
+                      document.getElementById(
+                        "modal_badge_3"
+                      ) as HTMLFormElement
+                    ).showModal();
+                  }
+                }}
+              /> */}
+              {/* <ShieldCheck
+                size={30}
+                weight="duotone"
+                className="mb-2 mr-2 transition duration-300 text-sky-600 hover:cursor-pointer hover:text-slate-800 sm:mb-0 sm:mr-2"
+                onClick={() => {
+                  if (document) {
+                    (
+                      document.getElementById(
+                        "modal_badge_2"
+                      ) as HTMLFormElement
+                    ).showModal();
+                  }
+                }}
+              /> */}
+              <ShieldWarning
+                size={30}
+                className="mb-2 mr-2 text-orange-400 transition duration-300 hover:cursor-pointer hover:text-slate-800 sm:mb-0 sm:mr-2"
+                weight="duotone"
+                onClick={() => {
+                  if (document) {
+                    (
+                      document.getElementById(
+                        "modal_badge_1"
+                      ) as HTMLFormElement
+                    ).showModal();
+                  }
+                }}
               />
             </h1>
             {/* <h2 className="mt-2 text-xl font-medium text-center text-primary sm:text-right">
@@ -149,6 +191,115 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
           </div>
         </div>
       </div>
+      {/* Modal Orange Badge */}
+      <dialog id="modal_badge_1" className="modal">
+        <div className="modal-box">
+          <h3 className="flex items-center text-lg font-bold text-center text-orange-500">
+            <ShieldWarning
+              size={32}
+              className="ml-2 text-orange-400"
+              weight="duotone"
+            />
+            تـوجـه
+          </h3>
+          <p className="py-4">
+            اطلاعات این واحد از اینترنت جمع‌آوری شده و توسط ادمین کـوچـا مدیریت
+            می‌شود. اگر شما مالک این صفحه هستید، با احراز هویت می‌توانید تیک آبی
+            دریافت کنید، مدیریت اطلاعات این صفحه رو به عهده بگیرید و از امکانات{" "}
+            <Link
+              href={"#"}
+              className="border-b border-black border-dashed hover:text-primary hover:border-primary"
+              target="_blank"
+            >
+              مرکز بیزینس
+            </Link>{" "}
+            برای راهبری و توسعه کسب‌و‌کارتون استفاده کنید.
+          </p>
+          <div className="flex items-center p-[10px] font-medium border border-yellow-300 rounded-md bg-yellow-50 text-[15px]">
+            <p className="text-center text-yellow-800">
+              کوچا، هیچ مسئولیتی در قبال خدمات این واحد صنفی ندارد.
+            </p>
+          </div>
+
+          <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2 modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="w-full btn">متوجه شدم</button>
+            </form>
+            <div className="ml-0">
+              <button className="w-full btn btn-primary">
+                مالک این صفحه هستم
+              </button>
+            </div>
+          </div>
+        </div>
+      </dialog>
+      {/* Modal Blue Badge */}
+      <dialog id="modal_badge_2" className="modal">
+        <div className="modal-box">
+          <h3 className="flex items-center text-lg font-bold text-center text-sky-700">
+            <ShieldCheck
+              size={32}
+              className="ml-2 text-sky-600"
+              weight="duotone"
+            />
+            تـیـک آبـی
+          </h3>
+          <p className="pt-4">
+            این واحد صنفی از تاریخ 1403/05/22 در راهنمای مشاغل کـوچـا حضور دارد
+            و محتوای این صفحه توسط مالک آن مدیریت می‌شود.
+          </p>
+          <p className="flex items-center pt-2 pb-4 text-gray-500">
+            <ArrowsClockwise size={14} className="ml-1" />
+            بروزرسانی شده در 1403/05/29
+          </p>
+          <div className="flex items-center p-[10px] font-medium border border-yellow-300 rounded-md bg-yellow-50 text-[15px]">
+            <p className="text-center text-yellow-800">
+              کـوچـا، هیچگونه مسئولیتی در قبال خدمات این واحد صنفی ندارد.
+            </p>
+          </div>
+
+          <div className="w-full modal-action">
+            <form method="dialog" className="w-full">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="w-full btn">متوجه شدم</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+      {/* Modal Gold Badge */}
+      <dialog id="modal_badge_3" className="modal">
+        <div className="modal-box">
+          <h3 className="flex items-center text-lg font-bold text-center text-yellow-600">
+            <ShieldCheck
+              size={32}
+              className="ml-2 text-yellow-600"
+              weight="duotone"
+            />
+            تـیـک طـلایـی
+          </h3>
+          <p className="pt-4">
+            این واحد صنفی از تاریخ 1403/05/22 در راهنمای مشاغل کـوچـا حضور دارد
+            و محتوای این صفحه توسط مالک آن مدیریت می‌شود.
+          </p>
+          <p className="flex items-center pt-2 pb-4 text-gray-500">
+            <ArrowsClockwise size={14} className="ml-1" />
+            بروزرسانی شده در 1403/05/29
+          </p>
+          <div className="flex items-center p-[10px] font-medium border border-yellow-300 rounded-md bg-yellow-50 text-[15px]">
+            <p className="text-center text-yellow-800">
+              کـوچـا، هیچگونه مسئولیتی در قبال خدمات این واحد صنفی ندارد.
+            </p>
+          </div>
+
+          <div className="w-full modal-action">
+            <form method="dialog" className="w-full">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="w-full btn">متوجه شدم</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };

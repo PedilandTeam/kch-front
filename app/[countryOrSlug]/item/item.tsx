@@ -45,9 +45,7 @@ export default function PageItem({ pageData }: PageItemProps) {
               {/* Facilities Section */}
               <div className="py-6 border-b border-gray-200 sm:py-8">
                 <h3 className="mb-4 font-bold sm:mb-5">{ITEM.FACILITIES}</h3>
-                <p className="text-gray-500">
-                  {ITEM.FACILITIES_NO}
-                </p>
+                <p className="text-gray-500">{ITEM.FACILITIES_NO}</p>
               </div>
 
               {/* Images Section */}
@@ -61,9 +59,7 @@ export default function PageItem({ pageData }: PageItemProps) {
                 <h3 className="mb-4 font-bold sm:mb-5">
                   {ITEM.USERS_COMMENTS}
                 </h3>
-                <p className="text-gray-500">
-                  {ITEM.USERS_COMMENTS_DISABLE}
-                </p>
+                <p className="text-gray-500">{ITEM.USERS_COMMENTS_DISABLE}</p>
               </div>
 
               {/* Advertise Section */}
@@ -71,9 +67,12 @@ export default function PageItem({ pageData }: PageItemProps) {
             </div>
           </div>
         </div>
-          
+
         <Suspense>
-          <SimilarCat countryCode={pageData.country.code} categoryId={pageData.category.id} />
+          <SimilarCat
+            countryCode={pageData.country.code}
+            categoryId={pageData.category.id}
+          />
         </Suspense>
       </div>
     </div>
