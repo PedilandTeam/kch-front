@@ -1,94 +1,75 @@
-import { DAYS } from "@/app/text/calendar";
+import { DAYS, MAH, MONTHES, STATUS } from "@/app/text/calendar";
 import { GENERAL } from "@/app/text/general";
-
-interface HourRange {
-  start: string;
-  end: string;
-}
-
-interface DaySchedule {
-  day: keyof typeof DAYS;
-  hours: HourRange[] | "CLOSED";
-  highlight?: boolean;
-}
-
-const schedule: DaySchedule[] = [
-  {
-    day: "MONDAY",
-    hours: [{ start: "", end: "" }],
-    highlight: false,
-  },
-  {
-    day: "TUESDAY",
-    hours: [{ start: "", end: "" }],
-  },
-  {
-    day: "WEDNESDAY",
-    hours: [{ start: "", end: "" }],
-  },
-  {
-    day: "TURSDAY",
-    hours: [{ start: "", end: "" }],
-  },
-  {
-    day: "FRIDAY",
-    hours: [{ start: "", end: "" }],
-  },
-  {
-    day: "SATURDAY",
-    hours: [{ start: "", end: "" }],
-  },
-  {
-    day: "SUNDAY",
-    hours: [{ start: "", end: "" }],
-    // hours: "CLOSED",
-  },
-];
-
-import React from "react";
+import { Clock } from "@phosphor-icons/react";
 
 const ItemTime: React.FC = () => {
   return (
     // WORK TIME
-    <div className="p-4 mb-3 border border-gray-200 rounded-md">
-      <h3 className="flex items-center justify-between mb-3 font-semibold sm:mb-5">
-        <span>{GENERAL.WORKING_HOURS}</span>
-        <div className="border bg-stone-200 border-stone-300 rounded-full w-[14px] h-[14px]"></div>
-      </h3>
-
-      <div className="mb-1">
-        {schedule.map(({ day, hours, highlight }) => (
-          <div
-            key={day}
-            className={`flex items-center justify-between px-2 py-[6px] border-b border-dashed first:border-t text-[15px] ${
-              highlight ? "text-green-700 border-green-500 bg-green-50" : ""
-            } ${
-              hours === "CLOSED" ? "text-red-400 bg-red-100 border-red-500" : ""
-            }`}
-          >
-            <span>{DAYS[day]}</span>
-            <div>
-              {hours === "CLOSED" ? (
-                <span>{GENERAL.CLOSED}</span>
-              ) : (
-                hours.map((hour, index) => (
-                  <React.Fragment key={index}>
-                    <span className="text-[13px] font-PinarLT">
-                      {hour.start}
-                      <span className="mx-1">-</span>
-                      {hour.end}
-                    </span>
-                    {index < hours.length - 1 && (
-                      <span className="mx-3">,</span>
-                    )}
-                  </React.Fragment>
-                ))
-              )}
-            </div>
+    <>
+      {/* Close */}
+      {/* <div className="p-4 mb-3 border border-red-200 rounded-md bg-opacity-60 bg-red-50">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center text-red-600">
+            <Clock size={20} className="ml-1" />
+            <span className="font-medium">{STATUS.CLOSE}</span>
           </div>
-        ))}
+          <div>
+            <span className="text-[15px]">{GENERAL.WORKING_HOURS}</span>
+            <span className="mr-2">9:00 {GENERAL.TO} 17:00</span>
+          </div>
+        </div>
+        <div className="flex items-center justify-around pt-3 mt-3 border-t border-gray-300 border-dashed">
+          <span className="font-medium">{GENERAL.TODAY}:</span>
+          <span className="text-[15px]">{DAYS.WEDNESDAY}</span>
+          <span className="text-lg text-gray-300">|</span>
+          <span className="text-[15px]">27 {MONTHES.MARCH} 2024</span>
+          <span className="text-lg text-gray-300">|</span>
+          <span className="text-[15px]">23 {MAH.FAR} 1403</span>
+        </div>
+      </div> */}
+      {/* Open */}
+      {/* <div className="p-4 mb-3 border border-green-200 rounded-md bg-opacity-60 bg-green-50">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center text-green-600">
+            <Clock size={20} className="ml-1" />
+            <span className="font-medium">{STATUS.OPEN}</span>
+          </div>
+          <div>
+            <span className="text-[15px]">{GENERAL.WORKING_HOURS}</span>
+            <span className="mr-2">9:00 {GENERAL.TO} 17:00</span>
+          </div>
+        </div>
+        <div className="flex items-center justify-around pt-3 mt-3 border-t border-gray-300 border-dashed">
+          <span className="font-medium">{GENERAL.TODAY}:</span>
+          <span className="text-[15px]">{DAYS.WEDNESDAY}</span>
+          <span className="text-lg text-gray-300">|</span>
+          <span className="text-[15px]">27 {MONTHES.MARCH} 2024</span>
+          <span className="text-lg text-gray-300">|</span>
+          <span className="text-[15px]">23 {MAH.FAR} 1403</span>
+        </div>
+      </div> */}
+      {/* Not Set */}
+      <div className="p-4 mb-3 border rounded-md border-gay-200 bg-opacity-60 bg-gray-50">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <Clock size={20} className="ml-1" />
+            <span className="font-medium">---</span>
+          </div>
+          <div className="text-gray-500">
+            <span className="text-[15px]">{GENERAL.WORKING_HOURS}</span>{" "}
+            <span className="text-[15px]">{STATUS.NOT_SET}</span>
+          </div>
+        </div>
+        {/* <div className="flex items-center justify-around pt-3 mt-3 border-t border-gray-300 border-dashed">
+          <span className="font-medium">{GENERAL.TODAY}:</span>
+          <span className="text-[15px]">{DAYS.WEDNESDAY}</span>
+          <span className="text-lg text-gray-300">|</span>
+          <span className="text-[15px]">27 {MONTHES.MARCH} 2024</span>
+          <span className="text-lg text-gray-300">|</span>
+          <span className="text-[15px]">23 {MAH.FAR} 1403</span>
+        </div> */}
       </div>
-    </div>
+    </>
   );
 };
 

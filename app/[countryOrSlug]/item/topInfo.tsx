@@ -35,13 +35,22 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
   return (
     <div className="h-full _top-section">
       <div className="container mx-auto max-w-[1144px] h-full">
-        <div className="flex flex-col items-center h-full pt-8 sm:flex-row sm:items-end sm:py-10">
+        <div className="relative flex flex-col items-center h-full pt-8 sm:flex-row sm:items-end sm:py-10">
+          <div className="sm:absolute left-3 sm:left-0 top-[40px] flex items-center">
+            <div className="px-2 py-1 bg-stone-500 text-white text-[15px] rounded-md ml-1 absolute sm:static left-3 top-[40px]">
+              شغل آزاد
+            </div>
+            <div className="px-2 py-1 bg-blue-400 text-white text-[15px] rounded-md absolute sm:static right-3 top-[40px]">
+              جدید
+            </div>
+          </div>
+
           <ItemProfilePicture
             className="mb-5 rounded-full w-[170px] h-[170px] drop-shadow-sm sm:mb-0"
             pageData={pageData}
           />
           <div className="flex-1 px-3 _item-details sm:mr-5">
-            <h1 className="text-[28px] font-bold text-slate-700 flex items-center justify-center sm:justify-start flex-col-reverse sm:flex-row">
+            <h1 className="text-[28px] font-bold text-slate-700 flex items-center justify-center sm:justify-start flex-col-reverse sm:flex-row font-enc">
               {pageData?.title}
               {/* <ShieldCheck
                 size={30}
@@ -86,10 +95,10 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                 }}
               />
             </h1>
-            {/* <h2 className="mt-2 text-xl font-medium text-center text-primary sm:text-right">
+            <h2 className="mt-2 text-xl font-medium text-center text-primary sm:text-right">
               زیرعنوان واحد
-            </h2> */}
-            <div className="flex items-center mt-4 mb-8 sm:mb-3 _card-rating">
+            </h2>
+            <div className="flex items-center justify-center mt-4 mb-8 sm:justify-start sm:mb-3 _card-rating">
               {/* @ts-ignore */}
               <Rating
                 initialRating={0}
@@ -102,18 +111,6 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                 (<span>{ITEM.WHITOUT}</span> {ITEM.COMMENT})
               </span>
             </div>
-            {/* <div className="flex justify-center mb-6 sm:justify-start item-location sm:mb-2">
-              <CircleFlag
-                width={1}
-                height={1}
-                countryCode={pageData?.country?.code}
-                className="w-5 ml-3"
-                title={COUNTRY.GERMANY}
-              />
-              <span>{pageData?.country?.name}</span>
-              <span className="ml-1">،</span>
-              <span>{pageData?.city?.name}</span>
-            </div> */}
           </div>
 
           <div className="w-full bg-white sm:bg-transparent sm:w-auto">
@@ -211,7 +208,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
               className="border-b border-black border-dashed hover:text-primary hover:border-primary"
               target="_blank"
             >
-              مرکز بیزینس
+              بیزینس سنتر
             </Link>{" "}
             برای راهبری و توسعه کسب‌و‌کارتون استفاده کنید.
           </p>

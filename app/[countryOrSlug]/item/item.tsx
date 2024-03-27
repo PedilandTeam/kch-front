@@ -16,7 +16,7 @@ export default function PageItem({ pageData }: PageItemProps) {
     <div className="component page-item">
       <CountryUpdater pageData={pageData} />
 
-      <div className="bg-[#fbf7ed] bg-[url('/images/pattern-03.png')] bg-center  mb-4">
+      <div className="bg-[#fbf7ed] bg-[url('/images/pattern-03.png')] bg-center mb-4">
         <ItemTopInfo pageData={pageData} />
       </div>
 
@@ -61,12 +61,36 @@ export default function PageItem({ pageData }: PageItemProps) {
                 </h3>
                 <p className="text-gray-500">{ITEM.USERS_COMMENTS_DISABLE}</p>
               </div>
-
-              {/* Advertise Section */}
-              <div className="py-6 sm:py-8"></div>
             </div>
           </div>
         </div>
+
+        {/* Advertising Section */}
+        <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
+          <div>
+            <Image
+              src={"/images/banner/bnr-03.gif"}
+              width={562}
+              height={72}
+              alt="banner"
+            />
+          </div>
+          <div>
+            <Image
+              src={"/images/banner/bnr-02.gif"}
+              width={562}
+              height={72}
+              alt="banner"
+            />
+          </div>
+        </div>
+        
+        <Suspense>
+          <SimilarCat
+            countryCode={pageData.country.code}
+            categoryId={pageData.category.id}
+          />
+        </Suspense>
 
         <Suspense>
           <SimilarCat
@@ -74,6 +98,26 @@ export default function PageItem({ pageData }: PageItemProps) {
             categoryId={pageData.category.id}
           />
         </Suspense>
+
+        {/* Advertising Section */}
+        <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0">
+          <div>
+            <Image
+              src={"/images/banner/bnr-04.gif"}
+              width={562}
+              height={72}
+              alt="banner"
+            />
+          </div>
+          <div>
+            <Image
+              src={"/images/banner/bnr-04.gif"}
+              width={562}
+              height={72}
+              alt="banner"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

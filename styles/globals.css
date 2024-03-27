@@ -10,11 +10,17 @@
     font-feature-settings: "ss05";
     font-variation-settings: "DOTS" 1;
   }
-}
 
-@supports (font-variation-settings: normal) {
-  body {
-    font-family: 'AnjomanMaxVF', tahoma;
+  .font-enc {
+    -moz-font-feature-settings: normal;
+    -webkit-font-feature-settings: normal;
+    font-feature-settings: normal;
+  }
+
+  .font-latin {
+    font-family: Arial, Helvetica, sans-serif;
+    font-variation-settings: initial;
+    font-feature-settings: normal;
   }
 }
 

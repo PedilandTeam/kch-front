@@ -42,7 +42,7 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
     return null;
   }
   return (
-    <div className="text-left item-address">
+    <div className="text-left _item-address">
       {Array.isArray(Images) &&
         Images.map((image, index) => {
           return (
@@ -76,7 +76,7 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
             </Link>
           );
         })}
-      <span className="font-PinarLT">{text}</span>
+      <span className="font-latin">{text}</span>
     </div>
   );
 }
@@ -193,7 +193,10 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
           )}
         </div>
       </div>
-      <div className="p-4 mb-3 border border-gray-200 rounded-md">
+
+      <ItemTime />
+
+      <div className="p-4 mb-3 border border-gray-200 rounded-md ">
         <ItemSideInfoItem
           text={`${
             pageData?.address?.address ? `${pageData?.address?.address},` : ""
@@ -207,7 +210,15 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
 
       <ItemClaim />
 
-      <ItemTime />
+      {/* Advertising Section */}
+      <div className="mb-3">
+        <Image
+          src={"/images/banner/bnr-06.gif"}
+          width={368}
+          height={280}
+          alt="banner"
+        />
+      </div>
 
       {/* Share Modal */}
       {/* <dialog id="modal_share" className="modal">
