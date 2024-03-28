@@ -17,6 +17,8 @@ export const ITEM = {
   DESCRIPTION_PLACEHOLDER: "توضیحاتی در مورد این واحد ثبت نشده است.",
   FACILITIES: "امکانات",
   FACILITIES_NO: "امکانات این واحد لیست نشده است.",
+  SERVICES: "خدمات",
+  SERVICES_NO: "خدمات این واحد لیست نشده است.",
   IMAGES: "تصاویر",
   IMAGES_NO: "تصویری برای این واحد وجود ندارد.",
   COMMENT: "نظر",

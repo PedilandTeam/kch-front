@@ -7,6 +7,7 @@ import { ITEM } from "@/app/text/directory";
 import Image from "next/image";
 import SimilarCat from "./tools/similarCat";
 import { Suspense } from "react";
+import ServicesList from "./tools/servicesList";
 export type PageItemProps = {
   pageData: PageNamespace.Page;
 };
@@ -42,6 +43,9 @@ export default function PageItem({ pageData }: PageItemProps) {
                 </p>
               </div>
 
+              {/* Services Section */}
+              <ServicesList />
+
               {/* Facilities Section */}
               <div className="py-6 border-b border-gray-200 sm:py-8">
                 <h3 className="mb-4 font-bold sm:mb-5">{ITEM.FACILITIES}</h3>
@@ -65,7 +69,7 @@ export default function PageItem({ pageData }: PageItemProps) {
           </div>
         </div>
 
-        {/* Advertising Section */}
+        {/* Advertising Section P01 */}
         <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
           <div>
             <Image
@@ -84,13 +88,6 @@ export default function PageItem({ pageData }: PageItemProps) {
             />
           </div>
         </div>
-        
-        <Suspense>
-          <SimilarCat
-            countryCode={pageData.country.code}
-            categoryId={pageData.category.id}
-          />
-        </Suspense>
 
         <Suspense>
           <SimilarCat
@@ -99,7 +96,14 @@ export default function PageItem({ pageData }: PageItemProps) {
           />
         </Suspense>
 
-        {/* Advertising Section */}
+        <Suspense>
+          <SimilarCat
+            countryCode={pageData.country.code}
+            categoryId={pageData.category.id}
+          />
+        </Suspense>
+
+        {/* Advertising Section P02 */}
         <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0">
           <div>
             <Image

@@ -1,7 +1,3 @@
-import Link from "next/link";
-import { CircleFlag } from "next-circle-flags";
-import Image from "next/image";
-import { FolderSimpleStar } from "@app/client-packages/phosphor-icons/react";
 import { PageNamespace } from "@/types/page";
 import { API_ROUTES } from "@/routes";
 import SuggestedListItem from "../suggestedListItem";
@@ -29,7 +25,7 @@ const SimilarCat = async ({ categoryId, countryCode }: SimilarCat) => {
   if (pages?.meta.totalItems! >= 4)
     return (
       <div className="px-3 my-12 sm:my-20 sm:px-0">
-        <h3 className="mb-6 text-xl font-bold">مشاغل مشابه در دسته‌بندی ساخت و ساز</h3>
+        <h3 className="mb-6 text-xl font-extrabold">مشاغل مشابه در دسته‌بندی ساخت و ساز</h3>
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-y-4 sm:gap-5">
           {pages?.items.map((page) => {
             return <SuggestedListItem page={page} key={page.id} />;

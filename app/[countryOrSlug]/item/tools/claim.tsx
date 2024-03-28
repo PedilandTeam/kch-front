@@ -1,4 +1,4 @@
-import { ShieldCheck } from "@phosphor-icons/react";
+import { ShieldCheck } from "app/client-packages/phosphor-icons/react";
 import Link from "next/link";
 
 const ItemClaim = () => {

@@ -1,8 +1,53 @@
-'use client'
+"use client";
 
-import { FolderSimpleStar } from "@phosphor-icons/react";
+import {
+  FolderSimpleStar,
+  FolderSimple,
+  Folder,
+  MapPinLine,
+  MapPin,
+  ArrowsClockwise,
+  FacebookLogo,
+  InstagramLogo,
+  ShareNetwork,
+  ShieldCheck,
+  ShieldWarning,
+  Star,
+  TelegramLogo,
+  YoutubeLogo,
+  DeviceMobile,
+  GlobeSimple,
+  WhatsappLogo,
+  Clock,
+  Person,
+  HouseSimple,
+  Tipi,
+  Plant,
+  Confetti,
+} from "@phosphor-icons/react";
 
-
-export{
-    FolderSimpleStar
-}
+export {
+  FolderSimpleStar,
+  FolderSimple,
+  Folder,
+  MapPinLine,
+  MapPin,
+  ArrowsClockwise,
+  FacebookLogo,
+  InstagramLogo,
+  ShareNetwork,
+  ShieldCheck,
+  ShieldWarning,
+  Star,
+  TelegramLogo,
+  YoutubeLogo,
+  DeviceMobile,
+  GlobeSimple,
+  WhatsappLogo,
+  Clock,
+  Person,
+  HouseSimple,
+  Tipi,
+  Plant,
+  Confetti,
+};

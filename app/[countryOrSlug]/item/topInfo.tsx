@@ -1,6 +1,5 @@
 "use client";
 
-import { StarIcon } from "@heroicons/react/24/solid";
 import Rating from "@client-packages/react-rating";
 import { PageNamespace } from "@/types/page";
 import ItemProfilePicture from "./itemProfilePicture";
@@ -13,11 +12,17 @@ import {
   ShareNetwork,
   ShieldCheck,
   ShieldWarning,
+  Star,
   TelegramLogo,
   YoutubeLogo,
-} from "@phosphor-icons/react";
+  HouseSimple,
+  Tipi,
+  Plant,
+  Confetti,
+} from "app/client-packages/phosphor-icons/react";
 import useLinkHandler from "@/hooks/useLinkHandler";
 import { useState } from "react";
+import { GENERAL } from "@/app/text/general";
 
 export type ItemTopInfoType = { pageData: PageNamespace.Page };
 export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
@@ -36,12 +41,18 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
     <div className="h-full _top-section">
       <div className="container mx-auto max-w-[1144px] h-full">
         <div className="relative flex flex-col items-center h-full pt-8 sm:flex-row sm:items-end sm:py-10">
-          <div className="sm:absolute left-3 sm:left-0 top-[40px] flex items-center">
-            <div className="px-2 py-1 bg-stone-500 text-white text-[15px] rounded-md ml-1 absolute sm:static left-3 top-[40px]">
-              شغل آزاد
-            </div>
-            <div className="px-2 py-1 bg-blue-400 text-white text-[15px] rounded-md absolute sm:static right-3 top-[40px]">
-              جدید
+          <div className="sm:absolute left-3 sm:left-0 top-[40px] sm:flex items-center hidden">
+            {/* <div className="px-2 py-[6px] bg-emerald-500 text-white text-[15px] rounded-md flex items-center">
+              <Plant size={20} className="ml-1 text-white" weight="duotone" />
+              {GENERAL.HOME_JOB}
+            </div> */}
+            <div className="px-2 py-[6px] bg-blue-400 text-white text-[15px] rounded-md flex items-center mr-2">
+              <Confetti
+                size={20}
+                className="ml-1 text-white"
+                weight="duotone"
+              />
+              {GENERAL.NEW}
             </div>
           </div>
 
@@ -52,60 +63,77 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
           <div className="flex-1 px-3 _item-details sm:mr-5">
             <h1 className="text-[28px] font-bold text-slate-700 flex items-center justify-center sm:justify-start flex-col-reverse sm:flex-row font-enc">
               {pageData?.title}
-              {/* <ShieldCheck
-                size={30}
-                weight="duotone"
-                className="mb-2 mr-2 text-yellow-600 transition duration-300 hover:cursor-pointer hover:text-slate-800 sm:mb-0 sm:mr-2"
-                onClick={() => {
-                  if (document) {
-                    (
-                      document.getElementById(
-                        "modal_badge_3"
-                      ) as HTMLFormElement
-                    ).showModal();
-                  }
-                }}
-              /> */}
-              {/* <ShieldCheck
-                size={30}
-                weight="duotone"
-                className="mb-2 mr-2 transition duration-300 text-sky-600 hover:cursor-pointer hover:text-slate-800 sm:mb-0 sm:mr-2"
-                onClick={() => {
-                  if (document) {
-                    (
-                      document.getElementById(
-                        "modal_badge_2"
-                      ) as HTMLFormElement
-                    ).showModal();
-                  }
-                }}
-              /> */}
-              <ShieldWarning
-                size={30}
-                className="mb-2 mr-2 text-orange-400 transition duration-300 hover:cursor-pointer hover:text-slate-800 sm:mb-0 sm:mr-2"
-                weight="duotone"
-                onClick={() => {
-                  if (document) {
-                    (
-                      document.getElementById(
-                        "modal_badge_1"
-                      ) as HTMLFormElement
-                    ).showModal();
-                  }
-                }}
-              />
+              <div className="flex items-center gap-2 mb-2 sm:mr-3 sm:mb-0">
+                {/* <ShieldCheck
+                  size={30}
+                  weight="duotone"
+                  className="text-yellow-600 transition duration-300 hover:cursor-pointer hover:text-slate-800"
+                  onClick={() => {
+                    if (document) {
+                      (
+                        document.getElementById(
+                          "modal_badge_3"
+                        ) as HTMLFormElement
+                      ).showModal();
+                    }
+                  }}
+                /> */}
+                {/* <ShieldCheck
+                  size={30}
+                  weight="duotone"
+                  className="transition duration-300 text-sky-600 hover:cursor-pointer hover:text-slate-800"
+                  onClick={() => {
+                    if (document) {
+                      (
+                        document.getElementById(
+                          "modal_badge_2"
+                        ) as HTMLFormElement
+                      ).showModal();
+                    }
+                  }}
+                /> */}
+                <ShieldWarning
+                  size={30}
+                  className="text-orange-400 transition duration-300 hover:cursor-pointer hover:text-slate-800"
+                  weight="duotone"
+                  onClick={() => {
+                    if (document) {
+                      (
+                        document.getElementById(
+                          "modal_badge_1"
+                        ) as HTMLFormElement
+                      ).showModal();
+                    }
+                  }}
+                />
+                <Plant
+                  size={30}
+                  className="text-green-600 transition duration-300 hover:cursor-pointer hover:text-slate-800"
+                  weight="duotone"
+                />
+                <Confetti
+                  size={30}
+                  className="text-blue-600 transition duration-300 hover:cursor-pointer hover:text-slate-800 sm:hidden"
+                  weight="duotone"
+                />
+              </div>
             </h1>
             <h2 className="mt-2 text-xl font-medium text-center text-primary sm:text-right">
               زیرعنوان واحد
             </h2>
-            <div className="flex items-center justify-center mt-4 mb-8 sm:justify-start sm:mb-3 _card-rating">
+            <div className="flex items-center justify-center mt-4 mb-8 sm:justify-start sm:mb-4 _card-rating">
               {/* @ts-ignore */}
               <Rating
                 initialRating={0}
                 direction={"rtl"}
                 readonly={true}
-                emptySymbol={<StarIcon className="w-8 h-8 text-stone-300" />}
-                fullSymbol={<StarIcon className="w-8 h-8 text-yellow-400" />}
+                className="flex"
+                emptySymbol={
+                  <Star size={30} weight="duotone" className="text-stone-300" />
+                }
+                fullSymbol={
+                  <Star size={30} weight="fill" className="text-yellow-400" />
+                }
               />
               <span className="mr-2">
                 (<span>{ITEM.WHITOUT}</span> {ITEM.COMMENT})
@@ -116,7 +144,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
           <div className="w-full bg-white sm:bg-transparent sm:w-auto">
             <div className="flex justify-center mx-3 border-b border-gray-200 sm:border-b-0 sm:mx-0">
               {!haveSocial ? (
-                <p className="py-5 ml-3 text-slate-400 sm:text-black sm:py-3">
+                <p className="py-5 ml-3 text-slate-400 sm:text-black sm:py-4">
                   {ITEM.NO_SOCIAL_MEDIA}
                 </p>
               ) : (

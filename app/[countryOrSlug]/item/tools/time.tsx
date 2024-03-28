@@ -1,6 +1,6 @@
 import { DAYS, MAH, MONTHES, STATUS } from "@/app/text/calendar";
 import { GENERAL } from "@/app/text/general";
-import { Clock } from "@phosphor-icons/react";
+import { Clock } from "app/client-packages/phosphor-icons/react";
 
 const ItemTime: React.FC = () => {
   return (
@@ -60,14 +60,14 @@ const ItemTime: React.FC = () => {
             <span className="text-[15px]">{STATUS.NOT_SET}</span>
           </div>
         </div>
-        {/* <div className="flex items-center justify-around pt-3 mt-3 border-t border-gray-300 border-dashed">
+        <div className="flex items-center justify-around pt-3 mt-3 border-t border-gray-300 border-dashed">
           <span className="font-medium">{GENERAL.TODAY}:</span>
           <span className="text-[15px]">{DAYS.WEDNESDAY}</span>
           <span className="text-lg text-gray-300">|</span>
           <span className="text-[15px]">27 {MONTHES.MARCH} 2024</span>
           <span className="text-lg text-gray-300">|</span>
           <span className="text-[15px]">23 {MAH.FAR} 1403</span>
-        </div> */}
+        </div>
       </div>
     </>
   );

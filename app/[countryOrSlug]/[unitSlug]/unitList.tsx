@@ -11,8 +11,6 @@ import ListFilter from "./filter/listFilter";
 import { Suspense } from "react";
 import Loading from "./_loading";
 import SideBanner from "@/app/banners/side-banner";
-import { FunnelIcon } from "@heroicons/react/24/solid";
-import { _TXT } from "@/app/text";
 import FilterMobile from "./filter/filter.mobile";
 import FilterModalMobile from "./filter/filterModal.mobile";
 
@@ -90,21 +88,21 @@ export default async function UntiList({
     <div className="component sm:mt-3 page-list">
       <div className="container mx-auto max-w-[1144px]">
         <div className="grid grid-cols-1 sm:grid-cols-8 gap-y-4 sm:gap-8">
-          <div className="sidebar hidden sm:block sm:col-span-2">
+          <div className="hidden sidebar sm:block sm:col-span-2">
             <ListFilter cities={cities} categories={categories} />
           </div>
 
           <div className="page-content sm:col-span-6">
             <div className="flex flex-wrap">
-              <div className="sm:order-2 w-full sm:mb-2">
+              <div className="w-full sm:order-2 sm:mb-2">
                 <ItemBreadCrumb
                   unit={{ name: unit.name, slug: unit.slug }}
                   country={{ name: country.name, code: country.code }}
                 />
               </div>
 
-              <div className="page-header sm:order-1 w-full px-3 sm:px-0">
-                <h1 className="text-xl font-semibold my-4 sm:mt-0 sm:mb-3 text-pink-800">
+              <div className="w-full px-3 page-header sm:order-1 sm:px-0">
+                <h1 className="my-4 text-xl font-semibold text-pink-800 sm:mt-0 sm:mb-3">
                   لیست {unit?.name} فارسی زبان در {country?.name}
                 </h1>
               </div>
@@ -133,7 +131,7 @@ export default async function UntiList({
             </div>
           </div>
 
-          <div className="sm:hidden mt-5 mx-3">
+          <div className="mx-3 mt-5 sm:hidden">
             <SideBanner />
           </div>
         </div>

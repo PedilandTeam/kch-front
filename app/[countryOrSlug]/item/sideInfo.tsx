@@ -12,7 +12,7 @@ import {
   GlobeSimple,
   TelegramLogo,
   WhatsappLogo,
-} from "@phosphor-icons/react";
+} from "app/client-packages/phosphor-icons/react";
 import { SOCIAL } from "@/app/text/social";
 import { GENERAL } from "@/app/text/general";
 import useLinkHandler from "@/hooks/useLinkHandler";

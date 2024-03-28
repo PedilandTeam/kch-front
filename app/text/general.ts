@@ -15,6 +15,7 @@ export const GENERAL = {
   EMAIL: "ایمیل",
   FEATURED: "ویژه",
   HOME: "خانه",
+  HOME_JOB: "شغل خانگی",
   IS_OPEN: "باز است",
   KOOCHAA: "کوچا",
   KOOCHAA_SLOGAN: "جامعه پارسی زبانان مهاجر",
