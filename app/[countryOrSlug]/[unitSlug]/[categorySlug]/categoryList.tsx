@@ -13,6 +13,7 @@ import Loading from "../_loading";
 import SideBanner from "@/app/banners/side-banner";
 import FilterMobile from "./filter/filter.mobile";
 import FilterModalMobile from "./filter/filterModal.mobile";
+import Image from "next/image";
 
 type PagesListProps = {
   category: CategoryNamespace.category;
@@ -57,57 +58,67 @@ export default async function CategoryList({
   const cities = await fetchCities(country.code, category.id);
 
   return (
-    <div className="component sm:mt-3 page-list">
+    <div className="pt-5 component _page-list">
       <div className="container mx-auto max-w-[1144px]">
-        <div className="grid grid-cols-1 sm:grid-cols-8 gap-y-4 sm:gap-8">
-          <div className="hidden sidebar sm:block sm:col-span-2">
-            <ListFilter cities={cities} />
-          </div>
-
-          <div className="page-content sm:col-span-6">
-            <div className="flex flex-wrap">
-              <div className="w-full sm:order-2 sm:mb-2">
-                <ItemBreadCrumb
-                  unit={unit}
-                  category={category}
-                  country={{ name: country.name, code: country.code }}
-                />
-              </div>
-
-              <div className="w-full px-3 page-header sm:order-1 sm:px-0">
-                <h1 className="my-4 text-xl font-semibold text-pink-800 sm:mt-0 sm:mb-3">
-                  لیست{" "}
-                  {category?.seoTitle
-                    ? category.seoTitle
-                    : `${category.name} فارسی زبان`}{" "}
-                  در {country?.name}{" "}
-                </h1>
-              </div>
+        <div className="_page-content">
+          <div className="_top-section">
+            <div className="flex items-center justify-between w-full pb-5">
+              <h1 className="text-2xl font-bold text-secondary">
+                لیست{" "}
+                {category?.seoTitle
+                  ? category.seoTitle
+                  : `${category.name} فارسی زبان`}{" "}
+                در {country?.name}{" "}
+              </h1>
+              <ItemBreadCrumb
+                unit={unit}
+                category={category}
+                country={{ name: country.name, code: country.code }}
+              />
             </div>
-            <div className="px-3 sm:px-0">
-
-              <div className="md:hidden">
-                <FilterMobile />
-                <FilterModalMobile cities={cities.items} />
-              </div>
-
-              <Suspense
-                fallback={<Loading />}
-                key={`unit-cardlist-${search}-${city}-${category}`}
-              >
-                <CardsList
-                  category={category}
-                  country={country}
-                  pageNumber={pageNumber}
-                  city={city}
-                  search={search}
+            
+            {/* Advertising Section P03 */}
+            {/* <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0">
+              <div>
+                <Image
+                  src={"/images/banner/bnr-04.gif"}
+                  width={562}
+                  height={72}
+                  alt="banner"
                 />
-              </Suspense>
+              </div>
+              <div>
+                <Image
+                  src={"/images/banner/bnr-04.gif"}
+                  width={562}
+                  height={72}
+                  alt="banner"
+                />
+              </div>
+            </div> */}
+
+            <div className="hidden sm:block _filter">
+              <ListFilter cities={cities} />
             </div>
           </div>
 
-          <div className="mx-3 mt-5 sm:hidden">
-            <SideBanner />
+          {/* Cards List */}
+          <Suspense
+            fallback={<Loading />}
+            key={`unit-cardlist-${search}-${city}-${category}`}
+          >
+            <CardsList
+              category={category}
+              country={country}
+              pageNumber={pageNumber}
+              city={city}
+              search={search}
+            />
+          </Suspense>
+
+          <div className="md:hidden">
+            <FilterMobile />
+            <FilterModalMobile cities={cities.items} />
           </div>
         </div>
       </div>

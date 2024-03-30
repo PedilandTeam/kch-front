@@ -1,10 +1,19 @@
-import { CircleFlag } from "next-circle-flags";
-import { FolderIcon } from "@heroicons/react/24/outline";
+"use client";
+
 import Link from "next/link";
 import categoryPathGenerator from "@/utils/categoryPathGenerator";
 import { PageNamespace } from "@/types/page";
 import { CountryNamespace } from "@/types/country";
 import ItemProfilePicture from "../item/itemProfilePicture";
+
+import {
+  Folder,
+  MapPinLine,
+  Star,
+  ShieldWarning,
+  Plant,
+} from "app/client-packages/phosphor-icons/react";
+import Rating from "react-rating";
 
 type cardListItem = {
   page: PageNamespace.Page;
@@ -15,74 +24,65 @@ type cardListItem = {
 export default function CardListItem({ page, country, variant }: cardListItem) {
   return (
     <div
+      className="relative px-4 py-5 transition duration-300 border border-gray-200  w-[280px] sm:w-auto hover:shadow-lg hover:shadow-blue-100 hover:border-blue-200 card rounded-lg hover:bg-blue-50 hover:bg-opacity-30 group carousel-item sm:box-border"
       key={`cardlist-page-index-${page.slug}`}
-      className="card shadow-lg border border-gray-100 hover:border-gray-300"
     >
-      <figure className="pt-5">
-        <Link href={`/${page.slug}`}>
-          <ItemProfilePicture
-            height={140}
-            width={140}
-            pageData={page}
-            className={"rounded-full"}
+      <Link href={`/${page.slug}`}>
+        <div>
+          <figure>
+            <ItemProfilePicture
+              height={140}
+              width={140}
+              pageData={page}
+              className={"rounded-full"}
+            />
+          </figure>
+
+          <ShieldWarning
+            size={26}
+            className="absolute transition duration-300 text-stone-300 group-hover:text-orange-400 top-4 right-4"
+            weight="duotone"
           />
-        </Link>
-      </figure>
-      <div className="card-body px-4 py-5">
-        <Link href={`/${page.slug}`}>
-          <h2 className="card-title font-PinarLT text-slate-700 hover:text-pink-800 text-lg block text-center truncate hover:overflow-visible">
+
+          {/* <Plant
+            size={26}
+            className="absolute transition duration-300 text-stone-300 group-hover:text-emerald-600 top-4 left-4"
+            weight="duotone"
+          /> */}
+          <h2 className="my-3 text-xl font-semibold text-center truncate transition duration-300 group-hover:text-primary hover:overflow-visible _card-title">
             {page.title}
           </h2>
-        </Link>
 
-        <div className="flex mt-1 mb-2 justify-center card-rating">
-          {/* @ts-ignore */}
-          <div className="rating">
-            <input
-              type="radio"
-              name="rating-1"
-              className="mask w-[24px] h-[24px] mask-star-2 bg-gray-200"
-            />
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask w-[24px] h-[24px] mask-star-2 bg-gray-200"
-            />
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask w-[24px] h-[24px] mask-star-2 bg-gray-200"
-            />
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask w-[24px] h-[24px] mask-star-2 bg-gray-200"
-            />
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask w-[24px] h-[24px] mask-star-2 bg-gray-200"
+          <div className="flex items-center justify-center _card-rating">
+            {/* @ts-ignore */}
+            <Rating
+              initialRating={0}
+              direction={"rtl"}
+              readonly={true}
+              className="flex"
+              emptySymbol={
+                <Star size={26} weight="duotone" className="text-stone-300" />
+              }
+              fullSymbol={
+                <Star size={26} weight="fill" className="text-yellow-400" />
+              }
             />
           </div>
-          {/* <span className="flex flex-wrap content-center mr-2 text-sm text-gray-500">
-                      (0 نظر)
-                    </span> */}
         </div>
+      </Link>
 
-        <div className="flex justify-center w-full card-tools text-[15px] mb-1 text-gray-600">
-          <div className="flex ml-2">
-            <CircleFlag
-              alt={`پرچم کشور ${country.name}`}
-              width={5}
-              height={5}
-              countryCode={page?.country?.code}
-              className="w-5 ml-1"
-              title={page?.country?.name}
+      <div className="mt-4">
+        <div className="flex justify-between text-[15px] border-t border-dashed text-gray-500 group-hover:border-blue-200 pt-2">
+          <div className="flex items-center">
+            <MapPinLine
+              size={18}
+              weight="light"
+              className="ml-1 text-primary"
             />
-            <p className="truncate">{page?.city?.name}</p>
+            <span className="truncate">{page?.city?.name}</span>
           </div>
-          <div className="flex justify-center content-center">
-            <FolderIcon className="w-5 ml-1 text-gray-400" />
+          <div className="flex items-center">
+            <Folder size={18} weight="light" className="ml-1 text-primary" />
             {variant == "category" ? (
               <span className="truncate">{page?.category?.name}</span>
             ) : (
@@ -93,7 +93,7 @@ export default function CardListItem({ page, country, variant }: cardListItem) {
                   page.category.slug
                 )}
               >
-                <span className="truncate">{page?.category?.name}</span>
+                <span className="truncate hover:text-primary">{page?.category?.name}</span>
               </Link>
             )}
           </div>

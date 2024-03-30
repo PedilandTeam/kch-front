@@ -1,9 +1,8 @@
-import { Category, PageNamespace } from "@/types/page";
+import { PageNamespace } from "@/types/page";
 import { CountryNamespace } from "@/types/country";
 import { CategoryNamespace } from "@/types/category";
 import CardListItem from "../cardListItem";
 import Pagination from "../pagination/pagination";
-import { UnitType } from "@/types/unit";
 import { API_ROUTES } from "@/routes";
 
 type CardsListType = {
@@ -11,23 +10,28 @@ type CardsListType = {
   pageNumber?: number;
   city?: number | number[];
   category?: CategoryNamespace.category;
-  search?: string
+  search?: string;
 };
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const CardsList = async({ category, country, pageNumber, city, search }: CardsListType) => {
-
+export const CardsList = async ({
+  category,
+  country,
+  pageNumber,
+  city,
+  search,
+}: CardsListType) => {
   let pages: PageNamespace.GET | undefined;
   let isNotFound = false;
 
   try {
     pages = await (
-      await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 30, {
+      await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 24, {
         countryCode: country.code,
         cityIds: city,
         categoryIds: category?.id,
-        search
+        search,
       })
     ).json();
   } catch (e) {
@@ -38,17 +42,19 @@ export const CardsList = async({ category, country, pageNumber, city, search }: 
     isNotFound = true;
   }
 
-  if(isNotFound){
+  if (isNotFound) {
     return (
       <div className="w-full min-h-[60vh] flex justify-center items-center">
-        <h3 className="text-2xl font-bold">با فیلترهای انتخابی چیزی یافت نشد :)</h3>
+        <h3 className="text-2xl font-bold">
+          با فیلترهای انتخابی چیزی یافت نشد :)
+        </h3>
       </div>
-    )
+    );
   }
   return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="list-card min-h-[500px] w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-4 sm:gap-6">
+    <>
+      <div className="min-h-[500px] w-full _list-card">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-y-4 sm:gap-5">
           {pages?.items?.map((page: PageNamespace.Page, index: number) => {
             return (
               <CardListItem
@@ -61,13 +67,7 @@ export const CardsList = async({ category, country, pageNumber, city, search }: 
           })}
         </div>
       </div>
-      {
-          pages?.meta?.totalPages! > 1
-          ?
-          <Pagination pages={pages!} />
-          :
-          null
-      }
-    </div>
+      {pages?.meta?.totalPages! > 1 ? <Pagination pages={pages!} /> : null}
+    </>
   );
 };

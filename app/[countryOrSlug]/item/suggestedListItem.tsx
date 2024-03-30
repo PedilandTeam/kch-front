@@ -18,7 +18,7 @@ type cardListItem = {
 
 export default function SuggestedListItem({ page }: cardListItem) {
   return (
-    <div className="relative px-4 py-5 transition duration-300 border border-gray-200 shadow-md w-[280px] sm:w-auto hover:shadow-lg hover:shadow-blue-100 hover:border-blue-200 card rounded-lg bg-stone-50 bg-opacity-30 hover:bg-blue-50 hover:bg-opacity-30 group carousel-item sm:box-border">
+    <div className="relative px-4 py-5 transition duration-300 border border-gray-200 w-[280px] sm:w-auto hover:shadow-lg hover:shadow-blue-100 hover:border-blue-200 card rounded-lg hover:bg-blue-50 hover:bg-opacity-30 group carousel-item sm:box-border">
       <Link href={`/${page.slug}`}>
         <div>
           <figure>
@@ -36,11 +36,11 @@ export default function SuggestedListItem({ page }: cardListItem) {
             weight="duotone"
           />
 
-          <Plant
+          {/* <Plant
             size={26}
             className="absolute transition duration-300 text-stone-300 group-hover:text-emerald-600 top-4 left-4"
             weight="duotone"
-          />
+          /> */}
           <h2 className="my-3 text-xl font-semibold text-center truncate transition duration-300 group-hover:text-primary hover:overflow-visible _card-title">
             {page.title}
           </h2>

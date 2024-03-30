@@ -68,7 +68,7 @@ export default function PageSearch() {
             onChange={searchChangeHandler}
             value={search || ""}
             placeholder="جستجو"
-            className="input input-bordered w-full mb-3"
+            className="w-full input input-bordered"
         />
     )
 }

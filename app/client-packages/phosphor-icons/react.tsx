@@ -28,6 +28,7 @@ import {
   XLogo,
   CaretLineUp,
   CaretUp,
+  Sliders,
 } from "@phosphor-icons/react";
 
 export {
@@ -58,4 +59,5 @@ export {
   XLogo,
   CaretLineUp,
   CaretUp,
+  Sliders,
 };

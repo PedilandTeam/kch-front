@@ -7,6 +7,7 @@ import { ITEM } from "@/app/text/directory";
 import SimilarCat from "./tools/similarCat";
 import { Suspense } from "react";
 import ServicesList from "./tools/servicesList";
+import Image from "next/image";
 export type PageItemProps = {
   pageData: PageNamespace.Page;
 };

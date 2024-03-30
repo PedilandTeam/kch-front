@@ -127,15 +127,16 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   }).city;
 
   return (
-    <div className="filter-wrap">
-      <div className="filter-section">
+    <div className="_filter-wrap">
+      <div className="flex items-center justify-start _filter-section">
         <label
           htmlFor={id}
-          className="btn btn-primary btn-outline w-full"
+          className="btn btn-primary btn-outline"
         >
           {_TXT.CITY.SELECT}
         </label>
-        <div className="px-3 my-3">
+
+        <div className="flex items-center gap-5 mr-5">
           {Array.isArray(citiesInQuery) ? (
             // if city is multiple number, find all of that from cities
             citiesInQuery.map((cityId) => {
@@ -166,8 +167,8 @@ export default function CityFilter({ cities, id }: CityFilterType) {
       <input type="checkbox" id={id} className="modal-toggle" />
       <div className="modal">
         <div className=" modal-box p-0 max-h-[550px] ">
-          <div className="pt-5 pb-3 px-8 bg-white w-full">
-            <h3 className="flex justify-between content-center text-lg font-bold">
+          <div className="w-full px-8 pt-5 pb-3 bg-white">
+            <h3 className="flex content-center justify-between text-lg font-bold">
               {_TXT.CITY.SELECT}
 
               {/* delete text */}
@@ -185,7 +186,7 @@ export default function CityFilter({ cities, id }: CityFilterType) {
               onChange={citySearchHandler}
               type="text"
               placeholder={_TXT.CITY.SEARCH_IN_LIST}
-              className="input input-bordered w-full"
+              className="w-full input input-bordered"
               ref={inputRef}
             />
           </div>
@@ -205,13 +206,13 @@ export default function CityFilter({ cities, id }: CityFilterType) {
             })}
           </div>
           <div className="flex">
-            <div className="modal-action box-border w-full pt-3 pb-5 px-8 mt-3 flex justify-between items-center ">
+            <div className="box-border flex items-center justify-between w-full px-8 pt-3 pb-5 mt-3 modal-action ">
               <label
                 onClick={applyFilters}
                 htmlFor={id}
-                className="btn btn-primary w-full"
+                className="w-full btn btn-primary"
               >
-                {_TXT.GENERAL.CONFIRM}
+                نمایش 12 مورد
               </label>
             </div>
           </div>
