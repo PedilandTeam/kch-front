@@ -24,9 +24,18 @@ const SimilarCat = async ({ categoryId, countryCode }: SimilarCat) => {
 
   if (pages?.meta.totalItems! >= 4)
     return (
-      <div className="px-3 my-12 sm:my-20 sm:px-0">
-        <h3 className="mb-6 text-xl font-extrabold">مشاغل مشابه در دسته‌بندی ساخت و ساز</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-y-4 sm:gap-5">
+      <div className="my-12 sm:my-20">
+        <h3 className="px-3 mb-2 text-xl font-extrabold sm:mb-6 sm:px-0">
+          مشاغل مشابه در دسته‌بندی ساخت و ساز
+        </h3>
+
+        <div className="hidden grid-cols-1 sm:grid sm:grid-cols-4 gap-y-4 sm:gap-5">
+          {pages?.items.map((page) => {
+            return <SuggestedListItem page={page} key={page.id} />;
+          })}
+        </div>
+
+        <div className="max-w-full gap-5 p-5 rounded-none carousel carousel-center sm:hidden">
           {pages?.items.map((page) => {
             return <SuggestedListItem page={page} key={page.id} />;
           })}

@@ -8,8 +8,6 @@ import {
   MapPinLine,
   Star,
   ShieldWarning,
-  HouseSimple,
-  Tipi,
   Plant,
 } from "app/client-packages/phosphor-icons/react";
 import Rating from "react-rating";
@@ -20,54 +18,53 @@ type cardListItem = {
 
 export default function SuggestedListItem({ page }: cardListItem) {
   return (
-    <div className="relative transition duration-300 border border-gray-200 shadow-md hover:shadow-lg hover:shadow-blue-100 hover:border-blue-200 card bg-stone-50 bg-opacity-30 hover:bg-blue-50 hover:bg-opacity-30 group">
-      <figure className="pt-5">
-        <Link href={`/${page.slug}`}>
-          <ItemProfilePicture
-            height={140}
-            width={140}
-            pageData={page}
-            className={"rounded-full"}
+    <div className="relative px-4 py-5 transition duration-300 border border-gray-200 shadow-md w-[280px] sm:w-auto hover:shadow-lg hover:shadow-blue-100 hover:border-blue-200 card rounded-lg bg-stone-50 bg-opacity-30 hover:bg-blue-50 hover:bg-opacity-30 group carousel-item sm:box-border">
+      <Link href={`/${page.slug}`}>
+        <div>
+          <figure>
+            <ItemProfilePicture
+              height={140}
+              width={140}
+              pageData={page}
+              className={"rounded-full"}
+            />
+          </figure>
+
+          <ShieldWarning
+            size={26}
+            className="absolute transition duration-300 text-stone-300 group-hover:text-orange-400 top-4 right-4"
+            weight="duotone"
           />
-        </Link>
-      </figure>
 
-      <ShieldWarning
-        size={26}
-        className="absolute transition duration-300 text-stone-300 group-hover:text-orange-400 top-4 right-4"
-        weight="duotone"
-      />
-
-      <Plant
-        size={26}
-        className="absolute transition duration-300 text-stone-300 group-hover:text-emerald-600 top-4 left-4"
-        weight="duotone"
-      />
-
-      <div className="px-4 pt-5">
-        <Link href={`/${page.slug}`}>
-          <h2 className="text-xl font-semibold text-center truncate hover:text-primary hover:overflow-visible _card-title">
+          <Plant
+            size={26}
+            className="absolute transition duration-300 text-stone-300 group-hover:text-emerald-600 top-4 left-4"
+            weight="duotone"
+          />
+          <h2 className="my-3 text-xl font-semibold text-center truncate transition duration-300 group-hover:text-primary hover:overflow-visible _card-title">
             {page.title}
           </h2>
-        </Link>
 
-        <div className="flex items-center justify-center mt-4 mb-8 sm:mb-4 _card-rating">
-          {/* @ts-ignore */}
-          <Rating
-            initialRating={0}
-            direction={"rtl"}
-            readonly={true}
-            className="flex"
-            emptySymbol={
-              <Star size={26} weight="duotone" className="text-stone-300" />
-            }
-            fullSymbol={
-              <Star size={26} weight="fill" className="text-yellow-400" />
-            }
-          />
+          <div className="flex items-center justify-center _card-rating">
+            {/* @ts-ignore */}
+            <Rating
+              initialRating={0}
+              direction={"rtl"}
+              readonly={true}
+              className="flex"
+              emptySymbol={
+                <Star size={26} weight="duotone" className="text-stone-300" />
+              }
+              fullSymbol={
+                <Star size={26} weight="fill" className="text-yellow-400" />
+              }
+            />
+          </div>
         </div>
+      </Link>
 
-        <div className="flex justify-between text-[15px] border-t pt-2 pb-4 border-dashed text-gray-500 group-hover:border-blue-200">
+      <div className="mt-4">
+        <div className="flex justify-between text-[15px] border-t border-dashed text-gray-500 group-hover:border-blue-200 pt-2">
           <div className="flex items-center">
             <MapPinLine
               size={18}
@@ -78,7 +75,9 @@ export default function SuggestedListItem({ page }: cardListItem) {
           </div>
           <div className="flex items-center">
             <Folder size={18} weight="light" className="ml-1 text-primary" />
-            <span className="truncate">{page?.category?.name}</span>
+            <Link href={"#"} className="truncate hover:text-primary">
+              {page?.category?.name}
+            </Link>
           </div>
         </div>
       </div>

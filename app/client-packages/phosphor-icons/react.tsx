@@ -24,6 +24,10 @@ import {
   Tipi,
   Plant,
   Confetti,
+  LinkedinLogo,
+  XLogo,
+  CaretLineUp,
+  CaretUp,
 } from "@phosphor-icons/react";
 
 export {
@@ -50,4 +54,8 @@ export {
   Tipi,
   Plant,
   Confetti,
+  LinkedinLogo,
+  XLogo,
+  CaretLineUp,
+  CaretUp,
 };

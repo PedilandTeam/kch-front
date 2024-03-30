@@ -4,7 +4,6 @@ import { ItemTopInfo } from "./topInfo";
 import { PageNamespace } from "@/types/page";
 import CountryUpdater from "./countryUpdater";
 import { ITEM } from "@/app/text/directory";
-import Image from "next/image";
 import SimilarCat from "./tools/similarCat";
 import { Suspense } from "react";
 import ServicesList from "./tools/servicesList";
@@ -70,7 +69,7 @@ export default function PageItem({ pageData }: PageItemProps) {
         </div>
 
         {/* Advertising Section P01 */}
-        <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
+        {/* <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
           <div>
             <Image
               src={"/images/banner/bnr-03.gif"}
@@ -87,8 +86,9 @@ export default function PageItem({ pageData }: PageItemProps) {
               alt="banner"
             />
           </div>
-        </div>
+        </div> */}
 
+        {/* Same Items in the Category */}
         <Suspense>
           <SimilarCat
             countryCode={pageData.country.code}
@@ -96,15 +96,16 @@ export default function PageItem({ pageData }: PageItemProps) {
           />
         </Suspense>
 
-        <Suspense>
+        {/* Randomize Items in the Unit */}
+        {/* <Suspense>
           <SimilarCat
             countryCode={pageData.country.code}
             categoryId={pageData.category.id}
           />
-        </Suspense>
+        </Suspense> */}
 
         {/* Advertising Section P02 */}
-        <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0">
+        {/* <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0">
           <div>
             <Image
               src={"/images/banner/bnr-04.gif"}
@@ -121,7 +122,7 @@ export default function PageItem({ pageData }: PageItemProps) {
               alt="banner"
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
