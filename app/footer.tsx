@@ -65,7 +65,8 @@ export const Footer = () => {
           <div className="flex items-center">
             <div className="w-full text-center">
               <Link
-                href={"#"}
+                href={"https://t.me/koochaa_support"}
+                target={"_blank"}
                 className="font-medium text-white border-white btn btn-outline hover:border-black"
               >
                 {FOOTER.CALL_SUPPORT}
