@@ -1,5 +1,5 @@
 "use client";
-import { _TXT } from "@/app/text";
+import { GENERAL } from "@/app/text/general";
 import Link from "next/link";
 
 type ItemBreadCrumbType = {
@@ -14,16 +14,16 @@ type ItemBreadCrumbType = {
 };
 export const ItemBreadCrumb = ({ unit, country }: ItemBreadCrumbType) => {
   return (
-    <div className="text-sm breadcrumbs bg-blue-50 sm:bg-transparent px-4 py-3">
+    <div className="w-full px-4 py-3 text-sm sm:w-auto breadcrumbs bg-blue-50 sm:bg-transparent">
       <ul>
         <li>
-          <Link href="/">{_TXT.GENERAL.HOME}</Link>
+          <Link href="/">{GENERAL.HOME}</Link>
         </li>
         <li>
           <Link href={`/${country.code}`}>{country.name}</Link>
         </li>
         <li>
-          {unit.name} {_TXT.GENERAL.PERSIAN}
+          {unit.name} {GENERAL.PERSIAN}
         </li>
       </ul>
     </div>

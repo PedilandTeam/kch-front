@@ -53,7 +53,7 @@ export const CardsList = async ({
   }
   return (
     <>
-      <div className="min-h-[500px] w-full _list-card">
+      <div className="min-h-[500px] w-full _cat-list-card">
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-y-4 sm:gap-5">
           {pages?.items?.map((page: PageNamespace.Page, index: number) => {
             return (

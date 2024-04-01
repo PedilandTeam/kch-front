@@ -1,8 +1,8 @@
-import { _TXT } from "@/app/text";
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CountryNamespace } from "@/types/country";
 import CountryCategoriesItems from "./countryCategoriesItems";
+import { CATEGORY } from "@/app/text/directory";
 
 async function getMostUsedCategories(countryCode: string) {
   let result: CategoryNamespace.MOST_USED;
@@ -40,10 +40,10 @@ export const CountryCategories = async ({
 
   return (
     <div className="container mx-auto max-w-[1144px]">
-      <div className="mod-categories my-8 sm:my-16">
-        <div className="mod-header text-center">
+      <div className="my-8 mod-categories sm:my-16">
+        <div className="text-center mod-header">
           <h2 className="text-[20px] inline-block sm:text-[24px] font-semibold mb-5">
-            {_TXT.CATEGORY.POPULAR}
+            {CATEGORY.POPULAR}
           </h2>
         </div>
         <CountryCategoriesItems

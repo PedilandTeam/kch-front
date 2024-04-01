@@ -1,6 +1,5 @@
 "use client";
 
-import { _TXT } from "@/app/text";
 import { CityNamespace } from "@/types/city";
 import CityFilterItem from "./city.filter.item";
 import { useEffect, useRef, useState } from "react";
@@ -10,7 +9,8 @@ import { useRouter } from "next/navigation";
 import CityFilterSelectedItem from "./city.filter.selected.item";
 import useCreateQueryString from "@/hooks/useCreateQueryString";
 import useDeleteQueryString from "@/hooks/useDeleteQueryString";
-import { FunnelIcon } from "@heroicons/react/24/solid";
+import { CITY } from "@/app/text/location";
+import { GENERAL } from "@/app/text/general";
 
 type CityFilterType = {
   cities: CityNamespace.city[];
@@ -33,8 +33,8 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     useState(false);
 
   useEffect(() => {
-    setModifiedCities(cities)
-  }, [cities])
+    setModifiedCities(cities);
+  }, [cities]);
 
   const [shouldBeAdd, setShouldBeAdd] = useState<string[]>([]);
 
@@ -82,7 +82,6 @@ export default function CityFilter({ cities, id }: CityFilterType) {
 
   const createQueryString = useCreateQueryString();
 
-
   const applyFilters = () => {
     router.replace(`${pathname}?${createQueryString("city", shouldBeAdd)}`);
   };
@@ -127,16 +126,17 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   }).city;
 
   return (
-    <div className="_filter-wrap">
+    <div className="w-full _filter-wrap sm:w-auto">
       <div className="flex items-center justify-start _filter-section">
+        {/* The button to open modal */}
         <label
           htmlFor={id}
-          className="btn btn-primary btn-outline"
+          className="w-full btn btn-primary btn-outline sm:w-auto"
         >
-          {_TXT.CITY.SELECT}
+          {CITY.SELECT}
         </label>
 
-        <div className="flex items-center gap-5 mr-5">
+        <div className="flex items-center gap-5">
           {Array.isArray(citiesInQuery) ? (
             // if city is multiple number, find all of that from cities
             citiesInQuery.map((cityId) => {
@@ -162,35 +162,33 @@ export default function CityFilter({ cities, id }: CityFilterType) {
         </div>
       </div>
 
-
       {/* the modal */}
       <input type="checkbox" id={id} className="modal-toggle" />
       <div className="modal">
-        <div className=" modal-box p-0 max-h-[550px] ">
-          <div className="w-full px-8 pt-5 pb-3 bg-white">
+        <div className="modal-box p-0 max-h-[550px]">
+          <div className="w-full p-4 bg-white sm:p-6">
             <h3 className="flex content-center justify-between text-lg font-bold">
-              {_TXT.CITY.SELECT}
-
+              {CITY.SELECT}
               {/* delete text */}
               {citiesInQuery ? (
                 <span
                   onClick={deleteAllCityHandler}
                   className="cursor-pointer text-[15px] font-normal text-pink-800"
                 >
-                  {_TXT.GENERAL.DELETE_ALL}
+                  {GENERAL.DELETE_ALL}
                 </span>
               ) : null}
             </h3>
-            <p className="py-3">{_TXT.CITY.SELECT_MULTI}</p>
+            <p className="py-3">{CITY.SELECT_MULTI}</p>
             <input
               onChange={citySearchHandler}
               type="text"
-              placeholder={_TXT.CITY.SEARCH_IN_LIST}
+              placeholder={CITY.SEARCH_IN_LIST}
               className="w-full input input-bordered"
               ref={inputRef}
             />
           </div>
-          <div className="px-8 h-[16rem] overflow-y-scroll">
+          <div className="px-6 sm:px-8 h-[16rem] overflow-y-scroll">
             {modifiedCities?.map((city: CityNamespace.city) => {
               return (
                 <CityFilterItem
@@ -205,16 +203,14 @@ export default function CityFilter({ cities, id }: CityFilterType) {
               );
             })}
           </div>
-          <div className="flex">
-            <div className="box-border flex items-center justify-between w-full px-8 pt-3 pb-5 mt-3 modal-action ">
-              <label
-                onClick={applyFilters}
-                htmlFor={id}
-                className="w-full btn btn-primary"
-              >
-                نمایش 12 مورد
-              </label>
-            </div>
+          <div className="w-full px-4 mb-4 sm:mb-6 sm:px-6 modal-action">
+            <label
+              onClick={applyFilters}
+              htmlFor={id}
+              className="w-full btn btn-primary"
+            >
+              {GENERAL.CONFIRM}
+            </label>
           </div>
         </div>
         {/* <label className="modal-backdrop" htmlFor={id}>

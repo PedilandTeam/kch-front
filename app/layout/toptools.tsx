@@ -2,8 +2,9 @@
 
 import { Bars3Icon, MapIcon } from "@heroicons/react/24/outline";
 import { CircleFlag } from "next-circle-flags";
-import { _TXT } from "../text";
 import Link from "next/link";
+import { COUNTRY } from "../text/location";
+import { MENU } from "../text/menu";
 
 type TopToolsProps = {
   countryCode: string;
@@ -25,7 +26,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
         >
           <button className="btn btn-outline btn-primary rounded-full sm:rounded-lg px-0 sm:px-3 w-[48px] sm:w-auto">
             <span className="hidden sm:inline-block">
-              {_TXT.COUNTRY.SELECT}
+              {COUNTRY.SELECT}
             </span>
             <MapIcon className="w-6 h-6" />
           </button>
@@ -61,7 +62,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
                   href={`/${countryCode}/businesses`}
                   className="transition divide-purple-300 text-primary hover:text-black"
                 >
-                  {_TXT.MENU.BUSINESSES}
+                  {MENU.BUSINESSES}
                 </Link>
               </li>
               <li>
@@ -69,7 +70,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
                   href={`/${countryCode}/doctors`}
                   className="transition divide-purple-300 text-primary hover:text-black"
                 >
-                  {_TXT.MENU.DOCTORS}
+                  {MENU.DOCTORS}
                 </Link>
               </li>
             </ul>

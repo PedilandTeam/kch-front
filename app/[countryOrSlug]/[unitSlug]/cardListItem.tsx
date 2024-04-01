@@ -24,7 +24,7 @@ type cardListItem = {
 export default function CardListItem({ page, country, variant }: cardListItem) {
   return (
     <div
-      className="relative px-4 py-5 transition duration-300 border border-gray-200  w-[280px] sm:w-auto hover:shadow-lg hover:shadow-blue-100 hover:border-blue-200 card rounded-lg hover:bg-blue-50 hover:bg-opacity-30 group carousel-item sm:box-border"
+      className="relative mx-auto sm:mx-0 px-4 py-5 transition duration-300 border border-gray-200 w-[280px] sm:w-auto hover:shadow-lg hover:shadow-blue-100 hover:border-blue-200 card rounded-lg hover:bg-blue-50 hover:bg-opacity-30 group carousel-item sm:box-border"
       key={`cardlist-page-index-${page.slug}`}
     >
       <Link href={`/${page.slug}`}>

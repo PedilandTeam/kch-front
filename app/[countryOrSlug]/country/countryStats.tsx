@@ -1,4 +1,3 @@
-import { _TXT } from "@/app/text";
 import {
   EyeIcon,
   FolderIcon,
@@ -8,6 +7,8 @@ import {
 import { API_ROUTES } from "@/routes";
 import { StatsNamespace } from "@/types/stats";
 import { CountryNamespace } from "@/types/country";
+import { CATEGORY, ITEM } from "@/app/text/directory";
+import { CITY } from "@/app/text/location";
 type CountryStatsProps = {
   currentCountry: CountryNamespace.GET;
 };
@@ -27,8 +28,6 @@ async function getStats(
   return stats;
 }
 
-
-
 export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
   let stats: StatsNamespace.COUNTRY_STATS;
 
@@ -40,45 +39,45 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
   }
 
   return (
-    <div className="mod-stats4 my-14 sm:my-28 mx-3 sm:mx-0 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900">
+    <div className="mx-3 mod-stats4 my-14 sm:my-28 sm:mx-0 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900">
       <div className="container mx-auto max-w-[1144px]">
-        <div className="wrap p-12 flex flex-wrap sm:justify-around shadow-sm text-gray-100">
-          <div className="item w-full sm:w-auto flex mb-6 sm:mb-0">
-            <div className="image border border-dashed border-white p-5 ml-4 rounded-full">
+        <div className="flex flex-wrap p-12 text-gray-100 shadow-sm wrap sm:justify-around">
+          <div className="flex w-full mb-6 item sm:w-auto sm:mb-0">
+            <div className="p-5 ml-4 border border-white border-dashed rounded-full image">
               <RectangleStackIcon className="w-9 h-9" />
             </div>
             <div className="info flex flex-wrap content-center text-[20px]">
               <div className="ml-2 font-bold ">{stats.page}</div>
-              <div className="font-medium">{_TXT.ITEM._}</div>
+              <div className="font-medium">{ITEM._}</div>
             </div>
           </div>
-          <div className="item w-full sm:w-auto flex mb-6 sm:mb-0">
-            <div className="image border border-dashed border-white p-5 ml-4 rounded-full">
+          <div className="flex w-full mb-6 item sm:w-auto sm:mb-0">
+            <div className="p-5 ml-4 border border-white border-dashed rounded-full image">
               <MapIcon className="w-9 h-9" />
             </div>
             <div className="info flex flex-wrap content-center text-[20px]">
               <div className="ml-2 font-bold ">{stats.city}</div>
-              <div className="font-medium">{_TXT.CITY._}</div>
+              <div className="font-medium">{CITY._}</div>
             </div>
           </div>
-          <div className="item w-full sm:w-auto flex">
-            <div className="image border border-dashed border-white p-5 ml-4 rounded-full">
+          <div className="flex w-full item sm:w-auto">
+            <div className="p-5 ml-4 border border-white border-dashed rounded-full image">
               <FolderIcon className="w-9 h-9" />
             </div>
             <div className="info flex flex-wrap content-center text-[20px]">
               <div className="ml-2 font-bold ">{stats.category}</div>
-              <div className="font-medium">{_TXT.CATEGORY._}</div>
+              <div className="font-medium">{CATEGORY._}</div>
             </div>
           </div>
-          {/* <div className="item w-full sm:w-auto flex">
-            <div className="image border border-dashed border-white p-5 ml-4 rounded-full">
+          {/* <div className="flex w-full item sm:w-auto">
+            <div className="p-5 ml-4 border border-white border-dashed rounded-full image">
               <EyeIcon className="w-9 h-9" />
             </div>
             <div className="info flex flex-wrap content-center text-[20px]">
               <div className="ml-2 font-bold ">
-                {views ?? _TXT.GENERAL.LOADING}
+                {views ?? GENERAL.LOADING}
               </div>
-              <div className="font-medium">{_TXT.GENERAL.VIEW}</div>
+              <div className="font-medium">{GENERAL.VIEW}</div>
             </div>
           </div> */}
         </div>

@@ -1,6 +1,5 @@
 "use client";
 
-import { _TXT } from "@/app/text";
 import { CategoryNamespace } from "@/types/category";
 import CategoryFilterItem from "./category.filter.item";
 import { useEffect, useState } from "react";
@@ -10,6 +9,8 @@ import { useRouter } from "next/navigation";
 import CategoryFilterSelectedItem from "./category.filter.selected.item";
 import useCreateQueryString from "@/hooks/useCreateQueryString";
 import useDeleteQueryString from "@/hooks/useDeleteQueryString";
+import { CATEGORY } from "@/app/text/directory";
+import { GENERAL } from "@/app/text/general";
 
 type CategoryFilterType = {
   categories: CategoryNamespace.category[];
@@ -27,10 +28,9 @@ export type checkHandlerType = (value: string | number) => boolean | undefined;
 export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   const [modifiedCategories, setModifiedCategories] = useState(categories);
 
-
   useEffect(() => {
-    setModifiedCategories(categories)
-  },[categories])
+    setModifiedCategories(categories);
+  }, [categories]);
 
   const categorySearchHandler = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -44,7 +44,6 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  
 
   //category=1,2 -> [1,2] or category=3 -> "3"
   const categoriesInQuery = queryString.parse(searchParams.toString(), {
@@ -129,15 +128,17 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   };
 
   return (
-    <div className="filter-wrap">
-      <div className="filter-section mb-4">
-        {/* <h3 className="font-medium">{GENERAL.CATEGORY}</h3> */}
-
+    <div className="w-full max-w-1/2 _filter-wrap sm:w-auto">
+      <div className="flex items-center justify-start _filter-section">
         {/* The button to open modal */}
-        <label htmlFor={id} className={`btn btn-outline btn-primary w-full`}>
-          {citiesInQuery ? _TXT.CATEGORY.SELECT : _TXT.CATEGORY.SELECT}
+        <label
+          htmlFor={id}
+          className="w-full btn btn-primary btn-outline sm:w-auto"
+        >
+          {citiesInQuery ? CATEGORY.SELECT : CATEGORY.SELECT}
         </label>
-        <div className="px-3 my-3">
+
+        <div className="flex items-center gap-3">
           {Array.isArray(categoriesInQuery) ? (
             categoriesInQuery.map((categoryId) => {
               if (!categoryId) return;
@@ -166,19 +167,19 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
           ) : null}
         </div>
 
-        {/* Put this part before </body> tag */}
+        {/* the modal */}
         <input type="checkbox" id={id} className="modal-toggle" />
         <div className="modal">
-          <div className=" modal-box p-0 max-h-[550px] ">
-            <div className="pt-5 pb-3 px-8 bg-white w-full">
-              <h3 className="flex justify-between content-center text-lg font-bold">
+          <div className="modal-box p-0 max-h-[550px]">
+            <div className="w-full p-4 bg-white sm:p-6">
+              <h3 className="flex content-center justify-between text-lg font-bold">
                 انتخاب دسته بندی
                 {categoriesInQuery ? (
                   <span
                     onClick={deleteAllCategoryHandler}
                     className="cursor-pointer text-[15px] font-normal text-pink-800"
                   >
-                    {_TXT.GENERAL.DELETE_ALL}
+                    {GENERAL.DELETE_ALL}
                   </span>
                 ) : null}
               </h3>
@@ -189,10 +190,10 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
                 onChange={categorySearchHandler}
                 type="text"
                 placeholder="جستجو در لیست دسته بندی ها"
-                className="input input-bordered w-full"
+                className="w-full input input-bordered"
               />
             </div>
-            <div className="px-8 h-[16rem] overflow-y-scroll">
+            <div className="px-6 sm:px-8 h-[16rem] overflow-y-scroll">
               {modifiedCategories?.map(
                 (category: CategoryNamespace.category) => {
                   return (
@@ -210,13 +211,13 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
               )}
             </div>
 
-            <div className="modal-action box-border w-full pt-3 pb-5 px-8 mt-3 flex justify-between items-center bg-white shadow-2xl">
+            <div className="w-full px-4 mb-4 sm:mb-6 sm:px-6 modal-action">
               <label
                 onClick={applyFilters}
                 htmlFor={id}
-                className="btn btn-primary w-full"
+                className="w-full btn btn-primary"
               >
-                {_TXT.GENERAL.CONFIRM}
+                {GENERAL.CONFIRM}
               </label>
             </div>
           </div>

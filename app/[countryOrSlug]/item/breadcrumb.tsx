@@ -1,4 +1,4 @@
-import { _TXT } from "@/app/text";
+import { GENERAL } from "@/app/text/general";
 import { PageNamespace } from "@/types/page";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ export const ItemBreadCrumb = ({ pageData }: ItemBreadCrumbProps) => {
       <ul>
         <li>
           <Link href={"/"} className="text-blue-900">
-            {_TXT.GENERAL.HOME}
+            {GENERAL.HOME}
           </Link>
         </li>
         <li>

@@ -22,10 +22,6 @@ export default function CategoryFilterSelectedItem({
   category,
   removeFromShouldBeAdd,
 }: CategoryFilterSelectedItemProps) {
-
-
-
-
   const router = useRouter();
   const searchParams = useSearchParams() as unknown as URLSearchParams;
   const pathname = usePathname();
@@ -45,45 +41,46 @@ export default function CategoryFilterSelectedItem({
   const inputClickHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const currentTarget = event.currentTarget;
     if (!currentTarget.checked) {
-      removeFromShouldBeAdd(currentTarget.value)
+      removeFromShouldBeAdd(currentTarget.value);
       return router.replace(
         `${pathname}?${deleteQueryString("category", currentTarget.value)}`
       );
     }
   };
 
-  const isChecked = useCallback((parsedSearchParams: ParsedSearchParamsType) => {
-    return parsedSearchParams.category
-      ? Array.isArray(parsedSearchParams.category)
-        ? !!parsedSearchParams.category.find(
-          (param) => +param == category.id
-        )
-        : +parsedSearchParams.category == category.id
-      : false
-  }, [category.id])
+  const isChecked = useCallback(
+    (parsedSearchParams: ParsedSearchParamsType) => {
+      return parsedSearchParams.category
+        ? Array.isArray(parsedSearchParams.category)
+          ? !!parsedSearchParams.category.find((param) => +param == category.id)
+          : +parsedSearchParams.category == category.id
+        : false;
+    },
+    [category.id]
+  );
 
-  const id = useRef(`category-3413-select-${category.id}`)
-
+  const id = useRef(`category-3413-select-${category.id}`);
 
   return (
-
-    <div className="flex justify-right items-center" key={`cate-gory-filter-slected--${category.id}`}>
+    <div
+      className=""
+      key={`cate-gory-filter-slected--${category.id}`}
+    >
       <input
         ref={ref}
-        className="checkbox checkbox-secondary checkbox-sm ml-3"
+        className="ml-2 checkbox checkbox-sm border-gray-400 checked:white [--chkbg:theme(colors.gray.400)] [--chkfg:white]"
         onChange={inputClickHandler}
         id={id.current}
         value={category.id}
         type="checkbox"
         checked={isChecked(parsedSearchParams)}
       />
-      <p
+      <span
         onClick={() => ref.current?.click()}
-        className="item flex items-center py-2 cursor-pointer"
+        className="text-gray-500 cursor-pointer"
       >
         {category.name}
-      </p>
-
+      </span>
     </div>
   );
 }
