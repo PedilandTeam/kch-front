@@ -40,7 +40,7 @@ export const CountryCategories = async ({
 
   return (
     <div className="container mx-auto max-w-[1144px]">
-      <div className="my-8 mod-categories sm:my-16">
+      <div className="my-12 mod-categories sm:my-16">
         <div className="text-center mod-header">
           <h2 className="text-[20px] inline-block sm:text-[24px] font-semibold mb-5">
             {CATEGORY.POPULAR}

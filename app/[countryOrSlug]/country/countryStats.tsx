@@ -40,7 +40,7 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
   }
 
   return (
-    <div className="mx-3 mod-stats4 my-14 sm:my-28 sm:mx-0 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900">
+    <div className="mx-3 mod-stats4 my-14 sm:mb-28 sm:mt-14 sm:mx-0 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900">
       <div className="container mx-auto max-w-[1144px]">
         <div className="flex flex-wrap p-12 text-gray-100 shadow-sm wrap sm:justify-around">
           <div className="flex w-full mb-6 item sm:w-auto sm:mb-0">

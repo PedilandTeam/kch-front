@@ -31,6 +31,9 @@
       ],
       "@text/*": [
         "./app/text/*"
+      ],
+      "@/types/*": [
+        "./types/*"
       ]
     },
     "plugins": [
