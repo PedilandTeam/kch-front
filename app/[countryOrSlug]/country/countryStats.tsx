@@ -1,14 +1,15 @@
-import {
-  EyeIcon,
-  FolderIcon,
-  MapIcon,
-  RectangleStackIcon,
-} from "@heroicons/react/24/outline";
 import { API_ROUTES } from "@/routes";
 import { StatsNamespace } from "@/types/stats";
 import { CountryNamespace } from "@/types/country";
 import { CATEGORY, ITEM } from "@/app/text/directory";
 import { CITY } from "@/app/text/location";
+import {
+  MapPin,
+  Eye,
+  FolderStar,
+  CardsThree,
+} from "app/client-packages/phosphor-icons/react";
+import { GENERAL } from "@/app/text/general";
 type CountryStatsProps = {
   currentCountry: CountryNamespace.GET;
 };
@@ -44,7 +45,7 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
         <div className="flex flex-wrap p-12 text-gray-100 shadow-sm wrap sm:justify-around">
           <div className="flex w-full mb-6 item sm:w-auto sm:mb-0">
             <div className="p-5 ml-4 border border-white border-dashed rounded-full image">
-              <RectangleStackIcon className="w-9 h-9" />
+              <CardsThree size={32} weight="duotone" />
             </div>
             <div className="info flex flex-wrap content-center text-[20px]">
               <div className="ml-2 font-bold ">{stats.page}</div>
@@ -53,7 +54,7 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
           </div>
           <div className="flex w-full mb-6 item sm:w-auto sm:mb-0">
             <div className="p-5 ml-4 border border-white border-dashed rounded-full image">
-              <MapIcon className="w-9 h-9" />
+              <MapPin size={32} weight="duotone" />
             </div>
             <div className="info flex flex-wrap content-center text-[20px]">
               <div className="ml-2 font-bold ">{stats.city}</div>
@@ -62,16 +63,17 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
           </div>
           <div className="flex w-full item sm:w-auto">
             <div className="p-5 ml-4 border border-white border-dashed rounded-full image">
-              <FolderIcon className="w-9 h-9" />
+              <FolderStar size={32} weight="duotone" />
             </div>
             <div className="info flex flex-wrap content-center text-[20px]">
               <div className="ml-2 font-bold ">{stats.category}</div>
               <div className="font-medium">{CATEGORY._}</div>
             </div>
           </div>
+
           {/* <div className="flex w-full item sm:w-auto">
             <div className="p-5 ml-4 border border-white border-dashed rounded-full image">
-              <EyeIcon className="w-9 h-9" />
+              <Eye size={32} weight="duotone" />
             </div>
             <div className="info flex flex-wrap content-center text-[20px]">
               <div className="ml-2 font-bold ">

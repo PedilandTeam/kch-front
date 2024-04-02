@@ -11,11 +11,6 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Input from "@/components/daisy/input";
-import {
-  EnvelopeIcon,
-  FaceSmileIcon, LockClosedIcon,
-  UserIcon
-} from "@heroicons/react/24/outline";
 import Button from "@/components/daisy/button";
 // import HeaderSimple from "../layout/header-sm";
 
@@ -97,7 +92,7 @@ export default function RegisterForm({
   });
 
   return (
-    <div className="min-h-full flex flex-wrap items-baseline sm:items-center bg-simple-1 sm:relative">
+    <div className="flex flex-wrap items-baseline min-h-full sm:items-center bg-simple-1 sm:relative">
       {/* <HeaderSimple /> */}
 
       <div className="w-full sm:w-2/5 mx-3 my-20 sm:mx-auto bg-white p-6 sm:p-8 rounded-xl shadow border border-t-[4px] border-t-yellow-500 relative">
@@ -109,7 +104,7 @@ export default function RegisterForm({
             alt="Koocha Bird Symbol"
           />
         </div>
-        <h1 className="mb-4 font-semibold text-lg">ثبت حساب کاربری جدید</h1>
+        <h1 className="mb-4 text-lg font-semibold">ثبت حساب کاربری جدید</h1>
         <form onSubmit={formik.handleSubmit}>
           <div className="grid grid-cols-4 gap-3">
             <Input
@@ -148,7 +143,7 @@ export default function RegisterForm({
             <Input
               name="email"
               autoComplete="new-email"
-              onChange={formik.handleChange}            
+              onChange={formik.handleChange}
               className="col-span-4 sm:col-span-2"
               type="email"
               placeholder="ایمیل"
@@ -169,7 +164,7 @@ export default function RegisterForm({
             />
           </div>
 
-          <Button isLoading={loading} className="btn btn-primary my-6 w-full" />
+          <Button isLoading={loading} className="w-full my-6 btn btn-primary" />
 
           <p className="text-[15px]">
             حساب کاربری دارید؟{" "}
@@ -182,4 +177,3 @@ export default function RegisterForm({
     </div>
   );
 }
- 

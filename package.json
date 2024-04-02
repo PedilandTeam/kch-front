@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
-    "@heroicons/react": "^2.1.1",
     "@nextui-org/pagination": "^2.0.22",
     "@phosphor-icons/react": "^2.1.4",
     "@reduxjs/toolkit": "^1.9.6",

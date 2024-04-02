@@ -1,4 +1,3 @@
-import { CursorArrowRippleIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import sliderImage from "../../public/images/slide/home/hs-02.webp";
@@ -36,10 +35,7 @@ export const SliderMainHome = () => {
           </h2>
         </div>
         <Link href={"#select-country"} scroll>
-          <button className="btn btn-accent">
-            از اینجا شروع کنید
-            <CursorArrowRippleIcon className="w-7 h-7" />
-          </button>
+          <button className="btn btn-accent">از اینجا شروع کنید</button>
         </Link>
       </div>
     </div>

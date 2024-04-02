@@ -1,10 +1,10 @@
 "use client";
 
-import { Bars3Icon, MapIcon } from "@heroicons/react/24/outline";
 import { CircleFlag } from "next-circle-flags";
 import Link from "next/link";
 import { COUNTRY } from "../text/location";
 import { MENU } from "../text/menu";
+import { Flag, List } from "app/client-packages/phosphor-icons/react";
 
 type TopToolsProps = {
   countryCode: string;
@@ -15,7 +15,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
     <div className="flex items-center top-tools">
       {isMainPage ? (
         <div
-          className="select-country"
+          className="flex items-center _select-country"
           onClick={() => {
             if (document) {
               (
@@ -24,11 +24,9 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
             }
           }}
         >
-          <button className="btn btn-outline btn-primary rounded-full sm:rounded-lg px-0 sm:px-3 w-[48px] sm:w-auto">
-            <span className="hidden sm:inline-block">
-              {COUNTRY.SELECT}
-            </span>
-            <MapIcon className="w-6 h-6" />
+          <button className="p-0 rounded-full border-dashed btn btn-outline bg-blue-50 hover:bg-blue-100 sm:hover:bg-primary text-primary sm:hover:text-white sm:rounded-lg sm:pr-3 sm:pl-4 w-[48px] sm:w-auto">
+            <Flag size={24} weight="duotone" />
+            <span className="hidden sm:inline-block">{COUNTRY.SELECT}</span>
           </button>
         </div>
       ) : (
@@ -48,7 +46,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
             loading={"lazy"}
             alt={`Logo of country with ISO code ${countryCode}`}
             countryCode={countryCode}
-            className="w-[38px] h-[38px] transition opacity-75 hover:opacity-100 hover:cursor-pointer "
+            className="w-[40px] h-[40px] transition opacity-75 hover:opacity-100 hover:cursor-pointer "
           />
         </div>
       )}
@@ -79,9 +77,9 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
           <div className="mr-3 menu-icon sm:hidden">
             <label
               htmlFor="main-drawer"
-              className="flex items-center justify-center rounded-full w-[38px] h-[38px] bg-secondary"
+              className="flex items-center justify-center rounded-full w-[40px] h-[40px] bg-secondary text-white"
             >
-              <Bars3Icon className="text-white w-7 h-7" />
+              <List size={28} />
             </label>
           </div>
         </div>

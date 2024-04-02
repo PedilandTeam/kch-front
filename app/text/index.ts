@@ -8,15 +8,15 @@ import { FOOTER } from "./footer";
 import { CATEGORY, ITEM, FILTER } from "./directory";
 
 export const _TXT = {
-  GENERAL,
-  MENU,
-  COUNTRY,
-  CITY,
-  DAYS,
-  SOCIAL,
-  MODAL,
-  FOOTER,
   CATEGORY,
-  ITEM,
+  CITY,
+  COUNTRY,
+  DAYS,
   FILTER,
+  FOOTER,
+  GENERAL,
+  ITEM,
+  MENU,
+  MODAL,
+  SOCIAL,
 };

@@ -1,4 +1,4 @@
-import { ArrowPathIcon } from "@heroicons/react/24/outline";
+import { ArrowsClockwise } from "app/client-packages/phosphor-icons/react";
 import Link from "next/link";
 
 const TermsText = () => {
@@ -15,16 +15,16 @@ const TermsText = () => {
             ورود به پنل کاربری و استفاده از خدمات سایت به منزله مطالعه و موافقت
             شماست، صمیمانه توصیه می‌کنیم که این قوانین رو به دقت مطالعه کنید.
           </span>{" "}
-          <span className="text-red-500 text-[15px]">
+          <span className="text-red-500">
             (با توجه به اینکه قوانین در طول زمان کامل‌تر میشن، به تاریخ
             بروزرسانی اون دقت کنید)
           </span>
         </p>
-        <p className="my-6 text-gray-600 flex items-center">
-          <ArrowPathIcon className="w-4 h-4 ml-2" />
+        <p className="flex items-center gap-2 my-6 text-gray-600">
+          <ArrowsClockwise size={20} />
           بروز شده در مهرماه 1402
         </p>
-        <ol className="list-decimal mb-10">
+        <ol className="mb-10 list-decimal">
           <li>حریم خصوصی کاربران</li>
           <p>
             حفاظت از اطلاعات و حریم خصوصی کاربران جزو ارزش‌های اصلی کـوچـاست، از

@@ -1,7 +1,6 @@
 import { API_ROUTES, UNITS_LIST_ARRAY } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CountryNamespace } from "@/types/country";
-import { CursorArrowRippleIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import PagesSearch from "./pages.search";
@@ -47,16 +46,16 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
       />
 
       <div className="max-w-[1144px] sm:m-auto absolute w-auto bottom-[10%] sm:bottom-[15%] sm:left-0 sm:right-0 sm:w-full">
-        <div className="wrap text-center">
+        <div className="text-center wrap">
           <h3 className="sm:inline-block text-gray-300 bg-blue-900 bg-opacity-70 p-3 sm:pt-1 sm:pb-[40px] px-3 sm:px-[44px] text-[18px] sm:text-[21px] leading-[30px] sm:leading-[36px] sm:rounded-xl">
             اگر در
-            <span className="text-white font-semibold mx-1 inline-block">
+            <span className="inline-block mx-1 font-semibold text-white">
               {currentCountry.name}
             </span>
             زندگی می‌کنی و دلت میخواد
             <br />
             لیست کامل و بروزی از خدمات
-            <span className="text-white font-semibold inline-block mx-1">
+            <span className="inline-block mx-1 font-semibold text-white">
               فـارسـی زبـان
             </span>
             اطرافت داشته باشی
@@ -68,23 +67,20 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
           <PagesSearch countryCode={currentCountry.code} />
 
           <Link href={"#select-unit"} scroll>
-            <button className="btn btn-accent">
-              و یا از اینجا شروع کن
-              <CursorArrowRippleIcon className="w-7 h-7" />
-            </button>
+            <button className="btn btn-accent">و یا از اینجا شروع کن</button>
           </Link>
 
           {/* <h3 className="text-white mx-3 sm:mx-0 text-[17px] tracking-wide mb-3">
             و یا دسته‌بندی‌های پربازدید رو ببین:
           </h3>
-          <div className="flex flex-wrap justify-center gap-1 sm:gap-2 mx-3 sm:mx-0">
+          <div className="flex flex-wrap justify-center gap-1 mx-3 sm:gap-2 sm:mx-0">
             {UNITS_LIST_ARRAY.map((unit) => {
               return mostUsedCategories[unit.id].map((category) => {
                 return (
                   <Link
                     href={`/${currentCountry.code}/${unit.slug}/${category.slug}`}
                   >
-                    <button className="btn btn-sm btn-neutral font-normal text-gray-50 px-2">
+                    <button className="px-2 font-normal btn btn-sm btn-neutral text-gray-50">
                       {category.name}
                     </button>
                   </Link>
