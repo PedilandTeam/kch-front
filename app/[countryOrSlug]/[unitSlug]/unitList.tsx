@@ -93,7 +93,7 @@ export default async function UntiList({
                   لیست {unit?.name} فارسی زبان در {country?.name}
                 </h1>
                 <span className="hidden font-medium text-gray-500 sm:inline">
-                  (130 مورد)
+                  (130 آیتم)
                 </span>
               </div>
               <ItemBreadCrumb

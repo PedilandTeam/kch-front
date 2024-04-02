@@ -23,7 +23,7 @@ export default function FilterMobile() {
             <Sliders size={24} weight="light" className="ml-2" />
             <span className="font-semibold">{FILTER.SELECT}</span>
           </div>
-          <span className="font-medium">(130 مورد)</span>
+          <span className="font-medium">(130 آیتم)</span>
         </div>
       </button>
     </>
