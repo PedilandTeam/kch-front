@@ -30,6 +30,7 @@ import {
   Person,
   Plant,
   ShareNetwork,
+  Shield,
   ShieldCheck,
   ShieldWarning,
   Sliders,
@@ -39,6 +40,10 @@ import {
   WhatsappLogo,
   XLogo,
   YoutubeLogo,
+  Trophy,
+  UsersThree,
+  Bank,
+  Peace,
 } from "@phosphor-icons/react";
 
 export {
@@ -71,6 +76,7 @@ export {
   Person,
   Plant,
   ShareNetwork,
+  Shield,
   ShieldCheck,
   ShieldWarning,
   Sliders,
@@ -80,4 +86,8 @@ export {
   WhatsappLogo,
   XLogo,
   YoutubeLogo,
+  Trophy,
+  UsersThree,
+  Bank,
+  Peace,
 };

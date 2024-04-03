@@ -20,7 +20,7 @@ export const ItemBreadCrumb = ({
   unit,
 }: ItemBreadCrumbType) => {
   return (
-    <div className="w-full px-4 py-3 text-sm sm:w-auto breadcrumbs bg-blue-50 sm:bg-transparent">
+    <div className="w-full px-4 py-3 text-sm sm:px-0 sm:w-auto breadcrumbs bg-blue-50 sm:bg-transparent">
       <ul>
         <li>
           <Link href="/">{GENERAL.HOME}</Link>

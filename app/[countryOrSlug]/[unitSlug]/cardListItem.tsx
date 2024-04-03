@@ -71,33 +71,26 @@ export default function CardListItem({ page, country, variant }: cardListItem) {
         </div>
       </Link>
 
-      <div className="mt-4">
-        <div className="flex justify-between text-[15px] border-t border-dashed text-gray-500 group-hover:border-blue-200 pt-2">
-          <div className="flex items-center">
-            <MapPinLine
-              size={18}
-              weight="light"
-              className="ml-1 text-primary"
-            />
-            <span className="truncate">{page?.city?.name}</span>
-          </div>
-          <div className="flex items-center">
-            <Folder size={18} weight="light" className="ml-1 text-primary" />
-            {variant == "category" ? (
-              <span className="truncate">{page?.category?.name}</span>
-            ) : (
-              <Link
-                href={categoryPathGenerator(
-                  country.code,
-                  page.unit?.slug,
-                  page.category.slug
-                )}
-              >
-                <span className="truncate hover:text-primary">{page?.category?.name}</span>
-              </Link>
-            )}
-          </div>
-        </div>
+      <div className="mt-4 border-t border-dashed group-hover:border-blue-200">
+        <h3 className="flex items-center justify-center text-[15px] text-gray-500 pt-2">
+          {variant == "category" ? (
+            <span className="truncate">{page?.category?.name}</span>
+          ) : (
+            <Link
+              href={categoryPathGenerator(
+                country.code,
+                page.unit?.slug,
+                page.category.slug
+              )}
+            >
+              <span className="truncate hover:text-primary">
+                {page?.category?.name}
+              </span>
+            </Link>
+          )}
+          <span className="mx-1">در</span>
+          <span className="truncate">{page?.city?.name}</span>
+        </h3>
       </div>
     </div>
   );

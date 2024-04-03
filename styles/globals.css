@@ -34,11 +34,11 @@
 
 /* Static Pages Style */
 .page-wrap.static .text-wrap h2 {
-  @apply mt-8 mb-2 text-lg font-semibold text-primary first:mt-0;
+  @apply mt-8 mb-2 text-lg font-semibold text-secondary first:mt-0;
 }
 
 .page-wrap.static .text-wrap p {
-  @apply leading-7;
+  @apply mb-3 leading-7 last:mb-0;
 }
 
 .page-wrap.static .text-wrap a {
@@ -66,11 +66,7 @@
 }
 
 .page-wrap.static .text-wrap .section h2 {
-  @apply mb-3 text-lg;
-}
-
-.page-wrap.static .text-wrap .section p {
-  @apply leading-8;
+  @apply mb-5 text-xl text-center sm:mb-3 sm:text-right;
 }
 
 .page-wrap.static .text-wrap .item h3 {
