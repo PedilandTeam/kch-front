@@ -21,7 +21,8 @@ export namespace PageNamespace {
         createdDate: Date;
         updateDate: Date;
         title: string;
-        description: string;
+        subtitle?: string;
+        description?: string;
         haveAvatar: boolean;
         address: Address;
         socials?: Partial<Socials>;

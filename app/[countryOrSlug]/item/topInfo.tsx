@@ -31,12 +31,6 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
   const haveSocial = pageData.socials && Object.keys(socials).length > 0;
 
   const linkHandler = useLinkHandler({ pageData });
-
-  // Modal Consts
-  const [isModalOpen, setModalOpen] = useState(false);
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
-
   return (
     <div className="h-full _top-section">
       <div className="container mx-auto max-w-[1144px] h-full">
@@ -118,9 +112,11 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                 />
               </div>
             </h1>
-            <h2 className="mt-2 text-xl font-medium text-center text-primary sm:text-right">
-              زیرعنوان واحد
-            </h2>
+            {pageData.subtitle && (
+              <h2 className="mt-2 text-xl font-medium text-center text-primary sm:text-right">
+                {pageData.subtitle}
+              </h2>
+            )}
             <div className="flex items-center justify-center mt-4 mb-8 sm:justify-start sm:mb-4 _card-rating">
               {/* @ts-ignore */}
               <Rating
