@@ -31,7 +31,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
   delete socials.website;
   const haveSocial = pageData.socials && Object.keys(socials).length > 0;
 
-  const isNew = isPageNew(pageData.updateDate);
+  const isNew = isPageNew(pageData.createdDate);
 
   const linkHandler = useLinkHandler({ pageData });
   return (
