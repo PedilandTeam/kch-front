@@ -21,14 +21,17 @@ import {
   Confetti,
 } from "app/client-packages/phosphor-icons/react";
 import useLinkHandler from "@/hooks/useLinkHandler";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GENERAL } from "@/app/text/general";
+import isPageNew from "@/utils/isPageNew";
 
 export type ItemTopInfoType = { pageData: PageNamespace.Page };
 export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
   const socials = { ...pageData.socials };
   delete socials.website;
   const haveSocial = pageData.socials && Object.keys(socials).length > 0;
+
+  const isNew = isPageNew(pageData.updateDate);
 
   const linkHandler = useLinkHandler({ pageData });
   return (
@@ -40,14 +43,17 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
               <Plant size={20} className="ml-1 text-white" weight="duotone" />
               {GENERAL.HOME_JOB}
             </div> */}
-            <div className="px-2 py-[6px] bg-blue-400 text-white text-[15px] rounded-md flex items-center mr-2">
-              <Confetti
-                size={20}
-                className="ml-1 text-white"
-                weight="duotone"
-              />
-              {GENERAL.NEW}
-            </div>
+
+            {isNew && (
+              <div className="px-2 py-[6px] bg-blue-400 text-white text-[15px] rounded-md flex items-center mr-2">
+                <Confetti
+                  size={20}
+                  className="ml-1 text-white"
+                  weight="duotone"
+                />
+                {GENERAL.NEW}
+              </div>
+            )}
           </div>
 
           <ItemProfilePicture

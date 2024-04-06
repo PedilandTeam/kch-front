@@ -16,6 +16,7 @@ declare global {
       REDIS_URL: string;
       API_KEY: string;
       FRONT_URL: string;
+      NEXT_PUBLIC_DAYS_AS_NEW: string
     }
   }
 }
