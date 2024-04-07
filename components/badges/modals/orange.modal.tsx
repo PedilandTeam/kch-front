@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FC } from "react";
 import { BadgeModalsProps } from "../badges";
 
-const OrangeModal: FC = () => {
+const OrangeModal: FC<{slug: string}> = ({ slug }) => {
   return (
     <dialog id="orange_modal" className="modal">
       <div className="modal-box">
@@ -40,9 +40,11 @@ const OrangeModal: FC = () => {
             <button className="w-full btn">متوجه شدم</button>
           </form>
           <div className="ml-0">
-            <button className="w-full btn btn-primary">
-              مالک این صفحه هستم
-            </button>
+            <Link target="_blank" href={`${process.env.NEXT_PUBLIC_BIZ_FRONT_URL}/claim/claimWay?slug=${slug}`}>
+              <button className="w-full btn btn-primary">
+                مالک این صفحه هستم
+              </button>
+            </Link>
           </div>
         </div>
       </div>

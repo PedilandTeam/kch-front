@@ -188,7 +188,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
         </div>
       </div>
 
-      <OrangeModal/>
+      <OrangeModal slug={pageData.slug} />
       <BlueModal verifyDate={pageData.verifyDate} updateDate={pageData.updateDate} createdDate={pageData.createdDate} />
 
       {/* TODO: golden badge modal*/}
