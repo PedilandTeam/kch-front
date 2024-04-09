@@ -8,6 +8,7 @@ import SimilarCat from "./tools/similarCat";
 import { Suspense } from "react";
 import ServicesList from "./tools/servicesList";
 import Image from "next/image";
+import Description from "@/components/description";
 export type PageItemProps = {
   pageData: PageNamespace.Page;
 };
@@ -32,15 +33,16 @@ export default function PageItem({ pageData }: PageItemProps) {
               {/* Description Section */}
               <div className="py-6 border-b border-gray-200 sm:py-8">
                 <h3 className="mb-4 font-bold sm:mb-5">{ITEM.DESCRIPTION}</h3>
-                <p
+                <Description
                   className={`leading-8 ${
                     pageData.description ? "text-black" : "text-gray-500"
                   }`}
-                >
-                  {pageData.description
-                    ? pageData.description
-                    : ITEM.DESCRIPTION_PLACEHOLDER}
-                </p>
+                  html={
+                    pageData.description
+                      ? pageData.description
+                      : ITEM.DESCRIPTION_PLACEHOLDER
+                  }
+                />
               </div>
 
               {/* Services Section */}
