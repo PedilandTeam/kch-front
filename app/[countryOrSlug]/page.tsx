@@ -67,7 +67,7 @@ const pathGenerator = async (
         return {
           type: "item",
           props: {
-            pageData: pageData.items,
+            pageData: pageData.items[0],
           },
         };
       } catch (e: any) {
@@ -90,6 +90,8 @@ export async function generateMetadata({ params, searchParams }: Props) {
   } catch (e: any) {
     throw Error(e);
   }
+
+  
 
   switch (pathInfo.type) {
     case "country":
