@@ -17,6 +17,8 @@ import {
   YoutubeLogo,
   Plant,
   Confetti,
+  LinkedinLogo,
+  XLogo,
 } from "app/client-packages/phosphor-icons/react";
 import useLinkHandler from "@/hooks/useLinkHandler";
 import { GENERAL } from "@/app/text/general";
@@ -34,7 +36,6 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
   const haveSocial = pageData.socials && Object.keys(socials).length > 0;
 
   const isNew = isPageNew(pageData.createdDate);
-  
 
   const linkHandler = useLinkHandler({ pageData });
   return (
@@ -67,13 +68,10 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
             <h1 className="text-[28px] font-bold text-slate-700 flex items-center justify-center sm:justify-start flex-col-reverse sm:flex-row font-enc">
               {pageData?.title}
               <div className="flex items-center gap-2 mb-2 sm:mr-3 sm:mb-0">
-
-
                 {/* TODO: golden badge */}
 
-                <BlueBadge enable={!!pageData.business}/>
+                <BlueBadge enable={!!pageData.business} />
                 <OrangeBadge enable={!pageData.business} />
-
 
                 <Plant
                   size={30}
@@ -174,6 +172,28 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                       />
                     </Link>
                   ) : null}
+                  <Link
+                    href={`https://t.me/${pageData?.socials?.telegram}`}
+                    target="_blank"
+                    rel="nofollow noopener"
+                  >
+                    <XLogo
+                      size={32}
+                      weight="light"
+                      className="text-black transition duration-300"
+                    />
+                  </Link>
+                  <Link
+                    href={`https://t.me/${pageData?.socials?.telegram}`}
+                    target="_blank"
+                    rel="nofollow noopener"
+                  >
+                    <LinkedinLogo
+                      size={32}
+                      weight="light"
+                      className="transition duration-300 text-sky-700 hover:text-black"
+                    />
+                  </Link>
                 </div>
               )}
               <button onClick={linkHandler} data-type="share">
@@ -189,11 +209,14 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
       </div>
 
       <OrangeModal slug={pageData.slug} />
-      <BlueModal verifyDate={pageData.verifyDate} updateDate={pageData.updateDate} createdDate={pageData.createdDate} />
+      <BlueModal
+        verifyDate={pageData.verifyDate}
+        updateDate={pageData.updateDate}
+        createdDate={pageData.createdDate}
+      />
 
       {/* TODO: golden badge modal*/}
       {/* <GoldModal/> */}
-
     </div>
   );
 };
