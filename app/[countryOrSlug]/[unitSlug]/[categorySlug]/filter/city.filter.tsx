@@ -1,6 +1,5 @@
 "use client";
 
-import { _TXT } from "@app/text/index";
 import { CityNamespace } from "@/types/city";
 import CityFilterItem from "./city.filter.item";
 import { useEffect, useRef, useState } from "react";
@@ -10,6 +9,8 @@ import { useRouter } from "next/navigation";
 import CityFilterSelectedItem from "./city.filter.selected.item";
 import useCreateQueryString from "@/hooks/useCreateQueryString";
 import useDeleteQueryString from "@/hooks/useDeleteQueryString";
+import { CITY } from "@/app/text/location";
+import { GENERAL } from "@/app/text/general";
 
 type CityFilterType = {
   cities: CityNamespace.city[];
@@ -129,7 +130,7 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   return (
     <div className="filter-section">
       <label htmlFor={id} className="btn btn-primary btn-outline btn-wide">
-        {_TXT.CITY.SELECT}
+        {CITY.SELECT}
       </label>
       <div className="px-3 my-3">
         {Array.isArray(citiesInQuery) ? (
@@ -157,27 +158,27 @@ export default function CityFilter({ cities, id }: CityFilterType) {
       </div>
 
       {/* Put this part before </body> tag */}
-      <input type="checkbox" id={id} className="modal-toggle z-50" />
+      <input type="checkbox" id={id} className="z-50 modal-toggle" />
       <div className="modal">
         <div className=" modal-box p-0 max-h-[550px] ">
-          <div className="pt-5 pb-3 px-8 bg-white w-full">
-            <h3 className="flex justify-between content-center text-lg font-bold">
-              {_TXT.CITY.SELECT}
+          <div className="w-full px-8 pt-5 pb-3 bg-white">
+            <h3 className="flex content-center justify-between text-lg font-bold">
+              {CITY.SELECT}
               {citiesInQuery ? (
                 <span
                   onClick={deleteAllCityHandler}
                   className="cursor-pointer text-[15px] font-normal text-pink-800"
                 >
-                  {_TXT.CITY.DELETE_ALL}
+                  {CITY.DELETE_ALL}
                 </span>
               ) : null}
             </h3>
-            <p className="py-3">{_TXT.CITY.SELECT_MULTI}</p>
+            <p className="py-3">{CITY.SELECT_MULTI}</p>
             <input
               onChange={citySearchHandler}
               type="text"
               placeholder="جستجو در لیست شهرها"
-              className="input input-bordered w-full"
+              className="w-full input input-bordered"
               ref={inputRef}
             />
           </div>
@@ -197,13 +198,13 @@ export default function CityFilter({ cities, id }: CityFilterType) {
             })}
           </div>
           <div className="flex">
-            <div className="modal-action box-border w-full pt-3 pb-5 px-8 mt-3 flex justify-between items-center ">
+            <div className="box-border flex items-center justify-between w-full px-8 pt-3 pb-5 mt-3 modal-action ">
               <label
                 onClick={applyFilters}
                 htmlFor={id}
-                className="btn btn-primary w-full"
+                className="w-full btn btn-primary"
               >
-                {_TXT.GENERAL.CONFIRM}
+                {GENERAL.CONFIRM}
               </label>
             </div>
           </div>

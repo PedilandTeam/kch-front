@@ -47,38 +47,39 @@ function CityFilterSelectedItem({
     }
   };
 
-  const isChecked = useCallback((parsedSearchParams: ParsedSearchParamsType) => {
-    return parsedSearchParams.city
-      ? Array.isArray(parsedSearchParams.city)
-        ? !!parsedSearchParams.city.find(
-          (param) => +param == city.id
-        )
-        : +parsedSearchParams.city == city.id
-      : false
-  }, [city.id])
+  const isChecked = useCallback(
+    (parsedSearchParams: ParsedSearchParamsType) => {
+      return parsedSearchParams.city
+        ? Array.isArray(parsedSearchParams.city)
+          ? !!parsedSearchParams.city.find((param) => +param == city.id)
+          : +parsedSearchParams.city == city.id
+        : false;
+    },
+    [city.id]
+  );
 
-
-  const id = useRef(`category-3413-select-${city.id}`)
+  const id = useRef(`category-3413-select-${city.id}`);
 
   return (
-
-    <div className="flex justify-right items-center" key={`cate-gory-filter-slected--${city.id}`}>
+    <div
+      className="flex items-center"
+      key={`cate-gory-filter-slected--${city.id}`}
+    >
       <input
         ref={ref}
-        className="checkbox checkbox-secondary checkbox-sm ml-3"
+        className="ml-2 checkbox checkbox-sm border-gray-400 checked:white [--chkbg:theme(colors.gray.400)] [--chkfg:white]"
         onChange={inputClickHandler}
         id={id.current}
         value={city.id}
         type="checkbox"
         checked={isChecked(parsedSearchParams)}
       />
-      <p
+      <span
         onClick={() => ref.current?.click()}
-        className="item flex items-center py-2 cursor-pointer"
+        className="flex items-center text-gray-500 cursor-pointer"
       >
         {city.name}
-      </p>
-
+      </span>
     </div>
   );
 }

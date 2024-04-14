@@ -1,3 +1,5 @@
+"use client"
+
 import useCreateQueryString from "@/hooks/useCreateQueryString";
 import useDeleteQueryString from "@/hooks/useDeleteQueryString";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -64,7 +66,7 @@ export default () => {
             onChange={searchChangeHandler}
             value={search || ""}
             placeholder="جستجو"
-            className="input input-bordered w-full mb-4"
+            className="w-full input input-bordered"
         />
     )
 }

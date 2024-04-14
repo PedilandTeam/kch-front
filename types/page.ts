@@ -18,10 +18,15 @@ export namespace PageNamespace {
     export interface Page {
         id: number;
         slug: string;
-        createdDate: Date;
-        updateDate: Date;
+        createdDate: string;
+        updateDate: string;
         title: string;
-        description: string;
+        business?: {
+            username: string;
+        };
+        verifyDate?: string;
+        subtitle?: string;
+        description?: string;
         haveAvatar: boolean;
         address: Address;
         socials?: Partial<Socials>;

@@ -1,19 +1,14 @@
-"use client"
+"use client";
 import { Global } from "@emotion/react";
 
 const Fonts = () => (
   <Global
     styles={`
       @font-face {
-        font-family: "Pinar";
-        src: url("/fonts/Pinar-FD-VF.woff2") format('woff2 supports variations'),
-             url("/fonts/Pinar-FD-VF.woff2") format('woff2-variations');
-        font-display: fallback;
-      }
-      @font-face {
-        font-family: "Pinar-LT";
-        src: url("/fonts/Pinar-VF.woff2") format('woff2 supports variations'),
-             url("/fonts/Pinar-VF.woff2") format('woff2-variations');
+        font-family: 'AnjomanMaxVF';
+        src: url('/fonts/AnjomanMaxVF.woff') format('woff-variations'),
+        url('/fonts/AnjomanMaxVF.woff') format('woff');
+        font-weight: 100 1000;
         font-display: fallback;
       }
       `}

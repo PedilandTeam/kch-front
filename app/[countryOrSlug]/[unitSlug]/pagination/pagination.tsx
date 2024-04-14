@@ -1,6 +1,10 @@
 "use client";
-import { _TXT } from "@/app/text";
+
 import { PageNamespace } from "@/types/page";
+import {
+  ArrowCircleLeft,
+  ArrowCircleRight,
+} from "app/client-packages/phosphor-icons/react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
@@ -14,7 +18,7 @@ type ParsedSearchParams = {
 type PaginationProps = {
   pages: PageNamespace.GET;
 };
-export default function Pagination ({ pages }: PaginationProps) {
+export default function Pagination({ pages }: PaginationProps) {
   let totalPages = pages.meta.totalPages;
   const paginationLimit = 9;
   const staticPaginations = 2;
@@ -34,7 +38,6 @@ export default function Pagination ({ pages }: PaginationProps) {
       queryString.parse(searchParams.toString(), { arrayFormat: "comma" })
     );
   }, [searchParams]);
-
 
   /**
    * if totalPages are equal or lower than standard(usually 6) then all pages appear in pagination
@@ -140,21 +143,27 @@ export default function Pagination ({ pages }: PaginationProps) {
   );
 
   return (
-    <div className="flex justify-center items-center mt-9">
+    <div className="flex items-center justify-center my-14">
       <Link
         rel="next"
-        href={pageNumber == totalPages ? '#' : `${pathname}?page=${pageNumber + 1}`}
+        href={
+          pageNumber == totalPages ? "#" : `${pathname}?page=${pageNumber + 1}`
+        }
+        className={pageNumber == totalPages ? "cursor-default" : ""}
         onClick={buttonLinkHandler}
       >
         <button
           onClick={nextButtonClickHandler}
-          className={`join-item btn ml-2 ${
-            pageNumber == totalPages && "btn-active"
-          } `}
+          className={`_join-item btn border-none bg-white shadow-none  ${
+            pageNumber == totalPages
+              ? "btn-disabled text-gray-300"
+              : "btn-active text-sky-600 hover:text-black"
+          }`}
         >
-          {_TXT.GENERAL.NEXT}
+          <ArrowCircleRight size={32} weight="light" />
         </button>
       </Link>
+
       <div className="join" dir="ltr">
         <Link
           {...isPrevOrNext(1)}
@@ -163,7 +172,11 @@ export default function Pagination ({ pages }: PaginationProps) {
         >
           <button
             onClick={paginationButtonClickHandler}
-            className={`join-item btn ${pageNumber == 1 && "btn-active"} `}
+            className={`join-item font-bold border-sky-500 border-dashed text-sky-700 btn ${
+              pageNumber == 1
+                ? "bg-sky-100 btn-active"
+                : "bg-sky-50 hover:bg-sky-100"
+            } `}
           >
             {1}
           </button>
@@ -179,8 +192,10 @@ export default function Pagination ({ pages }: PaginationProps) {
             >
               <button
                 onClick={paginationButtonClickHandler}
-                className={`join-item btn ${
-                  pageNumber == number && "btn-active"
+                className={`join-item btn border-dashed border-sky-500 text-sky-700 shadow-none ${
+                  pageNumber == number
+                    ? "btn-active bg-sky-100"
+                    : "hover:bg-sky-100 bg-sky-50"
                 } `}
               >
                 {number}
@@ -205,18 +220,22 @@ export default function Pagination ({ pages }: PaginationProps) {
           </Link>
         ) : null}
       </div>
+
       <Link
         rel="prev"
-        href={pageNumber == 1 ? '#' : `${pathname}?page=${pageNumber - 1}`}
+        href={pageNumber == 1 ? "#" : `${pathname}?page=${pageNumber - 1}`}
+        className={pageNumber == 1 ? "cursor-default" : ""}
         onClick={buttonLinkHandler}
       >
         <button
           onClick={prevButtonClickHandler}
-          className={`join-item btn mr-2 ${
-            pageNumber == 1 && "btn-disabled"
-          } `}
+          className={`_join-item btn border-none bg-white shadow-none  ${
+            pageNumber == 1
+              ? "btn-disabled text-gray-300"
+              : "text-sky-600 hover:text-black"
+          }`}
         >
-          {_TXT.GENERAL.PREVIOUS}
+          <ArrowCircleLeft size={32} weight="light" />
         </button>
       </Link>
     </div>

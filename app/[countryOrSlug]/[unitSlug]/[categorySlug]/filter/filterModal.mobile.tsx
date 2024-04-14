@@ -1,11 +1,9 @@
 "use client";
 
-import { _TXT } from "@app/text/index";
-import { FunnelIcon } from "@heroicons/react/24/solid";
-// import CityFilter from "./city.filter";
 import { CityNamespace } from "@/types/city";
 import CityFilter from "../../filter/city.filter";
-import PagesSearch from "./pages.search";
+import { Sliders } from "app/client-packages/phosphor-icons/react";
+import { FILTER } from "@/app/text/directory";
 
 type FilterMobileProps = {
   cities: CityNamespace.city[];
@@ -17,20 +15,24 @@ export default function FilterModalMobile({ cities }: FilterMobileProps) {
       <dialog id="modal_category_filter" className="modal">
         <form
           method="dialog"
-          className="modal-box w-full max-h-full h-full rounded-none"
+          className="w-full h-full max-h-full rounded-none modal-box bg-blue-50"
         >
-          <div className="filter-title flex w-full border-b-[2px] border-b-gray-200 pb-2">
-            <FunnelIcon className="h-4 w-4 ml-2" />
-            <span className="font-semibold">{_TXT.FILTER._S}</span>
+          <div className="_filter-title flex w-full border-b-[2px] border-b-blue-800 border-dashed pb-3 mb-5 text-primary">
+            <Sliders size={24} weight="light" className="ml-1" />
+            <span className="font-semibold">{FILTER.SELECT}</span>
           </div>
-          <div className="py-4">
+
+          <div className="flex flex-wrap gap-3">
             <CityFilter
               id="mobile-categoryList-cityfilter-modal"
               cities={cities}
             />
+            <div>نتایج فیلتر اینجا دیده شود</div>
           </div>
-          <div className="modal-action">
-            <button className="btn w-full">{_TXT.FILTER.APPLY}</button>
+
+          <div className="grid grid-cols-2 gap-3 modal-action">
+            <button className="w-full btn btn-primary">{FILTER.APPLY}</button>
+            <button className="w-full btn btn-info">{FILTER.DELETE_ALL}</button>
           </div>
         </form>
       </dialog>

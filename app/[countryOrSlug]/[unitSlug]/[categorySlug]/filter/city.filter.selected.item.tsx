@@ -55,11 +55,11 @@ function CityFilterSelectedItem({
     <label
       key={"selected-cityxc-filter-item-" + city.name}
       htmlFor={`city-select-${city.name}`}
-      className="item flex items-center py-2 cursor-pointer"
+      className="flex items-center py-2 cursor-pointer item"
     >
       <input
         ref={ref}
-        className="checkbox checkbox-secondary checkbox-sm ml-3"
+        className="ml-3 checkbox checkbox-secondary checkbox-sm"
         onChange={inputClickHandler}
         id={`city-select-${city.name}`}
         value={city.id}

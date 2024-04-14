@@ -1,13 +1,12 @@
 "use client";
-import { _TXT } from "@/app/text";
-import { FunnelIcon } from "@client-packages/heroicons/components";
 import { CityNamespace } from "@/types/city";
 import { CategoryNamespace } from "@/types/category";
 import CityFilter from "./city.filter";
 import CategoryFilter from "./category.filter";
 import PageSearch from "./page.search";
-import SideBanner from "@/app/banners/side-banner";
 import FilterModalMobile from "./filterModal.mobile";
+import { Sliders } from "app/client-packages/phosphor-icons/react";
+import { FILTER } from "@/app/text/directory";
 
 type ListFilterProps = {
   cities: CityNamespace.GET;
@@ -15,20 +14,23 @@ type ListFilterProps = {
 };
 export default function ListFilter({ cities, categories }: ListFilterProps) {
   return (
-    <div className="filter-unit sm:sticky sm:top-4 z-20">
-      <div className="filter-title w-full hidden md:flex md:items-center border-b-[2px] border-b-gray-200 pb-2 mb-4">
-        <FunnelIcon className="h-4 w-4 ml-2" />
-        <span className="font-semibold">{_TXT.FILTER._S}</span>
+    <div className="flex gap-2 py-7 _filter-unit">
+      <div className="flex items-center _filter-title">
+        <Sliders size={24} weight="light" className="ml-1" />
+        <span className="font-semibold">{FILTER._S}</span>
       </div>
 
-      <div className="filter-body hidden md:block">
+      <div className="_search">
         <PageSearch />
-        <CityFilter id="cityfilter-modal" cities={cities?.items} />
-        <CategoryFilter id="categoryfilter-modal" categories={categories} />
       </div>
 
-      <div className="hidden sm:block">
-        <SideBanner />
+      <div className="flex gap-2 _filter-body">
+        <CategoryFilter id="categoryfilter-modal" categories={categories} />
+        <CityFilter id="cityfilter-modal" cities={cities?.items} />
+      </div>
+      
+      <div className="flex items-center _filter-resaults">
+        <div>نتایج فیلتر اینجا دیده شود</div>
       </div>
     </div>
   );

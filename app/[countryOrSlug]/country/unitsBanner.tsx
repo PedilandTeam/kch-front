@@ -1,4 +1,4 @@
-import { _TXT } from "@/app/text";
+import { MENU } from "@/app/text/menu";
 import { CountryNamespace } from "@/types/country";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,10 +10,10 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
   return (
     <div className="container mx-auto max-w-[1144px]">
       <div
-        className="mod-units4 grid sm:grid-cols-7 gap-6 sm:gap-10 mb-8 mt-6 pt-6 mx-3 sm:mb-28 sm:mt-14 sm:pt-14 sm:mx-0"
+        className="grid gap-6 pt-6 mx-3 mt-6 mb-8 mod-units4 sm:grid-cols-7 sm:gap-10 sm:mb-14 sm:mt-14 sm:pt-14 sm:mx-0"
         id="select-unit"
       >
-        <div className="mod-header sm:col-span-4 flex flex-wrap items-center">
+        <div className="flex flex-wrap items-center mod-header sm:col-span-4">
           <div className="border-r-[4px] sm:border-r-[5px] border-secondary pr-3 sm:pr-5 pl-3 sm:pl-0">
             <h2 className="text-[20px] sm:text-[24px] font-bold mb-1">
               راهنمای مشاغل کـوچـا
@@ -21,7 +21,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
             <p className="mb-4 text-[17px] text-slate-600 font-medium">
               یک ابزار ساده اما کاربردی
             </p>
-            <div className="sm:text-justify sm:pl-5 leading-7 font-medium text-gray-500 mb-2">
+            <div className="mb-2 font-medium leading-7 text-gray-500 sm:text-justify sm:pl-5">
               <p className="mb-2">
                 اگه خارج از ایران زندگی میکنی و تابحال به پیدا کردن یه سرویس
                 مشخص به زبـان فارسـی نیاز پیدا کرده باشی، حتما با مشکل نبود
@@ -40,10 +40,10 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
         </div>
 
         <div className="mod-items sm:col-span-3">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 sm:gap-6 ">
-            <div className="item group flex mb-3 sm:mb-0">
+          <div className="grid grid-cols-1 gap-0 sm:grid-cols-2 sm:gap-6 ">
+            <div className="flex mb-3 item group sm:mb-0">
               <Link href={`/${currentCountry.code}/businesses`}>
-                <div className="image relative h-min overflow-hidden rounded-xl">
+                <div className="relative overflow-hidden image h-min rounded-xl">
                   <Image
                     src={"/images/modules/mod-business-01.webp"}
                     width={400}
@@ -59,14 +59,14 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
                     className="rounded-xl group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-auto object-cover sm:hidden"
                   />
                   <div className="info absolute bottom-0 w-full px-4 py-10 group-hover:py-12 sm:py-8 sm:group-hover:py-10 transition-all duration-500 cursor-pointer rounded-b-md text-center text-[24px] sm:text-[20px] bg-gradient-to-t from-black text-white font-medium">
-                    {_TXT.MENU.BUSINESSES}
+                    {MENU.BUSINESSES}
                   </div>
                 </div>
               </Link>
             </div>
-            <div className="item group flex mb-4 sm:mb-0">
+            <div className="flex mb-4 item group sm:mb-0">
               <Link href={`/${currentCountry.code}/doctors`}>
-                <div className="image relative h-min overflow-hidden rounded-xl">
+                <div className="relative overflow-hidden image h-min rounded-xl">
                   <Image
                     src={"/images/modules/mod-doctor-01.webp"}
                     width={400}
@@ -82,7 +82,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
                     className="rounded-xl group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-auto object-cover sm:hidden"
                   />
                   <div className="info absolute bottom-0 w-full px-4 py-10 group-hover:py-12 sm:py-8 sm:group-hover:py-10 transition-all duration-500 cursor-pointer rounded-b-md text-center text-[24px] sm:text-[20px] bg-gradient-to-t from-black text-white font-medium">
-                    {_TXT.MENU.DOCTORS}
+                    {MENU.DOCTORS}
                   </div>
                 </div>
               </Link>

@@ -1,4 +1,3 @@
-
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CityNamespace } from "@/types/city";
@@ -10,11 +9,10 @@ import { CardsList } from "./cardsList";
 import ListFilter from "./filter/listFilter";
 import { Suspense } from "react";
 import Loading from "./_loading";
-import SideBanner from "@/app/banners/side-banner";
-import { FunnelIcon } from "@heroicons/react/24/solid";
-import { _TXT } from "@/app/text";
 import FilterMobile from "./filter/filter.mobile";
 import FilterModalMobile from "./filter/filterModal.mobile";
+import Image from "next/image";
+import PagesSearch from "./[categorySlug]/filter/pages.search";
 
 type PagesListProps = {
   unit: UnitType;
@@ -84,57 +82,113 @@ export default async function UntiList({
     await fetchCategories(country.code, unit.id, city)
   ).items;
 
-
-
   return (
-    <div className="component sm:mt-3 page-list">
+    <div className="pt-5 component _unit-list">
       <div className="container mx-auto max-w-[1144px]">
-        <div className="grid grid-cols-1 sm:grid-cols-8 gap-y-4 sm:gap-8">
-          <div className="sidebar hidden sm:block sm:col-span-2">
-            <ListFilter cities={cities} categories={categories} />
-          </div>
-
-          <div className="page-content sm:col-span-6">
-            <div className="flex flex-wrap">
-              <div className="sm:order-2 w-full sm:mb-2">
-                <ItemBreadCrumb
-                  unit={{ name: unit.name, slug: unit.slug }}
-                  country={{ name: country.name, code: country.code }}
-                />
-              </div>
-
-              <div className="page-header sm:order-1 w-full px-3 sm:px-0">
-                <h1 className="text-xl font-semibold my-4 sm:mt-0 sm:mb-3 text-pink-800">
+        <div className="_page-content">
+          <div className="_top-section">
+            <div className="flex flex-wrap items-center justify-between w-full pb-5 sm:flex-nowrap">
+              <div className="flex items-center gap-3 px-3 mb-4 sm:mb-0 sm:px-0">
+                <h1 className="text-xl font-bold sm:text-2xl text-secondary">
                   لیست {unit?.name} فارسی زبان در {country?.name}
                 </h1>
+                <span className="hidden font-medium text-gray-500 sm:inline">
+                  (130 آیتم)
+                </span>
               </div>
+              <ItemBreadCrumb
+                unit={{ name: unit.name, slug: unit.slug }}
+                country={{ name: country.name, code: country.code }}
+              />
             </div>
 
-            <div className="px-3 sm:px-0">
-
-              <div className="md:hidden">
-                <FilterMobile/>
-                <FilterModalMobile cities={cities.items} categories={categories} />
-              </div>
-              
-              <Suspense
-                fallback={<Loading />}
-                key={`unit-cardlist-${search}-${city}-${category}`}
-              >
-                <CardsList
-                  unit={unit}
-                  country={country}
-                  category={category}
-                  search={search}
-                  pageNumber={pageNumber}
-                  city={city}
+            {/* Advertising Section P03 */}
+            <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0">
+              <div>
+                <Image
+                  src={"/images/banner/bnr-04.gif"}
+                  width={562}
+                  height={72}
+                  alt="banner"
                 />
-              </Suspense>
+              </div>
+              <div className="hidden sm:block">
+                <Image
+                  src={"/images/banner/bnr-04.gif"}
+                  width={562}
+                  height={72}
+                  alt="banner"
+                />
+              </div>
+            </div>
+            <div className="hidden sm:block _filter">
+              <ListFilter cities={cities} categories={categories} />
             </div>
           </div>
 
-          <div className="sm:hidden mt-5 mx-3">
-            <SideBanner />
+          <div className="pt-2 sm:pt-0">
+            <div className="sticky top-0 z-[9] p-3 bg-white sm:hidden">
+              <FilterMobile />
+              <FilterModalMobile
+                cities={cities.items}
+                categories={categories}
+              />
+            </div>
+            <div className="px-3 pb-5 sm:hidden">
+              <PagesSearch />
+            </div>
+
+            {/* Cards List */}
+            <Suspense
+              fallback={<Loading />}
+              key={`unit-cardlist-${search}-${city}-${category}`}
+            >
+              <CardsList
+                unit={unit}
+                country={country}
+                category={category}
+                search={search}
+                pageNumber={pageNumber}
+                city={city}
+              />
+            </Suspense>
+          </div>
+
+          {/* Advertising Section P05 */}
+          <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0 my-14">
+            <div>
+              <Image
+                src={"/images/banner/bnr-04.gif"}
+                width={562}
+                height={72}
+                alt="banner"
+              />
+            </div>
+            <div>
+              <Image
+                src={"/images/banner/bnr-04.gif"}
+                width={562}
+                height={72}
+                alt="banner"
+              />
+            </div>
+          </div>
+
+          {/* SEO Text */}
+          <div className="overflow-hidden mx-7 _SEO-text sm:mx-0">
+            <p className="font-normal text-justify text-gray-500">
+              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+              استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+              در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+              نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+              کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان
+              جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای
+              طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان
+              فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری
+              موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد
+              نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل
+              دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+            </p>
           </div>
         </div>
       </div>

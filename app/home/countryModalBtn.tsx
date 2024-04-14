@@ -1,6 +1,6 @@
 "use client";
 
-import { _TXT } from "../text";
+import { COUNTRY } from "../text/location";
 
 export default () => {
   return (
@@ -15,7 +15,7 @@ export default () => {
           }
         }}
       >
-        {_TXT.COUNTRY.ALL_VIEW}
+        {COUNTRY.ALL_VIEW}
       </button>
     </div>
   );

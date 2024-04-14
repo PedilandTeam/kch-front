@@ -4,9 +4,11 @@ import { ItemTopInfo } from "./topInfo";
 import { PageNamespace } from "@/types/page";
 import CountryUpdater from "./countryUpdater";
 import { ITEM } from "@/app/text/directory";
-import Image from "next/image";
 import SimilarCat from "./tools/similarCat";
 import { Suspense } from "react";
+import ServicesList from "./tools/servicesList";
+import Image from "next/image";
+import Description from "@/components/description";
 export type PageItemProps = {
   pageData: PageNamespace.Page;
 };
@@ -16,7 +18,7 @@ export default function PageItem({ pageData }: PageItemProps) {
     <div className="component page-item">
       <CountryUpdater pageData={pageData} />
 
-      <div className="bg-[#fbf7ed] bg-[url('/images/pattern-03.png')] bg-center sm:h-[280px] mb-4">
+      <div className="bg-[#fbf7ed] bg-[url('/images/pattern-03.png')] bg-center mb-4">
         <ItemTopInfo pageData={pageData} />
       </div>
 
@@ -31,29 +33,31 @@ export default function PageItem({ pageData }: PageItemProps) {
               {/* Description Section */}
               <div className="py-6 border-b border-gray-200 sm:py-8">
                 <h3 className="mb-4 font-bold sm:mb-5">{ITEM.DESCRIPTION}</h3>
-                <p
-                  className={`text-[15px] leading-8 ${
+                <Description
+                  className={`leading-8 ${
                     pageData.description ? "text-black" : "text-gray-500"
                   }`}
-                >
-                  {pageData.description
-                    ? pageData.description
-                    : ITEM.DESCRIPTION_PLACEHOLDER}
-                </p>
+                  html={
+                    pageData.description
+                      ? pageData.description
+                      : ITEM.DESCRIPTION_PLACEHOLDER
+                  }
+                />
               </div>
+
+              {/* Services Section */}
+              <ServicesList />
 
               {/* Facilities Section */}
               <div className="py-6 border-b border-gray-200 sm:py-8">
                 <h3 className="mb-4 font-bold sm:mb-5">{ITEM.FACILITIES}</h3>
-                <p className="text-[15px] text-gray-500">
-                  {ITEM.FACILITIES_NO}
-                </p>
+                <p className="text-gray-500">{ITEM.FACILITIES_NO}</p>
               </div>
 
               {/* Images Section */}
               <div className="py-6 border-b border-gray-200 sm:py-8">
                 <h3 className="mb-4 font-bold sm:mb-5">{ITEM.IMAGES}</h3>
-                <p className="text-[15px] text-gray-500">{ITEM.IMAGES_NO}</p>
+                <p className="text-gray-500">{ITEM.IMAGES_NO}</p>
               </div>
 
               {/* Comment Section */}
@@ -61,20 +65,67 @@ export default function PageItem({ pageData }: PageItemProps) {
                 <h3 className="mb-4 font-bold sm:mb-5">
                   {ITEM.USERS_COMMENTS}
                 </h3>
-                <p className="text-[15px] text-gray-500">
-                  {ITEM.USERS_COMMENTS_DISABLE}
-                </p>
+                <p className="text-gray-500">{ITEM.USERS_COMMENTS_DISABLE}</p>
               </div>
-
-              {/* Advertise Section */}
-              <div className="py-6 sm:py-8"></div>
             </div>
           </div>
         </div>
-          
+
+        {/* Advertising Section P01 */}
+        {/* <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
+          <div>
+            <Image
+              src={"/images/banner/bnr-03.gif"}
+              width={562}
+              height={72}
+              alt="banner"
+            />
+          </div>
+          <div>
+            <Image
+              src={"/images/banner/bnr-02.gif"}
+              width={562}
+              height={72}
+              alt="banner"
+            />
+          </div>
+        </div> */}
+
+        {/* Same Items in the Category */}
         <Suspense>
-          <SimilarCat countryCode={pageData.country.code} categoryId={pageData.category.id} />
+          <SimilarCat
+            countryCode={pageData.country.code}
+            categoryId={pageData.category.id}
+          />
         </Suspense>
+
+        {/* Randomize Items in the Unit */}
+        {/* <Suspense>
+          <SimilarCat
+            countryCode={pageData.country.code}
+            categoryId={pageData.category.id}
+          />
+        </Suspense> */}
+
+        {/* Advertising Section P02 */}
+        {/* <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0">
+          <div>
+            <Image
+              src={"/images/banner/bnr-04.gif"}
+              width={562}
+              height={72}
+              alt="banner"
+            />
+          </div>
+          <div>
+            <Image
+              src={"/images/banner/bnr-04.gif"}
+              width={562}
+              height={72}
+              alt="banner"
+            />
+          </div>
+        </div> */}
       </div>
     </div>
   );
