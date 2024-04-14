@@ -1,5 +1,6 @@
 import { CityNamespace } from "./city";
 import { CountryNamespace } from "./country";
+import { TagNamespace } from "./tag";
 
 
 
@@ -18,10 +19,15 @@ export namespace PageNamespace {
     export interface Page {
         id: number;
         slug: string;
-        createdDate: Date;
-        updateDate: Date;
+        createdDate: string;
+        updateDate: string;
         title: string;
-        description: string;
+        business?: {
+            username: string;
+        };
+        verifyDate?: string;
+        subtitle?: string;
+        description?: string;
         haveAvatar: boolean;
         address: Address;
         socials?: Partial<Socials>;
@@ -33,6 +39,7 @@ export namespace PageNamespace {
         category: Category;
         city: CityNamespace.city;
         country: CountryNamespace.GET;
+        tags: TagNamespace.ITag[]
     }
 
 }

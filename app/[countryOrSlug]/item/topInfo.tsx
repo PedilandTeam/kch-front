@@ -1,21 +1,33 @@
 "use client";
 
-import { StarIcon } from "@heroicons/react/24/solid";
-import CircleFlag from "@/app/client-packages/circleflag";
 import Rating from "@client-packages/react-rating";
 import { PageNamespace } from "@/types/page";
 import ItemProfilePicture from "./itemProfilePicture";
 import Link from "next/link";
 import { ITEM } from "@/app/text/directory";
-import { COUNTRY } from "@/app/text/location";
 import {
+  ArrowsClockwise,
   FacebookLogo,
   InstagramLogo,
   ShareNetwork,
+  ShieldCheck,
+  ShieldWarning,
+  Star,
   TelegramLogo,
   YoutubeLogo,
-} from "@phosphor-icons/react";
+  Plant,
+  Confetti,
+  LinkedinLogo,
+  XLogo,
+} from "app/client-packages/phosphor-icons/react";
 import useLinkHandler from "@/hooks/useLinkHandler";
+import { GENERAL } from "@/app/text/general";
+import isPageNew from "@/utils/isPageNew";
+import BlueBadge from "../../../components/badges/blue.badge";
+import OrangeBadge from "@/components/badges/orange.badge";
+import OrangeModal from "@/components/badges/modals/orange.modal";
+import BlueModal from "@/components/badges/modals/blue.modal";
+import GoldModal from "@/components/badges/modals/gold.modal";
 
 export type ItemTopInfoType = { pageData: PageNamespace.Page };
 export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
@@ -23,52 +35,85 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
   delete socials.website;
   const haveSocial = pageData.socials && Object.keys(socials).length > 0;
 
-  const linkHandler = useLinkHandler({pageData})
+  const isNew = isPageNew(pageData.createdDate);
 
+  const linkHandler = useLinkHandler({ pageData });
   return (
-    <div className="h-full top-section">
+    <div className="h-full _top-section">
       <div className="container mx-auto max-w-[1144px] h-full">
-        <div className="flex flex-col items-center h-full pt-8 sm:flex-row sm:items-end sm:pb-10">
+        <div className="relative flex flex-col items-center h-full pt-8 sm:flex-row sm:items-end sm:py-10">
+          <div className="sm:absolute left-3 sm:left-0 top-[40px] sm:flex items-center hidden">
+            {/* <div className="px-2 py-[6px] bg-emerald-500 text-white text-[15px] rounded-md flex items-center">
+              <Plant size={20} className="ml-1 text-white" weight="duotone" />
+              {GENERAL.HOME_JOB}
+            </div> */}
+
+            {isNew && (
+              <div className="px-2 py-[6px] bg-blue-400 text-white text-[15px] rounded-md flex items-center mr-2">
+                <Confetti
+                  size={20}
+                  className="ml-1 text-white"
+                  weight="duotone"
+                />
+                {GENERAL.NEW}
+              </div>
+            )}
+          </div>
+
           <ItemProfilePicture
-            className="w-40 h-40 mb-5 rounded-full drop-shadow-sm sm:mb-0"
+            className="mb-5 rounded-full w-[170px] h-[170px] drop-shadow-sm sm:mb-0"
             pageData={pageData}
           />
-
-          <div className="flex-1 px-3 item-details sm:mr-5">
-            <h1 className="text-[26px] font-semibold text-right text-slate-700">
+          <div className="flex-1 px-3 _item-details sm:mr-5">
+            <h1 className="text-[28px] font-bold text-slate-700 flex items-center justify-center sm:justify-start flex-col-reverse sm:flex-row font-enc">
               {pageData?.title}
+              <div className="flex items-center gap-2 mb-2 sm:mr-3 sm:mb-0">
+                {/* TODO: golden badge */}
+
+                <BlueBadge enable={!!pageData.business} />
+                <OrangeBadge enable={!pageData.business} />
+
+                <Plant
+                  size={30}
+                  className="text-green-600 transition duration-300 hover:cursor-pointer hover:text-slate-800"
+                  weight="duotone"
+                />
+                <Confetti
+                  size={30}
+                  className="text-blue-600 transition duration-300 hover:cursor-pointer hover:text-slate-800 sm:hidden"
+                  weight="duotone"
+                />
+              </div>
             </h1>
-            <div className="flex items-center my-3 card-rating">
+            {pageData.subtitle && (
+              <h2 className="mt-2 text-xl font-medium text-center text-primary sm:text-right">
+                {pageData.subtitle}
+              </h2>
+            )}
+            <div className="flex items-center justify-center mt-4 mb-8 sm:justify-start sm:mb-4 _card-rating">
               {/* @ts-ignore */}
               <Rating
                 initialRating={0}
                 direction={"rtl"}
                 readonly={true}
-                emptySymbol={<StarIcon className="w-8 h-8 text-stone-300" />}
-                fullSymbol={<StarIcon className="w-8 h-8 text-yellow-400" />}
+                className="flex"
+                emptySymbol={
+                  <Star size={30} weight="duotone" className="text-stone-300" />
+                }
+                fullSymbol={
+                  <Star size={30} weight="fill" className="text-yellow-400" />
+                }
               />
               <span className="mr-2">
                 (<span>{ITEM.WHITOUT}</span> {ITEM.COMMENT})
               </span>
-            </div>
-            <div className="flex justify-center mb-6 sm:justify-start item-location sm:mb-3">
-              <CircleFlag
-                width={1}
-                height={1}
-                countryCode={pageData?.country?.code}
-                className="w-5 ml-3"
-                title={COUNTRY.GERMANY}
-              />
-              <span>{pageData?.country?.name}</span>
-              <span className="ml-1">،</span>
-              <span>{pageData?.city?.name}</span>
             </div>
           </div>
 
           <div className="w-full bg-white sm:bg-transparent sm:w-auto">
             <div className="flex justify-center mx-3 border-b border-gray-200 sm:border-b-0 sm:mx-0">
               {!haveSocial ? (
-                <p className="text-[15px] text-slate-400 sm:text-black ml-3 py-5 sm:py-3">
+                <p className="py-5 ml-3 text-slate-400 sm:text-black sm:py-4">
                   {ITEM.NO_SOCIAL_MEDIA}
                 </p>
               ) : (
@@ -127,6 +172,28 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                       />
                     </Link>
                   ) : null}
+                  <Link
+                    href={`https://t.me/${pageData?.socials?.telegram}`}
+                    target="_blank"
+                    rel="nofollow noopener"
+                  >
+                    <XLogo
+                      size={32}
+                      weight="light"
+                      className="text-black transition duration-300"
+                    />
+                  </Link>
+                  <Link
+                    href={`https://t.me/${pageData?.socials?.telegram}`}
+                    target="_blank"
+                    rel="nofollow noopener"
+                  >
+                    <LinkedinLogo
+                      size={32}
+                      weight="light"
+                      className="transition duration-300 text-sky-700 hover:text-black"
+                    />
+                  </Link>
                 </div>
               )}
               <button onClick={linkHandler} data-type="share">
@@ -140,6 +207,16 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
           </div>
         </div>
       </div>
+
+      <OrangeModal slug={pageData.slug} />
+      <BlueModal
+        verifyDate={pageData.verifyDate}
+        updateDate={pageData.updateDate}
+        createdDate={pageData.createdDate}
+      />
+
+      {/* TODO: golden badge modal*/}
+      {/* <GoldModal/> */}
     </div>
   );
 };

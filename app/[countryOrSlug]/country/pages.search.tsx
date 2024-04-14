@@ -46,19 +46,26 @@ const PagesSearch = ({ countryCode }: CountryPagesSearch) => {
       {search && pages && (
         <ul
           tabIndex={0}
-          className="w-11/12 sm:w-full mt-1 dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-xl"
+          className="w-11/12 sm:w-full dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-xl"
         >
           {pages?.meta?.itemCount > 0 ? (
             pages.items?.map((page) => {
               return (
-                <li key={page.id}>
-                  <Link className="flex justify-start" href={`/${page.slug}`}>
+                <li
+                  key={page.id}
+                  className="border-b border-dashed last:border-none text-[15px]"
+                >
+                  <Link
+                    className="flex justify-start px-0 rounded-none sm:px-2 hover:bg-blue-50"
+                    href={`/${page.slug}`}
+                  >
                     <ItemProfilePicture
                       pageData={page}
                       height={30}
                       width={30}
+                      className="rounded-full"
                     />
-                    <p>{page.title}</p>
+                    <p>{page.title}<span>، زیرعنوان واحد</span></p>
                   </Link>
                 </li>
               );

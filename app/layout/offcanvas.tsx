@@ -1,11 +1,10 @@
 "use client";
 
-import { _TXT } from "@/app/text";
 import Image from "next/image";
 import Link from "next/link";
-
 import { UNITS_LIST } from "@/routes";
 import { useRef } from "react";
+import { MENU } from "../text/menu";
 
 type OffCanvasProps = {
   countryCode: string;
@@ -44,7 +43,7 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
                 href={`/${countryCode}/${UNITS_LIST.BUSINESSES}`}
                 className="p-3 text-[16px]"
               >
-                {_TXT.MENU.BUSINESSES}
+                {MENU.BUSINESSES}
               </Link>
             </li>
             <li onClick={() => ref.current?.click()}>
@@ -52,17 +51,17 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
                 href={`/${countryCode}/${UNITS_LIST.DOCTORS}`}
                 className="p-3 text-[16px]"
               >
-                {_TXT.MENU.DOCTORS}
+                {MENU.DOCTORS}
               </Link>
             </li>
             <li onClick={() => ref.current?.click()}>
               <Link href={`/about`} className="p-3 text-[16px]">
-                {_TXT.MENU.ABOUT}
+                {MENU.ABOUT}
               </Link>
             </li>
             <li onClick={() => ref.current?.click()}>
               <Link href={`/jobs`} className="p-3 text-[16px]">
-                {_TXT.MENU.JOBS}
+                {MENU.JOBS}
               </Link>
             </li>
           </ul>

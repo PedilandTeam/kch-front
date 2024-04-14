@@ -35,9 +35,9 @@ export const Header = ({ children, countries }: HeaderProps) => {
     !contryCodeInStore && (countryCode == "un" || !countryCode);
 
   return (
-    <header className="w-full py-[10px] bg-white">
+    <header className="w-full py-[10px] bg-white shadow-sm">
       <div className="container mx-auto max-w-[1144px]">
-        <div className="flex justify-between mx-3 sm:mx-0">
+        <div className="flex items-center justify-between mx-3 sm:mx-0">
           <TopTools
             isMainPage={isMainPage}
             countryCode={contryCodeInStore || countryCode}

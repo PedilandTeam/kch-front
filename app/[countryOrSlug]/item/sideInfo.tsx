@@ -9,9 +9,10 @@ import ItemTime from "./tools/time";
 import ItemClaim from "./tools/claim";
 import {
   DeviceMobile,
-  GlobeSimple, TelegramLogo,
-  WhatsappLogo
-} from "@phosphor-icons/react";
+  GlobeSimple,
+  TelegramLogo,
+  WhatsappLogo,
+} from "app/client-packages/phosphor-icons/react";
 import { SOCIAL } from "@/app/text/social";
 import { GENERAL } from "@/app/text/general";
 import useLinkHandler from "@/hooks/useLinkHandler";
@@ -41,7 +42,7 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
     return null;
   }
   return (
-    <div className="text-left item-address">
+    <div className="text-left _item-address">
       {Array.isArray(Images) &&
         Images.map((image, index) => {
           return (
@@ -75,15 +76,13 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
             </Link>
           );
         })}
-      <span className="font-PinarLT">{text}</span>
+      <span className="font-latin">{text}</span>
     </div>
   );
 }
 
 export function ItemSideInfo({ pageData }: ItemSideInfoType) {
-
-  const linkHandler = useLinkHandler({pageData})
-
+  const linkHandler = useLinkHandler({ pageData });
 
   return (
     <div className="mx-3 sm:mx-0 item-side sm:col-span-4 sm:col-end-13">
@@ -100,13 +99,12 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
                 className="w-[26px] h-[26px] mx-auto group-hover:text-blue-900 transition duration-300 ease-in-out"
                 weight="duotone"
               />
-
-              <span className="text-[15px] font-medium transition duration-300 ease-in-out group-hover:text-blue-900">
+              <span className="font-medium transition duration-300 ease-in-out group-hover:text-blue-900">
                 {GENERAL.WEBSITE}
               </span>
             </button>
           ) : (
-            <button className="grid grid-rows-2 gap-[10px] text-center">
+            <button className="grid grid-rows-2 gap-[10px] text-center cursor-default">
               <GlobeSimple
                 className="text-gray-300 w-[26px] h-[26px] mx-auto"
                 weight="duotone"
@@ -128,19 +126,17 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
                 className="w-[26px] h-[26px] mx-auto group-hover:text-blue-900 transition duration-300 ease-in-out"
                 weight="duotone"
               />
-              <span className="text-[15px] font-medium transition duration-300 ease-in-out group-hover:text-blue-900">
+              <span className="font-medium transition duration-300 ease-in-out group-hover:text-blue-900">
                 {GENERAL.MOBILE}
               </span>
             </button>
           ) : (
-            <button className="grid grid-rows-2 gap-[10px] text-center">
+            <button className="grid grid-rows-2 gap-[10px] text-center cursor-default">
               <DeviceMobile
                 className="text-gray-300 w-[26px] h-[26px] mx-auto"
                 weight="duotone"
               />
-              <span className="text-gray-300 text-[15px]">
-                {GENERAL.MOBILE}
-              </span>
+              <span className="text-gray-300">{GENERAL.MOBILE}</span>
             </button>
           )}
         </div>
@@ -156,19 +152,17 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
                 className="w-[26px] h-[26px] mx-auto group-hover:text-sky-600 transition duration-300 ease-in-out"
                 weight="duotone"
               />
-              <span className="text-[15px] font-medium transition duration-300 ease-in-out group-hover:text-sky-700">
+              <span className="font-medium transition duration-300 ease-in-out group-hover:text-sky-700">
                 {SOCIAL.TELEGRAM}
               </span>
             </button>
           ) : (
-            <button className="grid grid-rows-2 gap-[10px] text-center">
+            <button className="grid grid-rows-2 gap-[10px] text-center cursor-default">
               <TelegramLogo
                 className="text-gray-300 w-[26px] h-[26px] mx-auto"
                 weight="duotone"
               />
-              <span className="text-[15px] text-gray-300">
-                {SOCIAL.TELEGRAM}
-              </span>
+              <span className="text-gray-300">{SOCIAL.TELEGRAM}</span>
             </button>
           )}
         </div>
@@ -184,24 +178,25 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
                 className="w-[26px] h-[26px] mx-auto group-hover:text-green-600 transition duration-300 ease-in-out"
                 weight="duotone"
               />
-              <span className="text-[15px] font-medium transition duration-300 ease-in-out group-hover:text-green-700">
+              <span className="font-medium transition duration-300 ease-in-out group-hover:text-green-700">
                 {SOCIAL.WHATSAPP}
               </span>
             </button>
           ) : (
-            <button className="grid grid-rows-2 gap-[10px] text-center">
+            <button className="grid grid-rows-2 gap-[10px] text-center cursor-default">
               <WhatsappLogo
                 className="text-gray-300 w-[26px] h-[26px] mx-auto"
                 weight="duotone"
               />
-              <span className="text-[15px] text-gray-300">
-                {SOCIAL.WHATSAPP}
-              </span>
+              <span className="text-gray-300">{SOCIAL.WHATSAPP}</span>
             </button>
           )}
         </div>
       </div>
-      <div className="p-4 mb-3 border border-gray-200 rounded-md">
+
+      <ItemTime />
+
+      <div className="p-4 mb-3 border border-gray-200 rounded-md ">
         <ItemSideInfoItem
           text={`${
             pageData?.address?.address ? `${pageData?.address?.address},` : ""
@@ -215,7 +210,15 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
 
       <ItemClaim />
 
-      <ItemTime />
+      {/* Advertising Section */}
+      <div className="mb-3">
+        <Image
+          src={"/images/banner/bnr-06.gif"}
+          width={368}
+          height={280}
+          alt="banner"
+        />
+      </div>
 
       {/* Share Modal */}
       {/* <dialog id="modal_share" className="modal">

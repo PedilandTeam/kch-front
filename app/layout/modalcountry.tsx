@@ -1,9 +1,10 @@
 "use client";
-import { _TXT } from "@/app/text";
+
 import { CircleFlag } from "next-circle-flags";
 import Link from "next/link";
 import { CountryNamespace } from "@/types/country";
 import { useRef } from "react";
+import { MODAL } from "../text/modal";
 
 type ModalCountryProps = {
   countries: CountryNamespace.GET[];
@@ -14,7 +15,7 @@ export const ModalCountry = ({ countries }: ModalCountryProps) => {
   return (
     <dialog id="modal_country" className="modal">
       <form method="dialog" className="modal-box sm:max-w-[50%] md:p-8">
-        <h3 className="mb-6 font-medium">{_TXT.MODAL.COUNTRY_TITLE}</h3>
+        <h3 className="mb-6 font-medium">{MODAL.COUNTRY_TITLE}</h3>
         <div className="grid grid-cols-3 gap-5 md:grid-cols-7 md:gap-5 place-content-center country-list">
           {countries?.map((country) => {
             return (
