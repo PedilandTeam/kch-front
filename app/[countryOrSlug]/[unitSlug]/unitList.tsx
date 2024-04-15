@@ -103,7 +103,7 @@ export default async function UntiList({
             </div>
 
             {/* Advertising Section P03 */}
-            <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0">
+            {/* <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0">
               <div>
                 <Image
                   src={"/images/banner/bnr-04.gif"}
@@ -120,7 +120,7 @@ export default async function UntiList({
                   alt="banner"
                 />
               </div>
-            </div>
+            </div> */}
             <div className="hidden sm:block _filter">
               <ListFilter cities={cities} categories={categories} />
             </div>
@@ -155,7 +155,7 @@ export default async function UntiList({
           </div>
 
           {/* Advertising Section P05 */}
-          <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0 my-14">
+          {/* <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0 my-14">
             <div>
               <Image
                 src={"/images/banner/bnr-04.gif"}
@@ -172,7 +172,7 @@ export default async function UntiList({
                 alt="banner"
               />
             </div>
-          </div>
+          </div> */}
 
           {/* SEO Text */}
           <div className="overflow-hidden mx-7 _SEO-text sm:mx-0">

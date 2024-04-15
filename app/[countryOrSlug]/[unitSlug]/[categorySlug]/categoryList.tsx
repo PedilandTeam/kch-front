@@ -83,7 +83,7 @@ export default async function CategoryList({
             </div>
 
             {/* Advertising Section P03 */}
-            <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0">
+            {/* <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0">
               <div>
                 <Image
                   src={"/images/banner/bnr-04.gif"}
@@ -100,7 +100,7 @@ export default async function CategoryList({
                   alt="banner"
                 />
               </div>
-            </div>
+            </div> */}
 
             <div className="hidden sm:block _filter">
               <ListFilter cities={cities} />
@@ -132,7 +132,7 @@ export default async function CategoryList({
           </div>
 
           {/* Advertising Section P04 */}
-          <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0 my-14">
+          {/* <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0 my-14">
             <div>
               <Image
                 src={"/images/banner/bnr-04.gif"}
@@ -149,7 +149,7 @@ export default async function CategoryList({
                 alt="banner"
               />
             </div>
-          </div>
+          </div> */}
 
           {/* SEO Text */}
           <div className="overflow-hidden mx-7 _SEO-text sm:mx-0">
