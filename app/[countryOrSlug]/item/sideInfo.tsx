@@ -211,14 +211,14 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
       <ItemClaim />
 
       {/* Advertising Section */}
-      <div className="mb-3">
+      {/* <div className="mb-3">
         <Image
           src={"/images/banner/bnr-06.gif"}
           width={368}
           height={280}
           alt="banner"
         />
-      </div>
+      </div> */}
 
       {/* Share Modal */}
       {/* <dialog id="modal_share" className="modal">

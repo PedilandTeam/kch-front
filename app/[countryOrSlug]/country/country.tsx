@@ -18,7 +18,7 @@ export default function Country({ currentCountry, categories }: CountryProps) {
       <UnitsBanner currentCountry={currentCountry} />
 
       {/* Advertising Section P05 */}
-      <div className="container mx-auto max-w-[1144px]">
+      {/* <div className="container mx-auto max-w-[1144px]">
         <div className="flex flex-wrap gap-3 px-3 my-10 sm:gap-5 sm:px-0">
           <div>
             <Image
@@ -37,7 +37,7 @@ export default function Country({ currentCountry, categories }: CountryProps) {
             />
           </div>
         </div>
-      </div>
+      </div> */}
 
       <CountryStats currentCountry={currentCountry} />
       <CountryCategories currentCountry={currentCountry} />
