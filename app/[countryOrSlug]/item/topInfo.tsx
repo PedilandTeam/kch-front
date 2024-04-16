@@ -173,7 +173,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                     </Link>
                   ) : null}
                   <Link
-                    href={`https://t.me/${pageData?.socials?.telegram}`}
+                    href={`https://twitter.com/${pageData?.socials?.x}`}
                     target="_blank"
                     rel="nofollow noopener"
                   >
@@ -184,7 +184,7 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                     />
                   </Link>
                   <Link
-                    href={`https://t.me/${pageData?.socials?.telegram}`}
+                    href={`https://www.linkedin.com/in/${pageData?.socials?.linkedin}`}
                     target="_blank"
                     rel="nofollow noopener"
                   >

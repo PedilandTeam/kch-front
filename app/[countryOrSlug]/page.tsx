@@ -64,7 +64,7 @@ const pathGenerator = async (
           )
         ).json();
 
-        if (!pageData?.items && pageData?.items?.length == 0) {
+        if (!pageData?.items || pageData?.items?.length == 0) {
           return NOT_FOUND;
         }
         return {
@@ -94,6 +94,8 @@ export async function generateMetadata({ params, searchParams }: Props) {
     throw Error(e);
   }
 
+  
+
   switch (pathInfo.type) {
     case "country":
       return {
@@ -108,7 +110,7 @@ export async function generateMetadata({ params, searchParams }: Props) {
     case "item":
       return {
         ...metadata,
-        title: `${pathInfo?.props?.pageData?.title} - ${pathInfo?.props.pageData.city.name}، ${pathInfo?.props.pageData.country.name} | کوچا`,
+        title: `${pathInfo?.props?.pageData?.title} - ${pathInfo?.props?.pageData?.city?.name}، ${pathInfo?.props?.pageData?.country?.name} | کوچا`,
         description: `این صفحه پروفایل اختصاصی ${pathInfo?.props?.pageData?.title} در پلتفرم کوچاست که شامل بروزترین و کاملترین اطلاعات موجود در فضای اینترنت درباره ایشان می باشد.`,
         alternates: {
           canonical: `${process.env.FRONT_URL}/${pathInfo?.props.pageData?.slug}`,
