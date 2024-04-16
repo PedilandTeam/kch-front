@@ -6,9 +6,10 @@ import CountryUpdater from "./countryUpdater";
 import { ITEM } from "@/app/text/directory";
 import SimilarCat from "./tools/similarCat";
 import { Suspense } from "react";
-import ServicesList from "./tools/servicesList";
+import ServicesList from "./tools/tagList";
 import Image from "next/image";
 import Description from "@/components/description";
+import TagList from "./tools/tagList";
 export type PageItemProps = {
   pageData: PageNamespace.Page;
 };
@@ -46,7 +47,7 @@ export default function PageItem({ pageData }: PageItemProps) {
               </div>
 
               {/* Services Section */}
-              <ServicesList />
+              <TagList tags={pageData.tags} />
 
               {/* Facilities Section */}
               <div className="py-6 border-b border-gray-200 sm:py-8">

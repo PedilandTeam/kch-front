@@ -28,14 +28,14 @@ export default function useLinkHandler({ pageData }: UseLinkHandler) {
         break;
       case "telegram":
         window.open(
-          `https://t.me/${pageData.socials?.telegram}`,
+          `https://t.me/${pageData.contact?.telegram}`,
           "_blank",
           "noopener, noreferrer"
         );
         break;
       case "whatsapp":
         window.open(
-          `https://api.whatsapp.com/send?phone=+${pageData.contact.whatsapp}`,
+          `https://wa.me/${pageData.contact.whatsapp}`,
           "_blank",
           "noopener, noreferrer"
         );

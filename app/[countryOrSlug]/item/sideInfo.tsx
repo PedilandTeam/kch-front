@@ -8,6 +8,7 @@ import upperCaseFirst from "@/utils/upperCaseFirst";
 import ItemTime from "./tools/time";
 import ItemClaim from "./tools/claim";
 import {
+  Phone,
   DeviceMobile,
   GlobeSimple,
   TelegramLogo,
@@ -82,6 +83,13 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
 }
 
 export function ItemSideInfo({ pageData }: ItemSideInfoType) {
+  const number = pageData.contact.telephone
+    ? `00${pageData.country.areaCode ? pageData.country.areaCode : ""}${pageData
+        .contact.telephone!}`
+    : pageData.contact.phone &&
+      `00${pageData.country.areaCode ? pageData.country.areaCode : ""}${pageData
+        .contact.phone!}`;
+
   const linkHandler = useLinkHandler({ pageData });
 
   return (
@@ -115,7 +123,22 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         </div>
         {/* PHONE/MOBILE */}
         <div className="grid grid-rows-1 gap-2 text-center border-l group hover:cursor-pointer">
-          {pageData?.contact?.phone ? (
+          {pageData.contact.telephone ? (
+            <button
+              onClick={linkHandler}
+              data-type="telephone"
+              data-tip={GENERAL.CLICK_IT}
+              className="grid grid-rows-2 gap-[10px] text-center tooltip font-PinarLT"
+            >
+              <Phone
+                className="w-[26px] h-[26px] mx-auto group-hover:text-blue-900 transition duration-300 ease-in-out"
+                weight="duotone"
+              />
+              <span className="font-medium transition duration-300 ease-in-out group-hover:text-blue-900">
+                تلفن
+              </span>
+            </button>
+          ) : pageData.contact.phone ? (
             <button
               onClick={linkHandler}
               data-type="phone"
@@ -127,22 +150,22 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
                 weight="duotone"
               />
               <span className="font-medium transition duration-300 ease-in-out group-hover:text-blue-900">
-                {GENERAL.MOBILE}
+                همراه
               </span>
             </button>
           ) : (
             <button className="grid grid-rows-2 gap-[10px] text-center cursor-default">
-              <DeviceMobile
+              <Phone
                 className="text-gray-300 w-[26px] h-[26px] mx-auto"
                 weight="duotone"
               />
-              <span className="text-gray-300">{GENERAL.MOBILE}</span>
+              <span className="text-gray-300">تلفن</span>
             </button>
           )}
         </div>
         {/* TELEGRAM */}
         <div className="grid grid-rows-1 gap-2 text-center border-l group hover:cursor-pointer">
-          {pageData?.socials?.telegram ? (
+          {pageData?.contact?.telegram ? (
             <button
               onClick={linkHandler}
               data-type="telegram"
@@ -211,14 +234,14 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
       <ItemClaim />
 
       {/* Advertising Section */}
-      <div className="mb-3">
+      {/* <div className="mb-3">
         <Image
           src={"/images/banner/bnr-06.gif"}
           width={368}
           height={280}
           alt="banner"
         />
-      </div>
+      </div> */}
 
       {/* Share Modal */}
       {/* <dialog id="modal_share" className="modal">

@@ -1,5 +1,6 @@
 import { CityNamespace } from "./city";
 import { CountryNamespace } from "./country";
+import { TagNamespace } from "./tag";
 
 
 
@@ -38,6 +39,7 @@ export namespace PageNamespace {
         category: Category;
         city: CityNamespace.city;
         country: CountryNamespace.GET;
+        tags: TagNamespace.ITag[]
     }
 
 }
