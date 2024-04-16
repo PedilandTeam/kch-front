@@ -172,28 +172,34 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                       />
                     </Link>
                   ) : null}
-                  <Link
-                    href={`https://twitter.com/${pageData?.socials?.x}`}
-                    target="_blank"
-                    rel="nofollow noopener"
-                  >
-                    <XLogo
-                      size={32}
-                      weight="light"
-                      className="text-black transition duration-300"
-                    />
-                  </Link>
-                  <Link
-                    href={`https://www.linkedin.com/in/${pageData?.socials?.linkedin}`}
-                    target="_blank"
-                    rel="nofollow noopener"
-                  >
-                    <LinkedinLogo
-                      size={32}
-                      weight="light"
-                      className="transition duration-300 text-sky-700 hover:text-black"
-                    />
-                  </Link>
+
+                  {pageData?.socials?.x && (
+                    <Link
+                      href={`https://twitter.com/${pageData?.socials?.x}`}
+                      target="_blank"
+                      rel="nofollow noopener"
+                    >
+                      <XLogo
+                        size={32}
+                        weight="light"
+                        className="text-black transition duration-300"
+                      />
+                    </Link>
+                  )}
+
+                  {pageData.socials?.linkedin && (
+                    <Link
+                      href={`https://www.linkedin.com/in/${pageData?.socials?.linkedin}`}
+                      target="_blank"
+                      rel="nofollow noopener"
+                    >
+                      <LinkedinLogo
+                        size={32}
+                        weight="light"
+                        className="transition duration-300 text-sky-700 hover:text-black"
+                      />
+                    </Link>
+                  )}
                 </div>
               )}
               <button onClick={linkHandler} data-type="share">
