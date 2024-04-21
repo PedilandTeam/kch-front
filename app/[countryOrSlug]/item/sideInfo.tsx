@@ -224,6 +224,8 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
           text={`${
             pageData?.address?.address ? `${pageData?.address?.address},` : ""
           } ${
+            pageData.address.postalCode ? `${pageData.address.postalCode},` : ""
+          } ${
             pageData?.city?.englishName
               ? upperCaseFirst(pageData.city.englishName)
               : upperCaseFirst(pageData?.city?.name)

@@ -1,6 +1,8 @@
+import { CategoryNamespace } from "./category";
 import { CityNamespace } from "./city";
 import { CountryNamespace } from "./country";
 import { TagNamespace } from "./tag";
+import { UnitType } from "./unit";
 
 
 
@@ -17,7 +19,7 @@ export namespace PageNamespace {
     }
 
     export interface Page {
-        id: number;
+        id: string;
         slug: string;
         createdDate: string;
         updateDate: string;
@@ -35,8 +37,8 @@ export namespace PageNamespace {
         profile: null;
         status: boolean;
         pictures: any[];
-        unit: Category;
-        category: Category;
+        unit: UnitType;
+        category: CategoryNamespace.category;
         city: CityNamespace.city;
         country: CountryNamespace.GET;
         tags: TagNamespace.ITag[]
@@ -63,19 +65,15 @@ export interface Socials {
     linkedin: string;
     telegram: string;
 }
-export interface Address {
-    country: string;
-    city: string;
-    address: string;
-}
 
-export interface Category {
-    id: number;
-    name: string;
-    slug: string;
-    createdDate: Date;
-    updateDate: Date;
+export interface Address {
+  address: string;
+  district: string;
+  postalCode: string;
+  longitude: number;
+  latitude: number;
 }
+ 
 
 
 export interface Country {
