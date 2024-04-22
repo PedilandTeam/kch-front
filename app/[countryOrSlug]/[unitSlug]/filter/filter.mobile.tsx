@@ -2,8 +2,12 @@
 
 import { FILTER } from "@/app/text/directory";
 import { Sliders } from "app/client-packages/phosphor-icons/react";
+import { FC } from "react";
 
-export default function FilterMobile() {
+type FilterMobile = {
+  pagesTotalItems?: number
+}
+const  FilterMobile: FC<FilterMobile> = ({pagesTotalItems}) => {
   const openFilters = () => {
     if (document) {
       (
@@ -22,9 +26,11 @@ export default function FilterMobile() {
             <Sliders size={24} weight="light" className="ml-2" />
             <span className="font-semibold">{FILTER.SELECT}</span>
           </div>
-          <span className="font-medium">(130 آیتم)</span>
+          <span className="font-medium">({pagesTotalItems} آیتم)</span>
         </div>
       </button>
     </>
   );
 }
+
+export default FilterMobile

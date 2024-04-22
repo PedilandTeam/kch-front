@@ -11,19 +11,23 @@ import useCreateQueryString from "@/hooks/useCreateQueryString";
 import useDeleteQueryString from "@/hooks/useDeleteQueryString";
 import { CITY } from "@/app/text/location";
 import { GENERAL } from "@/app/text/general";
+import CityFilterSelected from "./city.filter.selected";
+import { addToShouldBeAddType, removeFromShouldBeAddType } from "./category.filter";
 
 type CityFilterType = {
   cities: CityNamespace.city[];
   id: string;
+  shouldBeAdd: string[];
+  setShouldBeAdd: React.Dispatch<React.SetStateAction<string[]>>;
 };
 export type ParsedSearchParamsType = {
   city?: string[] | string;
 };
-export type addToShouldBeAddType = (item: string) => void;
-export type removeFromShouldBeAddType = (item: string) => void;
+
 export type checkHandlerType = (value: string | number) => boolean | undefined;
 
-export default function CityFilter({ cities, id }: CityFilterType) {
+export default function CityFilter({cities, setShouldBeAdd, shouldBeAdd, id}: CityFilterType) {
+
   const [modifiedCities, setModifiedCities] = useState(cities);
   const searchParams = useSearchParams() as unknown as URLSearchParams;
   const pathname = usePathname();
@@ -32,11 +36,11 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   const [isParsedSearchParamsAdded, setIsParsedSearchParamsAdded] =
     useState(false);
 
+
   useEffect(() => {
     setModifiedCities(cities);
   }, [cities]);
 
-  const [shouldBeAdd, setShouldBeAdd] = useState<string[]>([]);
 
   const addToShouldBeAdd: addToShouldBeAddType = (item: string) => {
     if (shouldBeAdd.includes(item)) return;
@@ -52,6 +56,9 @@ export default function CityFilter({ cities, id }: CityFilterType) {
       return [...old];
     });
   };
+
+
+
 
   const clearShouldBeAdd = () => {
     setShouldBeAdd([]);
@@ -135,31 +142,6 @@ export default function CityFilter({ cities, id }: CityFilterType) {
         >
           {CITY.SELECT}
         </label>
-
-        <div className="flex items-center gap-5">
-          {Array.isArray(citiesInQuery) ? (
-            // if city is multiple number, find all of that from cities
-            citiesInQuery.map((cityId) => {
-              if (!cityId) return;
-              const city = cities.find((city) => city.id == +cityId);
-              if (!city) return;
-              return (
-                <CityFilterSelectedItem
-                  removeFromShouldBeAdd={removeFromShouldBeAdd}
-                  key={`city-selected-item-xz-${cityId}`}
-                  city={city}
-                />
-              );
-            })
-          ) : citiesInQuery &&
-            cities.find((city) => city.id == +citiesInQuery) ? (
-            <CityFilterSelectedItem
-              removeFromShouldBeAdd={removeFromShouldBeAdd}
-              key={`city-selected-item-xz-single-`}
-              city={cities.find((city) => city.id == +citiesInQuery)!}
-            />
-          ) : null}
-        </div>
       </div>
 
       {/* the modal */}

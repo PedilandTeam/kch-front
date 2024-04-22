@@ -4,15 +4,45 @@ import { CategoryNamespace } from "@/types/category";
 import CityFilter from "./city.filter";
 import CategoryFilter from "./category.filter";
 import PageSearch from "./page.search";
-import FilterModalMobile from "./filterModal.mobile";
 import { Sliders } from "app/client-packages/phosphor-icons/react";
 import { FILTER } from "@/app/text/directory";
+import { useState } from "react";
+import CityFilterSelected from "./city.filter.selected";
+import CategoryFilterSelected from "./category.filter.selected";
 
 type ListFilterProps = {
   cities: CityNamespace.GET;
   categories: CategoryNamespace.category[];
 };
+export type addToShouldBeAddType = (item: string) => void;
+export type removeFromShouldBeAddType = (item: string) => void;
 export default function ListFilter({ cities, categories }: ListFilterProps) {
+
+  const [shouldBeAddCities, setShouldBeAddCities] = useState<string[]>([]);
+  const [shouldBeAddCategories, setShouldBeAddCategories] = useState<string[]>([]);
+  
+  const removeFromShouldBeAddCities: removeFromShouldBeAddType = (item: string) => {
+    setShouldBeAddCities((old) => {
+      const index = old.indexOf(item);
+      if (index != -1) {
+        old.splice(index, 1);
+      }
+      return [...old];
+    });
+  };
+
+  const removeFromShouldBeAddCategory: removeFromShouldBeAddType = (item: string) => {
+    setShouldBeAddCategories((old) => {
+      if (!old.includes(item)) {
+        return [...old, item];
+      } else {
+        return old.filter((n) => n !== item);
+      }
+    });
+  };
+
+
+
   return (
     <div className="flex gap-2 py-7 _filter-unit">
       <div className="flex items-center _filter-title">
@@ -25,12 +55,13 @@ export default function ListFilter({ cities, categories }: ListFilterProps) {
       </div>
 
       <div className="flex gap-2 _filter-body">
-        <CategoryFilter id="categoryfilter-modal" categories={categories} />
-        <CityFilter id="cityfilter-modal" cities={cities?.items} />
+        <CategoryFilter setShouldBeAdd={setShouldBeAddCategories} shouldBeAdd={shouldBeAddCategories} id="categoryfilter-modal" categories={categories} />
+        <CityFilter setShouldBeAdd={setShouldBeAddCities} shouldBeAdd={shouldBeAddCities} id="cityfilter-modal" cities={cities?.items} />
       </div>
       
       <div className="flex items-center _filter-resaults">
-        <div>نتایج فیلتر اینجا دیده شود</div>
+        <CategoryFilterSelected categories={categories} removeFromShouldBeAdd={removeFromShouldBeAddCategory} />
+        <CityFilterSelected cities={cities.items} removeFromShouldBeAdd={removeFromShouldBeAddCities} />
       </div>
     </div>
   );

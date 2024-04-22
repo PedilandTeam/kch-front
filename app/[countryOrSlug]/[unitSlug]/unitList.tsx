@@ -11,7 +11,6 @@ import { Suspense } from "react";
 import Loading from "./_loading";
 import FilterMobile from "./filter/filter.mobile";
 import FilterModalMobile from "./filter/filterModal.mobile";
-import Image from "next/image";
 import PagesSearch from "./[categorySlug]/filter/pages.search";
 import { PageNamespace } from "@/types/page";
 
@@ -148,7 +147,7 @@ export default async function UntiList({
 
           <div className="pt-2 sm:pt-0">
             <div className="sticky top-0 z-[9] p-3 bg-white sm:hidden">
-              <FilterMobile />
+              <FilterMobile pagesTotalItems={pages?.meta.totalItems} />
               <FilterModalMobile
                 cities={cities.items}
                 categories={categories}
