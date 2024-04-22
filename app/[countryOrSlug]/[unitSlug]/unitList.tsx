@@ -13,6 +13,8 @@ import FilterMobile from "./filter/filter.mobile";
 import FilterModalMobile from "./filter/filterModal.mobile";
 import Image from "next/image";
 import PagesSearch from "./[categorySlug]/filter/pages.search";
+import { PageNamespace } from "@/types/page";
+import axios from "axios";
 
 type PagesListProps = {
   unit: UnitType;
@@ -82,6 +84,25 @@ export default async function UntiList({
     await fetchCategories(country.code, unit.id, city)
   ).items;
 
+
+  let pages: PageNamespace.GET | undefined = undefined;
+  try {
+    pages = await (
+      await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 24, {
+        countryCode: country.code,
+        unitId: unit.id,
+        categoryIds: category,
+        cityIds: city,
+        search,
+      })
+    ).json();
+  } catch (e: any) {
+    // Because this handle in CardsList
+    console.log(e);
+    console.log(e?.response?.data);
+    
+  }
+
   return (
     <div className="pt-5 component _unit-list">
       <div className="container mx-auto max-w-[1144px]">
@@ -93,7 +114,7 @@ export default async function UntiList({
                   لیست {unit?.name} فارسی زبان در {country?.name}
                 </h1>
                 <span className="hidden font-medium text-gray-500 sm:inline">
-                  (130 آیتم)
+                  ({pages?.meta.totalItems} آیتم)
                 </span>
               </div>
               <ItemBreadCrumb
