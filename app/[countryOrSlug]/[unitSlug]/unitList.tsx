@@ -14,7 +14,6 @@ import FilterModalMobile from "./filter/filterModal.mobile";
 import Image from "next/image";
 import PagesSearch from "./[categorySlug]/filter/pages.search";
 import { PageNamespace } from "@/types/page";
-import axios from "axios";
 
 type PagesListProps = {
   unit: UnitType;
