@@ -9,6 +9,7 @@ import { FILTER } from "@/app/text/directory";
 import { useState } from "react";
 import CityFilterSelected from "./city.filter.selected";
 import CategoryFilterSelected from "./category.filter.selected";
+import DeleteFilter from "./delete.filter";
 
 type ListFilterProps = {
   cities: CityNamespace.GET;
@@ -22,8 +23,6 @@ export default function ListFilter({ cities, categories }: ListFilterProps) {
   const [shouldBeAddCategories, setShouldBeAddCategories] = useState<string[]>([]);
 
 
-  console.log(shouldBeAddCities);
-  
   
   const removeFromShouldBeAddCities: removeFromShouldBeAddType = (item: string) => {
     setShouldBeAddCities((old) => {
@@ -67,6 +66,11 @@ export default function ListFilter({ cities, categories }: ListFilterProps) {
         <CategoryFilterSelected categories={categories} removeFromShouldBeAdd={removeFromShouldBeAddCategory} />
         <CityFilterSelected cities={cities.items} removeFromShouldBeAdd={removeFromShouldBeAddCities} />
       </div>
+
+      <div className="mr-auto">
+        <DeleteFilter/>
+      </div>
+
     </div>
   );
 }

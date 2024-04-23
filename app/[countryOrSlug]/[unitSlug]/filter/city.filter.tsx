@@ -132,6 +132,12 @@ export default function CityFilter({cities, setShouldBeAdd, shouldBeAdd, id}: Ci
     arrayFormat: "comma",
   }).city;
 
+  useEffect(() => {
+    if (!Array.isArray(citiesInQuery) || citiesInQuery.length == 0) {
+      clearShouldBeAdd()
+    }
+  }, [citiesInQuery])
+
   return (
     <div className="w-full _filter-wrap sm:w-auto">
       <div className="flex items-center justify-start _filter-section">

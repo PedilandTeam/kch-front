@@ -53,6 +53,12 @@ export default function CategoryFilter({ categories, id, setShouldBeAdd, shouldB
     arrayFormat: "comma",
   }).category;
 
+  useEffect(() => {
+    if (!Array.isArray(categoriesInQuery) || categoriesInQuery.length == 0) {
+      clearShouldBeAdd()
+    }
+  }, [categoriesInQuery])
+
   // city=1,2 -> [1,2] or city=1 -> "1"
   const citiesInQuery = queryString.parse(searchParams.toString(), {
     arrayFormat: "comma",
