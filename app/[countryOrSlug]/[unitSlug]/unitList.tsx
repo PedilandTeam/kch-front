@@ -82,7 +82,6 @@ export default async function UntiList({
     await fetchCategories(country.code, unit.id, city)
   ).items;
 
-
   let pages: PageNamespace.GET | undefined = undefined;
   try {
     pages = await (
@@ -98,7 +97,6 @@ export default async function UntiList({
     // Because this handle in CardsList
     console.log(e);
     console.log(e?.response?.data);
-    
   }
 
   return (
