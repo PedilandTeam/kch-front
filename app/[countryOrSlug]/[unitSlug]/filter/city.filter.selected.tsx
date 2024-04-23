@@ -17,6 +17,7 @@ const CityFilterSelected: FC<CityFilterSelected> = ({
   const citiesInQuery = queryString.parse(searchParams.toString(), {
     arrayFormat: "comma",
   }).city;
+
   
   return (
     <div className="flex items-center gap-5">

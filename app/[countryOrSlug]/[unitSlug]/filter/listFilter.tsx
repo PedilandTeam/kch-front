@@ -20,6 +20,10 @@ export default function ListFilter({ cities, categories }: ListFilterProps) {
 
   const [shouldBeAddCities, setShouldBeAddCities] = useState<string[]>([]);
   const [shouldBeAddCategories, setShouldBeAddCategories] = useState<string[]>([]);
+
+
+  console.log(shouldBeAddCities);
+  
   
   const removeFromShouldBeAddCities: removeFromShouldBeAddType = (item: string) => {
     setShouldBeAddCities((old) => {
