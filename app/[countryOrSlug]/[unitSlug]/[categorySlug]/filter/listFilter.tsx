@@ -4,12 +4,44 @@ import CityFilter from "../../filter/city.filter";
 import PageSearch from "../../filter/page.search";
 import { Sliders } from "app/client-packages/phosphor-icons/react";
 import { FILTER } from "@/app/text/directory";
+import { useState } from "react";
+import { removeFromShouldBeAddType } from "../../filter/category.filter";
+import CityFilterSelected from "./city.filter.selected";
+import DeleteFilter from "./delete.filter";
 
 type ListFilterProps = {
   cities: CityNamespace.GET;
   // categories: CategoryNamespace.category[]
 };
 export default function CategoryListFilter({ cities }: ListFilterProps) {
+
+
+  const [shouldBeAddCities, setShouldBeAddCities] = useState<string[]>([]);
+  const [shouldBeAddCategories, setShouldBeAddCategories] = useState<string[]>([]);
+
+
+  
+  const removeFromShouldBeAddCities: removeFromShouldBeAddType = (item: string) => {
+    setShouldBeAddCities((old) => {
+      const index = old.indexOf(item);
+      if (index != -1) {
+        old.splice(index, 1);
+      }
+      return [...old];
+    });
+  };
+
+  const removeFromShouldBeAddCategory: removeFromShouldBeAddType = (item: string) => {
+    setShouldBeAddCategories((old) => {
+      if (!old.includes(item)) {
+        return [...old, item];
+      } else {
+        return old.filter((n) => n !== item);
+      }
+    });
+  };
+
+
   return (
     <div className="flex gap-2 py-7 _filter-catgory">
       <div className="flex items-center _filter-title">
@@ -22,11 +54,15 @@ export default function CategoryListFilter({ cities }: ListFilterProps) {
       </div>
 
       <div className="_filter-body">
-        <CityFilter id="category-cities-filter" cities={cities?.items} />
+        <CityFilter setShouldBeAdd={setShouldBeAddCities} shouldBeAdd={shouldBeAddCities} id="category-cities-filter" cities={cities?.items} />
       </div>
 
       <div className="flex items-center _filter-resaults">
-        <div>نتایج فیلتر اینجا دیده شود</div>
+        <CityFilterSelected cities={cities.items} removeFromShouldBeAdd={removeFromShouldBeAddCities} />
+      </div>
+
+      <div className="mr-auto">
+        <DeleteFilter/>
       </div>
     </div>
   );

@@ -4,12 +4,14 @@ import { CityNamespace } from "@/types/city";
 import CityFilter from "../../filter/city.filter";
 import { Sliders } from "app/client-packages/phosphor-icons/react";
 import { FILTER } from "@/app/text/directory";
+import { useState } from "react";
 
 type FilterMobileProps = {
   cities: CityNamespace.city[];
 };
 
 export default function FilterModalMobile({ cities }: FilterMobileProps) {
+  const [shouldBeAddCities, setShouldBeAddCities] = useState<string[]>([]);
   return (
     <>
       <dialog id="modal_category_filter" className="modal">
@@ -24,6 +26,8 @@ export default function FilterModalMobile({ cities }: FilterMobileProps) {
 
           <div className="flex flex-wrap gap-3">
             <CityFilter
+              setShouldBeAdd={setShouldBeAddCities}
+              shouldBeAdd={shouldBeAddCities}
               id="mobile-categoryList-cityfilter-modal"
               cities={cities}
             />

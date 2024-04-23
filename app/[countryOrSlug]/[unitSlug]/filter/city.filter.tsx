@@ -6,12 +6,9 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { useRouter } from "next/navigation";
-import CityFilterSelectedItem from "./city.filter.selected.item";
 import useCreateQueryString from "@/hooks/useCreateQueryString";
-import useDeleteQueryString from "@/hooks/useDeleteQueryString";
 import { CITY } from "@/app/text/location";
 import { GENERAL } from "@/app/text/general";
-import CityFilterSelected from "./city.filter.selected";
 import { addToShouldBeAddType, removeFromShouldBeAddType } from "./category.filter";
 
 type CityFilterType = {

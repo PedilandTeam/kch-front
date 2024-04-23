@@ -6,28 +6,27 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { useRouter } from "next/navigation";
-import CityFilterSelectedItem from "./city.filter.selected.item";
 import useCreateQueryString from "@/hooks/useCreateQueryString";
-import useDeleteQueryString from "@/hooks/useDeleteQueryString";
 import { CITY } from "@/app/text/location";
 import { GENERAL } from "@/app/text/general";
+import { addToShouldBeAddType, removeFromShouldBeAddType } from "../../filter/category.filter";
+
 
 type CityFilterType = {
   cities: CityNamespace.city[];
   id: string;
+  shouldBeAdd: string[];
+  setShouldBeAdd: React.Dispatch<React.SetStateAction<string[]>>;
 };
 export type ParsedSearchParamsType = {
   city?: string[] | string;
 };
-export type addToShouldBeAddType = (item: string) => void;
-export type removeFromShouldBeAddType = (item: string) => void;
+
 export type checkHandlerType = (value: string | number) => boolean | undefined;
 
-export default function CityFilter({ cities, id }: CityFilterType) {
-  const [modifiedCities, setModifiedCities] = useState(cities);
-  // const [shouldBeAdd, setShouldBeAdd] = useState<string[]>([])
-  // const [shouldBeRemove, setShouldBeRemove] = useState<string[]>([])
+export default function CityFilter({cities, setShouldBeAdd, shouldBeAdd, id}: CityFilterType) {
 
+  const [modifiedCities, setModifiedCities] = useState(cities);
   const searchParams = useSearchParams() as unknown as URLSearchParams;
   const pathname = usePathname();
   const [parsedSearchParams, setParsedSearchParams] =
@@ -35,7 +34,11 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   const [isParsedSearchParamsAdded, setIsParsedSearchParamsAdded] =
     useState(false);
 
-  const [shouldBeAdd, setShouldBeAdd] = useState<string[]>([]);
+
+  useEffect(() => {
+    setModifiedCities(cities);
+  }, [cities]);
+
 
   const addToShouldBeAdd: addToShouldBeAddType = (item: string) => {
     if (shouldBeAdd.includes(item)) return;
@@ -52,11 +55,15 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     });
   };
 
+
+
+
   const clearShouldBeAdd = () => {
     setShouldBeAdd([]);
   };
 
   useEffect(() => {
+    //parse query params to array
     setParsedSearchParams(
       queryString.parse(searchParams.toString(), { arrayFormat: "comma" })
     );
@@ -65,6 +72,9 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   useEffect(() => {
     if (isParsedSearchParamsAdded) return;
     if (!parsedSearchParams?.city) return;
+
+    //this condition is because if city filter be a single number we give number
+    //and if we have multiple cities we give an Array
     if (Array.isArray(parsedSearchParams.city)) {
       parsedSearchParams.city.forEach((cityId) => {
         addToShouldBeAdd(cityId);
@@ -76,7 +86,6 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   }, [parsedSearchParams]);
 
   const createQueryString = useCreateQueryString();
-  const deleteQueryString = useDeleteQueryString();
 
   const applyFilters = () => {
     router.replace(`${pathname}?${createQueryString("city", shouldBeAdd)}`);
@@ -110,14 +119,8 @@ export default function CityFilter({ cities, id }: CityFilterType) {
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
-  /**
-   * auto focusing on search input
-   */
-  // useEffect(() => {
-  //   if (inputRef.current) inputRef.current.focus();
-  // }, [inputRef]);
-
   const router = useRouter();
+
   /**
    * save cities that are in city query
    * if city query have a single number it's return string
@@ -127,49 +130,38 @@ export default function CityFilter({ cities, id }: CityFilterType) {
     arrayFormat: "comma",
   }).city;
 
+  useEffect(() => {
+    if (!Array.isArray(citiesInQuery) || citiesInQuery.length == 0) {
+      clearShouldBeAdd()
+    }
+  }, [citiesInQuery])
+
   return (
-    <div className="filter-section">
-      <label htmlFor={id} className="btn btn-primary btn-outline btn-wide">
-        {CITY.SELECT}
-      </label>
-      <div className="px-3 my-3">
-        {Array.isArray(citiesInQuery) ? (
-          // if city is multiple number, find all of that from cities
-          citiesInQuery.map((cityId) => {
-            if (!cityId) return;
-            const city = cities.find((city) => city.id == +cityId);
-            if (!city) return;
-            return (
-              <CityFilterSelectedItem
-                removeFromShouldBeAdd={removeFromShouldBeAdd}
-                key={`city-selected-item-xz-${cityId}`}
-                city={city}
-              />
-            );
-          })
-        ) : citiesInQuery &&
-          cities.find((city) => city.id == +citiesInQuery) ? (
-          <CityFilterSelectedItem
-            removeFromShouldBeAdd={removeFromShouldBeAdd}
-            key={`city-selected-item-xz-single-`}
-            city={cities.find((city) => city.id == +citiesInQuery)!}
-          />
-        ) : null}
+    <div className="w-full _filter-wrap sm:w-auto">
+      <div className="flex items-center justify-start _filter-section">
+        {/* The button to open modal */}
+        <label
+          htmlFor={id}
+          className="w-full btn btn-primary btn-outline sm:w-auto"
+        >
+          {CITY.SELECT}
+        </label>
       </div>
 
-      {/* Put this part before </body> tag */}
-      <input type="checkbox" id={id} className="z-50 modal-toggle" />
+      {/* the modal */}
+      <input type="checkbox" id={id} className="modal-toggle" />
       <div className="modal">
-        <div className=" modal-box p-0 max-h-[550px] ">
-          <div className="w-full px-8 pt-5 pb-3 bg-white">
+        <div className="modal-box p-0 max-h-[550px]">
+          <div className="w-full p-4 bg-white sm:p-6">
             <h3 className="flex content-center justify-between text-lg font-bold">
               {CITY.SELECT}
+              {/* delete text */}
               {citiesInQuery ? (
                 <span
                   onClick={deleteAllCityHandler}
                   className="cursor-pointer text-[15px] font-normal text-pink-800"
                 >
-                  {CITY.DELETE_ALL}
+                  {GENERAL.DELETE_ALL}
                 </span>
               ) : null}
             </h3>
@@ -177,12 +169,12 @@ export default function CityFilter({ cities, id }: CityFilterType) {
             <input
               onChange={citySearchHandler}
               type="text"
-              placeholder="جستجو در لیست شهرها"
+              placeholder={CITY.SEARCH_IN_LIST}
               className="w-full input input-bordered"
               ref={inputRef}
             />
           </div>
-          <div className="px-8 h-[16rem] overflow-y-scroll">
+          <div className="px-6 sm:px-8 h-[16rem] overflow-y-scroll">
             {modifiedCities?.map((city: CityNamespace.city) => {
               return (
                 <CityFilterItem
@@ -197,16 +189,14 @@ export default function CityFilter({ cities, id }: CityFilterType) {
               );
             })}
           </div>
-          <div className="flex">
-            <div className="box-border flex items-center justify-between w-full px-8 pt-3 pb-5 mt-3 modal-action ">
-              <label
-                onClick={applyFilters}
-                htmlFor={id}
-                className="w-full btn btn-primary"
-              >
-                {GENERAL.CONFIRM}
-              </label>
-            </div>
+          <div className="w-full px-4 mb-4 sm:mb-6 sm:px-6 modal-action">
+            <label
+              onClick={applyFilters}
+              htmlFor={id}
+              className="w-full btn btn-primary"
+            >
+              {GENERAL.CONFIRM}
+            </label>
           </div>
         </div>
         {/* <label className="modal-backdrop" htmlFor={id}>
