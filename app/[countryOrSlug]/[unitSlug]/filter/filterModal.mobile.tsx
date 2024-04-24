@@ -9,6 +9,7 @@ import { Sliders } from "app/client-packages/phosphor-icons/react";
 import { useState } from "react";
 import CategoryFilterSelected from "./category.filter.selected";
 import CityFilterSelected from "./city.filter.selected";
+import DeleteFilterMobile from "./delete.filter.mobile";
 
 type FilterMobileProps = {
   cities: CityNamespace.city[];
@@ -70,7 +71,7 @@ export default function FilterModalMobile({
 
           <div className="grid grid-cols-2 gap-3 modal-action">
             <button className="w-full btn btn-primary">{FILTER.APPLY}</button>
-            <button className="w-full btn btn-info">{FILTER.DELETE_ALL}</button>
+            <DeleteFilterMobile/>
           </div>
         </form>
       </dialog>
