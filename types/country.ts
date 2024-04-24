@@ -9,5 +9,6 @@ export namespace CountryNamespace {
         status: boolean
         availability: boolean
         areaCode: number
+        englishName: string
     }
 }

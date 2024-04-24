@@ -8,11 +8,10 @@ import { ItemBreadCrumb } from "./breadcrumb";
 import { CardsList } from "./cardsList";
 import ListFilter from "./filter/listFilter";
 import { CountryNamespace } from "@/types/country";
-import { Suspense } from "react";
+import { Suspense, useCallback } from "react";
 import Loading from "../_loading";
 import FilterMobile from "./filter/filter.mobile";
 import FilterModalMobile from "./filter/filterModal.mobile";
-import Image from "next/image";
 import PagesSearch from "./filter/pages.search";
 import { PageNamespace } from "@/types/page";
 
@@ -74,6 +73,17 @@ export default async function CategoryList({
     console.log(e?.response?.data);
   }
 
+
+
+  let seoTitle: string;
+
+  if (category?.seoTitle) {
+    seoTitle = category.seoTitle.replace(/{{country}}/g, country.name || country.englishName);
+  } else {
+    seoTitle = `لیست ${category.name} فارسی زبان در ${country?.name}`
+  }
+
+
   return (
     <div className="pt-5 component _category-list">
       <div className="container mx-auto max-w-[1144px]">
@@ -82,11 +92,7 @@ export default async function CategoryList({
             <div className="flex flex-wrap items-center justify-between w-full pb-5 sm:flex-nowrap">
               <div className="flex items-center gap-3 px-3 mb-4 sm:mb-0 sm:px-0">
                 <h1 className="text-xl font-bold sm:text-2xl text-secondary">
-                  لیست{" "}
-                  {category?.seoTitle
-                    ? category.seoTitle
-                    : `${category.name} فارسی زبان`}{" "}
-                  در {country?.name}
+                  {seoTitle}
                 </h1>
                 <span className="hidden font-medium text-gray-500 sm:inline">
                   ({pages?.meta.totalItems} آیتم)
