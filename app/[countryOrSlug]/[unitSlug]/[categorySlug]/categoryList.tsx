@@ -73,16 +73,22 @@ export default async function CategoryList({
     console.log(e?.response?.data);
   }
 
-
-
-  let seoTitle: string;
-
-  if (category?.seoTitle) {
-    seoTitle = category.seoTitle.replace(/{{country}}/g, country.name || country.englishName);
-  } else {
-    seoTitle = `لیست ${category.name} فارسی زبان در ${country?.name}`
-  }
-
+  const defaultSeoDescription = category.seoDescription
+    ? category.seoDescription.replace(
+        /{{country}}/g,
+        country.name || country.englishName
+      )
+    : `لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+  استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+  در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+  نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+  کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان
+  جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای
+  طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان
+  فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری
+  موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد
+  نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل
+  دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`;
 
   return (
     <div className="pt-5 component _category-list">
@@ -92,7 +98,11 @@ export default async function CategoryList({
             <div className="flex flex-wrap items-center justify-between w-full pb-5 sm:flex-nowrap">
               <div className="flex items-center gap-3 px-3 mb-4 sm:mb-0 sm:px-0">
                 <h1 className="text-xl font-bold sm:text-2xl text-secondary">
-                  {seoTitle}
+                  لیست{" "}
+                  {category?.seoTitle
+                    ? category.seoTitle
+                    : `${category.name} فارسی زبان`}{" "}
+                  در {country?.name}
                 </h1>
                 <span className="hidden font-medium text-gray-500 sm:inline">
                   ({pages?.meta.totalItems} آیتم)
@@ -177,17 +187,7 @@ export default async function CategoryList({
           {/* SEO Text */}
           <div className="overflow-hidden mx-7 _SEO-text sm:mx-0">
             <p className="font-normal text-justify text-gray-500">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-              استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
-              در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
-              نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
-              کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان
-              جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای
-              طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان
-              فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری
-              موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد
-              نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل
-              دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+              {defaultSeoDescription}
             </p>
           </div>
         </div>

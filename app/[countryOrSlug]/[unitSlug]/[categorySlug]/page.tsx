@@ -103,16 +103,8 @@ export const generateMetadata = async ({ params: { countryOrSlug, unitSlug, cate
 
   const pageSearchParams = searchParams?.page;
 
-  let seoTitle: string;
-
-  if (category?.seoTitle) {
-    seoTitle = category.seoTitle.replace(/{{country}}/g, pathInfo?.props?.country.name || pathInfo?.props?.country.englishName);
-  } else {
-    seoTitle = `لیست ${category.name} فارسی زبان در ${pathInfo?.props?.country?.name}`
-  }
-
   return {
-    title: `${seoTitle} | کوچا`,
+    title: `لیست ${category?.seoTitle ? category.seoTitle: `${category.name} فارسی زبان`} در ${pathInfo?.props?.country?.name} | کوچا`,
     description: `به جامعه مجازی ایرانیان مهاجر مقیم ${
       countryOrSlug && currentCountry && currentCountry.name
     } خوش آمدید. در این صفحه لیست کاملی از ${
