@@ -11,10 +11,13 @@ import useCreateQueryString from "@/hooks/useCreateQueryString";
 import useDeleteQueryString from "@/hooks/useDeleteQueryString";
 import { CATEGORY } from "@/app/text/directory";
 import { GENERAL } from "@/app/text/general";
+import CategoryFilterSelected from "./category.filter.selected";
 
 type CategoryFilterType = {
   categories: CategoryNamespace.category[];
   id: string;
+  shouldBeAdd: string[];
+  setShouldBeAdd: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 export type ParsedSearchParamsType = {
@@ -25,7 +28,7 @@ export type addToShouldBeAddType = (item: string) => void;
 export type removeFromShouldBeAddType = (item: string) => void;
 export type checkHandlerType = (value: string | number) => boolean | undefined;
 
-export default function CategoryFilter({ categories, id }: CategoryFilterType) {
+export default function CategoryFilter({ categories, id, setShouldBeAdd, shouldBeAdd }: CategoryFilterType) {
   const [modifiedCategories, setModifiedCategories] = useState(categories);
 
   useEffect(() => {
@@ -50,6 +53,12 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
     arrayFormat: "comma",
   }).category;
 
+  useEffect(() => {
+    if (!Array.isArray(categoriesInQuery) || categoriesInQuery.length == 0) {
+      clearShouldBeAdd()
+    }
+  }, [categoriesInQuery])
+
   // city=1,2 -> [1,2] or city=1 -> "1"
   const citiesInQuery = queryString.parse(searchParams.toString(), {
     arrayFormat: "comma",
@@ -61,8 +70,7 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   const [isParsedSearchParamsAdded, setIsParsedSearchParamsAdded] =
     useState(false);
 
-  // filters that should be added
-  const [shouldBeAdd, setShouldBeAdd] = useState<string[]>([]);
+
 
   const addToShouldBeAdd: addToShouldBeAddType = (item: string) => {
     if (shouldBeAdd.includes(item)) return;
@@ -76,11 +84,6 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
       } else {
         return old.filter((n) => n !== item);
       }
-      // const index = old.indexOf(item);
-      // if (index != -1) {
-      //   old.splice(index, 1);
-      // }
-      // return [...old];
     });
   };
 
@@ -119,10 +122,6 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
   };
 
   const checkHandler: checkHandlerType = (value: string | number) => {
-    // console.log(value);
-    // shouldBeAdd.find((n) => {
-    //   shouldBeAdd.find((n) => console.log(n))
-    // })
     const hasItem = shouldBeAdd.some((n) => n == value);
     return hasItem;
   };
@@ -137,35 +136,6 @@ export default function CategoryFilter({ categories, id }: CategoryFilterType) {
         >
           {citiesInQuery ? CATEGORY.SELECT : CATEGORY.SELECT}
         </label>
-
-        <div className="flex items-center gap-3">
-          {Array.isArray(categoriesInQuery) ? (
-            categoriesInQuery.map((categoryId) => {
-              if (!categoryId) return;
-              const category = categories.find(
-                (category) => category.id == +categoryId
-              );
-              if (!category) return;
-              return (
-                <CategoryFilterSelectedItem
-                  key={`category-in-query-${category.slug}`}
-                  removeFromShouldBeAdd={removeFromShouldBeAdd}
-                  category={category}
-                />
-              );
-            })
-          ) : categoriesInQuery &&
-            categories.find((category) => category.id == +categoriesInQuery) ? (
-            <CategoryFilterSelectedItem
-              removeFromShouldBeAdd={removeFromShouldBeAdd}
-              category={
-                categories.find(
-                  (category) => category.id == +categoriesInQuery
-                )!
-              }
-            />
-          ) : null}
-        </div>
 
         {/* the modal */}
         <input type="checkbox" id={id} className="modal-toggle" />

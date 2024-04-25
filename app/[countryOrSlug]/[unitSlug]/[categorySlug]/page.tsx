@@ -104,9 +104,7 @@ export const generateMetadata = async ({ params: { countryOrSlug, unitSlug, cate
   const pageSearchParams = searchParams?.page;
 
   return {
-    title: `لیست ${pathInfo?.props?.category?.name} فارسی زبان در ${
-      countryOrSlug && currentCountry && currentCountry.name
-    } | کوچا`,
+    title: `لیست ${category?.seoTitle ? category.seoTitle: `${category.name} فارسی زبان`} در ${pathInfo?.props?.country?.name} | کوچا`,
     description: `به جامعه مجازی ایرانیان مهاجر مقیم ${
       countryOrSlug && currentCountry && currentCountry.name
     } خوش آمدید. در این صفحه لیست کاملی از ${

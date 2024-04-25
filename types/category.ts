@@ -12,6 +12,7 @@ export namespace CategoryNamespace {
         updateDate: string,
         unit: UnitType,
         seoTitle: string,
+        seoDescription: string
     }
 
     export interface MostUsedCategory extends category {

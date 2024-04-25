@@ -65,7 +65,7 @@ const PagesSearch = ({ countryCode }: CountryPagesSearch) => {
                       width={30}
                       className="rounded-full"
                     />
-                    <p>{page.title}<span>، زیرعنوان واحد</span></p>
+                    <p>{page.title} <span className="text-xs text-black/70">{page.subtitle}</span></p>
                   </Link>
                 </li>
               );

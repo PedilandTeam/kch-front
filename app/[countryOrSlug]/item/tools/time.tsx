@@ -1,8 +1,44 @@
-import { DAYS, MAH, MONTHES, STATUS } from "@/app/text/calendar";
+import { STATUS } from "@/app/text/calendar";
 import { GENERAL } from "@/app/text/general";
 import { Clock } from "app/client-packages/phosphor-icons/react";
+import { useMemo } from "react";
 
 const ItemTime: React.FC = () => {
+  const date = useMemo(() => new Date(), []);
+
+  const jalaliDate = useMemo(() => {
+    const formatter = new Intl.DateTimeFormat("fa-IR", {
+      calendar: "persian",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    return formatter.format(date);
+  }, [date]);
+
+  const miladiDate = useMemo(() => {
+    // Create an Intl.DateTimeFormat instance for Persian locale but Gregorian calendar
+    const formatter = new Intl.DateTimeFormat("fa-IR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      calendar: "gregory", // Explicitly use the Gregorian calendar
+    });
+
+    // Format the date
+    return formatter.format(date);
+  }, [date]);
+
+  const dayName = useMemo(() => {
+    const dayFormatter = new Intl.DateTimeFormat("fa-IR", {
+      weekday: "long", // Option to get the full name of the weekday
+    });
+
+    // Format the date to get the weekday
+    return dayFormatter.format(date);
+  }, [date]);
+
   return (
     // WORK TIME
     <>
@@ -62,11 +98,11 @@ const ItemTime: React.FC = () => {
         </div>
         <div className="flex items-center justify-around pt-3 mt-3 border-t border-gray-300 border-dashed">
           <span className="font-medium">{GENERAL.TODAY}:</span>
-          <span className="text-[15px]">{DAYS.WEDNESDAY}</span>
+          <span className="text-[15px]">{dayName}</span>
           <span className="text-lg text-gray-300">|</span>
-          <span className="text-[15px]">27 {MONTHES.MARCH} 2024</span>
+          <span className="text-[15px]">{miladiDate}</span>
           <span className="text-lg text-gray-300">|</span>
-          <span className="text-[15px]">23 {MAH.FAR} 1403</span>
+          <span className="text-[15px]">{jalaliDate}</span>
         </div>
       </div>
     </>

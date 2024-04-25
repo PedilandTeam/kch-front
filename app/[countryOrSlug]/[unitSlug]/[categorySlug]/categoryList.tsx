@@ -8,12 +8,12 @@ import { ItemBreadCrumb } from "./breadcrumb";
 import { CardsList } from "./cardsList";
 import ListFilter from "./filter/listFilter";
 import { CountryNamespace } from "@/types/country";
-import { Suspense } from "react";
+import { Suspense, useCallback } from "react";
 import Loading from "../_loading";
 import FilterMobile from "./filter/filter.mobile";
 import FilterModalMobile from "./filter/filterModal.mobile";
-import Image from "next/image";
 import PagesSearch from "./filter/pages.search";
+import { PageNamespace } from "@/types/page";
 
 type PagesListProps = {
   category: CategoryNamespace.category;
@@ -57,6 +57,39 @@ export default async function CategoryList({
   if (!country) return notFound();
   const cities = await fetchCities(country.code, category.id);
 
+  let pages: PageNamespace.GET | undefined = undefined;
+  try {
+    pages = await (
+      await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 24, {
+        countryCode: country.code,
+        cityIds: city,
+        categoryIds: category?.id,
+        search,
+      })
+    ).json();
+  } catch (e: any) {
+    // Because this handle in CardsList
+    console.log(e);
+    console.log(e?.response?.data);
+  }
+
+  const defaultSeoDescription = category.seoDescription
+    ? category.seoDescription.replace(
+        /{{country}}/g,
+        country.name || country.englishName
+      )
+    : `لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+  استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+  در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
+  نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+  کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان
+  جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای
+  طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان
+  فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری
+  موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد
+  نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل
+  دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`;
+
   return (
     <div className="pt-5 component _category-list">
       <div className="container mx-auto max-w-[1144px]">
@@ -72,7 +105,7 @@ export default async function CategoryList({
                   در {country?.name}
                 </h1>
                 <span className="hidden font-medium text-gray-500 sm:inline">
-                  (130 آیتم)
+                  ({pages?.meta.totalItems} آیتم)
                 </span>
               </div>
               <ItemBreadCrumb
@@ -109,7 +142,7 @@ export default async function CategoryList({
 
           <div className="pt-2 sm:pt-0">
             <div className="sticky top-0 z-[9] p-3 bg-white sm:hidden">
-              <FilterMobile />
+              <FilterMobile pagesTotalItems={pages?.meta.totalItems} />
               <FilterModalMobile cities={cities.items} />
             </div>
             <div className="px-3 pb-5 sm:hidden">
@@ -154,17 +187,7 @@ export default async function CategoryList({
           {/* SEO Text */}
           <div className="overflow-hidden mx-7 _SEO-text sm:mx-0">
             <p className="font-normal text-justify text-gray-500">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-              استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
-              در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
-              نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
-              کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان
-              جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای
-              طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان
-              فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری
-              موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد
-              نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل
-              دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+              {defaultSeoDescription}
             </p>
           </div>
         </div>

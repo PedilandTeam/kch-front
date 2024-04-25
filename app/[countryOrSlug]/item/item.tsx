@@ -4,12 +4,10 @@ import { ItemTopInfo } from "./topInfo";
 import { PageNamespace } from "@/types/page";
 import CountryUpdater from "./countryUpdater";
 import { ITEM } from "@/app/text/directory";
-import SimilarCat from "./tools/similarCat";
 import { Suspense } from "react";
-import ServicesList from "./tools/tagList";
-import Image from "next/image";
 import Description from "@/components/description";
 import TagList from "./tools/tagList";
+import SuggestedPages from "./tools/suggestedPages";
 export type PageItemProps = {
   pageData: PageNamespace.Page;
 };
@@ -94,9 +92,22 @@ export default function PageItem({ pageData }: PageItemProps) {
 
         {/* Same Items in the Category */}
         <Suspense>
-          <SimilarCat
+          <SuggestedPages
+            unit={pageData.unit}
+            pageId={pageData.id}
             countryCode={pageData.country.code}
-            categoryId={pageData.category.id}
+            category={pageData.category}
+            basedOn="category"
+          />
+        </Suspense>
+
+        <Suspense>
+          <SuggestedPages
+            unit={pageData.unit}
+            pageId={pageData.id}
+            countryCode={pageData.country.code}
+            city={pageData.city}
+            basedOn="city"
           />
         </Suspense>
 
