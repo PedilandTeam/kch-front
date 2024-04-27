@@ -14,14 +14,14 @@ type ListFilterProps = {
   // categories: CategoryNamespace.category[]
 };
 export default function CategoryListFilter({ cities }: ListFilterProps) {
-
-
   const [shouldBeAddCities, setShouldBeAddCities] = useState<string[]>([]);
-  const [shouldBeAddCategories, setShouldBeAddCategories] = useState<string[]>([]);
+  const [shouldBeAddCategories, setShouldBeAddCategories] = useState<string[]>(
+    []
+  );
 
-
-  
-  const removeFromShouldBeAddCities: removeFromShouldBeAddType = (item: string) => {
+  const removeFromShouldBeAddCities: removeFromShouldBeAddType = (
+    item: string
+  ) => {
     setShouldBeAddCities((old) => {
       const index = old.indexOf(item);
       if (index != -1) {
@@ -31,7 +31,9 @@ export default function CategoryListFilter({ cities }: ListFilterProps) {
     });
   };
 
-  const removeFromShouldBeAddCategory: removeFromShouldBeAddType = (item: string) => {
+  const removeFromShouldBeAddCategory: removeFromShouldBeAddType = (
+    item: string
+  ) => {
     setShouldBeAddCategories((old) => {
       if (!old.includes(item)) {
         return [...old, item];
@@ -41,9 +43,8 @@ export default function CategoryListFilter({ cities }: ListFilterProps) {
     });
   };
 
-
   return (
-    <div className="flex gap-2 py-7 _filter-catgory">
+    <div className="flex gap-3 py-7 _filter-catgory">
       <div className="flex items-center _filter-title">
         <Sliders size={24} weight="light" className="ml-1" />
         <span className="font-semibold">{FILTER._S}</span>
@@ -54,15 +55,23 @@ export default function CategoryListFilter({ cities }: ListFilterProps) {
       </div>
 
       <div className="_filter-body">
-        <CityFilter setShouldBeAdd={setShouldBeAddCities} shouldBeAdd={shouldBeAddCities} id="category-cities-filter" cities={cities?.items} />
+        <CityFilter
+          setShouldBeAdd={setShouldBeAddCities}
+          shouldBeAdd={shouldBeAddCities}
+          id="category-cities-filter"
+          cities={cities?.items}
+        />
       </div>
 
-      <div className="flex items-center _filter-resaults">
-        <CityFilterSelected cities={cities.items} removeFromShouldBeAdd={removeFromShouldBeAddCities} />
+      <div className="flex items-center pr-2 _filter-resaults">
+        <CityFilterSelected
+          cities={cities.items}
+          removeFromShouldBeAdd={removeFromShouldBeAddCities}
+        />
       </div>
 
-      <div className="mr-auto">
-        <DeleteFilter/>
+      <div className="flex items-center mr-auto">
+        <DeleteFilter />
       </div>
     </div>
   );

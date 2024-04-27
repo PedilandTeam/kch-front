@@ -6,11 +6,7 @@ import { CityNamespace } from "@/types/city";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import queryString from "query-string";
-import React, {
-  memo, useEffect,
-  useRef,
-  useState
-} from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { removeFromShouldBeAddType } from "./city.filter";
 
 type CityFilterItemProps = {
@@ -55,11 +51,11 @@ function CityFilterSelectedItem({
     <label
       key={"selected-cityxc-filter-item-" + city.name}
       htmlFor={`city-select-${city.name}`}
-      className="flex items-center py-2 cursor-pointer item"
+      className="flex items-center cursor-pointer item"
     >
       <input
         ref={ref}
-        className="ml-3 checkbox checkbox-secondary checkbox-sm"
+        className="ml-2 checkbox checkbox-secondary checkbox-sm"
         onChange={inputClickHandler}
         id={`city-select-${city.name}`}
         value={city.id}

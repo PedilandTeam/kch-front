@@ -14,6 +14,7 @@ import FilterMobile from "./filter/filter.mobile";
 import FilterModalMobile from "./filter/filterModal.mobile";
 import PagesSearch from "./filter/pages.search";
 import { PageNamespace } from "@/types/page";
+import Image from "next/image";
 
 type PagesListProps = {
   category: CategoryNamespace.category;
@@ -95,7 +96,7 @@ export default async function CategoryList({
       <div className="container mx-auto max-w-[1144px]">
         <div className="_page-content">
           <div className="_top-section">
-            <div className="flex flex-wrap items-center justify-between w-full pb-5 sm:flex-nowrap">
+            <div className="flex flex-wrap items-center justify-between w-full sm:flex-nowrap">
               <div className="flex items-center gap-3 px-3 mb-4 sm:mb-0 sm:px-0">
                 <h1 className="text-xl font-bold sm:text-2xl text-secondary">
                   لیست{" "}
@@ -116,7 +117,7 @@ export default async function CategoryList({
             </div>
 
             {/* Advertising Section P03 */}
-            {/* <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0">
+            {/* <div className="flex flex-wrap gap-3 px-3 pt-5 sm:gap-5 sm:px-0">
               <div>
                 <Image
                   src={"/images/banner/bnr-04.gif"}

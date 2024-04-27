@@ -18,7 +18,9 @@ const DeleteFilterMobile = () => {
   };
 
   return (
-    <button onClick={deleteAllCategoryHandler} className="w-full btn btn-info">حذف همه</button>
+    <button onClick={deleteAllCategoryHandler} className="w-full btn btn-neutral">
+      حذف فیلترها
+    </button>
   );
 };
 export default DeleteFilterMobile;

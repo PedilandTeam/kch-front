@@ -16,7 +16,9 @@ type FilterMobileProps = {
 export default function FilterModalMobile({ cities }: FilterMobileProps) {
   const [shouldBeAddCities, setShouldBeAddCities] = useState<string[]>([]);
 
-  const removeFromShouldBeAddCities: removeFromShouldBeAddType = (item: string) => {
+  const removeFromShouldBeAddCities: removeFromShouldBeAddType = (
+    item: string
+  ) => {
     setShouldBeAddCities((old) => {
       const index = old.indexOf(item);
       if (index != -1) {
@@ -45,12 +47,15 @@ export default function FilterModalMobile({ cities }: FilterMobileProps) {
               id="mobile-categoryList-cityfilter-modal"
               cities={cities}
             />
-            <CityFilterSelected cities={cities} removeFromShouldBeAdd={removeFromShouldBeAddCities} />
+            <CityFilterSelected
+              cities={cities}
+              removeFromShouldBeAdd={removeFromShouldBeAddCities}
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-3 modal-action">
             <button className="w-full btn btn-primary">{FILTER.APPLY}</button>
-            <DeleteFilterMobile/>
+            <DeleteFilterMobile />
           </div>
         </form>
       </dialog>

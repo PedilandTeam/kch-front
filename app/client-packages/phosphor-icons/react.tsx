@@ -44,7 +44,8 @@ import {
   UsersThree,
   Bank,
   Peace,
-  Phone
+  Phone,
+  X,
 } from "@phosphor-icons/react";
 
 export {
@@ -91,5 +92,6 @@ export {
   UsersThree,
   Bank,
   Peace,
-  Phone
+  Phone,
+  X,
 };
