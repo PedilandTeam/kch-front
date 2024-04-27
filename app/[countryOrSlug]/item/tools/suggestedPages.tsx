@@ -53,7 +53,7 @@ const SuggestedPages = async ({
   if (pages.length >= 4)
     return (
       <div className="my-12 sm:my-20">
-        <h3 className="px-3 mb-2 text-xl font-extrabold sm:mb-6 sm:px-0">
+        <h3 className="px-3 mb-2 text-xl font-extrabold text-center sm:mb-6 sm:px-0 sm:text-right">
           سایر{" "}
           {basedOn === "category"
             ? category?.seoTitle

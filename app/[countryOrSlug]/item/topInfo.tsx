@@ -79,11 +79,11 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                   weight="duotone"
                 /> */}
 
-                <Confetti
+                {/* <Confetti
                   size={30}
                   className="text-blue-600 transition duration-300 hover:cursor-pointer hover:text-slate-800 sm:hidden"
                   weight="duotone"
-                />
+                /> */}
               </div>
             </h1>
             {pageData.subtitle && (

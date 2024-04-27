@@ -24,7 +24,7 @@ const ItemClaim = () => {
           استفاده کنید.
         </p>
         <Link
-          href={"https://t.me/koochaa_support"}
+          href={"https://biz.koochaa.com/claim"}
           target="_blank"
           className="w-full btn btn-primary"
         >
