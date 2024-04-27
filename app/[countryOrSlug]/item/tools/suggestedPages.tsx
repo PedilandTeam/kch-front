@@ -54,12 +54,11 @@ const SuggestedPages = async ({
     return (
       <div className="my-12 sm:my-20">
         <h3 className="px-3 mb-2 text-xl font-extrabold text-center sm:mb-6 sm:px-0 sm:text-right">
-          سایر{" "}
           {basedOn === "category"
             ? category?.seoTitle
-              ? category.seoTitle
+              ? `سایر ${category.seoTitle} در`
               : category?.name
-            : "کسب و کارهای"}{" "}
+            : "آیتم‌های تصادفی در"}{" "}
           {basedOn === "category"
             ? city?.name
             : city?.name || city?.englishName}
