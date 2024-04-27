@@ -65,7 +65,7 @@ const PagesSearch = ({ countryCode }: CountryPagesSearch) => {
                       width={30}
                       className="rounded-full"
                     />
-                    <p>{page.title} <span className="text-xs text-black/70">{page.subtitle}</span></p>
+                    <p>{page.title} {page.subtitle && <span className="text-gray-500">- {page.subtitle}</span>}</p>
                   </Link>
                 </li>
               );
