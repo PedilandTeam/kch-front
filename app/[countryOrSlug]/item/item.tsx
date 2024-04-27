@@ -97,6 +97,7 @@ export default function PageItem({ pageData }: PageItemProps) {
             pageId={pageData.id}
             countryCode={pageData.country.code}
             category={pageData.category}
+            city={pageData.city}
             basedOn="category"
           />
         </Suspense>
