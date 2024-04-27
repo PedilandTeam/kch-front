@@ -83,10 +83,10 @@ function ItemSideInfoItem({ Icons, Images, text }: ItemSideInfoItemType) {
 }
 
 export function ItemSideInfo({ pageData }: ItemSideInfoType) {
-  const number = pageData.contact.telephone
+  const number = pageData.contact?.telephone
     ? `00${pageData.country.areaCode ? pageData.country.areaCode : ""}${pageData
         .contact.telephone!}`
-    : pageData.contact.phone &&
+    : pageData.contact?.phone &&
       `00${pageData.country.areaCode ? pageData.country.areaCode : ""}${pageData
         .contact.phone!}`;
 
@@ -123,7 +123,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         </div>
         {/* PHONE/MOBILE */}
         <div className="grid grid-rows-1 gap-2 text-center border-l group hover:cursor-pointer">
-          {pageData.contact.telephone ? (
+          {pageData.contact?.telephone ? (
             <button
               onClick={linkHandler}
               data-type="telephone"
@@ -138,7 +138,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
                 تلفن
               </span>
             </button>
-          ) : pageData.contact.phone ? (
+          ) : pageData.contact?.phone ? (
             <button
               onClick={linkHandler}
               data-type="phone"
