@@ -87,6 +87,15 @@ const ItemTime: React.FC = () => {
       {/* Not Set */}
       <div className="p-4 mb-3 border rounded-md border-gay-200 bg-opacity-60 bg-gray-50">
         <div className="flex items-center justify-between">
+          <span className="font-medium">{GENERAL.TODAY}:</span>
+          <span className="text-[15px]">{dayName}</span>
+          <span className="text-lg text-gray-300">|</span>
+          <span className="text-[15px]">{miladiDate}</span>
+          <span className="text-lg text-gray-300">|</span>
+          <span className="text-[15px]">{jalaliDate}</span>
+        </div>
+
+        <div className="flex items-center justify-between pt-3 mt-3 border-t border-gray-300 border-dashed">
           <div className="flex items-center">
             <Clock size={20} className="ml-1" />
             <span className="font-medium">---</span>
@@ -95,14 +104,6 @@ const ItemTime: React.FC = () => {
             <span className="text-[15px]">{GENERAL.WORKING_HOURS}</span>{" "}
             <span className="text-[15px]">{STATUS.NOT_SET}</span>
           </div>
-        </div>
-        <div className="flex items-center justify-around pt-3 mt-3 border-t border-gray-300 border-dashed">
-          <span className="font-medium">{GENERAL.TODAY}:</span>
-          <span className="text-[15px]">{dayName}</span>
-          <span className="text-lg text-gray-300">|</span>
-          <span className="text-[15px]">{miladiDate}</span>
-          <span className="text-lg text-gray-300">|</span>
-          <span className="text-[15px]">{jalaliDate}</span>
         </div>
       </div>
     </>

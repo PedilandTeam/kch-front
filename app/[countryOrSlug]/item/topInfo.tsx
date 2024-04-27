@@ -73,11 +73,12 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                 <BlueBadge enable={!!pageData.business} />
                 <OrangeBadge enable={!pageData.business} />
 
-                <Plant
+                {/* <Plant
                   size={30}
                   className="text-green-600 transition duration-300 hover:cursor-pointer hover:text-slate-800"
                   weight="duotone"
-                />
+                /> */}
+
                 <Confetti
                   size={30}
                   className="text-blue-600 transition duration-300 hover:cursor-pointer hover:text-slate-800 sm:hidden"

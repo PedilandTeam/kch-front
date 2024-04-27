@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FC } from "react";
 import { BadgeModalsProps } from "../badges";
 
-const OrangeModal: FC<{slug: string}> = ({ slug }) => {
+const OrangeModal: FC<{ slug: string }> = ({ slug }) => {
   return (
     <dialog id="orange_modal" className="modal">
       <div className="modal-box">
@@ -16,9 +16,10 @@ const OrangeModal: FC<{slug: string}> = ({ slug }) => {
           تـوجـه
         </h3>
         <p className="py-4">
-          اطلاعات این واحد از اینترنت جمع‌آوری شده و توسط ادمین کـوچـا مدیریت
-          می‌شود. اگر شما مالک این صفحه هستید، با احراز هویت می‌توانید تیک آبی
-          دریافت کنید، مدیریت اطلاعات این صفحه رو به عهده بگیرید و از امکانات{" "}
+          اطلاعات این صفحه از اینترنت جمع‌آوری شده و در حال حاضر توسط ادمین
+          کـوچـا مدیریت می‌شود. اگر شما مالک این واحد صنفی هستید، می‌توانید با
+          احراز هویت خود تیک آبی دریافت کنید، مدیریت اطلاعات این صفحه رو به عهده
+          بگیرید و از امکانات{" "}
           <Link
             href={"#"}
             className="border-b border-black border-dashed hover:text-primary hover:border-primary"
@@ -30,7 +31,8 @@ const OrangeModal: FC<{slug: string}> = ({ slug }) => {
         </p>
         <div className="flex items-center p-[10px] font-medium border border-yellow-300 rounded-md bg-yellow-50 text-[15px]">
           <p className="text-center text-yellow-800">
-            کوچا، هیچ مسئولیتی در قبال خدمات این واحد صنفی ندارد.
+            <strong>بسیار مهم:</strong> کوچا، هیچ مسئولیتی در قبال خدمات این واحد
+            صنفی ندارد.
           </p>
         </div>
 
@@ -40,7 +42,10 @@ const OrangeModal: FC<{slug: string}> = ({ slug }) => {
             <button className="w-full btn">متوجه شدم</button>
           </form>
           <div className="ml-0">
-            <Link target="_blank" href={`${process.env.NEXT_PUBLIC_BIZ_FRONT_URL}/claim/claimWay?slug=${slug}`}>
+            <Link
+              target="_blank"
+              href={`${process.env.NEXT_PUBLIC_BIZ_FRONT_URL}/claim/claimWay?slug=${slug}`}
+            >
               <button className="w-full btn btn-primary">
                 مالک این صفحه هستم
               </button>
