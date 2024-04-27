@@ -21,7 +21,7 @@ const OrangeModal: FC<{ slug: string }> = ({ slug }) => {
           احراز هویت خود تیک آبی دریافت کنید، مدیریت اطلاعات این صفحه رو به عهده
           بگیرید و از امکانات{" "}
           <Link
-            href={"#"}
+            href={process.env.NEXT_PUBLIC_BIZ_FRONT_URL}
             className="border-b border-black border-dashed hover:text-primary hover:border-primary"
             target="_blank"
           >
