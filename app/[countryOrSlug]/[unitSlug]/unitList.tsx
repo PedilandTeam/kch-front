@@ -13,6 +13,7 @@ import FilterMobile from "./filter/filter.mobile";
 import FilterModalMobile from "./filter/filterModal.mobile";
 import PagesSearch from "./[categorySlug]/filter/pages.search";
 import { PageNamespace } from "@/types/page";
+import Image from "next/image";
 
 type PagesListProps = {
   unit: UnitType;
@@ -104,7 +105,7 @@ export default async function UntiList({
       <div className="container mx-auto max-w-[1144px]">
         <div className="_page-content">
           <div className="_top-section">
-            <div className="flex flex-wrap items-center justify-between w-full pb-5 sm:flex-nowrap">
+            <div className="flex flex-wrap items-center justify-between w-full sm:flex-nowrap">
               <div className="flex items-center gap-3 px-3 mb-4 sm:mb-0 sm:px-0">
                 <h1 className="text-xl font-bold sm:text-2xl text-secondary">
                   لیست {unit?.name} فارسی زبان در {country?.name}
@@ -120,7 +121,7 @@ export default async function UntiList({
             </div>
 
             {/* Advertising Section P03 */}
-            {/* <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0">
+            {/* <div className="flex flex-wrap gap-3 px-3 pt-5 sm:gap-5 sm:px-0">
               <div>
                 <Image
                   src={"/images/banner/bnr-04.gif"}
@@ -138,6 +139,7 @@ export default async function UntiList({
                 />
               </div>
             </div> */}
+
             <div className="hidden sm:block _filter">
               <ListFilter cities={cities} categories={categories} />
             </div>
@@ -192,7 +194,7 @@ export default async function UntiList({
           </div> */}
 
           {/* SEO Text */}
-          <div className="overflow-hidden mx-7 _SEO-text sm:mx-0">
+          {/* <div className="overflow-hidden mx-7 _SEO-text sm:mx-0">
             <p className="font-normal text-justify text-gray-500">
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
               استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
@@ -206,7 +208,7 @@ export default async function UntiList({
               نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل
               دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

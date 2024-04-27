@@ -63,7 +63,7 @@ export default function CategoryListFilter({ cities }: ListFilterProps) {
         />
       </div>
 
-      <div className="flex items-center pr-2 _filter-resaults">
+      <div className="flex items-center _filter-resaults">
         <CityFilterSelected
           cities={cities.items}
           removeFromShouldBeAdd={removeFromShouldBeAddCities}
