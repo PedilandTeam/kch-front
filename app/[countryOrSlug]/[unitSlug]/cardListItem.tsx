@@ -49,9 +49,16 @@ export default function CardListItem({ page, country, variant }: cardListItem) {
             className="absolute transition duration-300 text-stone-300 group-hover:text-emerald-600 top-4 left-4"
             weight="duotone"
           /> */}
-          <h2 className="my-3 text-xl font-semibold text-center truncate transition duration-300 group-hover:text-primary hover:overflow-visible _card-title">
-            {page.title}
-          </h2>
+          <div className="flex flex-col justify-center my-3 h-14">
+            <h2 className="text-xl font-semibold text-center truncate transition duration-300 group-hover:text-primary hover:overflow-visible _card-title">
+              {page.title}
+            </h2>
+            {page.subtitle && (
+              <h3 className="mt-1 font-medium text-center text-gray-700">
+                {page.subtitle}
+              </h3>
+            )}
+          </div>
 
           <div className="flex items-center justify-center _card-rating">
             {/* @ts-ignore */}
