@@ -1,5 +1,6 @@
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import queryString from "query-string";
+import { X } from "@/app/client-packages/phosphor-icons/react";
 
 const DeleteFilter = () => {
   const searchParams = useSearchParams();
@@ -22,14 +23,16 @@ const DeleteFilter = () => {
   };
 
   return (
-    <button
-      onClick={deleteAllCategoryHandler}
-      className={`w-full btn btn-primary btn-outline ${
-        !ENABELED ? "btn-disabled" : ""
-      } sm:w-auto`}
-    >
-      حذف فیلترها
-    </button>
+    <div className="tooltip" data-tip="حذف فیلترها">
+      <button
+        onClick={deleteAllCategoryHandler}
+        className={`btn btn-sm btn-circle btn-outline hover:btn-error group ${
+          !ENABELED ? "hidden" : ""
+        }`}
+      >
+        <X className="w-5 h-5 group-hover:text-white" />
+      </button>
+    </div>
   );
 };
 export default DeleteFilter;

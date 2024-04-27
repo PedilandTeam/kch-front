@@ -55,7 +55,7 @@ function CityFilterSelectedItem({
     >
       <input
         ref={ref}
-        className="ml-2 checkbox checkbox-secondary checkbox-sm"
+        className="ml-2 checkbox checkbox-sm border-gray-400 checked:white [--chkbg:theme(colors.gray.400)] [--chkfg:white]"
         onChange={inputClickHandler}
         id={`city-select-${city.name}`}
         value={city.id}

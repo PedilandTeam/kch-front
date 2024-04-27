@@ -20,7 +20,7 @@ const CategoryFilterSelected: FC<CategoryFilterSelected> = ({
     arrayFormat: "comma",
   }).category;
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex flex-wrap items-center gap-3 sm:flex-nowrap">
       {Array.isArray(categoriesInQuery) ? (
         categoriesInQuery.map((categoryId) => {
           if (!categoryId) return;

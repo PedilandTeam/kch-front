@@ -20,7 +20,7 @@ const CityFilterSelected: FC<CityFilterSelected> = ({
 
   
   return (
-    <div className="flex items-center gap-5">
+    <div className="flex flex-wrap items-center gap-3 sm:flex-nowrap">
       {Array.isArray(citiesInQuery) ? (
         // if city is multiple number, find all of that from cities
         citiesInQuery.map((cityId) => {

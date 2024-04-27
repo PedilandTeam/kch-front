@@ -63,7 +63,7 @@ export default function CategoryFilterSelectedItem({
 
   return (
     <div
-      className=""
+      className="flex items-center"
       key={`cate-gory-filter-slected--${category.id}`}
     >
       <input
