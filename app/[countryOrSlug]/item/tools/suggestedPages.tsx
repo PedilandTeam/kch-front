@@ -11,7 +11,7 @@ type SuggestedPages = {
   countryCode: string;
   unit: UnitType;
   category?: CategoryNamespace.category;
-  city?: CityNamespace.city
+  city: CityNamespace.city
   basedOn: 'category' | 'city'
 };
 const SuggestedPages = async ({ category, city, countryCode, basedOn, pageId, unit }: SuggestedPages) => {
@@ -19,7 +19,7 @@ const SuggestedPages = async ({ category, city, countryCode, basedOn, pageId, un
 
   try {
     if (basedOn === 'category') {
-      pages = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/pages/random?categoryId=${category?.id}&countryCode=${countryCode}&excludeId=${pageId}`).then((res) => res.data);
+      pages = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/pages/random?categoryId=${category?.id}&cityId=${city.id}&excludeId=${pageId}`).then((res) => res.data);
     }
   
     if (basedOn === 'city') {
@@ -40,7 +40,7 @@ const SuggestedPages = async ({ category, city, countryCode, basedOn, pageId, un
     return (
       <div className="my-12 sm:my-20">
         <h3 className="px-3 mb-2 text-xl font-extrabold sm:mb-6 sm:px-0">
-          {basedOn === 'category' ? unit.name : 'صفحات'} مشابه در {basedOn === 'category' ? 'دسته' : 'شهر'} {basedOn === 'category' ? category?.name : city?.name || city?.englishName}
+          سایر {basedOn === 'category' ? category?.seoTitle ? category.seoTitle : category?.name : 'کسب و کارهای'} {basedOn === 'category' ? city?.name : city?.name || city?.englishName}
         </h3>
 
         <div className="hidden grid-cols-1 sm:grid sm:grid-cols-4 gap-y-4 sm:gap-5">
