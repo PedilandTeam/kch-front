@@ -8,13 +8,12 @@ import { ItemBreadCrumb } from "./breadcrumb";
 import { CardsList } from "./cardsList";
 import ListFilter from "./filter/listFilter";
 import { CountryNamespace } from "@/types/country";
-import { Suspense, useCallback } from "react";
+import { Suspense } from "react";
 import Loading from "../_loading";
 import FilterMobile from "./filter/filter.mobile";
 import FilterModalMobile from "./filter/filterModal.mobile";
 import PagesSearch from "./filter/pages.search";
 import { PageNamespace } from "@/types/page";
-import Image from "next/image";
 
 type PagesListProps = {
   category: CategoryNamespace.category;
@@ -74,22 +73,12 @@ export default async function CategoryList({
     console.log(e?.response?.data);
   }
 
-  const defaultSeoDescription = category.seoDescription
-    ? category.seoDescription.replace(
-        /{{country}}/g,
-        country.name || country.englishName
-      )
-    : `لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-  استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
-  در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
-  نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
-  کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان
-  جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای
-  طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان
-  فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری
-  موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد
-  نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل
-  دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.`;
+  const defaultSeoDescription =
+    category.seoDescription &&
+    category.seoDescription.replace(
+      /{{country}}/g,
+      country.name || country.englishName
+    );
 
   return (
     <div className="pt-5 component _category-list">
