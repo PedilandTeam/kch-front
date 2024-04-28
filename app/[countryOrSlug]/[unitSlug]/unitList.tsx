@@ -13,7 +13,6 @@ import FilterMobile from "./filter/filter.mobile";
 import FilterModalMobile from "./filter/filterModal.mobile";
 import PagesSearch from "./[categorySlug]/filter/pages.search";
 import { PageNamespace } from "@/types/page";
-import Image from "next/image";
 import { SeoText } from "./seoText";
 
 type PagesListProps = {
@@ -195,7 +194,7 @@ export default async function UntiList({
           </div> */}
 
           {/* SEO Text */}
-          <SeoText currentCountry={country} />
+          <SeoText currentCountry={country} unit={unit} />
         </div>
       </div>
     </div>
