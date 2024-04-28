@@ -32,7 +32,7 @@ export const HomeCountries = async () => {
   };
 
   return (
-    <div className="container mx-auto max-w-[1144px] my-12 sm:mt-18 sm:mb-24">
+    <div className="container mx-auto max-w-[1144px] my-10 sm:mt-18 sm:mb-20">
       <div className="pt-4 mx-3 mod-home-countries sm:mx-0" id="select-country">
         <div className="mod-header pr-3 pl-3 sm:pr-4 sm:pl-0 mb-5 sm:mb-7 border-r-[4px] sm:border-r-[5px] border-secondary">
           <h2 className="text-[20px] sm:text-[22px] font-semibold">
