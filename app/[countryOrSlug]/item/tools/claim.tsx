@@ -3,11 +3,10 @@ import Link from "next/link";
 import { FC } from "react";
 
 type ItemClaim = {
-  enable: boolean
-}
-const ItemClaim: FC<ItemClaim> = ({enable}) => {
-
-
+  enable: boolean;
+  slug: string;
+};
+const ItemClaim: FC<ItemClaim> = ({ enable, slug }) => {
   return enable ? (
     <>
       {/* ADMIN ALERT */}
@@ -30,9 +29,10 @@ const ItemClaim: FC<ItemClaim> = ({enable}) => {
           استفاده کنید.
         </p>
         <Link
-          href={"https://biz.koochaa.com/claim"}
+          rel="nofollow"
           target="_blank"
           className="w-full btn btn-primary"
+          href={`${process.env.NEXT_PUBLIC_BIZ_FRONT_URL}/claim/claimWay?slug=${slug}`}
         >
           دریافت مالکیت صفحه
         </Link>

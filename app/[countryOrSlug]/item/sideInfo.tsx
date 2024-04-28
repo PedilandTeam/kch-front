@@ -236,7 +236,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         />
       </div>
 
-      <ItemClaim enable={!pageData.business} />
+      <ItemClaim slug={pageData.slug} enable={!pageData.business} />
 
       {/* Advertising Section */}
       {/* <div className="mb-3">
