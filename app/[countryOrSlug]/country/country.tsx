@@ -40,7 +40,9 @@ export default function Country({ currentCountry, categories }: CountryProps) {
       </div> */}
 
       <CountryStats currentCountry={currentCountry} />
+
       <CountryCategories currentCountry={currentCountry} />
+
       <SeoText currentCountry={currentCountry} />
     </div>
   );
