@@ -31,8 +31,8 @@ const OrangeModal: FC<{ slug: string }> = ({ slug }) => {
         </p>
         <div className="flex items-center p-[10px] font-medium border border-yellow-300 rounded-md bg-yellow-50 text-[15px]">
           <p className="text-center text-yellow-800">
-            <strong>بسیار مهم:</strong> کوچا، هیچ مسئولیتی در قبال خدمات این واحد
-            صنفی ندارد.
+            <strong>بسیار مهم:</strong> کوچا، هیچ مسئولیتی در قبال خدمات این
+            واحد صنفی ندارد.
           </p>
         </div>
 
@@ -43,6 +43,7 @@ const OrangeModal: FC<{ slug: string }> = ({ slug }) => {
           </form>
           <div className="ml-0">
             <Link
+              rel="nofollow"
               target="_blank"
               href={`${process.env.NEXT_PUBLIC_BIZ_FRONT_URL}/claim/claimWay?slug=${slug}`}
             >
