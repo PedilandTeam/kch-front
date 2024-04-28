@@ -91,6 +91,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         .contact.phone!}`;
 
   const linkHandler = useLinkHandler({ pageData });
+  
 
   return (
     <div className="mx-3 sm:mx-0 item-side sm:col-span-4 sm:col-end-13">
@@ -235,7 +236,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         />
       </div>
 
-      <ItemClaim />
+      <ItemClaim enable={!pageData.business} />
 
       {/* Advertising Section */}
       {/* <div className="mb-3">

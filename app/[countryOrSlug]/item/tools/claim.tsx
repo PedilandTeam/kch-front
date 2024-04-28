@@ -1,8 +1,14 @@
 import { ShieldCheck } from "app/client-packages/phosphor-icons/react";
 import Link from "next/link";
+import { FC } from "react";
 
-const ItemClaim = () => {
-  return (
+type ItemClaim = {
+  enable: boolean
+}
+const ItemClaim: FC<ItemClaim> = ({enable}) => {
+
+
+  return enable ? (
     <>
       {/* ADMIN ALERT */}
 
@@ -32,7 +38,7 @@ const ItemClaim = () => {
         </Link>
       </div>
     </>
-  );
+  ) : null;
 };
 
 export default ItemClaim;
