@@ -5,15 +5,12 @@ import categoryPathGenerator from "@/utils/categoryPathGenerator";
 import { PageNamespace } from "@/types/page";
 import { CountryNamespace } from "@/types/country";
 import ItemProfilePicture from "../item/itemProfilePicture";
-
 import {
-  Folder,
-  MapPinLine,
-  Star,
-  ShieldWarning,
-  Plant,
+  Star
 } from "app/client-packages/phosphor-icons/react";
 import Rating from "react-rating";
+import OrangeBadge from "@/components/badges/orange.badge";
+import BlueBadge from "@/components/badges/blue.badge";
 
 type cardListItem = {
   page: PageNamespace.Page;
@@ -22,6 +19,7 @@ type cardListItem = {
 };
 
 export default function CardListItem({ page, country, variant }: cardListItem) {
+  
   return (
     <div
       className="relative w-9/12 px-4 py-5 mx-auto transition duration-300 border border-gray-200 shadow-md sm:shadow-gray-100 sm:mx-0 sm:w-auto hover:shadow-lg hover:shadow-blue-100 hover:border-blue-200 card rounded-xl hover:bg-blue-50 hover:bg-opacity-30 group carousel-item sm:box-border"
@@ -38,11 +36,8 @@ export default function CardListItem({ page, country, variant }: cardListItem) {
             />
           </figure>
 
-          <ShieldWarning
-            size={26}
-            className="absolute transition duration-300 text-stone-300 group-hover:text-orange-400 top-4 right-4"
-            weight="duotone"
-          />
+          <BlueBadge  enable={!!page.business} absoluteMode />
+          <OrangeBadge enable={!page.business} absoluteMode/>
 
           {/* <Plant
             size={26}

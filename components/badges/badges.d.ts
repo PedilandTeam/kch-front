@@ -2,6 +2,7 @@
 
 export type BadgesProps = {
     enable: boolean
+    absoluteMode?: boolean
 }
 
 export type BadgeModalsProps = {
