@@ -143,7 +143,7 @@ export default function Pagination({ pages }: PaginationProps) {
   );
 
   return (
-    <div className="flex items-center justify-center my-14">
+    <div className="flex items-center justify-center my-10 sm:mb-20">
       <Link
         rel="next"
         href={

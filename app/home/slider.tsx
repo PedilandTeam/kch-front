@@ -29,7 +29,7 @@ export const SliderMainHome = () => {
           <h3 className="text-gray-300 font-medium bg-blue-900 bg-opacity-60 inline-flex flex-wrap text-[20px] sm:text-[24px] px-2">
             هـر کـجـای جـهـان کـه زنـدگی مـی‌کـنـیـد،
           </h3>
-          <h2 className="text-white font-bold text-[28px] sm:text-[34px] leading-[48px] sm:leading-[54px] max-w-[310px] sm:max-w-[600px] mt-2 mb-5 drop-shadow">
+          <h2 className="text-white pr-3 sm:pr-0 font-bold text-[28px] sm:text-[34px] leading-[48px] sm:leading-[54px] max-w-[310px] sm:max-w-[600px] mt-2 mb-5 drop-shadow">
             به راحتی مـشـاغـل و پـزشـکـان فـارسـی زبـان اطـراف‌تـون رو پـیـدا
             کـنـیـد!
           </h2>

@@ -175,7 +175,7 @@ export default async function CategoryList({
           </div> */}
 
           {/* SEO Text */}
-          <div className="overflow-hidden mx-7 _SEO-text sm:mx-0">
+          <div className="my-10 sm:my-20 mx-7 _SEO-text sm:mx-0">
             <p className="font-normal text-justify text-gray-500">
               {defaultSeoDescription}
             </p>
