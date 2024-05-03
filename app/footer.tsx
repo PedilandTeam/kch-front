@@ -50,6 +50,9 @@ export const Footer = () => {
               <Link href={"/about"} className="link link-hover">
                 {MENU.ABOUT}
               </Link>
+              <Link href={"http://biz.koochaa.com"} className="link link-hover">
+                {MENU.BIZ}
+              </Link>
               <Link href={"/jobs"} className="link link-hover">
                 {MENU.JOBS}
               </Link>

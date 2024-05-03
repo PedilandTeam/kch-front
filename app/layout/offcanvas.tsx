@@ -55,6 +55,14 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
               </Link>
             </li>
             <li onClick={() => ref.current?.click()}>
+              <Link
+                href={"https://biz.koochaa.com"}
+                className="p-3 text-[16px]"
+              >
+                {MENU.BIZ}
+              </Link>
+            </li>{" "}
+            <li onClick={() => ref.current?.click()}>
               <Link href={`/about`} className="p-3 text-[16px]">
                 {MENU.ABOUT}
               </Link>

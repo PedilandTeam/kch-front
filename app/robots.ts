@@ -1,13 +1,12 @@
-import { MetadataRoute } from 'next'
- 
+import { MetadataRoute } from "next";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: ['/_next/', '/images/', 'biz.koochaa.com/*'],
-
+      userAgent: "*",
+      allow: "/",
+      disallow: ["/_next/", "/images/"],
     },
-    sitemap: 'https://koochaa.com/sitemap.xml',
-  }
+    sitemap: "https://koochaa.com/sitemap.xml",
+  };
 }

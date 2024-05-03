@@ -1,5 +1,6 @@
 export const MENU = {
   ABOUT: "درباره کوچا",
+  BIZ: "بیزینس سنتر",
   JOBS: "فرصت‌های شغلی",
   CONTACT_US: "تماس با ما",
   CORPORATE_OPPORTUNITIES: "فرصت‌های همکاری",

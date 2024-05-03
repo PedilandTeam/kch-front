@@ -3,12 +3,15 @@ import { CountryNamespace } from "@/types/country";
 import Image from "next/image";
 import Link from "next/link";
 import CountryModalBtn from "./countryModalBtn";
-import atImage from "../../public/images/modules/mod-austria-min.jpg";
-import frImage from "../../public/images/modules/mod-france-min.jpg";
-import deImage from "../../public/images/modules/mod-germany-min.jpg";
-import trImage from "../../public/images/modules/mod-turkey-min.jpg";
-import ukImage from "../../public/images/modules/mod-england-min.jpg";
-import dkImage from "../../public/images/modules/mod-denmark-min.jpg";
+import atImage from "../../public/images/modules/mod-austria-min.webp";
+import frImage from "../../public/images/modules/mod-france-min.webp";
+import deImage from "../../public/images/modules/mod-germany-min.webp";
+import trImage from "../../public/images/modules/mod-turkey-min.webp";
+import ukImage from "../../public/images/modules/mod-england-min.webp";
+import dkImage from "../../public/images/modules/mod-denmark-min.webp";
+import seImage from "../../public/images/modules/mod-sweden-min.webp";
+import caImage from "../../public/images/modules/mod-canada-min.webp";
+import nlImage from "../../public/images/modules/mod-netherland-min.webp";
 import { COUNTRY } from "../text/location";
 
 async function fetchCountries() {
@@ -40,6 +43,65 @@ export const HomeCountries = async () => {
           </h2>
         </div>
         <div className="grid grid-cols-1 gap-2 wrap sm:grid-cols-3 sm:gap-3">
+          <div className="relative overflow-hidden group h-min rounded-xl">
+            <Link href={"/uk"}>
+              <Image
+                src={ukImage}
+                placeholder="blur"
+                width="400"
+                height="250"
+                alt="یک تصویر از کشور انگلستان"
+                className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
+                priority
+              />
+              <div className="absolute bottom-0 w-full px-5 py-8 text-white transition-all duration-500 cursor-pointer info group-hover:py-10 sm:py-5 sm:group-hover:py-8 bg-gradient-to-t from-black">
+                <h3 className="text-[20px] font-semibold text-center">
+                  {COUNTRY.ENGLAND}
+                  <span className="mr-1 font-normal">({getCount("uk")})</span>
+                </h3>
+              </div>
+            </Link>
+          </div>
+          <div className="relative overflow-hidden group h-min rounded-xl">
+            <Link href={"/de"}>
+              <Image
+                src={deImage}
+                placeholder="blur"
+                width="400"
+                height="250"
+                alt="یک تصویر از کشور آلمان"
+                className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
+                priority
+              />
+              <div className="absolute bottom-0 w-full px-5 py-8 text-white transition-all duration-500 cursor-pointer info group-hover:py-10 sm:py-5 sm:group-hover:py-8 bg-gradient-to-t from-black">
+                <h3 className="text-[20px] font-semibold text-center">
+                  {COUNTRY.GERMANY}
+                  <span className="mr-1 font-normal">({getCount("de")})</span>
+                </h3>
+              </div>
+            </Link>
+          </div>
+
+          <div className="relative overflow-hidden group h-min rounded-xl">
+            <Link href={"/ca"}>
+              <Image
+                src={caImage}
+                placeholder="blur"
+                width="400"
+                height="250"
+                alt="یک تصویر از کشور کانادا"
+                className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
+                priority
+              />
+              <div className="absolute bottom-0 w-full px-5 py-8 text-white transition-all duration-500 cursor-pointer info group-hover:py-10 sm:py-5 sm:group-hover:py-8 bg-gradient-to-t from-black">
+                <h3 className="text-[20px] font-semibold text-center">
+                  {COUNTRY.CANADA}
+                  <span className="mr-1 font-normal">({getCount("ca")})</span>
+                </h3>
+              </div>
+            </Link>
+          </div>
+
           <div className="relative overflow-hidden group h-min rounded-xl">
             <Link href={"/at"}>
               <Image
@@ -79,42 +141,21 @@ export const HomeCountries = async () => {
               </div>
             </Link>
           </div>
-
           <div className="relative overflow-hidden group h-min rounded-xl">
-            <Link href={"/de"}>
+            <Link href={"/se"}>
               <Image
-                src={deImage}
+                src={seImage}
                 placeholder="blur"
                 width="400"
                 height="250"
-                alt="یک تصویر از کشور آلمان"
+                alt="یک تصویر از کشور سوئد"
                 className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
                 priority
               />
               <div className="absolute bottom-0 w-full px-5 py-8 text-white transition-all duration-500 cursor-pointer info group-hover:py-10 sm:py-5 sm:group-hover:py-8 bg-gradient-to-t from-black">
                 <h3 className="text-[20px] font-semibold text-center">
-                  {COUNTRY.GERMANY}
-                  <span className="mr-1 font-normal">({getCount("de")})</span>
-                </h3>
-              </div>
-            </Link>
-          </div>
-
-          <div className="relative overflow-hidden group h-min rounded-xl">
-            <Link href={"/uk"}>
-              <Image
-                src={ukImage}
-                placeholder="blur"
-                width="400"
-                height="250"
-                alt="یک تصویر از کشور انگلستان"
-                className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
-                priority
-              />
-              <div className="absolute bottom-0 w-full px-5 py-8 text-white transition-all duration-500 cursor-pointer info group-hover:py-10 sm:py-5 sm:group-hover:py-8 bg-gradient-to-t from-black">
-                <h3 className="text-[20px] font-semibold text-center">
-                  {COUNTRY.ENGLAND}
-                  <span className="mr-1 font-normal">({getCount("uk")})</span>
+                  {COUNTRY.SWEDEN}
+                  <span className="mr-1 font-normal">({getCount("se")})</span>
                 </h3>
               </div>
             </Link>
@@ -155,6 +196,26 @@ export const HomeCountries = async () => {
                 <h3 className="text-[20px] font-semibold text-center">
                   {COUNTRY.TURKEY}
                   <span className="mr-1 font-normal">({getCount("tr")})</span>
+                </h3>
+              </div>
+            </Link>
+          </div>
+
+          <div className="relative overflow-hidden group h-min rounded-xl">
+            <Link href={"/nl"}>
+              <Image
+                src={nlImage}
+                placeholder="blur"
+                width="400"
+                height="250"
+                alt="یک تصویر از کشور هلند"
+                className="group-hover:scale-110 transition-all duration-500 cursor-pointer h-[220px] sm:h-auto object-cover"
+                priority
+              />
+              <div className="absolute bottom-0 w-full px-5 py-8 text-white transition-all duration-500 cursor-pointer info group-hover:py-10 sm:py-5 sm:group-hover:py-8 bg-gradient-to-t from-black">
+                <h3 className="text-[20px] font-semibold text-center">
+                  {COUNTRY.NETHERLAND}
+                  <span className="mr-1 font-normal">({getCount("nl")})</span>
                 </h3>
               </div>
             </Link>

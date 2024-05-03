@@ -71,6 +71,14 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
                   {MENU.DOCTORS}
                 </Link>
               </li>
+              <li>
+                <Link
+                  href={"https://biz.koochaa.com"}
+                  className="transition divide-purple-300 text-primary hover:text-black"
+                >
+                  {MENU.BIZ}
+                </Link>
+              </li>
             </ul>
           </div>
 

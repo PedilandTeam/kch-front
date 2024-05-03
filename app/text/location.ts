@@ -10,6 +10,9 @@ export const COUNTRY = {
   GEORGIA: "گرجستان",
   GERMANY: "آلمان",
   TURKEY: "ترکیه",
+  SWEDEN: "سوئد",
+  NETHERLAND: "هلند",
+  CANADA: "کانادا",
 };
 
 export const CITY = {
