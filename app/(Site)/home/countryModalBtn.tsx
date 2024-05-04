@@ -1,8 +1,9 @@
 "use client";
 
 import { COUNTRY } from "@/app/text/location";
+import { FC } from "react";
 
-export default () => {
+const CountryModalBtn: FC = () => {
   return (
     <div className="mt-12 text-center">
       <button
@@ -20,3 +21,5 @@ export default () => {
     </div>
   );
 };
+
+export default CountryModalBtn
