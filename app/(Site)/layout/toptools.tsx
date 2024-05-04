@@ -73,7 +73,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
               </li>
               <li>
                 <Link
-                  href={"https://biz.koochaa.com"}
+                  href={"process.env.NEXT_PUBLIC_BIZ_FRONT_URL"}
                   className="transition divide-purple-300 text-primary hover:text-black"
                 >
                   {MENU.BIZ}
