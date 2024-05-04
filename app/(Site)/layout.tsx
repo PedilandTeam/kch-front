@@ -1,10 +1,10 @@
-import { Header } from "./header";
-import { Footer } from "./footer";
+import { Header } from "@/app/header";
+import { Footer } from "@/app/footer";
 import "@/styles/globals.css";
-import Fonts from "../config/fonts";
+import Fonts from "@/config/fonts";
 import { CountryNamespace } from "@/types/country";
 import { API_ROUTES } from "@/routes";
-import { ModalCountry } from "./layout/modalcountry";
+import { ModalCountry } from "@/app/(Site)/layout/modalcountry";
 import Script from "next/script";
 import { Metadata } from "next";
 import { Toaster } from "react-hot-toast";

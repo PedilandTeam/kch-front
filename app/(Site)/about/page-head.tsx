@@ -1,6 +1,6 @@
 import Image from "next/image";
-import phImage from "../../public/images/phead/ph-about-01.webp";
-import phImageMobile from "../../public/images/phead/ph-about-01-m.webp";
+import phImage from "@/public/images/phead/ph-about-01.webp";
+import phImageMobile from "@/public/images/phead/ph-about-01-m.webp";
 
 const PageHead = () => {
   return (

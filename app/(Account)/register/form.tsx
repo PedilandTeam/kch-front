@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Input from "@/components/daisy/input";
 import Button from "@/components/daisy/button";
-// import HeaderSimple from "../layout/header-sm";
+// import HeaderSimple from "@/app/(Site)/layout/header-sm";
 
 export type FormikValues = {
   firstname: string;

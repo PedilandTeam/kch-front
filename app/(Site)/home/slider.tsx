@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import sliderImage from "../../public/images/slide/home/hs-02.webp";
-import sliderImageMobile from "../../public/images/slide/home/hsm-01.webp";
+import sliderImage from "@/public/images/slide/home/hs-02.webp";
+import sliderImageMobile from "@/public/images/slide/home/hsm-01.webp";
 
 export const SliderMainHome = () => {
   return (

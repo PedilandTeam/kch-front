@@ -4,7 +4,7 @@ import { MENU } from "./menu";
 import { DAYS } from "./calendar";
 import { SOCIAL } from "./social";
 import { MODAL } from "./modal";
-import { FOOTER } from "./footer";
+import { FOOTER } from "@/app/footer";
 import { CATEGORY, ITEM, FILTER } from "./directory";
 
 export const _TXT = {

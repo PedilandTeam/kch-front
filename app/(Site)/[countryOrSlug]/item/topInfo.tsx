@@ -6,28 +6,21 @@ import ItemProfilePicture from "./itemProfilePicture";
 import Link from "next/link";
 import { ITEM } from "@/app/text/directory";
 import {
-  ArrowsClockwise,
   FacebookLogo,
   InstagramLogo,
-  ShareNetwork,
-  ShieldCheck,
-  ShieldWarning,
-  Star,
+  ShareNetwork, Star,
   TelegramLogo,
-  YoutubeLogo,
-  Plant,
-  Confetti,
+  YoutubeLogo, Confetti,
   LinkedinLogo,
-  XLogo,
+  XLogo
 } from "app/client-packages/phosphor-icons/react";
 import useLinkHandler from "@/hooks/useLinkHandler";
 import { GENERAL } from "@/app/text/general";
 import isPageNew from "@/utils/isPageNew";
-import BlueBadge from "../../../components/badges/blue.badge";
+import BlueBadge from "@/components/badges/blue.badge";
 import OrangeBadge from "@/components/badges/orange.badge";
 import OrangeModal from "@/components/badges/modals/orange.modal";
 import BlueModal from "@/components/badges/modals/blue.modal";
-import GoldModal from "@/components/badges/modals/gold.modal";
 
 export type ItemTopInfoType = { pageData: PageNamespace.Page };
 export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {

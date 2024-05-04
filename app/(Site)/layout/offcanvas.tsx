@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { UNITS_LIST } from "@/routes";
 import { useRef } from "react";
-import { MENU } from "../text/menu";
+import { MENU } from "@/app/text/menu";
 
 type OffCanvasProps = {
   countryCode: string;

@@ -1,7 +1,7 @@
 "use client";
 
-import { TopTools } from "./layout/toptools";
-import { OffCanvas } from "./layout/offcanvas";
+import { TopTools } from "@/app/(Site)/layout/toptools";
+import { OffCanvas } from "@/app/(Site)/layout/offcanvas";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";

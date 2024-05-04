@@ -1,6 +1,6 @@
 "use client";
 
-import { COUNTRY } from "../text/location";
+import { COUNTRY } from "@/app/text/location";
 
 export default () => {
   return (

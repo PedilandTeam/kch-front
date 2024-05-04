@@ -3,16 +3,16 @@ import { CountryNamespace } from "@/types/country";
 import Image from "next/image";
 import Link from "next/link";
 import CountryModalBtn from "./countryModalBtn";
-import atImage from "../../public/images/modules/mod-austria-min.webp";
-import frImage from "../../public/images/modules/mod-france-min.webp";
-import deImage from "../../public/images/modules/mod-germany-min.webp";
-import trImage from "../../public/images/modules/mod-turkey-min.webp";
-import ukImage from "../../public/images/modules/mod-england-min.webp";
-import dkImage from "../../public/images/modules/mod-denmark-min.webp";
-import seImage from "../../public/images/modules/mod-sweden-min.webp";
-import caImage from "../../public/images/modules/mod-canada-min.webp";
-import nlImage from "../../public/images/modules/mod-netherland-min.webp";
-import { COUNTRY } from "../text/location";
+import atImage from "@/public/images/modules/mod-austria-min.webp";
+import frImage from "@/public/images/modules/mod-france-min.webp";
+import deImage from "@/public/images/modules/mod-germany-min.webp";
+import trImage from "@/public/images/modules/mod-turkey-min.webp";
+import ukImage from "@/public/images/modules/mod-england-min.webp";
+import dkImage from "@/public/images/modules/mod-denmark-min.webp";
+import seImage from "@/public/images/modules/mod-sweden-min.webp";
+import caImage from "@/public/images/modules/mod-canada-min.webp";
+import nlImage from "@/public/images/modules/mod-netherland-min.webp";
+import { COUNTRY } from "@/app/text/location";
 
 async function fetchCountries() {
   let countries: CountryNamespace.GET[];
