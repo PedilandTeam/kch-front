@@ -41,7 +41,7 @@ export default async function fetchWrapper<T>(
   path: string,
   config: FetchWrapperConfig = {}
 ): Promise<FetchWrapperResponse<T>> {
-  let { filters, overrideUrl, revalidate, method, body, tags } = config;
+  let { filters, overrideUrl, revalidate, method = 'GET', body, tags } = config;
   const url = `${process.env.API_URL}/${path}`;
   const urlObject = new URL(overrideUrl ? overrideUrl : url);
 
@@ -66,6 +66,7 @@ export default async function fetchWrapper<T>(
     next: { revalidate, tags },
   };
 
+
   let response: Response | undefined = undefined;
   let error: unknown;
   let isNotFound: boolean = false;
@@ -75,6 +76,9 @@ export default async function fetchWrapper<T>(
   let errorJson: any = null;
   const fetcher: FetchWrapperResponse<T> = await fetch(urlObject, fetchConfig)
     .then(async (res) => {
+
+      const resJson = await res.json()
+
       if (!res.ok) {
         if (res.status === 404) {
           isNotFound = true;
@@ -88,11 +92,11 @@ export default async function fetchWrapper<T>(
           isServerError = true;
         }
 
-        errorJson = await res.json();
+        errorJson = resJson
       }
       isOk = true;
       response = res;
-      return await res.json();
+      return await resJson
     })
     .catch((err: unknown) => {
       error = err;

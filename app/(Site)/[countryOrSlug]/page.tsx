@@ -35,10 +35,11 @@ const pathGenerator = async (
       },
       revalidate:
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
-    })
+    });
     if (country?.length > 0) {
       currentCountry = country[0];
     }
+
 
     const categories = await fetchWrapper<CategoryNamespace.GET>("categories", {
       filters: {
