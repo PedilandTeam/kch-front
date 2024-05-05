@@ -1,26 +1,33 @@
-import { API_ROUTES } from "@/routes";
 import { CountryNamespace } from "@/types/country";
 import { UnitType } from "@/types/unit";
-import { isNumber } from "lodash";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import queryString from "query-string";
 import { PathGeneratorType } from "../page";
 import UnitList from "./unitList";
-import { headers } from "next/headers";
+import fetchWrapper from "@/modules/fetchWrapper";
 
 const pathGenerator = async (
   countryOrSlug: string,
   unitSlug: string
 ): Promise<PathGeneratorType> => {
-  const units = await (await API_ROUTES.UNITS.GET_ALL(2000)).json();
-  const currentUnit = units.find((unit: UnitType) => unit.slug == unitSlug);
-  const countryList = await (
-    await API_ROUTES.COUNTRIES.GET_ALL(false, 20)
-  ).json();
-  const currentCountry = countryList.find(
-    (country: CountryNamespace.GET) => country.code == countryOrSlug
-  );
+  const currentUnit = (
+    await fetchWrapper<UnitType[]>("units", {
+      filters: {
+        slug: unitSlug,
+      },
+      revalidate:
+        +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+    })
+  )[0];
+
+  const countryList = await fetchWrapper<CountryNamespace.GET[]>('countries', {
+    filters: {
+      code: countryOrSlug,
+    },
+    revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+  })
+  const currentCountry = countryList[0]
 
   if (!currentUnit || !currentCountry) {
     return {
@@ -32,15 +39,19 @@ const pathGenerator = async (
     type: "unit",
     props: {
       unit: currentUnit,
-      country: currentCountry
+      country: currentCountry,
     },
   };
 };
 
-
-type generateMetadata = {params: { countryOrSlug: string; unitSlug: string }, searchParams: { [key: string]: string | string[] | undefined }}
-export const generateMetadata = async ({params: { countryOrSlug, unitSlug }, searchParams}: generateMetadata): Promise<Metadata> => {
-
+type generateMetadata = {
+  params: { countryOrSlug: string; unitSlug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+export const generateMetadata = async ({
+  params: { countryOrSlug, unitSlug },
+  searchParams,
+}: generateMetadata): Promise<Metadata> => {
   let pathInfo: PathGeneratorType;
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug);
@@ -57,9 +68,13 @@ export const generateMetadata = async ({params: { countryOrSlug, unitSlug }, sea
     };
   }
 
-  
-  const countries = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 120)).json();
-  const currentCountry: CountryNamespace.GET | undefined = countries.find((country: CountryNamespace.GET) => country.code == countryOrSlug);
+  const countries = await fetchWrapper<CountryNamespace.GET[]>('countries', {
+    filters: {
+      code: countryOrSlug,
+    },
+    revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+  })
+  const currentCountry: CountryNamespace.GET | undefined = countries[0]
 
   const pageSearchParams = searchParams?.page;
 
@@ -72,9 +87,11 @@ export const generateMetadata = async ({params: { countryOrSlug, unitSlug }, sea
     } خوش آمدید. در این صفحه لیست کاملی از ${
       pathInfo?.props?.unit?.name
     } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
-    alternates:{
-      canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${pathInfo?.props?.unit?.slug}${pageSearchParams ? `?page=${pageSearchParams}` : ''}`
-    }
+    alternates: {
+      canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${
+        pathInfo?.props?.unit?.slug
+      }${pageSearchParams ? `?page=${pageSearchParams}` : ""}`,
+    },
   };
 };
 

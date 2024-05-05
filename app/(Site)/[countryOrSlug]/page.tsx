@@ -4,6 +4,9 @@ import PageItem from "./item/item";
 import { notFound } from "next/navigation";
 import Country from "./country/country";
 import { metadata } from "../page";
+import fetchWrapper, { FetchWrapperError } from "@/modules/fetchWrapper";
+import { CategoryNamespace } from "@/types/category";
+import { PageNamespace } from "@/types/page";
 
 export type PathsType = "country" | "unit" | "category" | "item";
 export type PathGeneratorType = {
@@ -25,23 +28,28 @@ const pathGenerator = async (
 
   // const countryOrSlug = countryOrSlug as unknown as string
   let currentCountry: CountryNamespace.GET;
-
   try {
+    const country = await fetchWrapper<CountryNamespace.GET[]>("countries", {
+      filters: {
+        code: countryOrSlug,
+      },
+      revalidate:
+        +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+    })
+    if (country?.length > 0) {
+      currentCountry = country[0];
+    }
 
-    // Get All countries
-    const countries = await (
-      await API_ROUTES.COUNTRIES.GET_ALL(false, 20)
-    ).json();
-    currentCountry = countries.find(
-      (country: CountryNamespace.GET) => country.code == countryOrSlug
-    );
+    const categories = await fetchWrapper<CategoryNamespace.GET>("categories", {
+      filters: {
+        page: 1,
+        limit: 300,
+      },
+      revalidate:
+        +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+    });
 
-    
-    const categories = await (
-      await API_ROUTES.CATEGOREIS.GET_ALL(1, 300, undefined, undefined, 20)
-    ).json();
-
-    if (currentCountry && countryOrSlug) {
+    if (currentCountry! && countryOrSlug) {
       return {
         type: "country",
         props: {
@@ -54,15 +62,15 @@ const pathGenerator = async (
     //show single page
     if (countryOrSlug) {
       try {
-        const pageData = await (
-          await API_ROUTES.PAGES.GET_ALL(
-            1,
-            1,
-            { slug: countryOrSlug },
-            undefined,
-            "no-store"
-          )
-        ).json();
+
+        const pageData = await fetchWrapper<PageNamespace.GET>('pages', {
+          filters: {
+            page: 1,
+            limit: 1,
+            slug: countryOrSlug
+          },
+          revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000
+        })
 
         if (!pageData?.items || pageData?.items?.length == 0) {
           return NOT_FOUND;
@@ -93,8 +101,6 @@ export async function generateMetadata({ params, searchParams }: Props) {
   } catch (e: any) {
     throw Error(e);
   }
-
-  
 
   switch (pathInfo.type) {
     case "country":

@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import CategoryList from "./categoryList";
 import { PathGeneratorType } from "../../page";
 import queryString from "query-string";
+import fetchWrapper, { FetchWrapperError } from "@/modules/fetchWrapper";
 
 type ParsedSearchParams = {
   page?: number | number[];
@@ -27,35 +28,35 @@ const pathGenerator = async (
   categorySlug: string
 ): Promise<PathGeneratorType> => {
   // const units = await (await API_ROUTES.UNITS.GET_ALL(2000)).json();
-  const units = await API_ROUTES.UNITS.GET_ALL(2000)
-    .then(async (res) => await res.json())
-    .catch((e) => {
-      console.log(e);
-    });
-  const currentUnit: UnitType = units.find(
-    (unit: UnitType) => unit.slug == unitSlug
-  );
+  const currentUnit = (
+    await fetchWrapper<UnitType[]>("units", {
+      filters: {
+        slug: unitSlug,
+      },
+      revalidate:
+        +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+    })
+  )[0];
+
   // const countryList = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 20)).json();
-  const countryList = await API_ROUTES.COUNTRIES.GET_ALL(false, 20)
-    .then((res) => res.json())
-    .catch((e) => {
-      console.log(e);
-    });
-  const currentCountry = countryList.find(
-    (country: CountryNamespace.GET) => country.code == countryOrSlug
-  );
+  const countryList = await fetchWrapper<CountryNamespace.GET[]>("countries", {
+    filters: {
+      code: countryOrSlug,
+    },
+    revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+  });
+  const currentCountry = countryList[0];
 
   // const categories: CategoryNamespace.GET = await (await API_ROUTES.CATEGOREIS.GET_ALL(1, 1, categorySlug)).json();
-  const categories: CategoryNamespace.GET = await API_ROUTES.CATEGOREIS.GET_ALL(
-    1,
-    1,
-    categorySlug
-  )
-    .then((res) => res.json())
-    .catch((e) => {
-      console.log(e);
-      throw new Error("error in get categories categorySlug/page");
-    });
+
+  const categories = await fetchWrapper<CategoryNamespace.GET>("categories", {
+    filters: {
+      page: 1,
+      limit: 1,
+      slug: categorySlug
+    },
+    revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+  });
 
   const currentCategory = categories?.items[0];
 
@@ -76,10 +77,14 @@ const pathGenerator = async (
   // return <CategoryList category={currentCategory} country={currentCountry} />
 };
 
-
-type generateMetadata = { params: { countryOrSlug: string; unitSlug: string; categorySlug: string }, searchParams: { [key: string]: string | string[] | undefined } }
-export const generateMetadata = async ({ params: { countryOrSlug, unitSlug, categorySlug }, searchParams }: generateMetadata): Promise<Metadata> => {
-
+type generateMetadata = {
+  params: { countryOrSlug: string; unitSlug: string; categorySlug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+export const generateMetadata = async ({
+  params: { countryOrSlug, unitSlug, categorySlug },
+  searchParams,
+}: generateMetadata): Promise<Metadata> => {
   let pathInfo: PathGeneratorType;
 
   try {
@@ -97,22 +102,31 @@ export const generateMetadata = async ({ params: { countryOrSlug, unitSlug, cate
     };
   }
 
-
-  const countries = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 120)).json();
-  const currentCountry: CountryNamespace.GET | undefined = countries.find((country: CountryNamespace.GET) => country.code == countryOrSlug);
+  const countries = await (
+    await API_ROUTES.COUNTRIES.GET_ALL(false, 120)
+  ).json();
+  const currentCountry: CountryNamespace.GET | undefined = countries.find(
+    (country: CountryNamespace.GET) => country.code == countryOrSlug
+  );
 
   const pageSearchParams = searchParams?.page;
 
   return {
-    title: `لیست ${category?.seoTitle ? category.seoTitle: `${category.name} فارسی زبان`} در ${pathInfo?.props?.country?.name} | کوچا`,
+    title: `لیست ${
+      category?.seoTitle ? category.seoTitle : `${category.name} فارسی زبان`
+    } در ${pathInfo?.props?.country?.name} | کوچا`,
     description: `به جامعه مجازی ایرانیان مهاجر مقیم ${
       countryOrSlug && currentCountry && currentCountry.name
     } خوش آمدید. در این صفحه لیست کاملی از ${
       pathInfo?.props?.category?.name
     } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
     alternates: {
-      canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${unitSlug}/${pathInfo?.props?.category?.slug}${pageSearchParams ? `?page=${pageSearchParams}` : ''}`
-    }
+      canonical: `${process.env.FRONT_URL}/${
+        currentCountry?.code
+      }/${unitSlug}/${pathInfo?.props?.category?.slug}${
+        pageSearchParams ? `?page=${pageSearchParams}` : ""
+      }`,
+    },
   };
 };
 
