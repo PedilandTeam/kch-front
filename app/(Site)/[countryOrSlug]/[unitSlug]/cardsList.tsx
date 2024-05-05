@@ -6,6 +6,7 @@ import CardListItem from "./cardListItem";
 import { Suspense } from "react";
 import Loading from "./_loading";
 import { API_ROUTES } from "@/routes";
+import fetchWrapper from "@/modules/fetchWrapper";
 
 type CardsListType = {
   unit: UnitType;
@@ -22,8 +23,6 @@ type ParsedSearchParamsType = {
   category?: string[] | string;
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 export const CardsList = async ({
   unit,
   country,
@@ -36,15 +35,18 @@ export const CardsList = async ({
   let pages: PageNamespace.GET | undefined = undefined;
 
   try {
-    pages = await (
-      await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 24, {
+    pages = await fetchWrapper<PageNamespace.GET>("pages", {
+      filters: {
+        page: pageNumber ? pageNumber : 1,
+        limit: 24,
         countryCode: country.code,
         unitId: unit.id,
         categoryIds: category,
         cityIds: city,
         search,
-      })
-    ).json();
+      },
+      revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+    });
   } catch (e: any) {
     isNotFound = true;
   }

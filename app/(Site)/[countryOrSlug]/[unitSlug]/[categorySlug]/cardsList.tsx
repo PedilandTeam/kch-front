@@ -4,6 +4,7 @@ import { CategoryNamespace } from "@/types/category";
 import CardListItem from "../cardListItem";
 import Pagination from "../pagination/pagination";
 import { API_ROUTES } from "@/routes";
+import fetchWrapper from "@/modules/fetchWrapper";
 
 type CardsListType = {
   country: CountryNamespace.GET;
@@ -26,14 +27,18 @@ export const CardsList = async ({
   let isNotFound = false;
 
   try {
-    pages = await (
-      await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 24, {
+
+    pages = await fetchWrapper('pages', {
+      filters: {
+        page: pageNumber ? pageNumber : 1,
+        limit: 24,
         countryCode: country.code,
         cityIds: city,
         categoryIds: category?.id,
         search,
-      })
-    ).json();
+      },
+      revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+    })
   } catch (e) {
     isNotFound = true;
   }
