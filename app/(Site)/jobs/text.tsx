@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Accordion from "../client-packages/daisy/accordion";
+import Accordion from "@/app/client-packages/daisy/accordion";
 import ApplyForm from "./form";
 
 const JobsText = () => {

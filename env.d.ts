@@ -18,6 +18,8 @@ declare global {
       FRONT_URL: string;
       NEXT_PUBLIC_DAYS_AS_NEW: string;
       NEXT_PUBLIC_BIZ_FRONT_URL: string;
+      REVALIDATE_SECRET: string;
+      DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS: string;
     }
   }
 }
