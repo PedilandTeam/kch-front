@@ -4,6 +4,7 @@ import { CityNamespace } from "@/types/city";
 import axios, { AxiosError } from "axios";
 import { UnitType } from "@/types/unit";
 import CardListItem from "../../[unitSlug]/cardListItem";
+import fetchWrapper from "@/modules/fetchWrapper";
 
 type SuggestedPages = {
   pageId: string;
@@ -25,19 +26,18 @@ const SuggestedPages = async ({
 
   try {
     if (basedOn === "category") {
-      pages = await axios
-        .get(
-          `${process.env.NEXT_PUBLIC_API_URL}/pages/random?categoryId=${category?.id}&cityId=${city.id}&excludeId=${pageId}`
-        )
-        .then((res) => res.data);
+      
+      pages = await fetchWrapper(`${process.env.NEXT_PUBLIC_API_URL}/pages/random?categoryId=${category?.id}&cityId=${city.id}&excludeId=${pageId}`, {
+        tags: ["country", "page"],
+        revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+      })
     }
 
     if (basedOn === "city") {
-      pages = await axios
-        .get(
-          `${process.env.NEXT_PUBLIC_API_URL}/pages/random?cityId=${city?.id}&countryCode=${countryCode}&excludeId=${pageId}`
-        )
-        .then((res) => res.data);
+      pages = await fetchWrapper(`${process.env.NEXT_PUBLIC_API_URL}/pages/random?cityId=${city?.id}&countryCode=${countryCode}&excludeId=${pageId}`, {
+        tags: ["country", "page"],
+        revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+      })
     }
   } catch (e: AxiosError | any) {
     console.log(e?.response?.data);
