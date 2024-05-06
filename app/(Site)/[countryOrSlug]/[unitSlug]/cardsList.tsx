@@ -45,7 +45,9 @@ export const CardsList = async ({
         cityIds: city,
         search,
       },
-      revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+      tags: ["country", "page"],
+      revalidate:
+        +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     });
   } catch (e: any) {
     isNotFound = true;

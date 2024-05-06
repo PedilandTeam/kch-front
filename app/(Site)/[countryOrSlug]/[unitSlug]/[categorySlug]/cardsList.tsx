@@ -37,6 +37,7 @@ export const CardsList = async ({
         categoryIds: category?.id,
         search,
       },
+      tags: ["country", 'page'],
       revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     })
   } catch (e) {

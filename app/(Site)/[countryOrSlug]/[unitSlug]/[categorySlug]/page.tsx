@@ -33,6 +33,7 @@ const pathGenerator = async (
       filters: {
         slug: unitSlug,
       },
+      tags: ["country", 'page'],
       revalidate:
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     })
@@ -43,6 +44,7 @@ const pathGenerator = async (
     filters: {
       code: countryOrSlug,
     },
+    tags: ["country", 'page'],
     revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
   });
   const currentCountry = countryList[0];
@@ -55,6 +57,7 @@ const pathGenerator = async (
       limit: 1,
       slug: categorySlug
     },
+    tags: ["country", 'page'],
     revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
   });
 
