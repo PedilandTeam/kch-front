@@ -29,6 +29,6 @@ export async function GET(request: NextRequest) {
 
 
 
-  console.info(`Revalidated: ${paths}`)
+  console.info(`Revalidated:`, paths ? paths : tags);
   return Response.json({ revalidated: true, date: Date.now() })
 }
