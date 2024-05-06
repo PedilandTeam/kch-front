@@ -96,7 +96,7 @@ export default async function fetchWrapper<T>(
       }
       isOk = true;
       response = res;
-      return await resJson
+      return resJson;
     })
     .catch((err: unknown) => {
       error = err;

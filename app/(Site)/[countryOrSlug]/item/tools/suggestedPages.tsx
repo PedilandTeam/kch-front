@@ -27,16 +27,16 @@ const SuggestedPages = async ({
   try {
     if (basedOn === "category") {
       
-      pages = await fetchWrapper(`${process.env.NEXT_PUBLIC_API_URL}/pages/random?categoryId=${category?.id}&cityId=${city.id}&excludeId=${pageId}`, {
-        tags: ["country", "page"],
+      pages = await fetchWrapper(`pages/random?categoryId=${category?.id}&cityId=${city.id}&excludeId=${pageId}`, {
         revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+        tags: ["country", "page"],
       })
     }
 
     if (basedOn === "city") {
-      pages = await fetchWrapper(`${process.env.NEXT_PUBLIC_API_URL}/pages/random?cityId=${city?.id}&countryCode=${countryCode}&excludeId=${pageId}`, {
-        tags: ["country", "page"],
+      pages = await fetchWrapper(`pages/random?cityId=${city?.id}&countryCode=${countryCode}&excludeId=${pageId}`, {
         revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+        tags: ["country", "page"],
       })
     }
   } catch (e: AxiosError | any) {
