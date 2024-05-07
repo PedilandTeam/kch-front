@@ -74,6 +74,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
               <li>
                 <Link
                   href={process.env.NEXT_PUBLIC_BIZ_FRONT_URL}
+                  target="_blank"
                   className="transition divide-purple-300 text-primary hover:text-black"
                 >
                   {MENU.BIZ}
