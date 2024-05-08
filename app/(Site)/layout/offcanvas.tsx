@@ -57,6 +57,7 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
             <li onClick={() => ref.current?.click()}>
               <Link
                 href={process.env.NEXT_PUBLIC_BIZ_FRONT_URL}
+                target="_blank"
                 className="p-3 text-[16px]"
               >
                 {MENU.BIZ}
