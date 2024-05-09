@@ -154,7 +154,7 @@ export default function Pagination({ pages }: PaginationProps) {
       >
         <button
           onClick={nextButtonClickHandler}
-          className={`_join-item btn border-none bg-white shadow-none  ${
+          className={`_join-item btn border-none bg-white shadow-none pr-0 pl-2 sm:pl-4 ${
             pageNumber == totalPages
               ? "btn-disabled text-gray-300"
               : "btn-active text-sky-600 hover:text-black"
@@ -229,7 +229,7 @@ export default function Pagination({ pages }: PaginationProps) {
       >
         <button
           onClick={prevButtonClickHandler}
-          className={`_join-item btn border-none bg-white shadow-none  ${
+          className={`_join-item btn border-none bg-white shadow-none pr-2 sm:pr-4 pl-0 ${
             pageNumber == 1
               ? "btn-disabled text-gray-300"
               : "text-sky-600 hover:text-black"
