@@ -14,6 +14,9 @@ import FilterMobile from "./filter/filter.mobile";
 import FilterModalMobile from "./filter/filterModal.mobile";
 import PagesSearch from "./filter/pages.search";
 import { PageNamespace } from "@/types/page";
+import fetchCampaigns from "@/utils/fetchCampaigns";
+import AdvertiseLg from "@/components/advertise/lg";
+import AdvertiseSm from "@/components/advertise/sm";
 
 type PagesListProps = {
   category: CategoryNamespace.category;
@@ -80,6 +83,9 @@ export default async function CategoryList({
       country.name || country.englishName
     );
 
+
+    const { customers, campaign } = await fetchCampaigns(country.code)
+
   return (
     <div className="pt-5 component _category-list">
       <div className="container mx-auto max-w-[1144px]">
@@ -106,24 +112,14 @@ export default async function CategoryList({
             </div>
 
             {/* Advertising Section P03 */}
-            {/* <div className="flex flex-wrap gap-3 px-3 pt-5 sm:gap-5 sm:px-0">
-              <div>
-                <Image
-                  src={"/images/banner/bnr-04.gif"}
-                  width={562}
-                  height={72}
-                  alt="banner"
-                />
-              </div>
-              <div className="hidden sm:block">
-                <Image
-                  src={"/images/banner/bnr-04.gif"}
-                  width={562}
-                  height={72}
-                  alt="banner"
-                />
-              </div>
-            </div> */}
+            <AdvertiseLg
+              customers={[customers?.[0], customers?.[1]]}
+              campaignId={campaign?.id}
+            />
+            <AdvertiseSm
+              customers={[customers?.[0], customers?.[1]]}
+              campaignId={campaign?.id}
+            />
 
             <div className="hidden sm:block _filter">
               <ListFilter cities={cities} />
@@ -155,24 +151,14 @@ export default async function CategoryList({
           </div>
 
           {/* Advertising Section P04 */}
-          {/* <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0 my-14">
-            <div>
-              <Image
-                src={"/images/banner/bnr-04.gif"}
-                width={562}
-                height={72}
-                alt="banner"
-              />
-            </div>
-            <div>
-              <Image
-                src={"/images/banner/bnr-04.gif"}
-                width={562}
-                height={72}
-                alt="banner"
-              />
-            </div>
-          </div> */}
+          <AdvertiseLg
+              customers={[customers?.[2], customers?.[3]]}
+              campaignId={campaign?.id}
+            />
+            <AdvertiseSm
+              customers={[customers?.[2], customers?.[3]]}
+              campaignId={campaign?.id}
+            />
 
           {/* SEO Text */}
           <div className="my-10 sm:my-20 mx-7 _SEO-text sm:mx-0">

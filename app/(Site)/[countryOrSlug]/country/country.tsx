@@ -6,38 +6,36 @@ import { CategoryNamespace } from "@/types/category";
 import { UnitsBanner } from "./unitsBanner";
 import { SeoText } from "./seoText";
 import Image from "next/image";
+import AdvertiseLg from "@/components/advertise/lg";
+import AdvertiseSm from "@/components/advertise/sm";
+import fetchCampaigns from "@/utils/fetchCampaigns";
 
 type CountryProps = {
   currentCountry: CountryNamespace.GET;
   categories: CategoryNamespace.GET;
 };
-export default function Country({ currentCountry, categories }: CountryProps) {
+export default async function Country({
+  currentCountry,
+  categories,
+}: CountryProps) {
+  const { customers, campaign } = await fetchCampaigns(currentCountry.code);
+
   return (
     <div className="component _country-page">
       <SliderHome currentCountry={currentCountry} />
       <UnitsBanner currentCountry={currentCountry} />
 
       {/* Advertising Section P05 */}
-      {/* <div className="container mx-auto max-w-[1144px]">
-        <div className="flex flex-wrap gap-3 px-3 my-10 sm:gap-5 sm:px-0">
-          <div>
-            <Image
-              src={"/images/banner/bnr-04.gif"}
-              width={562}
-              height={72}
-              alt="banner"
-            />
-          </div>
-          <div>
-            <Image
-              src={"/images/banner/bnr-04.gif"}
-              width={562}
-              height={72}
-              alt="banner"
-            />
-          </div>
-        </div>
-      </div> */}
+      <div className="w-full flex justify-center items-center">
+        <AdvertiseLg
+          customers={[customers?.[0], customers?.[1]]}
+          campaignId={campaign?.id}
+        />
+        <AdvertiseSm
+          customers={[customers?.[0], customers?.[1]]}
+          campaignId={campaign?.id}
+        />
+      </div>
 
       <CountryStats currentCountry={currentCountry} />
 

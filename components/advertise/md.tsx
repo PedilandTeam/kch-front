@@ -10,7 +10,6 @@ const Desktop = dynamic(
     ssr: false,
   }
 );
-
 /**
  * Renders a component that displays two advertisement images for a given campaign.
  *
@@ -19,7 +18,7 @@ const Desktop = dynamic(
  * @param {string} props.campaignId - The ID of the campaign.
  * @return {JSX.Element | null} The rendered component or null if there are fewer than 2 customers.
  */
-const AdvertiseLg: FC<AdvertiseProps> = ({
+const AdvertiseMd: FC<AdvertiseProps> = ({
   customers,
   campaignId,
 }: AdvertiseProps): JSX.Element | null => {
@@ -30,7 +29,7 @@ const AdvertiseLg: FC<AdvertiseProps> = ({
       <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0">
         <Link href={customers[0]?.link || "#"} target="_blank">
           <Image
-            src={`${process.env.NEXT_PUBLIC_DL_URL}/campaigns/${campaignId}/${customers[0]?.lg}`}
+            src={`${process.env.NEXT_PUBLIC_DL_URL}/campaigns/${campaignId}/${customers[0]?.md}`}
             width={562}
             height={72}
             alt="banner"
@@ -38,7 +37,7 @@ const AdvertiseLg: FC<AdvertiseProps> = ({
         </Link>
         <Link href={customers[1]?.link || "#"} target="_blank">
           <Image
-            src={`${process.env.NEXT_PUBLIC_DL_URL}/campaigns/${campaignId}/${customers[1]?.lg}`}
+            src={`${process.env.NEXT_PUBLIC_DL_URL}/campaigns/${campaignId}/${customers[1]?.md}`}
             width={562}
             height={72}
             alt="banner"
@@ -49,4 +48,4 @@ const AdvertiseLg: FC<AdvertiseProps> = ({
   );
 };
 
-export default AdvertiseLg;
+export default AdvertiseMd;
