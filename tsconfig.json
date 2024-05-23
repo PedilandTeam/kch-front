@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,21 +16,11 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "@app/*": [
-        "./app/*"
-      ],
-      "@client-packages/*": [
-        "./app/client-packages/*"
-      ],
-      "@text/*": [
-        "./app/text/*"
-      ],
-      "@/types/*": [
-        "./types/*"
-      ]
+      "@/*": ["./*"],
+      "@app/*": ["./app/*"],
+      "@client-packages/*": ["./app/client-packages/*"],
+      "@text/*": ["./app/text/*"],
+      "@/types/*": ["./types/*"]
     },
     "plugins": [
       {
@@ -50,9 +36,12 @@
     "app/header.tsx",
     "components/elements/badgenew.jsx",
     "components/elements/badgenew.jsx",
-    ".next/types/**/*.ts"
-, "app/layout/backtotop.jsx", "app/jobs/text.tsx", "app/jobs/page.tsx"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    ".next/types/**/*.ts",
+    "app/layout/backtotop.jsx",
+    "app/jobs/text.tsx",
+    "app/jobs/page.tsx",
+    "./*.ts",
+    "./*.tsx"
+  ],
+  "exclude": ["node_modules"]
 }

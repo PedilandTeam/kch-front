@@ -8,13 +8,19 @@ import { Suspense } from "react";
 import Description from "@/components/description";
 import TagList from "./tools/tagList";
 import SuggestedPages from "./tools/suggestedPages";
-import Image from "next/image";
+import { CampaignNamespace } from "@/types/campaign";
+import AdvertiseMd from "@/components/advertise/md";
+import AdvertiseSm from "@/components/advertise/sm";
+import fetchCampaigns from "@/utils/fetchCampaigns";
 import Link from "next/link";
+import Image from "next/image";
 export type PageItemProps = {
   pageData: PageNamespace.Page;
 };
 
-export default function PageItem({ pageData }: PageItemProps) {
+export default async function PageItem({ pageData }: PageItemProps) {
+  const { campaign, customers } = await fetchCampaigns(pageData.country.code);
+
   return (
     <div className="component page-item">
       <CountryUpdater pageData={pageData} />
@@ -73,24 +79,15 @@ export default function PageItem({ pageData }: PageItemProps) {
         </div>
 
         {/* Advertising Section P01 */}
-        {/* <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
-          <div>
-            <Image
-              src={"/images/banner/bnr-03.gif"}
-              width={562}
-              height={72}
-              alt="banner"
-            />
-          </div>
-          <div>
-            <Image
-              src={"/images/banner/bnr-02.gif"}
-              width={562}
-              height={72}
-              alt="banner"
-            />
-          </div>
-        </div> */}
+
+        <AdvertiseSm
+          customers={[customers?.[0], customers?.[1]]}
+          campaignId={campaign?.id}
+        />
+        <AdvertiseMd
+          customers={[customers?.[0], customers?.[1]]}
+          campaignId={campaign?.id}
+        />
 
         {/* Same Items in the Category */}
         <Suspense>
@@ -142,33 +139,16 @@ export default function PageItem({ pageData }: PageItemProps) {
           />
         </Suspense>
 
-        {/* Randomize Items in the Unit */}
-        {/* <Suspense>
-          <SimilarCat
-            countryCode={pageData.country.code}
-            categoryId={pageData.category.id}
-          />
-        </Suspense> */}
-
         {/* Advertising Section P02 */}
-        {/* <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0">
-          <div>
-            <Image
-              src={"/images/banner/bnr-04.gif"}
-              width={562}
-              height={72}
-              alt="banner"
-            />
-          </div>
-          <div>
-            <Image
-              src={"/images/banner/bnr-04.gif"}
-              width={562}
-              height={72}
-              alt="banner"
-            />
-          </div>
-        </div> */}
+        <AdvertiseSm
+          customers={[customers[2], customers[3]]}
+          campaignId={campaign?.id}
+        />
+
+        <AdvertiseMd
+          customers={[customers[2], customers[3]]}
+          campaignId={campaign?.id}
+        />
       </div>
     </div>
   );

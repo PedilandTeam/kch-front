@@ -6,46 +6,35 @@ import { CategoryNamespace } from "@/types/category";
 import { UnitsBanner } from "./unitsBanner";
 import { SeoText } from "./seoText";
 import Image from "next/image";
-import Link from "next/link";
+import AdvertiseLg from "@/components/advertise/lg";
+import AdvertiseSm from "@/components/advertise/sm";
+import fetchCampaigns from "@/utils/fetchCampaigns";
 
 type CountryProps = {
   currentCountry: CountryNamespace.GET;
   categories: CategoryNamespace.GET;
 };
-export default function Country({ currentCountry, categories }: CountryProps) {
+export default async function Country({
+  currentCountry,
+  categories,
+}: CountryProps) {
+  const { customers, campaign } = await fetchCampaigns(currentCountry.code);
+
   return (
     <div className="component _country-page">
       <SliderHome currentCountry={currentCountry} />
       <UnitsBanner currentCountry={currentCountry} />
 
       {/* Advertising Section P05 */}
-      <div className="container mx-auto max-w-[1144px]">
-        <div className="flex flex-wrap gap-3 px-3 my-10 sm:gap-5 sm:px-0">
-          <div>
-            <Link href={"https://biz.koochaa.com/"} target="_blank">
-              <Image
-                src={"/images/banner/ads-002-S1_V1.jpg"}
-                width={562}
-                height={144}
-                quality={100}
-                className="rounded-lg"
-                alt="banner"
-              />
-            </Link>
-          </div>
-          <div>
-            <Link href={"https://tally.so/r/3XDljz"} target="_blank">
-              <Image
-                src={"/images/banner/ads-001-S1_V6.jpg"}
-                width={562}
-                height={144}
-                quality={100}
-                className="rounded-lg"
-                alt="banner"
-              />
-            </Link>
-          </div>
-        </div>
+      <div className="w-full flex justify-center items-center">
+        <AdvertiseLg
+          customers={[customers?.[0], customers?.[1]]}
+          campaignId={campaign?.id}
+        />
+        <AdvertiseSm
+          customers={[customers?.[0], customers?.[1]]}
+          campaignId={campaign?.id}
+        />
       </div>
 
       <CountryStats currentCountry={currentCountry} />

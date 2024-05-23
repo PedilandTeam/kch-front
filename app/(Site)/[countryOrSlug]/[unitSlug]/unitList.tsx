@@ -14,8 +14,9 @@ import FilterModalMobile from "./filter/filterModal.mobile";
 import PagesSearch from "./[categorySlug]/filter/pages.search";
 import { PageNamespace } from "@/types/page";
 import { SeoText } from "./seoText";
-import Image from "next/image";
-import Link from "next/link";
+import fetchCampaigns from "@/utils/fetchCampaigns";
+import AdvertiseLg from "@/components/advertise/lg";
+import AdvertiseSm from "@/components/advertise/sm";
 
 type PagesListProps = {
   unit: UnitType;
@@ -102,6 +103,8 @@ export default async function UntiList({
     console.log(e?.response?.data);
   }
 
+  const { customers, campaign } = await fetchCampaigns(country.code);
+
   return (
     <div className="pt-5 component _unit-list">
       <div className="container mx-auto max-w-[1144px]">
@@ -123,24 +126,15 @@ export default async function UntiList({
             </div>
 
             {/* Advertising Section P03 */}
-            {/* <div className="flex flex-wrap gap-3 px-3 pt-5 sm:gap-5 sm:px-0">
-              <div>
-                <Image
-                  src={"/images/banner/bnr-04.gif"}
-                  width={562}
-                  height={72}
-                  alt="banner"
-                />
-              </div>
-              <div className="hidden sm:block">
-                <Image
-                  src={"/images/banner/bnr-04.gif"}
-                  width={562}
-                  height={72}
-                  alt="banner"
-                />
-              </div>
-            </div> */}
+
+            <AdvertiseLg
+              customers={[customers?.[0], customers?.[1]]}
+              campaignId={campaign?.id}
+            />
+            <AdvertiseSm
+              customers={[customers?.[0], customers?.[1]]}
+              campaignId={campaign?.id}
+            />
 
             <div className="hidden sm:block _filter">
               <ListFilter cities={cities} categories={categories} />
@@ -176,32 +170,14 @@ export default async function UntiList({
           </div>
 
           {/* Advertising Section P05 */}
-          <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0 my-14">
-            <div>
-              <Link href={"https://biz.koochaa.com/"} target="_blank">
-                <Image
-                  src={"/images/banner/ads-002-S1_V1.jpg"}
-                  width={562}
-                  height={144}
-                  quality={100}
-                  className="rounded-lg"
-                  alt="banner"
-                />
-              </Link>
-            </div>
-            <div>
-              <Link href={"https://tally.so/r/3XDljz"} target="_blank">
-                <Image
-                  src={"/images/banner/ads-001-S1_V6.jpg"}
-                  width={562}
-                  height={144}
-                  quality={100}
-                  className="rounded-lg"
-                  alt="banner"
-                />
-              </Link>
-            </div>
-          </div>
+          <AdvertiseLg
+            customers={[customers?.[2], customers?.[3]]}
+            campaignId={campaign?.id}
+          />
+          <AdvertiseSm
+            customers={[customers?.[2], customers?.[3]]}
+            campaignId={campaign?.id}
+          />
 
           {/* SEO Text */}
           <SeoText currentCountry={country} unit={unit} />

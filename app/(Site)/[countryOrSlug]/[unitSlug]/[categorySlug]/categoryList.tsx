@@ -14,8 +14,9 @@ import FilterMobile from "./filter/filter.mobile";
 import FilterModalMobile from "./filter/filterModal.mobile";
 import PagesSearch from "./filter/pages.search";
 import { PageNamespace } from "@/types/page";
-import Image from "next/image";
-import Link from "next/link";
+import fetchCampaigns from "@/utils/fetchCampaigns";
+import AdvertiseLg from "@/components/advertise/lg";
+import AdvertiseSm from "@/components/advertise/sm";
 
 type PagesListProps = {
   category: CategoryNamespace.category;
@@ -57,7 +58,7 @@ export default async function CategoryList({
   search,
 }: PagesListProps) {
   if (!country) return notFound();
-  const cities = await fetchCities(country.code, category.id);
+  const cities = await fetchCities(country.code, category?.id);
 
   let pages: PageNamespace.GET | undefined = undefined;
   try {
@@ -81,6 +82,9 @@ export default async function CategoryList({
       /{{country}}/g,
       country.name || country.englishName
     );
+
+
+    const { customers, campaign } = await fetchCampaigns(country.code)
 
   return (
     <div className="pt-5 component _category-list">
@@ -108,28 +112,14 @@ export default async function CategoryList({
             </div>
 
             {/* Advertising Section P03 */}
-            {/* <div className="flex flex-wrap gap-3 px-3 pt-5 sm:gap-5 sm:px-0">
-              <div>
-                <Image
-                  src={"/images/banner/ads-002-S1_V1.jpg"}
-                  width={562}
-                  height={144}
-                  quality={100}
-                  className="rounded-lg"
-                  alt="banner"
-                />
-              </div>
-              <div className="hidden sm:block">
-                <Image
-                  src={"/images/banner/ads-001-S1_V6.jpg"}
-                  width={562}
-                  height={144}
-                  quality={100}
-                  className="rounded-lg"
-                  alt="banner"
-                />
-              </div>
-            </div> */}
+            <AdvertiseLg
+              customers={[customers?.[0], customers?.[1]]}
+              campaignId={campaign?.id}
+            />
+            <AdvertiseSm
+              customers={[customers?.[0], customers?.[1]]}
+              campaignId={campaign?.id}
+            />
 
             <div className="hidden sm:block _filter">
               <ListFilter cities={cities} />
@@ -161,32 +151,14 @@ export default async function CategoryList({
           </div>
 
           {/* Advertising Section P04 */}
-          <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0 my-14">
-            <div>
-              <Link href={"https://biz.koochaa.com/"} target="_blank">
-                <Image
-                  src={"/images/banner/ads-002-S1_V1.jpg"}
-                  width={562}
-                  height={144}
-                  quality={100}
-                  className="rounded-lg"
-                  alt="banner"
-                />
-              </Link>
-            </div>
-            <div>
-              <Link href={"https://tally.so/r/3XDljz"} target="_blank">
-                <Image
-                  src={"/images/banner/ads-001-S1_V6.jpg"}
-                  width={562}
-                  height={144}
-                  quality={100}
-                  className="rounded-lg"
-                  alt="banner"
-                />
-              </Link>
-            </div>
-          </div>
+          <AdvertiseLg
+              customers={[customers?.[2], customers?.[3]]}
+              campaignId={campaign?.id}
+            />
+            <AdvertiseSm
+              customers={[customers?.[2], customers?.[3]]}
+              campaignId={campaign?.id}
+            />
 
           {/* SEO Text */}
           <div className="my-10 sm:my-20 mx-7 _SEO-text sm:mx-0">
