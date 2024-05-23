@@ -14,6 +14,8 @@ import FilterMobile from "./filter/filter.mobile";
 import FilterModalMobile from "./filter/filterModal.mobile";
 import PagesSearch from "./filter/pages.search";
 import { PageNamespace } from "@/types/page";
+import Image from "next/image";
+import Link from "next/link";
 
 type PagesListProps = {
   category: CategoryNamespace.category;
@@ -109,17 +111,21 @@ export default async function CategoryList({
             {/* <div className="flex flex-wrap gap-3 px-3 pt-5 sm:gap-5 sm:px-0">
               <div>
                 <Image
-                  src={"/images/banner/bnr-04.gif"}
+                  src={"/images/banner/ads-002-S1_V1.jpg"}
                   width={562}
-                  height={72}
+                  height={144}
+                  quality={100}
+                  className="rounded-lg"
                   alt="banner"
                 />
               </div>
               <div className="hidden sm:block">
                 <Image
-                  src={"/images/banner/bnr-04.gif"}
+                  src={"/images/banner/ads-001-S1_V6.jpg"}
                   width={562}
-                  height={72}
+                  height={144}
+                  quality={100}
+                  className="rounded-lg"
                   alt="banner"
                 />
               </div>
@@ -155,24 +161,32 @@ export default async function CategoryList({
           </div>
 
           {/* Advertising Section P04 */}
-          {/* <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0 my-14">
+          <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0 my-14">
             <div>
-              <Image
-                src={"/images/banner/bnr-04.gif"}
-                width={562}
-                height={72}
-                alt="banner"
-              />
+              <Link href={"https://biz.koochaa.com/"} target="_blank">
+                <Image
+                  src={"/images/banner/ads-002-S1_V1.jpg"}
+                  width={562}
+                  height={144}
+                  quality={100}
+                  className="rounded-lg"
+                  alt="banner"
+                />
+              </Link>
             </div>
             <div>
-              <Image
-                src={"/images/banner/bnr-04.gif"}
-                width={562}
-                height={72}
-                alt="banner"
-              />
+              <Link href={"https://tally.so/r/3XDljz"} target="_blank">
+                <Image
+                  src={"/images/banner/ads-001-S1_V6.jpg"}
+                  width={562}
+                  height={144}
+                  quality={100}
+                  className="rounded-lg"
+                  alt="banner"
+                />
+              </Link>
             </div>
-          </div> */}
+          </div>
 
           {/* SEO Text */}
           <div className="my-10 sm:my-20 mx-7 _SEO-text sm:mx-0">

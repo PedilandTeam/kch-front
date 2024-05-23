@@ -14,6 +14,8 @@ import FilterModalMobile from "./filter/filterModal.mobile";
 import PagesSearch from "./[categorySlug]/filter/pages.search";
 import { PageNamespace } from "@/types/page";
 import { SeoText } from "./seoText";
+import Image from "next/image";
+import Link from "next/link";
 
 type PagesListProps = {
   unit: UnitType;
@@ -174,24 +176,32 @@ export default async function UntiList({
           </div>
 
           {/* Advertising Section P05 */}
-          {/* <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0 my-14">
+          <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0 my-14">
             <div>
-              <Image
-                src={"/images/banner/bnr-04.gif"}
-                width={562}
-                height={72}
-                alt="banner"
-              />
+              <Link href={"https://biz.koochaa.com/"} target="_blank">
+                <Image
+                  src={"/images/banner/ads-002-S1_V1.jpg"}
+                  width={562}
+                  height={144}
+                  quality={100}
+                  className="rounded-lg"
+                  alt="banner"
+                />
+              </Link>
             </div>
             <div>
-              <Image
-                src={"/images/banner/bnr-04.gif"}
-                width={562}
-                height={72}
-                alt="banner"
-              />
+              <Link href={"https://tally.so/r/3XDljz"} target="_blank">
+                <Image
+                  src={"/images/banner/ads-001-S1_V6.jpg"}
+                  width={562}
+                  height={144}
+                  quality={100}
+                  className="rounded-lg"
+                  alt="banner"
+                />
+              </Link>
             </div>
-          </div> */}
+          </div>
 
           {/* SEO Text */}
           <SeoText currentCountry={country} unit={unit} />

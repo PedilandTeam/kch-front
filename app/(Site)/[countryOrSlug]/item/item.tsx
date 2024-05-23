@@ -8,6 +8,8 @@ import { Suspense } from "react";
 import Description from "@/components/description";
 import TagList from "./tools/tagList";
 import SuggestedPages from "./tools/suggestedPages";
+import Image from "next/image";
+import Link from "next/link";
 export type PageItemProps = {
   pageData: PageNamespace.Page;
 };
@@ -101,6 +103,34 @@ export default function PageItem({ pageData }: PageItemProps) {
             basedOn="category"
           />
         </Suspense>
+
+        {/* Advertising Section P01 */}
+        <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
+          <div>
+            <Link href={"https://biz.koochaa.com/"} target="_blank">
+              <Image
+                src={"/images/banner/ads-002-S1_V1.jpg"}
+                width={562}
+                height={144}
+                quality={100}
+                className="rounded-lg"
+                alt="banner"
+              />
+            </Link>
+          </div>
+          <div>
+            <Link href={"https://tally.so/r/3XDljz"} target="_blank">
+              <Image
+                src={"/images/banner/ads-001-S1_V6.jpg"}
+                width={562}
+                height={144}
+                quality={100}
+                className="rounded-lg"
+                alt="banner"
+              />
+            </Link>
+          </div>
+        </div>
 
         <Suspense>
           <SuggestedPages
