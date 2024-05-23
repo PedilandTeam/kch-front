@@ -55,7 +55,7 @@ export default async function CategoryList({
   search,
 }: PagesListProps) {
   if (!country) return notFound();
-  const cities = await fetchCities(country.code, category.id);
+  const cities = await fetchCities(country.code, category?.id);
 
   let pages: PageNamespace.GET | undefined = undefined;
   try {
