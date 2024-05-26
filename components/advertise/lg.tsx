@@ -22,13 +22,21 @@ const Desktop = dynamic(
 const AdvertiseLg: FC<AdvertiseProps> = ({
   customers,
   campaignId,
+  from,
 }: AdvertiseProps): JSX.Element | null => {
-  customers = customers.filter(Boolean)
+  customers = customers.filter(Boolean);
   if (!campaignId || customers.length < 2) return null;
   return (
     <Desktop>
       <div className="flex flex-wrap gap-3 px-3 sm:gap-5 sm:px-0">
-        <Link href={customers[0]?.link || "#"} target="_blank">
+        <Link
+          href={`${
+            process.env.NEXT_PUBLIC_API_URL
+          }/click/${campaignId}?customer=${
+            customers[0].type
+          }&from=${from}&size=${"lg"}`}
+          target="_blank"
+        >
           <Image
             src={`${process.env.NEXT_PUBLIC_DL_URL}/campaigns/${campaignId}/${customers[0]?.lg}`}
             width={562}
@@ -36,7 +44,14 @@ const AdvertiseLg: FC<AdvertiseProps> = ({
             alt="banner"
           />
         </Link>
-        <Link href={customers[1]?.link || "#"} target="_blank">
+        <Link
+          href={`${
+            process.env.NEXT_PUBLIC_API_URL
+          }/click/${campaignId}?customer=${
+            customers[1].type
+          }&from=${from}&size=${"lg"}`}
+          target="_blank"
+        >
           <Image
             src={`${process.env.NEXT_PUBLIC_DL_URL}/campaigns/${campaignId}/${customers[1]?.lg}`}
             width={562}

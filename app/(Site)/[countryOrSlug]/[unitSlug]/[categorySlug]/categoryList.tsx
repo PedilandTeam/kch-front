@@ -17,6 +17,7 @@ import { PageNamespace } from "@/types/page";
 import fetchCampaigns from "@/utils/fetchCampaigns";
 import AdvertiseLg from "@/components/advertise/lg";
 import AdvertiseSm from "@/components/advertise/sm";
+import StaticAdvertise from "@/components/advertise/static";
 
 type PagesListProps = {
   category: CategoryNamespace.category;
@@ -83,8 +84,8 @@ export default async function CategoryList({
       country.name || country.englishName
     );
 
-
-    const { customers, campaign } = await fetchCampaigns(country.code)
+  const { customers, campaign } = await fetchCampaigns(country.code);
+  
 
   return (
     <div className="pt-5 component _category-list">
@@ -113,10 +114,12 @@ export default async function CategoryList({
 
             {/* Advertising Section P03 */}
             <AdvertiseLg
+              from="category"
               customers={[customers?.[0], customers?.[1]]}
               campaignId={campaign?.id}
             />
             <AdvertiseSm
+              from="category"
               customers={[customers?.[0], customers?.[1]]}
               campaignId={campaign?.id}
             />
@@ -152,13 +155,28 @@ export default async function CategoryList({
 
           {/* Advertising Section P04 */}
           <AdvertiseLg
-              customers={[customers?.[2], customers?.[3]]}
-              campaignId={campaign?.id}
+            from="category"
+            customers={[customers?.[2], customers?.[3]]}
+            campaignId={campaign?.id}
+          />
+          <AdvertiseSm
+            from="category"
+            customers={[customers?.[2], customers?.[3]]}
+            campaignId={campaign?.id}
+          />
+
+          <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
+            <StaticAdvertise
+              lgDisable={customers.length >= 4}
+              imageUrlOrPath="/images/banner/ads-002-S1_V1.jpg"
+              link="https://biz.koochaa.com/"
             />
-            <AdvertiseSm
-              customers={[customers?.[2], customers?.[3]]}
-              campaignId={campaign?.id}
+            <StaticAdvertise
+              lgDisable={customers.length >= 4}
+              imageUrlOrPath="/images/banner/ads-001-S1_V6.jpg"
+              link="https://tally.so/r/3XDljz"
             />
+          </div>
 
           {/* SEO Text */}
           <div className="my-10 sm:my-20 mx-7 _SEO-text sm:mx-0">

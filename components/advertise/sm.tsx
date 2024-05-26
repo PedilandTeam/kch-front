@@ -20,14 +20,22 @@ const MobileOrTablet = dynamic(
  */
 const AdvertiseSm: FC<AdvertiseProps> = ({
   customers,
+  from,
   campaignId,
 }: AdvertiseProps): JSX.Element | null => {
-  customers = customers.filter(Boolean)
+  customers = customers.filter(Boolean);
   if (!campaignId || customers.length < 1) return null;
   return (
     <MobileOrTablet>
       <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
-        <Link href={customers[0]?.link || "#"} target="_blank">
+        <Link
+          href={`${
+            process.env.NEXT_PUBLIC_API_URL
+          }/click/${campaignId}?customer=${
+            customers[0].type
+          }&from=${from}&size=${"sm"}`}
+          target="_blank"
+        >
           <Image
             src={`${process.env.NEXT_PUBLIC_DL_URL}/campaigns/${campaignId}/${customers[0]?.sm}`}
             width={562}
@@ -36,7 +44,14 @@ const AdvertiseSm: FC<AdvertiseProps> = ({
           />
         </Link>
         {customers.length > 1 ? (
-          <Link href={customers[1]?.link || "#"} target="_blank">
+          <Link
+            href={`${
+              process.env.NEXT_PUBLIC_API_URL
+            }/click/${campaignId}?customer=${
+              customers[1].type
+            }&from=${from}&size=${"sm"}`}
+            target="_blank"
+          >
             <Image
               src={`${process.env.NEXT_PUBLIC_DL_URL}/campaigns/${campaignId}/${customers[1]?.sm}`}
               width={562}

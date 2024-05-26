@@ -17,6 +17,7 @@ import { SeoText } from "./seoText";
 import fetchCampaigns from "@/utils/fetchCampaigns";
 import AdvertiseLg from "@/components/advertise/lg";
 import AdvertiseSm from "@/components/advertise/sm";
+import StaticAdvertise from "@/components/advertise/static";
 
 type PagesListProps = {
   unit: UnitType;
@@ -128,10 +129,12 @@ export default async function UntiList({
             {/* Advertising Section P03 */}
 
             <AdvertiseLg
+              from="unit"
               customers={[customers?.[0], customers?.[1]]}
               campaignId={campaign?.id}
             />
             <AdvertiseSm
+              from="unit"
               customers={[customers?.[0], customers?.[1]]}
               campaignId={campaign?.id}
             />
@@ -171,13 +174,28 @@ export default async function UntiList({
 
           {/* Advertising Section P05 */}
           <AdvertiseLg
+            from="unit"
             customers={[customers?.[2], customers?.[3]]}
             campaignId={campaign?.id}
           />
           <AdvertiseSm
+            from="unit"
             customers={[customers?.[2], customers?.[3]]}
             campaignId={campaign?.id}
           />
+
+          <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
+            <StaticAdvertise
+              lgDisable={customers.length >= 4}
+              imageUrlOrPath="/images/banner/ads-002-S1_V1.jpg"
+              link="https://biz.koochaa.com/"
+            />
+            <StaticAdvertise
+              lgDisable={customers.length >= 4}
+              imageUrlOrPath="/images/banner/ads-001-S1_V6.jpg"
+              link="https://tally.so/r/3XDljz"
+            />
+          </div>
 
           {/* SEO Text */}
           <SeoText currentCountry={country} unit={unit} />

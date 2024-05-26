@@ -28,10 +28,12 @@ export default async function Country({
       {/* Advertising Section P05 */}
       <div className="w-full flex justify-center items-center">
         <AdvertiseLg
+          from="country"
           customers={[customers?.[0], customers?.[1]]}
           campaignId={campaign?.id}
         />
         <AdvertiseSm
+          from="country"
           customers={[customers?.[0], customers?.[1]]}
           campaignId={campaign?.id}
         />
@@ -41,7 +43,7 @@ export default async function Country({
 
       <CountryCategories currentCountry={currentCountry} />
 
-      <SeoText currentCountry={currentCountry} />
+      <SeoText customers={customers} currentCountry={currentCountry} />
     </div>
   );
 }

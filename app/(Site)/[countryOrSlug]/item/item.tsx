@@ -14,6 +14,7 @@ import AdvertiseSm from "@/components/advertise/sm";
 import fetchCampaigns from "@/utils/fetchCampaigns";
 import Link from "next/link";
 import Image from "next/image";
+import StaticAdvertise from "@/components/advertise/static";
 export type PageItemProps = {
   pageData: PageNamespace.Page;
 };
@@ -81,10 +82,12 @@ export default async function PageItem({ pageData }: PageItemProps) {
         {/* Advertising Section P01 */}
 
         <AdvertiseSm
+          from="item"
           customers={[customers?.[0], customers?.[1]]}
           campaignId={campaign?.id}
         />
         <AdvertiseMd
+          from="item"
           customers={[customers?.[0], customers?.[1]]}
           campaignId={campaign?.id}
         />
@@ -101,34 +104,6 @@ export default async function PageItem({ pageData }: PageItemProps) {
           />
         </Suspense>
 
-        {/* Advertising Section P01 */}
-        <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
-          <div>
-            <Link href={"https://biz.koochaa.com/"} target="_blank">
-              <Image
-                src={"/images/banner/ads-002-S1_V1.jpg"}
-                width={562}
-                height={144}
-                quality={100}
-                className="rounded-lg"
-                alt="banner"
-              />
-            </Link>
-          </div>
-          <div>
-            <Link href={"https://tally.so/r/3XDljz"} target="_blank">
-              <Image
-                src={"/images/banner/ads-001-S1_V6.jpg"}
-                width={562}
-                height={144}
-                quality={100}
-                className="rounded-lg"
-                alt="banner"
-              />
-            </Link>
-          </div>
-        </div>
-
         <Suspense>
           <SuggestedPages
             unit={pageData.unit}
@@ -141,14 +116,30 @@ export default async function PageItem({ pageData }: PageItemProps) {
 
         {/* Advertising Section P02 */}
         <AdvertiseSm
+          from="item"
           customers={[customers[2], customers[3]]}
           campaignId={campaign?.id}
         />
 
         <AdvertiseMd
+          from="item"
           customers={[customers[2], customers[3]]}
           campaignId={campaign?.id}
         />
+
+        {/* Advertising Section P01 */}
+        <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
+          <StaticAdvertise
+            lgDisable={customers.length >= 4}
+            imageUrlOrPath="/images/banner/ads-002-S1_V1.jpg"
+            link="https://biz.koochaa.com/"
+          />
+          <StaticAdvertise
+            lgDisable={customers.length >= 4}
+            imageUrlOrPath="/images/banner/ads-001-S1_V6.jpg"
+            link="https://tally.so/r/3XDljz"
+          />
+        </div>
       </div>
     </div>
   );
