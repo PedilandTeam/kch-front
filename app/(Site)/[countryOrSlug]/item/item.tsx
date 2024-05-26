@@ -130,11 +130,13 @@ export default async function PageItem({ pageData }: PageItemProps) {
         {/* Advertising Section P01 */}
         <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
           <StaticAdvertise
+            from="item"
             lgDisable={customers.length >= 4}
             imageUrlOrPath="/images/banner/ads-002-S1_V1.jpg"
             link="https://biz.koochaa.com/"
           />
           <StaticAdvertise
+            from="item"
             lgDisable={customers.length >= 4}
             imageUrlOrPath="/images/banner/ads-001-S1_V6.jpg"
             link="https://tally.so/r/3XDljz"
