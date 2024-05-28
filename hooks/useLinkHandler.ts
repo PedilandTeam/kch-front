@@ -35,7 +35,9 @@ export default function useLinkHandler({ pageData }: UseLinkHandler) {
         break;
       case "whatsapp":
         window.open(
-          `https://wa.me/${pageData.contact.whatsapp}`,
+          `https://wa.me/00${
+            pageData.country.areaCode ? pageData.country.areaCode : ""
+          }${pageData.contact.whatsapp!}`,
           "_blank",
           "noopener, noreferrer"
         );
