@@ -7,6 +7,7 @@ import { API_ROUTES } from "@/routes";
 import { ModalCountry } from "@/app/(Site)/layout/modalcountry";
 import Script from "next/script";
 import { Toaster } from "react-hot-toast";
+import Hotjar from "@/components/hotjar";
 
 export default async function RootLayout({
   children,
@@ -25,6 +26,7 @@ export default async function RootLayout({
     <html lang="fa" dir="rtl" className="scroll-smooth">
       <body className="min-h-screen overflow-x-hidden">
         <Fonts />
+        <Hotjar/>
         <Header countries={countries}>
           <ModalCountry countries={countries} />
         </Header>
