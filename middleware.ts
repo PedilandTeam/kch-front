@@ -8,6 +8,8 @@ export function middleware(request: NextRequest) {
     request.headers.forEach((value, key) => {
         string += `${key}: ${value}\n`
     })
+    console.log(string, '\n', '\n');
+    
   return NextResponse.next()
   
 }
