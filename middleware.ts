@@ -3,9 +3,10 @@ import type { NextRequest } from 'next/server'
  
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
+
+    let string = ''
     request.headers.forEach((value, key) => {
-        console.log(key, value);
-        
+        string += `${key}: ${value}\n`
     })
   return NextResponse.next()
   
