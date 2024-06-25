@@ -15,6 +15,7 @@ import fetchCampaigns from "@/utils/fetchCampaigns";
 import Link from "next/link";
 import Image from "next/image";
 import StaticAdvertise from "@/components/advertise/static";
+import page from "../../germany/restaurant/page";
 export type PageItemProps = {
   pageData: PageNamespace.Page;
 };
@@ -22,8 +23,27 @@ export type PageItemProps = {
 export default async function PageItem({ pageData }: PageItemProps) {
   const { campaign, customers } = await fetchCampaigns(pageData.country.code);
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: pageData.title,
+    image: pageData.profile,
+    url: pageData.socials?.website,
+    telephone: pageData.contact.telephone || pageData.contact.phone,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: pageData.city,     
+      addressCountry: pageData.country,
+    } 
+  } 
+
   return (
     <div className="component page-item">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <CountryUpdater pageData={pageData} />
 
       <div className="bg-[#fbf7ed] bg-[url('/images/pattern-03.png')] bg-center mb-4">
