@@ -32,8 +32,8 @@ export default async function PageItem({ pageData }: PageItemProps) {
     telephone: pageData.contact.telephone || pageData.contact.phone,
     address: {
       "@type": "PostalAddress",
-      addressLocality: pageData.city,     
-      addressCountry: pageData.country,
+      addressLocality: pageData.city.englishName,     
+      addressCountry: pageData.country.code?.toUpperCase(),
     } 
   } 
 
