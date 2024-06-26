@@ -27,7 +27,7 @@ export default async function PageItem({ pageData }: PageItemProps) {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: pageData.title,
-    image: pageData.profile,
+    image: `${process.env.NEXT_PUBLIC_DL_URL}/pages/${pageData.id}/${pageData.profile}`,
     url: pageData.socials?.website,
     telephone: pageData.contact.telephone || pageData.contact.phone,
     address: {
