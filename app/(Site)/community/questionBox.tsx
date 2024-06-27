@@ -3,7 +3,7 @@ import { User } from "@nextui-org/react";
 
 export default function QuestionBox() {
   return (
-    <div className="flex">
+    <div className="flex w-full max-w-[72rem]">
       <div className="flex justify-end">
         {/* <User
           name="Jane Doe"
