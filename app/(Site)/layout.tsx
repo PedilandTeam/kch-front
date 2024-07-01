@@ -8,7 +8,8 @@ import { ModalCountry } from "@/app/(Site)/layout/modalcountry";
 import Script from "next/script";
 import { Toaster } from "react-hot-toast";
 import Hotjar from "@/components/hotjar";
-import {NextUIProvider} from "@nextui-org/react";
+import { NextUIProvider } from "@nextui-org/react";
+import { headers } from "next/headers";
 
 export default async function RootLayout({
   children,
@@ -23,30 +24,38 @@ export default async function RootLayout({
     throw new Error("error in get country");
   }
 
+  const header = headers();
+
+  // header.forEach(header => {
+  //   console.log(header.get)
+  // })
+
   return (
     <html lang="fa" dir="rtl" className="scroll-smooth">
       <body className="min-h-screen overflow-x-hidden">
-      <NextUIProvider>
+        <NextUIProvider>
+          <Fonts />
+          <Hotjar />
 
-        <Fonts />
-        <Hotjar/>
-        <Header countries={countries}>
-          <ModalCountry countries={countries} />
-        </Header>
-        <Toaster />
-        {children}
-        <Footer />
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD" />
-        <Script id="google-analytics">
-          {`
+          {!header.get("x-pathname") && (
+            <Header countries={countries}>
+              <ModalCountry countries={countries} />
+            </Header>
+          )}
+          <Toaster />
+          {children}
+          <Footer />
+          <Script src="https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD" />
+          <Script id="google-analytics">
+            {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
  
           gtag('config', 'G-EED4RG3GPD');
         `}
-        </Script>
-       </NextUIProvider>
+          </Script>
+        </NextUIProvider>
       </body>
     </html>
   );

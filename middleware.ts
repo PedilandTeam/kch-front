@@ -1,15 +1,19 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
- 
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
+  const url = new URL(request.url);
+  const origin = url.origin;
+  const pathname = url.pathname;
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-url", request.url);
+  requestHeaders.set("x-origin", origin);
+  requestHeaders.set("x-pathname", pathname);
 
-    let string = ''
-    request.headers.forEach((value, key) => {
-        string += `${key}: ${value}\n`
-    })
-    console.log(string, '\n', '\n');
-    
-  return NextResponse.next()
-  
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
 }
