@@ -31,10 +31,10 @@ export const Footer = () => {
   }, []);
 
   return (
-    <footer className="pt-10 sm:pt-16 pb-6 sm:pb-5 mt-10 sm:mt-20 bg-[#1c39bb] text-gray-50 rounded-tl-3xl rounded-tr-3xl sm:rounded-none">
+    <footer className=" pt-10 sm:pt-16 pb-6 sm:pb-5 mt-10 sm:mt-20 bg-[#1c39bb] text-gray-50 rounded-tl-3xl rounded-tr-3xl sm:rounded-none">
       <div className=" container max-w-[1144px] px-3 sm:px-0 mx-auto _footer text-[15px]">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-4">
-          <div className="px-4 sm:col-span-2 sm:px-0">
+          <div className=" px-4 sm:col-span-2 sm:px-0">
             <Image
               src={"/images/logo-white.svg"}
               width={160}
