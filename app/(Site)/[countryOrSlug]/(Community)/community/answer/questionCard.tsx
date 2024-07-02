@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import {
   ArrowFatDown,
@@ -18,7 +19,7 @@ const topic = "مهاجرت";
 const countOfAnswer: string = "3 پاسخ";
 const userBio: string = "ساکن المان از سال 2014";
 const countOfUpvote: string = "10";
-export default function QuestionBox({ params }: { params: { slug: string } }) {
+export default function QuestionCard() {
   return (
     <div className="w-full max-w-[72rem] p-4 bg-white flex flex-col items-center mt-[8rem]">
       {/* Question Card */}
@@ -58,8 +59,8 @@ export default function QuestionBox({ params }: { params: { slug: string } }) {
           <div className="flex items-center gap-2">
             <div>
               <div className="flex gap-1 text-[.8rem]">
-                <Link href={`/${params}/community/answer`}>
-                  <Button variant="light" size="sm">
+                {/* <Button variant="light" size="sm"> */}
+                  {/* <Link href={`/${params}/community/answer`}> */}
                     <span>
                       <ChatCircleDots
                         size={25}
@@ -68,8 +69,8 @@ export default function QuestionBox({ params }: { params: { slug: string } }) {
                       />
                     </span>
                     <span>{countOfAnswer}</span>
-                  </Button>{" "}
-                </Link>
+                  {/* </Link> */}
+                {/* </Button> */}
               </div>
             </div>
             <div className="font-bold  w-auto   text-gray-700  gap-2 h-[1.9rem] items-center flex rounded-xl text-xs bg-[#D9D9D9]">

@@ -158,3 +158,10 @@
 .shadow-tlx {
   text-shadow: 0 2px 0 black;
 }
+
+
+/* custom modal's textArea for modal question  */
+#textarea-wrapper > div > div {
+  height: auto !important;
+  min-height: 190px;
+}
