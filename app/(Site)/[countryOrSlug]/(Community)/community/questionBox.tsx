@@ -7,7 +7,7 @@ import {
 } from "@phosphor-icons/react";
 import { User, Button } from "@nextui-org/react";
 const userName: string = "سینا پیرانی";
-const timeOfQuestion: string = "22 دقیقه قبل";
+const timeOfQuestion: string = "22 دقیقه پیش";
 const UserQuestion: string = " آیا وبفلو مناسب برای ساخت وبسایت است؟";
 const questionDescription: string =
   "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده ";
@@ -27,7 +27,7 @@ export default function QuestionBox() {
               <User
                 avatarProps={{
                   size: "sm",
-                  src: "https://avatars.githubusercontent.com/u/30373425?v=4",
+                  src: "",
                 }}
               />
               <div className="flex flex-col">

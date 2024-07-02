@@ -19,11 +19,13 @@ export default function CommunityHeader() {
           <User
             avatarProps={{
               size: "sm",
-              src: "https://avatars.githubusercontent.com/u/30373425?v=4",
+              src: "",
             }}
           />
           <Input size="sm" fullWidth placeholder="دنبال چی می گردی؟" />
-          <Bell size={33} weight="bold" color="#676567" />
+          <Button variant="light" size="sm" isIconOnly>
+            <Bell size={33} weight="bold" color="#676567" />
+          </Button>
         </div>
         <div className="flex justify-between mt-3">
           <Button className="h-[32px]" variant="solid" color="warning">
