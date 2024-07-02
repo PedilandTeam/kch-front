@@ -18,6 +18,7 @@ export default function BottomMenu() {
         />
       </Link>
       <Flag size={32} color="#282828" />
+      
     </div>
   );
 }
