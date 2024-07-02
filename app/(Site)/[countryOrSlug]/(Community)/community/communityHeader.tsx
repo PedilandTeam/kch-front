@@ -22,7 +22,7 @@ export default function CommunityHeader() {
               src: "",
             }}
           />
-          <Input  fullWidth placeholder="دنبال چی می گردی؟" />
+          <Input size="sm" fullWidth placeholder="دنبال چی می گردی؟" />
           <Button variant="light" size="sm" isIconOnly>
             <Bell size={33} weight="bold" color="#676567" />
           </Button>

@@ -1,8 +1,10 @@
 "use client";
+import { User } from "@nextui-org/react";
 import { Flag, HouseLine, List } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+
 
 export default function BottomMenu() {
   return (
@@ -18,7 +20,12 @@ export default function BottomMenu() {
         />
       </Link>
       <Flag size={32} color="#282828" />
-      
+      <User
+        avatarProps={{
+          size: "sm",
+          src: "",
+        }}
+      />
     </div>
   );
 }
