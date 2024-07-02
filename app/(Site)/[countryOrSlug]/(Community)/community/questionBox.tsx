@@ -5,7 +5,9 @@ import {
   ChatCircleDots,
   Tag,
 } from "@phosphor-icons/react";
+
 import { User, Button } from "@nextui-org/react";
+
 const userName: string = "سینا پیرانی";
 const timeOfQuestion: string = "22 دقیقه پیش";
 const UserQuestion: string = " آیا وبفلو مناسب برای ساخت وبسایت است؟";
@@ -20,9 +22,9 @@ export default function QuestionBox() {
     <div className="w-full max-w-[72rem] p-4 bg-white flex flex-col items-center mt-[8rem]">
       {/* Question Card */}
       <div className="w-full  bg-[#F6F7FF] rounded-xl p-4 mb-4">
-        <div className="flex h-[4rem]   border-b-2 border-dotted border-gray-300   justify-between items-center ">
+        <div className="qCard-header flex h-[4rem]   border-b-2 border-dotted border-gray-300   justify-between items-center ">
           {/* Avatar and Name */}
-          <div className="flex  flex-col bg--400  items-center">
+          <div className="flex flex-col items-center bg--400">
             <div className="flex items-center bg--900 ">
               <User
                 avatarProps={{
@@ -32,7 +34,7 @@ export default function QuestionBox() {
               />
               <div className="flex flex-col">
                 <span className="ml-2 font-bold">{userName} </span>
-                <span className=" flex text-sm ">{userBio}</span>
+                <span className="flex text-sm ">{userBio}</span>
               </div>
             </div>
           </div>
@@ -40,21 +42,21 @@ export default function QuestionBox() {
           <div className="text-sm text-gray-500">{timeOfQuestion}</div>
         </div>
         {/* Question and Description */}
-        <div className="mb-2 mt-3">
-          <div className="font-bold text-lg">{UserQuestion}</div>
-          <div className="text-sm text-gray-700 mt-1">
+        <div className="mt-3 mb-2">
+          <div className="text-lg font-bold">{UserQuestion}</div>
+          <div className="mt-1 text-sm text-gray-700">
             {questionDescription}
           </div>
         </div>
         {/* Topic and Up Vote */}
-        <div className="mt-5 flex text-sm justify-between items-center">
+        <div className="flex items-center justify-between mt-5 text-sm">
           <div className="text-sm text-gray-600">
             <span className="flex gap-1 font-bold ">
               <Tag size={22} color="#262526" weight="duotone" />
               <span className="text-[.7rem]"> {topic}</span>
             </span>
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <div>
               <div className="flex gap-1 text-[.8rem]">
                 <Button variant="light" size="sm">
@@ -94,8 +96,6 @@ export default function QuestionBox() {
           </div>
         </div>
       </div>
-
-      {/**/}
     </div>
   );
 }

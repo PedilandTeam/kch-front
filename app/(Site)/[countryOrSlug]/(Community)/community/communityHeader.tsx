@@ -14,24 +14,18 @@ import { Bell, FadersHorizontal, SortAscending } from "@phosphor-icons/react";
 export default function CommunityHeader() {
   return (
     <div className="fixed top-0 w-full max-w-[72rem] bg-white z-50 shadow-md">
-      <div className="p-4 flex flex-col gap-3">
+      <div className="flex flex-col gap-3 p-4">
         <div className="flex items-center gap-3">
-          <User
-            avatarProps={{
-              size: "sm",
-              src: "",
-            }}
-          />
-          <Input size="sm" fullWidth placeholder="دنبال چی می گردی؟" />
-          <Button variant="light" size="sm" isIconOnly>
-            <Bell size={33} weight="bold" color="#676567" />
+          <Input fullWidth placeholder="دنبال چی می گردی؟" />
+          <Button variant="light" isIconOnly>
+            <Bell size={30} color="#676567" />
           </Button>
         </div>
         <div className="flex justify-between mt-3">
           <Button className="h-[32px]" variant="solid" color="warning">
             <span className="font-bold"> + ایجاد سوال</span>
           </Button>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center">
             <Dropdown>
               <DropdownTrigger>
                 <Button variant="light" size="sm">
@@ -45,12 +39,12 @@ export default function CommunityHeader() {
                 <DropdownItem key="edit">Edit file</DropdownItem>
                 <DropdownItem key="delete">Delete file</DropdownItem>
               </DropdownMenu>
-            </Dropdown>{" "}
+            </Dropdown>
             <Dropdown>
               <DropdownTrigger>
                 <Button variant="light" size="sm">
                   <SortAscending size={21} color="#676567" />
-                  <span className="font-bold"> مرتب سازی</span>
+                  <span className="font-bold">مرتب سازی</span>
                 </Button>
               </DropdownTrigger>
               <DropdownMenu aria-label="Example with disabled actions">
