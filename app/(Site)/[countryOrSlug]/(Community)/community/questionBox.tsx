@@ -14,7 +14,7 @@ const questionDescription: string =
 const topic = "مهاجرت";
 const countOfAnswer: string = "3 پاسخ";
 const userBio: string = "ساکن المان از سال 2014";
-
+const countOfUpvote: string = "10";
 export default function QuestionBox() {
   return (
     <div className="w-full max-w-[72rem] p-4 bg-white flex flex-col items-center mt-[8rem]">
@@ -69,15 +69,23 @@ export default function QuestionBox() {
                 </Button>
               </div>
             </div>
-            <div className="font-bold  w-auto   text-gray-700  gap-2 h-[1.9rem] items-center flex rounded-xl text-xs bg-[#D9D9D9]">
-              <Button isIconOnly size="sm" variant="light">
+            <div className="font-bold  w-auto ml-2  text-gray-700  gap-2 h-[1.9rem] items-center flex rounded-xl text-xs bg-[#D9D9D9]">
+              <Button
+                isIconOnly
+                size="sm"
+                className="ml-[-.5rem]"
+                variant="light"
+              >
                 <span className="">
                   <ArrowFatDown size={18} color="#da3316" weight="duotone" />
                 </span>
               </Button>
               |
               <Button size="sm" variant="light">
-                <span> باهات موافقم</span>
+                <span>
+                  باهات موافقم .
+                  <span className="font-bold">{countOfUpvote}</span>
+                </span>
                 <span>
                   <ArrowFatUp size={18} color="#2ed90c" weight="duotone" />
                 </span>
