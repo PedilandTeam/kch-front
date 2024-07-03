@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -23,13 +23,27 @@ const QuestionModal: React.FC<QuestionModalProps> = ({
   setOpenModal,
 }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [modalSize, setModalSize] = useState("full");
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 728) {
+        setModalSize("md");
+      } else {
+        setModalSize("full");
+      }
+    };
+
+    handleResize(); // Set initial size
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <>
       {/* <Button onPress={onOpen} color="primary">Open Modal</Button> */}
       <Modal
         isOpen={openModal}
-        size="full"
+        size={modalSize}
         backdrop="blur"
         onOpenChange={onOpenChange}
         onClose={() => setOpenModal(false)}
@@ -44,6 +58,7 @@ const QuestionModal: React.FC<QuestionModalProps> = ({
               </ModalHeader>
               <ModalBody>
                 <Select
+                color="warning"
                   isRequired
                   // label="تاپیک"
                   placeholder="انتخاب تاپیک"
@@ -56,13 +71,14 @@ const QuestionModal: React.FC<QuestionModalProps> = ({
                   <SelectItem>test</SelectItem>
                 </Select>
                 <Input
+                color="warning"
                   autoFocus
                   placeholder="سوال "
                   variant="bordered"
                   size="lg"
                 />
                 <div id="textarea-wrapper">
-                  <Textarea size="lg"  variant="bordered" placeholder="توضیحات"  />
+                  <Textarea size="lg" className=""  color="warning" variant="bordered" placeholder="توضیحات"  />
                 </div>
                 <Button className=" max-w-[6rem]" color="primary">
                   ثبت سوال

@@ -20,9 +20,9 @@ const userBio: string = "ساکن المان از سال 2014";
 const countOfUpvote: string = "10";
 export default function QuestionBox({ params }: { params: { slug: string } }) {
   return (
-    <div className="w-full max-w-[72rem] p-4 bg-white flex flex-col items-center mt-[8rem]">
+    <div className="QuestionCard w-full max-w-[72rem] p-4 bg-white flex flex-col items-center ">
       {/* Question Card */}
-      <div className="w-full  bg-[#F6F7FF] rounded-xl p-4 mb-4">
+      <div className="w-full  bg-[#F6F7FF] rounded-xl p-4 ">
         <div className="qCard-header flex h-[4rem]   border-b-2 border-dotted border-gray-300   justify-between items-center ">
           {/* Avatar and Name */}
           <div className="flex flex-col items-center bg--400">
@@ -59,7 +59,7 @@ export default function QuestionBox({ params }: { params: { slug: string } }) {
             <div>
               <div className="flex gap-1 text-[.8rem]">
                 <Link href={`/${params}/community/answer`}>
-                  <Button variant="light" size="sm">
+                  <Button variant="flat" color="primary" size="sm">
                     <span>
                       <ChatCircleDots
                         size={25}

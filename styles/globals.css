@@ -163,5 +163,7 @@
 /* custom modal's textArea for modal question  */
 #textarea-wrapper > div > div {
   height: auto !important;
-  min-height: 190px;
+  min-height: 100px !important;
+  /* padding: -100 !important; */
+  /* text-align: end !important; */
 }
