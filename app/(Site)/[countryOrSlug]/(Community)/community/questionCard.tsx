@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   ArrowFatDown,
@@ -18,7 +19,9 @@ const topic = "مهاجرت";
 const countOfAnswer: string = "3 پاسخ";
 const userBio: string = "ساکن المان از سال 2014";
 const countOfUpvote: string = "10";
-export default function QuestionBox({ params }: { params: { slug: string } }) {
+export default function QuestionCard({ params }: { params: { countryOrSlug: string } }) {
+ console.log(params.countryOrSlug);
+ const countryOrSlug :string = params.countryOrSlug
   return (
     <div className="QuestionCard w-full max-w-[72rem] p-4 bg-white flex flex-col items-center ">
       {/* Question Card */}
@@ -58,7 +61,7 @@ export default function QuestionBox({ params }: { params: { slug: string } }) {
           <div className="flex items-center gap-2">
             <div>
               <div className="flex gap-1 text-[.8rem]">
-                <Link href={`/${params}/community/answer`}>
+                <Link href={`/${countryOrSlug}/community/answer`}>
                   <Button variant="flat" color="primary" size="sm">
                     <span>
                       <ChatCircleDots
