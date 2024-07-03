@@ -28,7 +28,7 @@ const QuestionModal: React.FC<QuestionModalProps> = ({
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 728) {
-        setModalSize("md");
+        setModalSize("2xl");
       } else {
         setModalSize("full");
       }
