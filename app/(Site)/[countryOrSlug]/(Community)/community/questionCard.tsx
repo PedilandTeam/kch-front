@@ -7,7 +7,6 @@ import {
   Tag,
 } from "@phosphor-icons/react";
 
-import { User, Button } from "@nextui-org/react";
 import Link from "next/link";
 
 const userName: string = "سینا پیرانی";
@@ -19,24 +18,28 @@ const topic = "مهاجرت";
 const countOfAnswer: string = "3 پاسخ";
 const userBio: string = "ساکن المان از سال 2014";
 const countOfUpvote: string = "10";
-export default function QuestionCard({ params }: { params: { countryOrSlug: string } }) {
- console.log(params.countryOrSlug);
- const countryOrSlug :string = params.countryOrSlug
+export default function QuestionCard({
+  params,
+}: {
+  params: { countryOrSlug: string };
+}) {
+  const countryOrSlug: string = params.countryOrSlug;
+  console.log(countryOrSlug);
+
   return (
-    <div className="QuestionCard w-full max-w-[72rem] p-4 bg-white flex flex-col items-center ">
+    <div className="QuestionCard w-full max-w-[72rem] p-4 bg-white flex flex-col items-center mt-4">
       {/* Question Card */}
       <div className="w-full  bg-[#F6F7FF] rounded-xl p-4 ">
         <div className="qCard-header flex h-[4rem]   border-b-2 border-dotted border-gray-300   justify-between items-center ">
           {/* Avatar and Name */}
-          <div className="flex flex-col items-center bg--400">
-            <div className="flex items-center bg--900 ">
-              <User
-                avatarProps={{
-                  size: "md",
-                  src: "",
-                }}
-              />
-              <div className="flex flex-col">
+          <div className="flex flex- items-center ">
+            <div className="flex   items-center  ">
+              <div className="avatar">
+                <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2">
+                  <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg" />
+                </div>
+              </div>
+              <div className="flex mr-3 flex-col">
                 <h2 className="ml-2 font-bold">{userName} </h2>
                 <span className="flex text-sm ">{userBio}</span>
               </div>
@@ -54,46 +57,43 @@ export default function QuestionCard({ params }: { params: { countryOrSlug: stri
         <div className="flex items-center justify-between mt-5 text-sm">
           <div className="text-sm text-gray-600">
             <span className="flex gap-1 font-bold ">
-              <Tag size={22} color="#262526" weight="duotone" />
+              <Tag size={18} color="#262526" weight="duotone" />
               <h3 className="text-[.7rem]">{topic}</h3>
             </span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center  gap-2 ">
             <div>
-              <div className="flex gap-1 text-[.8rem]">
-                <Link href={`/${countryOrSlug}/community/answer`}>
-                  <Button variant="flat" color="primary" size="sm">
-                    <span>
-                      <ChatCircleDots
-                        size={25}
-                        color="#787678"
-                        weight="duotone"
-                      />
-                    </span>
-                    <span>{countOfAnswer}</span>
-                  </Button>{" "}
+              <div className=" font-bold  w-auto   text- mr-1   h-[1.9rem] items-center flex rounded-xl text-[.7rem]  bg-[#C0C6FF]">
+                <Link
+                  className="flex"
+                  href={`/${countryOrSlug}/community/answer`}
+                >
+                  <button className="btn btn-ghost w-auto   rounded-xl btn-sm h-[rem]  font-medium text-sm">
+                    <ChatCircleDots
+                      size={20}
+                      color="#787678"
+                      weight="duotone"
+                    />
+
+                    <p className="text-[.7rem]">{countOfAnswer}</p>
+                  </button>
                 </Link>
               </div>
             </div>
-            <div className="font-bold  w-auto   text-gray-700  gap-2 h-[1.9rem] items-center flex rounded-xl text-xs bg-[#D9D9D9]">
-              <Button
-                isIconOnly
-                size="sm"
-                className="ml-[-.5rem]"
-                variant="light"
-              >
+            <div className=" font-bold  w-auto   text-gray-700   h-[1.9rem] items-center flex rounded-xl text-xs bg-[#D9D9D9]">
+              <button className="btn btn-ghost btn-square  btn-sm bg-transparent bg-contain border-none  font-medium font-sm">
                 <span className="">
                   <ArrowFatDown size={18} color="#da3316" weight="duotone" />
                 </span>
-              </Button>
+              </button>
               |
-              <Button size="sm" variant="light">
-                <span>باهات موافقم</span>
+              <button className="btn btn-ghost w-[8rem] btn-sm  bg-transparent bg-contain border-none  font-medium ">
+                <span className="text-[.7rem]">باهات موافقم</span>
                 <span>
-                  <ArrowFatUp size={18} color="#2ed90c" weight="duotone" />
+                  <ArrowFatUp size={17} color="#2ed90c" weight="duotone" />
                 </span>
-                <span className="font-bold">{countOfUpvote}</span>
-              </Button>
+                <span className="font-bold text-xs">{countOfUpvote}</span>
+              </button>
             </div>
           </div>
         </div>

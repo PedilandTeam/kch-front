@@ -3,12 +3,8 @@ import React from "react";
 import {
   ArrowFatDown,
   ArrowFatUp,
-  ChatCircleDots,
   Tag,
 } from "@phosphor-icons/react";
-
-import { User, Button } from "@nextui-org/react";
-import Link from "next/link";
 
 const userName: string = "سینا پیرانی";
 const timeOfQuestion: string = "22 دقیقه پیش";
@@ -21,20 +17,19 @@ const userBio: string = "ساکن المان از سال 2014";
 const countOfUpvote: string = "10";
 export default function QuestionCard() {
   return (
-    <div className="w-full max-w-[72rem] p-4 bg-white flex flex-col items-center ">
+    <div className="w-full max-w-[72rem] p-4 bg-white flex flex-col items-center mt-4 ">
       {/* Question Card */}
       <div className="w-full  bg-[#F6F7FF] rounded-xl p-4 mb-4">
         <div className="qCard-header flex h-[4rem]   border-b-2 border-dotted border-gray-300   justify-between items-center ">
           {/* Avatar and Name */}
-          <div className="flex flex-col items-center bg--400">
-            <div className="flex items-center bg--900 ">
-              <User
-                avatarProps={{
-                  size: "md",
-                  src: "",
-                }}
-              />
-              <div className="flex flex-col">
+          <div className="flex flex- items-center ">
+            <div className="flex   items-center  ">
+              <div className="avatar">
+                <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2">
+                  <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg" />
+                </div>
+              </div>
+              <div className="flex mr-3 flex-col">
                 <h2 className="ml-2 font-bold">{userName} </h2>
                 <span className="flex text-sm ">{userBio}</span>
               </div>
@@ -57,41 +52,21 @@ export default function QuestionCard() {
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <div>
-              <div className="flex gap-1 text-[.8rem]">
-                {/* <Button variant="light" size="sm"> */}
-                  {/* <Link href={`/${params}/community/answer`}> */}
-                    <span>
-                      <ChatCircleDots
-                        size={25}
-                        color="#787678"
-                        weight="duotone"
-                      />
-                    </span>
-                    <span>{countOfAnswer}</span>
-                  {/* </Link> */}
-                {/* </Button> */}
-              </div>
-            </div>
+
             <div className="font-bold  w-auto   text-gray-700  gap-2 h-[1.9rem] items-center flex rounded-xl text-xs bg-[#D9D9D9]">
-              <Button
-                isIconOnly
-                size="sm"
-                className="ml-[-.5rem]"
-                variant="light"
-              >
+             <button className="btn btn-ghost btn-square  btn-sm bg-transparent bg-contain border-none  font-medium font-sm">
                 <span className="">
                   <ArrowFatDown size={18} color="#da3316" weight="duotone" />
                 </span>
-              </Button>
+              </button>
               |
-              <Button size="sm" variant="light">
+              <button className="btn ml-[rem] btn-ghost w-[9rem] btn-sm  bg-transparent bg-contain border-none px-1 font-medium font-sm">
                 <span>باهات موافقم</span>
                 <span>
                   <ArrowFatUp size={18} color="#2ed90c" weight="duotone" />
                 </span>
                 <span className="font-bold">{countOfUpvote}</span>
-              </Button>
+              </button>
             </div>
           </div>
         </div>

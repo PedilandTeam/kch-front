@@ -6,7 +6,6 @@ import CommunityHeader from "./communityHeader";
 import QuestionCard from "./questionCard";
 
 export default function Page({ params }: { params: { countryOrSlug: string }}) {
-  console.log(params);
   
   return (
     <div className="h-auto min-h-[53vh] flex flex-col items-center ">
@@ -14,7 +13,6 @@ export default function Page({ params }: { params: { countryOrSlug: string }}) {
         <CommunityHeader />
       </div>
       <div className="mt-[9rem]">
-        {" "}
         <QuestionCard  params={params}/>
         <QuestionCard params={params} />
         <QuestionCard  params={params}/>
