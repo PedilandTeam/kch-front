@@ -6,25 +6,45 @@ import React from "react";
 
 export default function BottomMenu() {
   return (
-    <div className="md:hidden fixed z-50 bottom-0 h-[5rem] w-full gap-[3rem] bg-white flex justify-center items-center py-2 border-t-2 border-gray-300">
-      <List size={38} color="#282828" />
-      <div className="avatar">
-        <div className="ring-gray-300 ring-offset-base-100 w-8 rounded-full ring ring-offset-2">
-          <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg" />
+    <div className="fixed z-50 w-full md:hidden bottom-2">
+      <div className="flex items-center justify-between px-4 py-2 mx-2 bg-white border border-gray-300 rounded-full wraper">
+        <div className="flex flex-col items-center justify-center">
+          <Flag size={30} color="#282828" />
+          <span className="inline-flex justify-center text-sm">
+            انتخاب کشور
+          </span>
         </div>
+
+        <div className="flex flex-col items-center justify-center">
+          <div className="mb-1 avatar">
+            <Image
+              src="/images/user-avatar.jpg"
+              className="border-2 rounded-full"
+              width={24}
+              height={24}
+              alt="User Avatar"
+            />
+          </div>
+          <span className="inline-flex justify-center text-sm">
+            حساب کاربری
+          </span>
+        </div>
+
+        <div className="flex flex-col items-center justify-center">
+          <List size={30} color="#282828" />
+          <span className="inline-flex justify-center text-sm">منو</span>
+        </div>
+
+        <Link href="/">
+          <Image
+            src="/images/logo-01.png"
+            width={40}
+            height={40}
+            priority={true}
+            alt="Koochaa Logo"
+          />
+        </Link>
       </div>
-
-      <Flag size={38} color="#282828" />
-
-      <Link href="/">
-        <Image
-          src="/images/logo-01.png"
-          width={40}
-          height={40}
-          priority={true}
-          alt="Koochaa Logo"
-        />
-      </Link>
     </div>
   );
 }
