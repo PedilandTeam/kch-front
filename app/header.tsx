@@ -9,7 +9,7 @@ import Image from "next/image";
 import { CountryNamespace } from "@/types/country";
 import { useHeader } from "@/store/useHeader";
 
-type HeaderProps = {
+export type HeaderProps = {
   children: React.ReactNode;
   countries: CountryNamespace.GET[];
 };

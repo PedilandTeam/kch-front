@@ -20,7 +20,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
             if (document) {
               (
                 document.getElementById("modal_country") as HTMLFormElement
-              ).showModal();
+              )?.showModal();
             }
           }}
         >
@@ -36,7 +36,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
             if (document) {
               (
                 document.getElementById("modal_country") as HTMLFormElement
-              ).showModal();
+              )?.showModal();
             }
           }}
         >

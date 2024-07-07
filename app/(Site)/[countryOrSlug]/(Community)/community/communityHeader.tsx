@@ -1,12 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Bell, FadersHorizontal, SortAscending } from "@phosphor-icons/react";
-import QuestionModal from "./questionModal";
 
 export default function CommunityHeader() {
   const [filterDropdown, setFilterDropdown] = useState("ترتیب");
 
-  const [colseDropdown, setColseDropdown] = useState(false);
+  const [colseFilterDropdown, setColseFilterDropdown] = useState(false);
+  const [colseSortDropdown, setColseSortDropdown] = useState(false);
+
   return (
     <>
       <div className=" header fixed top-0 w-full  bg-white z-50 shadow-md">
@@ -26,7 +27,11 @@ export default function CommunityHeader() {
           <div className="flex  justify-between mt-3 ">
             <button
               className="btn btn-warning rounded-[1rem] "
-              onClick={() => document.getElementById("my_modal_5").showModal()}
+              onClick={() => {
+                (
+                  document.getElementById("my_modal_5") as HTMLFormElement
+                ).showModal();
+              }}
             >
               <h2 className="font-bold"> + ایجاد سوال</h2>
             </button>
@@ -79,38 +84,66 @@ export default function CommunityHeader() {
               </div>
             </dialog>
 
-            {/* filter && sort */}
+            {/* filter  */}
             <div className="flex items-center gap-2">
-              <div  className="dropdown dropdown-bottom dropdown-end">
-                <div tabIndex={0} role="button"className="btn btn-ghost  btn-sm dropdown-hover m- bg-transparent bg-contain border-none  font-medium font-sm">
+              <div className="dropdown dropdown-bottom dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  onClick={() => {
+                    setColseFilterDropdown(!colseFilterDropdown);
+                    setColseSortDropdown(false);
+                  }}
+                  className="btn btn-ghost  btn-sm dropdown-hover m- bg-transparent bg-contain border-none  font-medium font-sm"
+                >
                   <FadersHorizontal size={21} color="#676567" />
                   فیلتر
                 </div>
-               {colseDropdown && <ul  tabIndex={0} className="menu dropdown-content bg-base-100 rounded-box z-[1] w-48 p-2 shadow">
-                  <li>
-                    <a>Item 1</a>
-                  </li>
-                  <li>
-                    <a>Item 2</a>
-                  </li>
-                </ul>}
+                {colseFilterDropdown && (
+                  <ul
+                    onClick={() => setColseFilterDropdown(!colseFilterDropdown)}
+                    tabIndex={0}
+                    className="menu dropdown-content bg-base-100 rounded-box z-[1] w-48 p-2 shadow"
+                  >
+                    <li>
+                      <a>Item 1</a>
+                    </li>
+                    <li>
+                      <a>Item 2</a>
+                    </li>
+                  </ul>
+                )}
               </div>
-              <div  className="dropdown dropdown-bottom dropdown-end">
-                <div tabIndex={0} role="button" className="btn btn-ghost  btn-sm dropdown-hover m- bg-transparent bg-contain border-none  font-medium font-sm">
+
+              {/* sort */}
+              <div className="dropdown dropdown-bottom dropdown-end">
+                <div
+                  onClick={() => {
+                    setColseSortDropdown(!colseSortDropdown);
+                    setColseFilterDropdown(false);
+
+                  }}
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost  btn-sm dropdown-hover m- bg-transparent bg-contain border-none  font-medium font-sm"
+                >
                   <SortAscending size={21} color="#676567" />
                   {filterDropdown}
                 </div>
-                <ul
-                  tabIndex={0}
-                  className=" menu dropdown-content bg-base-100 rounded-box z-[1] w-48 p-2 shadow"
-                >
-                  <li>
-                    <a>Item 1</a>
-                  </li>
-                  <li>
-                    <a>Item 2</a>
-                  </li>
-                </ul>
+                {colseSortDropdown && (
+                  <ul
+                    onClick={() => setColseSortDropdown(!colseSortDropdown)}
+                    tabIndex={0}
+                    className=" menu dropdown-content bg-base-100 rounded-box z-[1] w-48 p-2 shadow"
+                  >
+                    <li>
+                      <a>Item 1</a>
+                    </li>
+                    <li>
+                      <a>Item 2</a>
+                    </li>
+                  </ul>
+                )}
               </div>
             </div>
           </div>
