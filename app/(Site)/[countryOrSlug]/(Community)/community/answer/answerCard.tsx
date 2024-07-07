@@ -12,40 +12,40 @@ const countOfUpvote: string = "10";
 
 export default function AnswerCard() {
   return (
-    <div className=" px-4 w-[92%] max-w-[72rem]  bg-white flex  flex-col items-center">
+    <div className="px-4 w-[92%] max-w-[72rem] bg-white flex  flex-col items-center">
       {/* Vertical Timeline Container */}
       <div className="relative">
         {/* Vertical Line */}
         <div className="absolute h-full w-px bg-gray-300 bottom-6 right-9"></div>
 
         {/* Timeline Content */}
-        <div className="w-full ">
+        <div className="w-full">
           {/* Timeline Item */}
           <div className="flex flex-row items-center space-x-4">
             {/* Time */}
             {/* <div className="text-gray-500 m-3"></div> */}
 
             {/* Question Card */}
-            <div className="w-full z-0 bg-[#E8EAFF] rounded-xl px-4 py-2 mb-6">
+            <div className="w-full z-0 bg-blue-100 rounded-xl px-4 py-2 mb-6">
               {/* Question Header */}
-              <div className="qCard-header flex h-[4rem] border-b-2 border-dotted border-gray-300 justify-between items-center">
+              <div className="qCard-header flex py-2 border-b-2 border-dotted border-gray-300 justify-between items-center">
                 {/* Avatar and Name */}
                 {/* Avatar and Name */}
-                <div className="flex flex- items-center ">
-                  <div className="flex   items-center  ">
+                <div className="flex items-center">
+                  <div className="flex items-center">
                     <div className="avatar">
                       <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2">
                         <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg" />
                       </div>
                     </div>
-                    <div className="flex mr-3 flex-col">
+                    <div className="flex mr-3 gap-1 flex-col">
                       <h2 className="ml-2 font-bold">{userName} </h2>
-                      <span className="flex text-sm ">{userBio}</span>
+                      <span className="flex text-xs">{userBio}</span>
                     </div>
                   </div>
                 </div>
                 {/* Date */}
-                <span className="text-sm text-gray-500">{timeOfQuestion}</span>
+                <span className="text-xs text-gray-500">{timeOfQuestion}</span>
               </div>
               {/* Question and Description */}
               <div className="mt-3 mb-3">
@@ -54,10 +54,10 @@ export default function AnswerCard() {
                 </p>
               </div>
               {/* Topic and Up Vote */}
-              <div className="flex items-center justify-end mt-7 ">
-                <div className="flex items-center gap-2 ">
-                  <div className="font-bold w-auto text-gray-700  h-[2rem] items-center flex rounded-xl text-xs bg-[#C0C6FF]">
-                    <button className="btn btn-ghost w-[1.5rem] btn-square  btn-xs bg-transparent  border-none  font-medium font-sm">
+              <div className="flex items-center  pb-2 justify-end mt-5">
+                <div className="flex items-center">
+                  <div className="flex items-center py-1 font-bold w-auto text-gray-700 rounded-xl text-xs bg-blue-300">
+                    <button className="btn btn-ghost btn-square btn-xs bg-transparent  border-none font-medium">
                       <span className="">
                         <ArrowFatDown
                           size={15}
@@ -67,7 +67,7 @@ export default function AnswerCard() {
                       </span>
                     </button>
                     |
-                    <button className="btn ml-btn-ghost w-auto btn-xs  bg-transparent  border-none  font-medium font-sm">
+                    <button className="btn btn-ghost w-auto btn-xs bg-transparent border-none font-medium font-sm">
                       <span className="text-[.7rem]">باهات موافقم</span>
                       <span>
                         <ArrowFatUp

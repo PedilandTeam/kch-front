@@ -69,7 +69,7 @@ export default function BottomMenu({
       <div
         className={`fixed bottom-2 w-full  transition-transform duration-300 transform ${
           isVisible ? "translate-y-0" : "translate-y-100"
-        } z-50 md:hidden`}
+        } z-0 md:hidden`}
       >
         <div className="flex items-center justify-between px-6 py-2 mx-2 bg-white border border-gray-300 rounded-full wraper">
           <div className="flex flex-col items-center justify-center">

@@ -27,19 +27,19 @@ export default function QuestionCard({
   console.log(countryOrSlug);
 
   return (
-    <div className="QuestionCard w-full max-w-[72rem] bg-white flex flex-col items-center ">
+    <div className="QuestionCard w-full max-w-[72rem] bg-white flex flex-col items-center">
       {/* Question Card */}
-      <div className="w-full  bg-blue-50 rounded-xl p-4 ">
-        <div className="qCard-header flex h-[4rem]   border-b-2 border-dotted border-gray-300   justify-between items-center ">
+      <div className="w-full bg-blue-50 rounded-xl p-4">
+        <div className="qCard-header flex py-2 border-b-2 border-dotted border-gray-300 justify-between items-center">
           {/* Avatar and Name */}
-          <div className="flex flex- items-center ">
-            <div className="flex   items-center  ">
+          <div className="flex items-center">
+            <div className="flex items-center">
               <div className="avatar">
                 <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2">
                   <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg" />
                 </div>
               </div>
-              <div className="flex mr-3 flex-col">
+              <div className="flex mr-3 gap-1 flex-col">
                 <h2 className="ml-2 font-bold">{userName} </h2>
                 <span className="flex text-sm ">{userBio}</span>
               </div>
@@ -61,33 +61,33 @@ export default function QuestionCard({
               <h3 className="text-[.7rem]">{topic}</h3>
             </span>
           </div>
-          <div className="flex items-center   gap-1 ">
+          <div className="flex items-center gap-1">
             <div>
-              <div className=" font-bold  w-auto   text- mr-1   h-auto items-center justify-center flex rounded-xl text-[.7rem]  bg-[#C0C6FF]">
+              <div className="font-bold w-auto py-1 mr-1 h-auto items-center justify-center flex rounded-xl text-[.7rem] bg-blue-200">
                 <Link
                   className="flex"
                   href={`/${countryOrSlug}/community/answer`}
                 >
-                  <button className="btn btn-ghost   h-[2rem] rounded-xl btn-xs  font-medium ">
+                  <button className="btn btn-ghost rounded-xl btn-xs font-medium">
                     <ChatCircleDots
                       size={16}
                       color="#787678"
                       weight="duotone"
                     />
 
-                    <p className="text-[.65rem] font-medium ">{countOfAnswer}</p>
+                    <p className="text-[.65rem] font-medium">{countOfAnswer}</p>
                   </button>
                 </Link>
               </div>
             </div>
-            <div className=" font-bold  w-auto   text-gray-700   h-[2rem] items-center flex rounded-xl text-xs bg-[#D9D9D9]">
-              <button className="btn btn-ghost  w-[1.5rem] btn-square   btn-xs bg-transparent border-none  font-medium  ">
+            <div className="font-bold w-auto py-1 text-gray-700 items-center flex rounded-xl text-xs bg-gray-200">
+              <button className="btn btn-ghost btn-square btn-xs bg-transparent border-none font-medium">
                 <span className="">
                   <ArrowFatDown size={15} color="#da3316" weight="duotone" />
                 </span>
               </button>
               |
-              <button className="btn btn-ghost w-auto btn-xs   bg-transparent  border-none  font-medium ">
+              <button className="btn btn-ghost w-auto btn-xs bg-transparent border-none font-medium">
                 <span className="text-[.7rem]">باهات موافقم</span>
                 <span>
                   <ArrowFatUp size={15} color="#2ed90c" weight="duotone" />

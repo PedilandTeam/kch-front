@@ -3,9 +3,9 @@ import QuestionCard from "./questionCard";
 
 function QuestionAnswer() {
   return (
-    <div className=" flex flex-col items-center mt-[5rem]">
+    <div className="flex flex-col items-center mt-[5rem]">
       <QuestionCard />
-      <div className=" flex flex-col items-end">
+      <div className="flex flex-col items-end">
         <AnswerCard />
         <AnswerCard />
         <AnswerCard />

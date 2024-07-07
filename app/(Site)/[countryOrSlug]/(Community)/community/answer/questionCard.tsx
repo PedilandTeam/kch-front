@@ -17,21 +17,21 @@ const userBio: string = "ساکن المان از سال 2014";
 const countOfUpvote: string = "10";
 export default function QuestionCard() {
   return (
-    <div className="w-full max-w-[72rem] px-4 py-2 bg-white flex flex-col items-center  ">
+    <div className="w-full max-w-[72rem] px-4 py-2 bg-white flex flex-col items-center">
       {/* Question Card */}
-      <div className="w-full  bg-[#F6F7FF] rounded-xl px-4 py-2 mb-4">
-        <div className="qCard-header flex h-[4rem]   border-b-2 border-dotted border-gray-300   justify-between items-center ">
+      <div className="w-full bg-[#F6F7FF] rounded-xl px-4 py-2 mb-4">
+        <div className="qCard-header flex py-2 border-b-2 border-dotted border-gray-300 justify-between items-center">
           {/* Avatar and Name */}
-          <div className="flex flex- items-center ">
-            <div className="flex   items-center  ">
+          <div className="flex items-center">
+            <div className="flex items-center">
               <div className="avatar">
                 <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2">
                   <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg" />
                 </div>
               </div>
-              <div className="flex mr-3 flex-col">
+              <div className="flex mr-3 gap-1 flex-col">
                 <h2 className="ml-2 font-bold">{userName} </h2>
-                <span className="flex text-sm ">{userBio}</span>
+                <span className="flex text-sm">{userBio}</span>
               </div>
             </div>
           </div>
@@ -44,8 +44,8 @@ export default function QuestionCard() {
           <p className="mt-1 text-sm text-gray-700">{questionDescription}</p>
         </div>
         {/* Topic and Up Vote */}
-        <div className="flex items-center justify-between mt-5 ">
-          <div className="text-sm text-gray-600">
+        <div className="flex items-center justify-between mt-5">
+          <div className="text-sm  text-gray-600">
             <span className="flex gap-1 font-bold ">
               <Tag size={22} color="#262526" weight="duotone" />
               <h3 className="text-[.7rem]">{topic}</h3>
@@ -53,8 +53,8 @@ export default function QuestionCard() {
           </div>
           <div className="flex items-center gap-2">
 
-          <div className=" font-bold  w-auto   text-gray-700   h-[2rem] items-center flex rounded-xl text-xs bg-[#D9D9D9]">
-              <button className="btn btn-ghost  w-[1.5rem] btn-square   btn-xs bg-transparent border-none  font-medium  ">
+          <div className="font-bold py-1 w-auto text-gray-700 items-center flex rounded-xl text-xs bg-gray-200">
+              <button className="btn btn-ghost btn-square btn-xs bg-transparent border-none font-medium">
                 <span className="">
                   <ArrowFatDown size={15} color="#da3316" weight="duotone" />
                 </span>
