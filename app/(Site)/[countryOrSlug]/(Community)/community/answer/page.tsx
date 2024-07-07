@@ -3,10 +3,8 @@ import QuestionCard from "./questionCard";
 
 function QuestionAnswer() {
   return (
-    <div className="h-auto min-h-[53vh] flex flex-col items-center">
-      <div className="mt-[9rem]">
-        <QuestionCard />
-      </div>
+    <div className=" flex flex-col items-center mt-[5rem]">
+      <QuestionCard />
       <div className=" flex flex-col items-end">
         <AnswerCard />
         <AnswerCard />

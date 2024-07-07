@@ -9,6 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      translate: {
+        '100': '120%'
+      },
       // fontFamily: {
       //   PinarLT: "Pinar-LT",
       // },

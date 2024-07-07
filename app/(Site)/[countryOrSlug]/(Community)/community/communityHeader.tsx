@@ -1,30 +1,64 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Bell, FadersHorizontal, SortAscending } from "@phosphor-icons/react";
 
 export default function CommunityHeader() {
   const [filterDropdown, setFilterDropdown] = useState("ترتیب");
-
   const [colseFilterDropdown, setColseFilterDropdown] = useState(false);
   const [colseSortDropdown, setColseSortDropdown] = useState(false);
 
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [topFix, setTopFix] = useState(18);
+console.log(lastScrollY);
+
+
+const handleScroll = () => {
+  const currentScrollY = window.scrollY;
+  
+// Show top navigation
+   if (currentScrollY <= 2) { // Adjust this threshold as needed
+    setTopFix(18); // Show top navigation
+  }else {
+    setTopFix(0); // Hide top navigation and show fixed element
+  }
+
+  setLastScrollY(currentScrollY);
+};
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
+
   return (
     <>
-      <div className=" header fixed top-0 w-full  bg-white z-50 shadow-md">
-        <div className="p-4 flex flex-col gap-3 max-w-screen-xl mx-auto ">
-          <div className="flex items-center gap-3">
+      <div className="bg-white pr-4 pl-2 py-2 header w-full  ">
+        <div className=" flex flex-col gap-2 max-w-screen-xl mx-auto ">
+          <div className="flex   items-center gap-1">
             <input
               type="text"
               placeholder="دنبال چی می گردی؟"
-              className="input  w-full bg-gray-50 rounded-[1rem] "
+              className="input w-full bg-gray-50 rounded-[1rem] "
             />
-
             <button className="btn btn-ghost btn-square  rounded-[1rem]  ">
               <Bell size={33} color="#676567" />
             </button>
           </div>
-          {/*  */}
-          <div className="flex  justify-between mt-3 ">
+        </div>
+      </div>
+
+      {/*  part2*/}
+      <div
+        className={`fixed top-${topFix} w-full transition-transform duration-300 ${
+          isVisible ? "translate-y-0" : "translate-y-full"
+        }   bg-white pr-4 pl-2 py-2 header w-full z-10 mb-[80rem]  shadow-md`}
+      >
+        <div className=" flex flex-col gap-2 max-w-screen-xl mx-auto ">
+          <div className="flex justify-between">
             <button
               className="btn btn-warning rounded-[1rem] "
               onClick={() => {
@@ -39,7 +73,7 @@ export default function CommunityHeader() {
               id="my_modal_5"
               className="modal md:modal-middle modal-bottom h-[100vh]"
             >
-              <div className="modal-box">
+              <div className="modal-box  ">
                 {/*header */}
                 <h2 className="font-bold text-lg">ثبت سوال</h2>
                 {/* body */}
@@ -85,7 +119,7 @@ export default function CommunityHeader() {
             </dialog>
 
             {/* filter  */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center ">
               <div className="dropdown dropdown-bottom dropdown-end">
                 <div
                   tabIndex={0}
@@ -121,7 +155,6 @@ export default function CommunityHeader() {
                   onClick={() => {
                     setColseSortDropdown(!colseSortDropdown);
                     setColseFilterDropdown(false);
-
                   }}
                   tabIndex={0}
                   role="button"
@@ -134,7 +167,7 @@ export default function CommunityHeader() {
                   <ul
                     onClick={() => setColseSortDropdown(!colseSortDropdown)}
                     tabIndex={0}
-                    className=" menu dropdown-content bg-base-100 rounded-box z-[1] w-48 p-2 shadow"
+                    className=" menu dropdown-content bg-base-100 rounded-box  w-48 p-2 shadow"
                   >
                     <li>
                       <a>Item 1</a>

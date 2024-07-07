@@ -12,11 +12,11 @@ const countOfUpvote: string = "10";
 
 export default function AnswerCard() {
   return (
-    <div className="w-[92%] max-w-[72rem] p-4 bg-white flex  flex-col items-center">
+    <div className=" px-4 w-[92%] max-w-[72rem]  bg-white flex  flex-col items-center">
       {/* Vertical Timeline Container */}
       <div className="relative">
         {/* Vertical Line */}
-        <div className="absolute h-full w-px bg-gray-300 bottom-12 right-9"></div>
+        <div className="absolute h-full w-px bg-gray-300 bottom-6 right-9"></div>
 
         {/* Timeline Content */}
         <div className="w-full ">
@@ -26,7 +26,7 @@ export default function AnswerCard() {
             {/* <div className="text-gray-500 m-3"></div> */}
 
             {/* Question Card */}
-            <div className="w-full z-0 bg-[#E8EAFF] rounded-xl p-4 mb-4">
+            <div className="w-full z-0 bg-[#E8EAFF] rounded-xl px-4 py-2 mb-6">
               {/* Question Header */}
               <div className="qCard-header flex h-[4rem] border-b-2 border-dotted border-gray-300 justify-between items-center">
                 {/* Avatar and Name */}
@@ -48,35 +48,35 @@ export default function AnswerCard() {
                 <span className="text-sm text-gray-500">{timeOfQuestion}</span>
               </div>
               {/* Question and Description */}
-              <div className="mt-3 mb-2">
+              <div className="mt-3 mb-3">
                 <p className="mt-1 text-sm text-gray-700">
                   {questionDescription}
                 </p>
               </div>
               {/* Topic and Up Vote */}
-              <div className="flex items-center justify-end mt-5 text-sm">
-                <div className="flex items-center gap-2">
-                  <div className="font-bold w-auto text-gray-700 gap-2 h-[1.9rem] items-center flex rounded-xl text-xs bg-[#C0C6FF]">
-                    <button className="btn btn-ghost btn-square  btn-sm bg-transparent bg-contain border-none  font-medium font-sm">
+              <div className="flex items-center justify-end mt-7 ">
+                <div className="flex items-center gap-2 ">
+                  <div className="font-bold w-auto text-gray-700  h-[2rem] items-center flex rounded-xl text-xs bg-[#C0C6FF]">
+                    <button className="btn btn-ghost w-[1.5rem] btn-square  btn-xs bg-transparent  border-none  font-medium font-sm">
                       <span className="">
                         <ArrowFatDown
-                          size={18}
+                          size={15}
                           color="#da3316"
                           weight="duotone"
                         />
                       </span>
                     </button>
                     |
-                    <button className="btn ml-[rem] btn-ghost w-[9rem] btn-sm  bg-transparent bg-contain border-none px-1 font-medium font-sm">
-                      <span>باهات موافقم</span>
+                    <button className="btn ml-btn-ghost w-auto btn-xs  bg-transparent  border-none  font-medium font-sm">
+                      <span className="text-[.7rem]">باهات موافقم</span>
                       <span>
                         <ArrowFatUp
-                          size={18}
+                          size={15}
                           color="#2ed90c"
                           weight="duotone"
                         />
                       </span>
-                      <span className="font-bold">{countOfUpvote}</span>
+                      <span className="font-bold text-[.7rem]">{countOfUpvote}</span>
                     </button>
                   </div>
                 </div>

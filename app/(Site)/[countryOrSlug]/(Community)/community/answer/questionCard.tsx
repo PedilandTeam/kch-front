@@ -17,9 +17,9 @@ const userBio: string = "ساکن المان از سال 2014";
 const countOfUpvote: string = "10";
 export default function QuestionCard() {
   return (
-    <div className="w-full max-w-[72rem] p-4 bg-white flex flex-col items-center mt-4 ">
+    <div className="w-full max-w-[72rem] px-4 py-2 bg-white flex flex-col items-center  ">
       {/* Question Card */}
-      <div className="w-full  bg-[#F6F7FF] rounded-xl p-4 mb-4">
+      <div className="w-full  bg-[#F6F7FF] rounded-xl px-4 py-2 mb-4">
         <div className="qCard-header flex h-[4rem]   border-b-2 border-dotted border-gray-300   justify-between items-center ">
           {/* Avatar and Name */}
           <div className="flex flex- items-center ">
@@ -44,7 +44,7 @@ export default function QuestionCard() {
           <p className="mt-1 text-sm text-gray-700">{questionDescription}</p>
         </div>
         {/* Topic and Up Vote */}
-        <div className="flex items-center justify-between mt-5 text-sm">
+        <div className="flex items-center justify-between mt-5 ">
           <div className="text-sm text-gray-600">
             <span className="flex gap-1 font-bold ">
               <Tag size={22} color="#262526" weight="duotone" />
@@ -53,19 +53,19 @@ export default function QuestionCard() {
           </div>
           <div className="flex items-center gap-2">
 
-            <div className="font-bold  w-auto   text-gray-700  gap-2 h-[1.9rem] items-center flex rounded-xl text-xs bg-[#D9D9D9]">
-             <button className="btn btn-ghost btn-square  btn-sm bg-transparent bg-contain border-none  font-medium font-sm">
+          <div className=" font-bold  w-auto   text-gray-700   h-[2rem] items-center flex rounded-xl text-xs bg-[#D9D9D9]">
+              <button className="btn btn-ghost  w-[1.5rem] btn-square   btn-xs bg-transparent border-none  font-medium  ">
                 <span className="">
-                  <ArrowFatDown size={18} color="#da3316" weight="duotone" />
+                  <ArrowFatDown size={15} color="#da3316" weight="duotone" />
                 </span>
               </button>
               |
-              <button className="btn ml-[rem] btn-ghost w-[9rem] btn-sm  bg-transparent bg-contain border-none px-1 font-medium font-sm">
-                <span>باهات موافقم</span>
+              <button className="btn btn-ghost w-auto btn-xs   bg-transparent  border-none  font-medium ">
+                <span className="text-[.7rem]">باهات موافقم</span>
                 <span>
-                  <ArrowFatUp size={18} color="#2ed90c" weight="duotone" />
+                  <ArrowFatUp size={15} color="#2ed90c" weight="duotone" />
                 </span>
-                <span className="font-bold">{countOfUpvote}</span>
+                <span className="font-bold text-[.7rem]">{countOfUpvote}</span>
               </button>
             </div>
           </div>

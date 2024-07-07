@@ -19,9 +19,8 @@ export default async function CommunityLayout({
 
   return (
     <>
-      <div className="fixed top-0 z-50 flex justify-center w-full">
-        <CommunityHeader />
-      </div>
+      <CommunityHeader />
+
       <ModalCountry countries={countries} />
       {children}
       <BottomMenu countries={countries} />
