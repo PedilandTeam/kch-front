@@ -46,6 +46,8 @@ export default function BottomMenu({
     };
   }, [lastScrollY]);
 
+
+
   useEffect(() => {
     const countryOrSlug = params.countryOrSlug as string;
     const isMainPage =
@@ -60,6 +62,8 @@ export default function BottomMenu({
     !contryCodeInStore && (countryCode == "un" || !countryCode);
   console.log(isMainPage, contryCodeInStore, countryCode);
 
+
+  
   return (
     <>
       <div className="h-full z-50">

@@ -7,24 +7,19 @@ export default function CommunityHeader() {
   const [colseFilterDropdown, setColseFilterDropdown] = useState(false);
   const [colseSortDropdown, setColseSortDropdown] = useState(false);
 
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  // const [lastScrollY, setLastScrollY] = useState(0);
   const [topFix, setTopFix] = useState(18);
-console.log(lastScrollY);
+  // console.log(lastScrollY);
 
-
-const handleScroll = () => {
-  const currentScrollY = window.scrollY;
-  
-// Show top navigation
-   if (currentScrollY <= 2) { // Adjust this threshold as needed
-    setTopFix(18); // Show top navigation
-  }else {
-    setTopFix(0); // Hide top navigation and show fixed element
-  }
-
-  setLastScrollY(currentScrollY);
-};
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+    if (currentScrollY <= 1) {
+      setTopFix(18); 
+    } 
+    else {
+      setTopFix(0); 
+    }
+  };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -32,7 +27,7 @@ const handleScroll = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [lastScrollY]);
+  }, []);
 
   return (
     <>
@@ -53,9 +48,8 @@ const handleScroll = () => {
 
       {/*  part2*/}
       <div
-        className={`fixed top-${topFix} w-full transition-transform duration-300 ${
-          isVisible ? "translate-y-0" : "translate-y-full"
-        }   bg-white pr-4 pl-2 py-2 header w-full z-10 mb-[80rem]  shadow-md`}
+        className={`fixed top-${topFix} transition-transform duration-300
+           bg-white pr-4 pl-2 py-2 header w-full z-10 shadow-md`}
       >
         <div className=" flex flex-col gap-2 max-w-screen-xl mx-auto ">
           <div className="flex justify-between">
@@ -97,7 +91,7 @@ const handleScroll = () => {
                   />
                   {/* textArea */}
                   <textarea
-                    className="textarea h-[6rem] w-full bg-gray-50 rounded-[1rem]"
+                    className="textarea pb-10 w-full bg-gray-50 rounded-[1rem]"
                     placeholder="توضیحات"
                   ></textarea>
                   {/* submit */}
@@ -108,7 +102,7 @@ const handleScroll = () => {
                     </button>{" "}
                     <form method="dialog">
                       {" "}
-                      <button className="btn mb-1 btn-error rounded-[1rem]  h-[1rem]">
+                      <button className="btn mb-1 btn-error rounded-[1rem]">
                         بستن
                       </button>
                     </form>
