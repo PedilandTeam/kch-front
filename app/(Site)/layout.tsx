@@ -37,11 +37,11 @@ export default async function RootLayout({
           <Fonts />
           <Hotjar />
 
-          {!header.get("x-pathname") && (
+          {/* {!header.get("x-pathname") && ( */}
             <Header countries={countries}>
               <ModalCountry countries={countries} />
             </Header>
-          )}
+          {/* )}  */}
           <Toaster />
           {children}
           <Footer />

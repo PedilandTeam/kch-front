@@ -2,7 +2,6 @@
 import React from "react";
 import { ArrowFatDown, ArrowFatUp } from "@phosphor-icons/react";
 
-
 const userName: string = "سینا پیرانی";
 const timeOfQuestion: string = "22 دقیقه پیش";
 const questionDescription: string =
@@ -39,17 +38,19 @@ export default function AnswerCard() {
                       </div>
                     </div>
                     <div className="flex mr-3 gap-1 flex-col">
-                      <h2 className="ml-2 font-bold">{userName} </h2>
-                      <span className="flex text-xs">{userBio}</span>
+                      <h2 className="ml-2 font-bold xl:text-xl">{userName} </h2>
+                      <span className="flex text-sm md:text-md">{userBio}</span>
                     </div>
                   </div>
                 </div>
                 {/* Date */}
-                <span className="text-xs text-gray-500">{timeOfQuestion}</span>
+                <span className="text-sm xl:text-md text-gray-500">
+                  {timeOfQuestion}
+                </span>
               </div>
               {/* Question and Description */}
               <div className="mt-3 mb-3">
-                <p className="mt-1 text-sm text-gray-700">
+                <p className="mt-1 text-sm xl:text-lg text-gray-700">
                   {questionDescription}
                 </p>
               </div>
@@ -57,7 +58,7 @@ export default function AnswerCard() {
               <div className="flex items-center  pb-2 justify-end mt-5">
                 <div className="flex items-center">
                   <div className="flex items-center py-1 font-bold w-auto text-gray-700 rounded-xl text-xs bg-blue-300">
-                    <button className="btn btn-ghost btn-square btn-xs bg-transparent  border-none font-medium">
+                    <button className="btn btn-ghost btn-square btn-xs xl:btn-sm  bg-transparent border-none font-medium">
                       <span className="">
                         <ArrowFatDown
                           size={15}
@@ -67,8 +68,10 @@ export default function AnswerCard() {
                       </span>
                     </button>
                     |
-                    <button className="btn btn-ghost w-auto btn-xs bg-transparent border-none font-medium font-sm">
-                      <span className="text-[.7rem]">باهات موافقم</span>
+                    <button className="btn btn-ghost w-auto btn-xs bg-transparent border-none font-medium">
+                      <span className="text-[.7rem] xl:text-base">
+                        باهات موافقم
+                      </span>
                       <span>
                         <ArrowFatUp
                           size={15}
@@ -76,7 +79,9 @@ export default function AnswerCard() {
                           weight="duotone"
                         />
                       </span>
-                      <span className="font-bold text-[.7rem]">{countOfUpvote}</span>
+                      <span className="font-bold text-[.7rem] xl:text-base">
+                        {countOfUpvote}
+                      </span>
                     </button>
                   </div>
                 </div>

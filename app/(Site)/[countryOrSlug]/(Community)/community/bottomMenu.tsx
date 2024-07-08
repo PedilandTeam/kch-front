@@ -25,7 +25,7 @@ export default function BottomMenu({
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
-    console.log(currentScrollY);
+    // console.log(currentScrollY);
 
     if (currentScrollY > lastScrollY) {
       // Scrolling down
@@ -60,7 +60,7 @@ export default function BottomMenu({
 
   const isMainPage =
     !contryCodeInStore && (countryCode == "un" || !countryCode);
-  console.log(isMainPage, contryCodeInStore, countryCode);
+  // console.log(isMainPage, contryC.odeInStore, countryCode);
 
 
   
@@ -75,7 +75,7 @@ export default function BottomMenu({
           isVisible ? "translate-y-0" : "translate-y-100"
         } z-0 md:hidden`}
       >
-        <div className="flex items-center justify-between px-6 py-2 mx-2 bg-white border border-gray-200 rounded-full wraper">
+        <div className="flex items-center justify-between pl-6 pr-4 py-2 mx-2 bg-white border border-gray-200 rounded-full wraper">
           <div className="flex flex-col gap-1 items-center justify-center">
             <div
               className="select-country"

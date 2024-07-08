@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Bell, FadersHorizontal, SortAscending } from "@phosphor-icons/react";
 import { number, string } from "yup";
 
-export default function CommunityHeader() {
+export default function CommunityHeaderMobile() {
   const [filterDropdown, setFilterDropdown] = useState("ترتیب");
   const [colseFilterDropdown, setColseFilterDropdown] = useState(false);
   const [colseSortDropdown, setColseSortDropdown] = useState(false);
@@ -18,20 +18,17 @@ export default function CommunityHeader() {
   const currentScrollY = window.scrollY;
   const handleScroll = () => {
     let currentScrollY = window.scrollY;
-    if (currentScrollY > 200) {
+    if (currentScrollY > 100) {
       setfix(true);
-    }
-    if (currentScrollY <= 201) {
-      // setTopFixXl(5);
-      setfix(false);
-
     }
 
     if (currentScrollY <= 1) {
       setTopFix(18);
+      setTopFixXl(5);
+      setfix(false);
     } else {
       setTopFix(0);
-      // setTopFixXl(-5);
+      setTopFixXl(-5);
     }
   };
 
@@ -62,11 +59,7 @@ export default function CommunityHeader() {
 
       {/*  part2*/}
       <div
-        className={`${
-          fix === true
-            ? " xl:fixed xl:top-[${topFixXl}rem] xl:mt-20"
-            : "xl:block"
-        }fixed top-${topFix}   transition-transform duration-300 shadow-md bg-white 
+        className={`fixed top-${topFix}   transition-transform duration-300 shadow-md bg-white 
            xl:bg-white pr-4 pl-2 py-2 header w-full xl:py-4 xl:max-w-[72rem]  z-10 xl:rounded-b-2xl`}
       >
         <div className={`flex flex-col gap-2 max-w-screen- mx-auto  `}>

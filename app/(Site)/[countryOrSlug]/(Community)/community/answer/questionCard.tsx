@@ -19,7 +19,7 @@ export default function QuestionCard() {
   return (
     <div className="w-full max-w-[72rem] px-4 py-2 bg-white flex flex-col items-center">
       {/* Question Card */}
-      <div className="w-full bg-[#F6F7FF] rounded-xl px-4 py-2 mb-4">
+      <div className="w-full bg-blue-50 rounded-xl px-4 py-2 mb-4">
         <div className="qCard-header flex py-2 border-b-2 border-dotted border-gray-300 justify-between items-center">
           {/* Avatar and Name */}
           <div className="flex items-center">
@@ -30,42 +30,42 @@ export default function QuestionCard() {
                 </div>
               </div>
               <div className="flex mr-3 gap-1 flex-col">
-                <h2 className="ml-2 font-bold">{userName} </h2>
-                <span className="flex text-sm">{userBio}</span>
+              <h2 className="ml-2 font-bold xl:text-xl">{userName} </h2>
+              <span className="flex text-sm md:text-md">{userBio}</span>
               </div>
             </div>
           </div>
           {/* Date */}
-          <span className="text-sm text-gray-500">{timeOfQuestion}</span>
+          <span className="text-sm xl:text-md text-gray-500">{timeOfQuestion}</span>
         </div>
         {/* Question and Description */}
         <div className="mt-3 mb-2">
-          <h2 className="text-lg font-bold">{UserQuestion}</h2>
-          <p className="mt-1 text-sm text-gray-700">{questionDescription}</p>
+        <h2 className="text-lg font-bold xl:text-xl">{UserQuestion}</h2>
+        <p className="mt-1 text-sm xl:text-lg text-gray-700">{questionDescription}</p>
         </div>
         {/* Topic and Up Vote */}
         <div className="flex items-center justify-between mt-5">
           <div className="text-sm  text-gray-600">
             <span className="flex gap-1 font-bold ">
               <Tag size={22} color="#262526" weight="duotone" />
-              <h3 className="text-[.7rem]">{topic}</h3>
+              <h3 className="text-[.7rem] xl:text-base">{topic}</h3>
             </span>
           </div>
           <div className="flex items-center gap-2">
 
           <div className="font-bold py-1 w-auto text-gray-700 items-center flex rounded-xl text-xs bg-gray-200">
-              <button className="btn btn-ghost btn-square btn-xs bg-transparent border-none font-medium">
-                <span className="">
+          <button className="btn btn-ghost rounded-xl btn-xs xl:btn-sm font-medium">
+          <span className="">
                   <ArrowFatDown size={15} color="#da3316" weight="duotone" />
                 </span>
               </button>
               |
-              <button className="btn btn-ghost w-auto btn-xs   bg-transparent  border-none  font-medium ">
-                <span className="text-[.7rem]">باهات موافقم</span>
-                <span>
+              <button className="btn btn-ghost w-auto btn-xs bg-transparent border-none font-medium">
+              <span className="text-[.7rem] xl:text-base">باهات موافقم</span>
+              <span>
                   <ArrowFatUp size={15} color="#2ed90c" weight="duotone" />
                 </span>
-                <span className="font-bold text-[.7rem]">{countOfUpvote}</span>
+                <span className="font-bold text-[.7rem] xl:text-base">{countOfUpvote}</span>
               </button>
             </div>
           </div>

@@ -27,7 +27,7 @@ export default function QuestionCard({
   console.log(countryOrSlug);
 
   return (
-    <div className="QuestionCard w-full max-w-[72rem] bg-white flex flex-col items-center">
+    <div className="QuestionCard  w-full max-w-[72rem] bg-white flex flex-col items-center">
       {/* Question Card */}
       <div className="w-full bg-blue-50 rounded-xl p-4">
         <div className="qCard-header flex py-2 border-b-2 border-dotted border-gray-300 justify-between items-center">
@@ -40,25 +40,25 @@ export default function QuestionCard({
                 </div>
               </div>
               <div className="flex mr-3 gap-1 flex-col">
-                <h2 className="ml-2 font-bold">{userName} </h2>
-                <span className="flex text-sm ">{userBio}</span>
+                <h2 className="ml-2 font-bold xl:text-xl">{userName} </h2>
+                <span className="flex text-sm md:text-md">{userBio}</span>
               </div>
             </div>
           </div>
           {/* Date */}
-          <span className="text-sm text-gray-500">{timeOfQuestion}</span>
+          <span className="text-sm xl:text-md text-gray-500">{timeOfQuestion}</span>
         </div>
         {/* Question and Description */}
         <div className="mt-3 mb-2">
-          <h2 className="text-lg font-bold">{UserQuestion}</h2>
-          <p className="mt-1 text-sm text-gray-700">{questionDescription}</p>
+          <h2 className="text-lg font-bold xl:text-xl">{UserQuestion}</h2>
+          <p className="mt-1 text-sm xl:text-lg text-gray-700">{questionDescription}</p>
         </div>
         {/* Topic and Up Vote */}
-        <div className="flex items-center justify-between mt-5 text-sm">
-          <div className="text-sm text-gray-600">
-            <span className="flex font-bold ">
+        <div className="flex items-center justify-between mt-5">
+          <div className="text-gray-600">
+            <span className="flex font-bold xl:gap-2">
               <Tag size={18} color="#262526" weight="duotone" />
-              <h3 className="text-[.7rem]">{topic}</h3>
+              <h3 className="text-[.7rem] xl:text-base">{topic}</h3>
             </span>
           </div>
           <div className="flex items-center gap-1">
@@ -68,31 +68,31 @@ export default function QuestionCard({
                   className="flex"
                   href={`/${countryOrSlug}/community/answer`}
                 >
-                  <button className="btn btn-ghost rounded-xl btn-xs font-medium">
+                  <button className="btn btn-ghost rounded-xl btn-xs xl:btn-sm bg-transparent font-medium">
                     <ChatCircleDots
                       size={16}
                       color="#787678"
                       weight="duotone"
                     />
 
-                    <p className="text-[.65rem] font-medium">{countOfAnswer}</p>
+                    <p className="text-[.65rem] xl:text-base font-medium">{countOfAnswer}</p>
                   </button>
                 </Link>
               </div>
             </div>
             <div className="font-bold w-auto py-1 text-gray-700 items-center flex rounded-xl text-xs bg-gray-200">
-              <button className="btn btn-ghost btn-square btn-xs bg-transparent border-none font-medium">
+              <button className="btn btn-ghost btn-square btn-xs xl:btn-sm  bg-transparent border-none font-medium">
                 <span className="">
                   <ArrowFatDown size={15} color="#da3316" weight="duotone" />
                 </span>
               </button>
               |
               <button className="btn btn-ghost w-auto btn-xs bg-transparent border-none font-medium">
-                <span className="text-[.7rem]">باهات موافقم</span>
+                <span className="text-[.7rem] xl:text-base">باهات موافقم</span>
                 <span>
                   <ArrowFatUp size={15} color="#2ed90c" weight="duotone" />
                 </span>
-                <span className="font-bold text-[.7rem]">{countOfUpvote}</span>
+                <span className="font-bold text-[.7rem] xl:text-base">{countOfUpvote}</span>
               </button>
             </div>
           </div>
