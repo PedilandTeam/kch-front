@@ -28,7 +28,7 @@ export default function AnswerCard() {
             {/* Question Card */}
             <div className="w-full z-0 bg-blue-100 rounded-xl px-4 py-2 mb-6">
               {/* Question Header */}
-              <div className="qCard-header flex py-2 border-b-2 border-dotted border-gray-300 justify-between items-center">
+              <div className="qCard-header flex py-2 border-b-2 border-dotted border-gray-400 justify-between items-center">
                 {/* Avatar and Name */}
                 {/* Avatar and Name */}
                 <div className="flex items-center">

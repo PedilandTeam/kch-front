@@ -75,8 +75,8 @@ export default function BottomMenu({
           isVisible ? "translate-y-0" : "translate-y-100"
         } z-0 md:hidden`}
       >
-        <div className="flex items-center justify-between px-6 py-2 mx-2 bg-white border border-gray-300 rounded-full wraper">
-          <div className="flex flex-col items-center justify-center">
+        <div className="flex items-center justify-between px-6 py-2 mx-2 bg-white border border-gray-200 rounded-full wraper">
+          <div className="flex flex-col gap-1 items-center justify-center">
             <div
               className="select-country"
               onClick={() => {
@@ -87,7 +87,7 @@ export default function BottomMenu({
                 }
               }}
             >
-              <div className="">
+              <div className="flex">
                 {" "}
                 <CircleFlag
                   width={20}
@@ -99,13 +99,13 @@ export default function BottomMenu({
                 />
               </div>
             </div>
-            <span className="inline-flex justify-center text-xs">
+            <span className="inline-flex justify-center text-xs ">
               انتخاب کشور
             </span>
           </div>
 
           <Link href="/account">
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col gap-1 items-center justify-center">
               <div className=" avatar">
                 <Image
                   src="/images/user-avatar.jpg"
@@ -123,16 +123,16 @@ export default function BottomMenu({
 
           <div
             onClick={() => document.getElementById("main-drawer")?.click()}
-            className="flex flex-col items-center justify-between"
+            className="flex flex-col gap-[2px] items-center justify-between"
           >
             <div className="flex justify-center cursor-pointer p-1 bg-blue-50 rounded-full">{" "}
             <List size={20} color="#282828" />
             </div>
-            <span className="inline-flex justify-center mb-[1px] text-xs">منو</span>
+            <span className="inline-flex justify-center text-xs">منو</span>
           </div>
 
           <Link href="/">
-            <div className="flex  flex-col items-center justify-center">
+            <div className="flex items-center justify-center">
               <Image
                 src="/images/logo-01.png"
                 width={36}
