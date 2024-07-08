@@ -24,7 +24,7 @@ export default function QuestionCard({
   params: { countryOrSlug: string };
 }) {
   const countryOrSlug: string = params.countryOrSlug;
-  console.log(countryOrSlug);
+  console.log(params);
 
   return (
     <div className="QuestionCard  w-full max-w-[72rem] bg-white flex flex-col items-center">
@@ -61,7 +61,7 @@ export default function QuestionCard({
               <h3 className="text-[.7rem] xl:text-base">{topic}</h3>
             </span>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 xl:gap-4">
             <div>
               <div className="font-bold w-auto py-1 mr-1 h-auto items-center justify-center flex rounded-xl text-[.7rem] bg-blue-200">
                 <Link
@@ -73,6 +73,13 @@ export default function QuestionCard({
                       size={16}
                       color="#787678"
                       weight="duotone"
+                      className="xl:hidden"
+                    />
+                       <ChatCircleDots
+                      size={28}
+                      color="#787678"
+                      weight="duotone"
+                      className="hidden xl:block"
                     />
 
                     <p className="text-[.65rem] xl:text-base font-medium">{countOfAnswer}</p>

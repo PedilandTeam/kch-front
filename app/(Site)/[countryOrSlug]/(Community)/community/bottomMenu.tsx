@@ -25,7 +25,7 @@ export default function BottomMenu({
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
-    // console.log(currentScrollY);
+    console.log(currentScrollY);
 
     if (currentScrollY > lastScrollY) {
       // Scrolling down

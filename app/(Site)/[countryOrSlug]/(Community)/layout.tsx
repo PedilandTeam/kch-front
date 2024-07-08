@@ -7,9 +7,15 @@ import CommunityHeaderMobile from "./community/communityHeaderMobile";
 
 export default async function CommunityLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: {
+    countryOrSlug: string;
+  };
 }) {
+  console.log(params);
+
   let countries: CountryNamespace.GET[];
   try {
     countries = await (await API_ROUTES.COUNTRIES.GET_ALL(1, 20)).json();
@@ -21,10 +27,10 @@ export default async function CommunityLayout({
   return (
     <>
       <div className="hidden xl:flex xl:flex-col xl:items-center xl:justify-center">
-        <CommunityHeader />
+        <CommunityHeader params={params} />
       </div>
       <div className="xl:hidden">
-        <CommunityHeaderMobile />
+        <CommunityHeaderMobile  params={params}/>
       </div>
 
       <ModalCountry countries={countries} />

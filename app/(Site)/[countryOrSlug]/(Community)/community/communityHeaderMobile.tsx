@@ -2,8 +2,17 @@
 import { useEffect, useState } from "react";
 import { Bell, FadersHorizontal, SortAscending } from "@phosphor-icons/react";
 import { number, string } from "yup";
+import { usePathname } from "next/navigation";
 
-export default function CommunityHeaderMobile() {
+export default function CommunityHeaderMobile({
+  params,
+}: {
+  params: { countryOrSlug: string };
+}) {
+  const countryOrSlug: string = params.countryOrSlug;
+
+  const pathName = usePathname();
+
   const [filterDropdown, setFilterDropdown] = useState("ترتیب");
   const [colseFilterDropdown, setColseFilterDropdown] = useState(false);
   const [colseSortDropdown, setColseSortDropdown] = useState(false);
@@ -125,34 +134,38 @@ export default function CommunityHeaderMobile() {
 
             {/* filter  */}
             <div className="flex items-center ">
-              <div className="dropdown dropdown-bottom dropdown-end">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  onClick={() => {
-                    setColseFilterDropdown(!colseFilterDropdown);
-                    setColseSortDropdown(false);
-                  }}
-                  className="btn btn-ghost  btn-sm dropdown-hover m- bg-transparent bg-contain border-none font-medium xl:text-base"
-                >
-                  <FadersHorizontal size={21} color="#676567" />
-                  فیلتر
-                </div>
-                {colseFilterDropdown && (
-                  <ul
-                    onClick={() => setColseFilterDropdown(!colseFilterDropdown)}
+            {pathName === `/${countryOrSlug}/community` && (
+                <div className="dropdown dropdown-bottom dropdown-end">
+                  <div
                     tabIndex={0}
-                    className="menu dropdown-content bg-base-100 rounded-box z-[1] w-48 p-2 shadow"
+                    role="button"
+                    onClick={() => {
+                      setColseFilterDropdown(!colseFilterDropdown);
+                      setColseSortDropdown(false);
+                    }}
+                    className="btn btn-ghost  btn-sm dropdown-hover m- bg-transparent bg-contain border-none font-medium xl:text-base"
                   >
-                    <li>
-                      <a>Item 1</a>
-                    </li>
-                    <li>
-                      <a>Item 2</a>
-                    </li>
-                  </ul>
-                )}
-              </div>
+                    <FadersHorizontal size={21} color="#676567" />
+                    فیلتر
+                  </div>
+                  {colseFilterDropdown && (
+                    <ul
+                      onClick={() =>
+                        setColseFilterDropdown(!colseFilterDropdown)
+                      }
+                      tabIndex={0}
+                      className="menu dropdown-content bg-base-100 rounded-box z-[1] w-48 p-2 shadow"
+                    >
+                      <li>
+                        <a>Item 1</a>
+                      </li>
+                      <li>
+                        <a>Item 2</a>
+                      </li>
+                    </ul>
+                  )}
+                </div>
+              )}
 
               {/* sort */}
               <div className="dropdown dropdown-bottom dropdown-end">

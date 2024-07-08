@@ -51,9 +51,9 @@ export default function QuestionCard() {
               <h3 className="text-[.7rem] xl:text-base">{topic}</h3>
             </span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center mb-2 gap-2">
 
-          <div className="font-bold py-1 w-auto text-gray-700 items-center flex rounded-xl text-xs bg-gray-200">
+          <div className="font-bold py-1 w-auto text-gray-700 items-center flex rounded-xl text-xs bg-blue-200">
           <button className="btn btn-ghost rounded-xl btn-xs xl:btn-sm font-medium">
           <span className="">
                   <ArrowFatDown size={15} color="#da3316" weight="duotone" />
