@@ -12,7 +12,6 @@ export default function CommunityHeader({
 }) {
   const countryOrSlug: string = params.countryOrSlug;
 
-
   const [filterDropdown, setFilterDropdown] = useState("ترتیب");
   const [colseFilterDropdown, setColseFilterDropdown] = useState(false);
   const [colseSortDropdown, setColseSortDropdown] = useState(false);
@@ -22,12 +21,11 @@ export default function CommunityHeader({
 
   const pathName = usePathname();
 
-
   // console.log(lastScrollY);
   const currentScrollY = window.scrollY;
   const handleScroll = () => {
     let currentScrollY = window.scrollY;
-    if (currentScrollY > 200) {
+    if (currentScrollY > 100) {
       setfix(true);
     }
     if (currentScrollY <= 201) {
@@ -53,23 +51,23 @@ export default function CommunityHeader({
       <div className=" xl:bg-white  bg-white xl:mt-3 xl:border-t xl:border-gray-50 xl:shadow-md  xl:py-4 pr-4 pl-2 py-2 header w-full xl:max-w-[72rem] xl:rounded-t-2xl ">
         <div className=" flex flex-col gap-2 max-w-screen-xl mx-auto  ">
           <div className="flex items-center gap-1">
-          <div className=" avatar">
-                <Image
-                  src="/images/user-avatar.jpg"
-                  className="border-2 rounded-full ml-5 hidden xl:block"
-                  width={45}
-                  height={45}
-                  alt="User Avatar"
-                />
-              </div>
+            <div className=" avatar">
+              <Image
+                src="/images/user-avatar.jpg"
+                className="border-2 rounded-full ml-5 hidden xl:block"
+                width={45}
+                height={45}
+                alt="User Avatar"
+              />
+            </div>
             <input
               type="text"
               placeholder="دنبال چی می گردی؟"
               className="input w-full bg-gray-50 rounded-[1rem]"
             />
-            <button className="btn bg-transparent mb-3 btn-ghost btn-square rounded-[1rem]">
+            <button className="btn bg-transparent mb-4 btn-ghost btn-square rounded-[1rem]">
               <Bell size={33} color="#676567" className="xl:hidden" />
-              <Bell size={60} color="#676567" className="hidden xl:block" />
+              <Bell size={65} color="#676567" className="hidden xl:block" />
             </button>
           </div>
         </div>
@@ -78,7 +76,7 @@ export default function CommunityHeader({
       {/*  part2*/}
       <div
         className={`${
-          fix === true ? "xl:fixed xl:mt-20" : "xl:block"
+          fix === true ? "xl:fixed xl:top-[-5rem] xl:mt-20 fixed top-${topFix} " : "block"
         }fixed top-${topFix} transition-transform duration-300 shadow-md bg-white 
            xl:bg-white pr-4 pl-2 py-2 header w-full xl:py-4 xl:max-w-[72rem]  z-10 xl:rounded-b-2xl`}
       >

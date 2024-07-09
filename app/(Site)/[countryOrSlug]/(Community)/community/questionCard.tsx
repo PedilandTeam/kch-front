@@ -57,7 +57,9 @@ export default function QuestionCard({
         <div className="flex items-center justify-between mt-5">
           <div className="text-gray-600">
             <span className="flex font-bold xl:gap-2">
-              <Tag size={18} color="#262526" weight="duotone" />
+              <Tag size={18} color="#262526" weight="duotone" className="xl:hidden" />
+              <Tag size={25} color="#262526" weight="duotone" className="hidden xl:block" />
+
               <h3 className="text-[.7rem] xl:text-base">{topic}</h3>
             </span>
           </div>

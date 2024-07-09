@@ -26,13 +26,9 @@ export default async function CommunityLayout({
 
   return (
     <>
-      <div className="hidden xl:flex xl:flex-col xl:items-center xl:justify-center">
+      <div className=" xl:flex xl:flex-col xl:items-center xl:justify-center">
         <CommunityHeader params={params} />
       </div>
-      <div className="xl:hidden">
-        <CommunityHeaderMobile  params={params}/>
-      </div>
-
       <ModalCountry countries={countries} />
       {children}
       <BottomMenu countries={countries} />
