@@ -48,7 +48,7 @@ export default function CommunityHeader({
 
   return (
     <>
-      <div className=" xl:bg-white  bg-white xl:mt-3 xl:border-t xl:border-gray-50 xl:shadow-md  xl:py-4 pr-4 pl-2 py-2 header w-full xl:max-w-[72rem] xl:rounded-t-2xl ">
+      <div className= "bg-white xl:mt-3 xl:border-t xl:border-gray-50 xl:shadow-md  pr-4 pl-2 pt-2 header w-full xl:max-w-[72rem] xl:rounded-t-2xl ">
         <div className=" flex flex-col gap-2 max-w-screen-xl mx-auto  ">
           <div className="flex items-center gap-1">
             <div className=" avatar">
@@ -65,7 +65,7 @@ export default function CommunityHeader({
               placeholder="دنبال چی می گردی؟"
               className="input w-full bg-gray-50 rounded-[1rem]"
             />
-            <button className="btn bg-transparent mb-4 btn-ghost btn-square rounded-[1rem]">
+            <button className="btn  xl:mb-4 bg-transparent  btn-ghost btn-square rounded-[1rem]">
               <Bell size={33} color="#676567" className="xl:hidden" />
               <Bell size={65} color="#676567" className="hidden xl:block" />
             </button>
@@ -78,7 +78,7 @@ export default function CommunityHeader({
         className={`${
           fix === true ? "xl:fixed xl:top-[-5rem] xl:mt-20 fixed top-${topFix} " : "block"
         }fixed top-${topFix} transition-transform duration-300 shadow-md bg-white 
-           xl:bg-white pr-4 pl-2 py-2 header w-full xl:py-4 xl:max-w-[72rem]  z-10 xl:rounded-b-2xl`}
+         pr-4 pl-2 py-2 header w-full xl:py-4 xl:max-w-[72rem]  z-10 xl:rounded-b-2xl`}
       >
         <div className={`flex flex-col gap-2 max-w-screen- mx-auto  `}>
           <div className="flex justify-between">
