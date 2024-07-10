@@ -3,7 +3,6 @@ import { CountryNamespace } from "@/types/country";
 import { ModalCountry } from "../../layout/modalcountry";
 import CommunityHeader from "./community/communityHeader";
 import BottomMenu from "./community/bottomMenu";
-import CommunityHeaderMobile from "./community/communityHeaderMobile";
 
 export default async function CommunityLayout({
   children,
@@ -23,7 +22,6 @@ export default async function CommunityLayout({
     console.log(e);
     throw new Error("error in get country");
   }
-
   return (
     <>
       <div className=" xl:flex xl:flex-col xl:items-center xl:justify-center">

@@ -26,9 +26,9 @@ export default async function RootLayout({
 
   const header = headers();
 
-  // header.forEach(header => {
-  //   console.log(header.get)
-  // })
+  header.forEach(header => {
+    console.log(header)
+  })
 
   return (
     <html lang="fa" dir="rtl" className="scroll-smooth">

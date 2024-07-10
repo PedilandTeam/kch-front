@@ -48,17 +48,11 @@ export default function CommunityHeader({
 
   return (
     <>
-      <div className= "bg-white xl:mt-3 xl:border-t xl:border-gray-50 xl:shadow-md  pr-4 pl-2 pt-2 header w-full xl:max-w-[72rem] xl:rounded-t-2xl ">
+      <div className= "bg-white xl:border-t xl:border-gray-50 xl:shadow-md  pr-4 pl-2 pt-2 header w-full xl:max-w-[72rem] xl:rounded-t-2xl ">
         <div className=" flex flex-col gap-2 max-w-screen-xl mx-auto  ">
           <div className="flex items-center gap-1">
             <div className=" avatar">
-              <Image
-                src="/images/user-avatar.jpg"
-                className="border-2 rounded-full ml-5 hidden xl:block"
-                width={45}
-                height={45}
-                alt="User Avatar"
-              />
+             
             </div>
             <input
               type="text"

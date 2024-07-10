@@ -8,4 +8,7 @@ export const MENU = {
   PRIVACY_POLICIES: "حریم خصوصی کاربران",
   BUSINESSES: "مشاغل فارسی زبان",
   DOCTORS: "پزشکان فارسی زبان",
+  COMMUNITY: "سوالات مهاجرت ",
+  JobNew:"راهنمای مشاغل"
+
 };
