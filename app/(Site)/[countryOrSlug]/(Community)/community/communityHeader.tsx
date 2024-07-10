@@ -1,9 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Bell, FadersHorizontal, SortAscending } from "@phosphor-icons/react";
-import { number, string } from "yup";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 
 export default function CommunityHeader({
   params,
@@ -48,10 +46,10 @@ export default function CommunityHeader({
 
   return (
     <>
-      <div className= "bg-white xl:border-t xl:border-gray-50 xl:shadow-md  pr-4 pl-2 pt-2 header w-full xl:max-w-[72rem] xl:rounded-t-2xl ">
-        <div className=" flex flex-col gap-2 max-w-screen-xl mx-auto  ">
+      <div className= "bg-white xl:border-t xl:border-gray-50 xl:shadow-md pr-4 pl-2 pt-2 header w-full xl:max-w-[72rem] xl:rounded-t-2xl">
+        <div className="flex flex-col gap-2 max-w-screen-xl mx-auto">
           <div className="flex items-center gap-1">
-            <div className=" avatar">
+            <div className="avatar">
              
             </div>
             <input
@@ -59,7 +57,7 @@ export default function CommunityHeader({
               placeholder="دنبال چی می گردی؟"
               className="input w-full bg-gray-50 rounded-[1rem]"
             />
-            <button className="btn  xl:mb-4 bg-transparent  btn-ghost btn-square rounded-[1rem]">
+            <button className="btn xl:mb-4 bg-transparent btn-ghost btn-square rounded-[1rem]">
               <Bell size={33} color="#676567" className="xl:hidden" />
               <Bell size={65} color="#676567" className="hidden xl:block" />
             </button>
