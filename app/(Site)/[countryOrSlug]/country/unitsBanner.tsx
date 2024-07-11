@@ -8,9 +8,9 @@ type UnitsBannerProps = {
 };
 export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
   return (
-    <div className="container mx-auto max-w-[1144px]">
+    <div className="unit-banner container mx-auto max-w-[1144px]">
       <div
-        className="grid gap-6 pt-6 mx-3 mt-6 mb-8 mod-units4 sm:grid-cols-7 sm:gap-10 sm:mb-14 sm:mt-14 sm:pt-14 sm:mx-0"
+        className="grid gap-6 pt-6 my-6 sm:grid-cols-7 sm:gap-10 sm:my-10 sm:px-3"
         id="select-unit"
       >
         <div className="flex flex-wrap items-center mod-header sm:col-span-4">

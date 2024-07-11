@@ -28,7 +28,7 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
   const units = UNITS_LIST_ARRAY;
 
   return (
-    <div className="slider h-[520px] flex justify-center content-center mx-3 sm:mx-auto sm:max-w-[95%] relative rounded-xl">
+    <div className="slider  h-[520px] flex justify-center content-center px-3 sm:mx-auto sm:max-w-[95%] md:max-w-full relative rounded-xl">
       <Image
         className="rounded-xl brightness-[.70] object-fill hidden sm:block"
         src={`/images/slide/home/${currentCountry.code}.webp`}

@@ -10,6 +10,7 @@ import { Toaster } from "react-hot-toast";
 import Hotjar from "@/components/hotjar";
 import { NextUIProvider } from "@nextui-org/react";
 import { headers } from "next/headers";
+import BottomMenu from "./[countryOrSlug]/(Community)/community/bottomMenu";
 
 export default async function RootLayout({
   children,
@@ -26,9 +27,9 @@ export default async function RootLayout({
 
   const header = headers();
 
-  header.forEach(header => {
-    console.log(header)
-  })
+  header.forEach((header) => {
+    console.log(header);
+  });
 
   return (
     <html lang="fa" dir="rtl" className="scroll-smooth">
@@ -38,12 +39,13 @@ export default async function RootLayout({
           <Hotjar />
 
           {/* {!header.get("x-pathname") && ( */}
-            <Header countries={countries}>
-              <ModalCountry countries={countries} />
-            </Header>
+          <Header countries={countries}>
+            <ModalCountry countries={countries} />
+          </Header>
           {/* )}  */}
           <Toaster />
           {children}
+          <BottomMenu countries={countries} />
           <Footer />
           <Script src="https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD" />
           <Script id="google-analytics">

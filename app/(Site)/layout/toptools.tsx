@@ -9,13 +9,18 @@ import { useState } from "react";
 import { CaretDown } from "@phosphor-icons/react";
 import MegaMenuItems from "./megaMenuItems";
 import Image from "next/image";
+import { Briefcase, Calendar, Chat, House, Users } from "@phosphor-icons/react";
 
 type TopToolsProps = {
   countryCode: string;
   isMainPage: boolean;
 };
 export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
-  const [showMegaMenu, setShowMegaMenu] = useState(false);
+  const [showMegaBiz, setShowMegaBiz] = useState(false);
+  const [showMegaJob, setShowMegaJob] = useState(false);
+  const [showMegaComm, setShowMegaComm] = useState(false);
+
+  const [itemName, setItemName] = useState("");
   return (
     <div className="flex items-center top-tools">
       {isMainPage ? (
@@ -46,7 +51,6 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
               }
             }}
           >
-
             <CircleFlag
               width={42}
               height={42}
@@ -56,13 +60,248 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
               className="w-[40px] h-[40px] transition opacity-75 hover:opacity-100 hover:cursor-pointer "
             />
           </div>
-          <Image
-            src="/images/user-avatar.jpg"
-            className="border-2 rounded-full ml-5 hidden xl:block"
-            width={42}
-            height={42}
-            alt="User Avatar"
-          />
+          <div className="relative">
+            {" "}
+            <Image
+              src="/images/user-avatar.jpg"
+              className="border-2 rounded-full ml-5 hidden xl:block"
+              width={42}
+              height={42}
+              alt="User Avatar"
+            />
+            <div className="absolute hidden md:block top-12  right-16 z-50 h-auto w-[52rem]">
+              {/* <MegaMenuItems showMegaMenu={showMegaMenu} itemName={itemName} setShowMegaMenu={setShowMegaMenu} /> */}
+              <MegaMenuItems
+                showMegaMenu={showMegaBiz}
+                setShowMegaMenu={setShowMegaBiz}
+                menuItems={[
+                  {
+                    title: "1منو اول",
+                    subTitle:
+                      "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
+                    items: [
+                      { text: "منو اول", icon: <House size={16} />, link: "#" },
+                      {
+                        text: "منو دوم",
+                        icon: <Briefcase size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو سوم",
+                        icon: <Calendar size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو جهارم",
+                        icon: <Chat size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو axXzcvb",
+                        icon: <Users size={16} />,
+                        link: "#",
+                      },
+                    ],
+                  },
+                  {
+                    title: "1منو اول",
+                    subTitle:
+                      "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
+                    items: [
+                      { text: "منو اول", icon: <House size={16} />, link: "#" },
+                      {
+                        text: "منو دوم",
+                        icon: <Briefcase size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو سوم",
+                        icon: <Calendar size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو جهارم",
+                        icon: <Chat size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو axXzcvb",
+                        icon: <Users size={16} />,
+                        link: "#",
+                      },
+                    ],
+                  },
+                  {
+                    title: "3منو سوم",
+                    subTitle:
+                      "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
+                    items: [
+                      { text: "منو اول", icon: <House size={16} />, link: "#" },
+                      {
+                        text: "منو دوم",
+                        icon: <Briefcase size={16} />,
+                        link: "#",
+                      },
+                    ],
+                    havePicture: true,
+                  },
+                ]}
+              />
+              <MegaMenuItems
+                showMegaMenu={showMegaJob}
+                setShowMegaMenu={setShowMegaJob}
+                menuItems={[
+                  {
+                    title: "21منو اول",
+                    subTitle:
+                      "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
+                    items: [
+                      { text: "منو اول", icon: <House size={16} />, link: "#" },
+                      {
+                        text: "منو دوم",
+                        icon: <Briefcase size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو سوم",
+                        icon: <Calendar size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو جهارم",
+                        icon: <Chat size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو axXzcvb",
+                        icon: <Users size={16} />,
+                        link: "#",
+                      },
+                    ],
+                  },
+                  {
+                    title: "1منو اول",
+                    subTitle:
+                      "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
+                    items: [
+                      { text: "منو اول", icon: <House size={16} />, link: "#" },
+                      {
+                        text: "منو دوم",
+                        icon: <Briefcase size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو سوم",
+                        icon: <Calendar size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو جهارم",
+                        icon: <Chat size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو axXzcvb",
+                        icon: <Users size={16} />,
+                        link: "#",
+                      },
+                    ],
+                  },
+                  {
+                    title: "3منو سوم",
+                    subTitle:
+                      "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
+                    items: [
+                      { text: "منو اول", icon: <House size={16} />, link: "#" },
+                      {
+                        text: "منو دوم",
+                        icon: <Briefcase size={16} />,
+                        link: "#",
+                      },
+                    ],
+                    havePicture: true,
+                  },
+                ]}
+              />
+              <MegaMenuItems
+                showMegaMenu={showMegaComm}
+                setShowMegaMenu={setShowMegaComm}
+                menuItems={[
+                  {
+                    title: "2منو دوم",
+                    subTitle:
+                      "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
+                    items: [
+                      { text: "منو اول", icon: <House size={16} />, link: "#" },
+                      {
+                        text: "منو دوم",
+                        icon: <Briefcase size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو سوم",
+                        icon: <Calendar size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو جهارم",
+                        icon: <Chat size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو پنجم",
+                        icon: <Users size={16} />,
+                        link: "#",
+                      },
+                    ],
+                  },
+                  {
+                    title: "22منو دوم",
+                    subTitle:
+                      "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
+                    items: [
+                      { text: "منو اول", icon: <House size={16} />, link: "#" },
+                      {
+                        text: "منو دوم",
+                        icon: <Briefcase size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو سوم",
+                        icon: <Calendar size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو جهارم",
+                        icon: <Chat size={16} />,
+                        link: "#",
+                      },
+                      {
+                        text: "منو پنجم",
+                        icon: <Users size={16} />,
+                        link: "#",
+                      },
+                    ],
+                  },
+                  {
+                    title: "3منو سوم",
+                    subTitle:
+                      "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
+                    items: [
+                      { text: "منو اول", icon: <House size={16} />, link: "#" },
+                      {
+                        text: "منو دوم",
+                        icon: <Briefcase size={16} />,
+                        link: "#",
+                      },
+                    ],
+                    havePicture: true,
+                  },
+                ]}
+              />
+              ;
+            </div>
+          </div>
         </div>
       )}
 
@@ -70,8 +309,6 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
         <div>
           <div className="mr-8 main-nav">
             <ul className="hidden gap-5 font-bold lg:flex">
-            <MegaMenuItems showMegaMenu={showMegaMenu} />
-
               {/* <li
                 onClick={() => setShowMegaMenu(!showMegaMenu)}
                 className="transition divide-purple-300 text-primary hover:text-black cursor-pointer"
@@ -88,7 +325,13 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
                 </Link>
               </li> */}
               <li
-                onClick={() => setShowMegaMenu(!showMegaMenu)}
+                onClick={() => {
+                  setShowMegaJob(!showMegaJob);
+                  setShowMegaComm(false);
+                  setShowMegaBiz(false);
+
+                  setItemName("Job");
+                }}
                 className="transition divide-purple-300 text-primary hover:text-black  cursor-pointer"
               >
                 {/* <Link
@@ -102,7 +345,16 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
                 </div>
                 {/* </Link> */}
               </li>
-              <li className="transition divide-purple-300 text-primary hover:text-black  cursor-pointer">
+              <li
+                onClick={() => {
+                  setShowMegaComm(!showMegaComm);
+                  setShowMegaJob(false);
+                  setShowMegaBiz(false);
+
+                  setItemName("Community");
+                }}
+                className="transition divide-purple-300 text-primary hover:text-black  cursor-pointer"
+              >
                 {/* <Link
                   href={process.env.NEXT_PUBLIC_BIZ_FRONT_URL}
                 > */}
@@ -119,7 +371,16 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
                   target="_blank"
                   className="transition divide-purple-300 text-primary hover:text-black"
                 > */}
-                <div className="flex items-center gap-2 ">
+                <div
+                  onClick={() => {
+                    setShowMegaBiz(!showMegaBiz);
+                    setShowMegaJob(false);
+                    setShowMegaComm(false);
+
+                    setItemName("Biz");
+                  }}
+                  className="flex items-center gap-2 "
+                >
                   {MENU.BIZ}
 
                   <CaretDown size={18} color="#5d07f3" />

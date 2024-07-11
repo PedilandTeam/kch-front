@@ -35,7 +35,7 @@ export const Header = ({ children, countries }: HeaderProps) => {
     !contryCodeInStore && (countryCode == "un" || !countryCode);
 
   return (
-    <header className="w-full py-[10px] bg-white shadow-sm absolute top-[-10rem] lg:static lg:top-0 ">
+    <header className="w-full py-3 px-3 bg-white shadow-sm hidden md:block ">
       <div className="container mx-auto max-w-[1144px]">
         <div className="flex items-center justify-between mx-3 sm:mx-0">
           <TopTools

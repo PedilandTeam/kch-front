@@ -46,7 +46,7 @@ export default function CommunityHeader({
 
   return (
     <>
-      <div className= "bg-white xl:border-t xl:border-gray-50 xl:shadow-md pr-4 pl-2 pt-2 header w-full xl:max-w-[72rem] xl:rounded-t-2xl">
+      <div className= "bg-white xl:mt-3 xl:border-t xl:border-gray-50 xl:shadow-md pr-4 pl-2 pt-2 header w-full xl:max-w-[72rem] xl:rounded-t-2xl">
         <div className="flex flex-col gap-2 max-w-screen-xl mx-auto">
           <div className="flex items-center gap-1">
             <div className="avatar">
