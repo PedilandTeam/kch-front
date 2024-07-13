@@ -1,6 +1,6 @@
 import { API_ROUTES } from "@/routes";
 import { CountryNamespace } from "@/types/country";
-import { ModalCountry } from "../../layout/modalcountry";
+import { ModalCountry } from "../../layout/modalCountry";
 import CommunityHeader from "./community/communityHeader";
 import BottomMenu from "./community/bottomMenu";
 

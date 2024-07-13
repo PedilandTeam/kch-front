@@ -17,10 +17,10 @@ export default function MegaCol({
   setShowMegaMenu,
 }: MegaColProps) {
   return (
-    <div className="flex-1 bg-sky-100 break-words flex flex-col items-start h-auto w-full px-4 pt-2 rounded-md">
+    <div className="flex-1 break-words flex flex-col items-start h-auto w-full rounded-md">
       <h2 className="text-md font-bold mb-2">{title}</h2>
       <h3 className="text-sm mb-2">{subTitle}</h3>
-      <ul className="w-full mb-2" onClick={() => setShowMegaMenu(false)}>
+      <ul className="w-full" onClick={() => setShowMegaMenu(false)}>
         {menuItems.map((item, index) => (
           <li
             className="text-md rounded-lg transition duration-300 ease-in-out hover:bg-blue-200"
@@ -37,7 +37,7 @@ export default function MegaCol({
         ))}
       </ul>
       {havePicture && (
-        <div className="h-full w-full px-2 pb-2">
+        <div className="h-full w-full mt-2">
           <div className="bg-blue-100 h-full w-full"></div>
         </div>
       )}

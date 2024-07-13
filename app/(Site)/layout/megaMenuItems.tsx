@@ -15,11 +15,10 @@ export default function MegaMenuItems({
     havePicture?: boolean;
   }[];
 }) {
-
   return (
     <div className="w-full h-auto">
       {showMegaMenu && (
-        <div className="bg-sky-50 border py-4 px-4 gap-4 rounded-lg  flex">
+        <div className="bg-white px-4 pb-4 gap-4 rounded-br-xl rounded-bl-xl flex">
           {menuItems.map((item) => {
             return (
               <MegaCol
