@@ -111,7 +111,7 @@ export default async function UntiList({
       <div className="container mx-auto max-w-[1144px]">
         <div className="_page-content">
           <div className="_top-section">
-            <div className="flex flex-wrap items-center justify-between w-full sm:flex-nowrap">
+            <div className="_wrapper flex flex-wrap items-center justify-between w-full sm:flex-nowrap">
               <div className="flex items-center gap-3 px-3 mb-4 sm:mb-0 sm:px-0">
                 <h1 className="text-xl font-bold sm:text-2xl text-secondary">
                   لیست {unit?.name} فارسی زبان در {country?.name}
@@ -184,7 +184,7 @@ export default async function UntiList({
             campaignId={campaign?.id}
           />
 
-          <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
+          <div className="_wrapper items-center xl:flex-row flex flex-col gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
             <StaticAdvertise
               from="unit"
               lgDisable={customers.length >= 4}

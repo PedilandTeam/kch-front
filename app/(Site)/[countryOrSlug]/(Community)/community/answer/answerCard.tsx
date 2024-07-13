@@ -18,16 +18,16 @@ export default function AnswerCard() {
         <div className="absolute h-full w-px bg-gray-300 bottom-6 right-9"></div>
 
         {/* Timeline Content */}
-        <div className="w-full">
+        <div className="w-ful">
           {/* Timeline Item */}
-          <div className="flex flex-row items-center space-x-4">
+          <div className="_wrap flex flex-row items-center space-x-4">
             {/* Time */}
             {/* <div className="text-gray-500 m-3"></div> */}
 
             {/* Question Card */}
             <div className="w-full z-0 bg-blue-100 rounded-xl px-4 py-2 mb-6">
               {/* Question Header */}
-              <div className="qCard-header flex py-2 border-b-2 border-dotted border-gray-400 justify-between items-center">
+              <div className="AnswerCard-header flex py-2 border-b-2 border-dotted border-gray-400 justify-between items-center">
                 {/* Avatar and Name */}
                 {/* Avatar and Name */}
                 <div className="flex items-center">
@@ -49,13 +49,13 @@ export default function AnswerCard() {
                 </span>
               </div>
               {/* Question and Description */}
-              <div className="mt-3 mb-3">
+              <div className="AnswerCard-body mt-3 mb-3">
                 <p className="mt-1 text-sm xl:text-lg text-gray-700">
                   {questionDescription}
                 </p>
               </div>
               {/* Topic and Up Vote */}
-              <div className="flex items-center  pb-2 justify-end mt-5">
+              <div className="AnswerCard-footer flex items-center  pb-2 justify-end mt-5">
                 <div className="flex items-center">
                   <div className="flex items-center py-1 font-bold w-auto text-gray-700 rounded-xl text-xs bg-blue-300">
                     <button className="btn btn-ghost btn-square btn-xs xl:btn-sm  bg-transparent border-none font-medium">
@@ -67,7 +67,7 @@ export default function AnswerCard() {
                         />
                       </span>
                     </button>
-                    |
+
                     <button className="btn btn-ghost w-auto btn-xs bg-transparent border-none font-medium">
                       <span className="text-[.7rem] xl:text-base">
                         باهات موافقم

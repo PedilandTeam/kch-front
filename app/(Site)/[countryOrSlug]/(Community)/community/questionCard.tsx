@@ -27,10 +27,10 @@ export default function QuestionCard({
   console.log(params);
 
   return (
-    <div className="QuestionCard  w-full max-w-[72rem] bg-white flex flex-col items-center">
+    <div className="_QuestionCard  w-full max-w-[72rem] bg-white flex flex-col items-center">
       {/* Question Card */}
       <div className="w-full bg-blue-50 rounded-xl p-4">
-        <div className="qCard-header flex py-2 border-b-2 border-dotted border-gray-300 justify-between items-center">
+        <div className="_QuestionCard-header flex py-2 border-b-2 border-dotted border-gray-300 justify-between items-center">
           {/* Avatar and Name */}
           <div className="flex items-center">
             <div className="flex items-center">
@@ -49,12 +49,12 @@ export default function QuestionCard({
           <span className="text-sm xl:text-md text-gray-500">{timeOfQuestion}</span>
         </div>
         {/* Question and Description */}
-        <div className="mt-3 mb-2">
+        <div className="QuestonCard-body mt-3 mb-2">
           <h2 className="text-lg font-bold xl:text-xl">{UserQuestion}</h2>
           <p className="mt-1 text-sm xl:text-lg text-gray-700">{questionDescription}</p>
         </div>
         {/* Topic and Up Vote */}
-        <div className="flex items-center justify-between mt-5">
+        <div className="QuestionCard-footer flex items-center justify-between mt-5">
           <div className="text-gray-600">
             <span className="flex font-bold xl:gap-2">
               <Tag size={18} color="#262526" weight="duotone" className="xl:hidden" />

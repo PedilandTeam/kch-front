@@ -4,14 +4,14 @@ import { CountryNamespace } from "@/types/country";
 
 type SeoTextProps = {
   currentCountry: CountryNamespace.GET;
-  customers: CampaignNamespace.ICampaignCustomer[]
+  customers: CampaignNamespace.ICampaignCustomer[];
 };
 
 export const SeoText = async ({ currentCountry, customers }: SeoTextProps) => {
   return (
     <div className="container mx-auto max-w-[1144px]">
-      <div className="mx-3 my-10 sm:my-20 _seo-text sm:mx-0">
-      <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
+      <div className="_seo-text  my-10 sm:my-20 sm:mx-0">
+        <div className="_wrapper items-center xl:flex-row flex flex-col mx-auto   gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
           <StaticAdvertise
             from="country"
             lgDisable={customers.length >= 4}

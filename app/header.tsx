@@ -35,7 +35,7 @@ export const Header = ({ children, countries }: HeaderProps) => {
 
   return (
     <header className="w-full py-3 bg-white shadow-sm hidden sm:block">
-      <div className="container mx-auto max-w-[1144px] px-3 sm:px-0">
+      <div className="container mx-auto max-w-[1144px] px-3">
         <div className="_wrap flex items-center justify-between">
           <TopTools
             isMainPage={isMainPage}

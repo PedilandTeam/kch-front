@@ -23,8 +23,6 @@ export default function BottomMenu({
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
-    console.log(currentScrollY);
-
     if (currentScrollY > lastScrollY) {
       // Scrolling down
       setIsVisible(false);
@@ -66,12 +64,12 @@ export default function BottomMenu({
     <>
 
       <div
-        className={`fixed bottom-2 w-full  transition-transform duration-300 transform ${
+        className={`_bottomMenu-fixed fixed bottom-2 w-full  transition-transform duration-300 transform ${
           isVisible ? "translate-y-0" : "translate-y-100"
         } z-0 sm:hidden`}
       >
-        <div className="flex items-center justify-between pl-6 pr-4 py-2 mx-2 bg-white border border-gray-200 rounded-full wraper">
-          <div className="flex flex-col gap-1 items-center justify-center">
+        <div className="_main-bottomMenu flex items-center justify-between pl-6 pr-4 py-2 mx-2 bg-white border border-gray-200 rounded-full">
+          <div className="_wrapper flex flex-col gap-1 items-center justify-center">
             <div
               className="select-country"
               onClick={() => {
@@ -118,7 +116,7 @@ export default function BottomMenu({
 
           <div
             onClick={() => document.getElementById("main-drawer")?.click()}
-            className="flex flex-col gap-[2px] items-center justify-between"
+            className="_Menu -list flex flex-col gap-[2px] items-center justify-between"
           >
             <div className="flex justify-center cursor-pointer p-1 bg-blue-50 rounded-full">
             <List size={20} color="#282828" />
@@ -127,7 +125,7 @@ export default function BottomMenu({
           </div>
 
           <Link href="/">
-            <div className="flex items-center justify-center">
+            <div className="_wrap-account flex items-center justify-center">
               <Image
                 src="/images/logo-01.png"
                 width={36}

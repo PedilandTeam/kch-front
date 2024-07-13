@@ -7,7 +7,7 @@ export default async function Page({
 }) {
   1;
   return (
-    <div className="h-auto flex flex-col items-center">
+    <div className="_community-mainPage h-auto flex flex-col items-center">
       <div className="flex flex-col mt-3 px-4 gap-4">
         <QuestionCard params={params} />
         <QuestionCard params={params} />

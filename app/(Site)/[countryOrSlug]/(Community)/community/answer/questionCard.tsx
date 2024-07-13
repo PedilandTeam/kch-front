@@ -17,12 +17,12 @@ const userBio: string = "ساکن المان از سال 2014";
 const countOfUpvote: string = "10";
 export default function QuestionCard() {
   return (
-    <div className="w-full max-w-[72rem] px-4 py-2 bg-white flex flex-col items-center">
+    <div className="QuestionCard w-full max-w-[72rem] px-4 py-2 bg-white flex flex-col items-center">
       {/* Question Card */}
-      <div className="w-full bg-blue-50 rounded-xl px-4 py-2 mb-4">
-        <div className="qCard-header flex py-2 border-b-2 border-dotted border-gray-300 justify-between items-center">
+      <div className="_container w-full bg-blue-50 rounded-xl px-4 py-2 mb-4">
+        <div className="_ QuestionCard-header flex py-2 border-b-2 border-dotted border-gray-300 justify-between items-center">
           {/* Avatar and Name */}
-          <div className="flex items-center">
+          <div className="QuestionCard-header flex items-center">
             <div className="flex items-center">
               <div className="avatar">
                 <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2">
@@ -39,12 +39,12 @@ export default function QuestionCard() {
           <span className="text-sm xl:text-md text-gray-500">{timeOfQuestion}</span>
         </div>
         {/* Question and Description */}
-        <div className="mt-3 mb-2">
+        <div className="_QuestionCard-body mt-3 mb-2">
         <h2 className="text-lg font-bold xl:text-xl">{UserQuestion}</h2>
         <p className="mt-1 text-sm xl:text-lg text-gray-700">{questionDescription}</p>
         </div>
         {/* Topic and Up Vote */}
-        <div className="flex items-center justify-between mt-5">
+        <div className="_QuestionCard-footer flex items-center justify-between mt-5">
           <div className="text-sm  text-gray-600">
             <span className="flex gap-1 font-bold ">
               <Tag size={22} color="#262526" weight="duotone" />

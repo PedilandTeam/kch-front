@@ -39,7 +39,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
           </div>
         </div>
 
-        <div className="mod-items sm:col-span-3 mx-3 sm:mx-0">
+        <div className="mod-items sm:col-span-3">
           <div className="grid grid-cols-1 gap-0 sm:grid-cols-2 sm:gap-6 ">
             <div className="flex mb-3 item group sm:mb-0">
               <Link href={`/${currentCountry.code}/businesses`}>

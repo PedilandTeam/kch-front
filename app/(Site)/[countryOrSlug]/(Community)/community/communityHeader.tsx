@@ -26,7 +26,7 @@ export default function CommunityHeader({
     if (currentScrollY > 100) {
       setfix(true);
     }
-    if (currentScrollY <= 160) {
+    if (currentScrollY <= 100) {
       setfix(false);
     }
     if (currentScrollY <= 1) {
