@@ -64,12 +64,12 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
             {" "}
             <Image
               src="/images/user-avatar.jpg"
-              className="border-2 rounded-full ml-5 hidden xl:block"
+              className="border-2 rounded-full ml-5 hidden sm:block"
               width={42}
               height={42}
               alt="User Avatar"
             />
-            <div className="absolute hidden md:block top-12  right-16 z-50 h-auto w-[52rem]">
+            <div className="absolute hidden md:block top-12  xl:right-16 lg:right-12 z-50 h-auto w-[52rem]">
               {/* <MegaMenuItems showMegaMenu={showMegaMenu} itemName={itemName} setShowMegaMenu={setShowMegaMenu} /> */}
               <MegaMenuItems
                 showMegaMenu={showMegaBiz}
@@ -299,7 +299,6 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
                   },
                 ]}
               />
-              ;
             </div>
           </div>
         </div>

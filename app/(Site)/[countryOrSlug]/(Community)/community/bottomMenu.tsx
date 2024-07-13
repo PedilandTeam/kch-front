@@ -5,10 +5,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { useHeader } from "@/store/useHeader";
-import { OffCanvas } from "@/app/(Site)/layout/offcanvas";
 import { CountryNamespace } from "@/types/country";
 import { CircleFlag } from "next-circle-flags";
-import { log } from "console";
 export default function BottomMenu({
   countries,
 }: {
@@ -66,14 +64,11 @@ export default function BottomMenu({
   
   return (
     <>
-      <div className="h-full z-50">
-        <OffCanvas countryCode={countryCode} />
-      </div>
 
       <div
         className={`fixed bottom-2 w-full  transition-transform duration-300 transform ${
           isVisible ? "translate-y-0" : "translate-y-100"
-        } z-0 md:hidden`}
+        } z-0 sm:hidden`}
       >
         <div className="flex items-center justify-between pl-6 pr-4 py-2 mx-2 bg-white border border-gray-200 rounded-full wraper">
           <div className="flex flex-col gap-1 items-center justify-center">
@@ -83,7 +78,7 @@ export default function BottomMenu({
                 if (document) {
                   (
                     document.getElementById("modal_country") as HTMLFormElement
-                  )?.showModal();
+                  ).showModal();
                 }
               }}
             >
@@ -125,7 +120,7 @@ export default function BottomMenu({
             onClick={() => document.getElementById("main-drawer")?.click()}
             className="flex flex-col gap-[2px] items-center justify-between"
           >
-            <div className="flex justify-center cursor-pointer p-1 bg-blue-50 rounded-full">{" "}
+            <div className="flex justify-center cursor-pointer p-1 bg-blue-50 rounded-full">
             <List size={20} color="#282828" />
             </div>
             <span className="inline-flex justify-center text-xs">منو</span>

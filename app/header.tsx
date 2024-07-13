@@ -10,7 +10,7 @@ import { CountryNamespace } from "@/types/country";
 import { useHeader } from "@/store/useHeader";
 
 export type HeaderProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   countries: CountryNamespace.GET[];
 };
 
@@ -35,14 +35,13 @@ export const Header = ({ children, countries }: HeaderProps) => {
     !contryCodeInStore && (countryCode == "un" || !countryCode);
 
   return (
-    <header className="w-full py-3 px-3 bg-white shadow-sm hidden md:block ">
+    <header className="w-full py-3 px-3 bg-white shadow-sm hidden sm:block ">
       <div className="container mx-auto max-w-[1144px]">
         <div className="flex items-center justify-between mx-3 sm:mx-0">
           <TopTools
             isMainPage={isMainPage}
             countryCode={contryCodeInStore || countryCode}
           />
-
           <div className="logo">
             <Link href="/">
               <Image
@@ -54,13 +53,11 @@ export const Header = ({ children, countries }: HeaderProps) => {
                 className="h-[50px] sm:w-[190px] w-[181px] sm:h-[54px]"
               />
             </Link>
-          </div>
-        </div>
+          </div>        
+        </div><OffCanvas countries={countries} />
+
       </div>
-
-      <OffCanvas countryCode={countryCode} />
-
       {children}
     </header>
-  );
-};
+  )
+}

@@ -31,7 +31,7 @@ export default function QuestionCard() {
               </div>
               <div className="flex mr-3 gap-1 flex-col">
               <h2 className="ml-2 font-bold xl:text-xl">{userName} </h2>
-              <span className="flex text-sm md:text-md">{userBio}</span>
+              <span className="flex text-sm sm:text-md">{userBio}</span>
               </div>
             </div>
           </div>

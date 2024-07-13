@@ -47,7 +47,7 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
 
       <div className="max-w-[1144px] sm:m-auto absolute w-auto bottom-[10%] sm:bottom-[15%] sm:left-0 sm:right-0 sm:w-full">
         <div className="text-center wrap">
-          <h3 className="sm:inline-block text-gray-300 bg-blue-900 bg-opacity-70 p-3 sm:pt-1 sm:pb-[40px] px-3 sm:px-[44px] text-[18px] sm:text-[21px] leading-[30px] sm:leading-[36px] sm:rounded-xl">
+          <h3 className="sm:inline-block text-gray-300 bg-blue-900 bg-opacity-70 mx-3 p-3 sm:pt-1 sm:mx-0 sm:pb-[40px] px-3 sm:px-[44px] text-[18px] sm:text-[21px] leading-[30px] sm:leading-[36px] sm:rounded-xl">
             اگر در
             <span className="inline-block mx-1 font-semibold text-white">
               {currentCountry.name}

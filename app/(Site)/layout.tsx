@@ -11,6 +11,7 @@ import Hotjar from "@/components/hotjar";
 import { NextUIProvider } from "@nextui-org/react";
 import { headers } from "next/headers";
 import BottomMenu from "./[countryOrSlug]/(Community)/community/bottomMenu";
+import { OffCanvas } from "./layout/offcanvas";
 
 export default async function RootLayout({
   children,
@@ -25,24 +26,17 @@ export default async function RootLayout({
     throw new Error("error in get country");
   }
 
-  const header = headers();
-
-  header.forEach((header) => {
-    console.log(header);
-  });
-
   return (
     <html lang="fa" dir="rtl" className="scroll-smooth">
-      <body className="min-h-screen overflow-x-hidden">
+      <body className="min-h-screen overflow-x-hidden mt-3 sm:mt-0">
         <NextUIProvider>
           <Fonts />
           <Hotjar />
 
-          {/* {!header.get("x-pathname") && ( */}
-          <Header countries={countries}>
-            <ModalCountry countries={countries} />
-          </Header>
-          {/* )}  */}
+          <ModalCountry countries={countries} />
+          <OffCanvas countries={countries} />
+          <Header countries={countries}/>
+
           <Toaster />
           {children}
           <BottomMenu countries={countries} />
