@@ -16,18 +16,24 @@ export default function CommunityHeader({
 
   const [topFix, setTopFix] = useState(18);
   const [fix, setfix] = useState(false);
-
+  const [fixM, setfixM] = useState(false);
   const pathName = usePathname();
 
   // console.log(lastScrollY);
   const currentScrollY = window.scrollY;
   const handleScroll = () => {
     let currentScrollY = window.scrollY;
-    if (currentScrollY > 100) {
+    if (currentScrollY > 165) {
       setfix(true);
     }
-    if (currentScrollY <= 100) {
+    if (currentScrollY <= 165) {
       setfix(false);
+    }
+    if (currentScrollY > 70) {
+      setfixM(true);
+    }
+    if (currentScrollY <= 70) {
+      setfixM(false);
     }
     if (currentScrollY <= 1) {
       setTopFix(18);
@@ -42,16 +48,14 @@ export default function CommunityHeader({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [fix, fixM, currentScrollY]);
 
   return (
     <>
-      <div className= "bg-white xl:mt-3 xl:border-t xl:border-gray-50 xl:shadow-md pr-4 pl-2 pt-2 header w-full xl:max-w-[72rem] xl:rounded-t-2xl">
+      <div className="bg-white xl:mt-3 xl:border-t xl:border-gray-50 xl:shadow-md pr-4 pl-2 pt-2 header w-full xl:max-w-[72rem] xl:rounded-t-2xl">
         <div className="flex flex-col gap-2 max-w-screen-xl mx-auto">
           <div className="flex items-center gap-1">
-            <div className="avatar">
-             
-            </div>
+            <div className="avatar"></div>
             <input
               type="text"
               placeholder="دنبال چی می گردی؟"
@@ -68,7 +72,9 @@ export default function CommunityHeader({
       {/*  part2*/}
       <div
         className={`${
-          fix === true ? "xl:fixed xl:top-[-5rem] xl:mt-20 fixed top-${topFix} " : "block"
+          fix === true ? "xl:fixed xl:top-[-5rem] xl:mt-20" : "block"
+        } ${
+          fixM === true ? "xl:static fixed top-${topFix} " : "block"
         }fixed top-${topFix} transition-transform duration-300 shadow-md bg-white 
          pr-4 pl-2 py-2 header w-full xl:py-4 xl:max-w-[72rem]  z-10 xl:rounded-b-2xl`}
       >
@@ -88,27 +94,29 @@ export default function CommunityHeader({
               id="my_modal_5"
               className="modal md:modal-middle modal-bottom h-[100vh]"
             >
-              <div className="modal-box  ">
-                {/*header */}
+              <div className="modal-box">
+                {/* header */}
                 <h2 className="font-bold text-lg">ثبت سوال</h2>
                 {/* body */}
                 <div className="modal-action gap-3 flex flex-col">
-                  {" "}
-                  <select className="select mb-3 bg-gray-50 w-full rounded-[1rem]">
-                    <option disabled selected>
-                      انتخاب تاپیک{" "}
+                  <select
+                    defaultValue=""
+                    className="select mb-3 bg-gray-50 w-full rounded-[1rem]"
+                  >
+                    <option value="" disabled>
+                      انتخاب تاپیک
                     </option>
-                    <option>Homer</option>
-                    <option>Marge</option>
-                    <option>Bart</option>
-                    <option>Lisa</option>
-                    <option>Maggie</option>
+                    <option value="Homer">Homer</option>
+                    <option value="Marge">Marge</option>
+                    <option value="Bart">Bart</option>
+                    <option value="Lisa">Lisa</option>
+                    <option value="Maggie">Maggie</option>
                   </select>
                   {/* Q */}
                   <input
                     type="text"
                     placeholder="سوال"
-                    className="input w-full mb-3  input-lg bg-gray-50 rounded-[1rem] "
+                    className="input w-full mb-3 input-lg bg-gray-50 rounded-[1rem]"
                   />
                   {/* textArea */}
                   <textarea
@@ -117,18 +125,15 @@ export default function CommunityHeader({
                   ></textarea>
                   {/* submit */}
                   <div className="flex mt-3">
-                    {" "}
-                    <button className="btn ml-3  btn-warning rounded-[1rem] ">
+                    <button className="btn ml-3 btn-warning rounded-[1rem]">
                       <h2 className="font-bold"> ثبت سوال</h2>
-                    </button>{" "}
+                    </button>
                     <form method="dialog">
-                      {" "}
                       <button className="btn mb-1 btn-error rounded-[1rem]">
                         بستن
                       </button>
                     </form>
                   </div>
-                  {/* if there is a button in form, it will close the modal */}
                 </div>
               </div>
             </dialog>
