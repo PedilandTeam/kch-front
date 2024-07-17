@@ -9,6 +9,8 @@ import Image from "next/image";
 import AdvertiseLg from "@/components/advertise/lg";
 import AdvertiseSm from "@/components/advertise/sm";
 import fetchCampaigns from "@/utils/fetchCampaigns";
+import StaticAdvertise from "@/components/advertise/static";
+import AdsSection from "./ads-section";
 
 type CountryProps = {
   currentCountry: CountryNamespace.GET;
@@ -42,6 +44,8 @@ export default async function Country({
       <CountryStats currentCountry={currentCountry} />
 
       <CountryCategories currentCountry={currentCountry} />
+
+      <AdsSection customers={customers} />
 
       <SeoText customers={customers} currentCountry={currentCountry} />
     </div>

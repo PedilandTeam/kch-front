@@ -39,17 +39,19 @@ export const CountryCategories = async ({
   // const units = await getUnits()
 
   return (
-    <div className="container mx-auto max-w-[1144px]">
-      <div className="my-10 mod-categories sm:my-20">
-        <div className="text-center mod-header">
-          <h2 className="text-[20px] inline-block sm:text-[24px] font-semibold mb-5">
-            {CATEGORY.POPULAR}
-          </h2>
+    <div className="_mod-categories my-9 sm:my-20">
+      <div className="container mx-auto max-w-[1144px] px-3 sm:px-0">
+        <div className="_wrap">
+          <div className="_mod-header text-center">
+            <h2 className="text-[20px] inline-block sm:text-[24px] font-semibold mb-3 sm:mb-5">
+              {CATEGORY.POPULAR}
+            </h2>
+          </div>
+          <CountryCategoriesItems
+            currentCountry={currentCountry}
+            recentlyUpdatedCategories={mostUsedCategories}
+          />
         </div>
-        <CountryCategoriesItems
-          currentCountry={currentCountry}
-          recentlyUpdatedCategories={mostUsedCategories}
-        />
       </div>
     </div>
   );

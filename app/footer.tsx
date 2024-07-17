@@ -31,10 +31,10 @@ export const Footer = () => {
   }, []);
 
   return (
-    <footer className=" pt-10 sm:pt-16 pb-6 sm:pb-5 mt-10 sm:mt-20 bg-[#1c39bb] text-gray-50 rounded-tl-3xl rounded-tr-3xl sm:rounded-none">
-      <div className=" container max-w-[1144px] px-3 mx-auto _footer text-[15px]">
+    <footer className="pt-9 sm:pt-20 pb-6 sm:pb-5 mt-9 sm:mt-20 bg-[#1c39bb] text-gray-50 text-[15px] rounded-tl-3xl rounded-tr-3xl sm:rounded-none">
+      <div className="container max-w-[1144px] mx-auto px-3 sm:px-0">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-4">
-          <div className=" px-4 sm:col-span-2 sm:px-0">
+          <div className="px-4 sm:col-span-2 sm:px-0">
             <Image
               src={"/images/logo-white.svg"}
               width={160}
@@ -129,7 +129,7 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-10 text-center sm:mt-20 _copyright">
+        <div className="_copyright mt-9 sm:mt-20 text-center">
           <p className="font-light">
             {FOOTER.COPYRIGHT_TEXT1}
             <Link href="/" className="inline-flex mx-1 link link-hover">
