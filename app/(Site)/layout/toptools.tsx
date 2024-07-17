@@ -20,7 +20,6 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
   const [showMegaJob, setShowMegaJob] = useState(false);
   const [showMegaComm, setShowMegaComm] = useState(false);
 
-  const [itemName, setItemName] = useState("");
   return (
     <div className="_top-tools flex items-center gap-8">
       {isMainPage ? (
@@ -81,8 +80,6 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
                   setShowMegaJob(!showMegaJob);
                   setShowMegaComm(false);
                   setShowMegaBiz(false);
-
-                  setItemName("Job");
                 }}
                 className="transition divide-purple-300 text-primary hover:text-black  cursor-pointer"
               >
@@ -100,7 +97,6 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
                   setShowMegaComm(!showMegaComm);
                   setShowMegaJob(false);
                   setShowMegaBiz(false);
-                  setItemName("Community");
                 }}
                 className="transition divide-purple-300 text-primary hover:text-black  cursor-pointer"
               >
@@ -119,7 +115,6 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
                     setShowMegaBiz(!showMegaBiz);
                     setShowMegaJob(false);
                     setShowMegaComm(false);
-                    setItemName("Biz");
                   }}
                   className="flex items-center gap-2"
                 >

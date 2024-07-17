@@ -18,7 +18,13 @@ export default function MegaMenu({
   setShowMegaComm: any;
 }) {
   return (
-    <div className="_mega-menu absolute top-[50px] xl:-right-4 lg:right-12 z-50 h-auto w-[52rem]">
+    <div
+      className={`_mega-menu ${showMegaBiz ? "-translate-y-[5px]" : ""}${
+        showMegaJob ? "-translate-y-[3px]" : ""
+      }${
+        showMegaComm ? "-translate-y-[4px]" : ""
+      }  transition-all duration-400  absolute top-[50px] xl:-right-4 lg:right-12 z-50 h-auto w-[52rem]`}
+    >
       <MegaMenuItems
         showMegaMenu={showMegaBiz}
         setShowMegaMenu={setShowMegaBiz}
