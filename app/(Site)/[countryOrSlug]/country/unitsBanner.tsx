@@ -2,6 +2,7 @@ import { MENU } from "@/app/text/menu";
 import { CountryNamespace } from "@/types/country";
 import Image from "next/image";
 import Link from "next/link";
+import PagesSearch from "./pages.search";
 
 type UnitsBannerProps = {
   currentCountry: CountryNamespace.GET;
@@ -20,13 +21,15 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
                 راهنمای مشاغل کـوچـا
               </h2>
               <p className="mb-4 text-[17px] text-slate-600 font-medium">
-                یک ابزار ساده اما کاربردی
+                ابزاری ساده و موثر برای جستجوی مشاغل فارسی
               </p>
+              <PagesSearch countryCode={currentCountry.code} />
+
               <div className="mb-2 font-medium leading-7 text-gray-500 sm:text-justify sm:pl-5">
                 <p className="mb-2">
-                  اگه خارج از ایران زندگی میکنی و تابحال به پیدا کردن یه سرویس
-                  مشخص به زبـان فارسـی نیاز پیدا کرده باشی، حتما با مشکل نبود
-                  اطلاعات منسجم و معتبر در این زمینه مواجه شدی.
+                  ااگر خارج از ایران زندگی می‌کنید و به دنبال یافتن خدماتی به
+                  زبان فارسی هستید، احتمالاً با چالش نبود اطلاعات یکپارچه و قابل
+                  اعتماد مواجه شده‌اید.
                 </p>
                 <p className="mb-2">
                   راهنمای مشاغل کـوچـا که در دو دسته مشاغل و پزشکان فـارسـی
@@ -50,7 +53,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
                       width={400}
                       height={560}
                       alt="Some Business People"
-                      className="rounded-xl group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-auto object-cover hidden sm:block"
+                      className="rounded-xl group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-[360px] object-cover hidden sm:block"
                     />
                     <Image
                       src={"/images/modules/mod-business-01-m.webp"}
@@ -73,7 +76,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
                       width={400}
                       height={560}
                       alt="a doctor"
-                      className="rounded-xl group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-auto object-cover hidden sm:block"
+                      className="rounded-xl group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-[360px] object-cover hidden sm:block"
                     />
                     <Image
                       src={"/images/modules/mod-doctor-01-m.webp"}
