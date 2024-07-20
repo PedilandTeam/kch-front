@@ -36,7 +36,7 @@ const PagesSearch = ({ countryCode }: CountryPagesSearch) => {
   };
 
   return (
-    <div className="dropdown mt-4 mb-5 w-full  sm:px-0 sm:w-[600px] mx-auto block">
+    <div className="dropdown mt-4 mb-5 w-full  sm:pl-5 xl:pl-0  mx-auto block">
       <input
         onChange={inputChangeHandler}
         type="text"
