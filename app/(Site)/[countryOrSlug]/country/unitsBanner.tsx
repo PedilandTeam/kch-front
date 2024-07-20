@@ -12,7 +12,7 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
     <div className="_unit-banner">
       <div className="container mx-auto max-w-[1144px] px-3 sm:px-0">
         <div
-          className="_wrap grid gap-6 my-9 sm:grid-cols-7 sm:gap-10 sm:my-20"
+          className="_wrap grid gap-6 my-9 lg:grid-cols-7 sm:gap-10 sm:my-20"
           id="select-unit"
         >
           <div className="_mod-header flex flex-wrap items-center sm:col-span-4">
