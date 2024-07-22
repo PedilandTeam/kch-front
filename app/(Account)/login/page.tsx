@@ -1,14 +1,14 @@
 'use client'
 
-import useAuthCheck from '@/hooks/useAuthCheck';
-import RegisterForm from './form';
+import LoginForm from './form';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import { mutate } from 'swr';
-import Loading from '../components/global/loading';
+import Loading from '@/app/(Account)/components/global/loading';
 
+const LoginPage = () => {
 
-const RegisterPage =  () => {
     const {isAuthenticated, isLoading} = useAuthCheck()
     const router = useRouter()
 
@@ -25,6 +25,6 @@ const RegisterPage =  () => {
     }
 
     if(!isAuthenticated)
-    return <RegisterForm />;
+    return <LoginForm />;
 };
-export default RegisterPage;
+export default LoginPage;
