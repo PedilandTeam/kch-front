@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Bell, FadersHorizontal, SortAscending } from "@phosphor-icons/react";
 import { usePathname } from "next/navigation";
+import AddQModal from "./addQModal";
 
 export default function CommunityHeader({
   params,
@@ -20,7 +21,6 @@ export default function CommunityHeader({
   const pathName = usePathname();
 
   // console.log(lastScrollY);
-  const currentScrollY = window.scrollY;
   const handleScroll = () => {
     let currentScrollY = window.scrollY;
     if (currentScrollY > 165) {
@@ -48,7 +48,9 @@ export default function CommunityHeader({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [fix, fixM, currentScrollY]);
+  }, [fix, fixM]);
+
+
 
   return (
     <>
@@ -80,64 +82,8 @@ export default function CommunityHeader({
       >
         <div className={`flex flex-col gap-2 max-w-screen- mx-auto  `}>
           <div className="flex justify-between">
-            <button
-              className="btn btn-warning rounded-[1rem] "
-              onClick={() => {
-                (
-                  document.getElementById("my_modal_5") as HTMLFormElement
-                ).showModal();
-              }}
-            >
-              <h2 className="font-bold"> + ایجاد سوال</h2>
-            </button>
-            <dialog
-              id="my_modal_5"
-              className="modal md:modal-middle modal-bottom h-[100vh]"
-            >
-              <div className="modal-box">
-                {/* header */}
-                <h2 className="font-bold text-lg">ثبت سوال</h2>
-                {/* body */}
-                <div className="modal-action gap-3 flex flex-col">
-                  <select
-                    defaultValue=""
-                    className="select mb-3 bg-gray-50 w-full rounded-[1rem]"
-                  >
-                    <option value="" disabled>
-                      انتخاب تاپیک
-                    </option>
-                    <option value="Homer">Homer</option>
-                    <option value="Marge">Marge</option>
-                    <option value="Bart">Bart</option>
-                    <option value="Lisa">Lisa</option>
-                    <option value="Maggie">Maggie</option>
-                  </select>
-                  {/* Q */}
-                  <input
-                    type="text"
-                    placeholder="سوال"
-                    className="input w-full mb-3 input-lg bg-gray-50 rounded-[1rem]"
-                  />
-                  {/* textArea */}
-                  <textarea
-                    className="textarea pb-10 w-full bg-gray-50 rounded-[1rem]"
-                    placeholder="توضیحات"
-                  ></textarea>
-                  {/* submit */}
-                  <div className="flex mt-3">
-                    <button className="btn ml-3 btn-warning rounded-[1rem]">
-                      <h2 className="font-bold"> ثبت سوال</h2>
-                    </button>
-                    <form method="dialog">
-                      <button className="btn mb-1 btn-error rounded-[1rem]">
-                        بستن
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </dialog>
-
+            {/* modal  */}
+            <AddQModal />
             {/* filter  */}
             <div className="flex items-center ">
               {pathName === `/${countryOrSlug}/community` && (
