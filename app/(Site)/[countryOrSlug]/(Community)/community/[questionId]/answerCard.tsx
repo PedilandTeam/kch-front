@@ -9,6 +9,7 @@ import usePostUpVoteAnswer from "../apiForum/usePostUpVoteAnswer";
 import usePostDownVoteAnswer from "../apiForum/usePostDownVoteAnswer";
 import useCheckUser from "../apiForum/useCheckUser";
 import CheckUserModal from "../component/checkUserModal";
+import SkeletonAnswerCard from "../component/skeletonAnswerCard";
 
 export default function AnswerCard({
   params,
@@ -32,13 +33,28 @@ export default function AnswerCard({
     error,
     mutate: answerMutate,
   } = useGetAnswer(countryOrSlug, questionIidParam, currentPage);
+  const test = answerData?.length || 2;
 
   // vote
   const { vote } = usePostUpVoteAnswer(answerMutate);
   const downVote = usePostDownVoteAnswer(answerMutate);
 
+  if (isLoading) {
+    return (
+      <div className="w-[92%] max-w-[72rem] bg-white flex  flex-col items-end">
+        <div className="w-full max-w-[60rem] flex flex-col items-end justify-end">
+          {Array.from({ length: 2 }).map((_, index) => (
+            <div className="flex justify-end w-full" key={index}>
+              <SkeletonAnswerCard />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="px-4 w-[92%] max-w-[72rem] bg-white flex  flex-col items-end">
+    <div className="w-[92%] max-w-[72rem] bg-white flex  flex-col items-end">
       {/* Vertical Timeline Container */}
       {answerData?.items.map((answer) => (
         <div key={answer.id} className="relative xl:w-[90%] w-full">
@@ -93,7 +109,7 @@ export default function AnswerCard({
                           ).showModal();
                         } else {
                           downVote(answer.id);
-                          checkUser()
+                          checkUser();
                         }
                       }}
                       className="btn btn-ghost btn-square btn-xs xl:btn-sm  bg-transparent border-none font-medium"
@@ -138,7 +154,6 @@ export default function AnswerCard({
                       </span>
                     </button>
                     <CheckUserModal />
-
                   </div>
                 </div>
               </div>

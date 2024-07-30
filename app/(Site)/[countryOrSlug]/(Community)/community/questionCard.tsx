@@ -17,6 +17,7 @@ import useCheckUser from "./apiForum/useCheckUser";
 import CheckUserModal from "./component/checkUserModal";
 import { useRouter, useSearchParams } from "next/navigation";
 import PaginationQ from "./component/paginationQ";
+import SkeletonQuestionCard from "./component/skeletonQuestionCard";
 // import PaginationQ from "./PaginationQ";
 
 export default function QuestionCard({
@@ -26,18 +27,14 @@ export default function QuestionCard({
 }) {
   const [currentPage, setCurrentPage] = useState<number | string | null>(1);
   const searchParams = useSearchParams();
-  console.log(searchParams.get("page"));
+  const params = new URLSearchParams(searchParams.toString());
+
   useEffect(() => {
     setCurrentPage(searchParams.get("page"));
-    console.log(currentPage);
-    
-  }, [searchParams,currentPage]);
-
-  
+  }, [searchParams, currentPage]);
 
   const { checkUser } = useCheckUser();
   const router = useRouter();
-
 
   // Get from SWR
   const { question, questionError, isQuestion, questionMutate } = useQuestions(
@@ -46,13 +43,24 @@ export default function QuestionCard({
   );
   const questionSwr = question?.items;
 
+  const test = questionSwr?.length || 3;
+
   // Up vote
-  const { vote } = usePostUpVote(questionMutate);
+  const { vote, loading } = usePostUpVote(questionMutate);
 
   // Down vote
   const downVote = usePostDownVote(questionMutate);
 
-  if (isQuestion) return <Spinner />;
+
+  if (isQuestion) {
+    return (
+      <div className="_QuestionCard min-h-[20rem] w-full max-w-[72rem] bg-white flex flex-col justify-between items-center">
+        {Array.from({ length: test }).map((_, index) => (
+          <SkeletonQuestionCard key={index} />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="_QuestionCard min-h-[20rem] w-full max-w-[72rem] bg-white flex flex-col justify-between items-center">
@@ -66,7 +74,10 @@ export default function QuestionCard({
         </div>
       ) : (
         questionSwr?.map((question) => (
-          <div key={question.id} className="w-full bg-blue-50 rounded-xl p-4 mb-4">
+          <div
+            key={question.id}
+            className="w-full bg-blue-50 rounded-xl p-4 mb-4"
+          >
             <div className="_QuestionCard-header flex py-2 border-b-2 border-dotted border-gray-300 justify-between items-center">
               {/* Avatar and Name */}
               <div className="flex items-center">
@@ -78,7 +89,8 @@ export default function QuestionCard({
                   </div>
                   <div className="flex mr-3 gap-1 flex-col">
                     <h2 className="ml-2 font-bold xl:text-xl">
-                      {question?.botUser?.firstname} {question?.botUser?.lastname}{" "}
+                      {question?.botUser?.firstname}{" "}
+                      {question?.botUser?.lastname}{" "}
                     </h2>
                     <span className="flex text-sm sm:text-md">{`ساکن ${question.country.name}`}</span>
                   </div>
@@ -134,8 +146,9 @@ export default function QuestionCard({
                             ) as HTMLFormElement
                           ).showModal();
                         } else {
+                          params.delete("sort");
                           router.push(
-                            `/${countryOrSlug}/community/${question.id}`
+                            `/${countryOrSlug}/community/${question.id}/`
                           );
                         }
                       }}
@@ -200,7 +213,9 @@ export default function QuestionCard({
                         checkUser();
                       }
                     }}
-                    className="btn btn-ghost w-auto btn-xs bg-transparent border-none font-medium"
+                    className={`${
+                      !loading ? "animate-pulse" : ""
+                    } btn btn-ghost w-auto btn-xs bg-transparent border-none font-medium `}
                   >
                     <span className="text-[.7rem] xl:text-base">
                       باهات موافقم

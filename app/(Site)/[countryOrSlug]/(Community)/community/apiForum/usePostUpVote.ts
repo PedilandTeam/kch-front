@@ -19,7 +19,6 @@ function usePostUpVote(questionMutate: any) {
       });
       const res = await req.text();
       console.log(res);
-      toast.success("با موفیت ثبت شد");
       questionMutate();
     } catch (err) {
       console.error(err);

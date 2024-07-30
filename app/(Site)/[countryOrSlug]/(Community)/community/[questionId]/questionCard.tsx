@@ -8,11 +8,11 @@ import {
 } from "@phosphor-icons/react";
 import AnswerToQuestion from "./answerToQuestion";
 import { timeAgo } from "../changeDate";
-import Spinner from "../component/spinner";
 import usePostUpVote from "../apiForum/usePostUpVote";
 import usePostDownVote from "../apiForum/usePostDownVote";
 import useGetQuestion from "../apiForum/useGetQuestion";
 import useCheckUser from "../apiForum/useCheckUser";
+import SkeletonQuestionCard from "../component/skeletonQuestionCard";
 
 export default function QuestionCard({
   params,
@@ -39,9 +39,17 @@ export default function QuestionCard({
   // get checkUser
   const { checkUser } = useCheckUser();
 
-  if (questionIsLoading) return <Spinner />;
+  if (questionIsLoading) {
+    return (
+      <div className="_QuestionCard min-h-[20rem] w-full max-w-[72rem] bg-white flex flex-col justify-between items-center">
+        {Array.from({ length: 1 }).map((_, index) => (
+          <SkeletonQuestionCard key={index} />
+        ))}
+      </div>
+    );
+  }
   return (
-    <div className="QuestionCard w-full max-w-[72rem] min-h-[15rem] px-4 py-2 bg-white flex flex-col items-center">
+    <div className="QuestionCard w-full max-w-[72rem] min-h-[15rem] py-2 bg-white flex flex-col items-center">
       {/* Question Card */}
       {thisPageQuestion ? (
         <div className="_container w-full bg-blue-50 rounded-xl px-4 py-2 mb-4">

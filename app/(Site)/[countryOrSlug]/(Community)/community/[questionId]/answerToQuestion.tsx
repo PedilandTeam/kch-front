@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import SpinnerBtn from "../component/SpinnerBtn";
 
 export default function AnswerToQuestion({
   openAnswer,
@@ -10,8 +11,9 @@ export default function AnswerToQuestion({
 }) {
   // post
   const [text, setText] = useState<string>("");
-
+  const [isLoading, setIsLoading] = useState(false);
   async function postAnswer() {
+    setIsLoading(true);
     const url = `https://api.koochaa.com/forum/answers`;
     try {
       const req = await fetch(url, {
@@ -25,13 +27,21 @@ export default function AnswerToQuestion({
           questionId,
         }),
       });
-      const res = await req.text();
-      console.log(res);
-      toast.success("پاسخ شما با موفقیت ثبت شد و پس از تایید منتشر میگردد", {
-        duration: 4000, 
-      });    } catch (error) {
+      if (req.ok) {
+        const res = await req.text();
+        console.log(res);
+        toast.success("پاسخ شما با موفقیت ثبت شد و پس از تایید منتشر میگردد", {
+          duration: 4000,
+        });
+      } else {
+        // در صورتی که وضعیت موفقیت‌آمیز نباشد، پیام خطا نمایش داده شود
+        toast.error("خطایی رخ داد");
+      }
+    } catch (error) {
       console.error(error);
-      toast.error("خطایی رخ داد")
+      toast.error("خطایی رخ داد");
+    } finally {
+      setIsLoading(false);
     }
   }
   return (
@@ -48,10 +58,11 @@ export default function AnswerToQuestion({
             }}
           ></textarea>
           <button
+            disabled={isLoading}
             onClick={() => postAnswer()}
             className="btn btn-primary mt-2 rounded-xl btn-xs sm:btn-md"
           >
-            ارسال پاسخ
+            {isLoading ? <SpinnerBtn text="در حال ارسال" /> : " ارسال پاسخ"}
           </button>
         </div>
       )}

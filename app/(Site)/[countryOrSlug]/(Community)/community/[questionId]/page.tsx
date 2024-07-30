@@ -27,9 +27,9 @@ async function Page({
   }
 
   return (
-    <div className="flex  flex-col items-center justify-center mt-2">
+    <div className="flex  flex-col items-center justify-center px-4 mt-2">
       <QuestionCard params={params} />
-      <div className="flex w-full flex-col xl:items-center items-end justify-center">
+      <div className="flex w-full flex-col lg:items-center items-end justify-center">
         <AnswerCard params={params} />
       </div>
     </div>

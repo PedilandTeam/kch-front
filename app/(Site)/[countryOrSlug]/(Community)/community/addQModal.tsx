@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useCheckUser from "./apiForum/useCheckUser";
 import CheckUserModal from "./component/checkUserModal";
+import SpinnerBtn from "./component/SpinnerBtn";
+import useGetTopic from "./apiForum/useGetTopic";
 interface Topic {
   id: string;
   slug: string;
@@ -11,33 +13,19 @@ interface Topic {
 }
 
 export default function AddQModal() {
-  const [topics, setTopics] = useState<Topic[]>([]);
   const [title, setTitle] = useState<string>("");
   const [text, setText] = useState<string>("");
   const [selectedTopic, setSelectedTopic] = useState<string>("");
   const { checkUser } = useCheckUser();
 
   //   get topic
-  useEffect(() => {
-    const fetchData = () => {
-      fetch("https://api.koochaa.com/forum/topics?limit=30&page=1", {
-        credentials: "include",
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          // console.log(result.items);
-          setTopics(result.items);
-        })
-        .catch((error) => console.error(error));
-    };
-
-    fetchData();
-  }, []);
-
+  const { data:topics, isLading, mutate } = useGetTopic();
+  
   // post
-  const isLoading = false;
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const fetchData = () => {
-     fetch("https://api.koochaa.com/forum/questions", {
+    setIsLoading(true);
+    fetch("https://api.koochaa.com/forum/questions", {
       method: "POST",
       body: JSON.stringify({
         countryId: 4,
@@ -52,7 +40,7 @@ export default function AddQModal() {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         toast.success("سوال شما با موفقیت ثبت شد و پس از تایید منتشر میگردد", {
           duration: 4000, // Duration in milliseconds (4 seconds)
         });
@@ -60,6 +48,9 @@ export default function AddQModal() {
       .catch((error) => {
         console.error(error);
         toast.error("خطایی رخ داد");
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
   const handleCreateQuestionClick = async () => {
@@ -97,7 +88,7 @@ export default function AddQModal() {
               <option value="" disabled>
                 انتخاب تاپیک
               </option>
-              {topics.map((topic) => (
+              {topics?.items.map((topic) => (
                 <option key={topic.id} value={topic.id}>
                   {topic.title}
                 </option>
@@ -110,7 +101,6 @@ export default function AddQModal() {
               className="input w-full mb-3 input-lg bg-gray-50 rounded-[1rem]"
               onChange={(e) => {
                 setTitle(e.target.value);
-                console.log(title);
               }}
             />
             {/* textArea */}
@@ -119,24 +109,24 @@ export default function AddQModal() {
               placeholder="توضیحات"
               onChange={(e) => {
                 setText(e.target.value);
-                console.log(text);
               }}
             ></textarea>
             {/* submit */}
             <div className="flex mt-3">
               <button
+                disabled={isLoading}
                 onClick={(e) => {
                   e.preventDefault();
                   fetchData();
                 }}
                 className="btn ml-3 btn-warning rounded-[1rem]"
               >
-                <h2 className="font-bold"> ثبت سوال</h2>
+                <h2 className="font-bold">
+                  {isLoading ? <SpinnerBtn text="در حال ثبت" /> : "ثبت سوال"}
+                </h2>
               </button>
               <form method="dialog">
-                <button className="btn mb-1 btn-error rounded-[1rem]">
-                  بستن
-                </button>
+                <button className="btn mb-1 btn rounded-[1rem]">بستن</button>
               </form>
             </div>
           </div>
