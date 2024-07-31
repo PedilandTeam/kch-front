@@ -161,7 +161,7 @@ export default function AnswerCard({
           </div>
         </div>
       ))}
-      <div className="flex justify-center w-full">
+      <div className="flex justify-center w-full ml-5 xl:ml-0">
         {answerData && <PaginationQ pages={{ meta: answerData.meta }} />}
       </div>
     </div>

@@ -41,6 +41,8 @@ export default function QuestionCard({
     countryOrSlug,
     currentPage
   );
+  console.log(question);
+  
   const questionSwr = question?.items;
 
   const test = questionSwr?.length || 3;
