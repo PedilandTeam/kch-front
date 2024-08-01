@@ -216,7 +216,7 @@ export default function QuestionCard({
                       }
                     }}
                     className={`${
-                      !loading ? "animate-pulse" : ""
+                      loading ? "animate-pulse" : ""
                     } btn btn-ghost w-auto btn-xs bg-transparent border-none font-medium `}
                   >
                     <span className="text-[.7rem] xl:text-base">
