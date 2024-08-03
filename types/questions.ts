@@ -5,8 +5,8 @@ export interface Get {
 }
 
 export interface Item {
-    createdDate: Date;
-    updateDate:  Date;
+    createdDate: string;
+    updateDate:  string;
     status:      boolean;
     id:          string;
     title:       string;
@@ -36,8 +36,8 @@ export interface BotUser {
 }
 
 export interface Country {
-    createdDate:  Date;
-    updateDate:   Date;
+    createdDate:  string;
+    updateDate:   string;
     status:       boolean;
     availability: boolean;
     id:           number;
@@ -59,8 +59,8 @@ export interface Topic {
 }
 
 export interface Vote {
-    createdDate: Date;
-    updateDate:  Date;
+    createdDate: string;
+    updateDate:  string;
     id:          string;
     type:        string;
 }

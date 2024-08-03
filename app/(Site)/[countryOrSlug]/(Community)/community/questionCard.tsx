@@ -18,12 +18,14 @@ import CheckUserModal from "./component/checkUserModal";
 import { useRouter, useSearchParams } from "next/navigation";
 import PaginationQ from "./component/paginationQ";
 import SkeletonQuestionCard from "./component/skeletonQuestionCard";
+import { CountryNamespace } from "@/types/country";
 // import PaginationQ from "./PaginationQ";
 
 export default function QuestionCard({
   countryOrSlug,
 }: {
   countryOrSlug: string;
+  country: CountryNamespace.GET
 }) {
   const [currentPage, setCurrentPage] = useState<number | string | null>(1);
   const searchParams = useSearchParams();
@@ -41,14 +43,13 @@ export default function QuestionCard({
     countryOrSlug,
     currentPage
   );
-  console.log(question);
   
   const questionSwr = question?.items;
 
   const test = questionSwr?.length || 3;
 
   // Up vote
-  const { vote, loading } = usePostUpVote(questionMutate);
+  const { vote, isVoteLoading } = usePostUpVote(questionMutate);
 
   // Down vote
   const downVote = usePostDownVote(questionMutate);
@@ -216,7 +217,7 @@ export default function QuestionCard({
                       }
                     }}
                     className={`${
-                      loading ? "animate-pulse" : ""
+                      isVoteLoading ? "animate-pulse" : ""
                     } btn btn-ghost w-auto btn-xs bg-transparent border-none font-medium `}
                   >
                     <span className="text-[.7rem] xl:text-base">
@@ -238,7 +239,7 @@ export default function QuestionCard({
         ))
       )}
       {/* Add Pagination Component */}
-      {question && <PaginationQ pages={{ meta: question.meta }} />}
+      {question && <PaginationQ pages={question} />}
     </div>
   );
 }

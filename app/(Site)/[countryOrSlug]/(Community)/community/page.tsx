@@ -27,19 +27,8 @@ export default async function Page({
   }
 
   const country = countryList[0];
-console.log("ccc",country);
 
-  const serverQuestion: QuestionNamespace.GET[] = await fetch(
-    `${process.env.API_URL}/forum/questions?limit=7&page=1`,
-    { credentials: "include" }
-  )
-    .then(async (res) => {
-      return await res.json();
-    })
-    .catch((e) => {
-      console.error(`Error in Get question in community`);
-      throw new Error("Internal server error");
-    });
+
  
 
   //   try {

@@ -19,7 +19,7 @@ export default function AddQModal() {
   const { checkUser } = useCheckUser();
 
   //   get topic
-  const { data:topics, isLading, mutate } = useGetTopic();
+  const { data:topics, isLoading: isTopicLoading, mutate } = useGetTopic();
   
   // post
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -88,7 +88,7 @@ export default function AddQModal() {
               <option value="" disabled>
                 انتخاب تاپیک
               </option>
-              {topics?.items.map((topic) => (
+              {topics?.items.map((topic: any) => (
                 <option key={topic.id} value={topic.id}>
                   {topic.title}
                 </option>
