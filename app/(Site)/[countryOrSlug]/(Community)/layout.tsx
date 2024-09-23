@@ -13,23 +13,31 @@ export default async function CommunityLayout({
     countryOrSlug: string;
   };
 }) {
-  console.log(params);
+  // console.log(params);
 
-  let countries: CountryNamespace.GET[];
+  let country: CountryNamespace.GET[];
   try {
-    countries = await (await API_ROUTES.COUNTRIES.GET_ALL(1, 20)).json();
+    country = await fetch(
+      `${process.env.API_URL}/countries?code=${params.countryOrSlug}`
+    ).then(async (res) => await res.json());
   } catch (e) {
     console.log(e);
     throw new Error("error in get country");
   }
+
+  console.log(country)
+
   return (
     <>
       <div className=" xl:flex xl:flex-col xl:items-center xl:justify-center">
-        <CommunityHeader params={params} />
+        <CommunityHeader
+          country={country[0]}
+          countryOrSlug={params.countryOrSlug}
+        />
       </div>
-      <ModalCountry countries={countries} />
+      <ModalCountry countries={country} />
       {children}
-      <BottomMenu countries={countries} />
+      <BottomMenu countries={country} />
     </>
   );
 }

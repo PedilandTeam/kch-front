@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       translate: {
-        '100': '120%'
+        100: "120%",
       },
       // fontFamily: {
       //   PinarLT: "Pinar-LT",
@@ -31,6 +31,7 @@ module.exports = {
           900: "#d8aa3b",
         },
       },
+    
     },
   },
   daisyui: {

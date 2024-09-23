@@ -1,26 +1,29 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Bell, FadersHorizontal, SortAscending } from "@phosphor-icons/react";
-import { usePathname } from "next/navigation";
+import AddQModal from "./addQModal";
+import HeaderFilter from "./component/headerFilter";
+import SearchInputHeader from "./component/SearchInputHeader";
+import { CountryNamespace } from "@/types/country";
+// import { CommunityBreadcrumb } from "../../[unitSlug]/breadcrumb";
+import { useQuestions } from "./apiForum/useGetQuestions";
+import { CommunityBreadcrumb } from "./component/breadcrumb";
 
 export default function CommunityHeader({
-  params,
+  country,
+  countryOrSlug,
 }: {
-  params: { countryOrSlug: string };
+  countryOrSlug: string;
+  country: CountryNamespace.GET;
 }) {
-  const countryOrSlug: string = params.countryOrSlug;
+  console.log("countryOrSlug", country);
 
-  const [filterDropdown, setFilterDropdown] = useState("ترتیب");
-  const [colseFilterDropdown, setColseFilterDropdown] = useState(false);
-  const [colseSortDropdown, setColseSortDropdown] = useState(false);
+  const { question } = useQuestions(countryOrSlug, 1);
 
   const [topFix, setTopFix] = useState(18);
   const [fix, setfix] = useState(false);
   const [fixM, setfixM] = useState(false);
-  const pathName = usePathname();
 
-  // console.log(lastScrollY);
-  const currentScrollY = window.scrollY;
   const handleScroll = () => {
     let currentScrollY = window.scrollY;
     if (currentScrollY > 165) {
@@ -48,160 +51,57 @@ export default function CommunityHeader({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [fix, fixM, currentScrollY]);
+  }, [fix, fixM]);
 
   return (
     <>
-      <div className="bg-white xl:mt-3 xl:border-t xl:border-gray-50 xl:shadow-md pr-4 pl-2 pt-2 header w-full xl:max-w-[72rem] xl:rounded-t-2xl">
-        <div className="flex flex-col gap-2 max-w-screen-xl mx-auto">
-          <div className="flex items-center gap-1">
-            <div className="avatar"></div>
-            <input
-              type="text"
-              placeholder="دنبال چی می گردی؟"
-              className="input w-full bg-gray-50 rounded-[1rem]"
-            />
-            <button className="btn xl:mb-4 bg-transparent btn-ghost btn-square rounded-[1rem]">
-              <Bell size={33} color="#676567" className="xl:hidden" />
-              <Bell size={65} color="#676567" className="hidden xl:block" />
-            </button>
-          </div>
+      {/* 1 */}
+
+      <div className="_wrapper flex flex-wrap items-center justify-between w-full xl:max-w-[72rem] sm:flex-nowrap py-2 bg-white sm:px-4 xl:px-0 mt-[.1rem]">
+        <div className="flex items-center gap-3 px-4 mb- sm:mb-0 sm:px-0">
+          <h1 className="text-xl font-bold sm:text-2xl text-secondary ">
+            لیست سوالات مهاجرت در {country?.name}
+          </h1>
+          <span className="hidden font-medium text-gray-500 sm:inline">
+            ({question?.meta.totalItems} آیتم)
+          </span>
         </div>
+        <CommunityBreadcrumb
+          country={{ name: country.name, code: country.code }}
+        />
       </div>
 
-      {/*  part2*/}
-      <div
-        className={`${
-          fix === true ? "xl:fixed xl:top-[-5rem] xl:mt-20" : "block"
-        } ${
-          fixM === true ? "xl:static fixed top-${topFix} " : "block"
-        }fixed top-${topFix} transition-transform duration-300 shadow-md bg-white 
+      {/*2: searchInput */}
+      <div className="w-full xl:max-w-[72rem] h-auto rounded-2xl shadow-md">
+
+
+
+        <div className="bg-white xl:rounded-t-2xl px-4">
+          <div className="flex flex-col gap-2 max-w-screen-xl mx-auto ">
+            <SearchInputHeader countryOrSlug={countryOrSlug} />
+
+            {/* <button className="btn xl:mb-4 bg-transparent btn-ghost btn-square rounded-[1rem]">
+              <Bell size={33} color="#676567" className="xl:hidden" />
+              <Bell size={65} color="#676567" className="hidden xl:block" />
+            </button> */}
+          </div>
+        </div>
+
+        {/*  part3*/}
+        <div
+          className={`${
+            fix === true ? "xl:fixed xl:top-[-5rem] xl:mt-20" : "block"
+          } ${
+            fixM === true ? "xl:static fixed top-${topFix} " : "block"
+          }fixed top-${topFix} transition-transform duration-300 bg-white 
          pr-4 pl-2 py-2 header w-full xl:py-4 xl:max-w-[72rem]  z-10 xl:rounded-b-2xl`}
-      >
-        <div className={`flex flex-col gap-2 max-w-screen- mx-auto  `}>
-          <div className="flex justify-between">
-            <button
-              className="btn btn-warning rounded-[1rem] "
-              onClick={() => {
-                (
-                  document.getElementById("my_modal_5") as HTMLFormElement
-                ).showModal();
-              }}
-            >
-              <h2 className="font-bold"> + ایجاد سوال</h2>
-            </button>
-            <dialog
-              id="my_modal_5"
-              className="modal md:modal-middle modal-bottom h-[100vh]"
-            >
-              <div className="modal-box">
-                {/* header */}
-                <h2 className="font-bold text-lg">ثبت سوال</h2>
-                {/* body */}
-                <div className="modal-action gap-3 flex flex-col">
-                  <select
-                    defaultValue=""
-                    className="select mb-3 bg-gray-50 w-full rounded-[1rem]"
-                  >
-                    <option value="" disabled>
-                      انتخاب تاپیک
-                    </option>
-                    <option value="Homer">Homer</option>
-                    <option value="Marge">Marge</option>
-                    <option value="Bart">Bart</option>
-                    <option value="Lisa">Lisa</option>
-                    <option value="Maggie">Maggie</option>
-                  </select>
-                  {/* Q */}
-                  <input
-                    type="text"
-                    placeholder="سوال"
-                    className="input w-full mb-3 input-lg bg-gray-50 rounded-[1rem]"
-                  />
-                  {/* textArea */}
-                  <textarea
-                    className="textarea pb-10 w-full bg-gray-50 rounded-[1rem]"
-                    placeholder="توضیحات"
-                  ></textarea>
-                  {/* submit */}
-                  <div className="flex mt-3">
-                    <button className="btn ml-3 btn-warning rounded-[1rem]">
-                      <h2 className="font-bold"> ثبت سوال</h2>
-                    </button>
-                    <form method="dialog">
-                      <button className="btn mb-1 btn-error rounded-[1rem]">
-                        بستن
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </dialog>
-
-            {/* filter  */}
-            <div className="flex items-center ">
-              {pathName === `/${countryOrSlug}/community` && (
-                <div className="dropdown dropdown-bottom dropdown-end">
-                  <div
-                    tabIndex={0}
-                    role="button"
-                    onClick={() => {
-                      setColseFilterDropdown(!colseFilterDropdown);
-                      setColseSortDropdown(false);
-                    }}
-                    className="btn btn-ghost  btn-sm dropdown-hover m- bg-transparent bg-contain border-none font-medium xl:text-base"
-                  >
-                    <FadersHorizontal size={21} color="#676567" />
-                    فیلتر
-                  </div>
-                  {colseFilterDropdown && (
-                    <ul
-                      onClick={() =>
-                        setColseFilterDropdown(!colseFilterDropdown)
-                      }
-                      tabIndex={0}
-                      className="menu dropdown-content bg-base-100 rounded-box z-[1] w-48 p-2 shadow"
-                    >
-                      <li>
-                        <a>Item 1</a>
-                      </li>
-                      <li>
-                        <a>Item 2</a>
-                      </li>
-                    </ul>
-                  )}
-                </div>
-              )}
-
-              {/* sort */}
-              <div className="dropdown dropdown-bottom dropdown-end">
-                <div
-                  onClick={() => {
-                    setColseSortDropdown(!colseSortDropdown);
-                    setColseFilterDropdown(false);
-                  }}
-                  tabIndex={0}
-                  role="button"
-                  className="btn btn-ghost xl:text-base btn-sm dropdown-hover m- bg-transparent bg-contain border-none  font-medium font-sm"
-                >
-                  <SortAscending size={21} color="#676567" />
-                  {filterDropdown}
-                </div>
-                {colseSortDropdown && (
-                  <ul
-                    onClick={() => setColseSortDropdown(!colseSortDropdown)}
-                    tabIndex={0}
-                    className=" menu dropdown-content bg-base-100 rounded-box  w-48 p-2 shadow"
-                  >
-                    <li>
-                      <a>Item 1</a>
-                    </li>
-                    <li>
-                      <a>Item 2</a>
-                    </li>
-                  </ul>
-                )}
-              </div>
+        >
+          <div className={`flex flex-col gap-2 max-w-screen- mx-auto  `}>
+            <div className="flex justify-between">
+              {/* modal  */}
+              <AddQModal />
+              {/* filter && sort */}
+              <HeaderFilter countryOrSlug={countryOrSlug} />
             </div>
           </div>
         </div>

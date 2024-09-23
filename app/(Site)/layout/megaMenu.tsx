@@ -23,7 +23,7 @@ export default function MegaMenu({
         showMegaJob ? "-translate-y-[3px]" : ""
       }${
         showMegaComm ? "-translate-y-[4px]" : ""
-      }  transition-all duration-400  absolute top-[50px] xl:-right-4 lg:right-12 z-50 h-auto w-[52rem]`}
+      }  transition-all duration-400  absolute top-[50px] xl:-right-4 z-50 h-auto xl:w-[52rem] lg:w-[48rem] md:w-[30rem] sm:w-full`}
     >
       <MegaMenuItems
         showMegaMenu={showMegaBiz}
