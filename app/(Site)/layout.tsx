@@ -4,7 +4,7 @@ import "@/styles/globals.css";
 import Fonts from "@/config/fonts";
 import { CountryNamespace } from "@/types/country";
 import { API_ROUTES } from "@/routes";
-import { ModalCountry } from "@/app/(Site)/layout/modalCountry";
+import { ModalCountry } from "@/app/(Site)/layout/modalcountry";
 import Script from "next/script";
 import { Toaster } from "react-hot-toast";
 import Hotjar from "@/components/hotjar";

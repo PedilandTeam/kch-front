@@ -64,7 +64,7 @@ export default function RegisterForm() {
             console.log(values);
             
             const token = await executeRecaptcha('user_signup');
-            await registerUser(values, token);
+            const res = await registerUser(values, token);
             router.push('/account');
         },
     });

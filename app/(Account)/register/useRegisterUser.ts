@@ -19,12 +19,14 @@ export default function useRegisterUser() {
             )
             .then((res) => {
                 toast.success(res.data?.message);
+                return res.data
             })
             .catch((err) => {
                 toast.error(
                     err.response.data?.message ||
                         'خطایی در هنگام ثبت‌نام پیش آمد'
                 );
+                return err?.response?.data | err
             })
             .finally(() => {
                 setLoading(false);

@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import HeaderMobile from "./header.mobile";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect } from "react";
-import signOutAction from "@/app/actions/signOut.action";
+import signOutAction from "@/actions/signOut.action";
 import { SignOut } from "@phosphor-icons/react";
 
 type HeaderProps = {

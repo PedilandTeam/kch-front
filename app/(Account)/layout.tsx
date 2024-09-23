@@ -4,7 +4,7 @@ import '@/styles/globals.css';
 import Fonts from '@/config/fonts';
 import { CountryNamespace } from '@/types/country';
 import { API_ROUTES } from '@/routes';
-import { ModalCountry } from '../layout/modalcountry';
+import { ModalCountry } from '../../layout/modalcountry';
 import { Providers } from '@/app/client-packages/react-redux/provider';
 import Script from 'next/script';
 import { Metadata, Viewport } from 'next';

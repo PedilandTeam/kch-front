@@ -53,7 +53,7 @@ export default memo(function SelectCity<T extends { items: any }>({
     useEffect(() => {
         const fetchCities = async () => {
             if (!countryId) return;
-            await fetch(`https://api.koochaa.com/cities?limit=10&page=1&countryId=${countryId}${search ? `&search=${search}` : ""}`)
+            await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cities?limit=10&page=1&countryId=${countryId}${search ? `&search=${search}` : ""}`)
             .then(async res => {
                 if (!res.ok) {
                     toast.error('خطایی رخ داد')
