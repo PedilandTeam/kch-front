@@ -18,7 +18,7 @@
     "paths": {
       "@/*": ["./*"],
       "@app/*": ["./app/*"],
-      "@client-packages/*": ["./app/client-packages/*"],
+      "@client-packages/*": ["./components/client-packages/*"],
       "@text/*": ["./app/text/*"],
       "@/types/*": ["./types/*"]
     },

@@ -4,8 +4,8 @@ export interface Get {
 }
 
 export interface Item {
-  createdDate: Date;
-  updateDate: Date;
+  createdDate: string;
+  updateDate: string;
   status: boolean;
   id: string;
   text: string;
@@ -24,12 +24,25 @@ export interface BotUser {
 }
 
 export interface Question {
-  createdDate: Date;
-  updateDate: Date;
+  createdDate: string;
+  updateDate: string;
   status: boolean;
   id: string;
   title: string;
   text: string;
+  botUser: {
+    firstname: string;
+    lastname: string
+  },
+  topic: {
+    title: string
+  },
+  country: {
+    name: string
+  },
+  votes: {
+    type: 'up' | 'down'
+  }[]
 }
 
 export interface Meta {

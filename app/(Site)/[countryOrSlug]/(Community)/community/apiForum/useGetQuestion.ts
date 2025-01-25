@@ -1,4 +1,5 @@
-import { fetcher } from "@/app/swr/fetcher";
+import { fetcher } from "@/swr/fetcher";
+import { Question } from "@/types/answer";
 import useSWR from "swr";
 
 function useGetQuestion(questionIdParams: string) {

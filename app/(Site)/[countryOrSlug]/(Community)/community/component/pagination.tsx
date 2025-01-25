@@ -1,11 +1,10 @@
 "use client";
 
-import { PageNamespace } from "@/types/page";
 import { QuestionNamespace } from "@/types/questions";
 import {
   ArrowCircleLeft,
   ArrowCircleRight,
-} from "app/client-packages/phosphor-icons/react";
+} from "@client-packages/phosphor-icons/react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
@@ -15,9 +14,9 @@ type ParsedSearchParams = {
   page?: number;
 };
 type PaginationProps = {
-  pages: QuestionNamespace.GET;
+  pages: Pick<QuestionNamespace.GET, 'meta'>;
 };
-export default function PaginationQ({ pages }: PaginationProps) {
+export default function Pagination({ pages }: PaginationProps) {
   let totalPages = pages?.meta?.totalPages;
   const paginationLimit = 9;
   const staticPaginations = 2;

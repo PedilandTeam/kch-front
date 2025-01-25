@@ -8,11 +8,13 @@ async function Page({
 }: {
   params: { countryOrSlug: string; questionId: string };
 }) {
-  const countryList: CountryNamespace.GET[] = await fetch(
+
+  const countryList: [CountryNamespace.GET] = await fetch(
     `${process.env.API_URL}/countries?code=${params.countryOrSlug}`,
-    {
-      credentials: "include",
-    }
+    {next: {
+      revalidate: 1000 * 60 * 60 * 24,
+      tags: ['country']
+    }}
   )
     .then(async (res) => {
       return await res.json();
@@ -22,7 +24,7 @@ async function Page({
       throw new Error("Internal server error");
     });
 
-  if (countryList.length === 0) {
+  if (!countryList.length) {
     notFound();
   }
 

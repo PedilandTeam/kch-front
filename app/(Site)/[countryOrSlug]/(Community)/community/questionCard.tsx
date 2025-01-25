@@ -16,7 +16,7 @@ import usePostDownVote from "./apiForum/usePostDownVote";
 import useCheckUser from "./apiForum/useCheckUser";
 import CheckUserModal from "./component/checkUserModal";
 import { useRouter, useSearchParams } from "next/navigation";
-import PaginationQ from "./component/paginationQ";
+import PaginationQ from "./component/pagination";
 import SkeletonQuestionCard from "./component/skeletonQuestionCard";
 import { CountryNamespace } from "@/types/country";
 // import PaginationQ from "./PaginationQ";

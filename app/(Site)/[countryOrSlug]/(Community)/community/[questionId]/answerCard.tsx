@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ArrowFatDown, ArrowFatUp } from "@phosphor-icons/react";
 import useGetAnswer from "../apiForum/useGetAnswer";
 import { timeAgo } from "../changeDate";
-import PaginationQ from "../component/paginationQ";
+import Pagination from "../component/pagination";
 import { useSearchParams } from "next/navigation";
 import usePostUpVoteAnswer from "../apiForum/usePostUpVoteAnswer";
 import usePostDownVoteAnswer from "../apiForum/usePostDownVoteAnswer";
@@ -33,7 +33,6 @@ export default function AnswerCard({
     error,
     mutate: answerMutate,
   } = useGetAnswer(countryOrSlug, questionIidParam, currentPage);
-  const test = answerData?.length || 2;
 
   // vote
   const { vote } = usePostUpVoteAnswer(answerMutate);
@@ -162,7 +161,7 @@ export default function AnswerCard({
         </div>
       ))}
       <div className="flex justify-center w-full ml-5 xl:ml-0">
-        {answerData && <PaginationQ pages={{ meta: answerData.meta }} />}
+        {answerData && <Pagination pages={{ meta: answerData.meta }} />}
       </div>
     </div>
   );

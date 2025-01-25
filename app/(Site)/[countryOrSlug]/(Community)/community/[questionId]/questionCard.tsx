@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ArrowFatDown,
   ArrowFatUp,
@@ -13,6 +13,7 @@ import usePostDownVote from "../apiForum/usePostDownVote";
 import useGetQuestion from "../apiForum/useGetQuestion";
 import useCheckUser from "../apiForum/useCheckUser";
 import SkeletonQuestionCard from "../component/skeletonQuestionCard";
+import toast from "react-hot-toast";
 
 export default function QuestionCard({
   params,
@@ -28,9 +29,6 @@ export default function QuestionCard({
   const { question, questionError, questionIsLoading, mutateQuestion } =
     useGetQuestion(questionIdParams);
 
-  const thisPageQuestion =
-    question?.country.code === countryOrSlug ? question : null;
-
   // vote
   const { vote } = usePostUpVote(mutateQuestion);
 
@@ -38,6 +36,12 @@ export default function QuestionCard({
   const downVote = usePostDownVote(mutateQuestion);
   // get checkUser
   const { checkUser } = useCheckUser();
+
+  useEffect(() => {
+    if (!questionError) return;
+    toast.error('خطایی در گرفتن لیست سوالات')
+  }, [questionError])
+  
 
   if (questionIsLoading) {
     return (
@@ -51,7 +55,7 @@ export default function QuestionCard({
   return (
     <div className="QuestionCard w-full max-w-[72rem] min-h-[15rem] py-2 bg-white flex flex-col items-center">
       {/* Question Card */}
-      {thisPageQuestion ? (
+      {question ? (
         <div className="_container w-full bg-blue-50 rounded-xl px-4 py-2 mb-4">
           <div className="_ QuestionCard-header flex py-2 border-b-2 border-dotted border-gray-300 justify-between items-center">
             {/* Avatar and Name */}
@@ -64,25 +68,25 @@ export default function QuestionCard({
                 </div>
                 <div className="flex mr-3 gap-1 flex-col">
                   <h2 className="ml-2 font-bold xl:text-xl">
-                    {thisPageQuestion?.botUser?.firstname}
-                    {thisPageQuestion?.botUser?.lastname}
+                    {question?.botUser?.firstname}
+                    {question?.botUser?.lastname}
                   </h2>
-                  <span className="flex text-sm sm:text-md">{`ساکن ${thisPageQuestion?.country?.name}`}</span>
+                  <span className="flex text-sm sm:text-md">{`ساکن ${question?.country?.name}`}</span>
                 </div>
               </div>
             </div>
             {/* Date */}
             <span className="text-sm xl:text-md text-gray-500">
-              {timeAgo(thisPageQuestion?.createdDate)}
+              {timeAgo(question?.createdDate)}
             </span>
           </div>
-          {/* thisPageQuestion and Description */}
-          <div className="_thisPageQuestionCard-body mt-3 mb-2">
+          {/* question and Description */}
+          <div className="_questionCard-body mt-3 mb-2">
             <h2 className="text-lg font-bold xl:text-xl">
-              {thisPageQuestion?.title}
+              {question?.title}
             </h2>
             <p className="mt-1 text-sm xl:text-lg text-gray-700">
-              {thisPageQuestion?.text}
+              {question?.text}
             </p>
           </div>
           {/* Topic and Up Vote */}
@@ -91,7 +95,7 @@ export default function QuestionCard({
               <span className="flex gap-1 font-bold ">
                 <Tag size={22} color="#262526" weight="duotone" />
                 <h3 className="text-[.7rem] xl:text-base">
-                  {thisPageQuestion?.topic?.title}
+                  {question?.topic?.title}
                 </h3>
               </span>
             </div>
@@ -102,7 +106,7 @@ export default function QuestionCard({
                     const isUserAuthenticated = await checkUser();
                     if (!isUserAuthenticated) {
                       (
-                        document.getElementById("my_modal_3") as HTMLFormElement
+                        document.getElementById("questionModal") as HTMLFormElement
                       ).showModal();
                     } else {
                       setOpenAnswer(!openAnswer);
@@ -134,10 +138,10 @@ export default function QuestionCard({
                     const isUserAuthenticated = await checkUser();
                     if (!isUserAuthenticated) {
                       (
-                        document.getElementById("my_modal_3") as HTMLFormElement
+                        document.getElementById("questionModal") as HTMLFormElement
                       ).showModal();
                     } else {
-                      downVote(thisPageQuestion?.id);
+                      downVote(question?.id);
                       checkUser();
                     }
                   }}
@@ -146,7 +150,7 @@ export default function QuestionCard({
                   <span className="flex gap-1 ">
                     <ArrowFatDown size={15} color="#da3316" weight="duotone" />
                     {
-                      thisPageQuestion?.votes?.filter((v) => v.type === "down")
+                      question?.votes?.filter((v) => v.type === "down")
                         .length
                     }
                   </span>
@@ -157,10 +161,10 @@ export default function QuestionCard({
                     const isUserAuthenticated = await checkUser();
                     if (!isUserAuthenticated) {
                       (
-                        document.getElementById("my_modal_3") as HTMLFormElement
+                        document.getElementById("questionModal") as HTMLFormElement
                       ).showModal();
                     } else {
-                      vote(thisPageQuestion.id);
+                      vote(question.id);
                       checkUser();
                     }
                   }}
@@ -174,7 +178,7 @@ export default function QuestionCard({
                   </span>
                   <span className="font-bold text-[.7rem] xl:text-base">
                     {
-                      thisPageQuestion?.votes?.filter((v) => v.type === "up")
+                      question?.votes?.filter((v) => v.type === "up")
                         .length
                     }
                   </span>
