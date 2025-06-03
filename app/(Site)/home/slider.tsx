@@ -5,7 +5,7 @@ import sliderImageMobile from "@/public/images/slide/home/hsm-01.webp";
 
 export const SliderMainHome = () => {
   return (
-    <div className="slider h-[520px] flex justify-center content-center mx-3 sm:mx-auto relative rounded-xl">
+    <div className="_slider-home h-[520px] flex justify-center content-center sm:mx-auto relative rounded-xl">
       <Image
         className="rounded-xl brightness-[.50] object-cover hidden sm:block"
         src={sliderImage}

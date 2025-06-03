@@ -1,15 +1,16 @@
 // app/(Site)/layout.tsx
-import "@/styles/globals.css";
 import { ModalCountry } from "@/app/(Site)/layout/modalcountry";
-import { Footer } from "@/app/footer";
-import { Header } from "@/app/header";
 import Hotjar from "@/components/hotjar";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import Fonts from "@/config/fonts";
 import { API_ROUTES } from "@/routes";
+import "@/styles/globals.css";
 import { CountryNamespace } from "@/types/country";
 import Script from "next/script";
 // UI Imports
 import { Toaster } from "react-hot-toast";
+import { MobileMenu } from "@/components/layout/MobileMenu";
 
 export default async function RootLayout({
   children,
@@ -26,15 +27,24 @@ export default async function RootLayout({
 
   return (
     <html lang="fa" dir="rtl" className="scroll-smooth">
-      <body className="min-h-screen overflow-x-hidden">
+      <body className="min-h-screen relative">
         <Fonts />
+
         <Hotjar />
+
         <Header countries={countries}>
           <ModalCountry countries={countries} />
         </Header>
-        <Toaster />
+
         {children}
+
         <Footer />
+
+        <MobileMenu />
+
+        <Toaster />
+
+        {/* GTM Script */}
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD" />
         <Script id="google-analytics">
           {`

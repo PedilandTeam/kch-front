@@ -1,3 +1,4 @@
+// components/layout/footer.tsx
 "use client";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -5,22 +6,21 @@ import {
   InstagramLogo,
   FacebookLogo,
   LinkedinLogo,
-  YoutubeLogo,
   XLogo,
   CaretUp,
 } from "app/client-packages/phosphor-icons/react";
-import { MENU } from "./text/menu";
-import { FOOTER } from "./text/footer";
-import { GENERAL } from "./text/general";
+import { MENU } from "@/app/text/menu";
+import { FOOTER } from "@app/text/footer";
+import { GENERAL } from "@/app/text/general";
 import Image from "next/image";
 
 export const Footer = () => {
   useEffect(() => {
     if (typeof window == "undefined") return;
-    var toTopDiv = document.getElementById("toTopDiv");
+    const toTopDiv = document.getElementById("toTopDiv");
     if (!toTopDiv) return;
     window.addEventListener("scroll", function () {
-      var toTopDiv = document.getElementById("toTopDiv");
+      const toTopDiv = document.getElementById("toTopDiv");
       if (window.scrollY > 600) {
         // Change the value as needed
         toTopDiv!.classList.remove("hidden");

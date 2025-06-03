@@ -1,7 +1,9 @@
+// app/(Site)/page.tsx
 import { Metadata } from "next";
+// UI Imports
+import HomeBottom from "./home/bottom";
 import { HomeCountries } from "./home/countries";
 import { SliderMainHome } from "./home/slider";
-import HomeBottom from "./home/bottom";
 
 export const metadata: Metadata = {
   title: "کوچا | جامعه ایرانیان مهاجر مقیم همه جا",
@@ -9,14 +11,16 @@ export const metadata: Metadata = {
     "هر جای دنیا که زندگی می کنید، کوچا همراه شماست تا بتوانید نیازهای خود را به زبان مادری و به سادگی رفع کنید. از معرفی مشاغل محلی گرفته تا پزشکانی که به زبان فارسی صحبت می کنند.",
   alternates: {
     canonical: process.env.FRONT_URL,
-  }
+  },
 };
 export default function Page() {
   return (
-    <div className="component page-home sm:mx-auto w-full sm:max-w-[95%]">
+    <main className="_page-home p-4">
       <SliderMainHome />
+
       <HomeCountries />
+
       <HomeBottom />
-    </div>
+    </main>
   );
 }

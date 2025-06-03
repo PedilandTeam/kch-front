@@ -1,13 +1,14 @@
+// components/layout/header.tsx
 "use client";
-
-import { TopTools } from "@/app/(Site)/layout/toptools";
-import { OffCanvas } from "@/app/(Site)/layout/offcanvas";
+import { useHeader } from "@/store/useHeader";
+import { CountryNamespace } from "@/types/country";
+import Image from "next/image";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { CountryNamespace } from "@/types/country";
-import { useHeader } from "@/store/useHeader";
+// UI Imports
+import { OffCanvas } from "@/app/(Site)/layout/offcanvas";
+import { TopTools } from "@/app/(Site)/layout/toptools";
 
 type HeaderProps = {
   children: React.ReactNode;
@@ -17,7 +18,7 @@ type HeaderProps = {
 export const Header = ({ children, countries }: HeaderProps) => {
   const params = useParams();
 
-  const { countryCode: contryCodeInStore, isNotFound } = useHeader();
+  const { countryCode: contryCodeInStore } = useHeader();
 
   const [countryCode, setCountryCode] = useState("");
 
@@ -35,7 +36,7 @@ export const Header = ({ children, countries }: HeaderProps) => {
     !contryCodeInStore && (countryCode == "un" || !countryCode);
 
   return (
-    <header className="w-full py-[10px] bg-white shadow-sm">
+    <header className="hidden md:block w-full py-[10px] bg-white shadow-sm">
       <div className="container mx-auto max-w-[1144px]">
         <div className="flex items-center justify-between mx-3 sm:mx-0">
           <TopTools

@@ -14,7 +14,7 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
   const ref = useRef<HTMLInputElement>(null);
 
   return (
-    <div dir="rtl" className="z-10 drawer drawer-end">
+    <div dir="rtl" className="z-10 drawer drawer-end hidden">
       <input
         ref={ref}
         id="main-drawer"
