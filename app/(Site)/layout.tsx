@@ -1,13 +1,15 @@
-import { Header } from "@/app/header";
-import { Footer } from "@/app/footer";
+// app/(Site)/layout.tsx
 import "@/styles/globals.css";
-import Fonts from "@/config/fonts";
-import { CountryNamespace } from "@/types/country";
-import { API_ROUTES } from "@/routes";
 import { ModalCountry } from "@/app/(Site)/layout/modalcountry";
-import Script from "next/script";
-import { Toaster } from "react-hot-toast";
+import { Footer } from "@/app/footer";
+import { Header } from "@/app/header";
 import Hotjar from "@/components/hotjar";
+import Fonts from "@/config/fonts";
+import { API_ROUTES } from "@/routes";
+import { CountryNamespace } from "@/types/country";
+import Script from "next/script";
+// UI Imports
+import { Toaster } from "react-hot-toast";
 
 export default async function RootLayout({
   children,
@@ -26,7 +28,7 @@ export default async function RootLayout({
     <html lang="fa" dir="rtl" className="scroll-smooth">
       <body className="min-h-screen overflow-x-hidden">
         <Fonts />
-        <Hotjar/>
+        <Hotjar />
         <Header countries={countries}>
           <ModalCountry countries={countries} />
         </Header>

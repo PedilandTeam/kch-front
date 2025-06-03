@@ -15,58 +15,35 @@ type ParsedSearchParams = {
   search: string;
 };
 
-/**
- *
- * @param countryOrSlug get country with [countryOrSlug]
- * @param unitSlug get unit of category to check is entered category part of current unit
- * @param categorySlug get targeted category by Slug
- * @returns
- */
 const pathGenerator = async (
   countryOrSlug: string,
   unitSlug: string,
   categorySlug: string
 ): Promise<PathGeneratorType> => {
-  // const units = await (await API_ROUTES.UNITS.GET_ALL(2000)).json();
   const currentUnit = (
     await fetchWrapper<UnitType[]>("units", {
-      filters: {
-        slug: unitSlug,
-      },
-      tags: ["country", 'page'],
-      revalidate:
-        +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+      filters: { slug: unitSlug },
+      tags: ["country", "page"],
+      revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     })
   )[0];
 
-  // const countryList = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 20)).json();
   const countryList = await fetchWrapper<CountryNamespace.GET[]>("countries", {
-    filters: {
-      code: countryOrSlug,
-    },
-    tags: ["country", 'page'],
+    filters: { code: countryOrSlug },
+    tags: ["country", "page"],
     revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
   });
   const currentCountry = countryList[0];
 
-  // const categories: CategoryNamespace.GET = await (await API_ROUTES.CATEGOREIS.GET_ALL(1, 1, categorySlug)).json();
-
   const categories = await fetchWrapper<CategoryNamespace.GET>("categories", {
-    filters: {
-      page: 1,
-      limit: 1,
-      slug: categorySlug
-    },
-    tags: ["country", 'page'],
+    filters: { page: 1, limit: 1, slug: categorySlug },
+    tags: ["country", "page"],
     revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
   });
-
   const currentCategory = categories?.items[0];
 
   if (currentCategory?.unit?.id != currentUnit?.id) {
-    return {
-      type: null,
-    };
+    return { type: null };
   }
 
   return {
@@ -77,19 +54,15 @@ const pathGenerator = async (
       unit: currentUnit,
     },
   };
-  // return <CategoryList category={currentCategory} country={currentCountry} />
 };
 
-type generateMetadata = {
-  params: { countryOrSlug: string; unitSlug: string; categorySlug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-export const generateMetadata = async ({
-  params: { countryOrSlug, unitSlug, categorySlug },
-  searchParams,
-}: generateMetadata): Promise<Metadata> => {
+// Next.js 15 باید params و searchParams رو جدا جدا await کنه و تایپ‌ها هم any گذاشته شدن برای سازگاری کامل
+export const generateMetadata = async (props: any): Promise<Metadata> => {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
+  const { countryOrSlug, unitSlug, categorySlug } = params;
+
   let pathInfo: PathGeneratorType;
-
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug, categorySlug);
   } catch (e: any) {
@@ -105,9 +78,7 @@ export const generateMetadata = async ({
     };
   }
 
-  const countries = await (
-    await API_ROUTES.COUNTRIES.GET_ALL(false, 120)
-  ).json();
+  const countries = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 120)).json();
   const currentCountry: CountryNamespace.GET | undefined = countries.find(
     (country: CountryNamespace.GET) => country.code == countryOrSlug
   );
@@ -115,31 +86,19 @@ export const generateMetadata = async ({
   const pageSearchParams = searchParams?.page;
 
   return {
-    title: `لیست ${
-      category?.seoTitle ? category.seoTitle : `${category.name} فارسی زبان`
-    } در ${pathInfo?.props?.country?.name} | کوچا`,
-    description: `به جامعه مجازی ایرانیان مهاجر مقیم ${
-      countryOrSlug && currentCountry && currentCountry.name
-    } خوش آمدید. در این صفحه لیست کاملی از ${
-      pathInfo?.props?.category?.name
-    } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
+    title: `لیست ${category?.seoTitle ? category.seoTitle : `${category.name} فارسی زبان`} در ${pathInfo?.props?.country?.name} | کوچا`,
+    description: `به جامعه مجازی ایرانیان مهاجر مقیم ${countryOrSlug && currentCountry && currentCountry.name} خوش آمدید. در این صفحه لیست کاملی از ${pathInfo?.props?.category?.name} فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
     alternates: {
-      canonical: `${process.env.FRONT_URL}/${
-        currentCountry?.code
-      }/${unitSlug}/${pathInfo?.props?.category?.slug}${
-        pageSearchParams ? `?page=${pageSearchParams}` : ""
-      }`,
+      canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${unitSlug}/${pathInfo?.props?.category?.slug}${pageSearchParams ? `?page=${pageSearchParams}` : ""}`,
     },
   };
 };
 
-export default async function CategoryPage({
-  params: { countryOrSlug, unitSlug, categorySlug },
-  searchParams,
-}: {
-  params: { countryOrSlug: string; unitSlug: string; categorySlug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
+export default async function CategoryPage(props: any) {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
+  const { countryOrSlug, unitSlug, categorySlug } = params;
+
   let parsedSearchParams: ParsedSearchParams;
   let pathInfo: PathGeneratorType;
 

@@ -14,40 +14,24 @@ export type PathGeneratorType = {
   props?: any;
 };
 
-type Props = {
-  params: { countryOrSlug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
 const pathGenerator = async (
   countryOrSlug: string
 ): Promise<PathGeneratorType> => {
-  const NOT_FOUND = {
-    type: null,
-  };
+  const NOT_FOUND = { type: null };
 
-  // const countryOrSlug = countryOrSlug as unknown as string
   let currentCountry: CountryNamespace.GET;
   try {
     const country = await fetchWrapper<CountryNamespace.GET[]>("countries", {
-      filters: {
-        code: countryOrSlug,
-      },
-      tags: ["country", 'page'],
+      filters: { code: countryOrSlug },
+      tags: ["country", "page"],
       revalidate:
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     });
-    if (country?.length > 0) {
-      currentCountry = country[0];
-    }
-
+    if (country?.length > 0) currentCountry = country[0];
 
     const categories = await fetchWrapper<CategoryNamespace.GET>("categories", {
-      filters: {
-        page: 1,
-        limit: 300,
-      },
-      tags: ["country", 'page'],
+      filters: { page: 1, limit: 300 },
+      tags: ["country", "page"],
       revalidate:
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     });
@@ -55,51 +39,34 @@ const pathGenerator = async (
     if (currentCountry! && countryOrSlug) {
       return {
         type: "country",
-        props: {
-          currentCountry,
-          categories,
-        },
+        props: { currentCountry, categories },
       };
     }
 
-    //show single page
     if (countryOrSlug) {
       try {
-
-        const pageData = await fetchWrapper<PageNamespace.GET>('pages', {
-          filters: {
-            page: 1,
-            limit: 1,
-            slug: countryOrSlug
-          },
-          tags: ['country', 'page'],
-          revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000
-        })
-
-        if (!pageData?.items || pageData?.items?.length == 0) {
-          return NOT_FOUND;
-        }
-        return {
-          type: "item",
-          props: {
-            pageData: pageData.items[0],
-          },
-        };
+        const pageData = await fetchWrapper<PageNamespace.GET>("pages", {
+          filters: { page: 1, limit: 1, slug: countryOrSlug },
+          tags: ["country", "page"],
+          revalidate:
+            +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+        });
+        if (!pageData?.items || pageData?.items?.length == 0) return NOT_FOUND;
+        return { type: "item", props: { pageData: pageData.items[0] } };
       } catch (e: any) {
         return NOT_FOUND;
       }
     }
 
     return NOT_FOUND;
-    // notFound()
   } catch (e: any) {
     return NOT_FOUND;
   }
 };
 
-export async function generateMetadata({ params, searchParams }: Props) {
+export async function generateMetadata(props: any) {
+  const params = await props.params;
   let pathInfo: PathGeneratorType;
-
   try {
     pathInfo = await pathGenerator(params.countryOrSlug);
   } catch (e: any) {
@@ -135,16 +102,11 @@ export async function generateMetadata({ params, searchParams }: Props) {
           "متاسفانه چنین صفحه‌ای وجود نداره و یا ممکنه بخاطر تغییرات وب‌سایت جدید کـوچـا آدرسش تغییر کرده باشه.",
       };
       notFound();
-
-    // }
   }
 }
 
-export default async function CenterPage({
-  params,
-}: {
-  params: { countryOrSlug: string };
-}) {
+export default async function CenterPage(props: any) {
+  const params = await props.params;
   let pathInfo: PathGeneratorType;
 
   try {
@@ -157,21 +119,15 @@ export default async function CenterPage({
   switch (pathInfo.type) {
     case "country":
       availability = pathInfo.props?.currentCountry.availability;
-      if (!availability) {
-        return notFound();
-      }
+      if (!availability) return notFound();
       return <Country {...pathInfo.props} />;
 
     case "item":
       availability = pathInfo.props?.pageData?.availability;
-      if (!availability) {
-        return notFound();
-      }
+      if (!availability) return notFound();
       return <PageItem {...pathInfo.props} />;
 
     default:
       notFound();
-
-    // }
   }
 }

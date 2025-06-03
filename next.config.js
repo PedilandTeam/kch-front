@@ -1,18 +1,26 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  eslint:{
+  eslint: {
     ignoreDuringBuilds: true
   },
-  typescript:{
+  typescript: {
     ignoreBuildErrors: true
   },
-  reactStrictMode: true,
-  images:{
-    domains:[
-      "dl.koochaa.com",
-      "www.koochaa.com",
-      "d11h29rvzk0dwa.cloudfront.net"
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "dl.koochaa.com"
+      },
+      {
+        protocol: "https",
+        hostname: "www.koochaa.com"
+      },
+      {
+        protocol: "https",
+        hostname: "d11h29rvzk0dwa.cloudfront.net"
+      }
     ]
   }
 }
