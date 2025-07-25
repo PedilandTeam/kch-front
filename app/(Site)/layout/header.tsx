@@ -1,13 +1,13 @@
 "use client";
 
-import { TopTools } from "@/app/(Site)/layout/toptools";
 import { OffCanvas } from "@/app/(Site)/layout/offcanvas";
+import { TopTools } from "@/app/(Site)/layout/toptools";
+import { useHeader } from "@/store/useHeader";
+import { CountryNamespace } from "@/types/country";
+import Image from "next/image";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { CountryNamespace } from "@/types/country";
-import { useHeader } from "@/store/useHeader";
 
 type HeaderProps = {
   children: React.ReactNode;
@@ -16,23 +16,25 @@ type HeaderProps = {
 
 export const Header = ({ children, countries }: HeaderProps) => {
   const params = useParams();
-
-  const { countryCode: contryCodeInStore, isNotFound } = useHeader();
-
-  const [countryCode, setCountryCode] = useState("");
+  const { countryCode: contryCodeInStore } = useHeader();
+  const [mounted, setMounted] = useState(false);
+  const [countryCode, setCountryCode] = useState("un");
 
   useEffect(() => {
+    setMounted(true);
+
     const countryOrSlug = params.countryOrSlug as string;
     const isMainPage =
       !countryOrSlug || !countries.find((c) => c.code === countryOrSlug);
-    const countryCodeFromParams = isMainPage ? "" : countryOrSlug;
-    setCountryCode(
-      isMainPage ? "un" : countryCodeFromParams || contryCodeInStore || "un"
-    );
+    const countryCodeFromParams = isMainPage ? "un" : countryOrSlug;
+
+    setCountryCode(countryCodeFromParams || contryCodeInStore || "un");
   }, [params, countries, contryCodeInStore]);
 
+  if (!mounted) return null;
+
   const isMainPage =
-    !contryCodeInStore && (countryCode == "un" || !countryCode);
+    !contryCodeInStore && (countryCode === "un" || !countryCode);
 
   return (
     <header className="w-full py-[10px] bg-white shadow-sm">

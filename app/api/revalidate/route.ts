@@ -6,29 +6,35 @@ export async function GET(request: NextRequest) {
   const secret = request.nextUrl.searchParams.get("secret");
 
   if (secret !== process.env.REVALIDATE_SECRET) {
-    return Response.json({ revalidated: false, message: "Invalid secret", date: Date.now() });
+    return Response.json({
+      revalidated: false,
+      message: "Invalid secret",
+      date: Date.now(),
+    });
   }
 
   if (!paths && !tags) {
-    return Response.json({ revalidated: false, message: "Missing paths", date: Date.now() });
+    return Response.json({
+      revalidated: false,
+      message: "Missing paths",
+      date: Date.now(),
+    });
   }
 
   if (paths) {
-    const pathsArray = paths.split(',')
+    const pathsArray = paths.split(",");
     for (const path of pathsArray) {
-      revalidatePath(path, "page")
+      revalidatePath(path, "page");
     }
   }
 
-  if(tags) {
-    const tagsArray = tags.split(',')
+  if (tags) {
+    const tagsArray = tags.split(",");
     for (const tag of tagsArray) {
-      revalidateTag(tag)
+      revalidateTag(tag);
     }
   }
-
-
 
   console.info(`Revalidated:`, paths ? paths : tags);
-  return Response.json({ revalidated: true, date: Date.now() })
+  return Response.json({ revalidated: true, date: Date.now() });
 }

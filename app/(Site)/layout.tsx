@@ -1,13 +1,15 @@
-import { Header } from "@/app/header";
-import { Footer } from "@/app/footer";
-import "@/styles/globals.css";
-import Fonts from "@/config/fonts";
-import { CountryNamespace } from "@/types/country";
-import { API_ROUTES } from "@/routes";
+// app/(Site)/layout.tsx
+
+import { Footer } from "@/app/(Site)/layout/footer";
+import { Header } from "@/app/(Site)/layout/header";
 import { ModalCountry } from "@/app/(Site)/layout/modalcountry";
+import Hotjar from "@/components/hotjar";
+import Fonts from "@/config/fonts";
+import { API_ROUTES } from "@/routes";
+import "@/styles/globals.css";
+import { CountryNamespace } from "@/types/country";
 import Script from "next/script";
 import { Toaster } from "react-hot-toast";
-import Hotjar from "@/components/hotjar";
 
 export default async function RootLayout({
   children,
@@ -26,13 +28,16 @@ export default async function RootLayout({
     <html lang="fa" dir="rtl" className="scroll-smooth">
       <body className="min-h-screen overflow-x-hidden">
         <Fonts />
-        <Hotjar/>
         <Header countries={countries}>
           <ModalCountry countries={countries} />
         </Header>
-        <Toaster />
+
         {children}
+
         <Footer />
+
+        <Toaster />
+        <Hotjar />
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD" />
         <Script id="google-analytics">
           {`

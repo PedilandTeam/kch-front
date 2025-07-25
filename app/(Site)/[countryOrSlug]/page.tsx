@@ -1,12 +1,13 @@
-import { API_ROUTES } from "@/routes";
-import { CountryNamespace } from "@/types/country";
-import PageItem from "./item/item";
-import { notFound } from "next/navigation";
-import Country from "./country/country";
-import { metadata } from "../page";
-import fetchWrapper, { FetchWrapperError } from "@/modules/fetchWrapper";
+// app/(Site)/[countryOrSlug]/page.tsx
+
+import fetchWrapper from "@/modules/fetchWrapper";
 import { CategoryNamespace } from "@/types/category";
+import { CountryNamespace } from "@/types/country";
 import { PageNamespace } from "@/types/page";
+import { notFound } from "next/navigation";
+import { metadata } from "../page";
+import Country from "./country/country";
+import PageItem from "./item/item";
 
 export type PathsType = "country" | "unit" | "category" | "item";
 export type PathGeneratorType = {
@@ -33,7 +34,7 @@ const pathGenerator = async (
       filters: {
         code: countryOrSlug,
       },
-      tags: ["country", 'page'],
+      tags: ["country", "page"],
       revalidate:
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     });
@@ -41,13 +42,12 @@ const pathGenerator = async (
       currentCountry = country[0];
     }
 
-
     const categories = await fetchWrapper<CategoryNamespace.GET>("categories", {
       filters: {
         page: 1,
         limit: 300,
       },
-      tags: ["country", 'page'],
+      tags: ["country", "page"],
       revalidate:
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     });
@@ -65,16 +65,16 @@ const pathGenerator = async (
     //show single page
     if (countryOrSlug) {
       try {
-
-        const pageData = await fetchWrapper<PageNamespace.GET>('pages', {
+        const pageData = await fetchWrapper<PageNamespace.GET>("pages", {
           filters: {
             page: 1,
             limit: 1,
-            slug: countryOrSlug
+            slug: countryOrSlug,
           },
-          tags: ['country', 'page'],
-          revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000
-        })
+          tags: ["country", "page"],
+          revalidate:
+            +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+        });
 
         if (!pageData?.items || pageData?.items?.length == 0) {
           return NOT_FOUND;

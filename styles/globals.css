@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-size: 15px;
+}
+
 @layer base {
   body {
     font-family: "AnjomanMaxVF", AnjomanMax, Tahoma, system-ui, sans-serif;
