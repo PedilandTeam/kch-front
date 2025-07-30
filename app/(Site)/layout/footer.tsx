@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 // UI Import
-import { FOOTER } from "@/app/text/footer";
-import { GENERAL } from "@/app/text/general";
-import { MENU } from "@/app/text/menu";
+import { FOOTER } from "@/text/footer";
+import { GENERAL } from "@/text/general";
+import { MENU } from "@/text/menu";
 import {
   CaretCircleUpDownIcon,
   FacebookLogoIcon,
