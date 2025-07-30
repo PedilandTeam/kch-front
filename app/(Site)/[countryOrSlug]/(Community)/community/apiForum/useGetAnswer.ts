@@ -1,4 +1,4 @@
-import { fetcher } from "@/app/swr/fetcher";
+import { fetcher } from "@/swr/fetcher";
 import { AnswerNamespace } from "@/types/answer";
 import useSWR from "swr";
 

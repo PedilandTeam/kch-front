@@ -1,5 +1,5 @@
 "use client";
-import { GENERAL } from "@/app/text/general";
+import { GENERAL } from "@/text/general";
 import Link from "next/link";
 
 type CommunityBreadcrumbType = {
@@ -8,7 +8,7 @@ type CommunityBreadcrumbType = {
     code: string;
   };
 };
-export const CommunityBreadcrumb = ({country }: CommunityBreadcrumbType) => {
+export const CommunityBreadcrumb = ({ country }: CommunityBreadcrumbType) => {
   return (
     <div className="breadcrumbs w-full px-4 py-3  text-sm sm:px-0 sm:w-auto sm:bg-transparent">
       <ul>

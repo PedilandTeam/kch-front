@@ -4,7 +4,7 @@ import {
   UsersThree,
   Bank,
   Peace,
-} from "app/client-packages/phosphor-icons/react";
+} from "@client-packages/phosphor-icons/react";
 
 const TextSec = () => {
   return (

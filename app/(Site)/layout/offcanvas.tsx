@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { UNITS_LIST } from "@/routes";
 import { useRef } from "react";
-import { MENU } from "@/app/text/menu";
+import { MENU } from "@/text/menu";
 import useCountryCode from "@/hooks/useCountryCode";
 import { CountryNamespace } from "@/types/country";
 
@@ -14,7 +14,7 @@ type OffCanvasProps = {
 
 export const OffCanvas = ({ countries }: OffCanvasProps) => {
   const ref = useRef<HTMLInputElement>(null);
-  const {countryCode, isMainPage} = useCountryCode(countries)
+  const { countryCode, isMainPage } = useCountryCode(countries);
 
   return (
     <div dir="rtl" className="z-10 drawer drawer-end">

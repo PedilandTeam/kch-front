@@ -1,4 +1,4 @@
-import { MENU } from "@/app/text/menu";
+import { MENU } from "@/text/menu";
 import { CountryNamespace } from "@/types/country";
 import Image from "next/image";
 import Link from "next/link";

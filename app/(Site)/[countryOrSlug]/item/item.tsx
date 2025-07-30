@@ -3,7 +3,7 @@ import { ItemSideInfo } from "./sideInfo";
 import { ItemTopInfo } from "./topInfo";
 import { PageNamespace } from "@/types/page";
 import CountryUpdater from "./countryUpdater";
-import { ITEM } from "@/app/text/directory";
+import { ITEM } from "@/text/directory";
 import { Suspense } from "react";
 import Description from "@/components/description";
 import TagList from "./tools/tagList";

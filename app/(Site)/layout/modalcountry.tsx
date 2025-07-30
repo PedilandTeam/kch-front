@@ -4,7 +4,7 @@ import { CircleFlag } from "next-circle-flags";
 import Link from "next/link";
 import { CountryNamespace } from "@/types/country";
 import { useRef } from "react";
-import { MODAL } from "@/app/text/modal";
+import { MODAL } from "@/text/modal";
 
 type ModalCountryProps = {
   countries: CountryNamespace.GET[];

@@ -8,10 +8,10 @@ import {
   YoutubeLogo,
   XLogo,
   CaretUp,
-} from "app/client-packages/phosphor-icons/react";
-import { MENU } from "./text/menu";
-import { FOOTER } from "./text/footer";
-import { GENERAL } from "./text/general";
+} from "@client-packages/phosphor-icons/react";
+import { MENU } from "@/text/menu";
+import { FOOTER } from "@/text/footer";
+import { GENERAL } from "@/text/general";
 import Image from "next/image";
 
 export const Footer = () => {

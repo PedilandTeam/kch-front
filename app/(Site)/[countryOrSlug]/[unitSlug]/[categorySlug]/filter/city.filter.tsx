@@ -7,10 +7,12 @@ import { usePathname, useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { useRouter } from "next/navigation";
 import useCreateQueryString from "@/hooks/useCreateQueryString";
-import { CITY } from "@/app/text/location";
-import { GENERAL } from "@/app/text/general";
-import { addToShouldBeAddType, removeFromShouldBeAddType } from "../../filter/category.filter";
-
+import { CITY } from "@/text/location";
+import { GENERAL } from "@/text/general";
+import {
+  addToShouldBeAddType,
+  removeFromShouldBeAddType,
+} from "../../filter/category.filter";
 
 type CityFilterType = {
   cities: CityNamespace.city[];
@@ -24,8 +26,12 @@ export type ParsedSearchParamsType = {
 
 export type checkHandlerType = (value: string | number) => boolean | undefined;
 
-export default function CityFilter({cities, setShouldBeAdd, shouldBeAdd, id}: CityFilterType) {
-
+export default function CityFilter({
+  cities,
+  setShouldBeAdd,
+  shouldBeAdd,
+  id,
+}: CityFilterType) {
   const [modifiedCities, setModifiedCities] = useState(cities);
   const searchParams = useSearchParams() as unknown as URLSearchParams;
   const pathname = usePathname();
@@ -34,11 +40,9 @@ export default function CityFilter({cities, setShouldBeAdd, shouldBeAdd, id}: Ci
   const [isParsedSearchParamsAdded, setIsParsedSearchParamsAdded] =
     useState(false);
 
-
   useEffect(() => {
     setModifiedCities(cities);
   }, [cities]);
-
 
   const addToShouldBeAdd: addToShouldBeAddType = (item: string) => {
     if (shouldBeAdd.includes(item)) return;
@@ -54,9 +58,6 @@ export default function CityFilter({cities, setShouldBeAdd, shouldBeAdd, id}: Ci
       return [...old];
     });
   };
-
-
-
 
   const clearShouldBeAdd = () => {
     setShouldBeAdd([]);
@@ -132,9 +133,9 @@ export default function CityFilter({cities, setShouldBeAdd, shouldBeAdd, id}: Ci
 
   useEffect(() => {
     if (!Array.isArray(citiesInQuery) || citiesInQuery.length == 0) {
-      clearShouldBeAdd()
+      clearShouldBeAdd();
     }
-  }, [citiesInQuery])
+  }, [citiesInQuery]);
 
   return (
     <div className="w-full _filter-wrap sm:w-auto">

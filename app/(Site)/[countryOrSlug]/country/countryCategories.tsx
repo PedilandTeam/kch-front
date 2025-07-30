@@ -2,7 +2,7 @@ import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CountryNamespace } from "@/types/country";
 import CountryCategoriesItems from "./countryCategoriesItems";
-import { CATEGORY } from "@/app/text/directory";
+import { CATEGORY } from "@/text/directory";
 
 async function getMostUsedCategories(countryCode: string) {
   let result: CategoryNamespace.MOST_USED;

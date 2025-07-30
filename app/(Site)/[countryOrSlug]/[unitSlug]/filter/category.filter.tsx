@@ -9,8 +9,8 @@ import { useRouter } from "next/navigation";
 import CategoryFilterSelectedItem from "./category.filter.selected.item";
 import useCreateQueryString from "@/hooks/useCreateQueryString";
 import useDeleteQueryString from "@/hooks/useDeleteQueryString";
-import { CATEGORY } from "@/app/text/directory";
-import { GENERAL } from "@/app/text/general";
+import { CATEGORY } from "@/text/directory";
+import { GENERAL } from "@/text/general";
 import CategoryFilterSelected from "./category.filter.selected";
 
 type CategoryFilterType = {
@@ -28,7 +28,12 @@ export type addToShouldBeAddType = (item: string) => void;
 export type removeFromShouldBeAddType = (item: string) => void;
 export type checkHandlerType = (value: string | number) => boolean | undefined;
 
-export default function CategoryFilter({ categories, id, setShouldBeAdd, shouldBeAdd }: CategoryFilterType) {
+export default function CategoryFilter({
+  categories,
+  id,
+  setShouldBeAdd,
+  shouldBeAdd,
+}: CategoryFilterType) {
   const [modifiedCategories, setModifiedCategories] = useState(categories);
 
   useEffect(() => {
@@ -55,9 +60,9 @@ export default function CategoryFilter({ categories, id, setShouldBeAdd, shouldB
 
   useEffect(() => {
     if (!Array.isArray(categoriesInQuery) || categoriesInQuery.length == 0) {
-      clearShouldBeAdd()
+      clearShouldBeAdd();
     }
-  }, [categoriesInQuery])
+  }, [categoriesInQuery]);
 
   // city=1,2 -> [1,2] or city=1 -> "1"
   const citiesInQuery = queryString.parse(searchParams.toString(), {
@@ -69,8 +74,6 @@ export default function CategoryFilter({ categories, id, setShouldBeAdd, shouldB
 
   const [isParsedSearchParamsAdded, setIsParsedSearchParamsAdded] =
     useState(false);
-
-
 
   const addToShouldBeAdd: addToShouldBeAddType = (item: string) => {
     if (shouldBeAdd.includes(item)) return;

@@ -1,15 +1,15 @@
 import { API_ROUTES } from "@/routes";
 import { StatsNamespace } from "@/types/stats";
 import { CountryNamespace } from "@/types/country";
-import { CATEGORY, ITEM } from "@/app/text/directory";
-import { CITY } from "@/app/text/location";
+import { CATEGORY, ITEM } from "@/text/directory";
+import { CITY } from "@/text/location";
 import {
   MapPin,
   Eye,
   FolderStar,
   CardsThree,
-} from "app/client-packages/phosphor-icons/react";
-import { GENERAL } from "@/app/text/general";
+} from "@client-packages/phosphor-icons/react";
+import { GENERAL } from "@/text/general";
 type CountryStatsProps = {
   currentCountry: CountryNamespace.GET;
 };

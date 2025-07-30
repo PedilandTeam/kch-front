@@ -1,4 +1,4 @@
-import { ShieldCheck } from "app/client-packages/phosphor-icons/react";
+import { ShieldCheck } from "@phosphor-icons/react/dist/ssr";
 import { BadgesProps } from "./badges";
 import { FC, useMemo } from "react";
 

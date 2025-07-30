@@ -1,4 +1,4 @@
-import { fetcher } from "@/app/swr/fetcher";
+import { fetcher } from "@/swr/fetcher";
 import useSWR from "swr";
 
 function useGetTopic() {

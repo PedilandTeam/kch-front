@@ -2,8 +2,8 @@
 
 import { CityNamespace } from "@/types/city";
 import CityFilter from "../../filter/city.filter";
-import { Sliders } from "app/client-packages/phosphor-icons/react";
-import { FILTER } from "@/app/text/directory";
+import { Sliders } from "@client-packages/phosphor-icons/react";
+import { FILTER } from "@/text/directory";
 import { useState } from "react";
 import { removeFromShouldBeAddType } from "../../filter/category.filter";
 import CityFilterSelected from "./city.filter.selected";

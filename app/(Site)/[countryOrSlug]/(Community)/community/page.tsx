@@ -1,7 +1,6 @@
 import { CountryNamespace } from "@/types/country";
 import QuestionCard from "./questionCard";
 import { notFound } from "next/navigation";
-import { QuestionNamespace } from "@/types/questions";
 
 export default async function Page({
   params,
@@ -27,9 +26,6 @@ export default async function Page({
   }
 
   const country = countryList[0];
-
-
- 
 
   //   try {
   //     const url = `https://api.koochaa.com/forum/questions?limit=30&page=1`;

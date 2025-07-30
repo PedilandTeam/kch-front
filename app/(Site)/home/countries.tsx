@@ -12,7 +12,7 @@ import dkImage from "@/public/images/modules/mod-denmark-min.webp";
 import seImage from "@/public/images/modules/mod-sweden-min.webp";
 import caImage from "@/public/images/modules/mod-canada-min.webp";
 import nlImage from "@/public/images/modules/mod-netherland-min.webp";
-import { COUNTRY } from "@/app/text/location";
+import { COUNTRY } from "@/text/location";
 
 async function fetchCountries() {
   let countries: CountryNamespace.GET[];

@@ -1,6 +1,6 @@
-import { STATUS } from "@/app/text/calendar";
-import { GENERAL } from "@/app/text/general";
-import { Clock } from "app/client-packages/phosphor-icons/react";
+import { STATUS } from "@/text/calendar";
+import { GENERAL } from "@/text/general";
+import { Clock } from "@client-packages/phosphor-icons/react";
 import { useMemo } from "react";
 
 const ItemTime: React.FC = () => {

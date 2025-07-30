@@ -1,4 +1,4 @@
-import { fetcher } from "@/app/swr/fetcher";
+import { fetcher } from "@/swr/fetcher";
 import { QuestionNamespace } from "@/types/questions";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";

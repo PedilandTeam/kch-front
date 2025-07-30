@@ -1,6 +1,6 @@
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import queryString from "query-string";
-import { X } from "@/app/client-packages/phosphor-icons/react";
+import { XIcon } from "@phosphor-icons/react/dist/ssr";
 
 const DeleteFilter = () => {
   const searchParams = useSearchParams();
@@ -30,7 +30,7 @@ const DeleteFilter = () => {
           !ENABELED ? "hidden" : ""
         }`}
       >
-        <X className="w-5 h-5 group-hover:text-white" />
+        <XIcon className="w-5 h-5 group-hover:text-white" />
       </button>
     </div>
   );

@@ -1,5 +1,5 @@
 "use client";
-import { GENERAL } from "@/app/text/general";
+import { GENERAL } from "@/text/general";
 import Link from "next/link";
 
 type ItemBreadCrumbType = {

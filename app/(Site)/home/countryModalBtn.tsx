@@ -1,6 +1,6 @@
 "use client";
 
-import { COUNTRY } from "@/app/text/location";
+import { COUNTRY } from "@/text/location";
 import { FC } from "react";
 
 const CountryModalBtn: FC = () => {
@@ -22,4 +22,4 @@ const CountryModalBtn: FC = () => {
   );
 };
 
-export default CountryModalBtn
+export default CountryModalBtn;

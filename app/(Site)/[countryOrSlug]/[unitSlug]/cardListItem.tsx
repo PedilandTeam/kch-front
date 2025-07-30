@@ -5,9 +5,7 @@ import categoryPathGenerator from "@/utils/categoryPathGenerator";
 import { PageNamespace } from "@/types/page";
 import { CountryNamespace } from "@/types/country";
 import ItemProfilePicture from "../item/itemProfilePicture";
-import {
-  Star
-} from "app/client-packages/phosphor-icons/react";
+import { Star } from "@client-packages/phosphor-icons/react";
 import Rating from "react-rating";
 import OrangeBadge from "@/components/badges/orange.badge";
 import BlueBadge from "@/components/badges/blue.badge";
@@ -19,7 +17,6 @@ type cardListItem = {
 };
 
 export default function CardListItem({ page, country, variant }: cardListItem) {
-  
   return (
     <div
       className="relative w-9/12 px-4 py-5 mx-auto transition duration-300 border border-gray-200 shadow-md sm:shadow-gray-100 sm:mx-0 sm:w-auto hover:shadow-lg hover:shadow-blue-100 hover:border-blue-200 card rounded-xl hover:bg-blue-50 hover:bg-opacity-30 group carousel-item sm:box-border"
@@ -36,8 +33,8 @@ export default function CardListItem({ page, country, variant }: cardListItem) {
             />
           </figure>
 
-          <BlueBadge  enable={!!page.business} absoluteMode />
-          <OrangeBadge enable={!page.business} absoluteMode/>
+          <BlueBadge enable={!!page.business} absoluteMode />
+          <OrangeBadge enable={!page.business} absoluteMode />
 
           {/* <Plant
             size={26}
