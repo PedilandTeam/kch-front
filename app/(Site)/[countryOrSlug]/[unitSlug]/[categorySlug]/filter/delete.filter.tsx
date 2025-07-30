@@ -1,4 +1,4 @@
-import { X } from "@/app/client-packages/phosphor-icons/react";
+import { X } from "@/client-packages/phosphor-icons/react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import queryString from "query-string";
 

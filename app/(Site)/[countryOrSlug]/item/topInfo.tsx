@@ -4,18 +4,20 @@ import Rating from "@client-packages/react-rating";
 import { PageNamespace } from "@/types/page";
 import ItemProfilePicture from "./itemProfilePicture";
 import Link from "next/link";
-import { ITEM } from "@/app/text/directory";
+import { ITEM } from "@/text/directory";
 import {
   FacebookLogo,
   InstagramLogo,
-  ShareNetwork, Star,
+  ShareNetwork,
+  Star,
   TelegramLogo,
-  YoutubeLogo, Confetti,
+  YoutubeLogo,
+  Confetti,
   LinkedinLogo,
-  XLogo
-} from "app/client-packages/phosphor-icons/react";
+  XLogo,
+} from "@client-packages/phosphor-icons/react";
 import useLinkHandler from "@/hooks/useLinkHandler";
-import { GENERAL } from "@/app/text/general";
+import { GENERAL } from "@/text/general";
 import isPageNew from "@/utils/isPageNew";
 import BlueBadge from "@/components/badges/blue.badge";
 import OrangeBadge from "@/components/badges/orange.badge";

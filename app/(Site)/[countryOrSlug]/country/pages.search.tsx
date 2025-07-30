@@ -36,12 +36,12 @@ const PagesSearch = ({ countryCode }: CountryPagesSearch) => {
   };
 
   return (
-    <div className="dropdown mt-4 mb-5 w-full px-4 sm:px-0 sm:w-[600px] mx-auto block">
+    <div className="dropdown mt-4 mb-5 w-full  sm:pl-5 xl:pl-0  mx-auto block">
       <input
         onChange={inputChangeHandler}
         type="text"
-        placeholder="اینجا تایپ کن"
-        className="input rounded-xl text-center h-[54px] text-[18px] font-medium w-full opacity-80 hover:opacity-100 focus:opacity-100"
+        placeholder="برای جستجو مشاغل اینجا تایپ کن"
+        className="input bg-gray-100 rounded-xl text-center h-[54px] text-[18px] font-medium w-full opacity-80 hover:opacity-100 focus:opacity-100"
       />
       {search && pages && (
         <ul

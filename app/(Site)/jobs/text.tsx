@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Accordion from "@/app/client-packages/daisy/accordion";
+import Accordion from "@/client-packages/daisy/accordion";
 import ApplyForm from "./form";
 
 const JobsText = () => {
@@ -140,8 +140,8 @@ const JobsText = () => {
             کنی، فایل رزومه‌ات رو آپلود کنی و توی یک یا چند پاراگراف از
             انگیزه‌ات برای به دست آوردن موقعیت شغلی مورد نظرت بنویسی. ما دوست
             داریم بهمون بگی چرا تمایل داری توی تیم ما کار کنی و فکر میکنی که
-            چطوری میتونی تاثیرگذار باشی. اگر هم سوالی داری و یا
-            فقط میخوای باهامون سلام و احوالپرسی کنی،{" "}
+            چطوری میتونی تاثیرگذار باشی. اگر هم سوالی داری و یا فقط میخوای
+            باهامون سلام و احوالپرسی کنی،{" "}
             <Link href={"https://t.me/koochaa_support"} target="_blank">
               آیدی تلگرام
             </Link>{" "}

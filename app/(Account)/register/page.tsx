@@ -1,34 +1,30 @@
-import RegisterForm from "./form";
-import { API_ROUTES } from "@/routes";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+'use client'
 
-const Register = async (param?: {
-  searchParams?: { slug?: string; claimWay: string };
-}) => {
-  const slug = param?.searchParams?.slug;
-  const claimWay = param?.searchParams?.claimWay;
+import useAuthCheck from '@/hooks/useAuthCheck';
+import RegisterForm from './form';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { mutate } from 'swr';
+import Loading from '../components/global/loading';
 
-  const cookieStore = cookies();
-  const token = cookieStore.get("token")?.value;
-  let haveAccess: boolean = true;
-  if (token) {
-    await API_ROUTES.AUTH.CHECK(token)
-      .then(async (res) => {
-        const data = await res.json();
-        haveAccess = false;
-      })
-      .catch((e) => {
-        if (e?.status == 401) {
-          haveAccess = true;
+
+const RegisterPage =  () => {
+    const {isAuthenticated, isLoading} = useAuthCheck()
+    const router = useRouter()
+
+    useEffect(() => {
+        if(!isLoading && isAuthenticated){
+            mutate(process.env.NEXT_PUBLIC_CHECKAUTH_URL).then(() => {
+                router.push('/account')
+            })
         }
-        console.log(e);
-      });
-  }
+    }, [isAuthenticated, isLoading, router])
 
-  if (!haveAccess) {
-    redirect("/home/mybiz/add");
-  }
-  return <RegisterForm slug={slug} claimWay={claimWay} />;
+    if(isLoading) {
+        return <Loading/>
+    }
+
+    if(!isAuthenticated)
+    return <RegisterForm />;
 };
-export default Register;
+export default RegisterPage;

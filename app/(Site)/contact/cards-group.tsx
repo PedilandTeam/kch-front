@@ -2,7 +2,7 @@ import {
   At,
   InstagramLogo,
   Headset,
-} from "app/client-packages/phosphor-icons/react";
+} from "@client-packages/phosphor-icons/react";
 import Link from "next/link";
 
 const CardsGroup = () => {

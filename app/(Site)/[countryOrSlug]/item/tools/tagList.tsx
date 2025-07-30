@@ -1,4 +1,4 @@
-import { ITEM } from "@/app/text/directory";
+import { ITEM } from "@/text/directory";
 
 type Tag = {
   id: number;
@@ -10,7 +10,6 @@ type TagList = {
 };
 
 const TagList: React.FC<TagList> = ({ tags }) => {
-
   return (
     <div className="py-6 border-b border-gray-200 sm:py-8">
       <h3 className="mb-4 font-bold sm:mb-5">{ITEM.SERVICES}</h3>

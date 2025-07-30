@@ -1,4 +1,4 @@
-import { ShieldCheck } from "app/client-packages/phosphor-icons/react";
+import { ShieldCheck } from "@client-packages/phosphor-icons/react";
 import Link from "next/link";
 import { FC } from "react";
 

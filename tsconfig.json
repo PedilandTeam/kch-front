@@ -18,7 +18,7 @@
     "paths": {
       "@/*": ["./*"],
       "@app/*": ["./app/*"],
-      "@client-packages/*": ["./app/client-packages/*"],
+      "@client-packages/*": ["./components/client-packages/*"],
       "@text/*": ["./app/text/*"],
       "@/types/*": ["./types/*"]
     },
@@ -37,7 +37,7 @@
     "components/elements/badgenew.jsx",
     "components/elements/badgenew.jsx",
     ".next/types/**/*.ts",
-    "app/layout/backtotop.jsx",
+    "layout/backtotop.jsx",
     "app/jobs/text.tsx",
     "app/jobs/page.tsx",
     "./*.ts",

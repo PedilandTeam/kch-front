@@ -1,4 +1,4 @@
-import { GENERAL } from "@/app/text/general";
+import { GENERAL } from "@/text/general";
 import { PageNamespace } from "@/types/page";
 import DeviceDetector from "device-detector-js";
 import { MouseEvent } from "react";
@@ -11,7 +11,7 @@ type UseLinkHandler = {
 export default function useLinkHandler({ pageData }: UseLinkHandler) {
   const linkHandler = (e: MouseEvent<HTMLButtonElement>) => {
     const type = e.currentTarget.dataset.type;
-    
+
     const regexp =
       /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/gim.exec(
         pageData?.socials?.website!

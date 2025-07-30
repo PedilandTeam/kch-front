@@ -1,4 +1,4 @@
-import { GENERAL } from "@/app/text/general";
+import { GENERAL } from "@/text/general";
 import { PageNamespace } from "@/types/page";
 import Link from "next/link";
 

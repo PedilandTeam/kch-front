@@ -13,9 +13,9 @@ import {
   GlobeSimple,
   TelegramLogo,
   WhatsappLogo,
-} from "app/client-packages/phosphor-icons/react";
-import { SOCIAL } from "@/app/text/social";
-import { GENERAL } from "@/app/text/general";
+} from "@client-packages/phosphor-icons/react";
+import { SOCIAL } from "@/text/social";
+import { GENERAL } from "@/text/general";
 import useLinkHandler from "@/hooks/useLinkHandler";
 
 interface ItemSideInfoType {
@@ -91,7 +91,6 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         .contact.phone!}`;
 
   const linkHandler = useLinkHandler({ pageData });
-  
 
   return (
     <div className="mx-3 sm:mx-0 item-side sm:col-span-4 sm:col-end-13">

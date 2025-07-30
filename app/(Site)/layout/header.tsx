@@ -1,6 +1,5 @@
 "use client";
 
-import { OffCanvas } from "@/app/(Site)/layout/offcanvas";
 import { TopTools } from "@/app/(Site)/layout/toptools";
 import { useHeader } from "@/store/useHeader";
 import { CountryNamespace } from "@/types/country";
@@ -9,8 +8,8 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-type HeaderProps = {
-  children: React.ReactNode;
+export type HeaderProps = {
+  children?: React.ReactNode;
   countries: CountryNamespace.GET[];
 };
 
@@ -37,15 +36,14 @@ export const Header = ({ children, countries }: HeaderProps) => {
     !contryCodeInStore && (countryCode === "un" || !countryCode);
 
   return (
-    <header className="w-full py-[10px] bg-white shadow-sm">
-      <div className="container mx-auto max-w-[1144px]">
-        <div className="flex items-center justify-between mx-3 sm:mx-0">
+    <header className="w-full py-3 bg-white shadow-sm hidden sm:block">
+      <div className="container mx-auto max-w-[1144px] px-3">
+        <div className="_wrap flex items-center justify-between">
           <TopTools
             isMainPage={isMainPage}
             countryCode={contryCodeInStore || countryCode}
           />
-
-          <div className="logo">
+          <div className="_logo">
             <Link href="/">
               <Image
                 src="/images/logo.svg"
@@ -59,10 +57,7 @@ export const Header = ({ children, countries }: HeaderProps) => {
           </div>
         </div>
       </div>
-
-      <OffCanvas countryCode={countryCode} />
-
-      {children}
+      {/* {children} */}
     </header>
   );
 };

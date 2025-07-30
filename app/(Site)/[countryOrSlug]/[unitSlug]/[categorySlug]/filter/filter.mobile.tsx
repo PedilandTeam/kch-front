@@ -1,13 +1,13 @@
 "use client";
 
-import { Sliders } from "app/client-packages/phosphor-icons/react";
-import { FILTER } from "@/app/text/directory";
+import { Sliders } from "@client-packages/phosphor-icons/react";
+import { FILTER } from "@/text/directory";
 import { FC } from "react";
 
 type FilterMobile = {
-  pagesTotalItems?: number
-}
-const  FilterMobile: FC<FilterMobile> = ({pagesTotalItems}) => {
+  pagesTotalItems?: number;
+};
+const FilterMobile: FC<FilterMobile> = ({ pagesTotalItems }) => {
   const openFilters = () => {
     if (document) {
       (
@@ -32,7 +32,6 @@ const  FilterMobile: FC<FilterMobile> = ({pagesTotalItems}) => {
       </button>
     </>
   );
-}
+};
 
-
-export default FilterMobile
+export default FilterMobile;

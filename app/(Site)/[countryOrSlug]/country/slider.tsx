@@ -28,49 +28,26 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
   const units = UNITS_LIST_ARRAY;
 
   return (
-    <div className="slider h-[520px] flex justify-center content-center mx-3 sm:mx-auto sm:max-w-[95%] relative rounded-xl">
-      <Image
-        className="rounded-xl brightness-[.70] object-fill hidden sm:block"
-        src={`/images/slide/home/${currentCountry.code}.webp`}
-        width={1700}
-        height={520}
-        loading="lazy"
-        alt={`یک تصویر از کشور ${currentCountry.name}`}
-      />
-      <Image
-        className="rounded-xl brightness-[.70] object-cover sm:hidden"
-        src={`/images/slide/home/${currentCountry.code}-m.webp`}
-        width={430}
-        height={600}
-        alt={`یک تصویر از کشور ${currentCountry.name}`}
-      />
-
-      <div className="max-w-[1144px] sm:m-auto absolute w-auto bottom-[10%] sm:bottom-[15%] sm:left-0 sm:right-0 sm:w-full">
-        <div className="text-center wrap">
-          <h3 className="sm:inline-block text-gray-300 bg-blue-900 bg-opacity-70 p-3 sm:pt-1 sm:pb-[40px] px-3 sm:px-[44px] text-[18px] sm:text-[21px] leading-[30px] sm:leading-[36px] sm:rounded-xl">
-            اگر در
-            <span className="inline-block mx-1 font-semibold text-white">
-              {currentCountry.name}
-            </span>
-            زندگی می‌کنی و دلت میخواد
-            <br />
-            لیست کامل و بروزی از خدمات
-            <span className="inline-block mx-1 font-semibold text-white">
-              فـارسـی زبـان
-            </span>
-            اطرافت داشته باشی
-          </h3>
-          <h2 className="text-white font-bold text-[30px] sm:text-[40px] mt-3 mx-3 sm:mx-0 sm:-mt-[36px] drop-shadow">
-            راهنمای مشاغل کـوچـا رو جستجو کن!
-          </h2>
-
-          <PagesSearch countryCode={currentCountry.code} />
-
-          <Link href={"#select-unit"} scroll>
-            <button className="btn btn-accent">و یا از اینجا شروع کن</button>
-          </Link>
-
-          {/* <h3 className="text-white mx-3 sm:mx-0 text-[17px] tracking-wide mb-3">
+    <div className="_slider bg-yellow-50">
+      <div className="container mx-auto max-w-[1144px] px-3 sm:px-0">
+        <div className="flex w-full py-20">
+          <div className="_text">
+            <div className="_wrap">
+              <h2 className="text-4xl font-extrabold">
+                هم‌رسانی تجربه ایرانیان مقیم {currentCountry.name}
+              </h2>
+              <h3 className="text-2xl font-medium leading-10 my-5 text-gray-500">
+                در هر مرحله از فرآیند مهاجرت که هستید،
+                <br className="hidden sm:block" />
+                می‌تونید سوالاتتون رو بپرسید و<br className="hidden sm:block" />
+                تجربیات ارزشمندتون رو با دیگران به اشتراک بذارید.
+              </h3>
+              <Link href={`/${currentCountry.code}/community`} scroll>
+                <button className="btn btn-accent rounded-full">
+                  از اینجا شروع کن
+                </button>
+              </Link>
+              {/* <h3 className="text-white mx-3 sm:mx-0 text-[17px] tracking-wide mb-3">
             و یا دسته‌بندی‌های پربازدید رو ببین:
           </h3>
           <div className="flex flex-wrap justify-center gap-1 mx-3 sm:gap-2 sm:mx-0">
@@ -88,6 +65,9 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
               });
             })}
           </div> */}
+            </div>
+          </div>
+          <div className="flex-1">Image</div>
         </div>
       </div>
     </div>

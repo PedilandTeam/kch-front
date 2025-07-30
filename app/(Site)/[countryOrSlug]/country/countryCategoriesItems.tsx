@@ -2,7 +2,7 @@
 import { UNITS_LIST_ARRAY } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CountryNamespace } from "@/types/country";
-import { FolderOpen } from "app/client-packages/phosphor-icons/react";
+import { FolderOpen } from "@client-packages/phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -36,7 +36,7 @@ export default function CountryCategoriesItems({
   };
 
   return (
-    <>
+    <div className="_wrap">
       <div className="text-center">
         {units.map((unit) => {
           if (recentlyUpdatedCategories[`${unit.id}`]?.length == 0) {
@@ -55,7 +55,7 @@ export default function CountryCategoriesItems({
           );
         })}
       </div>
-      <div className="flex flex-wrap justify-center gap-3 mx-3 mt-8 sm:gap-5 content sm:mx-0">
+      <div className="_content flex flex-wrap justify-center gap-3 sm:gap-5 mt-6">
         {recentlyUpdatedCategories[`${activeTab}`]?.map((category, index) => {
           return (
             <Link
@@ -85,6 +85,6 @@ export default function CountryCategoriesItems({
           );
         })}
       </div>
-    </>
+    </div>
   );
 }

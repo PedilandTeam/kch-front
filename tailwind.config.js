@@ -1,11 +1,17 @@
+const { nextui } = require("@nextui-org/react");
+
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
+      translate: {
+        100: "120%",
+      },
       // fontFamily: {
       //   PinarLT: "Pinar-LT",
       // },
@@ -25,6 +31,7 @@ module.exports = {
           900: "#d8aa3b",
         },
       },
+    
     },
   },
   daisyui: {
@@ -46,5 +53,5 @@ module.exports = {
     rtl: true,
   },
   important: true,
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"), nextui()],
 };

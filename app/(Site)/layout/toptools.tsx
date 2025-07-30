@@ -2,25 +2,34 @@
 
 import { CircleFlag } from "next-circle-flags";
 import Link from "next/link";
-import { COUNTRY } from "@/app/text/location";
-import { MENU } from "@/app/text/menu";
-import { Flag, List } from "app/client-packages/phosphor-icons/react";
+import { COUNTRY } from "@/text/location";
+import { MENU } from "@/text/menu";
+import { Flag, List } from "@client-packages/phosphor-icons/react";
+import { useState } from "react";
+import { CaretDown } from "@phosphor-icons/react";
+import MegaMenu from "./megaMenu";
+
+import Image from "next/image";
 
 type TopToolsProps = {
   countryCode: string;
   isMainPage: boolean;
 };
 export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
+  const [showMegaBiz, setShowMegaBiz] = useState(false);
+  const [showMegaJob, setShowMegaJob] = useState(false);
+  const [showMegaComm, setShowMegaComm] = useState(false);
+
   return (
-    <div className="flex items-center top-tools">
+    <div className="_top-tools flex items-center gap-8">
       {isMainPage ? (
         <div
-          className="flex items-center _select-country"
+          className="_select-country flex items-center "
           onClick={() => {
             if (document) {
               (
                 document.getElementById("modal_country") as HTMLFormElement
-              ).showModal();
+              )?.showModal();
             }
           }}
         >
@@ -30,67 +39,106 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
           </button>
         </div>
       ) : (
-        <div
-          className="select-country"
-          onClick={() => {
-            if (document) {
-              (
-                document.getElementById("modal_country") as HTMLFormElement
-              ).showModal();
-            }
-          }}
-        >
-          <CircleFlag
-            width={42}
-            height={42}
-            loading={"lazy"}
-            alt={`Logo of country with ISO code ${countryCode}`}
-            countryCode={countryCode}
-            className="w-[40px] h-[40px] transition opacity-75 hover:opacity-100 hover:cursor-pointer "
-          />
+        <div className="_icons flex items-center gap-4">
+          <div
+            className="_select-country"
+            onClick={() => {
+              if (document) {
+                (
+                  document.getElementById("modal_country") as HTMLFormElement
+                )?.showModal();
+              }
+            }}
+          >
+            <CircleFlag
+              width={40}
+              height={40}
+              loading={"lazy"}
+              alt={`Logo of country with ISO code ${countryCode}`}
+              countryCode={countryCode}
+              className="w-[40px] h-[40px] transition opacity-75 hover:opacity-100 hover:cursor-pointer"
+            />
+          </div>
+          <div className="_user-avatar">
+            <Image
+              src="/images/user-avatar.jpg"
+              className="border-2 rounded-full"
+              width={42}
+              height={42}
+              alt="User Avatar"
+            />
+          </div>
         </div>
       )}
 
       {isMainPage || countryCode === "un" ? null : (
-        <div>
-          <div className="mr-8 main-nav">
-            <ul className="hidden gap-5 font-bold lg:flex">
-              <li>
-                <Link
-                  href={`/${countryCode}/businesses`}
-                  className="transition divide-purple-300 text-primary hover:text-black"
-                >
-                  {MENU.BUSINESSES}
-                </Link>
+        <div className="_main-menu relative">
+          <div className="_main-nav">
+            <ul className="flex items-center gap-4 font-bold">
+              <li
+                onClick={() => {
+                  setShowMegaJob(!showMegaJob);
+                  setShowMegaComm(false);
+                  setShowMegaBiz(false);
+                }}
+                className="transition divide-purple-300 text-primary hover:text-black  cursor-pointer"
+              >
+                <div className="flex items-center gap-2">
+                  {MENU.JobNew}
+                  <CaretDown
+                    size={16}
+                    className="text-primar hover:text-black"
+                    weight="bold"
+                  />
+                </div>
               </li>
-              <li>
-                <Link
-                  href={`/${countryCode}/doctors`}
-                  className="transition divide-purple-300 text-primary hover:text-black"
-                >
-                  {MENU.DOCTORS}
-                </Link>
+              <li
+                onClick={() => {
+                  setShowMegaComm(!showMegaComm);
+                  setShowMegaJob(false);
+                  setShowMegaBiz(false);
+                }}
+                className="transition divide-purple-300 text-primary hover:text-black  cursor-pointer"
+              >
+                <div className="flex items-center gap-2">
+                  {MENU.COMMUNITY}
+                  <CaretDown
+                    size={16}
+                    className="text-primar hover:text-black"
+                    weight="bold"
+                  />
+                </div>
               </li>
-              <li>
-                <Link
-                  href={process.env.NEXT_PUBLIC_BIZ_FRONT_URL}
-                  target="_blank"
-                  className="transition divide-purple-300 text-primary hover:text-black"
+              <li className="transition divide-purple-300 text-primary hover:text-black cursor-pointer">
+                <div
+                  onClick={() => {
+                    setShowMegaBiz(!showMegaBiz);
+                    setShowMegaJob(false);
+                    setShowMegaComm(false);
+                  }}
+                  className="flex items-center gap-2"
                 >
                   {MENU.BIZ}
-                </Link>
+                  <CaretDown
+                    size={16}
+                    className="text-primar hover:text-black"
+                    weight="bold"
+                  />
+                </div>
               </li>
             </ul>
           </div>
 
-          <div className="mr-3 menu-icon sm:hidden">
-            <label
-              htmlFor="main-drawer"
-              className="flex items-center justify-center rounded-full w-[40px] h-[40px] bg-secondary text-white"
-            >
-              <List size={28} />
-            </label>
-          </div>
+          <MegaMenu
+            {...{
+              showMegaBiz,
+              setShowMegaBiz,
+              showMegaJob,
+              setShowMegaJob,
+              showMegaComm,
+              setShowMegaComm,
+            }}
+          />
         </div>
       )}
     </div>
