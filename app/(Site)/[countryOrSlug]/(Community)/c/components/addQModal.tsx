@@ -2,8 +2,8 @@ import { values } from "lodash";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useCheckUser from "./apiForum/useCheckUser";
-import CheckUserModal from "./component/checkUserModal";
-import SpinnerBtn from "./component/SpinnerBtn";
+import CheckUserModal from "./components/checkUserModal";
+import SpinnerBtn from "./components/SpinnerBtn";
 import useGetTopic from "./apiForum/useGetTopic";
 interface Topic {
   id: string;
@@ -19,8 +19,8 @@ export default function AddQModal() {
   const { checkUser } = useCheckUser();
 
   //   get topic
-  const { data:topics, isLoading: isTopicLoading, mutate } = useGetTopic();
-  
+  const { data: topics, isLoading: isTopicLoading, mutate } = useGetTopic();
+
   // post
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const fetchData = () => {
@@ -64,26 +64,26 @@ export default function AddQModal() {
   return (
     <>
       <button
-        className="btn btn-warning rounded-[1rem] "
+        className="btn btn-warning rounded-[1rem]"
         onClick={handleCreateQuestionClick}
       >
         <h2 className="font-bold"> + ایجاد سوال</h2>
       </button>
       <dialog
         id="my_modal_5"
-        className="modal md:modal-middle modal-bottom h-[100vh]"
+        className="modal modal-bottom h-[100vh] md:modal-middle"
       >
         <div className="modal-box">
           {/* header */}
-          <h2 className="font-bold text-lg">ثبت سوال</h2>
+          <h2 className="text-lg font-bold">ثبت سوال</h2>
           {/* body */}
-          <div className="modal-action gap-3 flex flex-col">
+          <div className="modal-action flex flex-col gap-3">
             <select
               onChange={(e) => {
                 setSelectedTopic((e.target as HTMLSelectElement).value);
               }}
               defaultValue=""
-              className="select mb-3 bg-gray-50 w-full rounded-[1rem]"
+              className="select mb-3 w-full rounded-[1rem] bg-gray-50"
             >
               <option value="" disabled>
                 انتخاب تاپیک
@@ -98,35 +98,35 @@ export default function AddQModal() {
             <input
               type="text"
               placeholder="سوال"
-              className="input w-full mb-3 input-lg bg-gray-50 rounded-[1rem]"
+              className="input input-lg mb-3 w-full rounded-[1rem] bg-gray-50"
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
             />
             {/* textArea */}
             <textarea
-              className="textarea pb-10 w-full bg-gray-50 rounded-[1rem]"
+              className="textarea w-full rounded-[1rem] bg-gray-50 pb-10"
               placeholder="توضیحات"
               onChange={(e) => {
                 setText(e.target.value);
               }}
             ></textarea>
             {/* submit */}
-            <div className="flex mt-3">
+            <div className="mt-3 flex">
               <button
                 disabled={isLoading}
                 onClick={(e) => {
                   e.preventDefault();
                   fetchData();
                 }}
-                className="btn ml-3 btn-warning rounded-[1rem]"
+                className="btn btn-warning ml-3 rounded-[1rem]"
               >
                 <h2 className="font-bold">
                   {isLoading ? <SpinnerBtn text="در حال ثبت" /> : "ثبت سوال"}
                 </h2>
               </button>
               <form method="dialog">
-                <button className="btn mb-1 btn rounded-[1rem]">بستن</button>
+                <button className="btn mb-1 rounded-[1rem]">بستن</button>
               </form>
             </div>
           </div>

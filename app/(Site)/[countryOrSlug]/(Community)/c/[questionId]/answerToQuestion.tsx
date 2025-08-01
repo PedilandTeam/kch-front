@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import SpinnerBtn from "../component/SpinnerBtn";
+import SpinnerBtn from "../components/SpinnerBtn";
 
 export default function AnswerToQuestion({
   openAnswer,

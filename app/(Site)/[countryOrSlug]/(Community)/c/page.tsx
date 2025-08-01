@@ -1,6 +1,8 @@
 import { CountryNamespace } from "@/types/country";
-import QuestionCard from "./questionCard";
 import { notFound } from "next/navigation";
+import QuestionCard from "./components/questionCard";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default async function Page({
   params,
@@ -11,7 +13,7 @@ export default async function Page({
     `${process.env.API_URL}/countries?code=${params.countryOrSlug}`,
     {
       credentials: "include",
-    }
+    },
   )
     .then(async (res) => {
       return await res.json();
@@ -45,10 +47,15 @@ export default async function Page({
   // console.log("Q:", question);
 
   return (
-    <div className="_community-mainPage h-auto flex flex-col items-center">
-      <div className="flex w-full items-center flex-col mt-3 px-4 gap-4">
-        <QuestionCard countryOrSlug={params.countryOrSlug} country={country} />
+    <div className="_community-mainPage flex flex-col gap-2 px-3">
+      <div className="flex items-center gap-2">
+        <Input placeholder="جستجو..." />
+        <div>
+          <Button>سوال بپرس</Button>
+        </div>
       </div>
+
+      <QuestionCard countryOrSlug={params.countryOrSlug} country={country} />
     </div>
   );
 }

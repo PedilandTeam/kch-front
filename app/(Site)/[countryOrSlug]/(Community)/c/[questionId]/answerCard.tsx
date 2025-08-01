@@ -2,14 +2,14 @@
 import React, { useEffect, useState } from "react";
 import { ArrowFatDown, ArrowFatUp } from "@phosphor-icons/react";
 import useGetAnswer from "../apiForum/useGetAnswer";
-import { timeAgo } from "../changeDate";
-import Pagination from "../component/pagination";
+import { timeAgo } from "../components/changeDate";
+import Pagination from "../components/pagination";
 import { useSearchParams } from "next/navigation";
 import usePostUpVoteAnswer from "../apiForum/usePostUpVoteAnswer";
 import usePostDownVoteAnswer from "../apiForum/usePostDownVoteAnswer";
 import useCheckUser from "../apiForum/useCheckUser";
-import CheckUserModal from "../component/checkUserModal";
-import SkeletonAnswerCard from "../component/skeletonAnswerCard";
+import CheckUserModal from "../components/checkUserModal";
+import SkeletonAnswerCard from "../components/skeletonAnswerCard";
 
 export default function AnswerCard({
   params,
@@ -40,10 +40,10 @@ export default function AnswerCard({
 
   if (isLoading) {
     return (
-      <div className="w-[92%] max-w-[72rem] bg-white flex  flex-col items-end">
-        <div className="w-full max-w-[60rem] flex flex-col items-end justify-end">
+      <div className="flex w-[92%] max-w-[72rem] flex-col items-end bg-white">
+        <div className="flex w-full max-w-[60rem] flex-col items-end justify-end">
           {Array.from({ length: 2 }).map((_, index) => (
-            <div className="flex justify-end w-full" key={index}>
+            <div className="flex w-full justify-end" key={index}>
               <SkeletonAnswerCard />
             </div>
           ))}
@@ -53,57 +53,57 @@ export default function AnswerCard({
   }
 
   return (
-    <div className="w-[92%] max-w-[72rem] bg-white flex  flex-col items-end">
+    <div className="flex w-[92%] max-w-[72rem] flex-col items-end bg-white">
       {/* Vertical Timeline Container */}
       {answerData?.items.map((answer) => (
-        <div key={answer.id} className="relative xl:w-[90%] w-full">
+        <div key={answer.id} className="relative w-full xl:w-[90%]">
           {/* Vertical Line */}
-          <div className="absolute h-full  w-px bg-gray-300 bottom-6 right-9"></div>
-          <div className="flex  space-x-4">
+          <div className="absolute bottom-6 right-9 h-full w-px bg-gray-300"></div>
+          <div className="flex space-x-4">
             {/* Question Card */}
-            <div className="_answer-card w-full z-0 bg-blue-100 rounded-xl px-4 py-2 mb-6">
+            <div className="_answer-card z-0 mb-6 w-full rounded-xl bg-blue-100 px-4 py-2">
               {/* Question Header */}
-              <div className="AnswerCard-header flex py-2 border-b-2 border-dotted border-gray-400 justify-between items-center">
+              <div className="AnswerCard-header flex items-center justify-between border-b-2 border-dotted border-gray-400 py-2">
                 {/* Avatar and Name */}
 
                 <div className="flex items-center">
                   <div className="flex items-center">
                     <div className="avatar">
-                      <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2">
+                      <div className="w-10 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
                         <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg" />
                       </div>
                     </div>
-                    <div className="flex mr-3 gap-1 flex-col">
+                    <div className="mr-3 flex flex-col gap-1">
                       <h2 className="ml-2 font-bold xl:text-xl">
                         {answer.botUser.firstname}
                         {answer.botUser.lastname}
                       </h2>
-                      <span className="flex text-sm md:text-md">{}</span>
+                      <span className="md:text-md flex text-sm">{}</span>
                     </div>
                   </div>
                 </div>
                 {/* Date */}
-                <span className="text-sm xl:text-md text-gray-500">
+                <span className="xl:text-md text-sm text-gray-500">
                   {timeAgo(answer?.createdDate)}
                 </span>
               </div>
               {/* Question and Description */}
-              <div className="AnswerCard-body mt-3 mb-3">
-                <p className="mt-1 text-sm xl:text-lg text-gray-700">
+              <div className="AnswerCard-body mb-3 mt-3">
+                <p className="mt-1 text-sm text-gray-700 xl:text-lg">
                   {answer.text}
                 </p>
               </div>
               {/* Topic and Up Vote */}
-              <div className="AnswerCard-footer flex items-center  pb-2 justify-end mt-5">
+              <div className="AnswerCard-footer mt-5 flex items-center justify-end pb-2">
                 <div className="flex items-center">
-                  <div className="flex items-center py-1 font-bold w-auto text-gray-700 rounded-xl text-xs bg-blue-300">
+                  <div className="flex w-auto items-center rounded-xl bg-blue-300 py-1 text-xs font-bold text-gray-700">
                     <button
                       onClick={async () => {
                         const isUserAuthenticated = await checkUser();
                         if (!isUserAuthenticated) {
                           (
                             document.getElementById(
-                              "my_modal_3"
+                              "my_modal_3",
                             ) as HTMLFormElement
                           ).showModal();
                         } else {
@@ -111,7 +111,7 @@ export default function AnswerCard({
                           checkUser();
                         }
                       }}
-                      className="btn btn-ghost btn-square btn-xs xl:btn-sm  bg-transparent border-none font-medium"
+                      className="btn btn-square btn-ghost btn-xs border-none bg-transparent font-medium xl:btn-sm"
                     >
                       <span className="">
                         <ArrowFatDown
@@ -128,7 +128,7 @@ export default function AnswerCard({
                         if (!isUserAuthenticated) {
                           (
                             document.getElementById(
-                              "my_modal_3"
+                              "my_modal_3",
                             ) as HTMLFormElement
                           ).showModal();
                         } else {
@@ -136,7 +136,7 @@ export default function AnswerCard({
                           checkUser();
                         }
                       }}
-                      className="btn btn-ghost w-auto btn-xs bg-transparent border-none font-medium"
+                      className="btn btn-ghost btn-xs w-auto border-none bg-transparent font-medium"
                     >
                       <span className="text-[.7rem] xl:text-base">
                         باهات موافقم
@@ -148,7 +148,7 @@ export default function AnswerCard({
                           weight="duotone"
                         />
                       </span>
-                      <span className="font-bold text-[.7rem] xl:text-base">
+                      <span className="text-[.7rem] font-bold xl:text-base">
                         {answer.votes.filter((v) => v.type === "up").length}
                       </span>
                     </button>
@@ -160,7 +160,7 @@ export default function AnswerCard({
           </div>
         </div>
       ))}
-      <div className="flex justify-center w-full ml-5 xl:ml-0">
+      <div className="ml-5 flex w-full justify-center xl:ml-0">
         {answerData && <Pagination pages={{ meta: answerData.meta }} />}
       </div>
     </div>

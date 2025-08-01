@@ -4,12 +4,12 @@ import Image from "next/image";
 import { AdvertiseProps } from "./type";
 import dynamic from "next/dynamic";
 
-const Desktop = dynamic(
-  () => import("../responsive").then((mod) => mod.Desktop),
-  {
-    ssr: false,
-  }
-);
+// const Desktop = dynamic(
+//   () => import("../responsive").then((mod) => mod.Desktop),
+//   {
+//     ssr: false,
+//   }
+// );
 
 /**
  * Renders a component that displays two advertisement images for a given campaign.

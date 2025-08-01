@@ -6,18 +6,15 @@ import {
   ChatCircleDots,
   Tag,
 } from "@phosphor-icons/react";
-import Link from "next/link";
 import { timeAgo } from "./changeDate";
-import Spinner from "./component/spinner";
-import { QuestionNamespace } from "@/types/questions";
-import usePostUpVote from "./apiForum/usePostUpVote";
-import { useQuestions } from "./apiForum/useGetQuestions";
-import usePostDownVote from "./apiForum/usePostDownVote";
-import useCheckUser from "./apiForum/useCheckUser";
-import CheckUserModal from "./component/checkUserModal";
+import usePostUpVote from "../apiForum/usePostUpVote";
+import { useQuestions } from "../apiForum/useGetQuestions";
+import usePostDownVote from "../apiForum/usePostDownVote";
+import useCheckUser from "../apiForum/useCheckUser";
+import CheckUserModal from "../components/checkUserModal";
 import { useRouter, useSearchParams } from "next/navigation";
-import PaginationQ from "./component/pagination";
-import SkeletonQuestionCard from "./component/skeletonQuestionCard";
+import PaginationQ from "./pagination";
+import SkeletonQuestionCard from "./skeletonQuestionCard";
 import { CountryNamespace } from "@/types/country";
 // import PaginationQ from "./PaginationQ";
 
@@ -25,7 +22,7 @@ export default function QuestionCard({
   countryOrSlug,
 }: {
   countryOrSlug: string;
-  country: CountryNamespace.GET
+  country: CountryNamespace.GET;
 }) {
   const [currentPage, setCurrentPage] = useState<number | string | null>(1);
   const searchParams = useSearchParams();
@@ -41,9 +38,9 @@ export default function QuestionCard({
   // Get from SWR
   const { question, questionError, isQuestion, questionMutate } = useQuestions(
     countryOrSlug,
-    currentPage
+    currentPage,
   );
-  
+
   const questionSwr = question?.items;
 
   const test = questionSwr?.length || 3;
@@ -54,10 +51,9 @@ export default function QuestionCard({
   // Down vote
   const downVote = usePostDownVote(questionMutate);
 
-
   if (isQuestion) {
     return (
-      <div className="_QuestionCard min-h-[20rem] w-full max-w-[72rem] bg-white flex flex-col justify-between items-center">
+      <div className="_QuestionCard flex min-h-[20rem] w-full max-w-[72rem] flex-col items-center justify-between bg-white">
         {Array.from({ length: test }).map((_, index) => (
           <SkeletonQuestionCard key={index} />
         ))}
@@ -66,10 +62,10 @@ export default function QuestionCard({
   }
 
   return (
-    <div className="_QuestionCard min-h-[20rem] w-full max-w-[72rem] bg-white flex flex-col justify-between items-center">
+    <div className="_QuestionCard flex min-h-[20rem] w-full max-w-[72rem] flex-col items-center justify-between bg-white">
       {/* If questionSwr is empty */}
       {questionSwr?.length === 0 ? (
-        <div className="text-center my-auto">
+        <div className="my-auto text-center">
           <h2 className="text-lg font-bold">هیچ سؤالی یافت نشد</h2>
           <p className="text-gray-600">
             در حال حاضر هیچ سؤالی در این بخش موجود نیست.
@@ -79,40 +75,40 @@ export default function QuestionCard({
         questionSwr?.map((question) => (
           <div
             key={question.id}
-            className="w-full bg-blue-50 rounded-xl p-4 mb-4"
+            className="mb-4 w-full rounded-xl bg-blue-50 p-4"
           >
-            <div className="_QuestionCard-header flex py-2 border-b-2 border-dotted border-gray-300 justify-between items-center">
+            <div className="_QuestionCard-header flex items-center justify-between border-b-2 border-dotted border-gray-300 py-2">
               {/* Avatar and Name */}
               <div className="flex items-center">
                 <div className="flex items-center">
                   <div className="avatar">
-                    <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2">
+                    <div className="w-10 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
                       <img src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg" />
                     </div>
                   </div>
-                  <div className="flex mr-3 gap-1 flex-col">
+                  <div className="mr-3 flex flex-col gap-1">
                     <h2 className="ml-2 font-bold xl:text-xl">
                       {question?.botUser?.firstname}{" "}
                       {question?.botUser?.lastname}{" "}
                     </h2>
-                    <span className="flex text-sm sm:text-md">{`ساکن ${question.country.name}`}</span>
+                    <span className="sm:text-md flex text-sm">{`ساکن ${question.country.name}`}</span>
                   </div>
                 </div>
               </div>
               {/* Date */}
-              <span className="text-sm xl:text-md text-gray-500">
+              <span className="xl:text-md text-sm text-gray-500">
                 {timeAgo(question.createdDate)}
               </span>
             </div>
             {/* Question and Description */}
-            <div className="QuestonCard-body mt-3 mb-2">
+            <div className="QuestonCard-body mb-2 mt-3">
               <h2 className="text-lg font-bold xl:text-xl">{question.title}</h2>
-              <p className="mt-1 text-sm xl:text-lg text-gray-700">
+              <p className="mt-1 text-sm text-gray-700 xl:text-lg">
                 {question.text}
               </p>
             </div>
             {/* Topic and Up Vote */}
-            <div className="QuestionCard-footer flex items-center justify-between mt-5">
+            <div className="QuestionCard-footer mt-5 flex items-center justify-between">
               <div className="text-gray-600">
                 <span className="flex font-bold xl:gap-2">
                   <Tag
@@ -134,7 +130,7 @@ export default function QuestionCard({
                 </span>
               </div>
               <div className="flex items-center gap-1 xl:gap-4">
-                <div className="font-bold w-auto py-1 mr-1 h-auto items-center justify-center flex rounded-xl text-[.7rem] bg-blue-200">
+                <div className="mr-1 flex h-auto w-auto items-center justify-center rounded-xl bg-blue-200 py-1 text-[.7rem] font-bold">
                   <div
                     className="flex"
                     // href={`/${countryOrSlug}/community/${question.id}`}
@@ -145,17 +141,17 @@ export default function QuestionCard({
                         if (!isUserAuthenticated) {
                           (
                             document.getElementById(
-                              "my_modal_3"
+                              "my_modal_3",
                             ) as HTMLFormElement
                           ).showModal();
                         } else {
                           params.delete("sort");
                           router.push(
-                            `/${countryOrSlug}/community/${question.id}/`
+                            `/${countryOrSlug}/community/${question.id}/`,
                           );
                         }
                       }}
-                      className="btn btn-ghost rounded-xl btn-xs xl:btn-sm bg-transparent font-medium"
+                      className="btn btn-ghost btn-xs rounded-xl bg-transparent font-medium xl:btn-sm"
                     >
                       <ChatCircleDots
                         size={16}
@@ -170,20 +166,20 @@ export default function QuestionCard({
                         className="hidden xl:block"
                       />
 
-                      <p className="text-[.65rem] xl:text-base font-medium">
+                      <p className="text-[.65rem] font-medium xl:text-base">
                         {`${question.answers.length} پاسخ`}
                       </p>
                     </button>
                   </div>
                 </div>
-                <div className="font-bold w-auto py-1 text-gray-700 items-center flex rounded-xl text-xs bg-gray-200">
+                <div className="flex w-auto items-center rounded-xl bg-gray-200 py-1 text-xs font-bold text-gray-700">
                   <button
                     onClick={async () => {
                       const isUserAuthenticated = await checkUser();
                       if (!isUserAuthenticated) {
                         (
                           document.getElementById(
-                            "my_modal_3"
+                            "my_modal_3",
                           ) as HTMLFormElement
                         ).showModal();
                       } else {
@@ -191,9 +187,9 @@ export default function QuestionCard({
                         checkUser();
                       }
                     }}
-                    className="btn btn-ghost btn-square btn-xs xl:btn-sm  bg-transparent border-none font-medium"
+                    className="btn btn-square btn-ghost btn-xs border-none bg-transparent font-medium xl:btn-sm"
                   >
-                    <span className="flex justify-center items-center gap-1 px-2">
+                    <span className="flex items-center justify-center gap-1 px-2">
                       <ArrowFatDown
                         size={15}
                         color="#da3316"
@@ -208,7 +204,7 @@ export default function QuestionCard({
                       if (!isUserAuthenticated) {
                         (
                           document.getElementById(
-                            "my_modal_3"
+                            "my_modal_3",
                           ) as HTMLFormElement
                         ).showModal();
                       } else {
@@ -218,7 +214,7 @@ export default function QuestionCard({
                     }}
                     className={`${
                       isVoteLoading ? "animate-pulse" : ""
-                    } btn btn-ghost w-auto btn-xs bg-transparent border-none font-medium `}
+                    } btn btn-ghost btn-xs w-auto border-none bg-transparent font-medium`}
                   >
                     <span className="text-[.7rem] xl:text-base">
                       باهات موافقم
@@ -226,7 +222,7 @@ export default function QuestionCard({
                     <span>
                       <ArrowFatUp size={15} color="#2ed90c" weight="duotone" />
                     </span>
-                    <span className="font-bold text-[.7rem] xl:text-base">
+                    <span className="text-[.7rem] font-bold xl:text-base">
                       {question.votes.filter((v) => v.type === "up").length}
                     </span>
                   </button>

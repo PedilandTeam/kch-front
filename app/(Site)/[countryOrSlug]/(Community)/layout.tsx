@@ -1,7 +1,7 @@
 // app/(Site)/[countryOrSlug]/(Community)/layout.tsx
 
-import CommunityHeader from "@/components/community/header";
-import MobileMenu from "@/components/community/mobileMenu";
+import CommunityHeader from "@/app/(Site)/[countryOrSlug]/(Community)/c/components/header";
+import MobileMenu from "@/app/(Site)/[countryOrSlug]/(Community)/c/components/mobileMenu";
 import { ModalCountry } from "@/layout/modalcountry";
 import { CountryNamespace } from "@/types/country";
 

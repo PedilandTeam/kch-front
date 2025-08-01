@@ -18,7 +18,7 @@ import {
 
 export const Footer = () => {
   return (
-    <footer className="mt-10 rounded-tl-3xl rounded-tr-3xl bg-[#1c39bb] pb-6 pt-6 text-gray-50 sm:mt-20 sm:rounded-none sm:pb-5 sm:pt-16">
+    <footer className="mt-6 rounded-tl-3xl rounded-tr-3xl bg-[#1c39bb] py-6 text-gray-50 sm:mt-20 sm:rounded-none sm:pb-5 sm:pt-16">
       <div className="_footer container mx-auto max-w-6xl px-3 sm:px-0">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-4">
           <div className="px-2 sm:col-span-2 sm:px-0">
