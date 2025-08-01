@@ -1,36 +1,12 @@
-
 module.exports = {
+  darkMode: ["class"],
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      translate: {
-        100: "120%",
-      },
-      // fontFamily: {
-      //   PinarLT: "Pinar-LT",
-      // },
-      colors: {
-        blue: {
-          100: "#d2d8f2",
-          300: "#a4b0e4",
-          300: "#7788d6",
-          700: "#4a61c9",
-          900: "#1c39bb",
-        },
-        yellow: {
-          100: "#f6eed9",
-          300: "#efdcb1",
-          500: "#e8cd8a",
-          700: "#e0bb63",
-          900: "#d8aa3b",
-        },
-      },
-    
-    },
+    extend: {},
   },
   daisyui: {
     themes: [
@@ -51,5 +27,5 @@ module.exports = {
     rtl: true,
   },
   important: true,
-  plugins: [require("daisyui"),],
+  plugins: [require("daisyui"), require("tailwindcss-animate")],
 };

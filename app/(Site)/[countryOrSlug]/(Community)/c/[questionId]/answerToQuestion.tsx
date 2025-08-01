@@ -29,7 +29,6 @@ export default function AnswerToQuestion({
       });
       if (req.ok) {
         const res = await req.text();
-        console.log(res);
         toast.success("پاسخ شما با موفقیت ثبت شد و پس از تایید منتشر میگردد", {
           duration: 4000,
         });
@@ -48,10 +47,10 @@ export default function AnswerToQuestion({
     <div>
       {/* Answer Section */}
       {openAnswer && (
-        <div className="answer-div bg-blue-100 p-4 mt-4 rounded-xl">
+        <div className="answer-div mt-4 rounded-xl bg-blue-100 p-4">
           {/* <h3 className="text-lg font-bold mb-2">پاسخ شما</h3> */}
           <textarea
-            className="textarea w-full h-16 p-2 rounded-md border border-gray-300"
+            className="textarea h-16 w-full rounded-md border border-gray-300 p-2"
             placeholder="پاسخ خود را اینجا بنویسید..."
             onChange={(e) => {
               setText(e.target.value);
@@ -60,7 +59,7 @@ export default function AnswerToQuestion({
           <button
             disabled={isLoading}
             onClick={() => postAnswer()}
-            className="btn btn-primary mt-2 rounded-xl btn-xs sm:btn-md"
+            className="btn btn-primary btn-xs mt-2 rounded-xl sm:btn-md"
           >
             {isLoading ? <SpinnerBtn text="در حال ارسال" /> : " ارسال پاسخ"}
           </button>

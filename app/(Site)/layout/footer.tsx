@@ -18,15 +18,15 @@ import {
 
 export const Footer = () => {
   return (
-    <footer className="mt-10 rounded-tl-3xl rounded-tr-3xl bg-[#1c39bb] pb-6 pt-10 text-gray-50 sm:mt-20 sm:rounded-none sm:pb-5 sm:pt-16">
+    <footer className="mt-10 rounded-tl-3xl rounded-tr-3xl bg-[#1c39bb] pb-6 pt-6 text-gray-50 sm:mt-20 sm:rounded-none sm:pb-5 sm:pt-16">
       <div className="_footer container mx-auto max-w-6xl px-3 sm:px-0">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-4">
           <div className="px-2 sm:col-span-2 sm:px-0">
             <Image
+              className="mb-3 h-auto w-[160px]"
               src={"/images/logo-white.svg"}
-              width={160}
-              height={45}
-              className="mb-3"
+              width={300}
+              height={83}
               alt="Koochaa Logo in white color"
             />
             <p className="text-justify font-extralight">{FOOTER.SEO_TEXT}</p>
@@ -55,7 +55,7 @@ export const Footer = () => {
           <div className="flex items-center">
             <div className="_socials w-full space-y-2 text-center">
               <div>{FOOTER.FOLLOW_US}</div>
-              <div className="flex w-full justify-center gap-4 sm:justify-around sm:gap-0">
+              <div className="flex w-full justify-center gap-7 sm:justify-around sm:gap-0">
                 <Link
                   href={"https://www.instagram.com/_koochaa"}
                   target="_blank"

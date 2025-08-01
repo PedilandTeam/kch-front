@@ -18,7 +18,6 @@ function usePostUpVoteAnswer(questionMutate: any) {
         },
       });
       const res = await req.text();
-      // console.log(res);
       questionMutate();
     } catch (err) {
       console.error(err);

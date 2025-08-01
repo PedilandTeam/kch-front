@@ -2,6 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 3.9%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --accent: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 89.8%;
+  --input: 0 0% 89.8%;
+  --ring: 0 0% 3.9%;
+  --chart-1: 12 76% 61%;
+  --chart-2: 173 58% 39%;
+  --chart-3: 197 37% 24%;
+  --chart-4: 43 74% 66%;
+  --chart-5: 27 87% 67%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 0 0% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  --secondary: 0 0% 14.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 0 0% 14.9%;
+  --muted-foreground: 0 0% 63.9%;
+  --accent: 0 0% 14.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 14.9%;
+  --input: 0 0% 14.9%;
+  --ring: 0 0% 83.1%;
+  --chart-1: 220 70% 50%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
+}
+
 html {
   font-size: 15px;
 }
@@ -28,17 +83,9 @@ html {
   }
 }
 
-
-
-
-
-
-
-
-
 /* Static Pages Style */
 .page-wrap.static .text-wrap h2 {
-  @apply mt-8 mb-2 text-lg font-semibold text-secondary first:mt-0;
+  @apply mb-2 mt-8 text-lg font-semibold text-secondary first:mt-0;
 }
 
 .page-wrap.static .text-wrap p {
@@ -46,7 +93,7 @@ html {
 }
 
 .page-wrap.static .text-wrap a {
-  @apply underline text-primary hover:text-secondary hover:no-underline;
+  @apply text-primary underline hover:text-secondary hover:no-underline;
 }
 
 .page-wrap.static .text-wrap strong {
@@ -54,7 +101,7 @@ html {
 }
 
 .page-wrap.static .text-wrap ul {
-  @apply pr-3 my-3;
+  @apply my-3 pr-3;
 }
 
 .page-wrap.static .text-wrap ul li {
@@ -62,15 +109,15 @@ html {
 }
 
 .page-wrap.static .text-wrap ol li {
-  @apply mt-8 mb-2 mr-5 text-lg font-semibold first:mt-0;
+  @apply mb-2 mr-5 mt-8 text-lg font-semibold first:mt-0;
 }
 
 .page-wrap.static .text-wrap .section {
-  @apply p-5 mb-8 border border-r-4 border-blue-100 rounded-tl-xl rounded-bl-xl sm:p-8 bg-slate-50 last:mb-0;
+  @apply mb-8 rounded-bl-xl rounded-tl-xl border border-r-4 border-blue-100 bg-slate-50 p-5 last:mb-0 sm:p-8;
 }
 
 .page-wrap.static .text-wrap .section h2 {
-  @apply mb-5 text-xl text-center sm:mb-3 sm:text-right;
+  @apply mb-5 text-center text-xl sm:mb-3 sm:text-right;
 }
 
 .page-wrap.static .text-wrap .item h3 {
@@ -78,32 +125,32 @@ html {
 }
 
 .page-wrap.static .text-wrap .item ul {
-  @apply pr-0 mb-8 sm:pr-3;
+  @apply mb-8 pr-0 sm:pr-3;
 }
 
 .page-wrap.static .text-wrap .item ul li {
-  @apply sm:list-disc sm:list-inside;
+  @apply sm:list-inside sm:list-disc;
 }
 
 .page-wrap.static .page-head {
-  @apply flex justify-center content-center mx-3 sm:mx-auto sm:max-w-[95%] relative;
+  @apply relative mx-3 flex content-center justify-center sm:mx-auto sm:max-w-[95%];
 }
 
 .page-wrap.static .page-head .content {
-  @apply max-w-[1144px] w-full mx-auto absolute top-0 left-0 right-0 h-full flex flex-wrap items-center justify-center sm:justify-start;
+  @apply absolute left-0 right-0 top-0 mx-auto flex h-full w-full max-w-[1144px] flex-wrap items-center justify-center sm:justify-start;
 }
 
 .page-wrap.static .page-head .content .wrap h1 {
-  @apply font-bold text-[34px] sm:text-[38px] mb-1 sm:mb-3 text-center sm:text-right;
+  @apply mb-1 text-center text-[34px] font-bold sm:mb-3 sm:text-right sm:text-[38px];
 }
 
 .page-wrap.static .page-head .content .wrap h2 {
-  @apply font-medium text-[21px] sm:text-[22px] text-center sm:text-right;
+  @apply text-center text-[21px] font-medium sm:text-right sm:text-[22px];
 }
 
 /* Off-Canvas */
 .menu ul li a {
-  @apply mb-3 font-medium text-blue-900 border border-blue-300 border-dashed hover:text-white hover:bg-blue-300 focus:bg-blue-300;
+  @apply mb-3 border border-dashed border-blue-300 font-medium text-blue-900 hover:bg-blue-300 hover:text-white focus:bg-blue-300;
 }
 
 /* Main Scroll Style */
@@ -152,7 +199,7 @@ html {
 
 /* Button Styles */
 .btn-lime {
-  @apply px-3 bg-lime-300 border-lime-300 text-lime-900 hover:bg-lime-400 hover:border-lime-400 hover:text-lime-950;
+  @apply border-lime-300 bg-lime-300 px-3 text-lime-900 hover:border-lime-400 hover:bg-lime-400 hover:text-lime-950;
 }
 
 .shadow-blx {
@@ -162,7 +209,6 @@ html {
 .shadow-tlx {
   text-shadow: 0 2px 0 black;
 }
-
 
 /* custom modal's textArea for modal question  */
 #textarea-wrapper > div > div {

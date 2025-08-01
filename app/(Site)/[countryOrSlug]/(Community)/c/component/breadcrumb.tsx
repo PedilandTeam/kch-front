@@ -10,7 +10,7 @@ type CommunityBreadcrumbType = {
 };
 export const CommunityBreadcrumb = ({ country }: CommunityBreadcrumbType) => {
   return (
-    <div className="breadcrumbs w-full px-4 py-3  text-sm sm:px-0 sm:w-auto sm:bg-transparent">
+    <div className="breadcrumbs w-full py-2 text-sm sm:w-auto sm:bg-transparent sm:px-0">
       <ul>
         <li>
           <Link href="/">{GENERAL.HOME}</Link>
