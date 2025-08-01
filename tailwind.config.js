@@ -1,11 +1,9 @@
-const { nextui } = require("@nextui-org/react");
 
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -53,5 +51,5 @@ module.exports = {
     rtl: true,
   },
   important: true,
-  plugins: [require("daisyui"), nextui()],
+  plugins: [require("daisyui"),],
 };

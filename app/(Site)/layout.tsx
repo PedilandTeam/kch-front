@@ -10,7 +10,6 @@ import "@/styles/globals.css";
 import { CountryNamespace } from "@/types/country";
 import Script from "next/script";
 import { Toaster } from "react-hot-toast";
-import { NextUIProvider } from "@nextui-org/react";
 
 export default async function RootLayout({
   children,
@@ -28,7 +27,6 @@ export default async function RootLayout({
   return (
     <html lang="fa" dir="rtl" className="scroll-smooth">
       <body className="min-h-screen overflow-x-hidden">
-        <NextUIProvider>
         <Fonts />
         <Header countries={countries}>
           <ModalCountry countries={countries} />
@@ -49,8 +47,7 @@ export default async function RootLayout({
  
           gtag('config', 'G-EED4RG3GPD');
         `}
-          </Script>
-        </NextUIProvider>
+        </Script>
       </body>
     </html>
   );

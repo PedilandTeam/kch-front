@@ -1,7 +1,9 @@
-import { CountryNamespace } from "@/types/country";
+// app/(Site)/[countryOrSlug]/(Community)/layout.tsx
+
+import BottomMenu from "@/components/community/bottomMenu";
 import { ModalCountry } from "@/layout/modalcountry";
-import CommunityHeader from "./community/communityHeader";
-import BottomMenu from "./community/bottomMenu";
+import { CountryNamespace } from "@/types/country";
+import CommunityHeader from "./c/communityHeader";
 
 export default async function CommunityLayout({
   children,
@@ -12,7 +14,6 @@ export default async function CommunityLayout({
     countryOrSlug: string;
   };
 }) {
-  // console.log(params);
 
   let country: CountryNamespace.GET[];
   try {
