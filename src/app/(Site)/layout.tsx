@@ -4,7 +4,6 @@ import { Footer } from "@/app/(Site)/layout/footer";
 import { Header } from "@/app/(Site)/layout/header";
 import { ModalCountry } from "@/app/(Site)/layout/modalcountry";
 import Hotjar from "@/components/hotjar";
-import Fonts from "@/config/fonts";
 import { API_ROUTES } from "@/routes";
 import "@/styles/globals.css";
 import { CountryNamespace } from "@/types/country";
@@ -27,7 +26,6 @@ export default async function RootLayout({
   return (
     <html lang="fa" dir="rtl" className="scroll-smooth">
       <body className="min-h-screen overflow-x-hidden">
-        <Fonts />
         <Header countries={countries}>
           <ModalCountry countries={countries} />
         </Header>

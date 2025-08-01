@@ -1,6 +1,5 @@
 import { Header } from "./components/header/header";
 import "@/styles/globals.css";
-import Fonts from "@/config/fonts";
 import { Providers } from "@/components/client-packages/react-redux/provider";
 import Script from "next/script";
 import { Metadata, Viewport } from "next";
@@ -28,8 +27,7 @@ export default async function RootLayout({
     <html lang="fa" dir="rtl" className="scroll-smooth">
       <body className="min-h-screen">
         <Providers>
-          <div className="lg:container mx-auto">
-            <Fonts />
+          <div className="mx-auto lg:container">
             <Header />
             <Toaster />
             <main className="min-h-[70vh]">{children}</main>

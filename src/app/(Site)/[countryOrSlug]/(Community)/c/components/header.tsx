@@ -49,9 +49,9 @@ export default function CommunityHeader({
   }, [fix, fixM]);
 
   return (
-    <div className="_community-header px-3 pb-3 pt-4">
+    <div className="_community-header px-3 pt-4 pb-3">
       <div className="_title">
-        <h1 className="text-xl font-bold text-secondary sm:text-2xl">
+        <h1 className="text-xl font-bold sm:text-2xl">
           موضوعات مطرح شده در {country?.name}
         </h1>
         <span className="hidden font-medium text-gray-500 sm:inline">
