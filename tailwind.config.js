@@ -1,3 +1,5 @@
+/** @type {import('tailwindcss').Config} */
+
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -6,24 +8,16 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "hsl(var(--primary))",
+        "primary-foreground": "hsl(var(--primary-foreground))",
+        secondary: "hsl(var(--secondary))",
+      },
+    },
   },
   daisyui: {
-    themes: [
-      {
-        koochaa: {
-          primary: "#1c39bb",
-          secondary: "#d8aa3c",
-          accent: "#1dcdbc",
-          neutral: "#2b3440",
-          "base-100": "#ffffff",
-          info: "#3abff8",
-          success: "#36d399",
-          warning: "#fbbd23",
-          error: "#f87272",
-        },
-      },
-    ],
+    themes: [],
     rtl: true,
   },
   important: true,

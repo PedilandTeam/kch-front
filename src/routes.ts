@@ -72,14 +72,13 @@ const baseFetch = async (
     })
       .then((res: Response) => {
         if (!res.ok) {
-          res.json().then((res) => console.log(res));
+          res.json();
           reject(res);
         }
         resolve(res);
       })
       .catch((error: any) => {
         console.log("error", error);
-
         reject(error);
       });
   });

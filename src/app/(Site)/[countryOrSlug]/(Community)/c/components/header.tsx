@@ -49,7 +49,7 @@ export default function CommunityHeader({
   }, [fix, fixM]);
 
   return (
-    <div className="_community-header px-3 pt-4">
+    <div className="_community-header px-3 pb-3 pt-4">
       <div className="_title">
         <h1 className="text-xl font-bold text-secondary sm:text-2xl">
           موضوعات مطرح شده در {country?.name}
@@ -59,9 +59,9 @@ export default function CommunityHeader({
         </span>
       </div>
 
-      <CommunityBreadcrumb
+      {/* <CommunityBreadcrumb
         country={{ name: country.name, code: country.code }}
-      />
+      /> */}
     </div>
   );
 }

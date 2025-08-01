@@ -1,3 +1,5 @@
+// src/app/(Site)/[countryOrSlug]/[unitSlug]/[categorySlug]/page.tsx
+
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CountryNamespace } from "@/types/country";
@@ -25,7 +27,7 @@ type ParsedSearchParams = {
 const pathGenerator = async (
   countryOrSlug: string,
   unitSlug: string,
-  categorySlug: string
+  categorySlug: string,
 ): Promise<PathGeneratorType> => {
   // const units = await (await API_ROUTES.UNITS.GET_ALL(2000)).json();
   const currentUnit = (
@@ -33,7 +35,7 @@ const pathGenerator = async (
       filters: {
         slug: unitSlug,
       },
-      tags: ["country", 'page'],
+      tags: ["country", "page"],
       revalidate:
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     })
@@ -44,7 +46,7 @@ const pathGenerator = async (
     filters: {
       code: countryOrSlug,
     },
-    tags: ["country", 'page'],
+    tags: ["country", "page"],
     revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
   });
   const currentCountry = countryList[0];
@@ -55,9 +57,9 @@ const pathGenerator = async (
     filters: {
       page: 1,
       limit: 1,
-      slug: categorySlug
+      slug: categorySlug,
     },
-    tags: ["country", 'page'],
+    tags: ["country", "page"],
     revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
   });
 
@@ -84,10 +86,18 @@ type generateMetadata = {
   params: { countryOrSlug: string; unitSlug: string; categorySlug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
-export const generateMetadata = async ({
-  params: { countryOrSlug, unitSlug, categorySlug },
-  searchParams,
-}: generateMetadata): Promise<Metadata> => {
+
+export const generateMetadata = async (_props: any): Promise<Metadata> => {
+  // قدم اول: resolve props (در صورت Promise بودن)
+  const props = _props?.then ? await _props : _props;
+  // قدم دوم: resolve params (در صورت Promise بودن)
+  const params = props.params?.then ? await props.params : props.params;
+  const searchParams = props.searchParams?.then
+    ? await props.searchParams
+    : props.searchParams;
+  // حالا میتونی استفاده کنی:
+  const { countryOrSlug, unitSlug, categorySlug } = params;
+
   let pathInfo: PathGeneratorType;
 
   try {
@@ -109,7 +119,7 @@ export const generateMetadata = async ({
     await API_ROUTES.COUNTRIES.GET_ALL(false, 120)
   ).json();
   const currentCountry: CountryNamespace.GET | undefined = countries.find(
-    (country: CountryNamespace.GET) => country.code == countryOrSlug
+    (country: CountryNamespace.GET) => country.code == countryOrSlug,
   );
 
   const pageSearchParams = searchParams?.page;
@@ -133,19 +143,20 @@ export const generateMetadata = async ({
   };
 };
 
-export default async function CategoryPage({
-  params: { countryOrSlug, unitSlug, categorySlug },
-  searchParams,
-}: {
-  params: { countryOrSlug: string; unitSlug: string; categorySlug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
+export default async function CategoryPage(_props: any) {
+  const props = _props?.then ? await _props : _props;
+  const params = props.params?.then ? await props.params : props.params;
+  const searchParams = props.searchParams?.then
+    ? await props.searchParams
+    : props.searchParams;
+  const { countryOrSlug, unitSlug, categorySlug } = params;
+
   let parsedSearchParams: ParsedSearchParams;
   let pathInfo: PathGeneratorType;
 
   parsedSearchParams = queryString.parse(
     queryString.stringify(searchParams ?? {}),
-    { arrayFormat: "comma", parseNumbers: true }
+    { arrayFormat: "comma", parseNumbers: true },
   ) as ParsedSearchParams;
   const { page: pageNumber, city, search } = parsedSearchParams;
 

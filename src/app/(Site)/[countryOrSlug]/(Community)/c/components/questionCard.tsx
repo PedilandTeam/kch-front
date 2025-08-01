@@ -19,8 +19,10 @@ import { CountryNamespace } from "@/types/country";
 // import PaginationQ from "./PaginationQ";
 
 export default function QuestionCard({
+  data,
   countryOrSlug,
 }: {
+  data: any;
   countryOrSlug: string;
   country: CountryNamespace.GET;
 }) {
@@ -61,10 +63,12 @@ export default function QuestionCard({
     );
   }
 
+  console.log(data);
+
   return (
     <div className="_QuestionCard flex min-h-[20rem] w-full max-w-[72rem] flex-col items-center justify-between bg-white">
       {/* If questionSwr is empty */}
-      {questionSwr?.length === 0 ? (
+      {data?.length === 0 ? (
         <div className="my-auto text-center">
           <h2 className="text-lg font-bold">هیچ سؤالی یافت نشد</h2>
           <p className="text-gray-600">

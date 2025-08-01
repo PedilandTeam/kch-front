@@ -3,12 +3,12 @@ import { notFound } from "next/navigation";
 import QuestionCard from "./components/questionCard";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import CommunityHeader from "./components/header";
 
-export default async function Page({
-  params,
-}: {
-  params: { countryOrSlug: string };
-}) {
+export default async function Page(_props: any) {
+  const props = _props?.then ? await _props : _props;
+  const params = props.params?.then ? await props.params : props.params;
+
   const countryList: CountryNamespace.GET[] = await fetch(
     `${process.env.API_URL}/countries?code=${params.countryOrSlug}`,
     {
@@ -29,25 +29,21 @@ export default async function Page({
 
   const country = countryList[0];
 
-  //   try {
-  //     const url = `https://api.koochaa.com/forum/questions?limit=30&page=1`;
-  //     const response = await fetch(url, {
-  //       credentials: "include",
-  //     });
-  //     const result = await response.json();
-  //     setQuestion(result.items);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-  // // get Q
-  // useEffect(() => {
-  //   fetchQuestion();
-  // }, []);
-  // console.log("Q:", question);
+  let result;
+  try {
+    const url = `${process.env.API_URL}/forum/questions?limit=30&page=1&countryCode=${country.code}`;
+    const response = await fetch(url, {
+      credentials: "include",
+    });
+    result = await response.json();
+  } catch (error) {
+    console.error(error);
+  }
 
   return (
     <div className="_community-mainPage flex flex-col gap-2 px-3">
+      {/* <CommunityHeader country={country[0]} countryOrSlug={countryOrSlug} /> */}
+
       <div className="flex items-center gap-2">
         <Input placeholder="جستجو..." />
         <div>
@@ -55,7 +51,11 @@ export default async function Page({
         </div>
       </div>
 
-      <QuestionCard countryOrSlug={params.countryOrSlug} country={country} />
+      <QuestionCard
+        data={result.items}
+        countryOrSlug={params.countryOrSlug}
+        country={country}
+      />
     </div>
   );
 }
