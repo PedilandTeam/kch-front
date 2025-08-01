@@ -1,7 +1,12 @@
+// tsconfig.json
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -14,13 +19,23 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
-      "@/*": ["./*"],
-      "@app/*": ["./app/*"],
-      "@client-packages/*": ["./components/client-packages/*"],
-      "@text/*": ["./app/text/*"],
-      "@/types/*": ["./types/*"]
+      "@/*": [
+        "*"
+      ],
+      "@app/*": [
+        "app/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@styles/*": [
+        "styles/*"
+      ],
+      "@types/*": [
+        "types/*"
+      ]
     },
     "plugins": [
       {
@@ -30,18 +45,10 @@
   },
   "include": [
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "app/(Site)/layout/header.tsx",
-    "app/(Site)/layout/header.tsx",
-    "components/elements/badgenew.jsx",
-    "components/elements/badgenew.jsx",
-    ".next/types/**/*.ts",
-    "layout/backtotop.jsx",
-    "app/jobs/text.tsx",
-    "app/jobs/page.tsx",
-    "./*.ts",
-    "./*.tsx"
+    "src",
+    ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
