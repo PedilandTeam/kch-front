@@ -140,4 +140,8 @@ body {
   .container {
     @apply px-3;
   }
+
+  .page {
+    @apply pt-3;
+  }
 }

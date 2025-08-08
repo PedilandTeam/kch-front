@@ -5,8 +5,9 @@ import { MODAL } from "@/text/modal";
 import { Country } from "@/types/country";
 import { CircleFlag } from "next-circle-flags";
 import Link from "next/link";
-import { useRef } from "react";
 
+// UI Imports
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -15,9 +16,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 
 type DialogCountryProps = {
   open: boolean;
@@ -33,12 +32,13 @@ export const DialogCountry = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
+        dir="rtl"
         className="max-h-[90vh] gap-5 overflow-y-auto p-5"
         showCloseButton={false}
       >
         <form method="dialog">
           <DialogHeader className="gap-5">
-            <DialogTitle className="text-[15px] font-normal text-gray-500">
+            <DialogTitle className="text-center text-[15px] font-normal text-gray-500">
               {MODAL.COUNTRY_TITLE}
             </DialogTitle>
             <DialogDescription asChild>
@@ -67,7 +67,7 @@ export const DialogCountry = ({
           </DialogHeader>
         </form>
 
-        <DialogFooter className="sm:justify-start">
+        <DialogFooter className="sm:justify-center">
           <DialogClose asChild>
             <Button type="button" variant="secondary">
               انصراف

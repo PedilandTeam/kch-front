@@ -178,8 +178,18 @@ export const API_ROUTES = {
       );
     },
   },
+
+  // Refactored by Pedram
   COUNTRIES: {
-    GET_ALL: (status?: any, revalidate?: number, cache?: requestCacheType) => {
+    GET_ALL: ({
+      status,
+      revalidate,
+      cache,
+    }: {
+      status?: number;
+      revalidate?: number;
+      cache?: requestCacheType;
+    } = {}) => {
       return baseFetch(
         {
           path: "countries",
@@ -190,6 +200,7 @@ export const API_ROUTES = {
       );
     },
   },
+
   CITIES: {
     GET_ALL: (
       page: number = 1,

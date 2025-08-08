@@ -1,6 +1,5 @@
 // app/(Site)/layout.tsx
 
-import { DialogCountry } from "@/app/(Site)/layout/dialogCountry";
 import { Footer } from "@/app/(Site)/layout/footer";
 import { Header } from "@/app/(Site)/layout/header";
 import Hotjar from "@/components/hotjar";
@@ -16,20 +15,27 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  let countries: Country[];
+  let countries: Country[] = [];
+
   try {
-    countries = await (await API_ROUTES.COUNTRIES.GET_ALL(1, 20)).json();
-  } catch (e) {
-    console.log(e);
-    throw new Error("error in get country");
+    const res = await API_ROUTES.COUNTRIES.GET_ALL({
+      status: 1,
+      revalidate: 86400, // 24h cache
+    });
+
+    if (res.ok) {
+      countries = await res.json();
+    } else {
+      console.error(`Failed to fetch countries: ${res.status}`);
+    }
+  } catch (error) {
+    console.error("Error fetching countries", error);
   }
 
   return (
     <html lang="fa" dir="rtl" className="scroll-smooth">
       <body className="flex justify-center overflow-x-hidden bg-neutral-100 antialiased">
-        <div className="relative min-h-dvh w-full max-w-[414px] bg-white shadow-lg">
-          <Header countries={countries} />
-
+        <div className="_app relative min-h-dvh w-full max-w-[414px] bg-white shadow-lg">
           {children}
 
           <Footer />
@@ -44,12 +50,11 @@ export default async function RootLayout({
               <Script src="https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD" />
               <Script id="google-analytics">
                 {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
- 
-          gtag('config', 'G-EED4RG3GPD');
-        `}
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', 'G-EED4RG3GPD');
+                `}
               </Script>
             </>
           )}

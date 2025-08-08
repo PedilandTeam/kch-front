@@ -28,16 +28,27 @@ export default function AppMenu({ countries, children }: AppMenuProps) {
   const lastScrollY = useRef(0);
 
   useEffect(() => {
+    let ticking = false;
+    const threshold = 5;
+
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
 
-      if (currentScrollY > lastScrollY.current) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
+          if (Math.abs(currentScrollY - lastScrollY.current) > threshold) {
+            if (currentScrollY > lastScrollY.current) {
+              setIsVisible(false); // scroll down → hide
+            } else {
+              setIsVisible(true); // scroll up → show
+            }
+            lastScrollY.current = currentScrollY;
+          }
+
+          ticking = false;
+        });
+        ticking = true;
       }
-
-      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -60,7 +71,7 @@ export default function AppMenu({ countries, children }: AppMenuProps) {
   return (
     <div
       className={cn(
-        "_mobileMenu-fixed fixed bottom-0 left-1/2 z-0 w-full max-w-md -translate-x-1/2 transform transition-transform duration-300",
+        "_mobile-menu fixed bottom-0 left-1/2 z-0 w-full max-w-[414px] -translate-x-1/2 transform transition-transform duration-300",
         isVisible ? "translate-y-0" : "translate-y-full",
       )}
     >
@@ -72,7 +83,7 @@ export default function AppMenu({ countries, children }: AppMenuProps) {
             loading={"lazy"}
             alt={`Logo of country with ISO code ${countryCode}`}
             countryCode={countryCode}
-            className="opacity-50"
+            className="opacity-50 hover:cursor-pointer"
             onClick={() => setIsOpen(true)}
           />
         </div>

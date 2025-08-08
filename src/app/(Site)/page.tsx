@@ -1,7 +1,8 @@
+// src/app/(Site)/page.tsx
+
+import { HomeCountries } from "@/components/home/homeCountries";
+import { HomeSEO } from "@/components/home/homeSeo";
 import { Metadata } from "next";
-import { HomeCountries } from "./home/countries";
-import { SliderMainHome } from "./home/slider";
-import HomeBottom from "./home/bottom";
 
 export const metadata: Metadata = {
   title: "کوچا | جامعه ایرانیان مهاجر مقیم همه جا",
@@ -11,14 +12,13 @@ export const metadata: Metadata = {
     canonical: process.env.FRONT_URL,
   },
 };
-export default function Page() {
-  return (
-    <div className="component page-home w-full">
-      <SliderMainHome />
 
+export default function HomePage() {
+  return (
+    <main className="_home-page page">
       <HomeCountries />
 
-      <HomeBottom />
-    </div>
+      <HomeSEO />
+    </main>
   );
 }

@@ -31,6 +31,7 @@ async function getMostUsedCategories(countryCode: string) {
 type CountryCategoriesProps = {
   currentCountry: Country;
 };
+
 export const CountryCategories = async ({
   currentCountry,
 }: CountryCategoriesProps) => {

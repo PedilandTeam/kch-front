@@ -1,4 +1,4 @@
-const HomeBottom = () => {
+export const HomeSEO = () => {
   return (
     <div className="container">
       <div className="_seo-text mx-3 my-10">
@@ -10,4 +10,3 @@ const HomeBottom = () => {
     </div>
   );
 };
-export default HomeBottom;
