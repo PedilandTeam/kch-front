@@ -1,20 +1,14 @@
+// src/types/tag.ts
 import { UnitType } from "./unit";
+import { Meta } from "./meta";
 
-export namespace TagNamespace {
-  export interface GET {
-    items: ITag[];
-    meta: {
-      currentPage: number;
-      itemCount: number;
-      itemsPerPage: number;
-      totalItems: number;
-      totalPages: number;
-    };
-  }
+export interface Tag {
+  id: number;
+  name: string;
+  unit: UnitType;
+}
 
-  export interface ITag {
-    name: string;
-    id: number;
-    unit: UnitType;
-  }
+export interface GetTagsResponse {
+  items: Tag[];
+  meta: Meta;
 }

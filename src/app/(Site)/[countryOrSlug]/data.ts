@@ -1,17 +1,18 @@
 // app/(Site)/[countryOrSlug]/data.ts
-import { cache } from "react";
+
 import fetchWrapper from "@/modules/fetchWrapper";
-import { CategoryNamespace } from "@/types/category";
+import { Category } from "@/types/category";
 import { Country } from "@/types/country";
-import { PageNamespace } from "@/types/page";
+import { GetPagesResponse, Page } from "@/types/page";
+import { cache } from "react";
 
 export type RouteData =
   | {
       type: "country";
       currentCountry: Country;
-      categories: CategoryNamespace.GET;
+      categories: Category;
     }
-  | { type: "item"; pageData: NonNullable<PageNamespace.GET["items"]>[number] }
+  | { type: "item"; pageData: Page }
   | null;
 
 const REVALIDATE =
@@ -25,7 +26,7 @@ export const getRouteData = cache(
         tags: ["country", "page"],
         revalidate: REVALIDATE,
       }),
-      fetchWrapper<CategoryNamespace.GET>("categories", {
+      fetchWrapper<Category>("categories", {
         filters: { page: 1, limit: 300 },
         tags: ["country", "page"],
         revalidate: REVALIDATE,
@@ -38,7 +39,7 @@ export const getRouteData = cache(
       return { type: "country", currentCountry, categories };
     }
 
-    const pageRes = await fetchWrapper<PageNamespace.GET>("pages", {
+    const pageRes = await fetchWrapper<GetPagesResponse>("pages", {
       filters: { page: 1, limit: 1, slug: countryOrSlug },
       tags: ["country", "page"],
       revalidate: REVALIDATE,

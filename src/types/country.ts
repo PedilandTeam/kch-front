@@ -1,3 +1,4 @@
+// src/types/country.ts
 export type Country = {
   id: number;
   name: string;

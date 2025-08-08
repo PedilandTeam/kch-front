@@ -1,10 +1,10 @@
 // app/(Site)/[countryOrSlug]/page.tsx
 
 import { notFound } from "next/navigation";
-import { getRouteData } from "./data";
-import CountryPage from "./country/countryPage";
-import PageItem from "./item/item";
 import { metadata as defaultMetadata } from "../page";
+import CountryPage from "./country/countryPage";
+import { getRouteData } from "./data";
+import PageItem from "./item/item";
 
 type Params = { params: Promise<{ countryOrSlug: string }> };
 
@@ -41,6 +41,8 @@ export async function generateMetadata({ params }: Params) {
 export default async function Page({ params }: Params) {
   const { countryOrSlug } = await params;
   const data = await getRouteData(countryOrSlug);
+
+  console.log("Pedram is watching...", data);
 
   if (!data) return notFound();
 

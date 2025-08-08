@@ -1,20 +1,15 @@
+// src/types/city.ts
 import { Country } from "./country";
+import { Meta } from "./meta";
 
-export namespace CityNamespace {
-  export type city = {
-    id: number;
-    name: string;
-    country: Country;
-    englishName?: string;
-  };
-  export interface GET {
-    items: city[];
-    meta: {
-      currentPage: number;
-      itemCount: number;
-      itemsPerPage: number;
-      totalItems: number;
-      totalPages: number;
-    };
-  }
+export interface City {
+  id: number;
+  name: string;
+  country: Country;
+  englishName?: string;
+}
+
+export interface GetCitiesResponse {
+  items: City[];
+  meta: Meta;
 }
