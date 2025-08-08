@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import { ItemBreadCrumb } from "./breadcrumb";
 import { CardsList } from "./cardsList";
 import ListFilter from "./filter/listFilter";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import { Suspense } from "react";
 import Loading from "../_loading";
 import FilterMobile from "./filter/filter.mobile";
@@ -21,7 +21,7 @@ import StaticAdvertise from "@/components/advertise/static";
 
 type PagesListProps = {
   category: CategoryNamespace.category;
-  country: CountryNamespace.GET;
+  country: Country;
   unit: UnitType;
   pageNumber: number;
   city: number | number[];

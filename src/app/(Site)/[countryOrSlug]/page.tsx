@@ -2,7 +2,7 @@
 
 import { notFound } from "next/navigation";
 import { getRouteData } from "./data";
-import Country from "./country/country";
+import CountryPage from "./country/countryPage";
 import PageItem from "./item/item";
 import { metadata as defaultMetadata } from "../page";
 
@@ -48,7 +48,7 @@ export default async function Page({ params }: Params) {
     if (!data.currentCountry.availability) return notFound();
 
     return (
-      <Country
+      <CountryPage
         currentCountry={data.currentCountry}
         categories={data.categories}
       />

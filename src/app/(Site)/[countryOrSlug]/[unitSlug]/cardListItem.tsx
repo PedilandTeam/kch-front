@@ -3,7 +3,7 @@
 import Link from "next/link";
 import categoryPathGenerator from "@/utils/categoryPathGenerator";
 import { PageNamespace } from "@/types/page";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import ItemProfilePicture from "../item/itemProfilePicture";
 import { Star } from "@phosphor-icons/react/dist/ssr";
 import Rating from "react-rating";
@@ -12,7 +12,7 @@ import BlueBadge from "@/components/badges/blue.badge";
 
 type cardListItem = {
   page: PageNamespace.Page;
-  country: CountryNamespace.GET;
+  country: Country;
   variant: "category" | "unit";
 };
 

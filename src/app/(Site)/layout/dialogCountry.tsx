@@ -2,7 +2,7 @@
 "use client";
 
 import { MODAL } from "@/text/modal";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import { CircleFlag } from "next-circle-flags";
 import Link from "next/link";
 import { useRef } from "react";
@@ -22,7 +22,7 @@ import { Button } from "@/components/ui/button";
 type DialogCountryProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  countries: CountryNamespace.GET[];
+  countries: Country[];
 };
 
 export const DialogCountry = ({

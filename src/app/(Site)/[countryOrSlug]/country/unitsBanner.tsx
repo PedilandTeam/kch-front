@@ -1,11 +1,11 @@
 import { MENU } from "@/text/menu";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import Image from "next/image";
 import Link from "next/link";
 import PagesSearch from "./pages.search";
 
 type UnitsBannerProps = {
-  currentCountry: CountryNamespace.GET;
+  currentCountry: Country;
 };
 export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
   return (

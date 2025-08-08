@@ -1,6 +1,6 @@
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import CountryCategoriesItems from "./countryCategoriesItems";
 import { CATEGORY } from "@/text/directory";
 
@@ -29,7 +29,7 @@ async function getMostUsedCategories(countryCode: string) {
 // }
 
 type CountryCategoriesProps = {
-  currentCountry: CountryNamespace.GET;
+  currentCountry: Country;
 };
 export const CountryCategories = async ({
   currentCountry,

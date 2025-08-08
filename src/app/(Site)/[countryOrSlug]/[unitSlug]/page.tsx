@@ -1,4 +1,4 @@
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import { UnitType } from "@/types/unit";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -22,7 +22,7 @@ const pathGenerator = async (
     })
   )[0];
 
-  const countryList = await fetchWrapper<CountryNamespace.GET[]>("countries", {
+  const countryList = await fetchWrapper<Country[]>("countries", {
     filters: {
       code: countryOrSlug,
     },
@@ -70,14 +70,14 @@ export const generateMetadata = async ({
     };
   }
 
-  const countries = await fetchWrapper<CountryNamespace.GET[]>("countries", {
+  const countries = await fetchWrapper<Country[]>("countries", {
     filters: {
       code: countryOrSlug,
     },
     tags: ["country", "page"],
     revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
   });
-  const currentCountry: CountryNamespace.GET | undefined = countries[0];
+  const currentCountry: Country | undefined = countries[0];
 
   const pageSearchParams = searchParams?.page;
 

@@ -2,7 +2,7 @@
 
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import { UnitType } from "@/types/unit";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -42,7 +42,7 @@ const pathGenerator = async (
   )[0];
 
   // const countryList = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 20)).json();
-  const countryList = await fetchWrapper<CountryNamespace.GET[]>("countries", {
+  const countryList = await fetchWrapper<Country[]>("countries", {
     filters: {
       code: countryOrSlug,
     },
@@ -118,8 +118,8 @@ export const generateMetadata = async (_props: any): Promise<Metadata> => {
   const countries = await (
     await API_ROUTES.COUNTRIES.GET_ALL(false, 120)
   ).json();
-  const currentCountry: CountryNamespace.GET | undefined = countries.find(
-    (country: CountryNamespace.GET) => country.code == countryOrSlug,
+  const currentCountry: Country | undefined = countries.find(
+    (country: Country) => country.code == countryOrSlug,
   );
 
   const pageSearchParams = searchParams?.page;

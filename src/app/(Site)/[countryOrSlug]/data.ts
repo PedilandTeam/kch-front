@@ -2,13 +2,13 @@
 import { cache } from "react";
 import fetchWrapper from "@/modules/fetchWrapper";
 import { CategoryNamespace } from "@/types/category";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import { PageNamespace } from "@/types/page";
 
 export type RouteData =
   | {
       type: "country";
-      currentCountry: CountryNamespace.GET;
+      currentCountry: Country;
       categories: CategoryNamespace.GET;
     }
   | { type: "item"; pageData: NonNullable<PageNamespace.GET["items"]>[number] }
@@ -20,7 +20,7 @@ const REVALIDATE =
 export const getRouteData = cache(
   async (countryOrSlug: string): Promise<RouteData> => {
     const [countries, categories] = await Promise.all([
-      fetchWrapper<CountryNamespace.GET[]>("countries", {
+      fetchWrapper<Country[]>("countries", {
         filters: { code: countryOrSlug },
         tags: ["country", "page"],
         revalidate: REVALIDATE,

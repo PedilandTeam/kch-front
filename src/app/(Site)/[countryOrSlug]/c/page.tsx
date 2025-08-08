@@ -1,15 +1,15 @@
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import { notFound } from "next/navigation";
 import QuestionCard from "./components/questionCard";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import CommunityHeader from "./components/header";
+import CommunityHeader from "./components/communityHeader";
 
 export default async function Page(_props: any) {
   const props = _props?.then ? await _props : _props;
   const params = props.params?.then ? await props.params : props.params;
 
-  const countryList: CountryNamespace.GET[] = await fetch(
+  const countryList: Country[] = await fetch(
     `${process.env.API_URL}/countries?code=${params.countryOrSlug}`,
     {
       credentials: "include",
@@ -41,13 +41,17 @@ export default async function Page(_props: any) {
   }
 
   return (
-    <div className="_community-mainPage mx-auto flex max-w-md flex-col gap-2 bg-red-100 px-3">
+    <div className="_community-page flex flex-col gap-3 pt-3">
       <CommunityHeader country={country} countryOrSlug={country.code} />
 
-      <div className="flex items-center gap-2">
-        <Input placeholder="جستجو..." />
-        <div>
-          <Button>سوال بپرس</Button>
+      <div>
+        <div className="container">
+          <div className="flex items-center gap-2">
+            <Input placeholder="جستجو..." />
+            <div>
+              <Button>سوال بپرس</Button>
+            </div>
+          </div>
         </div>
       </div>
 

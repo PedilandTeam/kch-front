@@ -1,8 +1,8 @@
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import { UnitType } from "@/types/unit";
 
 type SeoTextProps = {
-  currentCountry: CountryNamespace.GET;
+  currentCountry: Country;
   unit: UnitType;
 };
 
@@ -10,7 +10,7 @@ export const SeoText = async ({ currentCountry, unit }: SeoTextProps) => {
   return (
     <>
       {unit.name === "مشاغل" ? (
-        <div className="my-10 mx-7 sm:my-20 _SEO-text sm:mx-0">
+        <div className="_SEO-text mx-7 my-10 sm:mx-0 sm:my-20">
           <p className="text-justify text-gray-500">
             در ماه‌های اولیه مهاجرت به {currentCountry.name}، موضوعاتی از قبیل
             فرآیندهای اداری اقامت، بازکردن حساب بانکی، پیدا کردن و مستقر شدن در
@@ -36,7 +36,7 @@ export const SeoText = async ({ currentCountry, unit }: SeoTextProps) => {
           </p>
         </div>
       ) : (
-        <div className="my-10 sm:my-20 mx-7 _SEO-text sm:mx-0">
+        <div className="_SEO-text mx-7 my-10 sm:mx-0 sm:my-20">
           <p className="text-justify text-gray-500">
             در ماه‌های اولیه مهاجرت به {currentCountry.name}، موضوعاتی از قبیل
             بیماری‌های اورژانسی، مراجعه به پزشک و مراکز درمانی، تهیه دارو و حتی

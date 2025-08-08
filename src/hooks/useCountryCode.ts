@@ -1,9 +1,9 @@
 import { useHeader } from "@/store/useHeader";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
-const useCountryCode = (countries: CountryNamespace.GET[]) => {
+const useCountryCode = (countries: Country[]) => {
   const params = useParams();
 
   const { countryCode: contryCodeInStore, isNotFound } = useHeader();
@@ -16,7 +16,7 @@ const useCountryCode = (countries: CountryNamespace.GET[]) => {
       !countryOrSlug || !countries.find((c) => c.code === countryOrSlug);
     const countryCodeFromParams = isMainPage ? "" : countryOrSlug;
     setCountryCode(
-      isMainPage ? "un" : countryCodeFromParams || contryCodeInStore || "un"
+      isMainPage ? "un" : countryCodeFromParams || contryCodeInStore || "un",
     );
   }, [params, countries, contryCodeInStore]);
 

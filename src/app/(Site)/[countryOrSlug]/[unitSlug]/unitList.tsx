@@ -1,7 +1,7 @@
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CityNamespace } from "@/types/city";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import { UnitType } from "@/types/unit";
 import joiner from "@/utils/joiner";
 import { ItemBreadCrumb } from "./breadcrumb";
@@ -21,7 +21,7 @@ import StaticAdvertise from "@/components/advertise/static";
 
 type PagesListProps = {
   unit: UnitType;
-  country: CountryNamespace.GET;
+  country: Country;
   pageNumber?: number;
   city?: number | number[];
   category?: number | number[];

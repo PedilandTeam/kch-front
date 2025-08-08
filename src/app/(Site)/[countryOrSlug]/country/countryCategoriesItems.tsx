@@ -1,14 +1,14 @@
 "use client";
 import { UNITS_LIST_ARRAY } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import { FolderOpenIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 import { useState } from "react";
 
 type CountryCategoriesItemsProps = {
   recentlyUpdatedCategories: CategoryNamespace.MOST_USED;
-  currentCountry: CountryNamespace.GET;
+  currentCountry: Country;
 };
 
 export default function CountryCategoriesItems({

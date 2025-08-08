@@ -1,4 +1,4 @@
-import { CountryNamespace } from "./country";
+import { Country } from "./country";
 
 export namespace CampaignNamespace {
   export interface ICampaignCustomer {
@@ -22,7 +22,7 @@ export namespace CampaignNamespace {
   export interface ICampaign {
     [key: string]: any;
     id: string;
-    country: CountryNamespace.GET;
+    country: Country;
     firstCustomer: ICampaignCustomer;
     secondCustomer: ICampaignCustomer;
     thirdCustomer: ICampaignCustomer;

@@ -3,7 +3,7 @@
 
 import { cn } from "@/lib/utils";
 import { useHeader } from "@/store/useHeader";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -17,7 +17,7 @@ import { DialogCountry } from "./dialogCountry";
 
 export type AppMenuProps = {
   children?: React.ReactNode;
-  countries: CountryNamespace.GET[];
+  countries: Country[];
 };
 export default function AppMenu({ countries, children }: AppMenuProps) {
   const params = useParams();

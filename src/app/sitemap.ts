@@ -1,6 +1,6 @@
 import { API_ROUTES } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import { UnitType } from "@/types/unit";
 import { MetadataRoute } from "next";
 import type { PageNamespace } from "types/page";
@@ -19,10 +19,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     categoriesSiteMap: MetadataRoute.Sitemap = [],
     pagesSiteMap: MetadataRoute.Sitemap = [];
   try {
-    const countries: CountryNamespace.GET[] = await (
+    const countries: Country[] = await (
       await API_ROUTES.COUNTRIES.GET_ALL(1, 100)
     ).json();
-    countriesSiteMap = countries.map((country: CountryNamespace.GET) => {
+    countriesSiteMap = countries.map((country: Country) => {
       return {
         url: `${baseUrl}/${country.code}`,
         lastModified: lastModifiedGenerator(),
@@ -33,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       await API_ROUTES.UNITS.GET_ALL(100)
     ).json();
     unitsSiteMap = [];
-    countries.forEach((country: CountryNamespace.GET) => {
+    countries.forEach((country: Country) => {
       return units.forEach((unit: UnitType) => {
         unitsSiteMap.push({
           url: `${baseUrl}/${country.code}/${unit.slug}`,
@@ -47,7 +47,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ).json();
     const categories: CategoryNamespace.category[] = categoriesGet.items;
     categoriesSiteMap = [];
-    countries.forEach((country: CountryNamespace.GET) => {
+    countries.forEach((country: Country) => {
       return categories.forEach((category) => {
         categoriesSiteMap.push({
           url: `${baseUrl}/${country.code}/${category.unit.slug}/${category.slug}`,

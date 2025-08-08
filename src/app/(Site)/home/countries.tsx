@@ -1,5 +1,5 @@
 import { API_ROUTES } from "@/routes";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import Image from "next/image";
 import Link from "next/link";
 import CountryModalBtn from "./countryModalBtn";
@@ -15,7 +15,7 @@ import nlImage from "@/assets/images/modules/mod-netherland-min.webp";
 import { COUNTRY } from "@/text/location";
 
 async function fetchCountries() {
-  let countries: CountryNamespace.GET[];
+  let countries: Country[];
   try {
     countries = await (await API_ROUTES.COUNTRIES.GET_ALL()).json();
   } catch (e) {
@@ -26,12 +26,11 @@ async function fetchCountries() {
 }
 
 export const HomeCountries = async () => {
-  const countries: CountryNamespace.GET[] = await fetchCountries();
+  const countries: Country[] = await fetchCountries();
 
   const getCount = (countryCode: string) => {
-    return countries.find(
-      (country: CountryNamespace.GET) => country.code == countryCode,
-    )?.pageCount;
+    return countries.find((country: Country) => country.code == countryCode)
+      ?.pageCount;
   };
 
   return (

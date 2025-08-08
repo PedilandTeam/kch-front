@@ -1,9 +1,9 @@
 // app/components/community/header.tsx
 "use client";
 
-import { useQuestions } from "@/app/(Site)/[countryOrSlug]/(Community)/c/apiForum/useGetQuestions";
-import { CommunityBreadcrumb } from "@/app/(Site)/[countryOrSlug]/(Community)/c/components/breadcrumb";
-import { CountryNamespace } from "@/types/country";
+import { useQuestions } from "@/app/(Site)/[countryOrSlug]/c/apiForum/useGetQuestions";
+import { CommunityBreadcrumb } from "@/app/(Site)/[countryOrSlug]/c/components/breadcrumb";
+import { Country } from "@/types/country";
 import { useEffect, useState } from "react";
 
 export default function CommunityHeader({
@@ -11,7 +11,7 @@ export default function CommunityHeader({
   countryOrSlug,
 }: {
   countryOrSlug: string;
-  country: CountryNamespace.GET;
+  country: Country;
 }) {
   const { question } = useQuestions(countryOrSlug, 1);
 
@@ -49,19 +49,21 @@ export default function CommunityHeader({
   }, [fix, fixM]);
 
   return (
-    <div className="_community-header px-3 pt-4 pb-3">
-      <div className="_title">
-        <h1 className="text-xl font-bold sm:text-2xl">
-          موضوعات مطرح شده در {country?.name}
-        </h1>
-        <span className="hidden font-medium text-gray-500 sm:inline">
-          ({question?.meta.totalItems} آیتم)
-        </span>
-      </div>
+    <div className="_community-header">
+      <div className="container">
+        <div className="rounded-xl border bg-sky-50 p-3">
+          <h1 className="text-center font-semibold">
+            موضوعات مطرح شده در {country?.name}
+          </h1>
+          <span className="hidden font-medium text-gray-500 sm:inline">
+            ({question?.meta.totalItems} آیتم)
+          </span>
+        </div>
 
-      {/* <CommunityBreadcrumb
+        {/* <CommunityBreadcrumb
         country={{ name: country.name, code: country.code }}
       /> */}
+      </div>
     </div>
   );
 }

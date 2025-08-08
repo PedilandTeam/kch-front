@@ -1,6 +1,6 @@
 import { API_ROUTES } from "@/routes";
 import { StatsNamespace } from "@/types/stats";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import { CATEGORY, ITEM } from "@/text/directory";
 import { CITY } from "@/text/location";
 import {
@@ -11,7 +11,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import { GENERAL } from "@/text/general";
 type CountryStatsProps = {
-  currentCountry: CountryNamespace.GET;
+  currentCountry: Country;
 };
 
 async function getStats(

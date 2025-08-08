@@ -1,5 +1,5 @@
 import { PageNamespace } from "@/types/page";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import { CategoryNamespace } from "@/types/category";
 import CardListItem from "../cardListItem";
 import Pagination from "../pagination/pagination";
@@ -7,7 +7,7 @@ import { API_ROUTES } from "@/routes";
 import fetchWrapper from "@/modules/fetchWrapper";
 
 type CardsListType = {
-  country: CountryNamespace.GET;
+  country: Country;
   pageNumber?: number;
   city?: number | number[];
   category?: CategoryNamespace.category;

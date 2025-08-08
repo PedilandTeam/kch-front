@@ -6,7 +6,7 @@ import { Header } from "@/app/(Site)/layout/header";
 import Hotjar from "@/components/hotjar";
 import { API_ROUTES } from "@/routes";
 import "@/styles/globals.css";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import Script from "next/script";
 import MobileMenu from "./layout/appMenu";
 import SiteProviders from "./providers";
@@ -16,7 +16,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  let countries: CountryNamespace.GET[];
+  let countries: Country[];
   try {
     countries = await (await API_ROUTES.COUNTRIES.GET_ALL(1, 20)).json();
   } catch (e) {

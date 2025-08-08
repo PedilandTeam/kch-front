@@ -1,8 +1,8 @@
 import { CampaignNamespace } from "@/types/campaign";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 
 type SeoTextProps = {
-  currentCountry: CountryNamespace.GET;
+  currentCountry: Country;
   customers: CampaignNamespace.ICampaignCustomer[];
 };
 

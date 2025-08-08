@@ -2,11 +2,11 @@
 import { _TXT } from "@/text";
 import { CircleFlag } from "next-circle-flags";
 import Link from "next/link";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import { useRef } from "react";
 
 type ModalCountryProps = {
-  countries: CountryNamespace.GET[];
+  countries: Country[];
 };
 export const ModalCountry = ({ countries }: ModalCountryProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);

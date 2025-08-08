@@ -6,10 +6,10 @@ import { UNITS_LIST } from "@/routes";
 import { useRef } from "react";
 import { MENU } from "@/text/menu";
 import useCountryCode from "@/hooks/useCountryCode";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 
 type OffCanvasProps = {
-  countries: CountryNamespace.GET[];
+  countries: Country[];
 };
 
 export const OffCanvas = ({ countries }: OffCanvasProps) => {
@@ -17,7 +17,7 @@ export const OffCanvas = ({ countries }: OffCanvasProps) => {
   const { countryCode, isMainPage } = useCountryCode(countries);
 
   return (
-    <div dir="rtl" className="z-10 drawer drawer-end">
+    <div dir="rtl" className="drawer drawer-end z-10">
       <input
         ref={ref}
         id="main-drawer"
@@ -28,8 +28,8 @@ export const OffCanvas = ({ countries }: OffCanvasProps) => {
       <div className="drawer-side">
         <label htmlFor="main-drawer" className="drawer-overlay"></label>
 
-        <div className="h-full p-4 menu w-80 bg-blue-50 text-base-content">
-          <div className="relative flex justify-end w-full mb-5 logo">
+        <div className="menu text-base-content h-full w-80 bg-blue-50 p-4">
+          <div className="logo relative mb-5 flex w-full justify-end">
             <Link href="/">
               <Image
                 src="/images/logo.svg"

@@ -1,6 +1,6 @@
 import { PageNamespace } from "@/types/page";
 import { UnitType } from "@/types/unit";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import Pagination from "./pagination/pagination";
 import CardListItem from "./cardListItem";
 import { Suspense } from "react";
@@ -10,7 +10,7 @@ import fetchWrapper from "@/modules/fetchWrapper";
 
 type CardsListType = {
   unit: UnitType;
-  country: CountryNamespace.GET;
+  country: Country;
   // pages: PageNamespace.GET;
   pageNumber?: number;
   city?: number | number[];

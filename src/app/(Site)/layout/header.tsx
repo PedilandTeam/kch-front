@@ -2,7 +2,7 @@
 
 import { TopTools } from "@/app/(Site)/layout/toptools";
 import { useHeader } from "@/store/useHeader";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 export type HeaderProps = {
   children?: React.ReactNode;
-  countries: CountryNamespace.GET[];
+  countries: Country[];
 };
 
 export const Header = ({ children, countries }: HeaderProps) => {

@@ -1,12 +1,12 @@
 import { API_ROUTES, UNITS_LIST_ARRAY } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
-import { CountryNamespace } from "@/types/country";
+import { Country } from "@/types/country";
 import Image from "next/image";
 import Link from "next/link";
 import PagesSearch from "./pages.search";
 
 type SliderHomeProps = {
-  currentCountry: CountryNamespace.GET;
+  currentCountry: Country;
 };
 
 async function getMostUsedCategories(countryCode: string) {
@@ -28,9 +28,9 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
   const units = UNITS_LIST_ARRAY;
 
   return (
-    <div className="slider  h-[520px] flex justify-center content-center px-3 sm:mx-auto sm:max-w-[95%] md:max-w-full relative rounded-xl">
+    <div className="slider relative flex h-[520px] content-center justify-center rounded-xl px-3 sm:mx-auto sm:max-w-[95%] md:max-w-full">
       <Image
-        className="rounded-xl brightness-[.70] object-fill hidden sm:block"
+        className="hidden rounded-xl object-fill brightness-[.70] sm:block"
         src={`/images/slide/home/${currentCountry.code}.webp`}
         width={1700}
         height={520}
@@ -38,29 +38,29 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
         alt={`یک تصویر از کشور ${currentCountry.name}`}
       />
       <Image
-        className="rounded-xl brightness-[.70] object-cover sm:hidden"
+        className="rounded-xl object-cover brightness-[.70] sm:hidden"
         src={`/images/slide/home/${currentCountry.code}-m.webp`}
         width={430}
         height={600}
         alt={`یک تصویر از کشور ${currentCountry.name}`}
       />
 
-      <div className="max-w-[1144px] sm:m-auto absolute w-auto bottom-[10%] sm:bottom-[15%] sm:left-0 sm:right-0 sm:w-full">
-        <div className="text-center wrap">
-          <h3 className="sm:inline-block text-gray-300 bg-blue-900 bg-opacity-70 mx-3 p-3 sm:pt-1 sm:mx-0 sm:pb-[40px] px-3 sm:px-[44px] text-[18px] sm:text-[21px] leading-[30px] sm:leading-[36px] sm:rounded-xl">
+      <div className="absolute bottom-[10%] w-auto max-w-[1144px] sm:right-0 sm:bottom-[15%] sm:left-0 sm:m-auto sm:w-full">
+        <div className="wrap text-center">
+          <h3 className="bg-opacity-70 mx-3 bg-blue-900 p-3 px-3 text-[18px] leading-[30px] text-gray-300 sm:mx-0 sm:inline-block sm:rounded-xl sm:px-[44px] sm:pt-1 sm:pb-[40px] sm:text-[21px] sm:leading-[36px]">
             اگر در
-            <span className="inline-block mx-1 font-semibold text-white">
+            <span className="mx-1 inline-block font-semibold text-white">
               {currentCountry.name}
             </span>
             زندگی می‌کنی و دلت میخواد
             <br />
             لیست کامل و بروزی از خدمات
-            <span className="inline-block mx-1 font-semibold text-white">
+            <span className="mx-1 inline-block font-semibold text-white">
               فـارسـی زبـان
             </span>
             اطرافت داشته باشی
           </h3>
-          <h2 className="text-white font-bold text-[30px] sm:text-[40px] mt-3 mx-3 sm:mx-0 sm:-mt-[36px] drop-shadow">
+          <h2 className="mx-3 mt-3 text-[30px] font-bold text-white drop-shadow sm:mx-0 sm:-mt-[36px] sm:text-[40px]">
             راهنمای مشاغل کـوچـا رو جستجو کن!
           </h2>
 
