@@ -1,5 +1,13 @@
-import { CityNamespace } from "./city";
+import { City } from "./city";
 import { Country } from "./country";
+
+export interface User {
+  id: string;
+  username: string;
+  firstname: string;
+  lastname: string;
+  level: number;
+}
 
 export interface IUser {
   id: string;
@@ -9,7 +17,7 @@ export interface IUser {
   firstname: string;
   lastname: string;
   country: Country;
-  city: CityNamespace.city | null;
+  city: City | null;
   ads: any[];
   lastAd: Date | null;
   balance: number;

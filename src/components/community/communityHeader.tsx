@@ -18,7 +18,7 @@ export default function CommunityHeader({
   return (
     <div className="_community-header">
       <div className="container">
-        <div className="flex items-center justify-center gap-3 rounded-xl border bg-sky-50 p-3">
+        <div className="flex items-center justify-center gap-3 rounded-lg border bg-sky-50 p-3">
           <h1 className="font-semibold">همرسانی تجربه در {country?.name}</h1>
           <span className="hidden font-medium text-gray-500 sm:inline">
             ({question?.meta.totalItems} مورد)

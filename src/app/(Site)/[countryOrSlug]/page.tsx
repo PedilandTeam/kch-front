@@ -42,8 +42,6 @@ export default async function Page({ params }: Params) {
   const { countryOrSlug } = await params;
   const data = await getRouteData(countryOrSlug);
 
-  console.log("Pedram is watching...", data);
-
   if (!data) return notFound();
 
   if (data.type === "country") {

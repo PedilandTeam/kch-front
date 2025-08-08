@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { API_ROUTES, UNITS_LIST_ARRAY } from "@/routes";
-import { CategoryNamespace } from "@/types/category";
+import { Category, MostUsedCategories } from "@/types/category";
 import { Country } from "@/types/country";
 import Link from "next/link";
 
@@ -11,7 +11,8 @@ type SliderHomeProps = {
 };
 
 async function getMostUsedCategories(countryCode: string) {
-  let result: CategoryNamespace.MOST_USED;
+  let result: MostUsedCategories;
+
   try {
     result = await (
       await API_ROUTES.CATEGOREIS.MOST_USED(countryCode, 2, 120)
@@ -24,8 +25,9 @@ async function getMostUsedCategories(countryCode: string) {
 }
 
 export const CountryPageForum = async ({ currentCountry }: SliderHomeProps) => {
-  const mostUsedCategories: CategoryNamespace.MOST_USED =
-    await getMostUsedCategories(currentCountry.code);
+  const mostUsedCategories: MostUsedCategories = await getMostUsedCategories(
+    currentCountry.code,
+  );
   const units = UNITS_LIST_ARRAY;
 
   return (

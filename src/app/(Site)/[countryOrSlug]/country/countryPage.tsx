@@ -2,7 +2,7 @@
 
 import AdvertiseLg from "@/components/advertise/lg";
 import AdvertiseSm from "@/components/advertise/sm";
-import { CategoryNamespace } from "@/types/category";
+import { Category } from "@/types/category";
 import fetchCampaigns from "@/utils/fetchCampaigns";
 import AdsSection from "./ads-section";
 import { CountryCategories } from "./countryCategories";
@@ -15,8 +15,9 @@ import { CountryPageHeader } from "./countryPageHeader";
 
 type CountryPageProps = {
   currentCountry: Country;
-  categories: CategoryNamespace.GET;
+  categories: Category;
 };
+
 export default async function CountryPage({
   currentCountry,
   categories,
