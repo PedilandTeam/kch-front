@@ -1,4 +1,4 @@
-import { ChevronLeftIcon } from "@phosphor-icons/react/dist/ssr";
+import { ArrowLeftIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 
 type DataBox = {
@@ -17,7 +17,7 @@ export default function DataBox({ title, data, link, linkText }: DataBox) {
       <div className="col-span-2 row-span-full cursor-pointer select-none">
         <Link href={link} className="flex w-full items-center justify-center">
           <p>{linkText}</p>
-          <ChevronLeftIcon className="h-6 w-6" />
+          <ArrowLeftIcon className="h-6 w-6" />
         </Link>
       </div>
     </div>

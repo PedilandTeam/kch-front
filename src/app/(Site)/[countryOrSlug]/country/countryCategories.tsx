@@ -39,11 +39,11 @@ export const CountryCategories = async ({
   // const units = await getUnits()
 
   return (
-    <div className="_mod-categories my-9 sm:my-20">
-      <div className="container mx-auto max-w-[1144px] px-3 sm:px-0">
+    <div className="_mod-categories my-9">
+      <div className="container">
         <div className="_wrap">
           <div className="_mod-header text-center">
-            <h2 className="text-[20px] inline-block sm:text-[24px] font-semibold mb-3 sm:mb-5">
+            <h2 className="mb-3 inline-block text-[20px] font-semibold">
               {CATEGORY.POPULAR}
             </h2>
           </div>

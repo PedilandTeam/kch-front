@@ -30,7 +30,7 @@ type PagesListProps = {
 
 async function fetchCities(
   countryCode: string,
-  categoryId: number
+  categoryId: number,
 ): Promise<CityNamespace.GET> {
   let cities: CityNamespace.GET;
 
@@ -81,27 +81,26 @@ export default async function CategoryList({
     category.seoDescription &&
     category.seoDescription.replace(
       /{{country}}/g,
-      country.name || country.englishName
+      country.name || country.englishName,
     );
 
   const { customers, campaign } = await fetchCampaigns(country.code);
-  
 
   return (
-    <div className="pt-5 component _category-list">
+    <div className="component _category-list pt-5">
       <div className="container mx-auto max-w-[1144px]">
         <div className="_page-content">
           <div className="_top-section">
-            <div className="flex flex-wrap items-center justify-between w-full sm:flex-nowrap">
-              <div className="flex items-center gap-3 px-3 mb-4 sm:mb-0 sm:px-0">
-                <h1 className="text-xl font-bold sm:text-2xl text-secondary">
+            <div className="flex w-full flex-wrap items-center justify-between">
+              <div className="mb-4 flex items-center gap-3 px-3">
+                <h1 className="text-secondary text-xl font-bold">
                   لیست{" "}
                   {category?.seoTitle
                     ? category.seoTitle
                     : `${category.name} فارسی زبان`}{" "}
                   در {country?.name}
                 </h1>
-                <span className="hidden font-medium text-gray-500 sm:inline">
+                <span className="hidden font-medium text-gray-500">
                   ({pages?.meta.totalItems} آیتم)
                 </span>
               </div>
@@ -124,17 +123,17 @@ export default async function CategoryList({
               campaignId={campaign?.id}
             />
 
-            <div className="hidden sm:block _filter">
+            <div className="_filter hidden">
               <ListFilter cities={cities} />
             </div>
           </div>
 
-          <div className="pt-2 sm:pt-0">
-            <div className="sticky top-0 z-[9] p-3 bg-white sm:hidden">
+          <div className="pt-2">
+            <div className="sticky top-0 z-[9] bg-white p-3">
               <FilterMobile pagesTotalItems={pages?.meta.totalItems} />
               <FilterModalMobile cities={cities.items} />
             </div>
-            <div className="px-3 pb-5 sm:hidden">
+            <div className="px-3 pb-5">
               <PagesSearch />
             </div>
 
@@ -165,7 +164,7 @@ export default async function CategoryList({
             campaignId={campaign?.id}
           />
 
-          <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
+          <div className="mt-12 mb-5 flex flex-wrap gap-3 px-3">
             <StaticAdvertise
               from="category"
               lgDisable={customers.length >= 4}
@@ -181,8 +180,8 @@ export default async function CategoryList({
           </div>
 
           {/* SEO Text */}
-          <div className="my-10 sm:my-20 mx-7 _SEO-text sm:mx-0">
-            <p className="font-normal text-justify text-gray-500">
+          <div className="_SEO-text mx-7 my-10">
+            <p className="text-justify font-normal text-gray-500">
               {defaultSeoDescription}
             </p>
           </div>

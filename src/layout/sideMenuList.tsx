@@ -1,16 +1,16 @@
 import React from "react";
 import { SideMenuItem } from "./sideMenu";
 import {
-  HomeIcon,
   BriefcaseIcon,
-  ChatBubbleBottomCenterTextIcon,
+  HouseIcon,
+  ChatTextIcon,
 } from "@phosphor-icons/react/dist/ssr";
 
 export const SideMenuList: SideMenuItem[] = [
   {
     title: "خانه",
     path: "/account",
-    icon: <HomeIcon className="ml-2 h-6 w-6" />,
+    icon: <HouseIcon className="ml-2 h-6 w-6" />,
     isMain: true,
   },
   {
@@ -22,7 +22,7 @@ export const SideMenuList: SideMenuItem[] = [
   {
     title: "آمار",
     path: "/account/stats",
-    icon: <ChatBubbleBottomCenterTextIcon className="ml-2 h-6 w-6" />,
+    icon: <ChatTextIcon className="ml-2 h-6 w-6" />,
     isMain: false,
   },
 ];

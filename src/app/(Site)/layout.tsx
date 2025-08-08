@@ -1,13 +1,14 @@
 // app/(Site)/layout.tsx
 
+import { DialogCountry } from "@/app/(Site)/layout/dialogCountry";
 import { Footer } from "@/app/(Site)/layout/footer";
 import { Header } from "@/app/(Site)/layout/header";
-import { ModalCountry } from "@/app/(Site)/layout/modalcountry";
 import Hotjar from "@/components/hotjar";
 import { API_ROUTES } from "@/routes";
 import "@/styles/globals.css";
 import { CountryNamespace } from "@/types/country";
 import Script from "next/script";
+import MobileMenu from "./layout/appMenu";
 import SiteProviders from "./providers";
 
 export default async function RootLayout({
@@ -27,13 +28,13 @@ export default async function RootLayout({
     <html lang="fa" dir="rtl" className="scroll-smooth">
       <body className="flex justify-center overflow-x-hidden bg-neutral-100 antialiased">
         <div className="relative min-h-dvh w-full max-w-[414px] bg-white shadow-lg">
-          <Header countries={countries}>
-            <ModalCountry countries={countries} />
-          </Header>
+          <Header countries={countries} />
 
           {children}
 
           <Footer />
+
+          <MobileMenu countries={countries} />
 
           <SiteProviders />
 

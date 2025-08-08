@@ -59,7 +59,7 @@ export const CardsList = async ({
 
   if (isNotFound) {
     return (
-      <div className="w-full min-h-[60vh] flex justify-center items-center">
+      <div className="flex min-h-[60vh] w-full items-center justify-center">
         <h3 className="text-lg font-medium text-gray-500">
           موردی مطابق با فیلترهای انتخابی یافت نشد.
         </h3>
@@ -69,8 +69,8 @@ export const CardsList = async ({
 
   return (
     <>
-      <div className="min-h-[500px] w-full _unit-list-card">
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-y-4 sm:gap-5">
+      <div className="_unit-list-card min-h-[500px] w-full">
+        <div className="grid grid-cols-1 gap-y-4">
           {pages?.items?.map((page: PageNamespace.Page, index: number) => {
             return (
               <CardListItem

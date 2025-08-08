@@ -31,7 +31,7 @@ type PagesListProps = {
 async function fetchCities(
   countryCode: string,
   unitIds: number,
-  categoryIds?: number | number[]
+  categoryIds?: number | number[],
 ): Promise<CityNamespace.GET> {
   let cities: CityNamespace.GET;
   try {
@@ -54,7 +54,7 @@ async function fetchCities(
 async function fetchCategories(
   countryCode: string,
   unitIds: number | number[],
-  cityIds?: number | number[]
+  cityIds?: number | number[],
 ): Promise<CategoryNamespace.GET> {
   let categories: CategoryNamespace.GET | undefined;
   try {
@@ -107,16 +107,16 @@ export default async function UntiList({
   const { customers, campaign } = await fetchCampaigns(country.code);
 
   return (
-    <div className="pt-5 component _unit-list">
-      <div className="container mx-auto max-w-[1144px]">
+    <div className="component _unit-list pt-5">
+      <div className="container">
         <div className="_page-content">
           <div className="_top-section">
-            <div className="_wrapper flex flex-wrap items-center justify-between w-full sm:flex-nowrap">
-              <div className="flex items-center gap-3 px-3 mb-4 sm:mb-0 sm:px-0">
-                <h1 className="text-xl font-bold sm:text-2xl text-secondary">
+            <div className="_wrapper flex w-full flex-wrap items-center justify-between">
+              <div className="mb-4 flex items-center gap-3 px-3">
+                <h1 className="text-secondary text-xl font-bold">
                   لیست {unit?.name} فارسی زبان در {country?.name}
                 </h1>
-                <span className="hidden font-medium text-gray-500 sm:inline">
+                <span className="hidden font-medium text-gray-500">
                   ({pages?.meta.totalItems} آیتم)
                 </span>
               </div>
@@ -139,20 +139,20 @@ export default async function UntiList({
               campaignId={campaign?.id}
             />
 
-            <div className="hidden sm:block _filter">
+            <div className="_filter hidden">
               <ListFilter cities={cities} categories={categories} />
             </div>
           </div>
 
-          <div className="pt-2 sm:pt-0">
-            <div className="sticky top-0 z-[9] p-3 bg-white sm:hidden">
+          <div className="pt-2">
+            <div className="sticky top-0 z-[9] bg-white p-3">
               <FilterMobile pagesTotalItems={pages?.meta.totalItems} />
               <FilterModalMobile
                 cities={cities.items}
                 categories={categories}
               />
             </div>
-            <div className="px-3 pb-5 sm:hidden">
+            <div className="px-3 pb-5">
               <PagesSearch />
             </div>
 
@@ -184,7 +184,7 @@ export default async function UntiList({
             campaignId={campaign?.id}
           />
 
-          <div className="_wrapper items-center xl:flex-row flex flex-col gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
+          <div className="_wrapper mt-12 mb-5 flex flex-col items-center gap-3 px-3 xl:flex-row">
             <StaticAdvertise
               from="unit"
               lgDisable={customers.length >= 4}

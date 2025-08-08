@@ -13,15 +13,17 @@ import { useEffect, useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ChatsIcon, ListIcon } from "@phosphor-icons/react/dist/ssr";
 import { CircleFlag } from "next-circle-flags";
+import { DialogCountry } from "./dialogCountry";
 
-export default function MobileMenu({
-  countries,
-}: {
+export type AppMenuProps = {
+  children?: React.ReactNode;
   countries: CountryNamespace.GET[];
-}) {
+};
+export default function AppMenu({ countries, children }: AppMenuProps) {
   const params = useParams();
   const { countryCode: contryCodeInStore, isNotFound } = useHeader();
   const [countryCode, setCountryCode] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
 
@@ -65,19 +67,13 @@ export default function MobileMenu({
       <div className="_main-mobileMenu flex items-center justify-between border border-gray-200 bg-white px-4 py-2">
         <div className="_select-country flex">
           <CircleFlag
-            width={28}
-            height={28}
+            width={32}
+            height={32}
             loading={"lazy"}
             alt={`Logo of country with ISO code ${countryCode}`}
             countryCode={countryCode}
-            className="h-8 w-8 opacity-75 transition hover:cursor-pointer hover:opacity-100"
-            onClick={() => {
-              if (document) {
-                (
-                  document.getElementById("modal_country") as HTMLFormElement
-                ).showModal();
-              }
-            }}
+            className="opacity-50"
+            onClick={() => setIsOpen(true)}
           />
         </div>
 
@@ -86,13 +82,15 @@ export default function MobileMenu({
         </div>
 
         <div className="_logo">
-          <Image
-            src="/images/logo-01.png"
-            alt="Koochaa Logo"
-            width={42}
-            height={42}
-            priority
-          />
+          <Link href={"/"}>
+            <Image
+              src="/images/logo-01.png"
+              alt="Koochaa Logo"
+              width={42}
+              height={42}
+              priority
+            />
+          </Link>
         </div>
 
         <div className="_community">
@@ -101,11 +99,16 @@ export default function MobileMenu({
 
         <Link className="_account" href="/account">
           <Avatar className="h-[32px] w-[32px]">
-            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarImage
+              src="https://github.com/shadcn.png"
+              className="opacity-50"
+            />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
         </Link>
       </div>
+
+      <DialogCountry countries={countries} open={isOpen} setOpen={setIsOpen} />
     </div>
   );
 }

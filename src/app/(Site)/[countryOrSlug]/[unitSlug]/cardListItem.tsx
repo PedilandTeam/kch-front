@@ -19,7 +19,7 @@ type cardListItem = {
 export default function CardListItem({ page, country, variant }: cardListItem) {
   return (
     <div
-      className="relative w-9/12 px-4 py-5 mx-auto transition duration-300 border border-gray-200 shadow-md sm:shadow-gray-100 sm:mx-0 sm:w-auto hover:shadow-lg hover:shadow-blue-100 hover:border-blue-200 card rounded-xl hover:bg-blue-50 hover:bg-opacity-30 group carousel-item sm:box-border"
+      className="card hover:bg-opacity-30 group carousel-item relative mx-auto w-9/12 rounded-xl border border-gray-200 px-4 py-5 shadow-md transition duration-300 hover:border-blue-200 hover:bg-blue-50 hover:shadow-lg hover:shadow-blue-100"
       key={`cardlist-page-index-${page.slug}`}
     >
       <Link href={`/${page.slug}`}>
@@ -41,18 +41,18 @@ export default function CardListItem({ page, country, variant }: cardListItem) {
             className="absolute transition duration-300 text-stone-300 group-hover:text-emerald-600 top-4 left-4"
             weight="duotone"
           /> */}
-          <div className="flex flex-col justify-center my-3 h-14">
-            <h2 className="text-xl font-semibold text-center truncate transition duration-300 group-hover:text-primary hover:overflow-visible _card-title">
+          <div className="my-3 flex h-14 flex-col justify-center">
+            <h2 className="group-hover:text-primary _card-title truncate text-center text-xl font-semibold transition duration-300 hover:overflow-visible">
               {page.title}
             </h2>
             {page.subtitle && (
-              <h3 className="mt-1 font-medium text-center text-gray-700">
+              <h3 className="mt-1 text-center font-medium text-gray-700">
                 {page.subtitle}
               </h3>
             )}
           </div>
 
-          <div className="flex items-center justify-center _card-rating">
+          <div className="_card-rating flex items-center justify-center">
             {/* @ts-ignore */}
             <Rating
               initialRating={0}
@@ -71,7 +71,7 @@ export default function CardListItem({ page, country, variant }: cardListItem) {
       </Link>
 
       <div className="mt-4 border-t border-dashed group-hover:border-blue-200">
-        <h3 className="flex items-center justify-center text-[15px] text-gray-500 pt-2">
+        <h3 className="flex items-center justify-center pt-2 text-[15px] text-gray-500">
           {variant == "category" ? (
             <span className="truncate">{page?.category?.name}</span>
           ) : (
@@ -79,10 +79,10 @@ export default function CardListItem({ page, country, variant }: cardListItem) {
               href={categoryPathGenerator(
                 country.code,
                 page.unit?.slug,
-                page.category.slug
+                page.category.slug,
               )}
             >
-              <span className="truncate hover:text-primary">
+              <span className="hover:text-primary truncate">
                 {page?.category?.name}
               </span>
             </Link>

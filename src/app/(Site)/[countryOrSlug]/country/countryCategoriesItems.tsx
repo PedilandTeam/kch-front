@@ -2,8 +2,7 @@
 import { UNITS_LIST_ARRAY } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CountryNamespace } from "@/types/country";
-import { FolderOpen } from "@phosphor-icons/react/dist/ssr";
-import Image from "next/image";
+import { FolderOpenIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -46,7 +45,7 @@ export default function CountryCategoriesItems({
             <a
               onClick={() => activeTabChangeHandler(unit.id)}
               key={`unit-${unit.id}`}
-              className={`tab-bordered tab h-16 border-b-[3px] px-3 text-[18px] font-medium sm:px-6 ${
+              className={`tab-bordered tab h-16 border-b-[3px] px-3 text-[18px] font-medium ${
                 activeTab == unit.id ? "tab-active border-secondary" : ""
               } `}
             >
@@ -55,12 +54,12 @@ export default function CountryCategoriesItems({
           );
         })}
       </div>
-      <div className="_content mt-6 flex flex-wrap justify-center gap-3 sm:gap-5">
+      <div className="_content mt-6 flex flex-wrap justify-center gap-3">
         {recentlyUpdatedCategories[`${activeTab}`]?.map((category, index) => {
           return (
             <Link
               scroll
-              className="w-full sm:basis-1/6"
+              className="w-full"
               key={"country-category" + category.id}
               href={`/${currentCountry.code}/${
                 unitFinder(category.unitId)?.slug
@@ -68,16 +67,16 @@ export default function CountryCategoriesItems({
             >
               <div
                 key={`country-category-list-${category.id}${index}`}
-                className="cat-card group flex items-center justify-center rounded-md border-2 border-gray-200 py-3 pl-0 pr-4 font-medium transition-all hover:border-dashed hover:border-blue-300 hover:bg-blue-100 hover:bg-opacity-20 sm:flex-row sm:flex-wrap sm:pb-0 sm:pl-4"
+                className="cat-card group hover:bg-opacity-20 flex items-center justify-center rounded-md border-2 border-gray-200 py-3 pr-4 pl-0 font-medium transition-all hover:border-dashed hover:border-blue-300 hover:bg-blue-100"
               >
-                <FolderOpen
+                <FolderOpenIcon
                   weight="duotone"
-                  className="ml-4 h-14 w-14 text-gray-400 group-hover:text-primary sm:ml-0 sm:h-10 sm:w-10"
+                  className="group-hover:text-primary ml-4 h-14 w-14 text-gray-400"
                 />
-                <div className="my-4 flex h-[48px] w-full items-center group-hover:text-blue-900 sm:justify-center sm:text-center">
+                <div className="my-4 flex h-[48px] w-full items-center group-hover:text-blue-900">
                   {category.name}
                 </div>
-                <span className="ml-5 flex h-[42px] min-w-[42px] items-center justify-center rounded-full border-2 bg-white pt-[4px] text-[18px] group-hover:border-dashed group-hover:border-blue-300 group-hover:font-bold group-hover:text-blue-900 sm:-mb-[2px] sm:h-[34px] sm:min-w-[42px] sm:items-end sm:rounded-bl-none sm:rounded-br-none sm:border-b-white sm:pt-0 sm:leading-none sm:group-hover:border-b-white sm:group-hover:border-l-blue-300 sm:group-hover:bg-white">
+                <span className="ml-5 flex h-[42px] min-w-[42px] items-center justify-center rounded-full border-2 bg-white pt-[4px] text-[18px] group-hover:border-dashed group-hover:border-blue-300 group-hover:font-bold group-hover:text-blue-900">
                   {category.pageCount}
                 </span>
               </div>

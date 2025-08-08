@@ -9,27 +9,27 @@ import fetchWrapper from "@/modules/fetchWrapper";
 
 const pathGenerator = async (
   countryOrSlug: string,
-  unitSlug: string
+  unitSlug: string,
 ): Promise<PathGeneratorType> => {
   const currentUnit = (
     await fetchWrapper<UnitType[]>("units", {
       filters: {
         slug: unitSlug,
       },
-      tags: ["country", 'page'],
+      tags: ["country", "page"],
       revalidate:
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     })
   )[0];
 
-  const countryList = await fetchWrapper<CountryNamespace.GET[]>('countries', {
+  const countryList = await fetchWrapper<CountryNamespace.GET[]>("countries", {
     filters: {
       code: countryOrSlug,
     },
-    tags: ["country", 'page'],
+    tags: ["country", "page"],
     revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
-  })
-  const currentCountry = countryList[0]
+  });
+  const currentCountry = countryList[0];
 
   if (!currentUnit || !currentCountry) {
     return {
@@ -70,14 +70,14 @@ export const generateMetadata = async ({
     };
   }
 
-  const countries = await fetchWrapper<CountryNamespace.GET[]>('countries', {
+  const countries = await fetchWrapper<CountryNamespace.GET[]>("countries", {
     filters: {
       code: countryOrSlug,
     },
-    tags: ["country", 'page'],
+    tags: ["country", "page"],
     revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
-  })
-  const currentCountry: CountryNamespace.GET | undefined = countries[0]
+  });
+  const currentCountry: CountryNamespace.GET | undefined = countries[0];
 
   const pageSearchParams = searchParams?.page;
 
@@ -118,7 +118,7 @@ export default async function UnitPage({
 
   parsedSearchParams = queryString.parse(
     queryString.stringify(searchParams ?? {}),
-    { arrayFormat: "comma", parseNumbers: true }
+    { arrayFormat: "comma", parseNumbers: true },
   ) as ParsedSearchParams;
   //get filters from query
   const { page: pageNumber, category, city, search } = parsedSearchParams;

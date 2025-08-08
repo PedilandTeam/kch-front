@@ -30,7 +30,7 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
   return (
     <div className="_slider bg-yellow-50">
       <div className="container">
-        <div className="flex w-full flex-col py-10">
+        <div className="flex w-full flex-col py-3">
           <div className="_text">
             <div className="_wrap">
               <h2 className="text-4xl font-extrabold">

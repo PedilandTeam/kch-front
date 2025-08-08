@@ -41,9 +41,9 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
 
   return (
     <div className="_country-stats bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900">
-      <div className="container mx-auto max-w-[1144px] px-3 sm:px-0">
-        <div className="_wrap wrap flex flex-wrap gap-6 px-9 py-12 text-gray-100 shadow-sm sm:justify-around sm:px-0">
-          <div className="_item flex w-full gap-6 sm:w-auto">
+      <div className="container">
+        <div className="_wrap wrap flex flex-wrap gap-6 px-9 py-12 text-gray-100 shadow-sm">
+          <div className="_item flex w-full gap-6">
             <div className="_image rounded-full border border-dashed border-white p-4">
               <CardsThree size={36} weight="duotone" />
             </div>
@@ -53,7 +53,7 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
             </div>
           </div>
 
-          <div className="_item flex w-full gap-6 sm:w-auto">
+          <div className="_item flex w-full gap-6">
             <div className="_image rounded-full border border-dashed border-white p-4">
               <MapPin size={36} weight="duotone" />
             </div>
@@ -63,7 +63,7 @@ export const CountryStats = async ({ currentCountry }: CountryStatsProps) => {
             </div>
           </div>
 
-          <div className="_item flex w-full gap-6 sm:w-auto">
+          <div className="_item flex w-full gap-6">
             <div className="_image rounded-full border border-dashed border-white p-4">
               <FolderStar size={36} weight="duotone" />
             </div>

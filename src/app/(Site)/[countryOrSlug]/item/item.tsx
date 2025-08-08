@@ -24,18 +24,18 @@ export default async function PageItem({ pageData }: PageItemProps) {
   const { campaign, customers } = await fetchCampaigns(pageData.country.code);
 
   const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
     name: pageData.title,
     image: `${process.env.NEXT_PUBLIC_DL_URL}/pages/${pageData.id}/${pageData.profile}`,
     url: pageData.socials?.website,
     telephone: pageData.contact.telephone || pageData.contact.phone,
     address: {
       "@type": "PostalAddress",
-      addressLocality: pageData.city.englishName,     
+      addressLocality: pageData.city.englishName,
       addressCountry: pageData.country.code?.toUpperCase(),
-    } 
-  } 
+    },
+  };
 
   return (
     <div className="component page-item">
@@ -46,21 +46,21 @@ export default async function PageItem({ pageData }: PageItemProps) {
 
       <CountryUpdater pageData={pageData} />
 
-      <div className="bg-[#fbf7ed] bg-[url('/images/pattern-03.png')] bg-center mb-4">
+      <div className="mb-4 bg-[#fbf7ed] bg-[url('/images/pattern-03.png')] bg-center">
         <ItemTopInfo pageData={pageData} />
       </div>
 
       <div className="container mx-auto max-w-[1144px]">
-        <div className="grid grid-cols-1 sm:grid-cols-12 sm:gap-5">
+        <div className="grid grid-cols-1">
           <ItemSideInfo pageData={pageData} />
 
-          <div className="mt-2 sm:mt-0 item-main sm:col-span-8 sm:col-start-1 sm:row-start-1">
+          <div className="item-main mt-2">
             <ItemBreadCrumb pageData={pageData} />
 
-            <div className="px-3 sm:px-0">
+            <div className="px-3">
               {/* Description Section */}
-              <div className="py-6 border-b border-gray-200 sm:py-8">
-                <h3 className="mb-4 font-bold sm:mb-5">{ITEM.DESCRIPTION}</h3>
+              <div className="border-b border-gray-200 py-6">
+                <h3 className="mb-4 font-bold">{ITEM.DESCRIPTION}</h3>
                 <Description
                   className={`leading-8 ${
                     pageData.description ? "text-black" : "text-gray-500"
@@ -77,22 +77,20 @@ export default async function PageItem({ pageData }: PageItemProps) {
               <TagList tags={pageData.tags} />
 
               {/* Facilities Section */}
-              <div className="py-6 border-b border-gray-200 sm:py-8">
-                <h3 className="mb-4 font-bold sm:mb-5">{ITEM.FACILITIES}</h3>
+              <div className="border-b border-gray-200 py-6">
+                <h3 className="mb-4 font-bold">{ITEM.FACILITIES}</h3>
                 <p className="text-gray-500">{ITEM.FACILITIES_NO}</p>
               </div>
 
               {/* Images Section */}
-              <div className="py-6 border-b border-gray-200 sm:py-8">
-                <h3 className="mb-4 font-bold sm:mb-5">{ITEM.IMAGES}</h3>
+              <div className="border-b border-gray-200 py-6">
+                <h3 className="mb-4 font-bold">{ITEM.IMAGES}</h3>
                 <p className="text-gray-500">{ITEM.IMAGES_NO}</p>
               </div>
 
               {/* Comment Section */}
-              <div className="py-6 sm:py-8">
-                <h3 className="mb-4 font-bold sm:mb-5">
-                  {ITEM.USERS_COMMENTS}
-                </h3>
+              <div className="py-6">
+                <h3 className="mb-4 font-bold">{ITEM.USERS_COMMENTS}</h3>
                 <p className="text-gray-500">{ITEM.USERS_COMMENTS_DISABLE}</p>
               </div>
             </div>
@@ -148,7 +146,7 @@ export default async function PageItem({ pageData }: PageItemProps) {
         />
 
         {/* Advertising Section P01 */}
-        <div className="flex flex-wrap gap-3 px-3 mt-12 mb-5 sm:mt-20 sm:gap-5 sm:px-0">
+        <div className="mt-12 mb-5 flex flex-wrap gap-3 px-3">
           <StaticAdvertise
             from="item"
             lgDisable={customers.length >= 4}

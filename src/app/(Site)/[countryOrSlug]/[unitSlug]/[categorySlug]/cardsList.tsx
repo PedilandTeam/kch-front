@@ -27,8 +27,7 @@ export const CardsList = async ({
   let isNotFound = false;
 
   try {
-
-    pages = await fetchWrapper('pages', {
+    pages = await fetchWrapper("pages", {
       filters: {
         page: pageNumber ? pageNumber : 1,
         limit: 24,
@@ -37,9 +36,10 @@ export const CardsList = async ({
         categoryIds: category?.id,
         search,
       },
-      tags: ["country", 'page'],
-      revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
-    })
+      tags: ["country", "page"],
+      revalidate:
+        +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+    });
   } catch (e) {
     isNotFound = true;
   }
@@ -50,7 +50,7 @@ export const CardsList = async ({
 
   if (isNotFound) {
     return (
-      <div className="w-full min-h-[60vh] flex justify-center items-center">
+      <div className="flex min-h-[60vh] w-full items-center justify-center">
         <h3 className="text-2xl font-bold">
           با فیلترهای انتخابی چیزی یافت نشد :)
         </h3>
@@ -59,8 +59,8 @@ export const CardsList = async ({
   }
   return (
     <>
-      <div className="min-h-[500px] w-full _cat-list-card">
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-y-4 sm:gap-5">
+      <div className="_cat-list-card min-h-[500px] w-full">
+        <div className="grid grid-cols-1 gap-y-4">
           {pages?.items?.map((page: PageNamespace.Page, index: number) => {
             return (
               <CardListItem

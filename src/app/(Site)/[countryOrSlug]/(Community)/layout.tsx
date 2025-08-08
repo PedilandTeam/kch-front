@@ -1,6 +1,6 @@
 // app/(Site)/[countryOrSlug]/(Community)/layout.tsx
 
-import MobileMenu from "@/app/(Site)/[countryOrSlug]/(Community)/c/components/mobileMenu";
+import MobileMenu from "@/app/(Site)/layout/appMenu";
 import { ModalCountry } from "@/layout/modalcountry";
 import { CountryNamespace } from "@/types/country";
 

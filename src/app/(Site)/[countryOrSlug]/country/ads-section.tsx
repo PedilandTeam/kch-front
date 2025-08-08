@@ -5,9 +5,9 @@ type SeoTextProps = {
 };
 export default async function AdsSection({ customers }: SeoTextProps) {
   return (
-    <div className="_ads-section pt-5 sm:pt-10">
-      <div className="container mx-auto max-w-[1144px] px-3 sm:px-0">
-        <div className="_wrapper items-center xl:flex-row flex flex-col gap-5">
+    <div className="_ads-section pt-5">
+      <div className="container">
+        <div className="_wrapper flex flex-col items-center gap-5 xl:flex-row">
           <StaticAdvertise
             from="country"
             lgDisable={customers.length >= 4}

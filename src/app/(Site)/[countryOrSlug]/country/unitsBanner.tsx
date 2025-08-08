@@ -10,22 +10,19 @@ type UnitsBannerProps = {
 export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
   return (
     <div className="_unit-banner">
-      <div className="container mx-auto max-w-[1144px] px-3 sm:px-0">
-        <div
-          className="_wrap grid gap-6 my-9 sm:grid-cols-7 sm:gap-10 sm:my-20"
-          id="select-unit"
-        >
-          <div className="_mod-header flex flex-wrap items-center sm:col-span-4">
-            <div className="border-r-[4px] sm:border-r-[5px] border-secondary pr-3 sm:pr-5 pl-3 sm:pl-0">
-              <h2 className="text-[20px] sm:text-[24px] font-bold mb-1">
+      <div className="container">
+        <div className="_wrap my-9 grid gap-6" id="select-unit">
+          <div className="_mod-header flex flex-wrap items-center">
+            <div className="border-secondary border-r-[4px] pr-3 pl-3">
+              <h2 className="mb-1 text-[20px] font-bold">
                 راهنمای مشاغل کـوچـا
               </h2>
-              <p className="mb-4 text-[17px] text-slate-600 font-medium">
+              <p className="mb-4 text-[17px] font-medium text-slate-600">
                 ابزاری ساده و موثر برای جستجوی مشاغل فارسی
               </p>
               <PagesSearch countryCode={currentCountry.code} />
 
-              <div className="mb-2 font-medium leading-7 text-gray-500 sm:text-justify sm:pl-5">
+              <div className="mb-2 leading-7 font-medium text-gray-500">
                 <p className="mb-2">
                   اگه خارج از ایران زندگی میکنی و تابحال به پیدا کردن یه سرویس
                   مشخص به زبـان فارسـی نیاز پیدا کرده باشی، حتما با مشکل نبود
@@ -43,49 +40,49 @@ export const UnitsBanner = ({ currentCountry }: UnitsBannerProps) => {
             </div>
           </div>
 
-          <div className="_mod-items sm:col-span-3 sm:pl-5">
-            <div className="_wrap grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-6 ">
-              <div className="_item flex group">
+          <div className="_mod-items">
+            <div className="_wrap grid grid-cols-1 gap-3">
+              <div className="_item group flex">
                 <Link href={`/${currentCountry.code}/businesses`}>
-                  <div className="relative overflow-hidden image h-min rounded-xl">
+                  <div className="image relative h-min overflow-hidden rounded-xl">
                     <Image
                       src={"/images/modules/mod-business-01.webp"}
                       width={400}
                       height={560}
                       alt="Some Business People"
-                      className="rounded-xl group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-[360px] object-cover hidden sm:block"
+                      className="hidden h-[240px] cursor-pointer rounded-xl object-cover transition-all duration-500 group-hover:scale-110"
                     />
                     <Image
                       src={"/images/modules/mod-business-01-m.webp"}
                       width={430}
                       height={300}
                       alt="Some Business People"
-                      className="rounded-xl group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-auto object-cover sm:hidden"
+                      className="h-[240px] cursor-pointer rounded-xl object-cover transition-all duration-500 group-hover:scale-110"
                     />
-                    <div className="info absolute bottom-0 w-full px-4 py-10 group-hover:py-12 sm:py-8 sm:group-hover:py-10 transition-all duration-500 cursor-pointer rounded-b-md text-center text-[24px] sm:text-[20px] bg-gradient-to-t from-black text-white font-medium">
+                    <div className="info absolute bottom-0 w-full cursor-pointer rounded-b-md bg-gradient-to-t from-black px-4 py-10 text-center text-[24px] font-medium text-white transition-all duration-500 group-hover:py-12">
                       {MENU.BUSINESSES}
                     </div>
                   </div>
                 </Link>
               </div>
-              <div className="_item flex group">
+              <div className="_item group flex">
                 <Link href={`/${currentCountry.code}/doctors`}>
-                  <div className="relative overflow-hidden image h-min rounded-xl">
+                  <div className="image relative h-min overflow-hidden rounded-xl">
                     <Image
                       src={"/images/modules/mod-doctor-01.webp"}
                       width={400}
                       height={560}
                       alt="a doctor"
-                      className="rounded-xl group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-[360px] object-cover hidden sm:block"
+                      className="hidden h-[240px] cursor-pointer rounded-xl object-cover transition-all duration-500 group-hover:scale-110"
                     />
                     <Image
                       src={"/images/modules/mod-doctor-01-m.webp"}
                       width={430}
                       height={300}
                       alt="a doctor"
-                      className="rounded-xl group-hover:scale-110 transition-all duration-500 cursor-pointer h-[240px] sm:h-auto object-cover sm:hidden"
+                      className="h-[240px] cursor-pointer rounded-xl object-cover transition-all duration-500 group-hover:scale-110"
                     />
-                    <div className="info absolute bottom-0 w-full px-4 py-10 group-hover:py-12 sm:py-8 sm:group-hover:py-10 transition-all duration-500 cursor-pointer rounded-b-md text-center text-[24px] sm:text-[20px] bg-gradient-to-t from-black text-white font-medium">
+                    <div className="info absolute bottom-0 w-full cursor-pointer rounded-b-md bg-gradient-to-t from-black px-4 py-10 text-center text-[24px] font-medium text-white transition-all duration-500 group-hover:py-12">
                       {MENU.DOCTORS}
                     </div>
                   </div>

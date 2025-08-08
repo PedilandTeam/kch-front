@@ -35,14 +35,12 @@ export const HomeCountries = async () => {
   };
 
   return (
-    <div className="sm:mt-18 container mx-auto my-10 max-w-[1144px] sm:mb-20">
-      <div className="mod-home-countries mx-3 pt-4 sm:mx-0" id="select-country">
-        <div className="mod-header mb-5 border-r-[4px] border-secondary pl-3 pr-3 sm:mb-7 sm:border-r-[5px] sm:pl-0 sm:pr-4">
-          <h2 className="text-[20px] font-semibold sm:text-[22px]">
-            {COUNTRY.POPULAR}
-          </h2>
+    <div className="container">
+      <div className="mod-home-countries mx-3 pt-4" id="select-country">
+        <div className="mod-header border-secondary mb-5 border-r-[4px] pr-3 pl-3">
+          <h2 className="text-[20px] font-semibold">{COUNTRY.POPULAR}</h2>
         </div>
-        <div className="wrap grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-3">
+        <div className="wrap grid grid-cols-1 gap-2">
           <div className="group relative h-min overflow-hidden rounded-xl">
             <Link href={"/uk"}>
               <Image
@@ -51,10 +49,10 @@ export const HomeCountries = async () => {
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور انگلستان"
-                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110 sm:h-auto"
+                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110"
                 priority
               />
-              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10 sm:py-5 sm:group-hover:py-8">
+              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10">
                 <h3 className="text-center text-[20px] font-semibold">
                   {COUNTRY.ENGLAND}
                   <span className="mr-1 font-normal">({getCount("uk")})</span>
@@ -70,10 +68,10 @@ export const HomeCountries = async () => {
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور آلمان"
-                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110 sm:h-auto"
+                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110"
                 priority
               />
-              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10 sm:py-5 sm:group-hover:py-8">
+              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10">
                 <h3 className="text-center text-[20px] font-semibold">
                   {COUNTRY.GERMANY}
                   <span className="mr-1 font-normal">({getCount("de")})</span>
@@ -90,10 +88,10 @@ export const HomeCountries = async () => {
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور کانادا"
-                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110 sm:h-auto"
+                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110"
                 priority
               />
-              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10 sm:py-5 sm:group-hover:py-8">
+              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10">
                 <h3 className="text-center text-[20px] font-semibold">
                   {COUNTRY.CANADA}
                   <span className="mr-1 font-normal">({getCount("ca")})</span>
@@ -110,10 +108,10 @@ export const HomeCountries = async () => {
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور اتریش"
-                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110 sm:h-auto"
+                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110"
                 priority
               />
-              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10 sm:py-5 sm:group-hover:py-8">
+              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10">
                 <h3 className="text-center text-[20px] font-semibold">
                   {COUNTRY.AUSTRIA}
                   <span className="mr-1 font-normal">({getCount("at")})</span>
@@ -130,10 +128,10 @@ export const HomeCountries = async () => {
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور فرانسه"
-                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110 sm:h-auto"
+                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110"
                 priority
               />
-              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10 sm:py-5 sm:group-hover:py-8">
+              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10">
                 <h3 className="text-center text-[20px] font-semibold">
                   {COUNTRY.FRANCE}
                   <span className="mr-1 font-normal">({getCount("fr")})</span>
@@ -149,10 +147,10 @@ export const HomeCountries = async () => {
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور سوئد"
-                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110 sm:h-auto"
+                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110"
                 priority
               />
-              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10 sm:py-5 sm:group-hover:py-8">
+              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10">
                 <h3 className="text-center text-[20px] font-semibold">
                   {COUNTRY.SWEDEN}
                   <span className="mr-1 font-normal">({getCount("se")})</span>
@@ -169,10 +167,10 @@ export const HomeCountries = async () => {
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور دانمارک"
-                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110 sm:h-auto"
+                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110"
                 priority
               />
-              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10 sm:py-5 sm:group-hover:py-8">
+              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10">
                 <h3 className="text-center text-[20px] font-semibold">
                   {COUNTRY.DENMARK}
                   <span className="mr-1 font-normal">({getCount("dk")})</span>
@@ -189,10 +187,10 @@ export const HomeCountries = async () => {
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور ترکیه"
-                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110 sm:h-auto"
+                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110"
                 priority
               />
-              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10 sm:py-5 sm:group-hover:py-8">
+              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10">
                 <h3 className="text-center text-[20px] font-semibold">
                   {COUNTRY.TURKEY}
                   <span className="mr-1 font-normal">({getCount("tr")})</span>
@@ -209,10 +207,10 @@ export const HomeCountries = async () => {
                 width="400"
                 height="250"
                 alt="یک تصویر از کشور هلند"
-                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110 sm:h-auto"
+                className="h-[220px] cursor-pointer object-cover transition-all duration-500 group-hover:scale-110"
                 priority
               />
-              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10 sm:py-5 sm:group-hover:py-8">
+              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10">
                 <h3 className="text-center text-[20px] font-semibold">
                   {COUNTRY.NETHERLAND}
                   <span className="mr-1 font-normal">({getCount("nl")})</span>

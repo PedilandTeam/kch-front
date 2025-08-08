@@ -36,8 +36,8 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
   return (
     <div className="_top-section h-full">
       <div className="container mx-auto h-full max-w-[1144px]">
-        <div className="relative flex h-full flex-col items-center pt-8 sm:flex-row sm:items-end sm:py-10">
-          <div className="left-3 top-[40px] hidden items-center sm:absolute sm:left-0 sm:flex">
+        <div className="relative flex h-full flex-col items-center pt-8">
+          <div className="top-[40px] left-3 hidden items-center">
             {/* <div className="px-2 py-[6px] bg-emerald-500 text-white text-[15px] rounded-md flex items-center">
               <Plant size={20} className="ml-1 text-white" weight="duotone" />
               {GENERAL.HOME_JOB}
@@ -56,13 +56,13 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
           </div>
 
           <ItemProfilePicture
-            className="mb-5 h-[170px] w-[170px] rounded-full drop-shadow-sm sm:mb-0"
+            className="mb-5 h-[170px] w-[170px] rounded-full drop-shadow-sm"
             pageData={pageData}
           />
-          <div className="_item-details flex-1 px-3 sm:mr-5">
-            <h1 className="font-enc flex flex-col-reverse items-center justify-center text-[28px] font-bold text-slate-700 sm:flex-row sm:justify-start">
+          <div className="_item-details flex-1 px-3">
+            <h1 className="font-enc flex flex-col-reverse items-center justify-center text-[28px] font-bold text-slate-700">
               {pageData?.title}
-              <div className="mb-2 flex items-center gap-2 sm:mb-0 sm:mr-3">
+              <div className="mb-2 flex items-center gap-2">
                 {/* TODO: golden badge */}
 
                 <BlueBadge enable={!!pageData.business} />
@@ -77,18 +77,18 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
                 {isNew && (
                   <Confetti
                     size={30}
-                    className="text-blue-600 transition duration-300 hover:cursor-pointer hover:text-slate-800 sm:hidden"
+                    className="text-blue-600 transition duration-300 hover:cursor-pointer hover:text-slate-800"
                     weight="duotone"
                   />
                 )}
               </div>
             </h1>
             {pageData.subtitle && (
-              <h2 className="mt-2 text-center text-xl font-medium text-primary sm:text-right">
+              <h2 className="text-primary mt-2 text-center text-xl font-medium">
                 {pageData.subtitle}
               </h2>
             )}
-            <div className="_card-rating mb-8 mt-4 flex items-center justify-center sm:mb-4 sm:justify-start">
+            <div className="_card-rating mt-4 mb-8 flex items-center justify-center">
               {/* @ts-ignore */}
               <Rating
                 initialRating={0}
@@ -108,15 +108,15 @@ export const ItemTopInfo = ({ pageData }: ItemTopInfoType) => {
             </div>
           </div>
 
-          <div className="w-full bg-white sm:w-auto sm:bg-transparent">
-            <div className="mx-3 flex justify-center border-b border-gray-200 sm:mx-0 sm:border-b-0">
+          <div className="w-full bg-white">
+            <div className="mx-3 flex justify-center border-b border-gray-200">
               {!haveSocial ? (
-                <p className="ml-3 py-5 text-slate-400 sm:py-4 sm:text-black">
+                <p className="ml-3 py-5 text-slate-400">
                   {ITEM.NO_SOCIAL_MEDIA}
                 </p>
               ) : (
                 <div
-                  className={`item-top-socials flex justify-center py-5 sm:py-0 [&>a]:ml-5`}
+                  className={`item-top-socials flex justify-center py-5 [&>a]:ml-5`}
                 >
                   {pageData.socials?.instagram ? (
                     <Link

@@ -1,8 +1,8 @@
 const HomeBottom = () => {
   return (
-    <div className="container mx-auto max-w-[1144px]">
-      <div className="mx-3 my-10 sm:my-20 _seo-text sm:mx-0">
-        <h1 className="text-gray-600 text-[16px] inline-block sm:text-[20px] font-semibold text-center w-full">
+    <div className="container">
+      <div className="_seo-text mx-3 my-10">
+        <h1 className="inline-block w-full text-center text-[16px] font-semibold text-gray-600">
           کـوچـا، جامعه ایرانیان مهاجر مقیم همه جاست!
         </h1>
         {/* <p className="mt-3 font-normal text-justify text-gray-500"></p> */}

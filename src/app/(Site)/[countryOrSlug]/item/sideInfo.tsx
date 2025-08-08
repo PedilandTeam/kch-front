@@ -93,7 +93,7 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
   const linkHandler = useLinkHandler({ pageData });
 
   return (
-    <div className="item-side mx-3 sm:col-span-4 sm:col-end-13 sm:mx-0">
+    <div className="item-side mx-3">
       <div className="item-contact mb-4 grid grid-cols-4">
         {/* WEBSITE */}
         <div className="group grid grid-rows-1 gap-2 border-l text-center hover:cursor-pointer">
