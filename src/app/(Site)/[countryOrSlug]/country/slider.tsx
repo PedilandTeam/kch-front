@@ -1,9 +1,9 @@
+// src/app/(Site)/[countryOrSlug]/country/slider.tsx
+
 import { API_ROUTES, UNITS_LIST_ARRAY } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { CountryNamespace } from "@/types/country";
-import Image from "next/image";
 import Link from "next/link";
-import PagesSearch from "./pages.search";
 
 type SliderHomeProps = {
   currentCountry: CountryNamespace.GET;
@@ -29,18 +29,18 @@ export const SliderHome = async ({ currentCountry }: SliderHomeProps) => {
 
   return (
     <div className="_slider bg-yellow-50">
-      <div className="container mx-auto max-w-[1144px] px-3 sm:px-0">
-        <div className="flex w-full py-20">
+      <div className="container">
+        <div className="flex w-full flex-col py-10">
           <div className="_text">
             <div className="_wrap">
               <h2 className="text-4xl font-extrabold">
                 هم‌رسانی تجربه ایرانیان مقیم {currentCountry.name}
               </h2>
-              <h3 className="text-2xl font-medium leading-10 my-5 text-gray-500">
+              <h3 className="my-5 text-2xl leading-10 font-medium text-gray-500">
                 در هر مرحله از فرآیند مهاجرت که هستید،
-                <br className="hidden sm:block" />
-                می‌تونید سوالاتتون رو بپرسید و<br className="hidden sm:block" />
-                تجربیات ارزشمندتون رو با دیگران به اشتراک بذارید.
+                <br className="hidden" />
+                می‌تونید سوالاتتون رو بپرسید و تجربیات ارزشمندتون رو با دیگران
+                به اشتراک بذارید.
               </h3>
               <Link href={`/${currentCountry.code}/community`} scroll>
                 <button className="btn btn-accent rounded-full">

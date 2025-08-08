@@ -41,7 +41,7 @@ export default async function Page(_props: any) {
   }
 
   return (
-    <div className="_community-mainPage flex flex-col gap-2 px-3">
+    <div className="_community-mainPage mx-auto flex max-w-md flex-col gap-2 bg-red-100 px-3">
       <CommunityHeader country={country} countryOrSlug={country.code} />
 
       <div className="flex items-center gap-2">

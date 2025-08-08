@@ -58,7 +58,7 @@ export default function MobileMenu({
   return (
     <div
       className={cn(
-        "_mobileMenu-fixed fixed bottom-0 z-0 w-full transform transition-transform duration-300 sm:hidden",
+        "_mobileMenu-fixed fixed bottom-0 left-1/2 z-0 w-full max-w-md -translate-x-1/2 transform transition-transform duration-300",
         isVisible ? "translate-y-0" : "translate-y-full",
       )}
     >

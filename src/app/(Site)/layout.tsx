@@ -8,7 +8,7 @@ import { API_ROUTES } from "@/routes";
 import "@/styles/globals.css";
 import { CountryNamespace } from "@/types/country";
 import Script from "next/script";
-import { Toaster } from "react-hot-toast";
+import SiteProviders from "./providers";
 
 export default async function RootLayout({
   children,
@@ -25,27 +25,34 @@ export default async function RootLayout({
 
   return (
     <html lang="fa" dir="rtl" className="scroll-smooth">
-      <body className="min-h-screen overflow-x-hidden">
-        <Header countries={countries}>
-          <ModalCountry countries={countries} />
-        </Header>
+      <body className="flex justify-center overflow-x-hidden bg-neutral-100 antialiased">
+        <div className="relative min-h-dvh w-full max-w-[414px] bg-white shadow-lg">
+          <Header countries={countries}>
+            <ModalCountry countries={countries} />
+          </Header>
 
-        {children}
+          {children}
 
-        <Footer />
+          <Footer />
 
-        <Toaster />
-        <Hotjar />
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD" />
-        <Script id="google-analytics">
-          {`
+          <SiteProviders />
+
+          {process.env.NODE_ENV === "production" && (
+            <>
+              <Hotjar />
+              <Script src="https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD" />
+              <Script id="google-analytics">
+                {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
  
           gtag('config', 'G-EED4RG3GPD');
         `}
-        </Script>
+              </Script>
+            </>
+          )}
+        </div>
       </body>
     </html>
   );

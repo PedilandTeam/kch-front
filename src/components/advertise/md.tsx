@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { FC } from "react";
 import Image from "next/image";
@@ -8,7 +10,7 @@ const Desktop = dynamic(
   () => import("../responsive").then((mod) => mod.Desktop),
   {
     ssr: false,
-  }
+  },
 );
 /**
  * Renders a component that displays two advertisement images for a given campaign.

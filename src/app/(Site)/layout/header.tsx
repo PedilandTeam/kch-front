@@ -36,7 +36,7 @@ export const Header = ({ children, countries }: HeaderProps) => {
     !contryCodeInStore && (countryCode === "un" || !countryCode);
 
   return (
-    <header className="w-full py-3 bg-white shadow-sm hidden sm:block">
+    <header className="hidden w-full bg-white py-3 shadow-sm">
       <div className="container mx-auto max-w-[1144px] px-3">
         <div className="_wrap flex items-center justify-between">
           <TopTools
@@ -51,7 +51,7 @@ export const Header = ({ children, countries }: HeaderProps) => {
                 height={54}
                 priority={true}
                 alt="Koochaa Logo"
-                className="h-[50px] sm:w-[190px] w-[181px] sm:h-[54px]"
+                className="h-[50px] w-[181px]"
               />
             </Link>
           </div>

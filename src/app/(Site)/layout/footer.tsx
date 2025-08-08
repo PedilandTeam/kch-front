@@ -18,10 +18,10 @@ import {
 
 export const Footer = () => {
   return (
-    <footer className="mt-6 rounded-tl-3xl rounded-tr-3xl bg-[#1c39bb] py-6 text-gray-50 sm:mt-20 sm:rounded-none sm:pb-5 sm:pt-16">
-      <div className="_footer container mx-auto max-w-6xl px-3 sm:px-0">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-4">
-          <div className="px-2 sm:col-span-2 sm:px-0">
+    <footer className="mt-6 rounded-tl-3xl rounded-tr-3xl bg-[#1c39bb] py-6 text-gray-50">
+      <div className="_footer container mx-auto max-w-6xl px-3">
+        <div className="grid grid-cols-1 gap-10">
+          <div className="px-2">
             <Image
               className="mb-3 h-auto w-[160px]"
               src={"/images/logo-white.svg"}
@@ -33,7 +33,7 @@ export const Footer = () => {
           </div>
 
           <div className="flex items-center">
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-center sm:grid sm:grid-flow-row sm:pr-16">
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-center">
               <Link href={"/about"} className="link-hover link">
                 {MENU.ABOUT}
               </Link>
@@ -55,7 +55,7 @@ export const Footer = () => {
           <div className="flex items-center">
             <div className="_socials w-full space-y-2 text-center">
               <div>{FOOTER.FOLLOW_US}</div>
-              <div className="flex w-full justify-center gap-7 sm:justify-around sm:gap-0">
+              <div className="flex w-full justify-center gap-7">
                 <Link
                   href={"https://www.instagram.com/_koochaa"}
                   target="_blank"
@@ -63,7 +63,7 @@ export const Footer = () => {
                   <InstagramLogoIcon
                     size={30}
                     weight="light"
-                    className="transition duration-300 hover:text-secondary"
+                    className="hover:text-secondary transition duration-300"
                   />
                 </Link>
 
@@ -74,7 +74,7 @@ export const Footer = () => {
                   <LinkedinLogoIcon
                     size={30}
                     weight="light"
-                    className="transition duration-300 hover:text-secondary"
+                    className="hover:text-secondary transition duration-300"
                   />
                 </Link>
 
@@ -85,7 +85,7 @@ export const Footer = () => {
                   <FacebookLogoIcon
                     size={30}
                     weight="light"
-                    className="transition duration-300 hover:text-secondary"
+                    className="hover:text-secondary transition duration-300"
                   />
                 </Link>
 
@@ -93,7 +93,7 @@ export const Footer = () => {
                   <XLogoIcon
                     size={30}
                     weight="light"
-                    className="transition duration-300 hover:text-secondary"
+                    className="hover:text-secondary transition duration-300"
                   />
                 </Link>
               </div>
@@ -101,7 +101,7 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="_copyright mt-8 text-center sm:mt-20">
+        <div className="_copyright mt-8 text-center">
           <p className="text-sm font-light">
             {FOOTER.COPYRIGHT_TEXT1}
             <Link href="/" className="link-hover link mx-1 inline-flex">
@@ -115,7 +115,7 @@ export const Footer = () => {
       <Link
         href={"#top"}
         scroll
-        className="fixed -right-10 bottom-[10px] hidden sm:bottom-[50px] sm:right-[50px]"
+        className="fixed -right-10 bottom-[10px] hidden"
         id="toTopDiv"
       >
         <CaretCircleUpDownIcon

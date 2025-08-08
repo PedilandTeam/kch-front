@@ -1,16 +1,16 @@
-import { CountryStats } from "./countryStats";
-import { CountryCategories } from "./countryCategories";
-import { SliderHome } from "./slider";
-import { CountryNamespace } from "@/types/country";
-import { CategoryNamespace } from "@/types/category";
-import { UnitsBanner } from "./unitsBanner";
-import { SeoText } from "./seoText";
-import Image from "next/image";
+// app/(Site)/[countryOrSlug]/country/country.tsx
+
 import AdvertiseLg from "@/components/advertise/lg";
 import AdvertiseSm from "@/components/advertise/sm";
+import { CategoryNamespace } from "@/types/category";
+import { CountryNamespace } from "@/types/country";
 import fetchCampaigns from "@/utils/fetchCampaigns";
-import StaticAdvertise from "@/components/advertise/static";
 import AdsSection from "./ads-section";
+import { CountryCategories } from "./countryCategories";
+import { CountryStats } from "./countryStats";
+import { SeoText } from "./seoText";
+import { SliderHome } from "./slider";
+import { UnitsBanner } from "./unitsBanner";
 
 type CountryProps = {
   currentCountry: CountryNamespace.GET;
@@ -25,10 +25,11 @@ export default async function Country({
   return (
     <div className="component _country-page">
       <SliderHome currentCountry={currentCountry} />
+
       <UnitsBanner currentCountry={currentCountry} />
 
       {/* Advertising Section P05 */}
-      <div className="w-full flex justify-center items-center">
+      {/* <div className="flex w-full items-center justify-center">
         <AdvertiseLg
           from="country"
           customers={[customers?.[0], customers?.[1]]}
@@ -39,7 +40,7 @@ export default async function Country({
           customers={[customers?.[0], customers?.[1]]}
           campaignId={campaign?.id}
         />
-      </div>
+      </div> */}
 
       <CountryStats currentCountry={currentCountry} />
 
