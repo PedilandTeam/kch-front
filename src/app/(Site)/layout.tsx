@@ -1,14 +1,13 @@
 // app/(Site)/layout.tsx
 
-import { Footer } from "@/app/(Site)/layout/footer";
-import { Header } from "@/app/(Site)/layout/header";
 import Hotjar from "@/components/hotjar";
+
 import { API_ROUTES } from "@/routes";
 import "@/styles/globals.css";
 import { Country } from "@/types/country";
 import Script from "next/script";
-import MobileMenu from "./layout/appMenu";
 import SiteProviders from "./providers";
+import { AppMenu } from "@/components/index";
 
 export default async function RootLayout({
   children,
@@ -38,9 +37,9 @@ export default async function RootLayout({
         <div className="_app relative min-h-dvh w-full max-w-[414px] bg-white shadow-lg">
           {children}
 
-          <Footer />
+          {/* <Footer /> */}
 
-          <MobileMenu countries={countries} />
+          <AppMenu countries={countries} />
 
           <SiteProviders />
 

@@ -1,60 +1,44 @@
 // src/app/(Site)/[countryOrSlug]/c/page.tsx
 
-import { Country } from "@/types/country";
+import { swrKeys } from "@/lib/swr/swrKeys";
+import { fetchCountryByCode } from "@/sdk/country.server";
+import { fetchQuestionsServer } from "@/sdk/forum.server";
 import { notFound } from "next/navigation";
+import { SWRConfig } from "swr";
 
-// UI Imports
-import CommunityHeader from "@/components/community/communityHeader";
-import QuestionCard from "@/components/community/questionCard";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import {
+  CommunityPageHeader,
+  PageContainer,
+  QuestionsSection,
+  SiteBanner,
+} from "@/components/index";
 
 type PageProps = {
   params: Promise<{ countryOrSlug: string }>;
+  searchParams: Record<string, string | string[] | undefined>;
 };
 
-async function getCountry(countryOrSlug: string): Promise<Country> {
-  const res = await fetch(
-    `${process.env.API_URL}/countries?code=${countryOrSlug}`,
-  );
-  if (!res.ok) notFound();
-  const list: Country[] = await res.json();
-  if (!list?.length) notFound();
-  return list[0];
-}
+export default async function Page({ params, searchParams }: PageProps) {
+  const [sp, cp] = await Promise.all([searchParams, params]);
+  const country = await fetchCountryByCode(cp.countryOrSlug);
 
-export default async function Page({ params }: PageProps) {
-  const { countryOrSlug } = await params;
-  const country = await getCountry(countryOrSlug);
+  if (!country) return notFound();
 
-  const qs = new URLSearchParams({
-    limit: "30",
-    page: "1",
-    countryCode: country.code,
-  });
-  const qRes = await fetch(`${process.env.API_URL}/forum/questions?${qs}`);
-  const questions = qRes.ok ? await qRes.json() : { items: [] };
+  const page = Number(sp.page ?? 1);
+  const limit = 30;
+  const p = { countryCode: country.code, page, limit };
+  const initial = await fetchQuestionsServer(p);
+  const key = swrKeys.questions(p);
 
   return (
-    <div className="_community-page flex flex-col gap-3 pt-3">
-      <CommunityHeader country={country} countryOrSlug={country.code} />
+    <PageContainer className="_community-page">
+      <SiteBanner />
+      
+      <CommunityPageHeader country={country} countryOrSlug={country.code} />
 
-      <div>
-        <div className="container">
-          <div className="flex items-center gap-2">
-            <Input placeholder="جستجو..." />
-            <div>
-              <Button>سوال بپرس</Button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <QuestionCard
-        data={questions.items ?? []}
-        countryOrSlug={countryOrSlug}
-        country={country}
-      />
-    </div>
+      <SWRConfig value={{ fallback: { [key]: initial } }}>
+        <QuestionsSection swrKey={key} countryCode={country.code} />
+      </SWRConfig>
+    </PageContainer>
   );
 }

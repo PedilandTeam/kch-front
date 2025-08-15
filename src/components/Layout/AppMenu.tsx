@@ -1,4 +1,4 @@
-// app/(Site)/[countryOrSlug]/(Community)/c/mobileMenu.tsx
+// src/components/Layout/AppMenu.tsx
 "use client";
 
 import { cn } from "@/lib/utils";
@@ -13,13 +13,14 @@ import { useEffect, useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ChatsIcon, ListIcon } from "@phosphor-icons/react/dist/ssr";
 import { CircleFlag } from "next-circle-flags";
-import { DialogCountry } from "./dialogCountry";
+import { DialogCountry } from "../../app/(Site)/layout/dialogCountry";
 
 export type AppMenuProps = {
   children?: React.ReactNode;
   countries: Country[];
 };
-export default function AppMenu({ countries, children }: AppMenuProps) {
+
+export const AppMenu = ({ countries, children }: AppMenuProps) => {
   const params = useParams();
   const { countryCode: contryCodeInStore, isNotFound } = useHeader();
   const [countryCode, setCountryCode] = useState("");
@@ -122,4 +123,4 @@ export default function AppMenu({ countries, children }: AppMenuProps) {
       <DialogCountry countries={countries} open={isOpen} setOpen={setIsOpen} />
     </div>
   );
-}
+};

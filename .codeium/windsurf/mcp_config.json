@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "koochaa-kch-front": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@sequa-ai/sequa-mcp@latest",
+        "https://mcp.sequa.ai/v1/o/pediland/p/koochaa/r/github+PedilandTeam+kch-front/code-assistant"
+      ]
+    }
+  }
+}

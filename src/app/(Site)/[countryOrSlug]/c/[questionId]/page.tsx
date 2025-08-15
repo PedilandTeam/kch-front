@@ -1,42 +1,46 @@
+// src/app/(Site)/[countryOrSlug]/c/[questionId]/page.tsx
+import { swrKeys } from "@/lib/swr/swrKeys";
+import { fetchCountryByCode } from "@/sdk/country.server";
+import { fetchQuestionServer } from "@/sdk/forum.server";
 import { notFound } from "next/navigation";
-import AnswerCard from "./answerCard";
-import QuestionCard from "./questionCard";
-import { Country } from "@/types/country";
+import { SWRConfig } from "swr";
 
-async function Page({
-  params,
-}: {
-  params: { countryOrSlug: string; questionId: string };
-}) {
-  const countryList: [Country] = await fetch(
-    `${process.env.API_URL}/countries?code=${params.countryOrSlug}`,
-    {
-      next: {
-        revalidate: 1000 * 60 * 60 * 24,
-        tags: ["country"],
-      },
-    },
-  )
-    .then(async (res) => {
-      return await res.json();
-    })
-    .catch((e) => {
-      console.error(`Error in Get country in community`);
-      throw new Error("Internal server error");
-    });
+import { QuestionDetailsSection } from "@/components/index";
 
-  if (!countryList.length) {
-    notFound();
-  }
+type PageProps = {
+  params: Promise<{
+    countryOrSlug: string;
+    questionId: string;
+    topicId: string;
+    limit: number;
+    page: number;
+  }>;
+};
+
+export default async function Page({ params }: PageProps) {
+  const p = await Promise.resolve(params);
+
+  const countryOrSlug = p.countryOrSlug;
+  const questionId = p.questionId;
+  const topicId = p.topicId;
+  const limit = p.limit;
+  const page = p.page;
+
+  const country = await fetchCountryByCode(countryOrSlug);
+  if (!country) return notFound();
+  const countryCode = country.code;
+
+  const qKey = swrKeys.question({ questionId, countryCode });
+
+  const question = await fetchQuestionServer({ id: questionId });
+
+  if (!question) return notFound();
 
   return (
-    <div className="mt-2 flex flex-col items-center justify-center px-4">
-      <QuestionCard params={params} />
-      <div className="flex w-full flex-col items-end justify-center lg:items-center">
-        <AnswerCard params={params} />
+    <SWRConfig value={{ fallback: { [qKey]: question } }}>
+      <div>
+        <QuestionDetailsSection question={question} />
       </div>
-    </div>
+    </SWRConfig>
   );
 }
-
-export default Page;
