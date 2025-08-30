@@ -1,4 +1,4 @@
-import { Country } from "@/types/country";
+import { Country } from "@/schemas/country";
 import fetchWrapper from "./fetchWrapper";
 
 export type FetchCountry = { code?: string };

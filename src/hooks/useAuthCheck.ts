@@ -1,4 +1,4 @@
-import { axiosFetcher } from "@/swr/axiosFetcher";
+import { axiosFetcher } from "@/hooks/axiosFetcher";
 import { IUser } from "@/types/user";
 import useSWR from "swr";
 

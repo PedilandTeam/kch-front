@@ -1,8 +1,8 @@
 // src/components/Community/CommunityPageHeader.tsx
 "use client";
 
-import { useQuestions } from "@/app/(Site)/[countryOrSlug]/c/apiForum/useGetQuestions";
-import { Country } from "@/types/country";
+import { useQuestions } from "@/hooks/apiForum/useGetQuestions";
+import { Country } from "@/schemas/country";
 
 export const CommunityPageHeader = ({
   country,

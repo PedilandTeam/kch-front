@@ -3,7 +3,7 @@
 
 import { cn } from "@/lib/utils";
 import { useHeader } from "@/store/useHeader";
-import { Country } from "@/types/country";
+import { Country } from "@/schemas/country";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -13,21 +13,27 @@ import { useEffect, useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ChatsIcon, ListIcon } from "@phosphor-icons/react/dist/ssr";
 import { CircleFlag } from "next-circle-flags";
-import { DialogCountry } from "../../app/(Site)/layout/dialogCountry";
+import { CountriesDialog } from "@/components/index";
+import useSWR from "swr";
+import { swrKeys } from "@/hooks/swr/swrKeys";
 
-export type AppMenuProps = {
-  children?: React.ReactNode;
-  countries: Country[];
-};
-
-export const AppMenu = ({ countries, children }: AppMenuProps) => {
+export const AppMenu = () => {
+  const { data, error, isLoading } = useSWR(swrKeys.countries());
+  const { countryCode, setCountryCode } = useHeader();
   const params = useParams();
-  const { countryCode: contryCodeInStore, isNotFound } = useHeader();
-  const [countryCode, setCountryCode] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
+  const [countries, setCountries] = useState<Country[] | undefined>();
 
+  useEffect(() => {
+    if (data) {
+      const filteredCountries = data?.filter((c: Country) => c.status === true);
+      setCountries(filteredCountries);
+    }
+  }, [data]);
+
+  // Scroll Effect
   useEffect(() => {
     let ticking = false;
     const threshold = 5;
@@ -59,15 +65,15 @@ export const AppMenu = ({ countries, children }: AppMenuProps) => {
   useEffect(() => {
     const countryOrSlug = params.countryOrSlug as string;
     const isMainPage =
-      !countryOrSlug || !countries?.find((c) => c.code === countryOrSlug);
+      !countryOrSlug ||
+      !countries?.find((c: Country) => c.code === countryOrSlug);
     const countryCodeFromParams = isMainPage ? "" : countryOrSlug;
     setCountryCode(
-      isMainPage ? "un" : countryCodeFromParams || contryCodeInStore || "un",
+      isMainPage ? "un" : countryCodeFromParams || countryCode || "un",
     );
-  }, [params, countries, contryCodeInStore]);
+  }, [params, countries, countryCode, setCountryCode]);
 
-  const isMainPage =
-    !contryCodeInStore && (countryCode == "un" || !countryCode);
+  const isMainPage = !countryCode && (countryCode == "un" || !countryCode);
 
   return (
     <div
@@ -79,12 +85,13 @@ export const AppMenu = ({ countries, children }: AppMenuProps) => {
       <div className="_main-mobileMenu flex items-center justify-between border border-gray-200 bg-white px-4 py-2">
         <div className="_select-country flex">
           <CircleFlag
+            className="opacity-50 hover:cursor-pointer"
             width={32}
             height={32}
+            quality={75}
             loading={"lazy"}
-            alt={`Logo of country with ISO code ${countryCode}`}
+            alt={`Logo of country with ISO code ${countries?.find((c: Country) => c.code === countryCode)?.code}`}
             countryCode={countryCode}
-            className="opacity-50 hover:cursor-pointer"
             onClick={() => setIsOpen(true)}
           />
         </div>
@@ -120,7 +127,11 @@ export const AppMenu = ({ countries, children }: AppMenuProps) => {
         </Link>
       </div>
 
-      <DialogCountry countries={countries} open={isOpen} setOpen={setIsOpen} />
+      <CountriesDialog
+        countries={countries || []}
+        open={isOpen}
+        setOpen={setIsOpen}
+      />
     </div>
   );
 };

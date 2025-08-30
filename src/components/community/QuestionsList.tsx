@@ -2,8 +2,8 @@
 "use client";
 
 import { QuestionCard, QuestionsTools } from "@/components/index";
-import { Question } from "@/lib/schemas/community";
-import type { Country } from "@/types/country";
+import { Question } from "@/schemas/community";
+import { Country } from "@/schemas/country";
 
 type QuestionsListProps = {
   data: Question[];

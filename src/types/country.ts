@@ -1,11 +1,3 @@
-// src/types/country.ts
-export type Country = {
-  id: number;
-  name: string;
-  code: string;
-  pageCount: number;
-  status: boolean;
-  availability: boolean;
-  areaCode: number;
-  englishName: string;
-};
+// Temporary re-export to fix compilation issues
+// TODO: Remove this file after updating all imports to @/schemas/country
+export type { Country } from "@/schemas/country";

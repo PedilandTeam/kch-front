@@ -3,7 +3,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import { z } from "zod";
-import { QuestionsResponseSchema } from "@/lib/schemas/community";
+import { QuestionsResponseSchema } from "@/schemas/community";
 
 const API_URL = process.env.API_URL!;
 if (!API_URL) throw new Error("Missing API_URL");

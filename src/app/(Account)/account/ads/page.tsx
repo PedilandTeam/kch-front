@@ -1,6 +1,6 @@
 "use client";
 
-import { fetcher } from "@/swr/fetcher";
+import { fetcher } from "@/hooks/fetcher";
 import { AdNamespace } from "@/types/ad";
 import useSWR from "swr";
 import Ad from "./components/ad";

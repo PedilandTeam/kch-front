@@ -7,7 +7,7 @@ import { UnitType } from "@/types/unit";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CategoryList from "./categoryList";
-import { PathGeneratorType } from "../../page";
+import { PathGeneratorType } from "../../(root)/page";
 import queryString from "query-string";
 import fetchWrapper, { FetchWrapperError } from "@/modules/fetchWrapper";
 

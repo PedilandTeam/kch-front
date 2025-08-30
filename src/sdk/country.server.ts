@@ -1,28 +1,15 @@
-// src/sdk/country.server.ts
+export async function fetchCountryByCode(id: number) {
+  const baseUrl = process.env.API_URL;
+  if (!baseUrl) throw new Error("Missing API_URL in env");
 
-import "server-only";
-import { Country } from "@/types/country";
-
-const API_URL = process.env.API_URL!;
-if (!API_URL) throw new Error("Missing API_URL");
-
-export async function fetchCountryByCode(
-  code: string,
-): Promise<Country | null> {
-  const url = `${API_URL}/countries?code=${encodeURIComponent(code)}`;
-
-  const res = await fetch(url, {
-    next: { revalidate: 60 * 60 * 24, tags: ["countries"] }, // 24h ISR
+  const res = await fetch(`${baseUrl}/countries/${id}`, {
+    cache: "no-store",
   });
 
-  if (!res.ok) throw new Error(`countries ${res.status}`);
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    throw new Error(`Failed to fetch country (SSR). ${res.status}: ${body}`);
+  }
 
-  const data: unknown = await res.json();
-  if (!Array.isArray(data) || data.length === 0) return null;
-
-  const item = data[0] as Partial<Country>;
-  // minimal structural guard
-  if (!item || typeof item.code !== "string") return null;
-
-  return item as Country;
+  return res.json();
 }

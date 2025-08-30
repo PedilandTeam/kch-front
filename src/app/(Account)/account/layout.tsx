@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import SideMenu from '@/layout/sideMenu';
-import { SideMenuList } from '@/layout/sideMenuList';
+import SideMenu from '@/components/Layout/sideMenu';
+import { SideMenuList } from '@/components/Layout/sideMenuList';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 // import  from '@/hooks/useAuthCheck';

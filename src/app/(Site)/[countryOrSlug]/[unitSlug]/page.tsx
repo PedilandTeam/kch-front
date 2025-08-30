@@ -3,7 +3,7 @@ import { UnitType } from "@/types/unit";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import queryString from "query-string";
-import { PathGeneratorType } from "../page";
+import { PathGeneratorType } from "../(root)/page";
 import UnitList from "./unitList";
 import fetchWrapper from "@/modules/fetchWrapper";
 

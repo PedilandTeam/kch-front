@@ -1,24 +1,21 @@
 "use client";
 
 import { useHeader } from "@/store/useHeader";
-import { Metadata } from "next";
 import Image from "next/image";
 import { useEffect } from "react";
 
-
 export default function NotFound() {
-
-  const {setIsNotFound} = useHeader()
+  const { setIsNotFound } = useHeader();
   useEffect(() => {
-    setIsNotFound(true)
+    setIsNotFound(true);
     return () => {
-      setIsNotFound(false)
-    }
-  }, [])
+      setIsNotFound(false);
+    };
+  }, []);
 
   return (
-    <div className="container max-w-[1144px] mx-auto mt-8">
-      <div className="not-found min-h-[500px] flex flex-wrap justify-center items-center">
+    <div className="container mx-auto mt-8 max-w-[1144px]">
+      <div className="not-found flex min-h-[500px] flex-wrap items-center justify-center">
         <div className="wrap">
           <div className="flex justify-center">
             <Image
@@ -28,13 +25,13 @@ export default function NotFound() {
               height={200}
             />
           </div>
-          <h1 className="text-lg sm:text-2xl font-semibold text-center mt-4 text-yellow-900">
+          <h1 className="mt-4 text-center text-lg font-semibold text-yellow-900 sm:text-2xl">
             متاسفانه چنین صفحه‌ای وجود نداره!
           </h1>
-          <p className="text-blue-900 sm:text-lg my-3 text-center px-5 sm:px-0">
+          <p className="my-3 px-5 text-center text-blue-900 sm:px-0 sm:text-lg">
             و یا ممکنه بخاطر تغییرات وب‌سایت جدید کـوچـا آدرسش تغییر کرده باشه.
           </p>
-          <p className="text-gray-600 text-center sm:text-lg font-light px-8 sm:px-0">
+          <p className="px-8 text-center font-light text-gray-600 sm:px-0 sm:text-lg">
             با انتخاب کشور مورد نظرت می‌تونی به جستجو ادامه بدی.
           </p>
         </div>

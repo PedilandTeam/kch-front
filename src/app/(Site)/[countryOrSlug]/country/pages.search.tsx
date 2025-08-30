@@ -1,6 +1,6 @@
 "use client";
 
-import { usePages } from "@/hooks/swr/usePages";
+import { usePages } from "@/hooks/usePages";
 import Image from "next/image";
 import Link from "next/link";
 import { ChangeEvent, useEffect, useState } from "react";

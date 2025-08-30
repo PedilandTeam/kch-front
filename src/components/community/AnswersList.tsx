@@ -1,15 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { ArrowFatDown, ArrowFatUp } from "@phosphor-icons/react";
-import useGetAnswer from "../../app/(Site)/[countryOrSlug]/c/apiForum/useGetAnswer";
+import useGetAnswer from "../../hooks/apiForum/useGetAnswer";
 import { timeAgo } from "../../lib/timeAgo";
-import Pagination from "../../app/(Site)/[countryOrSlug]/c/components/pagination";
+import Pagination from "./pagination";
 import { useSearchParams } from "next/navigation";
-import usePostUpVoteAnswer from "../../app/(Site)/[countryOrSlug]/c/apiForum/usePostUpVoteAnswer";
-import usePostDownVoteAnswer from "../../app/(Site)/[countryOrSlug]/c/apiForum/usePostDownVoteAnswer";
-import useCheckUser from "../../app/(Site)/[countryOrSlug]/c/apiForum/useCheckUser";
-import CheckUserModal from "../../app/(Site)/[countryOrSlug]/c/components/checkUserModal";
-import SkeletonAnswerCard from "../../app/(Site)/[countryOrSlug]/c/components/skeletonAnswerCard";
+import usePostUpVoteAnswer from "../../hooks/apiForum/usePostUpVoteAnswer";
+import usePostDownVoteAnswer from "../../hooks/apiForum/usePostDownVoteAnswer";
+import useCheckUser from "../../hooks/apiForum/useCheckUser";
+import CheckUserModal from "./checkUserModal";
+import SkeletonAnswerCard from "./skeletonAnswerCard";
 
 export const AnswersList = ({
   params,
@@ -101,17 +101,12 @@ export const AnswersList = ({
                       onClick={async () => {
                         const isUserAuthenticated = await checkUser();
                         if (!isUserAuthenticated) {
-                          (
-                            document.getElementById(
-                              "my_modal_3",
-                            ) as HTMLFormElement
-                          ).showModal();
+                          window.dispatchEvent(new Event('openLoginModal'));
                         } else {
                           downVote(answer.id);
-                          checkUser();
                         }
                       }}
-                      className="btn btn-square btn-ghost btn-xs xl:btn-sm border-none bg-transparent font-medium"
+                      className="inline-flex items-center justify-center rounded-xl p-1 hover:bg-blue-400 xl:p-2"
                     >
                       <span className="">
                         <ArrowFatDown
@@ -126,17 +121,12 @@ export const AnswersList = ({
                       onClick={async () => {
                         const isUserAuthenticated = await checkUser();
                         if (!isUserAuthenticated) {
-                          (
-                            document.getElementById(
-                              "my_modal_3",
-                            ) as HTMLFormElement
-                          ).showModal();
+                          window.dispatchEvent(new Event('openLoginModal'));
                         } else {
                           vote(answer.id);
-                          checkUser();
                         }
                       }}
-                      className="btn btn-ghost btn-xs w-auto border-none bg-transparent font-medium"
+                      className="inline-flex items-center gap-1 rounded-xl px-2 py-1 hover:bg-blue-400 xl:px-3 xl:py-2"
                     >
                       <span className="text-[.7rem] xl:text-base">
                         باهات موافقم

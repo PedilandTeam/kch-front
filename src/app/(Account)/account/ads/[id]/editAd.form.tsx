@@ -16,7 +16,7 @@ import toast from "react-hot-toast";
 import useAdPicture from "@/store/useAdPicture";
 import axios, { AxiosError } from "axios";
 import useFetchAd from "../hooks/useFetchAd";
-import { axiosFetcher } from "@/swr/axiosFetcher";
+import { axiosFetcher } from "@/hooks/axiosFetcher";
 import useCreateAd from "../hooks/useAdManagement";
 import useUploadAdPictures from "../hooks/useUploadAdPictures";
 import useAdManagement from "../hooks/useAdManagement";

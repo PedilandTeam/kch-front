@@ -1,8 +1,6 @@
-// src/components/home/countries.tsx
-
 import { API_ROUTES } from "@/routes";
 import { COUNTRY } from "@/text/location";
-import { Country } from "@/types/country";
+import { Country } from "@/schemas/country";
 import Image from "next/image";
 import Link from "next/link";
 
