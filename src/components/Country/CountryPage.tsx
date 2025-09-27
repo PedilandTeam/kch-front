@@ -3,8 +3,8 @@
 import { Category } from "@/types/category";
 import { Country } from "@/schemas/country";
 import fetchCampaigns from "@/utils/fetchCampaigns";
-import { CountryPageForum } from "../../app/(Site)/[countryOrSlug]/country/countryPageForum";
-import { CountryPageHeader } from "../../app/(Site)/[countryOrSlug]/country/countryPageHeader";
+import { CountryPageForum } from "../../app/[countryOrSlug]/country/countryPageForum";
+import { CountryPageHeader } from "../../app/[countryOrSlug]/country/countryPageHeader";
 
 type CountryPageProps = {
   currentCountry: Country;

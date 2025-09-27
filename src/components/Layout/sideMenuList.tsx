@@ -1,5 +1,5 @@
 import React from "react";
-import { SideMenuItem } from "./sideMenu";
+import { SideMenuItem } from "../panel/tmp/sideMenu";
 import {
   BriefcaseIcon,
   HouseIcon,
