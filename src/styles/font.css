@@ -1,8 +1,14 @@
 @font-face {
-  font-family: "AnjomanMaxVF";
+  font-family: "Anjoman";
   src:
+    url("/fonts/AnjomanMaxVF.woff2") format("woff2-variations"),
+    url("/fonts/AnjomanMaxVF.woff2") format("woff2"),
     url("/fonts/AnjomanMaxVF.woff") format("woff-variations"),
     url("/fonts/AnjomanMaxVF.woff") format("woff");
   font-weight: 100 1000;
   font-display: fallback;
+}
+
+:root {
+  --font-anjoman: "Anjoman", sans-serif;
 }

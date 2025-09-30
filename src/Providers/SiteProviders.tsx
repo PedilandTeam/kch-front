@@ -2,7 +2,7 @@
 
 import Hotjar from "@/components/hotjar";
 import Script from "next/script";
-import { Toaster } from "react-hot-toast";
+import { Toaster } from "@/components/ui/sonner";
 import { SwrProvider } from "./SwrProvider";
 
 export default function SiteProviders({
@@ -14,7 +14,14 @@ export default function SiteProviders({
     <SwrProvider>
       {children}
 
-      <Toaster />
+      <Toaster
+        position="top-right"
+        richColors
+        theme="light"
+        toastOptions={{
+          className: "font-anjoman !important",
+        }}
+      />
 
       {process.env.NODE_ENV === "production" && (
         <>
