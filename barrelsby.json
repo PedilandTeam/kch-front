@@ -1,0 +1,13 @@
+{
+  "directory": [
+    "src/components",
+    "src/components/ui",
+    "src/components/panel",
+    "src/components/home"
+  ],
+  "delete": true,
+  "singleQuotes": true,
+  "structure": "flat",
+  "barrelName": "index.ts",
+  "exclude": ["index.ts"]
+}

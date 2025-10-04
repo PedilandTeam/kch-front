@@ -3,5 +3,5 @@ export default function PanelLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <main className="flex min-h-full flex-col gap-5">{children}</main>;
+  return <main className="flex min-h-full flex-col">{children}</main>;
 }

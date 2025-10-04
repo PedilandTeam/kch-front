@@ -2,13 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-// import Button from "@/components/daisy/button";
 import { usePathname } from "next/navigation";
 import HeaderMobile from "./header.mobile";
-import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
-import { useState, useEffect } from "react";
 import signOutAction from "@/actions/signOut.action";
-import { SignOut } from "@phosphor-icons/react";
+import { SignOutIcon } from "@phosphor-icons/react";
+import { useEffect, useState } from "react";
 
 type HeaderProps = {
   children?: React.ReactNode;
@@ -37,7 +35,7 @@ export const Header = ({ children }: HeaderProps) => {
   return (
     <header
       id="header"
-      className={` fixed right-0 top-0 z-30 bg-white transition-all duration-300 lg:static lg:flex ${
+      className={`fixed top-0 right-0 z-30 bg-white transition-all duration-300 lg:static lg:flex ${
         isVisible
           ? "visible opacity-100"
           : "invisible opacity-0 lg:visible lg:opacity-100"
@@ -48,8 +46,6 @@ export const Header = ({ children }: HeaderProps) => {
       <Link className="hidden lg:block" href="/">
         <Image
           src="/images/logo.svg"
-          // width={isTop ? 195 : 174}
-          // height={isTop ? 54 : 48}
           width={195}
           height={54}
           priority={true}
@@ -61,25 +57,15 @@ export const Header = ({ children }: HeaderProps) => {
 
       <div className="hidden gap-x-2 lg:flex">
         <button onClick={() => signOutAction()} className="btn btn-ghost">
-          <SignOut size={28} color="#f7273f" /> خروج
+          <SignOutIcon size={28} color="#f7273f" /> خروج
         </button>
         <Link href={"/"}>
-          <button
-            className="btn btn-ghost btn-md px-5
-                    "
-          >
-            رفتن به سایت
-          </button>
+          <button className="btn btn-ghost btn-md px-5">رفتن به سایت</button>
         </Link>
 
         {!pathname.startsWith("/account/ads/new") ? (
           <Link href={"/account/ads/new"}>
-            <button
-              className="btn btn-primary
-                    "
-            >
-              ثبت آگهی
-            </button>
+            <button className="btn btn-primary">ثبت آگهی</button>
           </Link>
         ) : null}
       </div>

@@ -1,8 +1,17 @@
 import { cn } from "@/lib/utils";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui";
-import { Card, CardContent, CardHeader } from "../ui/card";
+import Link from "next/link";
+
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Card,
+  CardContent,
+  CardHeader,
+} from "@/components/index";
 
 interface AdsItemProps {
+  id: number;
   title: string;
   description: string;
   image: string;
@@ -12,6 +21,7 @@ interface AdsItemProps {
 }
 
 export const AdsItem = ({
+  id,
   title,
   description,
   image,
@@ -20,22 +30,24 @@ export const AdsItem = ({
   className,
 }: AdsItemProps) => {
   return (
-    <Card className={cn(className)}>
-      <CardHeader className="flex flex-row items-center gap-3 space-y-0 p-5 pb-2.5">
-        <Avatar className="size-11">
-          <AvatarImage src={image} />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-        <div>
-          <h2 className="text-[15px] font-medium">{title}</h2>
-          <p className="text-muted-foreground text-[13px]">
-            {date} در دسته {category}
-          </p>
-        </div>
-      </CardHeader>
-      <CardContent className="p-5 pt-0">
-        <p className="line-clamp-2 text-sm text-gray-600">{description}</p>
-      </CardContent>
-    </Card>
+    <Link className="flex" href={`/panel/adsclub/${id}`}>
+      <Card className={cn(className)}>
+        <CardHeader className="flex flex-row items-center gap-3 space-y-0 p-5 pb-2.5">
+          <Avatar className="size-11">
+            <AvatarImage src={image} />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+          <div>
+            <h2 className="text-[15px] font-medium">{title}</h2>
+            <p className="text-muted-foreground text-[13px]">
+              {date} در دسته {category}
+            </p>
+          </div>
+        </CardHeader>
+        <CardContent className="p-5 pt-0">
+          <p className="line-clamp-2 text-sm text-gray-600">{description}</p>
+        </CardContent>
+      </Card>
+    </Link>
   );
 };

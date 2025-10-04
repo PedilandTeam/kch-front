@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { Button } from "../ui";
 import { AdsItem } from "./AdsItem";
-import { AdsData, adsData } from "@/constants/ads-data";
+import type { AdsData } from "@/constants/ads-data";
+import { adsData } from "@/constants/ads-data";
 
 export const AdsList = () => {
   return (
-    <section className="flex flex-1 flex-col space-y-3 rounded-t-3xl bg-gradient-to-b from-blue-200 to-blue-100 p-4">
-      <h2 className="mb-4 text-center font-semibold text-blue-900">
+    <section className="login-bg flex flex-1 flex-col space-y-3 rounded-t-3xl bg-no-repeat bg-cover p-4 pt-5">
+      <h2 className="mb-5 text-center font-semibold text-white">
         آگـهـی هـای جـدیـد
       </h2>
 
@@ -18,7 +19,7 @@ export const AdsList = () => {
 
           <Button
             variant="ghost"
-            className="w-full font-normal text-blue-900"
+            className="w-full font-normal text-white"
             asChild
           >
             <Link href="/panel/adsclub/explore">

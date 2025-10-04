@@ -1,5 +1,6 @@
 import { AdsItem } from "@/components/panel/AdsItem";
-import { AdsData, adsData } from "@/constants/ads-data";
+import type { AdsData } from "@/constants/ads-data";
+import { adsData } from "@/constants/ads-data";
 import { PageHeader } from "@/components/panel/PageHeader";
 
 export default function ExplorePage() {

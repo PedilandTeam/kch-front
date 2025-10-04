@@ -1,21 +1,21 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
+import { AdsClubLogo, CreditDisplay } from "@/components/index";
+import { usePointsStore } from "@/store/usePointsStore";
 
 export default function IntroPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // گرفتن step از query (شروع از 1)
   const step = Number(searchParams.get("step") ?? 1);
 
-  // اسلایدها
   const slides = useMemo(
     () => [
       {
@@ -56,7 +56,7 @@ export default function IntroPage() {
         title: "سیستم کسب امتیاز",
         content:
           "تو ادزکلاب، برای ایجاد جذابیت و قدردانی از کاربران فعال و وفادار یک سیستم امتیازدهی وجود داره. با جمع‌آوری امتیازهای بیشتر، اعتبار استفاده از خدمات ویژه، تخفیف‌ها و آفرها براتون فعال میشه.",
-        btnText: "میخوام ثبت نام کنم (45+ امتیاز)",
+        btnText: "بـزن بـریـم (45+ امتیاز)",
       },
     ],
     [],
@@ -69,49 +69,28 @@ export default function IntroPage() {
   const nextStep = () => {
     if (step < slides.length) {
       goToStep(step + 1);
+      addPoints(1);
+
       if (step === slides.length - 1) {
-        toast.success("تبریک، شما تا این لحظه 5 امتیاز کسب کردید.");
+        toast.success("تبریک میگم، شما تا این لحظه 5 امتیاز کسب کردید.");
       }
     }
   };
 
-  return (
-    <div className="flex h-screen flex-col items-center justify-center space-y-6 p-5">
-      {/* Progress + Coins */}
-      <div className="flex w-full items-center justify-between">
-        <div className="flex flex-row-reverse gap-1.5">
-          {slides.map((slide) => {
-            const isPastStep = slide.id < step;
-            const isCurrent = slide.id === step;
+  const addPoints = usePointsStore((state) => state.addPoints);
 
-            return (
-              <button
-                key={slide.id}
-                onClick={() => isPastStep && goToStep(slide.id)}
-                disabled={!isPastStep}
-                className={`h-1.5 w-6 rounded transition-colors ${
-                  isCurrent
-                    ? "bg-blue-600"
-                    : isPastStep
-                      ? "bg-gray-300 hover:bg-blue-700"
-                      : "cursor-not-allowed bg-gray-200"
-                }`}
-              />
-            );
-          })}
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="text-secondary text-lg font-bold">{step}</span>
-          <Image
-            src="/images/icons/icon-coins-2.png"
-            width={32}
-            height={32}
-            alt="coin"
-          />
-        </div>
+  useEffect(() => {
+    addPoints(1);
+  }, []);
+
+  return (
+    <div className="flex h-screen flex-col items-center justify-center space-y-6 p-4">
+      <div className="flex w-full items-center justify-between">
+        <AdsClubLogo />
+
+        <CreditDisplay />
       </div>
 
-      {/* متن اسلاید */}
       <div className="flex flex-1 flex-col items-center justify-center gap-10">
         <div className="flex w-full flex-1 items-end justify-center">
           <Image
@@ -132,28 +111,39 @@ export default function IntroPage() {
         </div>
       </div>
 
-      {/* دکمه‌ها */}
-      <div className="flex w-full flex-col gap-2">
-        <Button
-          className="w-full font-normal text-gray-400"
-          variant="ghost"
-          asChild
-        >
-          <Link href="/join/adsclub">
-            ممنون، برام جذاب نیست. نمی‌خوام ادامه بدم.
-          </Link>
-        </Button>
+      <div className="flex flex-row-reverse gap-1.5">
+        {slides.map((slide) => {
+          const isPastStep = slide.id < step;
+          const isCurrent = slide.id === step;
 
+          return (
+            <button
+              key={slide.id}
+              onClick={() => isPastStep && goToStep(slide.id)}
+              disabled={!isPastStep}
+              className={`h-1.5 w-6 rounded transition-colors ${
+                isCurrent
+                  ? "bg-blue-600"
+                  : isPastStep
+                    ? "bg-gray-300 hover:bg-blue-700"
+                    : "cursor-not-allowed bg-gray-200"
+              }`}
+            />
+          );
+        })}
+      </div>
+
+      <div className="flex w-full flex-col gap-2">
         {step < slides.length ? (
-          // همه اسلایدها به جز آخر
           <Button onClick={nextStep} className="w-full">
             <ArrowRight />
             {slides[step - 1]?.btnText}
           </Button>
         ) : (
-          // اسلاید آخر
           <Button variant="success" className="w-full" asChild>
-            <Link href="/auth/signup">{slides[step - 1]?.btnText}</Link>
+            <Link href="/panel/adsclub/onboarding/register">
+              {slides[step - 1]?.btnText}
+            </Link>
           </Button>
         )}
       </div>

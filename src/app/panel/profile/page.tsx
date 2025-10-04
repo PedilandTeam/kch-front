@@ -1,4 +1,5 @@
-import { PageHeader } from "@/components/panel/PageHeader";
+import { PageHeader } from "@/components/index";
+import ProfileForm from "./ProfileForm";
 
 export default function ProfilePage() {
   return (
@@ -6,6 +7,8 @@ export default function ProfilePage() {
       <PageHeader icon="UserListIcon" title="حساب کاربری">
         این صفحه شامل تمام اطلاعات حساب کاربری شماست.
       </PageHeader>
+
+      <ProfileForm />
     </div>
   );
 }

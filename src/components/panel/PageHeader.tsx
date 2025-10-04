@@ -27,7 +27,7 @@ export const PageHeader = ({ icon, title, children }: PageHeaderProps) => {
           {title}
         </h1>
         <Link href="/panel/adsclub">
-          <MoveLeftIcon className="size-6" />
+          <MoveLeftIcon />
         </Link>
       </div>
       {children && (
