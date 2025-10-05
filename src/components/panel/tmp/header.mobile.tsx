@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/daisy/button";
-import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRightIcon } from "@phosphor-icons/react";
 import { useRouter } from "next/navigation";
 import HeaderTitle from "./headerTitle";
 

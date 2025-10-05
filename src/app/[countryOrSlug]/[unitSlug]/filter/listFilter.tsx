@@ -4,7 +4,7 @@ import { CategoryNamespace } from "@/types/category";
 import CityFilter from "./city.filter";
 import CategoryFilter from "./category.filter";
 import PageSearch from "./page.search";
-import { Sliders } from "@phosphor-icons/react/dist/ssr";
+import { Sliders } from "@phosphor-icons/react";
 import { FILTER } from "@/text/directory";
 import { useState } from "react";
 import CityFilterSelected from "./city.filter.selected";

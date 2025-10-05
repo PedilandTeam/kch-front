@@ -1,5 +1,5 @@
 'use client';
-import { fetcher } from '@/app/swr/fetcher';
+import { fetcher } from '@/hooks/fetcher';
 import { FormEvent, memo, useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { CircleFlag } from 'next-circle-flags';

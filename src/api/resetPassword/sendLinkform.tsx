@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import useSendResetPassword from "./useSendResetPassword";
 import EmailSent from "./emailSent";
-import { EnvelopeIcon } from "@phosphor-icons/react/dist/ssr";
+import { EnvelopeIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import Input from "@/components/daisy/input";
 import Button from "@/components/daisy/button";

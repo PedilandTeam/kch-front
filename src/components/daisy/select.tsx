@@ -12,8 +12,8 @@ import {
   MouseEvent,
   FocusEvent,
 } from "react";
-import { ChevronDownIcon } from "@phosphor-icons/react/dist/ssr";
 import SelectSearch from "./selectSearch";
+import { ChevronDownIcon } from "lucide-react";
 
 interface Select
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "children" | "onChange"> {

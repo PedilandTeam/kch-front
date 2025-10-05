@@ -24,6 +24,7 @@ const nextConfig = {
         hostname: "d11h29rvzk0dwa.cloudfront.net",
       },
     ],
+    qualities: [75, 100],
   },
 };
 

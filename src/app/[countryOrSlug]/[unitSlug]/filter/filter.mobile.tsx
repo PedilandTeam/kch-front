@@ -1,7 +1,7 @@
 "use client";
 
 import { FILTER } from "@/text/directory";
-import { Sliders } from "@phosphor-icons/react/dist/ssr";
+import { Sliders } from "@phosphor-icons/react";
 import { FC } from "react";
 
 type FilterMobile = {

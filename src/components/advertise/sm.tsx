@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { FC } from "react";
+import type { FC } from "react";
 import Image from "next/image";
-import { AdvertiseProps } from "./type";
-import dynamic from "next/dynamic";
-import { CampaignNamespace } from "@/types/campaign";
+import type { AdvertiseProps } from "./type";
+import { MobileOrTablet } from "../responsive";
 // const MobileOrTablet = dynamic(
 //   () => import("../responsive").then((mod) => mod.MobileOrTablet),
 //   {

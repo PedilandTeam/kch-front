@@ -1,5 +1,5 @@
 import useAdPicture from "@/store/useAdPicture";
-import { TrashIcon } from "@phosphor-icons/react/dist/ssr";
+import { TrashIcon } from "@phosphor-icons/react";
 
 export default function Picture({
   blob,

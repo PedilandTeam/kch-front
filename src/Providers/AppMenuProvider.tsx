@@ -12,10 +12,8 @@ export const AppMenuProvider = async ({
 
   return (
     <SWRConfig value={{ fallback: { [unstable_serialize(key)]: initial } }}>
-      <main>
-        {children}
-        <AppMenu />
-      </main>
+      <main>{children}</main>
+      <AppMenu />
     </SWRConfig>
   );
 };

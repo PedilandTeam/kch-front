@@ -5,7 +5,7 @@ import CategoryFilter, { removeFromShouldBeAddType } from "./category.filter";
 import { CityNamespace } from "@/types/city";
 import { CategoryNamespace } from "@/types/category";
 import { FILTER } from "@/text/directory";
-import { Sliders } from "@phosphor-icons/react/dist/ssr";
+import { Sliders } from "@phosphor-icons/react";
 import { useState } from "react";
 import CategoryFilterSelected from "./category.filter.selected";
 import CityFilterSelected from "./city.filter.selected";

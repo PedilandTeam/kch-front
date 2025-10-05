@@ -1,4 +1,4 @@
-import { ArrowsClockwise } from "@phosphor-icons/react/dist/ssr";
+import { ArrowsClockwise } from "@phosphor-icons/react";
 import Link from "next/link";
 
 const TermsText = () => {

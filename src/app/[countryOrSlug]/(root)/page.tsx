@@ -1,8 +1,8 @@
-import { notFound } from "next/navigation";
 import { baseSiteMetadata } from "@/config/metadata";
-import {CountryPage} from "@/components/index";
+import { notFound } from "next/navigation";
 import { getRouteData } from "../data";
-import PageItem from "../item/item";
+
+import { CountryPage, ItemDetailsPage } from "@/components/index";
 
 type Params = { params: Promise<{ countryOrSlug: string }> };
 
@@ -54,5 +54,5 @@ export default async function Page({ params }: Params) {
 
   if (!data.pageData) return notFound();
 
-  return <PageItem pageData={data.pageData} />;
+  return <ItemDetailsPage pageData={data.pageData} />;
 }

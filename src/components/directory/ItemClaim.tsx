@@ -1,20 +1,21 @@
-import { ShieldCheck } from "@phosphor-icons/react/dist/ssr";
+import { ShieldCheckIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
-import { FC } from "react";
+import type { FC } from "react";
 
 type ItemClaim = {
   enable: boolean;
   slug: string;
 };
-const ItemClaim: FC<ItemClaim> = ({ enable, slug }) => {
+
+export const ItemClaim: FC<ItemClaim> = ({ enable, slug }) => {
   return enable ? (
     <>
       {/* ADMIN ALERT */}
 
       {/* CLAIM PAGE */}
-      <div className="mb-3 rounded-md border border-blue-200 bg-blue-50 p-4">
+      <div className="mx-3 my-6 rounded-md border border-blue-200 bg-blue-50 p-4">
         <div className="mb-3 flex content-center items-center">
-          <ShieldCheck
+          <ShieldCheckIcon
             size={28}
             weight="duotone"
             className="ml-2 text-sky-600"
@@ -40,5 +41,3 @@ const ItemClaim: FC<ItemClaim> = ({ enable, slug }) => {
     </>
   ) : null;
 };
-
-export default ItemClaim;

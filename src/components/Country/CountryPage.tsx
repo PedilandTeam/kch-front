@@ -1,7 +1,7 @@
 // app/(Site)/[countryOrSlug]/country/country.tsx
 
-import { Category } from "@/types/category";
-import { Country } from "@/schemas/country";
+import type { Category } from "@/types/category";
+import type { Country } from "@/schemas/country";
 import fetchCampaigns from "@/utils/fetchCampaigns";
 import { CountryPageForum } from "../../app/[countryOrSlug]/country/countryPageForum";
 import { CountryPageHeader } from "../../app/[countryOrSlug]/country/countryPageHeader";

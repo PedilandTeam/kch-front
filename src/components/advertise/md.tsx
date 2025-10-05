@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { FC } from "react";
+import type { FC } from "react";
 import Image from "next/image";
-import { AdvertiseProps } from "./type";
+import type { AdvertiseProps } from "./type";
 import dynamic from "next/dynamic";
 
 const Desktop = dynamic(

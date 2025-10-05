@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import { REGEX } from "@/utils/regex";
 import toast from "react-hot-toast";
 import useLogin from "./useLogin";
-import { LockClosedIcon, UserIcon } from "@phosphor-icons/react/dist/ssr";
+import { LockClosedIcon, UserIcon } from "@phosphor-icons/react";
 import Input from "@/components/daisy/input";
 import Button from "@/components/daisy/button";
 import { useEffect } from "react";

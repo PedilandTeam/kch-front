@@ -4,7 +4,7 @@ import { PageNamespace } from "@/types/page";
 import {
   ArrowCircleLeft,
   ArrowCircleRight,
-} from "@phosphor-icons/react/dist/ssr";
+} from "@phosphor-icons/react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";

@@ -1,5 +1,5 @@
 "use client";
-import { CheckCircleIcon } from "@phosphor-icons/react/dist/ssr";
+import { CheckCircleIcon } from "@phosphor-icons/react";
 
 export default function EmailSent() {
   return (

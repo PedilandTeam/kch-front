@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from "react";
 
 // UI Imports
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ChatsIcon, ListIcon } from "@phosphor-icons/react/dist/ssr";
+import { ChatsIcon, ListIcon } from "@phosphor-icons/react";
 import { CircleFlag } from "next-circle-flags";
 import { CountriesDialog } from "@/components/index";
 import useSWR from "swr";

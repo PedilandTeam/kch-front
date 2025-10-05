@@ -1,6 +1,6 @@
 "use client";
 
-import { Sliders } from "@phosphor-icons/react/dist/ssr";
+import { Sliders } from "@phosphor-icons/react";
 import { FILTER } from "@/text/directory";
 import { FC } from "react";
 

@@ -14,7 +14,7 @@ import {
   Confetti,
   LinkedinLogo,
   XLogo,
-} from "@phosphor-icons/react/dist/ssr";
+} from "@phosphor-icons/react";
 import useLinkHandler from "@/hooks/useLinkHandler";
 import { GENERAL } from "@/text/general";
 import isPageNew from "@/utils/isPageNew";

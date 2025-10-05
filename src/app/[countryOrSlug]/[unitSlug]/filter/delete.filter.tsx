@@ -1,6 +1,6 @@
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import queryString from "query-string";
-import { XIcon } from "@phosphor-icons/react/dist/ssr";
+import { XIcon } from "@phosphor-icons/react";
 
 const DeleteFilter = () => {
   const searchParams = useSearchParams();

@@ -1,6 +1,13 @@
-import { useState } from "react";
+"use client";
+
 import MegaMenuItems from "./megaMenuItems";
-import { Briefcase, Calendar, Chat, House, Users } from "@phosphor-icons/react";
+import {
+  BriefcaseIcon,
+  CalendarIcon,
+  ChatIcon,
+  HouseIcon,
+  UsersIcon,
+} from "@phosphor-icons/react";
 
 export default function MegaMenu({
   showMegaBiz,
@@ -23,7 +30,7 @@ export default function MegaMenu({
         showMegaJob ? "-translate-y-[3px]" : ""
       }${
         showMegaComm ? "-translate-y-[4px]" : ""
-      }  transition-all duration-400  absolute top-[50px] xl:-right-4 z-50 h-auto xl:w-[52rem] lg:w-[48rem] md:w-[30rem] sm:w-full`}
+      } absolute top-[50px] z-50 h-auto transition-all duration-400 sm:w-full md:w-[30rem] lg:w-[48rem] xl:-right-4 xl:w-[52rem]`}
     >
       <MegaMenuItems
         showMegaMenu={showMegaBiz}
@@ -34,25 +41,25 @@ export default function MegaMenu({
             subTitle:
               "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
             items: [
-              { text: "منو اول", icon: <House size={16} />, link: "#" },
+              { text: "منو اول", icon: <HouseIcon size={16} />, link: "#" },
               {
                 text: "منو دوم",
-                icon: <Briefcase size={16} />,
+                icon: <BriefcaseIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو سوم",
-                icon: <Calendar size={16} />,
+                icon: <CalendarIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو جهارم",
-                icon: <Chat size={16} />,
+                icon: <ChatIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو axXzcvb",
-                icon: <Users size={16} />,
+                icon: <UsersIcon size={16} />,
                 link: "#",
               },
             ],
@@ -62,25 +69,25 @@ export default function MegaMenu({
             subTitle:
               "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
             items: [
-              { text: "منو اول", icon: <House size={16} />, link: "#" },
+              { text: "منو اول", icon: <HouseIcon size={16} />, link: "#" },
               {
                 text: "منو دوم",
-                icon: <Briefcase size={16} />,
+                icon: <BriefcaseIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو سوم",
-                icon: <Calendar size={16} />,
+                icon: <CalendarIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو جهارم",
-                icon: <Chat size={16} />,
+                icon: <ChatIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو axXzcvb",
-                icon: <Users size={16} />,
+                icon: <UsersIcon size={16} />,
                 link: "#",
               },
             ],
@@ -90,10 +97,10 @@ export default function MegaMenu({
             subTitle:
               "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
             items: [
-              { text: "منو اول", icon: <House size={16} />, link: "#" },
+              { text: "منو اول", icon: <HouseIcon size={16} />, link: "#" },
               {
                 text: "منو دوم",
-                icon: <Briefcase size={16} />,
+                icon: <BriefcaseIcon size={16} />,
                 link: "#",
               },
             ],
@@ -110,25 +117,25 @@ export default function MegaMenu({
             subTitle:
               "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
             items: [
-              { text: "منو اول", icon: <House size={16} />, link: "#" },
+              { text: "منو اول", icon: <HouseIcon size={16} />, link: "#" },
               {
                 text: "منو دوم",
-                icon: <Briefcase size={16} />,
+                icon: <BriefcaseIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو سوم",
-                icon: <Calendar size={16} />,
+                icon: <CalendarIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو جهارم",
-                icon: <Chat size={16} />,
+                icon: <ChatIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو axXzcvb",
-                icon: <Users size={16} />,
+                icon: <UsersIcon size={16} />,
                 link: "#",
               },
             ],
@@ -138,25 +145,25 @@ export default function MegaMenu({
             subTitle:
               "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
             items: [
-              { text: "منو اول", icon: <House size={16} />, link: "#" },
+              { text: "منو اول", icon: <HouseIcon size={16} />, link: "#" },
               {
                 text: "منو دوم",
-                icon: <Briefcase size={16} />,
+                icon: <BriefcaseIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو سوم",
-                icon: <Calendar size={16} />,
+                icon: <CalendarIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو جهارم",
-                icon: <Chat size={16} />,
+                icon: <ChatIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو axXzcvb",
-                icon: <Users size={16} />,
+                icon: <UsersIcon size={16} />,
                 link: "#",
               },
             ],
@@ -166,10 +173,10 @@ export default function MegaMenu({
             subTitle:
               "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
             items: [
-              { text: "منو اول", icon: <House size={16} />, link: "#" },
+              { text: "منو اول", icon: <HouseIcon size={16} />, link: "#" },
               {
                 text: "منو دوم",
-                icon: <Briefcase size={16} />,
+                icon: <BriefcaseIcon size={16} />,
                 link: "#",
               },
             ],
@@ -186,25 +193,25 @@ export default function MegaMenu({
             subTitle:
               "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
             items: [
-              { text: "منو اول", icon: <House size={16} />, link: "#" },
+              { text: "منو اول", icon: <HouseIcon size={16} />, link: "#" },
               {
                 text: "منو دوم",
-                icon: <Briefcase size={16} />,
+                icon: <BriefcaseIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو سوم",
-                icon: <Calendar size={16} />,
+                icon: <CalendarIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو جهارم",
-                icon: <Chat size={16} />,
+                icon: <ChatIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو پنجم",
-                icon: <Users size={16} />,
+                icon: <UsersIcon size={16} />,
                 link: "#",
               },
             ],
@@ -214,25 +221,25 @@ export default function MegaMenu({
             subTitle:
               "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
             items: [
-              { text: "منو اول", icon: <House size={16} />, link: "#" },
+              { text: "منو اول", icon: <HouseIcon size={16} />, link: "#" },
               {
                 text: "منو دوم",
-                icon: <Briefcase size={16} />,
+                icon: <BriefcaseIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو سوم",
-                icon: <Calendar size={16} />,
+                icon: <CalendarIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو جهارم",
-                icon: <Chat size={16} />,
+                icon: <ChatIcon size={16} />,
                 link: "#",
               },
               {
                 text: "منو پنجم",
-                icon: <Users size={16} />,
+                icon: <UsersIcon size={16} />,
                 link: "#",
               },
             ],
@@ -242,10 +249,10 @@ export default function MegaMenu({
             subTitle:
               "اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی. اینجا میتونی توضیحات بنویسی.",
             items: [
-              { text: "منو اول", icon: <House size={16} />, link: "#" },
+              { text: "منو اول", icon: <HouseIcon size={16} />, link: "#" },
               {
                 text: "منو دوم",
-                icon: <Briefcase size={16} />,
+                icon: <BriefcaseIcon size={16} />,
                 link: "#",
               },
             ],

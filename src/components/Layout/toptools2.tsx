@@ -1,9 +1,9 @@
 "use client";
 
-import { MapIcon } from "@phosphor-icons/react/dist/ssr";
 import { CircleFlag } from "next-circle-flags";
-import { _TXT } from "@app/text";
+import { _TXT } from "@/text";
 import Link from "next/link";
+import { MapPinIcon } from "@phosphor-icons/react";
 
 type TopToolsProps = {
   countryCode: string;
@@ -27,7 +27,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
             <span className="hidden sm:inline-block">
               {_TXT.COUNTRY.SELECT}
             </span>
-            <MapIcon className="h-6 w-6" />
+            <MapPinIcon className="h-6 w-6" />
           </button>
         </div>
       ) : (

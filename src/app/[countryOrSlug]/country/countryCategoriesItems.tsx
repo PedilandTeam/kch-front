@@ -2,7 +2,7 @@
 import { UNITS_LIST_ARRAY } from "@/routes";
 import { CategoryNamespace } from "@/types/category";
 import { Country } from "@/types/country";
-import { FolderOpenIcon } from "@phosphor-icons/react/dist/ssr";
+import { FolderOpenIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useState } from "react";
 

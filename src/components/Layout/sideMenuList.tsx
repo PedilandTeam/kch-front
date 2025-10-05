@@ -1,10 +1,6 @@
 import React from "react";
-import { SideMenuItem } from "../panel/tmp/sideMenu";
-import {
-  BriefcaseIcon,
-  HouseIcon,
-  ChatTextIcon,
-} from "@phosphor-icons/react/dist/ssr";
+import type { SideMenuItem } from "../panel/tmp/sideMenu";
+import { BriefcaseIcon, ChatTextIcon, HouseIcon } from "@phosphor-icons/react/dist/ssr";
 
 export const SideMenuList: SideMenuItem[] = [
   {

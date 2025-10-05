@@ -3,7 +3,7 @@ import {
   TrophyIcon,
   BankIcon,
   PeaceIcon,
-} from "@phosphor-icons/react/dist/ssr";
+} from "@phosphor-icons/react";
 
 export const AboutTextSec = () => {
   return (

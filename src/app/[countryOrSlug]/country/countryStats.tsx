@@ -8,7 +8,7 @@ import {
   Eye,
   FolderStar,
   CardsThree,
-} from "@phosphor-icons/react/dist/ssr";
+} from "@phosphor-icons/react";
 import { GENERAL } from "@/text/general";
 type CountryStatsProps = {
   currentCountry: Country;

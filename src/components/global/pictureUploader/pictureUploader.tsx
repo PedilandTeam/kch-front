@@ -1,6 +1,6 @@
 "use client";
 import useAdPicture from "@/store/useAdPicture";
-import { PlusIcon } from "@phosphor-icons/react/dist/ssr";
+import { PlusIcon } from "@phosphor-icons/react";
 
 export default function PictureUploader() {
   const { addPicture } = useAdPicture();

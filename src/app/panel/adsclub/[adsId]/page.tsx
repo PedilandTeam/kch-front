@@ -17,7 +17,7 @@ import {
   PhoneIcon,
   TelegramLogoIcon,
   WhatsappLogoIcon,
-} from "@phosphor-icons/react/dist/ssr";
+} from "@phosphor-icons/react";
 
 interface AdsDetailsProps {
   params: Promise<{ adsId: string }>;

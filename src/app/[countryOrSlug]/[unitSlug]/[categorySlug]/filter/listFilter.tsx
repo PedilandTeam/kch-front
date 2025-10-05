@@ -2,7 +2,7 @@
 import { CityNamespace } from "@/types/city";
 import CityFilter from "../../filter/city.filter";
 import PageSearch from "../../filter/page.search";
-import { Sliders } from "@phosphor-icons/react/dist/ssr";
+import { Sliders } from "@phosphor-icons/react";
 import { FILTER } from "@/text/directory";
 import { useState } from "react";
 import { removeFromShouldBeAddType } from "../../filter/category.filter";

@@ -6,14 +6,15 @@ import Link from "next/link";
 import React from "react";
 import upperCaseFirst from "@/utils/upperCaseFirst";
 import ItemTime from "./tools/time";
-import ItemClaim from "./tools/claim";
+import { ItemClaim } from "@/components/directory/ItemClaim";
 import {
   Phone,
   DeviceMobile,
   GlobeSimple,
   TelegramLogo,
   WhatsappLogo,
-} from "@phosphor-icons/react/dist/ssr";
+  ShareIcon,
+} from "@phosphor-icons/react";
 import { SOCIAL } from "@/text/social";
 import { GENERAL } from "@/text/general";
 import useLinkHandler from "@/hooks/useLinkHandler";
@@ -235,34 +236,6 @@ export function ItemSideInfo({ pageData }: ItemSideInfoType) {
         />
       </div>
 
-      <ItemClaim slug={pageData.slug} enable={!pageData.business} />
-
-      {/* Advertising Section */}
-      {/* <div className="mb-3">
-        <Image
-          src={"/images/banner/bnr-06.gif"}
-          width={368}
-          height={280}
-          alt="banner"
-        />
-      </div> */}
-
-      {/* Share Modal */}
-      {/* <dialog id="modal_share" className="modal">
-        <div className="modal-box">
-          <h3 className="flex items-center text-lg font-bold">
-            <ShareIcon className="w-[22px] h-[22px] ml-2" />
-            اشتراک گذاری
-          </h3>
-          <p className="pt-2">
-            با اشتراک گذاری این صفحه در صفحات اجتماعی به دیده شدنش کمک کنید.
-          </p>
-          <div className="share-links"></div>
-        </div>
-        <form method="dialog" className="modal-backdrop">
-          <button>close</button>
-        </form>
-      </dialog> */}
     </div>
   );
 }

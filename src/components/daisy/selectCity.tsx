@@ -1,8 +1,8 @@
 
 
 'use client';
-import { fetcher } from '@/app/swr/fetcher';
-import { FormEvent, memo, useEffect, useState } from 'react';
+import { fetcher } from '@/hooks/fetcher';
+import { memo, useEffect, useState } from 'react';
 import useSWR from 'swr';
 import Select from './select';
 import Option from './option';

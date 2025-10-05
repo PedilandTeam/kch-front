@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 
 type Accordion = {
@@ -10,12 +12,12 @@ export default function Accordion({ title, content, className }: Accordion) {
 
   return (
     <div className={`${className}`} onClick={() => setChecked((old) => !old)}>
-      <div className="collapse collapse-arrow bg-black-200 visible">
+      <div className="collapse-arrow bg-black-200 collapse visible">
         <input type="radio" name="my-accordion-2" checked={checked} />
-        <div className="visible collapse-title text-xl font-medium select-none py-6 px-5 sm:px-8">
+        <div className="collapse-title visible px-5 py-6 text-xl font-medium select-none sm:px-8">
           {title}
         </div>
-        <div className="collapse-content select-none px-5 sm:px-8">
+        <div className="collapse-content px-5 select-none sm:px-8">
           <div>{content}</div>
         </div>
       </div>

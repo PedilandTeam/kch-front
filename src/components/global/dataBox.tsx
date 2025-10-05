@@ -1,4 +1,4 @@
-import { ArrowLeftIcon } from "@phosphor-icons/react/dist/ssr";
+import { ArrowLeftIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 
 type DataBox = {

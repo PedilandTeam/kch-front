@@ -4,7 +4,7 @@ import { CircleFlag } from "next-circle-flags";
 import Link from "next/link";
 import { COUNTRY } from "@/text/location";
 import { MENU } from "@/text/menu";
-import { Flag, List } from "@phosphor-icons/react/dist/ssr";
+import { Flag, List } from "@phosphor-icons/react";
 import { useState } from "react";
 import { CaretDown } from "@phosphor-icons/react";
 import MegaMenu from "./megaMenu";

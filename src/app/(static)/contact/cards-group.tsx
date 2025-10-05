@@ -1,4 +1,4 @@
-import { At, InstagramLogo, Headset } from "@phosphor-icons/react/dist/ssr";
+import { At, InstagramLogo, Headset } from "@phosphor-icons/react";
 import Link from "next/link";
 
 const CardsGroup = () => {

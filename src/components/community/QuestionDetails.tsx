@@ -11,7 +11,7 @@ import {
   ChatCircleDotsIcon,
   FlagIcon,
   ShareNetworkIcon,
-} from "@phosphor-icons/react/dist/ssr";
+} from "@phosphor-icons/react";
 
 import { swrKeys } from "@/hooks/swr/swrKeys";
 import { useRouter } from "next/navigation";

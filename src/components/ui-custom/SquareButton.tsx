@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
-import * as Icons from "@phosphor-icons/react/dist/ssr";
+import * as Icons from "@phosphor-icons/react";
 import type { ElementType } from "react";
 import Link from "next/link";
 

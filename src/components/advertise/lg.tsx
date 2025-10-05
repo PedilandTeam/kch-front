@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { FC } from "react";
+import type { FC } from "react";
 import Image from "next/image";
-import { AdvertiseProps } from "./type";
-import dynamic from "next/dynamic";
+import type { AdvertiseProps } from "./type";
+import { Desktop } from "../responsive";
 
 // const Desktop = dynamic(
 //   () => import("../responsive").then((mod) => mod.Desktop),

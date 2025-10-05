@@ -1,18 +1,19 @@
-import { FC } from "react";
+import { cn } from "@/lib/utils";
+import type { FC } from "react";
 import sanitizeHtml from "sanitize-html";
 
-type Description = {
+interface RichText {
   html: string;
-  className: string;
-};
-const Description: FC<Description> = ({ html, className }) => {
-  // Define the allowed tags and attributes
+  className?: string;
+}
+
+export const RichText: FC<RichText> = ({ html, className }) => {
   const cleanHtml = sanitizeHtml(html, {
     allowedTags: ["p", "strong", "ol", "ul", "li"],
     allowedAttributes: {
-        ol: ['class'],
-        ul: ['class']
-    }, // No attributes allowed for simplicity; customize as needed
+      ol: ["class"],
+      ul: ["class"],
+    },
     transformTags: {
       ul: (tagName, attribs) => {
         return {
@@ -35,10 +36,8 @@ const Description: FC<Description> = ({ html, className }) => {
 
   return (
     <div
-      className={`${className} list-disc list-inside`}
+      className={cn(className, "list-inside list-disc")}
       dangerouslySetInnerHTML={{ __html: cleanHtml }}
     ></div>
   );
 };
-
-export default Description;

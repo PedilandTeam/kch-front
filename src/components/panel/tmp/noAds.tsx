@@ -1,5 +1,5 @@
 import Button from "@/components/daisy/button";
-import { PlusIcon } from "@phosphor-icons/react/dist/ssr";
+import { PlusIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 

@@ -1,6 +1,6 @@
 import { MoveLeftIcon } from "lucide-react";
 import Link from "next/link";
-import * as Icons from "@phosphor-icons/react/dist/ssr";
+import * as Icons from "@phosphor-icons/react";
 import type { ElementType } from "react";
 
 type PhosphorIconName = keyof typeof Icons;

@@ -1,5 +1,5 @@
 import { useUser } from "@/store/useUser";
-import { UserIcon } from "@phosphor-icons/react/dist/ssr";
+import { UserIcon } from "@phosphor-icons/react";
 
 export default function UserDetails({ className }: { className?: string }) {
   const { user } = useUser();

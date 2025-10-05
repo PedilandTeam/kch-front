@@ -1,6 +1,6 @@
-import { ShieldCheck } from "@phosphor-icons/react/dist/ssr";
-import { BadgesProps } from "./badges";
-import { FC, useMemo } from "react";
+import { ShieldCheckIcon } from "@phosphor-icons/react";
+import { useMemo, type FC } from "react";
+import type { BadgesProps } from "./badges";
 
 const BlueBadge: FC<BadgesProps> = ({ enable, absoluteMode = false }) => {
   const className = useMemo(() => {
@@ -10,7 +10,7 @@ const BlueBadge: FC<BadgesProps> = ({ enable, absoluteMode = false }) => {
   }, [absoluteMode]);
 
   return enable ? (
-    <ShieldCheck
+    <ShieldCheckIcon
       size={30}
       weight="duotone"
       className={className}

@@ -12,7 +12,7 @@ import {
   HashIcon,
   ShareNetworkIcon,
   TagIcon,
-} from "@phosphor-icons/react/dist/ssr";
+} from "@phosphor-icons/react";
 import Link from "next/link";
 
 export const QuestionCard = ({ data }: { data: Question[] }) => {

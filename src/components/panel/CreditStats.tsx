@@ -1,5 +1,5 @@
 import { usePointsStore } from "@/store/usePointsStore";
-import { MedalIcon } from "@phosphor-icons/react/dist/ssr";
+import { MedalIcon } from "@phosphor-icons/react";
 import { Medal } from "lucide-react";
 import Image from "next/image";
 

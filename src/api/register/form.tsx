@@ -11,7 +11,7 @@ import {
   FaceSmileIcon,
   LockClosedIcon,
   UserIcon,
-} from "@phosphor-icons/react/dist/ssr";
+} from "@phosphor-icons/react";
 import Button from "@/components/daisy/button";
 import useRegisterUser from "./useRegisterUser";
 import SelectWithFetching from "@/components/daisy/selectWithFetching";
