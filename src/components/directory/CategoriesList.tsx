@@ -1,26 +1,26 @@
-import { API_ROUTES } from "@/routes";
-import { CategoryNamespace } from "@/types/category";
-import { CityNamespace } from "@/types/city";
-import { UnitType } from "@/types/unit";
-import joiner from "@/utils/joiner";
-import { notFound } from "next/navigation";
-import { ItemBreadCrumb } from "./breadcrumb";
-import { CardsList } from "./cardsList";
-import ListFilter from "./filter/listFilter";
-import { Country } from "@/types/country";
-import { Suspense } from "react";
-import Loading from "../_loading";
-import FilterMobile from "./filter/filter.mobile";
-import FilterModalMobile from "./filter/filterModal.mobile";
-import PagesSearch from "./filter/pages.search";
-import { PageNamespace } from "@/types/page";
-import fetchCampaigns from "@/utils/fetchCampaigns";
 import AdvertiseLg from "@/components/advertise/lg";
 import AdvertiseSm from "@/components/advertise/sm";
-import StaticAdvertise from "@/components/advertise/static";
+import { API_ROUTES } from "@/routes";
+import type { Category } from "@/types/category";
+import type { City } from "@/types/city";
+import type { Country } from "@/types/country";
+import type { Page } from "@/types/page";
+import type { UnitType } from "@/types/unit";
+import fetchCampaigns from "@/utils/fetchCampaigns";
+import joiner from "@/utils/joiner";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import FilterMobile from "../../app/[countryOrSlug]/[unitSlug]/[categorySlug]/filter/filter.mobile";
+import FilterModalMobile from "../../app/[countryOrSlug]/[unitSlug]/[categorySlug]/filter/filterModal.mobile";
+import ListFilter from "../../app/[countryOrSlug]/[unitSlug]/[categorySlug]/filter/listFilter";
+import PagesSearch from "../../app/[countryOrSlug]/[unitSlug]/[categorySlug]/filter/pages.search";
+import Loading from "../../app/[countryOrSlug]/[unitSlug]/_loading";
+import { ItemBreadCrumb } from "./CategoryBreadcrumb";
+
+import { ItemCardsList, StaticAdvertise } from "@/components/index";
 
 type PagesListProps = {
-  category: CategoryNamespace.category;
+  category: Category;
   country: Country;
   unit: UnitType;
   pageNumber: number;
@@ -31,8 +31,8 @@ type PagesListProps = {
 async function fetchCities(
   countryCode: string,
   categoryId: number,
-): Promise<CityNamespace.GET> {
-  let cities: CityNamespace.GET;
+): Promise<City[]> {
+  let cities: City[];
 
   try {
     cities = await (
@@ -50,7 +50,7 @@ async function fetchCities(
   return cities;
 }
 
-export default async function CategoryList({
+export async function CategoriesList({
   category,
   country,
   unit,
@@ -61,7 +61,7 @@ export default async function CategoryList({
   if (!country) return notFound();
   const cities = await fetchCities(country.code, category?.id);
 
-  let pages: PageNamespace.GET | undefined = undefined;
+  let pages: Page[] | undefined = undefined;
   try {
     pages = await (
       await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 24, {
@@ -142,7 +142,7 @@ export default async function CategoryList({
               fallback={<Loading />}
               key={`unit-cardlist-${search}-${city}-${category}`}
             >
-              <CardsList
+              <ItemCardsList
                 category={category}
                 country={country}
                 pageNumber={pageNumber}

@@ -5,21 +5,12 @@ import { useFormik } from "formik";
 import Link from "next/link";
 import * as Yup from "yup";
 import Image from "next/image";
-import Input from "@/components/daisy/input";
-import {
-  EnvelopeIcon,
-  FaceSmileIcon,
-  LockClosedIcon,
-  UserIcon,
-} from "@phosphor-icons/react";
-import Button from "@/components/daisy/button";
 import useRegisterUser from "./useRegisterUser";
-import SelectWithFetching from "@/components/daisy/selectWithFetching";
 import useRecaptchaV3 from "@/hooks/useRecaptchaV3";
 import { ReCaptchaV3Provider } from "@/components/global/recaptchaV3Provider";
-import SelectCity from "@/components/daisy/selectCity";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { Button, Input } from "@/components/index";
 
 export type FormikValues = {
   firstname: string;
@@ -93,9 +84,6 @@ export default function RegisterForm() {
                 className="col-span-4 sm:col-span-2"
                 type="text"
                 placeholder="نام"
-                bordered={true}
-                isInvalid={!!formik.errors.firstname}
-                endContent={<FaceSmileIcon className="h-7 w-7 text-gray-400" />}
               />
               <Input
                 name="lastname"
@@ -104,9 +92,6 @@ export default function RegisterForm() {
                 className="col-span-4 sm:col-span-2"
                 type="text"
                 placeholder="نام خانوادگی"
-                bordered={true}
-                isInvalid={!!formik.errors.lastname}
-                endContent={<FaceSmileIcon className="h-7 w-7 text-gray-400" />}
               />
               <Input
                 name="username"
@@ -115,13 +100,6 @@ export default function RegisterForm() {
                 type="text"
                 className="col-span-4 sm:col-span-2"
                 placeholder="نام کاربری"
-                bordered={true}
-                isInvalid={!!formik.errors.username}
-                errorMessage={
-                  !!formik.errors.username &&
-                  "یوزرنیم فقط میتواند شامل عدد، حروف انگلیسی و علامت های نقطه(.) و خط تیره (-) باشد"
-                }
-                endContent={<UserIcon className="h-7 w-7 text-gray-400" />}
               />
               <Input
                 name="email"
@@ -130,13 +108,9 @@ export default function RegisterForm() {
                 className="col-span-4 sm:col-span-2"
                 type="email"
                 placeholder="ایمیل"
-                bordered={true}
-                isInvalid={!!formik.errors.email}
-                errorMessage="ایمیل را درست وارد کنید"
-                endContent={<EnvelopeIcon className="h-7 w-7 text-gray-400" />}
               />
 
-              <SelectWithFetching
+              {/* <SelectWithFetching
                 bordered
                 value={formik.values.countryId}
                 circleFlag
@@ -146,9 +120,9 @@ export default function RegisterForm() {
                 name="countryId"
                 setFieldValue={formik.setFieldValue}
                 formErrors={formik.errors}
-              />
+              /> */}
               {/* <SelectWithFetching bordered value={formik.values.countryId} circleFlag className="col-span-2" route="/countries" label="انتخاب کشور" name="countryId" setFieldValue={formik.setFieldValue} formErrors={formik.errors} /> */}
-              <SelectCity
+              {/* <SelectCity
                 bordered
                 value={formik.values.cityObject}
                 className="col-span-2"
@@ -161,7 +135,7 @@ export default function RegisterForm() {
                 searchAble
                 infiniteScroll
                 countryId={formik.values?.countryId}
-              />
+              /> */}
 
               <Input
                 name="password"
@@ -170,26 +144,16 @@ export default function RegisterForm() {
                 type="password"
                 className="col-span-4"
                 placeholder="رمز عبور"
-                bordered={true}
-                isInvalid={!!formik.errors.password}
-                errorMessage="رمز باید حداقل ۸ کارکتر و شامل حداقل یک حرف بزرگ و یک عدد باشد"
-                endContent={
-                  <LockClosedIcon className="h-7 w-7 text-gray-400" />
-                }
               />
             </div>
 
-            <Button
-              type="submit"
-              isLoading={registerUserLoading}
-              className="btn btn-primary my-6 w-full"
-            >
+            <Button type="submit" className="btn btn-primary my-6 w-full">
               ثبت نام کاربر
             </Button>
 
             <p className="text-[15px]">
               حساب کاربری دارید؟{" "}
-              <Link href={"/login"} className="font-medium text-primary">
+              <Link href={"/login"} className="text-primary font-medium">
                 اینجا کلیک کنید
               </Link>
             </p>

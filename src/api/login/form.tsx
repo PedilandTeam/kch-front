@@ -8,14 +8,12 @@ import * as Yup from "yup";
 import { REGEX } from "@/utils/regex";
 import toast from "react-hot-toast";
 import useLogin from "./useLogin";
-import { LockClosedIcon, UserIcon } from "@phosphor-icons/react";
-import Input from "@/components/daisy/input";
-import Button from "@/components/daisy/button";
 import { useEffect } from "react";
 import { mutate } from "swr";
+import { Button, Input } from "@/components";
 
 const LoginForm = () => {
-  const { login, loading } = useLogin();
+  const { login } = useLogin();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -73,31 +71,22 @@ const LoginForm = () => {
             alt="Koochaa Bird Symbol"
           />
         </div>
-        <h1 className="mb-4 text-lg font-semibold text-primary">
+        <h1 className="text-primary mb-4 text-lg font-semibold">
           ورود به حساب کاربری
         </h1>
         <form onSubmit={formik.handleSubmit}>
           <div className="grid gap-3">
             <Input
-              bordered
               type="text"
               name="usernameOrEmail"
               onChange={formik.handleChange}
               placeholder="نام کاربری یا ایمیل"
-              endContent={<UserIcon className="h-7 w-7 text-gray-400" />}
             />
             <Input
-              bordered
               type="password"
               name="password"
               onChange={formik.handleChange}
-              isInvalid={!!formik.errors.password}
-              errorMessage={
-                !!formik.errors.password &&
-                "رمز باید حداقل ۸ کارکتر و شامل حداقل یک حرف بزرگ و یک عدد باشد"
-              }
               placeholder="رمز عبور"
-              endContent={<LockClosedIcon className="h-7 w-7 text-gray-400" />}
             />
           </div>
           <div className="mt-3">
@@ -108,7 +97,6 @@ const LoginForm = () => {
               type="submit"
               className="btn-primary my-6 w-full text-white"
               color="primary"
-              isLoading={loading}
             >
               ورود کاربر
             </Button>

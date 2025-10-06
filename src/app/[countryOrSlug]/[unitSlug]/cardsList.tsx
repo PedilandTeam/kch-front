@@ -1,7 +1,7 @@
 import { PageNamespace } from "@/types/page";
 import { UnitType } from "@/types/unit";
 import { Country } from "@/types/country";
-import Pagination from "./pagination/pagination";
+import Pagination from "../../../components/directory/ListPagination";
 import CardListItem from "../../../components/directory/ItemCard";
 import { Suspense } from "react";
 import Loading from "./_loading";

@@ -1,9 +1,9 @@
 "use client";
 
-import Button from "@/components/daisy/button";
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { useRouter } from "next/navigation";
 import HeaderTitle from "./headerTitle";
+import { Button } from "@/components/index";
 
 export default function HeaderMobile() {
   const router = useRouter();

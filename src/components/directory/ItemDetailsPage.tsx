@@ -1,4 +1,3 @@
-import StaticAdvertise from "@/components/advertise/static";
 import { RichText } from "@/components/global/RichText";
 import { cn } from "@/lib/utils";
 import { ITEM } from "@/text/directory";
@@ -8,7 +7,12 @@ import { Suspense } from "react";
 import { ItemSideInfo } from "../../app/[countryOrSlug]/item/sideInfo";
 import { ItemTopInfo } from "../../app/[countryOrSlug]/item/topInfo";
 
-import { ItemBreadcrumb, ItemClaim, ItemSuggestion } from "@/components/index";
+import {
+  ItemBreadcrumb,
+  ItemClaim,
+  ItemSuggestion,
+  StaticAdvertise,
+} from "@/components/index";
 
 interface ItemDetailsPageProps {
   pageData: Page;

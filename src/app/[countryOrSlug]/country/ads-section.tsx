@@ -1,4 +1,4 @@
-import StaticAdvertise from "@/components/advertise/static";
+import StaticAdvertise from "@/components/advertise/StaticAdvertise";
 import { CampaignNamespace } from "@/types/campaign";
 type SeoTextProps = {
   customers: CampaignNamespace.ICampaignCustomer[];

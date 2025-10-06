@@ -2,23 +2,22 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import type { FC } from "react";
 
-type StaticAdvertise = {
+interface StaticAdvertiseProps {
   imageUrlOrPath: string;
   link: string;
   from: string;
   alt?: string;
   lgDisable?: boolean;
-};
+}
 
-const StaticAdvertise: FC<StaticAdvertise> = ({
+export const StaticAdvertise = ({
   imageUrlOrPath,
   link,
   from,
   alt = "banner",
   lgDisable = false,
-}) => {
+}: StaticAdvertiseProps) => {
   const onClick = () => {
     fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/click/us/?customer=us&from=${from}&size=${"lg"}`,
@@ -43,5 +42,3 @@ const StaticAdvertise: FC<StaticAdvertise> = ({
     </Link>
   );
 };
-
-export default StaticAdvertise;

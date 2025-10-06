@@ -1,24 +1,27 @@
 "use client";
 
-import { PageNamespace } from "@/types/page";
-import {
-  ArrowCircleLeft,
-  ArrowCircleRight,
-} from "@phosphor-icons/react";
+import type { GetPagesResponse } from "@/types/page";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import React, { useCallback, useEffect, useState, useTransition } from "react";
+
+import {
+  ArrowCircleLeftIcon,
+  ArrowCircleRightIcon,
+} from "@phosphor-icons/react";
 
 type ParsedSearchParams = {
   page?: number;
   city?: number | number[];
   category?: number | number[];
 };
+
 type PaginationProps = {
-  pages: PageNamespace.GET;
+  pages: GetPagesResponse;
 };
-export default function Pagination({ pages }: PaginationProps) {
+
+export const ListPagination = ({ pages }: PaginationProps) => {
   let totalPages = pages.meta.totalPages;
   const paginationLimit = 9;
   const staticPaginations = 2;
@@ -154,13 +157,13 @@ export default function Pagination({ pages }: PaginationProps) {
       >
         <button
           onClick={nextButtonClickHandler}
-          className={`_join-item btn border-none bg-white pl-2 pr-0 shadow-none sm:pl-4 ${
+          className={`_join-item btn border-none bg-white pr-0 pl-2 shadow-none sm:pl-4 ${
             pageNumber == totalPages
               ? "btn-disabled text-gray-300"
               : "btn-active text-sky-600 hover:text-black"
           }`}
         >
-          <ArrowCircleRight size={32} weight="light" />
+          <ArrowCircleRightIcon size={32} weight="light" />
         </button>
       </Link>
 
@@ -229,15 +232,15 @@ export default function Pagination({ pages }: PaginationProps) {
       >
         <button
           onClick={prevButtonClickHandler}
-          className={`_join-item btn border-none bg-white pl-0 pr-2 shadow-none sm:pr-4 ${
+          className={`_join-item btn border-none bg-white pr-2 pl-0 shadow-none sm:pr-4 ${
             pageNumber == 1
               ? "btn-disabled text-gray-300"
               : "text-sky-600 hover:text-black"
           }`}
         >
-          <ArrowCircleLeft size={32} weight="light" />
+          <ArrowCircleLeftIcon size={32} weight="light" />
         </button>
       </Link>
     </div>
   );
-}
+};

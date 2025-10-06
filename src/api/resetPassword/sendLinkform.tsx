@@ -2,25 +2,17 @@
 import React, { useEffect, useState } from "react";
 import useSendResetPassword from "./useSendResetPassword";
 import EmailSent from "./emailSent";
-import { EnvelopeIcon } from "@phosphor-icons/react";
 import Image from "next/image";
-import Input from "@/components/daisy/input";
-import Button from "@/components/daisy/button";
 import toast from "react-hot-toast";
+import { Button, Input } from "@/components/index";
 
 export default function SendLinkForm() {
-  const { loading, sendResetPassword, emailSent, error } =
-    useSendResetPassword();
+  const { sendResetPassword, emailSent, error } = useSendResetPassword();
   const [email, setEmail] = useState<string>();
-  const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
 
   const emailChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newEmail = event.target.value;
     setEmail(newEmail);
-
-    // Check email validity (you can use your own validation logic)
-    const isValidEmail = /\S+@\S+\.\S+/.test(newEmail);
-    setIsEmailValid(isValidEmail);
   };
 
   useEffect(() => {
@@ -54,18 +46,14 @@ export default function SendLinkForm() {
           <Input
             onChange={emailChangeHandler}
             placeholder="ایمیل"
-            bordered
             type="email"
             className="text-center"
-            endContent={<EnvelopeIcon className="h-7 w-7 text-gray-400" />}
           />
           <Button
             onClick={() => sendResetPassword(email!)}
             type="submit"
             className="btn-primary my-3 w-full"
             color="primary"
-            isLoading={loading}
-            isDisabled={!isEmailValid}
           >
             ارسال لینک
           </Button>

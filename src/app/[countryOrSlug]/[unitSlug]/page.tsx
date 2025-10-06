@@ -1,21 +1,22 @@
-import { Country } from "@/types/country";
-import { UnitType } from "@/types/unit";
-import { Metadata } from "next";
+import type { Country } from "@/types/country";
+import type { UnitType } from "@/types/unit";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import queryString from "query-string";
-import { PathGeneratorType } from "../(root)/page";
-import UnitList from "./unitList";
-import fetchWrapper from "@/api/fetchWrapper";
 
+import fetchWrapper from "@/api/fetchWrapper";
+import type { PathGeneratorType } from "./[categorySlug]/page";
+
+import { UnitsListPage } from "@/components/index";
+
+// ---------------- Path Generator ----------------
 const pathGenerator = async (
   countryOrSlug: string,
   unitSlug: string,
 ): Promise<PathGeneratorType> => {
   const currentUnit = (
     await fetchWrapper<UnitType[]>("units", {
-      filters: {
-        slug: unitSlug,
-      },
+      filters: { slug: unitSlug },
       tags: ["country", "page"],
       revalidate:
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
@@ -23,37 +24,34 @@ const pathGenerator = async (
   )[0];
 
   const countryList = await fetchWrapper<Country[]>("countries", {
-    filters: {
-      code: countryOrSlug,
-    },
+    filters: { code: countryOrSlug },
     tags: ["country", "page"],
     revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
   });
+
   const currentCountry = countryList[0];
 
   if (!currentUnit || !currentCountry) {
-    return {
-      type: null,
-    };
+    return { type: null };
   }
 
   return {
     type: "unit",
-    props: {
-      unit: currentUnit,
-      country: currentCountry,
-    },
+    props: { unit: currentUnit, country: currentCountry },
   };
 };
 
-type generateMetadata = {
-  params: { countryOrSlug: string; unitSlug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
+// ---------------- Metadata ----------------
 export const generateMetadata = async ({
-  params: { countryOrSlug, unitSlug },
+  params,
   searchParams,
-}: generateMetadata): Promise<Metadata> => {
+}: {
+  params: Promise<{ countryOrSlug: string; unitSlug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}): Promise<Metadata> => {
+  const { countryOrSlug, unitSlug } = await params;
+  const search = await searchParams;
+
   let pathInfo: PathGeneratorType;
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug);
@@ -71,15 +69,13 @@ export const generateMetadata = async ({
   }
 
   const countries = await fetchWrapper<Country[]>("countries", {
-    filters: {
-      code: countryOrSlug,
-    },
+    filters: { code: countryOrSlug },
     tags: ["country", "page"],
     revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
   });
-  const currentCountry: Country | undefined = countries[0];
 
-  const pageSearchParams = searchParams?.page;
+  const currentCountry: Country | undefined = countries[0];
+  const pageSearchParams = search?.page;
 
   return {
     title: `لیست ${pathInfo?.props?.unit?.name} فارسی زبان در ${
@@ -98,7 +94,7 @@ export const generateMetadata = async ({
   };
 };
 
-type Param = number | undefined;
+// ---------------- Page ----------------
 type ParsedSearchParams = {
   page?: number | number[];
   category?: number | number[];
@@ -107,22 +103,23 @@ type ParsedSearchParams = {
 };
 
 export default async function UnitPage({
-  params: { countryOrSlug, unitSlug },
+  params,
   searchParams,
 }: {
-  params: { countryOrSlug: string; unitSlug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ countryOrSlug: string; unitSlug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  let parsedSearchParams: ParsedSearchParams;
-  let pathInfo: PathGeneratorType;
+  const { countryOrSlug, unitSlug } = await params;
+  const rawSearchParams = await searchParams;
 
-  parsedSearchParams = queryString.parse(
-    queryString.stringify(searchParams ?? {}),
+  const parsedSearchParams = queryString.parse(
+    queryString.stringify(rawSearchParams ?? {}),
     { arrayFormat: "comma", parseNumbers: true },
   ) as ParsedSearchParams;
-  //get filters from query
+
   const { page: pageNumber, category, city, search } = parsedSearchParams;
 
+  let pathInfo: PathGeneratorType;
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug);
   } catch (e: any) {
@@ -131,7 +128,7 @@ export default async function UnitPage({
 
   if (pathInfo.type) {
     return (
-      <UnitList
+      <UnitsListPage
         {...pathInfo.props}
         city={city}
         category={category}

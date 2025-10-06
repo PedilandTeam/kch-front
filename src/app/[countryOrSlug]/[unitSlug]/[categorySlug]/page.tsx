@@ -1,15 +1,13 @@
-// src/app/(Site)/[countryOrSlug]/[unitSlug]/[categorySlug]/page.tsx
-
-import { API_ROUTES } from "@/routes";
-import { CategoryNamespace } from "@/types/category";
-import { Country } from "@/types/country";
-import { UnitType } from "@/types/unit";
-import { Metadata } from "next";
+// Refactored
+import type { Category } from "@/types/category";
+import type { Country } from "@/types/country";
+import type { UnitType } from "@/types/unit";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import CategoryList from "./categoryList";
-import { PathGeneratorType } from "../../(root)/page";
+import fetchWrapper from "@/api/fetchWrapper";
 import queryString from "query-string";
-import fetchWrapper, { FetchWrapperError } from "@/api/fetchWrapper";
+
+import { CategoriesList } from "@/components/index";
 
 type ParsedSearchParams = {
   page?: number | number[];
@@ -24,6 +22,15 @@ type ParsedSearchParams = {
  * @param categorySlug get targeted category by Slug
  * @returns
  */
+export type PathGeneratorType = {
+  type: "category" | null;
+  props: {
+    category: Category;
+    country: Country;
+    unit: UnitType;
+  };
+};
+
 const pathGenerator = async (
   countryOrSlug: string,
   unitSlug: string,
@@ -53,7 +60,7 @@ const pathGenerator = async (
 
   // const categories: CategoryNamespace.GET = await (await API_ROUTES.CATEGOREIS.GET_ALL(1, 1, categorySlug)).json();
 
-  const categories = await fetchWrapper<CategoryNamespace.GET>("categories", {
+  const categories = await fetchWrapper<Category>("categories", {
     filters: {
       page: 1,
       limit: 1,
@@ -63,7 +70,7 @@ const pathGenerator = async (
     revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
   });
 
-  const currentCategory = categories?.items[0];
+  const currentCategory = categories;
 
   if (currentCategory?.unit?.id != currentUnit?.id) {
     return {
@@ -115,9 +122,13 @@ export const generateMetadata = async (_props: any): Promise<Metadata> => {
     };
   }
 
-  const countries = await (
-    await API_ROUTES.COUNTRIES.GET_ALL(false, 120)
-  ).json();
+  const countries = await fetchWrapper<Country[]>("countries", {
+    filters: {
+      code: countryOrSlug,
+    },
+    tags: ["country", "page"],
+    revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+  });
   const currentCountry: Country | undefined = countries.find(
     (country: Country) => country.code == countryOrSlug,
   );
@@ -168,7 +179,7 @@ export default async function CategoryPage(_props: any) {
 
   if (pathInfo.type) {
     return (
-      <CategoryList
+      <CategoriesList
         {...pathInfo.props}
         pageNumber={pageNumber}
         city={city}

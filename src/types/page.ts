@@ -1,35 +1,38 @@
-// src/types/page.ts
-import { Category } from "./category";
-import { City } from "./city";
-import { Country } from "./country";
-import { Tag } from "./tag";
-import { UnitType } from "./unit";
-import { Meta } from "./meta";
+import type { City, Country, Meta } from "@/schemas";
+import type { Category } from "./category";
+import type { Tag } from "./tag";
+import type { UnitType } from "./unit";
 
 export interface Page {
-  id: string;
-  slug: string;
   createdDate: string;
   updateDate: string;
-  title: string;
-  business?: {
-    username: string;
-  };
+  status: boolean;
+  availability: boolean;
+  id: string;
   verifyDate?: string;
+  slug: string;
+  level: number;
+  title: string;
   subtitle?: string;
   description?: string;
-  haveAvatar: boolean;
   address: Address;
   socials?: Partial<Socials>;
   contact: Partial<Contact>;
   profile: null;
-  status: boolean;
-  pictures: Picture[];
-  unit: UnitType;
+  haveAvatar: boolean;
+  isPersonal: boolean;
+  lat: string;
+  lng: string;
+  locked: boolean;
   category: Category;
+  unit: UnitType;
   city: City;
+  pictures: Picture[];
   country: Country;
   tags: Tag[];
+  business?: {
+    username: string;
+  };
 }
 
 export interface Picture {

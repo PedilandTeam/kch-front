@@ -1,27 +1,18 @@
 "use client";
 
-import Pictures from "../components/pictures";
-import Input from "@/components/daisy/input";
-import Textarea from "@/components/daisy/textarea";
-import SelectWithFetching from "@/components/daisy/selectWithFetching";
 import { useFormik } from "formik";
-import Button from "@/components/daisy/button";
-import { useEffect, useState } from "react";
-import SelectCity from "@/components/daisy/selectCity";
-// import useCreateAd from './useCreateAd';
-import useSWR, { mutate } from "swr";
-import { useParams, useRouter } from "next/navigation";
-import * as Yup from "yup";
-import toast from "react-hot-toast";
-import useAdPicture from "@/store/useAdPicture";
-import axios, { AxiosError } from "axios";
-import useFetchAd from "../hooks/useFetchAd";
+import { useEffect } from "react";
+import Pictures from "../components/pictures";
 import { axiosFetcher } from "@/hooks/axiosFetcher";
-import useCreateAd from "../hooks/useAdManagement";
-import useUploadAdPictures from "../hooks/useUploadAdPictures";
-import useAdManagement from "../hooks/useAdManagement";
+import useAdPicture from "@/store/useAdPicture";
+import { useParams, useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import useSWR, { mutate } from "swr";
+import * as Yup from "yup";
 import DeleteAdModal from "../components/deleteAd.modal";
-// import useUploadAdPictures from './useUploadAdPictures';
+import useAdManagement from "../hooks/useAdManagement";
+import useUploadAdPictures from "../hooks/useUploadAdPictures";
+import { Button, Input } from "@/components/index";
 
 type EditAdForm = {
   id: string;
@@ -51,7 +42,7 @@ export default function EditAdForm() {
     error: adError,
   } = useSWR(
     `${process.env.NEXT_PUBLIC_API_URL}/ads/${params.id as string}`,
-    axiosFetcher
+    axiosFetcher,
   );
 
   useEffect(() => {
@@ -74,7 +65,7 @@ export default function EditAdForm() {
     price: Yup.string(),
     priceName: Yup.string().notRequired(),
     parentCategoryId: Yup.string().required(
-      "لطفا دسته بندی اصلی را انتخاب کنید"
+      "لطفا دسته بندی اصلی را انتخاب کنید",
     ),
     categoryId: Yup.string().required("لطفا دسته بندی را انتخاب کنید"),
   });
@@ -147,7 +138,7 @@ export default function EditAdForm() {
 
   if (ad)
     return (
-      <div className="mb-5 flex w-full max-w-lg flex-col items-center justify-center gap-y-2 px-2 ">
+      <div className="mb-5 flex w-full max-w-lg flex-col items-center justify-center gap-y-2 px-2">
         <Pictures
           currentPicturesPath={ad?.pictures}
           adId={params.id as string}
@@ -156,15 +147,11 @@ export default function EditAdForm() {
           name="title"
           onChange={formik.handleChange}
           placeholder="عنوان آگهی"
-          bordered
-          label="عنوان آگهی"
-          isInvalid={!!formik.errors.title}
           defaultValue={formik.values.title}
         />
-        <Textarea
+        <textarea
           name="description"
           onChange={formik.handleChange}
-          label="توضیحات آگهی"
           placeholder="توضیحات آگهی"
           defaultValue={formik.values.description}
         />
@@ -174,10 +161,7 @@ export default function EditAdForm() {
             onChange={formik.handleChange}
             placeholder="قیمت"
             type="number"
-            bordered
-            label="قیمت"
             className="w-1/2"
-            isInvalid={!!formik.errors.price}
             defaultValue={formik.values.price}
           />
           <Input
@@ -185,15 +169,12 @@ export default function EditAdForm() {
             onChange={formik.handleChange}
             placeholder="قیمت، ماهانه و.."
             type="text"
-            bordered
-            label="متن قیمت( اجاره، شهریه.. )"
             className="w-1/2"
-            isInvalid={!!formik.errors.priceName}
             defaultValue={formik.values.priceName}
           />
         </div>
         <div className="mt-5 flex w-full gap-x-1">
-          <SelectWithFetching
+          {/* <SelectWithFetching
             bordered
             value={formik.values.countryId}
             circleFlag
@@ -204,9 +185,9 @@ export default function EditAdForm() {
             setFieldValue={formik.setFieldValue}
             formErrors={formik.errors}
             defaultValue={formik.values.countryId}
-          />
+          /> */}
           {/* <SelectWithFetching bordered value={formik.values.countryId} circleFlag className="col-span-2" route="/countries" label="انتخاب کشور" name="countryId" setFieldValue={formik.setFieldValue} formErrors={formik.errors} /> */}
-          <SelectCity
+          {/* <SelectCity
             bordered
             value={formik.values.cityObject}
             className="col-span-2"
@@ -219,11 +200,11 @@ export default function EditAdForm() {
             searchAble
             infiniteScroll
             defaultValue={ad?.city?.name}
-          />
+          /> */}
         </div>
 
         <div className="mt-5 flex w-full gap-x-1">
-          <SelectWithFetching
+          {/* <SelectWithFetching
             bordered
             value={formik.values.parentCategoryId}
             className="col-span-2"
@@ -249,15 +230,15 @@ export default function EditAdForm() {
             setFieldValue={formik.setFieldValue}
             formErrors={formik.errors}
             defaultValue={formik.values.categoryId}
-          />
+          /> */}
         </div>
 
         <DeleteAdModal adId={adId} />
 
-        <div className="flex items-center justify-center gap-x-1 w-full">
+        <div className="flex w-full items-center justify-center gap-x-1">
           <label
             htmlFor="delete_ad_modal"
-            className="btn btn-ghost hover:bg-red-500 hover:text-white mt-5 w-3/12"
+            className="btn btn-ghost mt-5 w-3/12 hover:bg-red-500 hover:text-white"
           >
             حذف اگهی
           </label>
@@ -266,7 +247,6 @@ export default function EditAdForm() {
             onClick={() => {
               formik.handleSubmit();
             }}
-            isLoading={updateAdLoading || uploadAdPicturesLoading}
           >
             آپدیت آگهی
           </Button>

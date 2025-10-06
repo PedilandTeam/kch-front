@@ -14,7 +14,7 @@ export * from './tmp/adStats.chart';
 export * from './tmp/header.mobile';
 export * from './tmp/header';
 export * from './tmp/headerTitle';
-export * from './tmp/loading';
+export * from '../global/LoaderText';
 export * from './tmp/noAds';
 export * from './tmp/overview';
 export * from './tmp/sideMenu';

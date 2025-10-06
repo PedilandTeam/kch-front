@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Accordion from "@/client-packages/daisy/accordion";
 import ApplyForm from "./form";
 
 const JobsText = () => {
@@ -51,7 +50,7 @@ const JobsText = () => {
           </p>
         </div>
 
-        <Accordion
+        {/* <Accordion
           title="کارشناس موفقیت مشتری - کارآموزی"
           content={
             <div className="mb-3">
@@ -125,7 +124,7 @@ const JobsText = () => {
             </div>
           }
           className="item bg-yellow-100 mb-8 rounded-tl-xl rounded-bl-xl border-r-4 border-yellow-500"
-        />
+        /> */}
 
         <div className="section">
           <h2>دوست داری هم تیمی ما بشی؟</h2>

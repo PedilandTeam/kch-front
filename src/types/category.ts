@@ -1,6 +1,7 @@
 // src/types/category.ts
-import { Meta } from "./meta";
-import { UnitType } from "./unit";
+
+import type { Meta } from "@/schemas/meta";
+import type { UnitType } from "./unit";
 
 export interface Category {
   id: number;

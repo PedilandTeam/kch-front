@@ -1,5 +1,4 @@
-import animate from "tailwindcss-animate"
-import daisyui from "daisyui"
+import animate from "tailwindcss-animate";
 
 export default {
   content: [
@@ -20,10 +19,6 @@ export default {
       },
     },
   },
-  daisyui: {
-    themes: ["cupcake"],
-    rtl: true,
-    logs: false,
-  },
-  plugins: [animate, daisyui],
-}
+
+  plugins: [animate],
+};
