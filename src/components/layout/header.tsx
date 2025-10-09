@@ -1,8 +1,8 @@
 "use client";
 
-import { TopTools } from "@/components/_layout/toptools2";
+import { TopTools } from "@/components/layout/toptools2";
 import { useHeader } from "@/store/useHeader";
-import { Country } from "@/schemas/country";
+import type { Country } from "@/schemas/country";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";

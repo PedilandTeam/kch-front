@@ -1,6 +1,6 @@
 import { API_ROUTES } from "@/routes";
 import { COUNTRY } from "@/text/location";
-import { Country } from "@/schemas/country";
+import type { Country } from "@/schemas/country";
 import Image from "next/image";
 import Link from "next/link";
 

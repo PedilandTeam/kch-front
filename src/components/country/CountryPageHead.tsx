@@ -14,13 +14,15 @@ export const CountryPageHead = ({ currentCountry }: CountryPageHeadProps) => {
             جامعه ایرانیان مهاجر مقیم {currentCountry.name}
           </h1>
 
-          <Image
-            className="rounded-xl object-cover brightness-[.70] sm:hidden"
-            src={`/images/slide/home/${currentCountry.code}-m.webp`}
-            width={430}
-            height={600}
-            alt={`یک تصویر از کشور ${currentCountry.name}`}
-          />
+          <div>
+            <Image
+              className="rounded-xl object-cover brightness-[.70] sm:hidden"
+              src={`/images/slide/home/${currentCountry.code}-m.webp`}
+              width={430}
+              height={600}
+              alt={`یک تصویر از کشور ${currentCountry.name}`}
+            />
+          </div>
         </div>
       </div>
     </div>

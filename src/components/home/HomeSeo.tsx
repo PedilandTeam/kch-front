@@ -1,4 +1,4 @@
-export const HomeSEO = () => {
+export const HomeSeo = () => {
   return (
     <div className="container">
       <div className="_seo-text mx-3 my-10">
