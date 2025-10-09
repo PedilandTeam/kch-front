@@ -1,7 +1,7 @@
 import { API_ROUTES } from "@/routes";
 import type { City, Country } from "@/schemas";
 import type { Category } from "@/types/category";
-import type { Page } from "@/types/page";
+import type { GetPagesResponse } from "@/types/page";
 import type { UnitType } from "@/types/unit";
 import fetchCampaigns from "@/utils/fetchCampaigns";
 import joiner from "@/utils/joiner";
@@ -85,7 +85,7 @@ export async function UnitsListPage({
     city,
   );
 
-  let pages: Page | undefined = undefined;
+  let pages: GetPagesResponse | undefined = undefined;
   try {
     pages = await (
       await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 24, {

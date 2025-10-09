@@ -1,13 +1,12 @@
-import type { Country } from "@/types/country";
 import type { UnitType } from "@/types/unit";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import queryString from "query-string";
-
 import fetchWrapper from "@/api/fetchWrapper";
 import type { PathGeneratorType } from "./[categorySlug]/page";
 
 import { UnitsListPage } from "@/components/index";
+import type { Country } from "@/schemas";
 
 // ---------------- Path Generator ----------------
 const pathGenerator = async (
@@ -118,6 +117,8 @@ export default async function UnitPage({
   ) as ParsedSearchParams;
 
   const { page: pageNumber, category, city, search } = parsedSearchParams;
+
+  console.log("⭕", category);
 
   let pathInfo: PathGeneratorType;
   try {

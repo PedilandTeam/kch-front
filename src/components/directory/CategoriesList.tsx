@@ -2,9 +2,7 @@ import AdvertiseLg from "@/components/advertise/lg";
 import AdvertiseSm from "@/components/advertise/sm";
 import { API_ROUTES } from "@/routes";
 import type { Category } from "@/types/category";
-import type { City } from "@/types/city";
-import type { Country } from "@/types/country";
-import type { Page } from "@/types/page";
+import type { GetPagesResponse } from "@/types/page";
 import type { UnitType } from "@/types/unit";
 import fetchCampaigns from "@/utils/fetchCampaigns";
 import joiner from "@/utils/joiner";
@@ -18,6 +16,7 @@ import Loading from "../../app/[countryOrSlug]/[unitSlug]/_loading";
 import { ItemBreadCrumb } from "./CategoryBreadcrumb";
 
 import { ItemCardsList, StaticAdvertise } from "@/components/index";
+import type { City, Country } from "@/schemas";
 
 type PagesListProps = {
   category: Category;
@@ -61,7 +60,7 @@ export async function CategoriesList({
   if (!country) return notFound();
   const cities = await fetchCities(country.code, category?.id);
 
-  let pages: Page[] | undefined = undefined;
+  let pages: GetPagesResponse | undefined = undefined;
   try {
     pages = await (
       await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 24, {
@@ -129,10 +128,10 @@ export async function CategoriesList({
           </div>
 
           <div className="pt-2">
-            <div className="sticky top-0 z-[9] bg-white p-3">
+            {/* <div className="sticky top-0 z-[9] bg-white p-3">
               <FilterMobile pagesTotalItems={pages?.meta.totalItems} />
               <FilterModalMobile cities={cities.items} />
-            </div>
+            </div> */}
             <div className="px-3 pb-5">
               <PagesSearch />
             </div>

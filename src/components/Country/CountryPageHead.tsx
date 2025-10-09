@@ -1,12 +1,10 @@
-// app/(Site)/[countryOrSlug]/country/countryPageHeader.tsx
+import type { Country } from "@/schemas/country";
 
-import { Country } from "@/types/country";
+interface CountryPageHeadProps {
+  currentCountry: Country;
+}
 
-type CountryPageHeaderProps = { currentCountry: Country };
-
-export const CountryPageHeader = ({
-  currentCountry,
-}: CountryPageHeaderProps) => {
+export const CountryPageHead = ({ currentCountry }: CountryPageHeadProps) => {
   return (
     <div className="_country-header">
       <div className="container">

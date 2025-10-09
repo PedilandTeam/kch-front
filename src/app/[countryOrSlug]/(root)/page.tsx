@@ -44,12 +44,7 @@ export default async function Page({ params }: Params) {
   if (data.type === "country") {
     if (!data.currentCountry.availability) return notFound();
 
-    return (
-      <CountryPage
-        currentCountry={data.currentCountry}
-        categories={data.categories}
-      />
-    );
+    return <CountryPage currentCountry={data.currentCountry} />;
   }
 
   if (!data.pageData) return notFound();

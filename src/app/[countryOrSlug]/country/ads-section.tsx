@@ -1,5 +1,5 @@
-import StaticAdvertise from "@/components/advertise/StaticAdvertise";
-import { CampaignNamespace } from "@/types/campaign";
+import { StaticAdvertise } from "@/components/advertise/StaticAdvertise";
+import type { CampaignNamespace } from "@/types/campaign";
 type SeoTextProps = {
   customers: CampaignNamespace.ICampaignCustomer[];
 };
@@ -14,6 +14,7 @@ export default async function AdsSection({ customers }: SeoTextProps) {
             imageUrlOrPath="/images/banner/ads-002-S1_V1.jpg"
             link="https://biz.koochaa.com/"
           />
+
           <StaticAdvertise
             from="country"
             lgDisable={customers.length >= 4}

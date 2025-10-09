@@ -3,11 +3,11 @@
 import Link from "next/link";
 import categoryPathGenerator from "@/utils/categoryPathGenerator";
 import type { Page } from "@/types/page";
-import type { Country } from "@/types/country";
 import ItemProfilePicture from "../../app/[countryOrSlug]/item/itemProfilePicture";
 import { StarIcon } from "@phosphor-icons/react";
 import Rating from "react-rating";
 import { cn } from "@/lib/utils";
+import type { Country } from "@/schemas";
 
 interface ItemCardProps {
   page: Page;
@@ -58,7 +58,7 @@ export const ItemCard = ({
 
         <div className="flex w-full items-center justify-center">
           {/* @ts-ignore */}
-          <Rating
+          {/* <Rating
             initialRating={0}
             direction={"rtl"}
             readonly={true}
@@ -69,7 +69,7 @@ export const ItemCard = ({
             fullSymbol={
               <StarIcon size={20} weight="fill" className="text-yellow-400" />
             }
-          />
+          /> */}
         </div>
 
         <h4 className="text-muted-foreground flex w-full items-center justify-center text-[13px]">

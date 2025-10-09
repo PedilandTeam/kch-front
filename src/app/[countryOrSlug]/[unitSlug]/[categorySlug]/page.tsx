@@ -1,13 +1,13 @@
 // Refactored
 import type { Category } from "@/types/category";
-import type { Country } from "@/types/country";
 import type { UnitType } from "@/types/unit";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import fetchWrapper from "@/api/fetchWrapper";
 import queryString from "query-string";
 
-import { CategoriesList } from "@/components/index";
+import { CategoriesList } from "@components/index";
+import type { Country } from "@/schemas";
 
 type ParsedSearchParams = {
   page?: number | number[];

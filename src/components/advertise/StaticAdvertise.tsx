@@ -38,6 +38,7 @@ export const StaticAdvertise = ({
         quality={100}
         className="rounded-lg"
         alt={alt}
+        priority
       />
     </Link>
   );
