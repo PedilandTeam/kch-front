@@ -2,7 +2,7 @@ import { baseSiteMetadata } from "@/config/metadata";
 import { notFound } from "next/navigation";
 import { getRouteData } from "../data";
 
-import { CountryPage, ItemDetailsPage } from "@/components/index";
+import { CountryPage, ItemDetailsPage } from "@components/index";
 
 type Params = { params: Promise<{ countryOrSlug: string }> };
 

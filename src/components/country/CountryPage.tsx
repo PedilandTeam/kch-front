@@ -8,14 +8,12 @@ type CountryPageProps = {
 
 export const CountryPage = async ({ currentCountry }: CountryPageProps) => {
   return (
-    <div className="_country-page flex flex-col gap-3 py-3">
+    <div className="_country-page flex flex-col">
       <CountryPageHead currentCountry={currentCountry} />
 
-      {/* <CountryPageForum currentCountry={currentCountry} /> */}
-
-      {/* <CountryStats currentCountry={currentCountry} /> */}
-
       <CountryUnitCategories currentCountry={currentCountry} />
+
+      {/* <CountryPageForum currentCountry={currentCountry} /> */}
 
       {/* <CountrySeoText currentCountry={currentCountry} /> */}
     </div>

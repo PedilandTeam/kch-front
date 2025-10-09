@@ -1,4 +1,4 @@
-import { Button } from "@/components/index";
+import { Button } from "@components/index";
 import type { AdNamespace } from "@/types/ad";
 import moment from "moment";
 import Image from "next/image";

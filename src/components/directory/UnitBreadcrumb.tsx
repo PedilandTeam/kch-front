@@ -7,7 +7,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/index";
+} from "@components/index";
 
 interface UnitBreadcrumbProps {
   unit: {
@@ -22,7 +22,7 @@ interface UnitBreadcrumbProps {
 
 export const UnitBreadcrumb = ({ unit, country }: UnitBreadcrumbProps) => {
   return (
-    <div className="_breadcrumbs border-y border-gray-100 bg-gray-50 px-4 py-3 text-[15px] my-3">
+    <div className="_breadcrumbs border-y border-gray-100 bg-gray-50 px-4 py-3 text-[15px] mb-3">
       <Breadcrumb>
         <BreadcrumbList className="justify-center">
           <BreadcrumbItem>

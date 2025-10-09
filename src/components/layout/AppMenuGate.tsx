@@ -2,7 +2,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { AppMenu } from "@/components/index";
+import { AppMenu } from "@components/index";
 import type { Country } from "@/schemas/country";
 
 export default function AppMenuGate({ countries }: { countries: Country[] }) {

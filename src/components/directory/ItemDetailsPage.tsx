@@ -12,7 +12,7 @@ import {
   ItemClaim,
   ItemSuggestion,
   StaticAdvertise,
-} from "@/components/index";
+} from "@components/index";
 
 interface ItemDetailsPageProps {
   pageData: Page;

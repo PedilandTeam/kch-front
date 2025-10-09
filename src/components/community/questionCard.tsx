@@ -3,7 +3,7 @@
 import { Question } from "@/schemas/community";
 import { timeAgo } from "@/lib/timeAgo";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/index";
+import { Avatar, AvatarFallback, AvatarImage } from "@components/index";
 import {
   ArrowFatLineDownIcon,
   ArrowFatLineUpIcon,

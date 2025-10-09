@@ -1,4 +1,4 @@
-import { Button } from "@/components/index";
+import { Button } from "@components/index";
 import { PlusIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";

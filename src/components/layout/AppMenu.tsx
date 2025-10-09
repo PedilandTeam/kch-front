@@ -13,7 +13,7 @@ import { useEffect, useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ChatsIcon, ListIcon } from "@phosphor-icons/react";
 import { CircleFlag } from "next-circle-flags";
-import { CountriesDialog } from "@/components/index";
+import { CountriesDialog } from "@components/index";
 import useSWR from "swr";
 import { swrKeys } from "@/hooks/swr/swrKeys";
 

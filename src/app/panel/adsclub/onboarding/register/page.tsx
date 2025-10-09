@@ -1,7 +1,7 @@
 "use client";
 
 import RegisterForm from "./form";
-import { AdsClubLogo, CreditDisplay } from "@/components/index";
+import { AdsClubLogo, CreditDisplay } from "@components/index";
 import { usePointsStore } from "@/store/usePointsStore";
 import { useEffect } from "react";
 

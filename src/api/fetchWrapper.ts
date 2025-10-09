@@ -35,7 +35,7 @@ export type FetchWrapperConfig = {
   revalidate?: number;
   overrideUrl?: string;
   body?: any;
-  tags?: NextFetchRequestConfig["tags"];
+  tags?: string[];
 };
 export default async function fetchWrapper<T>(
   path: string,
@@ -66,8 +66,7 @@ export default async function fetchWrapper<T>(
     next: { revalidate, tags },
   };
 
-
-  let response: Response | undefined = undefined;
+  // let response: Response | undefined = undefined;
   let error: unknown;
   let isNotFound: boolean = false;
   let isUnAuthorized: boolean = false;
@@ -95,7 +94,6 @@ export default async function fetchWrapper<T>(
         errorJson = resJson
       }
       isOk = true;
-      response = res;
       return resJson;
     })
     .catch((err: unknown) => {

@@ -10,7 +10,7 @@ import * as Yup from "yup";
 import Pictures from "../components/pictures";
 import useAdManagement from "../hooks/useAdManagement";
 import useUploadAdPictures from "../hooks/useUploadAdPictures";
-import { Button, Input } from "@/components/index";
+import { Button, Input } from "@components/index";
 
 type NewAdForm = {
   countryId: string | number;

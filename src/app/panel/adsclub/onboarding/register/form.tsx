@@ -26,7 +26,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/index";
+} from "@components/index";
 
 type AdsClubRegister = z.infer<typeof adsClubRegisterSchema>;
 

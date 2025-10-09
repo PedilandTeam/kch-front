@@ -3,7 +3,7 @@ import type { Country } from "@/schemas/country";
 import type { Category } from "@/types/category";
 import type { GetPagesResponse, Page } from "@/types/page";
 
-import { ItemCard, ListPagination } from "@/components/index";
+import { ItemCard, ListPagination } from "@components/index";
 
 interface ItemCardsListProps {
   country: Country;
@@ -37,7 +37,6 @@ export const ItemCardsList = async ({
       revalidate:
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     });
-    console.log("pages", pages);
   } catch (e) {
     isNotFound = true;
   }

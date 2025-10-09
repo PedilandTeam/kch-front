@@ -1,4 +1,4 @@
-import { QuestionDetails } from "@/components/index";
+import { QuestionDetails } from "@components/index";
 
 type PageProps = {
   params: Promise<{

@@ -5,7 +5,7 @@ import queryString from "query-string";
 import fetchWrapper from "@/api/fetchWrapper";
 import type { PathGeneratorType } from "./[categorySlug]/page";
 
-import { UnitsListPage } from "@/components/index";
+import { UnitsListPage } from "@components/index";
 import type { Country } from "@/schemas";
 
 // ---------------- Path Generator ----------------

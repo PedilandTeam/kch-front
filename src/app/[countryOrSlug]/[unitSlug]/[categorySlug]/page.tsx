@@ -1,19 +1,22 @@
 // Refactored
-import type { Category } from "@/types/category";
+import fetchWrapper, { FetchWrapperError } from "@/api/fetchWrapper";
+import type { Country } from "@/schemas";
+import type { Category, GetCategoryResponse } from "@/types/category";
 import type { UnitType } from "@/types/unit";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import fetchWrapper from "@/api/fetchWrapper";
 import queryString from "query-string";
 
-import { CategoriesList } from "@components/index";
-import type { Country } from "@/schemas";
+import { CategoryListPage } from "@components/index";
 
-type ParsedSearchParams = {
-  page?: number | number[];
-  city?: any;
-  search: string;
-};
+interface CategoryPageProps {
+  params: Promise<{
+    countryOrSlug: string;
+    unitSlug: string;
+    categorySlug: string;
+  }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
 
 /**
  *
@@ -22,9 +25,10 @@ type ParsedSearchParams = {
  * @param categorySlug get targeted category by Slug
  * @returns
  */
+
 export type PathGeneratorType = {
   type: "category" | null;
-  props: {
+  props?: {
     category: Category;
     country: Country;
     unit: UnitType;
@@ -36,81 +40,108 @@ const pathGenerator = async (
   unitSlug: string,
   categorySlug: string,
 ): Promise<PathGeneratorType> => {
-  // const units = await (await API_ROUTES.UNITS.GET_ALL(2000)).json();
-  const currentUnit = (
-    await fetchWrapper<UnitType[]>("units", {
+  try {
+    // Fetch unit data
+    const units = await fetchWrapper<UnitType[]>("units", {
       filters: {
         slug: unitSlug,
       },
       tags: ["country", "page"],
       revalidate:
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
-    })
-  )[0];
+    });
+    const currentUnit = units[0];
 
-  // const countryList = await (await API_ROUTES.COUNTRIES.GET_ALL(false, 20)).json();
-  const countryList = await fetchWrapper<Country[]>("countries", {
-    filters: {
-      code: countryOrSlug,
-    },
-    tags: ["country", "page"],
-    revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
-  });
-  const currentCountry = countryList[0];
+    // Fetch country data
+    const countryList = await fetchWrapper<Country[]>("countries", {
+      filters: {
+        code: countryOrSlug,
+      },
+      tags: ["country", "page"],
+      revalidate:
+        +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+    });
+    const currentCountry = countryList[0];
 
-  // const categories: CategoryNamespace.GET = await (await API_ROUTES.CATEGOREIS.GET_ALL(1, 1, categorySlug)).json();
+    // Fetch category data
+    const categories = await fetchWrapper<GetCategoryResponse>("categories", {
+      filters: {
+        page: 1,
+        limit: 1,
+        slug: categorySlug,
+      },
+      tags: ["country", "page"],
+      revalidate:
+        +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+    });
+    const currentCategory = categories.items[0];
 
-  const categories = await fetchWrapper<Category>("categories", {
-    filters: {
-      page: 1,
-      limit: 1,
-      slug: categorySlug,
-    },
-    tags: ["country", "page"],
-    revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
-  });
+    // Validate all required data exists
+    if (!currentCategory || !currentCountry || !currentUnit) {
+      return {
+        type: null,
+      };
+    }
 
-  const currentCategory = categories;
+    // Validate category belongs to the unit
+    if (currentCategory.unit?.id !== currentUnit.id) {
+      return {
+        type: null,
+      };
+    }
 
-  if (currentCategory?.unit?.id != currentUnit?.id) {
     return {
-      type: null,
+      type: "category",
+      props: {
+        category: currentCategory,
+        country: currentCountry,
+        unit: currentUnit,
+      },
     };
+  } catch (error) {
+    console.error("Error in pathGenerator:", error);
+    if (error instanceof FetchWrapperError && error.isNotFound) {
+      return {
+        type: null,
+      };
+    }
+    throw error;
   }
-
-  return {
-    type: "category",
-    props: {
-      category: currentCategory,
-      country: currentCountry,
-      unit: currentUnit,
-    },
-  };
-  // return <CategoryList category={currentCategory} country={currentCountry} />
 };
 
-type generateMetadata = {
-  params: { countryOrSlug: string; unitSlug: string; categorySlug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+type ParsedSearchParams = {
+  page?: number | number[];
+  city?: any;
+  search: string;
 };
 
-export const generateMetadata = async (_props: any): Promise<Metadata> => {
-  // قدم اول: resolve props (در صورت Promise بودن)
-  const props = _props?.then ? await _props : _props;
-  // قدم دوم: resolve params (در صورت Promise بودن)
-  const params = props.params?.then ? await props.params : props.params;
-  const searchParams = props.searchParams?.then
-    ? await props.searchParams
-    : props.searchParams;
-  // حالا میتونی استفاده کنی:
-  const { countryOrSlug, unitSlug, categorySlug } = params;
+type GenerateMetadataProps = {
+  params: Promise<{
+    countryOrSlug: string;
+    unitSlug: string;
+    categorySlug: string;
+  }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export const generateMetadata = async ({
+  params,
+  searchParams,
+}: GenerateMetadataProps): Promise<Metadata> => {
+  const { countryOrSlug, unitSlug, categorySlug } = await params;
+  const resolvedSearchParams = await searchParams;
 
   let pathInfo: PathGeneratorType;
 
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug, categorySlug);
-  } catch (e: any) {
-    throw Error(e);
+  } catch (error) {
+    console.error("Error generating metadata:", error);
+    return {
+      title: "صفحه مورد نظر وجود ندارد | کوچا",
+      description:
+        "متاسفانه چنین صفحه‌ای وجود نداره و یا ممکنه بخاطر تغییرات وب‌سایت جدید کـوچـا آدرسش تغییر کرده باشه.",
+    };
   }
 
   const category = pathInfo.props?.category;
@@ -133,7 +164,7 @@ export const generateMetadata = async (_props: any): Promise<Metadata> => {
     (country: Country) => country.code == countryOrSlug,
   );
 
-  const pageSearchParams = searchParams?.page;
+  const pageSearchParams = resolvedSearchParams?.page;
 
   return {
     title: `لیست ${
@@ -154,33 +185,38 @@ export const generateMetadata = async (_props: any): Promise<Metadata> => {
   };
 };
 
-export default async function CategoryPage(_props: any) {
-  const props = _props?.then ? await _props : _props;
-  const params = props.params?.then ? await props.params : props.params;
-  const searchParams = props.searchParams?.then
-    ? await props.searchParams
-    : props.searchParams;
-  const { countryOrSlug, unitSlug, categorySlug } = params;
+export default async function CategoryPage({
+  params,
+  searchParams,
+}: CategoryPageProps) {
+  const { countryOrSlug, unitSlug, categorySlug } = await params;
+  const resolvedSearchParams = await searchParams;
 
   let parsedSearchParams: ParsedSearchParams;
   let pathInfo: PathGeneratorType;
 
   parsedSearchParams = queryString.parse(
-    queryString.stringify(searchParams ?? {}),
+    queryString.stringify(resolvedSearchParams ?? {}),
     { arrayFormat: "comma", parseNumbers: true },
   ) as ParsedSearchParams;
-  const { page: pageNumber, city, search } = parsedSearchParams;
+  const { page, city, search } = parsedSearchParams;
+
+  // Ensure pageNumber is always a single number
+  const pageNumber = Array.isArray(page) ? page[0] : page || 1;
 
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug, categorySlug);
-  } catch (e: any) {
-    throw Error(e);
+  } catch (error) {
+    console.error("Error in CategoryPage:", error);
+    notFound();
   }
 
-  if (pathInfo.type) {
+  if (pathInfo.type && pathInfo.props) {
     return (
-      <CategoriesList
-        {...pathInfo.props}
+      <CategoryListPage
+        category={pathInfo.props.category}
+        country={pathInfo.props.country}
+        unit={pathInfo.props.unit}
         pageNumber={pageNumber}
         city={city}
         search={search}

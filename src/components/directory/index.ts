@@ -1,6 +1,6 @@
 export { ItemCard } from "./ItemCard";
 export { ListPagination } from "./ListPagination";
-export * from "./CategoriesList";
+export * from "./CategoryListPage";
 export * from "./CategoryBreadcrumb";
 export * from "./ItemBreadcrumb";
 export * from "./ItemCardsList";

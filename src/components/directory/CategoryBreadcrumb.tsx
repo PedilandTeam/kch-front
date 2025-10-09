@@ -1,7 +1,15 @@
 "use client";
 import { GENERAL } from "@/text/general";
-import { UnitType } from "@/types/unit";
-import Link from "next/link";
+import type { UnitType } from "@/types/unit";
+
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@components/index";
 
 type ItemBreadCrumbType = {
   category: {
@@ -20,21 +28,30 @@ export const ItemBreadCrumb = ({
   unit,
 }: ItemBreadCrumbType) => {
   return (
-    <div className="w-full px-4 py-3 text-sm sm:px-0 sm:w-auto breadcrumbs bg-blue-50 sm:bg-transparent">
-      <ul>
-        <li>
-          <Link href="/">{GENERAL.HOME}</Link>
-        </li>
-        <li>
-          <Link href={`/${country.code}`}>{country.name}</Link>
-        </li>
-        <li>
-          <Link href={`/${country.code}/${unit.slug}`}>
-            {unit.name} {GENERAL.PERSIAN}
-          </Link>
-        </li>
-        <li>{category.name}</li>
-      </ul>
+    <div className="_breadcrumbs mb-3 border-y border-gray-100 bg-gray-50 px-4 py-3 text-[15px]">
+      <Breadcrumb>
+        <BreadcrumbList className="justify-center">
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">{GENERAL.HOME}</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href={`/${country.code}`}>
+              {country.name}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href={`/${country.code}/${unit.slug}`}>
+              {unit.name} {GENERAL.PERSIAN}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{category.name}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
     </div>
   );
 };

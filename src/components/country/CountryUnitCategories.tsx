@@ -60,7 +60,7 @@ export const CountryUnitCategories = async ({
   };
 
   return (
-    <div className="_country-unit-categories p-3">
+    <div className="_country-unit-categories p-3 pb-6">
       <div className="space-y-6">
         {units.map((unit) => {
           if (mostUsedCategories[`${unit.id}`]?.length == 0) {
@@ -80,9 +80,11 @@ export const CountryUnitCategories = async ({
                   variant="link"
                   size="sm"
                   className="!p-0 font-normal text-white/80"
+                  asChild
                 >
-                  لیست کامل
-                  <ArrowLeftIcon />
+                  <Link href={`/${currentCountry.code}/${unit.slug}`}>
+                    لیست کامل <ArrowLeftIcon />
+                  </Link>
                 </Button>
               </div>
 

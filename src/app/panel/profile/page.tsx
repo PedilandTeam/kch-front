@@ -1,4 +1,4 @@
-import { PageHeader } from "@/components/index";
+import { PageHeader } from "@components/index";
 import ProfileForm from "./ProfileForm";
 
 export default function ProfilePage() {

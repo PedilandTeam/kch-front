@@ -1,12 +1,18 @@
-import { CategoryNamespace } from '@/types/category';
-import fetchWrapper from './fetchWrapper';
+import type { GetCategoryResponse } from "@/types/category";
+import fetchWrapper from "./fetchWrapper";
 
 export type FetchCategories = {
-    page?: number | string;
-    limit?: number | string;
-    slug?: string;
-    revalidate: number;
+  page?: number | string;
+  limit?: number | string;
+  slug?: string;
+  revalidate: number;
 };
-export default async function fetchCategories(filters: FetchCategories, revalidate?: number): Promise<CategoryNamespace.GET> {
-    return await fetchWrapper<CategoryNamespace.GET, FetchCategories>('/categories', { filters: filters, isPaginated: true, revalidate: revalidate });
+export default async function fetchCategories(
+  filters: FetchCategories,
+  revalidate?: number,
+): Promise<GetCategoryResponse> {
+  return await fetchWrapper<GetCategoryResponse>("/categories", {
+    filters: filters,
+    revalidate: revalidate,
+  });
 }

@@ -8,8 +8,9 @@ import { AxiosError } from "axios";
 import {
   Carousel,
   CarouselContent,
-  CarouselItem, ItemCard
-} from "@/components/index";
+  CarouselItem,
+  ItemCard,
+} from "@components/index";
 
 interface ItemSuggestionProps {
   pageId: string;
