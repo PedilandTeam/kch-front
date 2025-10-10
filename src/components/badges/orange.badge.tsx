@@ -1,4 +1,4 @@
-import { ShieldWarning } from "@phosphor-icons/react";
+import { ShieldWarningIcon } from "@phosphor-icons/react/dist/ssr";
 import { BadgesProps } from "./badges";
 import { FC, useMemo } from "react";
 
@@ -10,7 +10,7 @@ const OrangeBadge: FC<BadgesProps> = ({ enable, absoluteMode = false }) => {
   }, [absoluteMode]);
 
   return enable ? (
-    <ShieldWarning
+    <ShieldWarningIcon
       size={30}
       className={className}
       weight="duotone"

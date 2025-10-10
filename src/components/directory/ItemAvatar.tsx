@@ -1,19 +1,19 @@
-import { PageNamespace } from "@/types/page";
+import type { Page } from "@/types/page";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
 
-type itemProfilePictureType = {
-  pageData: Pick<PageNamespace.Page, "id" | "haveAvatar" | "profile">;
+type itemAvatarProps = {
+  pageData: Pick<Page, "id" | "haveAvatar" | "profile">;
   height?: number;
   width?: number;
   className?: string;
 };
-export default function ItemProfilePicture({
+
+export const ItemAvatar = ({
   pageData,
   height,
   width,
   className,
-}: itemProfilePictureType) {
+}: itemAvatarProps) => {
   return (
     <Image
       loading="lazy"
@@ -28,4 +28,4 @@ export default function ItemProfilePicture({
       className={className}
     />
   );
-}
+};

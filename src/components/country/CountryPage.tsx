@@ -1,6 +1,6 @@
 import type { Country } from "@/schemas/country";
 
-import { CountryPageHead, CountryUnitCategories } from "@components/index";
+import { CountryPageHead, CountryUnitCategories } from "@components";
 
 type CountryPageProps = {
   currentCountry: Country;

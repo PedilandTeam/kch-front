@@ -9,7 +9,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@components/index";
+} from "@components";
 
 type ItemBreadCrumbType = {
   category: {

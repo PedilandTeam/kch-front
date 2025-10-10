@@ -22,7 +22,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@components/index";
+} from "@components";
 import { SelectSearch } from "@/components/ui-custom/SelectSearch";
 
 type AdsClubRegister = z.infer<typeof adsClubRegisterSchema>;

@@ -3,7 +3,7 @@ import type { Country } from "@/schemas/country";
 import type { Category } from "@/types/category";
 import type { GetPagesResponse, Page } from "@/types/page";
 
-import { ItemCard, ListPagination } from "@components/index";
+import { ItemCard, ListPagination } from "@components";
 
 interface ItemCardsListProps {
   country: Country;

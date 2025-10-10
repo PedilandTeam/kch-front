@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useRef } from "react";
 import { mutate } from "swr";
 import { useRouter } from "next/navigation";
-import { Button } from "@components/index";
+import { Button } from "@components";
 
 type DeleteAdModal = {};
 export default function DeleteAdModal({ adId }: { adId: string }) {

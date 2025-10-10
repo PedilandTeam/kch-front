@@ -9,7 +9,7 @@ import {
   PageContainer,
   QuestionsSection,
   SiteBanner,
-} from "@components/index";
+} from "@components";
 
 type PageProps = {
   params: Promise<{ countryOrSlug: string }>;

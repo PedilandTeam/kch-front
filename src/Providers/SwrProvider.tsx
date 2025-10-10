@@ -1,7 +1,7 @@
-import { SWRConfig, SWRConfiguration } from "swr";
-import { Fetcher, Key } from "swr";
 import { api } from "@/hooks/swr/axios";
 import { keyToUrl } from "@/hooks/swr/swrUrl";
+import type { Fetcher, Key, SWRConfiguration } from "swr";
+import { SWRConfig } from "swr";
 
 const fetcher: Fetcher<unknown, Key> = async (
   key: Key,

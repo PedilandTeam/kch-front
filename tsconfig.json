@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
@@ -25,21 +21,12 @@
     "incremental": true,
     "baseUrl": "src",
     "paths": {
-      "@/*": [
-        "*"
-      ],
-      "@app/*": [
-        "app/*"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@styles/*": [
-        "styles/*"
-      ],
-      "@types/*": [
-        "types/*"
-      ]
+      "@/*": ["*"],
+      "@app/*": ["app/*"],
+      "@components": ["./components/index.ts"],
+      "@providers": ["./providers/index.ts"],
+      "@styles/*": ["styles/*"],
+      "@types/*": ["types/*"]
     },
     "plugins": [
       {
@@ -54,7 +41,5 @@
     ".next/types/**/*.ts",
     "tailwind.config.js"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

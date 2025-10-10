@@ -1,9 +1,11 @@
 import { AppMenuProvider } from "@/providers/AppMenuProvider";
 
+interface CountryOrSlugLayoutProps {
+  children: React.ReactNode;
+}
+
 export default function CountryOrSlugLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}: CountryOrSlugLayoutProps) {
   return <AppMenuProvider>{children}</AppMenuProvider>;
 }

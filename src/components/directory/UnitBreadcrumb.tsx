@@ -7,7 +7,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@components/index";
+} from "@components";
 
 interface UnitBreadcrumbProps {
   unit: {

@@ -1,14 +1,13 @@
-import { ShieldWarning } from "@phosphor-icons/react";
+import { ShieldWarningIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
-import { FC } from "react";
-import { BadgeModalsProps } from "../badges";
+import type { FC } from "react";
 
 const OrangeModal: FC<{ slug: string }> = ({ slug }) => {
   return (
     <dialog id="orange_modal" className="modal">
       <div className="modal-box">
-        <h3 className="flex items-center text-lg font-bold text-center text-orange-500">
-          <ShieldWarning
+        <h3 className="flex items-center text-center text-lg font-bold text-orange-500">
+          <ShieldWarningIcon
             size={32}
             className="ml-2 text-orange-400"
             weight="duotone"
@@ -22,24 +21,24 @@ const OrangeModal: FC<{ slug: string }> = ({ slug }) => {
           بگیرید و از امکانات{" "}
           <Link
             href={process.env.NEXT_PUBLIC_BIZ_FRONT_URL}
-            className="border-b border-black border-dashed hover:text-primary hover:border-primary"
+            className="hover:text-primary hover:border-primary border-b border-dashed border-black"
             target="_blank"
           >
             بیزینس سنتر
           </Link>{" "}
           برای راهبری و توسعه کسب‌و‌کارتون استفاده کنید.
         </p>
-        <div className="flex items-center p-[10px] font-medium border border-yellow-300 rounded-md bg-yellow-50 text-[15px]">
+        <div className="flex items-center rounded-md border border-yellow-300 bg-yellow-50 p-[10px] text-[15px] font-medium">
           <p className="text-center text-yellow-800">
             <strong>بسیار مهم:</strong> کوچا، هیچ مسئولیتی در قبال خدمات این
             واحد صنفی ندارد.
           </p>
         </div>
 
-        <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2 modal-action">
+        <div className="modal-action grid w-full grid-cols-1 gap-2 sm:grid-cols-2">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
-            <button className="w-full btn">متوجه شدم</button>
+            <button className="btn w-full">متوجه شدم</button>
           </form>
           <div className="ml-0">
             <Link
@@ -47,7 +46,7 @@ const OrangeModal: FC<{ slug: string }> = ({ slug }) => {
               target="_blank"
               href={`${process.env.NEXT_PUBLIC_BIZ_FRONT_URL}/claim/claimWay?slug=${slug}`}
             >
-              <button className="w-full btn btn-primary">
+              <button className="btn btn-primary w-full">
                 مالک این صفحه هستم
               </button>
             </Link>

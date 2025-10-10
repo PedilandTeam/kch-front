@@ -1,4 +1,4 @@
-import { HomeCountries, HomeSeo } from "@components/index";
+import { HomeCountries, HomeSeo } from "@components";
 
 export const metadata = {
   title: "جامعه ایرانیان مهاجر",

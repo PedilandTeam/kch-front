@@ -3,7 +3,7 @@
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { useRouter } from "next/navigation";
 import HeaderTitle from "./headerTitle";
-import { Button } from "@components/index";
+import { Button } from "@components";
 
 export default function HeaderMobile() {
   const router = useRouter();

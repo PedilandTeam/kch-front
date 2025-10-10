@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import queryString from "query-string";
 
-import { CategoryListPage } from "@components/index";
+import { CategoryListPage } from "@components";
 
 interface CategoryPageProps {
   params: Promise<{

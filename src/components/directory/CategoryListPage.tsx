@@ -11,7 +11,7 @@ import { Suspense } from "react";
 import Loading from "../../app/[countryOrSlug]/[unitSlug]/_loading";
 import { ItemBreadCrumb } from "./CategoryBreadcrumb";
 
-import { ItemCardsList, StaticAdvertise } from "@components/index";
+import { ItemCardsList, StaticAdvertise } from "@components";
 
 type PagesListProps = {
   category: Category;

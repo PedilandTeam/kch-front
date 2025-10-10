@@ -1,4 +1,4 @@
-import { Button } from "@components/index";
+import { Button } from "@components";
 import Link from "next/link";
 
 export default function AdsPage() {

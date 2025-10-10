@@ -8,7 +8,7 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@components/index";
+} from "@components";
 import { FolderSimpleStarIcon } from "@phosphor-icons/react/dist/ssr";
 import { ArrowLeftIcon } from "lucide-react";
 

@@ -1,15 +1,12 @@
 "use client";
 
-import Hotjar from "@/components/hotjar";
 import Script from "next/script";
-import { Toaster } from "@/components/ui/sonner";
 import { SwrProvider } from "./SwrProvider";
 
-export default function SiteProviders({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+import Hotjar from "@/components/hotjar";
+import { Toaster } from "@/components/ui/sonner";
+
+export const SiteProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <SwrProvider>
       {children}
@@ -39,4 +36,4 @@ export default function SiteProviders({
       )}
     </SwrProvider>
   );
-}
+};

@@ -1,43 +1,44 @@
-import { ShieldCheckIcon } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 import type { FC } from "react";
+import { ContainerProvider } from "@providers";
 
-type ItemClaim = {
+import { Button } from "@components";
+import { ShieldCheckIcon } from "@phosphor-icons/react/dist/ssr";
+
+interface ItemClaimProps {
   enable: boolean;
   slug: string;
-};
+}
 
-export const ItemClaim: FC<ItemClaim> = ({ enable, slug }) => {
+export const ItemClaim: FC<ItemClaimProps> = ({ enable, slug }) => {
   return enable ? (
     <>
-      {/* ADMIN ALERT */}
+      <ContainerProvider>
+        <div className="space-y-3 rounded-md border border-blue-100 bg-blue-50/50 p-5 pb-4">
+          <div className="flex items-center gap-2">
+            <ShieldCheckIcon
+              size={24}
+              weight="duotone"
+              className="text-secondary"
+            />
+            <h6 className="text-primary font-semibold">
+              اگر شما مالک این صفحه هستید!
+            </h6>
+          </div>
 
-      {/* CLAIM PAGE */}
-      <div className="mx-3 my-6 rounded-md border border-blue-200 bg-blue-50 p-4">
-        <div className="mb-3 flex content-center items-center">
-          <ShieldCheckIcon
-            size={28}
-            weight="duotone"
-            className="ml-2 text-sky-600"
-          />
-          <h6 className="text-[17px] font-semibold text-sky-800">
-            اگر شما مالک این صفحه هستید!
-          </h6>
+          <p className="text-primary text-[15px]">
+            با احراز هویت می‌تونید تیک آبی دریافت کنید، مدیریت اطلاعات این صفحه
+            رو به عهده بگیرید و از امکانات کوچا برای راهبری و توسعه کسب‌و‌کارتون
+            استفاده کنید.
+          </p>
+
+          <Button asChild className="mt-1 w-full">
+            <Link href="https://t.me/koochaa_support" target="_blank">
+              دریافت مالکیت صفحه
+            </Link>
+          </Button>
         </div>
-        <p className="mb-4 leading-[26px] text-sky-800">
-          با احراز هویت می‌تونید تیک آبی دریافت کنید، مدیریت اطلاعات این صفحه رو
-          به عهده بگیرید و از امکانات کوچا برای راهبری و توسعه کسب‌و‌کارتون
-          استفاده کنید.
-        </p>
-        <Link
-          rel="nofollow"
-          target="_blank"
-          className="btn btn-primary w-full"
-          href={`${process.env.NEXT_PUBLIC_BIZ_FRONT_URL}/claim/claimWay?slug=${slug}`}
-        >
-          دریافت مالکیت صفحه
-        </Link>
-      </div>
+      </ContainerProvider>
     </>
   ) : null;
 };

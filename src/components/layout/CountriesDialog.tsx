@@ -14,7 +14,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@components/index";
+} from "@components";
 
 type CountriesDialogProps = {
   open: boolean;

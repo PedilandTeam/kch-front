@@ -8,7 +8,7 @@ import {
   CardContent,
   CardHeader,
   PageHeader,
-} from "@components/index";
+} from "@components";
 import Image from "next/image";
 import {
   DeviceMobileIcon,

@@ -18,4 +18,4 @@ export const AppMenuProvider = async ({
   );
 };
 
-import { AppMenu } from "@components/index";
+import { AppMenu } from "@components";

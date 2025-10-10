@@ -13,7 +13,7 @@ import {
   StaticAdvertise,
   UnitBreadcrumb,
   UnitSeoText,
-} from "@components/index";
+} from "@components";
 
 interface UnitsListPageProps {
   unit: UnitType;

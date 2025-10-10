@@ -1,13 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import categoryPathGenerator from "@/utils/categoryPathGenerator";
-import type { Page } from "@/types/page";
-import ItemProfilePicture from "../../app/[countryOrSlug]/item/itemProfilePicture";
-import { StarIcon } from "@phosphor-icons/react";
-import Rating from "react-rating";
 import { cn } from "@/lib/utils";
 import type { Country } from "@/schemas";
+import type { Page } from "@/types/page";
+import categoryPathGenerator from "@/utils/categoryPathGenerator";
+import Link from "next/link";
+
+import { ItemAvatar } from "@components";
 
 interface ItemCardProps {
   page: Page;
@@ -35,7 +34,7 @@ export const ItemCard = ({
 
       <div>
         <Link href={`/${page.slug}`}>
-          <ItemProfilePicture
+          <ItemAvatar
             height={60}
             width={60}
             pageData={page}
@@ -54,22 +53,6 @@ export const ItemCard = ({
               {page.subtitle}
             </h3>
           )}
-        </div>
-
-        <div className="flex w-full items-center justify-center">
-          {/* @ts-ignore */}
-          {/* <Rating
-            initialRating={0}
-            direction={"rtl"}
-            readonly={true}
-            className="leading-0"
-            emptySymbol={
-              <StarIcon size={20} weight="duotone" className="text-stone-300" />
-            }
-            fullSymbol={
-              <StarIcon size={20} weight="fill" className="text-yellow-400" />
-            }
-          /> */}
         </div>
 
         <h4 className="text-muted-foreground flex w-full items-center justify-center text-[13px]">

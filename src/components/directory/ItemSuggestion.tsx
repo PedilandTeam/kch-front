@@ -4,13 +4,9 @@ import type { Category } from "@/types/category";
 import type { Page } from "@/types/page";
 import type { UnitType } from "@/types/unit";
 import { AxiosError } from "axios";
+import { ContainerProvider } from "@/providers";
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  ItemCard,
-} from "@components/index";
+import { Carousel, CarouselContent, CarouselItem, ItemCard } from "@components";
 
 interface ItemSuggestionProps {
   pageId: string;
@@ -65,40 +61,44 @@ export const ItemSuggestion = async ({
 
   if (pages.length >= 4)
     return (
-      <div className="my-10">
-        <h3 className="mb-3 text-center font-semibold">
-          {basedOn === "category"
-            ? category?.seoTitle
-              ? `سایر ${category.seoTitle} در`
-              : category?.name
-            : "آیتم‌های تصادفی در"}{" "}
-          {basedOn === "category"
-            ? city?.name
-            : city?.name || city?.englishName}
-        </h3>
+      <ContainerProvider>
+        <div className="my-6 flex flex-col rounded-xl bg-gradient-to-b from-blue-900 to-blue-700 pb-5">
+          <div className="flex items-center justify-between rounded-t-xl px-4 py-4">
+            <h3 className="font-semibold text-white">
+              {basedOn === "category"
+                ? category?.seoTitle
+                  ? `سایر ${category.seoTitle} در`
+                  : category?.name
+                : "آیتم‌های تصادفی در"}{" "}
+              {basedOn === "category"
+                ? city?.name
+                : city?.name || city?.englishName}
+            </h3>
+          </div>
 
-        <Carousel
-          className="w-full"
-          opts={{
-            direction: "rtl",
-            align: "center",
-            loop: true,
-            watchSlides: true,
-          }}
-        >
-          <CarouselContent>
-            {pages?.map((page) => (
-              <CarouselItem key={page.id} className="mx-auto max-w-[300px]">
-                <ItemCard
-                  variant="unit"
-                  key={page.id}
-                  country={page.country}
-                  page={page}
-                />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
-      </div>
+          <Carousel
+            className="w-full"
+            opts={{
+              direction: "rtl",
+              align: "center",
+              loop: true,
+              watchSlides: true,
+            }}
+          >
+            <CarouselContent>
+              {pages?.map((page) => (
+                <CarouselItem key={page.id} className="mx-auto max-w-[300px]">
+                  <ItemCard
+                    variant="unit"
+                    key={page.id}
+                    country={page.country}
+                    page={page}
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </div>
+      </ContainerProvider>
     );
 };

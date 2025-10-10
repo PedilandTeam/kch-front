@@ -11,10 +11,9 @@ type UseLinkHandler = {
 export default function useLinkHandler({ pageData }: UseLinkHandler) {
   const linkHandler = (e: MouseEvent<HTMLButtonElement>) => {
     const type = e.currentTarget.dataset.type;
-
     const regexp =
       /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/gim.exec(
-        pageData?.socials?.website!
+        pageData?.socials?.website!,
       );
     if (!regexp || !Array.isArray(regexp) || !regexp[1]) {
       return;
@@ -30,7 +29,7 @@ export default function useLinkHandler({ pageData }: UseLinkHandler) {
         window.open(
           `https://t.me/${pageData.contact?.telegram}`,
           "_blank",
-          "noopener, noreferrer"
+          "noopener, noreferrer",
         );
         break;
       case "whatsapp":
@@ -39,7 +38,7 @@ export default function useLinkHandler({ pageData }: UseLinkHandler) {
             pageData.country.areaCode ? pageData.country.areaCode : ""
           }${pageData.contact.whatsapp!}`,
           "_blank",
-          "noopener, noreferrer"
+          "noopener, noreferrer",
         );
         break;
       case "telephone":
@@ -54,14 +53,14 @@ export default function useLinkHandler({ pageData }: UseLinkHandler) {
           window.open(
             `tel:${pageData.contact.telephone}`,
             "_blank",
-            "noopener, noreferrer"
+            "noopener, noreferrer",
           );
         }
         break;
       case "share":
         if (agent.device?.type == "desktop") {
           navigator.clipboard.writeText(
-            `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`
+            `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`,
           );
           toast.success(GENERAL.URL_COPIED);
         } else {
@@ -82,7 +81,7 @@ export default function useLinkHandler({ pageData }: UseLinkHandler) {
           window.open(
             `tel:${pageData.contact.phone}`,
             "_blank",
-            "noopener, noreferrer"
+            "noopener, noreferrer",
           );
         }
         break;

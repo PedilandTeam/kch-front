@@ -8,7 +8,7 @@ import {
   Card,
   CardContent,
   CardHeader,
-} from "@components/index";
+} from "@components";
 
 interface AdsItemProps {
   id: number;
