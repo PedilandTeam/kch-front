@@ -11,6 +11,7 @@ import {
   XLogoIcon,
   YoutubeLogoIcon,
 } from "@phosphor-icons/react/dist/ssr";
+import { ITEM } from "@/text";
 
 interface ItemSocialsProps {
   pageData: Page;
@@ -56,40 +57,47 @@ export const ItemSocials = ({ pageData }: ItemSocialsProps) => {
     },
   ];
 
+  const haveSocial =
+    pageData.socials && Object.keys(pageData.socials).length > 0;
+
   return (
-    <div className="_item-socials flex justify-center">
-      <div className="flex justify-center gap-5 rounded-full border-2 border-gray-200/60 bg-white/75 p-2 px-6">
-        {socials.map(({ name, url, icon: Icon, color }) => {
-          const username =
-            pageData.socials?.[name as keyof typeof pageData.socials];
+    <div className="_item-socials mx-5 flex justify-center border-b border-dashed pb-3">
+      {haveSocial ? (
+        <div className="flex justify-center gap-5">
+          {socials.map(({ name, url, icon: Icon, color }) => {
+            const username =
+              pageData.socials?.[name as keyof typeof pageData.socials];
 
-          if (!username) return null;
+            if (!username) return null;
 
-          return (
-            <Link
-              key={name}
-              href={url(username)}
-              target="_blank"
-              rel="nofollow noopener"
-            >
-              <Icon
-                size={30}
-                weight="light"
-                className={cn(
-                  "transition duration-300 hover:text-black",
-                  color,
-                )}
-              />
-            </Link>
-          );
-        })}
+            return (
+              <Link
+                key={name}
+                href={url(username)}
+                target="_blank"
+                rel="nofollow noopener"
+              >
+                <Icon
+                  size={30}
+                  weight="light"
+                  className={cn(
+                    "transition duration-300 hover:text-black",
+                    color,
+                  )}
+                />
+              </Link>
+            );
+          })}
 
-        <ShareNetworkIcon
+          {/* <ShareNetworkIcon
           size={30}
           weight="light"
           className="text-yellow-800 transition duration-300 hover:text-black"
-        />
-      </div>
+        /> */}
+        </div>
+      ) : (
+        <p className="text-muted-foreground text-sm">{ITEM.NO_SOCIAL_MEDIA}</p>
+      )}
     </div>
   );
 };

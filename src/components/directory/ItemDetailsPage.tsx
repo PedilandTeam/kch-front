@@ -41,15 +41,7 @@ export async function ItemDetailsPage({ pageData }: ItemDetailsPageProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        <div className="_top bg-[#fbf7ed] bg-[url('/images/pattern-03.png')] bg-center">
-          <ItemInfo pageData={pageData} />
-
-          <ItemContacts pageData={pageData} />
-
-          <ItemLocation pageData={pageData} />
-
-          <div className="_bg-gradient" />
-        </div>
+        <ItemInfo pageData={pageData} />
 
         <div className="_description mx-3 my-6 space-y-2 rounded-lg border border-gray-200 p-4">
           <RichText

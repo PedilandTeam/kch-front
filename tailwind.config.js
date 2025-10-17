@@ -13,6 +13,7 @@ export default {
     extend: {
       fontFamily: {
         anjoman: ["var(--font-anjoman)", "Anjoman", "sans-serif"],
+        roboto: ["var(--font-roboto)", "Roboto", "sans-serif"],
       },
       screens: {
         xs: "475px",

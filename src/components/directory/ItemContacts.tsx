@@ -13,6 +13,8 @@ import {
   TelegramLogoIcon,
   WhatsappLogoIcon,
 } from "@phosphor-icons/react/dist/ssr";
+import { ItemSocials } from "./ItemSocials";
+import { ItemLocation } from "./ItemLocation";
 
 interface ItemContactsProps {
   pageData: Page;
@@ -67,14 +69,14 @@ export const ItemContacts = ({ pageData }: ItemContactsProps) => {
   ];
 
   return (
-    <div className="item-contact mb-4 grid grid-cols-5 py-5">
+    <div className="_item-contacts grid grid-cols-5">
       {contactItems.map(({ key, label, icon: Icon, active, color }) => (
         <div key={key} className="group border-l border-dashed last:border-l-0">
           {active ? (
             <button
               onClick={linkHandler}
               data-type={key}
-              className="flex w-full cursor-pointer flex-col items-center justify-center gap-1.5 text-blue-900"
+              className="text-primary flex w-full cursor-pointer flex-col items-center justify-center gap-1.5"
             >
               <Icon
                 className={cn("mx-auto", color)}
