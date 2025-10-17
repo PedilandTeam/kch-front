@@ -1,4 +1,4 @@
-import type { Country } from "@/types/country";
+import type { Country } from "@/schemas";
 import type { UnitType } from "@/types/unit";
 
 type UnitSeoTextProps = {
@@ -11,7 +11,7 @@ export const UnitSeoText = async ({
   unit,
 }: UnitSeoTextProps) => {
   return (
-    <div className="_SEO-text my-6 px-3">
+    <div className="_SEO-text px-4">
       <div className="text-muted-foreground space-y-2 text-justify text-sm">
         {unit.name === "مشاغل" ? (
           <>

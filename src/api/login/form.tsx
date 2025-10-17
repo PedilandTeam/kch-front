@@ -46,7 +46,8 @@ const LoginForm = () => {
               router.replace("/account");
             });
         })
-        .catch((e) => {
+        .catch((err) => {
+          console.error("Error in LoginForm onSubmit", err);
           toast.error("خطایی رخ داد");
         });
     },

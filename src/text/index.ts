@@ -1,22 +1,8 @@
-import { GENERAL } from "./general";
-import { COUNTRY, CITY } from "./location";
-import { MENU } from "./menu";
-import { DAYS } from "./calendar";
-import { SOCIAL } from "./social";
-import { MODAL } from "./modal";
-import { FOOTER } from "./footer";
-import { CATEGORY, ITEM, FILTER } from "./directory";
-
-export const _TXT = {
-  CATEGORY,
-  CITY,
-  COUNTRY,
-  DAYS,
-  FILTER,
-  FOOTER,
-  GENERAL,
-  ITEM,
-  MENU,
-  MODAL,
-  SOCIAL,
-};
+export * from "./directory";
+export * from "./location";
+export * from "./calendar";
+export * from "./footer";
+export * from "./general";
+export * from "./menu";
+export * from "./modal";
+export * from "./social";

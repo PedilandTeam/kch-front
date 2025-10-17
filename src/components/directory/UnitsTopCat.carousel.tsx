@@ -3,16 +3,11 @@ import type { Country } from "@/schemas";
 import type { MostUsedCategory } from "@/types/category";
 import Link from "next/link";
 
-import {
-  Button,
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@components";
+import { Button, Carousel, CarouselContent, CarouselItem } from "@components";
 import { FolderSimpleStarIcon } from "@phosphor-icons/react/dist/ssr";
 import { ArrowLeftIcon } from "lucide-react";
 
-async function getMostUsedCategories(countryCode: string) {
+export const getMostUsedCategories = async (countryCode: string) => {
   let result: MostUsedCategory;
 
   try {
@@ -20,30 +15,17 @@ async function getMostUsedCategories(countryCode: string) {
       await API_ROUTES.CATEGOREIS.MOST_USED(countryCode, 7, 120)
     ).json();
     return result;
-  } catch (e) {
-    console.log(e);
-    throw new Error("error in getMostUsedCategories");
+  } catch (err) {
+    console.error("Error in getMostUsedCategories", err);
+    throw new Error("Error in getMostUsedCategories");
   }
-}
-
-// async function getUnits() {
-//   let result: UnitType[]
-//   try{
-//     result = await (await API_ROUTES.UNITS.GET_ALL(120)).json()
-//     return result
-//   }catch(e){
-//     console.log(e);
-//     throw new Error("error in getUnits")
-//   }
-// }
-
-type CountryUnitCategoriesProps = {
-  currentCountry: Country;
 };
 
-export const CountryUnitCategories = async ({
-  currentCountry,
-}: CountryUnitCategoriesProps) => {
+interface UnitsTopCatProps {
+  currentCountry: Country;
+}
+
+export const UnitsTopCat = async ({ currentCountry }: UnitsTopCatProps) => {
   const mostUsedCategories: MostUsedCategory = await getMostUsedCategories(
     currentCountry.code,
   );
@@ -60,8 +42,8 @@ export const CountryUnitCategories = async ({
   };
 
   return (
-    <div className="_country-unit-categories p-3 pb-6">
-      <div className="space-y-6">
+    <div className="_country-unit-categories px-4">
+      <div className="space-y-4">
         {units.map((unit) => {
           if (mostUsedCategories[`${unit.id}`]?.length == 0) {
             return;
@@ -107,7 +89,7 @@ export const CountryUnitCategories = async ({
                         <CarouselItem className="mx-auto w-[200px]">
                           <div
                             key={`country-category-list-${category.id}${index}`}
-                            className="flex flex-col items-center justify-center gap-2 rounded-md border border-gray-200/70 bg-white/95 p-4"
+                            className="flex flex-col items-center justify-center gap-2 rounded-lg border border-gray-200/70 bg-white/95 p-4"
                           >
                             <div>
                               <FolderSimpleStarIcon
@@ -119,7 +101,7 @@ export const CountryUnitCategories = async ({
                             <div className="text-primary line-clamp-1 text-[15px] font-semibold">
                               {category.name}
                             </div>
-                            <div className="text-muted-foreground text-[15px]">
+                            <div className="text-primary text-[15px]">
                               {category.pageCount} <span>مـورد</span>
                             </div>
                           </div>

@@ -16,8 +16,8 @@ async function getMostUsedCategories(countryCode: string) {
       await API_ROUTES.CATEGOREIS.MOST_USED(countryCode, 2, 120)
     ).json();
     return result;
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    console.error("Error in getMostUsedCategories", err);
     throw new Error("error in getMostUsedCategories");
   }
 }

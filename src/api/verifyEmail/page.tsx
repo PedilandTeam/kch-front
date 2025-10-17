@@ -8,8 +8,8 @@ export default async function VerifyEmailPage() {
   const token = cookieStore.get("token")?.value;
 
   const userModule = new UserModule(token || null);
-  await userModule.fetchUser().catch((e) => {
-    if (e.response?.status === 401) {
+  await userModule.fetchUser().catch((err) => {
+    if (err.response?.status === 401) {
       redirect("/login");
     }
   });

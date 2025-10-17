@@ -13,5 +13,7 @@ export * from './megaMenuItems';
 export * from './modalcountry';
 export * from './offcanvas';
 export * from './PageContainer';
+export * from './PageImage';
+export * from './PageSimple';
 export * from './sideMenuList';
 export * from './toptools';

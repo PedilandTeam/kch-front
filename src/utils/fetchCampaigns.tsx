@@ -1,8 +1,8 @@
 import { CampaignNamespace } from "@/types/campaign";
-type customers = CampaignNamespace.ICampaignCustomer & { type: CampaignNamespace.CampaignCustomerType }
-export default async function fetchCampaigns(
-  countryCode: string
-): Promise<{
+type customers = CampaignNamespace.ICampaignCustomer & {
+  type: CampaignNamespace.CampaignCustomerType;
+};
+export default async function fetchCampaigns(countryCode: string): Promise<{
   campaign?: CampaignNamespace.ICampaign;
   customers: CampaignNamespace.RandomCustomers[];
 }> {
@@ -17,7 +17,7 @@ export default async function fetchCampaigns(
         next: {
           revalidate: 30,
         },
-      }
+      },
     );
     campaignsList = await response.json();
 
@@ -26,16 +26,18 @@ export default async function fetchCampaigns(
       console.error(`Failed to fetch campaigns: ${errorText}`);
       throw new Error(errorText);
     }
-  } catch (error) {
-    console.error("Error while fetching campaigns:", error);
-    throw error;
+  } catch (err) {
+    console.error("Error while fetching campaigns:", err);
+    throw err;
   }
 
   if (campaignsList.items.length > 0) {
     campaign = campaignsList.items[0];
     if (!campaign) return { campaign, customers };
     customers = Object.keys(campaign)
-      .map((key) => (key.includes("Customer") ? {...campaign![key], type: key} : null))
+      .map((key) =>
+        key.includes("Customer") ? { ...campaign![key], type: key } : null,
+      )
       .map((value) => ({ value, sort: Math.random() * 100 }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ value }) => value)

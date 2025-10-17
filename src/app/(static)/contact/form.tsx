@@ -38,11 +38,12 @@ const ContactForm = () => {
             "پیام شما دریافت شد و بزودی با شما ارتباط خواهیم گرفت",
             {
               duration: 4000,
-            }
+            },
           );
           setSent(true);
         })
-        .catch((e) => {
+        .catch((err) => {
+          console.error("Error in ContactForm onSubmit", err);
           toast.error("کپچا مورد تایید نیست");
         });
     },
@@ -52,8 +53,8 @@ const ContactForm = () => {
 
   if (sent) {
     return (
-      <div className="flex flex-col justify-center items-center w-full min-h-[300px] gap-y-6 text-xl">
-        <p className="text-green-600 font-semibold text-3xl">
+      <div className="flex min-h-[300px] w-full flex-col items-center justify-center gap-y-6 text-xl">
+        <p className="text-3xl font-semibold text-green-600">
           ممنون! پیام‌تون رو دریافت کردیم.
         </p>
         <p>بزودی همکاران پشتیبانی باهاتون در ارتباط خواهند بود.</p>
@@ -61,12 +62,12 @@ const ContactForm = () => {
     );
   }
   return (
-    <div className="max-w-[760px] w-full mx-auto my-20 sm:mb-28 px-3 sm:px-0">
-      <h3 className="text-center font-semibold text-[18px] mb-8 text-pink-900">
+    <div className="mx-auto my-20 w-full max-w-[760px] px-3 sm:mb-28 sm:px-0">
+      <h3 className="mb-8 text-center text-[18px] font-semibold text-pink-900">
         همچنین می‌تونید از طریق این فرم به راحتی با ما در تماس باشید.
       </h3>
       <form onSubmit={formik.handleSubmit}>
-        <div className="row grid sm:grid-cols-6 gap-3">
+        <div className="row grid gap-3 sm:grid-cols-6">
           <div className="col-span-6 sm:col-span-2">
             <input
               type="text"
@@ -141,7 +142,7 @@ const ContactForm = () => {
             ></textarea>
           </div>
 
-          <div className=" flex justify-center items-center flex-col col-span-6 sm:col-span-2 sm:col-start-3">
+          <div className="col-span-6 flex flex-col items-center justify-center sm:col-span-2 sm:col-start-3">
             <ReCAPTCHA
               className="mb-4"
               sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}

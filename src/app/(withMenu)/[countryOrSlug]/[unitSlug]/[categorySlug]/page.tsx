@@ -1,7 +1,8 @@
 // Refactored
 import fetchWrapper, { FetchWrapperError } from "@/api/fetchWrapper";
 import type { Country } from "@/schemas";
-import type { Category, GetCategoryResponse } from "@/types/category";
+import type { GetCategoryResponse } from "@/types/category";
+import type { PathGeneratorType } from "@/types/pathGenerator";
 import type { UnitType } from "@/types/unit";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -25,15 +26,6 @@ interface CategoryPageProps {
  * @param categorySlug get targeted category by Slug
  * @returns
  */
-
-export type PathGeneratorType = {
-  type: "category" | null;
-  props?: {
-    category: Category;
-    country: Country;
-    unit: UnitType;
-  };
-};
 
 const pathGenerator = async (
   countryOrSlug: string,
@@ -98,14 +90,14 @@ const pathGenerator = async (
         unit: currentUnit,
       },
     };
-  } catch (error) {
-    console.error("Error in pathGenerator:", error);
-    if (error instanceof FetchWrapperError && error.isNotFound) {
+  } catch (err) {
+    console.error("Error in pathGenerator:", err);
+    if (err instanceof FetchWrapperError && err.isNotFound) {
       return {
         type: null,
       };
     }
-    throw error;
+    throw err;
   }
 };
 
@@ -135,8 +127,8 @@ export const generateMetadata = async ({
 
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug, categorySlug);
-  } catch (error) {
-    console.error("Error generating metadata:", error);
+  } catch (err) {
+    console.error("Error generating metadata:", err);
     return {
       title: "صفحه مورد نظر وجود ندارد | کوچا",
       description:
@@ -206,8 +198,8 @@ export default async function CategoryPage({
 
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug, categorySlug);
-  } catch (error) {
-    console.error("Error in CategoryPage:", error);
+  } catch (err) {
+    console.error("Error in CategoryPage:", err);
     notFound();
   }
 

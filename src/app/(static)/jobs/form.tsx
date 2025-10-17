@@ -7,7 +7,6 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { useEffect, useState } from "react";
 import sendFormAction from "./sendForm.action";
 
-
 interface IFormValues {
   name: string;
   birthday: string;
@@ -15,7 +14,7 @@ interface IFormValues {
   email: string;
   whatsapp: string;
   file: File | null;
-  message: string
+  message: string;
 }
 
 const ApplyForm = () => {
@@ -24,7 +23,7 @@ const ApplyForm = () => {
   const recaptchaTokenHandler = (token: string) => {
     setRecaptchaToken(token);
   };
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
 
   const formik = useFormik<IFormValues>({
     initialValues: {
@@ -42,39 +41,40 @@ const ApplyForm = () => {
       city: Yup.string().required(),
       email: Yup.string().email().required(),
       whatsapp: Yup.string().required(),
-      file: Yup.mixed().required('رزومه الزامی است'),
+      file: Yup.mixed().required("رزومه الزامی است"),
       message: Yup.string().required(),
     }),
     onSubmit: async (values) => {
-      setLoading(true)
-      const formData = new FormData()
-      formData.append('file', values.file!)
+      setLoading(true);
+      const formData = new FormData();
+      formData.append("file", values.file!);
       await sendFormAction(values, formData, recaptchaToken)
         .then((res) => {
           toast.success(
             "پیام شما دریافت شد و بزودی با شما ارتباط خواهیم گرفت",
             {
               duration: 4000,
-            }
+            },
           );
           setSent(true);
         })
-        .catch((e: any) => {
-          toast.error(e?.message);
+        .catch((err: any) => {
+          toast.error("متاسفانه پیام شما دریافت نشد", {
+            duration: 4000,
+          });
         })
         .finally(() => {
-          setLoading(false)
-        })
+          setLoading(false);
+        });
     },
     validateOnMount: false,
     validateOnBlur: false,
   });
 
-
   if (sent) {
     return (
-      <div className="flex flex-col justify-center items-center w-full min-h-[300px] gap-y-6 text-xl">
-        <p className="text-green-600 font-semibold text-3xl">
+      <div className="flex min-h-[300px] w-full flex-col items-center justify-center gap-y-6 text-xl">
+        <p className="text-3xl font-semibold text-green-600">
           ممنون! پیام‌تون رو دریافت کردیم.
         </p>
         <p>بزودی همکاران پشتیبانی باهاتون در ارتباط خواهند بود.</p>
@@ -82,18 +82,19 @@ const ApplyForm = () => {
     );
   }
   return (
-    <div className="sm:w-3/5 mx-auto">
-      <h3 className="text-secondary font-semibold mb-6 text-xl text-center">
+    <div className="mx-auto sm:w-3/5">
+      <h3 className="text-secondary mb-6 text-center text-xl font-semibold">
         فـرم ثـبـت درخـواسـت فـرصـت شـغـلـی
       </h3>
       <form onSubmit={formik.handleSubmit}>
-        <div className="row grid sm:grid-cols-6 gap-3">
+        <div className="row grid gap-3 sm:grid-cols-6">
           <div className="col-span-6 sm:col-span-2">
             <input
               type="text"
               placeholder="* نام کامل"
-              className={`input ${formik.errors.name && "input-error"
-                } input-bordered focus:input-secondary w-full`}
+              className={`input ${
+                formik.errors.name && "input-error"
+              } input-bordered focus:input-secondary w-full`}
               name="name"
               onChange={formik.handleChange}
             />
@@ -102,8 +103,9 @@ const ApplyForm = () => {
             <input
               type="text"
               placeholder="* تاریخ تولد"
-              className={`input ${formik.errors.birthday && "input-error"
-                } input-bordered focus:input-secondary w-full`}
+              className={`input ${
+                formik.errors.birthday && "input-error"
+              } input-bordered focus:input-secondary w-full`}
               name="birthday"
               onChange={formik.handleChange}
             />
@@ -112,8 +114,9 @@ const ApplyForm = () => {
             <input
               type="text"
               placeholder="* شهر محل سکونت"
-              className={`input ${formik.errors.city && "input-error"
-                } input-bordered focus:input-secondary w-full`}
+              className={`input ${
+                formik.errors.city && "input-error"
+              } input-bordered focus:input-secondary w-full`}
               name="city"
               onChange={formik.handleChange}
             />
@@ -122,8 +125,9 @@ const ApplyForm = () => {
             <input
               type="email"
               placeholder="* ایمیل"
-              className={`input ${formik.errors.email && "input-error"
-                } input-bordered focus:input-secondary w-full`}
+              className={`input ${
+                formik.errors.email && "input-error"
+              } input-bordered focus:input-secondary w-full`}
               name="email"
               onChange={formik.handleChange}
             />
@@ -132,8 +136,9 @@ const ApplyForm = () => {
             <input
               type="text"
               placeholder="* شماره واتس‌آپ"
-              className={`input ${formik.errors.email && "input-error"
-                } input-bordered focus:input-secondary w-full`}
+              className={`input ${
+                formik.errors.email && "input-error"
+              } input-bordered focus:input-secondary w-full`}
               name="whatsapp"
               onChange={formik.handleChange}
             />
@@ -149,14 +154,15 @@ const ApplyForm = () => {
               <label className="label">
                 <span className="label-text font-medium">آپلود فایل رزومه</span>
               </label>
-              <input 
+              <input
                 type="file"
                 accept="application/pdf, image/jpeg"
                 name="file"
-                className={`file-input ${formik.errors.email && "input-error"
-                  } file-input-bordered focus:file-input-secondary w-full`}
+                className={`file-input ${
+                  formik.errors.email && "input-error"
+                } file-input-bordered focus:file-input-secondary w-full`}
                 onChange={(event) => {
-                  formik.setFieldValue('file', event.currentTarget.files?.[0]);
+                  formik.setFieldValue("file", event.currentTarget.files?.[0]);
                 }}
               />
               <label className="label">
@@ -171,8 +177,8 @@ const ApplyForm = () => {
           <div className="col-span-6 sm:col-span-6">
             <textarea
               className={` ${
-                formik.errors.message && " textarea-error"
-              } textarea input-bordered focus:textarea-secondary text-base w-full`}
+                formik.errors.message && "textarea-error"
+              } textarea input-bordered focus:textarea-secondary w-full text-base`}
               placeholder="* متن انگیزه نامه"
               rows={8}
               name="message"
@@ -181,7 +187,7 @@ const ApplyForm = () => {
           </div>
 
           <div className="col-span-6">
-            <div className="flex justify-center flex-col items-center">
+            <div className="flex flex-col items-center justify-center">
               <ReCAPTCHA
                 className="mb-4"
                 sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
@@ -189,9 +195,9 @@ const ApplyForm = () => {
               />
               <button
                 type="submit"
-                className="btn btn-outline btn-secondary w-full sm:w-1/2 text-base"
+                className="btn btn-outline btn-secondary w-full text-base sm:w-1/2"
               >
-                {loading ? '...درحال ارسال' : 'ارسال فرم'}
+                {loading ? "...درحال ارسال" : "ارسال فرم"}
               </button>
             </div>
           </div>

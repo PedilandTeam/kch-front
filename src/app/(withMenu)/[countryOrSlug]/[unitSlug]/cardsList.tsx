@@ -1,8 +1,8 @@
 import { PageNamespace } from "@/types/page";
 import { UnitType } from "@/types/unit";
 import { Country } from "@/types/country";
-import Pagination from "../../../components/directory/ListPagination";
-import CardListItem from "../../../components/directory/ItemCard";
+import Pagination from "../../../../components/directory/ListPagination";
+import CardListItem from "../../../../components/directory/ItemCard";
 import { Suspense } from "react";
 import Loading from "./_loading";
 import { API_ROUTES } from "@/routes";
@@ -49,7 +49,7 @@ export const CardsList = async ({
       revalidate:
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     });
-  } catch (e: any) {
+  } catch (err: any) {
     isNotFound = true;
   }
 

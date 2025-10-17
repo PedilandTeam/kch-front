@@ -52,8 +52,16 @@ export default async function fetchWrapper<T>(
   if (filters) {
     Object.keys(filters).forEach((filter) => {
       const value = filters![filter];
-      if (value) urlObject.searchParams.append(filter, String(value));
+      if (value !== undefined && value !== null && value !== '') {
+        urlObject.searchParams.append(filter, String(value));
+      }
     });
+  }
+
+  // Debug logging for pages endpoint
+  if (path === 'pages') {
+    console.log("🔍 FetchWrapper URL:", urlObject.toString());
+    console.log("🔍 FetchWrapper filters:", filters);
   }
 
   const fetchConfig: RequestInit = {

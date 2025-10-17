@@ -29,8 +29,8 @@ export default function PictureWithLink({
         .then((res) => {
           mutate(`${process.env.NEXT_PUBLIC_API_URL}/ads/${adId}`);
         })
-        .catch((e: AxiosError) => {
-          const data = e.response?.data as { message: string };
+        .catch((err: AxiosError) => {
+          const data = err.response?.data as { message: string };
           toast.error(`خطایی رخ داد ${data?.message}`);
         })
         .finally(() => {
@@ -50,7 +50,7 @@ export default function PictureWithLink({
     >
       <div
         onClick={deletePictureHandler}
-        className="absolute left-2 top-2 rounded-lg bg-black/40 p-1 text-white active:scale-95"
+        className="absolute top-2 left-2 rounded-lg bg-black/40 p-1 text-white active:scale-95"
       >
         <TrashIcon className="h-4 w-4" />
       </div>

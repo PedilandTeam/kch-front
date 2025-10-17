@@ -43,8 +43,8 @@ export default function AnswerToQuestion({
         setText(""); // Clear the text after successful submission
         onAnswerPosted?.(); // Trigger refresh of answers list
       },
-      onError: (error) => {
-        console.error(error);
+      onError: (err) => {
+        console.error(err);
         toast.error("خطایی رخ داد");
       },
     }

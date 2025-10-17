@@ -1,16 +1,10 @@
-import { API_ROUTES } from "@/routes";
-import type { City, Country } from "@/schemas";
-import type { Category } from "@/types/category";
+import fetchWrapper from "@/api/fetchWrapper";
+import type { Country } from "@/schemas";
 import type { GetPagesResponse } from "@/types/page";
 import type { UnitType } from "@/types/unit";
-import fetchCampaigns from "@/utils/fetchCampaigns";
-import joiner from "@/utils/joiner";
-import { Suspense } from "react";
-
 import {
   ItemCardsList,
-  LoaderText,
-  StaticAdvertise,
+  PageImage,
   UnitBreadcrumb,
   UnitSeoText,
 } from "@components";
@@ -24,52 +18,6 @@ interface UnitsListPageProps {
   search?: string;
 }
 
-async function fetchCities(
-  countryCode: string,
-  unitIds: number,
-  categoryIds?: number | number[],
-): Promise<City[]> {
-  let cities: City[];
-  try {
-    cities = await (
-      await API_ROUTES.CITIES.BY_COUNTRY(countryCode, {
-        page: 1,
-        limit: 100,
-        unitIds: unitIds,
-        categoryIds: joiner(categoryIds),
-      })
-    ).json();
-  } catch (e) {
-    console.log(await e);
-    throw new Error("error in get cities fetchCities");
-  }
-
-  return cities;
-}
-
-async function fetchCategories(
-  countryCode: string,
-  unitIds: number | number[],
-  cityIds?: number | number[],
-): Promise<Category[]> {
-  let categories: Category[];
-  try {
-    categories = await (
-      await API_ROUTES.CATEGOREIS.BY_COUNTRY(countryCode, {
-        page: 1,
-        limit: 100,
-        unitIds: joiner(unitIds),
-        cityIds: joiner(cityIds),
-      })
-    ).json();
-  } catch (e) {
-    console.log(e);
-    throw new Error("Error in get Categories fetchCategories");
-  }
-
-  return categories!;
-}
-
 export async function UnitsListPage({
   unit,
   country,
@@ -78,85 +26,73 @@ export async function UnitsListPage({
   category,
   search,
 }: UnitsListPageProps) {
-  const cities = await fetchCities(country.code, unit.id, category);
-  const categories: Category[] = await fetchCategories(
-    country.code,
-    unit.id,
-    city,
-  );
-
   let pages: GetPagesResponse | undefined = undefined;
+
+  const filters = {
+    page: pageNumber ? pageNumber : 1,
+    limit: 24,
+    countryCode: country.code,
+    unitId: unit.id, // Use unitId (singular) as expected by /pages API
+    ...(city && { cityIds: city }),
+    ...(category && { categoryIds: category }),
+    ...(search && { search }),
+  };
+
+  console.log("🔍 UnitsListPage filters:", filters);
+  console.log("🔍 Unit ID:", unit.id, "Type:", typeof unit.id);
+  console.log("🔍 Country code:", country.code);
+
   try {
-    pages = await (
-      await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 24, {
-        countryCode: country.code,
-        unitId: unit.id,
-        categoryIds: category,
-        cityIds: city,
-        search,
-      })
-    ).json();
-  } catch (e: any) {
-    // Because this handle in CardsList
-    console.log(e);
-    console.log(e?.response?.data);
+    pages = await fetchWrapper<GetPagesResponse>("pages", {
+      filters,
+      tags: ["country", "page"],
+      revalidate:
+        +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+    });
+    
+    console.log("✅ UnitsListPage - Pages fetched:", pages?.meta);
+    console.log("✅ Total items returned:", pages?.items?.length);
+    
+    // Check if filtering worked
+    if (pages?.items?.length > 0) {
+      const firstItem = pages.items[0];
+      console.log("🔍 First item unit:", firstItem?.unit);
+      const itemsWithCorrectUnit = pages.items.filter(item => item.unit?.id === unit.id);
+      console.log("✅ Items with correct unit:", itemsWithCorrectUnit.length, "out of", pages.items.length);
+      
+      if (itemsWithCorrectUnit.length === 0) {
+        console.warn("⚠️ No items match the expected unit! This suggests filtering is not working.");
+      }
+    } else {
+      console.warn("⚠️ No items returned at all!");
+    }
+  } catch (err: any) {
+    console.error("❌ Error in UnitsListPage", err);
   }
 
-  const { customers, campaign } = await fetchCampaigns(country.code);
-
   return (
-    <main className="_unit-list-page">
-      {/* Unit Page Header */}
-      <div className="flex items-center gap-3 p-3">
-        <h1 className="text-secondary text-lg font-semibold">
-          لیست {unit?.name} فارسی زبان در {country?.name}
-        </h1>
-        {/* <span className="hidden font-medium text-gray-500">
-          ({pages?.meta.totalItems} آیتم)
-        </span> */}
+    <PageImage className="_unit-list-page" country={country}>
+      <div className="flex flex-col items-center space-y-4 px-3">
+        <div className="flex items-center justify-center gap-3">
+          <h1 className="text-lg font-semibold text-white drop-shadow-sm drop-shadow-black/70">
+            لیست {unit?.name} فارسی زبان در {country?.name}
+          </h1>
+          <span className="hidden font-medium text-gray-500">
+            ({pages?.meta.totalItems} آیتم)
+          </span>
+        </div>
+        <UnitBreadcrumb
+          unit={{ name: unit.name, slug: unit.slug }}
+          country={{ name: country.name, code: country.code }}
+        />
       </div>
 
-      {/* Unit Page BreadCrumb */}
-      <UnitBreadcrumb
-        unit={{ name: unit.name, slug: unit.slug }}
-        country={{ name: country.name, code: country.code }}
+      <ItemCardsList
+        pages={pages}
+        country={country}
       />
 
-      {/* Cards List */}
-      <Suspense
-        fallback={<LoaderText />}
-        key={`unit-cardlist-${search}-${city}-${category}`}
-      >
-        <ItemCardsList
-          unit={unit}
-          country={country}
-          category={category}
-          search={search}
-          pageNumber={pageNumber}
-          city={city}
-        />
-      </Suspense>
-
-      <div className="px-3">
-        <StaticAdvertise
-          from="unit"
-          lgDisable={customers.length >= 4}
-          imageUrlOrPath="/images/banner/ads-002-S1_V1.jpg"
-          link="https://biz.koochaa.com/"
-        />
-      </div>
-
-      {/* SEO Text */}
       <UnitSeoText currentCountry={country} unit={unit} />
-
-      <div className="px-3 pb-6">
-        <StaticAdvertise
-          from="unit"
-          lgDisable={customers.length >= 4}
-          imageUrlOrPath="/images/banner/ads-001-S1_V6.jpg"
-          link="https://tally.so/r/3XDljz"
-        />
-      </div>
-    </main>
+    </PageImage>
   );
 }

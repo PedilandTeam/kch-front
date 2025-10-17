@@ -1,18 +1,20 @@
+import fetchWrapper from "@/api/fetchWrapper";
 import type { UnitType } from "@/types/unit";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import queryString from "query-string";
-import fetchWrapper from "@/api/fetchWrapper";
-import type { PathGeneratorType } from "./[categorySlug]/page";
+import type { PathGeneratorType } from "@/types/pathGenerator";
+import type { Country } from "@/schemas";
 
 import { UnitsListPage } from "@components";
-import type { Country } from "@/schemas";
 
 // ---------------- Path Generator ----------------
 const pathGenerator = async (
   countryOrSlug: string,
   unitSlug: string,
 ): Promise<PathGeneratorType> => {
+  console.log("🔍 PathGenerator called with:", { countryOrSlug, unitSlug });
+  
   const currentUnit = (
     await fetchWrapper<UnitType[]>("units", {
       filters: { slug: unitSlug },
@@ -21,6 +23,8 @@ const pathGenerator = async (
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     })
   )[0];
+  
+  console.log("🔍 Found unit:", currentUnit);
 
   const countryList = await fetchWrapper<Country[]>("countries", {
     filters: { code: countryOrSlug },
@@ -36,7 +40,11 @@ const pathGenerator = async (
 
   return {
     type: "unit",
-    props: { unit: currentUnit, country: currentCountry },
+    props: {
+      unit: currentUnit,
+      country: currentCountry,
+      category: undefined,
+    },
   };
 };
 
@@ -54,8 +62,8 @@ export const generateMetadata = async ({
   let pathInfo: PathGeneratorType;
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug);
-  } catch (e: any) {
-    throw Error(e);
+  } catch (err: any) {
+    throw Error("Error in generateMetadata: " + err);
   }
 
   const unit = pathInfo.props?.unit;
@@ -116,15 +124,21 @@ export default async function UnitPage({
     { arrayFormat: "comma", parseNumbers: true },
   ) as ParsedSearchParams;
 
-  const { page: pageNumber, category, city, search } = parsedSearchParams;
+  const { page: rawPageNumber, category, city, search } = parsedSearchParams;
+
+  // Ensure pageNumber is always a single number
+  const pageNumber = Array.isArray(rawPageNumber)
+    ? rawPageNumber[0]
+    : rawPageNumber;
 
   console.log("⭕", category);
 
   let pathInfo: PathGeneratorType;
+
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug);
-  } catch (e: any) {
-    throw Error(e);
+  } catch (err: any) {
+    throw Error("Error in UnitPage: " + err);
   }
 
   if (pathInfo.type) {

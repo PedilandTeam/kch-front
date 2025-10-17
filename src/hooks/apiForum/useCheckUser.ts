@@ -9,7 +9,7 @@ export default function useCheckUser() {
         await response.json();
         return response?.status === 200 ? true : false
       })
-      .catch((error) => console.error(error));
+      .catch((err) => console.error(err));
   }
   return { checkUser };
 }

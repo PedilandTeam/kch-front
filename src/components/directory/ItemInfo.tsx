@@ -36,7 +36,7 @@ export const ItemInfo = ({ pageData }: ItemInfoProps) => {
     <div className="_item-info px-4 pt-6">
       <div className="flex items-center justify-center gap-3">
         <ItemAvatar
-          className="size-[90px] rounded-full drop-shadow-sm"
+          className="size-[90px] drop-shadow-sm"
           pageData={pageData}
         />
 

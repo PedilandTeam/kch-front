@@ -1,15 +1,20 @@
 "use client";
 
 import type { GetPagesResponse } from "@/types/page";
-import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
-import React, { useCallback, useEffect, useState, useTransition } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
-  ArrowCircleLeftIcon,
-  ArrowCircleRightIcon,
-} from "@phosphor-icons/react";
+  Pagination,
+  PaginationContent,
+  PaginationFirst,
+  PaginationItem,
+  PaginationLast,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import { Button } from "../ui";
 
 type ParsedSearchParams = {
   page?: number;
@@ -23,16 +28,10 @@ type PaginationProps = {
 
 export const ListPagination = ({ pages }: PaginationProps) => {
   let totalPages = pages.meta.totalPages;
-  const paginationLimit = 9;
-  const staticPaginations = 2;
-  const [isPagesLengthBiggerThanSix, setisPagesLengthBiggerThanSix] =
-    useState(false);
-  const [pagesArray, setPagesArray] = useState<number[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [isPending, startTransition] = useTransition();
   const [parsedSearchParams, setParsedSearchParams] =
     useState<ParsedSearchParams>();
 
@@ -41,54 +40,6 @@ export const ListPagination = ({ pages }: PaginationProps) => {
       queryString.parse(searchParams.toString(), { arrayFormat: "comma" }),
     );
   }, [searchParams]);
-
-  /**
-   * if totalPages are equal or lower than standard(usually 6) then all pages appear in pagination
-   * else just render pagination equal to standard (usually 6) to limit pagination buttons
-   */
-  useEffect(() => {
-    updatePagination();
-  }, [totalPages, paginationLimit, pageNumber]);
-
-  const updatePagination = () => {
-    startTransition(() => {
-      if (totalPages >= paginationLimit) {
-        const pagesArrayCache = [];
-        let i = pageNumber;
-        while (
-          pagesArrayCache.length < paginationLimit - staticPaginations &&
-          i < totalPages
-        ) {
-          if (i > 1) pagesArrayCache.push(i);
-          i++;
-        }
-
-        const prevPagesArrayCache = [];
-        for (
-          let i = pageNumber - 1;
-          i >
-          pageNumber -
-            (paginationLimit - staticPaginations - pagesArrayCache.length);
-          i--
-        ) {
-          prevPagesArrayCache.push(i);
-        }
-
-        setPagesArray([...prevPagesArrayCache.reverse(), ...pagesArrayCache]);
-      } else {
-        if (totalPages > 1) {
-          const temp = [];
-          for (let i = 2; i <= totalPages; i++) {
-            temp.push(i);
-          }
-          setPagesArray([...temp]);
-        } else {
-          setPagesArray([]);
-        }
-        // setPagesArray(Array.from({ length: totalPages }))
-      }
-    });
-  };
 
   useEffect(() => {
     const pageInSearchParams = searchParams.get("page");
@@ -110,137 +61,98 @@ export const ListPagination = ({ pages }: PaginationProps) => {
     );
   };
 
-  const paginationButtonClickHandler = (
-    e: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    routeGenerator(e.currentTarget?.textContent ?? 1, parsedSearchParams);
+  const generatePaginationUrl = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", page.toString());
+    return `${pathname}?${params.toString()}`;
   };
 
-  const nextButtonClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (pageNumber < totalPages) {
-      routeGenerator(pageNumber + 1, parsedSearchParams);
-    }
+  const handlePaginationClick = (page: number) => {
+    routeGenerator(page, parsedSearchParams);
   };
-
-  const prevButtonClickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (pageNumber > 1) {
-      routeGenerator(pageNumber - 1, parsedSearchParams);
-    }
-  };
-
-  const buttonLinkHandler = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-  };
-
-  const isPrevOrNext = useCallback(
-    (num: number) => {
-      return num > pageNumber
-        ? { rel: "next" }
-        : num < pageNumber
-          ? { rel: "prev" }
-          : num == pageNumber
-            ? {}
-            : {};
-    },
-    [pageNumber],
-  );
 
   return (
-    <div className="my-10 flex items-center justify-center sm:mb-20">
-      <Link
-        rel="next"
-        href={
-          pageNumber == totalPages ? "#" : `${pathname}?page=${pageNumber + 1}`
-        }
-        className={pageNumber == totalPages ? "cursor-default" : ""}
-        onClick={buttonLinkHandler}
-      >
-        <button
-          onClick={nextButtonClickHandler}
-          className={`_join-item btn border-none bg-white pr-0 pl-2 shadow-none sm:pl-4 ${
-            pageNumber == totalPages
-              ? "btn-disabled text-gray-300"
-              : "btn-active text-sky-600 hover:text-black"
-          }`}
-        >
-          <ArrowCircleRightIcon size={32} weight="light" />
-        </button>
-      </Link>
+    <Pagination className="py-3">
+      <PaginationContent>
+        {pageNumber > 1 && (
+          <PaginationItem>
+            <PaginationFirst
+              href={generatePaginationUrl(1)}
+              onClick={(e) => {
+                e.preventDefault();
+                handlePaginationClick(1);
+              }}
+              size="default"
+            />
+          </PaginationItem>
+        )}
 
-      <div className="join" dir="ltr">
-        <Link
-          {...isPrevOrNext(1)}
-          href={`${pathname}?page=1`}
-          onClick={buttonLinkHandler}
-        >
-          <button
-            onClick={paginationButtonClickHandler}
-            className={`btn join-item border-dashed border-sky-500 font-bold text-sky-700 ${
-              pageNumber == 1
-                ? "btn-active bg-sky-100"
-                : "bg-sky-50 hover:bg-sky-100"
-            } `}
+        {/* Previous Button */}
+        <PaginationItem>
+          <PaginationPrevious
+            href={pageNumber > 1 ? generatePaginationUrl(pageNumber - 1) : "#"}
+            onClick={(e) => {
+              e.preventDefault();
+              if (pageNumber > 1) {
+                handlePaginationClick(pageNumber - 1);
+              }
+            }}
+            className={pageNumber <= 1 ? "pointer-events-none opacity-50" : ""}
+            size="default"
+          />
+        </PaginationItem>
+
+        <PaginationItem>
+          <Button
+            variant="ghost"
+            className="text-primary hover:text-primary size-9 cursor-auto rounded-full bg-blue-50/70 text-base hover:bg-blue-50/70"
           >
-            {1}
-          </button>
-        </Link>
-
-        {pagesArray?.map((number, index) => {
-          return (
-            <Link
-              {...isPrevOrNext(number)}
-              key={`pagination-button-${number}`}
-              href={`${pathname}?page=${number}`}
-              onClick={buttonLinkHandler}
-            >
-              <button
-                onClick={paginationButtonClickHandler}
-                className={`btn join-item border-dashed border-sky-500 text-sky-700 shadow-none ${
-                  pageNumber == number
-                    ? "btn-active bg-sky-100"
-                    : "bg-sky-50 hover:bg-sky-100"
-                } `}
-              >
-                {number}
-              </button>
-            </Link>
-          );
-        })}
-        {totalPages >= paginationLimit ? (
-          <Link
-            {...isPrevOrNext(totalPages)}
-            href={`${pathname}?page=${totalPages}`}
-            onClick={buttonLinkHandler}
-          >
-            <button
-              onClick={paginationButtonClickHandler}
-              className={`btn join-item ${
-                pageNumber == totalPages && "btn-active"
-              }`}
-            >
-              {totalPages}
-            </button>
-          </Link>
-        ) : null}
-      </div>
-
-      <Link
-        rel="prev"
-        href={pageNumber == 1 ? "#" : `${pathname}?page=${pageNumber - 1}`}
-        className={pageNumber == 1 ? "cursor-default" : ""}
-        onClick={buttonLinkHandler}
-      >
-        <button
-          onClick={prevButtonClickHandler}
-          className={`_join-item btn border-none bg-white pr-2 pl-0 shadow-none sm:pr-4 ${
-            pageNumber == 1
-              ? "btn-disabled text-gray-300"
-              : "text-sky-600 hover:text-black"
-          }`}
+            {pageNumber}
+          </Button>
+        </PaginationItem>
+        <PaginationItem className="px-2">از</PaginationItem>
+        <Button
+          variant="ghost"
+          className="text-primary hover:text-primary size-9 cursor-auto rounded-full bg-blue-50/70 text-base hover:bg-blue-50/70"
         >
-          <ArrowCircleLeftIcon size={32} weight="light" />
-        </button>
-      </Link>
-    </div>
+          {totalPages}
+        </Button>
+
+        {/* Next Button */}
+        <PaginationItem>
+          <PaginationNext
+            href={
+              pageNumber < totalPages
+                ? generatePaginationUrl(pageNumber + 1)
+                : "#"
+            }
+            onClick={(e) => {
+              e.preventDefault();
+              if (pageNumber < totalPages) {
+                handlePaginationClick(pageNumber + 1);
+              }
+            }}
+            className={
+              pageNumber >= totalPages ? "pointer-events-none opacity-50" : ""
+            }
+            size="default"
+          />
+        </PaginationItem>
+
+        {/* Last Button - only show if not on last page */}
+        {pageNumber < totalPages && (
+          <PaginationItem>
+            <PaginationLast
+              href={generatePaginationUrl(totalPages)}
+              onClick={(e) => {
+                e.preventDefault();
+                handlePaginationClick(totalPages);
+              }}
+              size="default"
+            />
+          </PaginationItem>
+        )}
+      </PaginationContent>
+    </Pagination>
   );
 };

@@ -7,17 +7,17 @@ export const axiosFetcher = async (url: string) => {
       withCredentials: true,
     });
     return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
       // Check if the error has a response object
-      if (error.response) {
+      if (err.response) {
         // Attempt to use the response data or default to a generic message
         const errorMessage =
-          error.response.data ||
-          JSON.stringify(error.response.data) ||
+          err.response.data ||
+          JSON.stringify(err.response.data) ||
           "An error occurred";
         throw errorMessage;
-      } else if (error.request) {
+      } else if (err.request) {
         // The request was made but no response was received
         throw new Error("No response was received");
       } else {

@@ -1,6 +1,7 @@
-import { CountryStats } from "@/components/country/CountryStats";
 import type { Country } from "@/schemas/country";
 import Image from "next/image";
+
+import { CountryStats } from "@components";
 
 interface CountryPageHeadProps {
   currentCountry: Country;
@@ -8,7 +9,7 @@ interface CountryPageHeadProps {
 
 export const CountryPageHead = ({ currentCountry }: CountryPageHeadProps) => {
   return (
-    <div className="_country-page-head relative p-3">
+    <div className="_country-page-head relative mx-4">
       <Image
         className="aspect-square rounded-xl object-cover brightness-[.70]"
         src={`/images/slide/home/${currentCountry.code}-m.webp`}
@@ -18,14 +19,14 @@ export const CountryPageHead = ({ currentCountry }: CountryPageHeadProps) => {
         priority
       />
 
-      <div className="absolute right-0 bottom-0 left-0 flex h-full w-full flex-col items-center justify-center gap-3 p-6">
+      <div className="absolute top-0 right-0 flex h-full w-full flex-col items-center justify-center gap-4 p-3">
         <div className="flex w-full flex-1 items-center justify-center">
-          <h1 className="text-3xl leading-snug font-semibold text-white drop-shadow-md drop-shadow-black">
+          <h1 className="text-3xl leading-normal font-semibold text-white drop-shadow-md drop-shadow-black">
             جـامـعـه
             <br />
-            ایرانیان مهاجر
+            ایـرانـیـان مـهـاجـر
             <br />
-            مقیم {currentCountry.name}
+            مـقـیـم {currentCountry.name}
           </h1>
         </div>
 

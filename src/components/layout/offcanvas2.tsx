@@ -1,11 +1,10 @@
 "use client";
 
-import { _TXT } from "@/text";
 import Image from "next/image";
 import Link from "next/link";
-
 import { UNITS_LIST } from "@/routes";
 import { useRef } from "react";
+import { MENU } from "@/text";
 
 type OffCanvasProps = {
   countryCode: string;
@@ -26,7 +25,7 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
       <div className="drawer-side">
         <label htmlFor="main-drawer" className="drawer-overlay"></label>
 
-        <div className="menu h-full w-80 bg-blue-50 p-4 text-base-content">
+        <div className="menu text-base-content h-full w-80 bg-blue-50 p-4">
           <div className="logo relative mb-5 flex w-full justify-end">
             <Link href="/">
               <Image
@@ -44,7 +43,7 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
                 href={`/${countryCode}/${UNITS_LIST.BUSINESSES}`}
                 className="p-3 text-[16px]"
               >
-                {_TXT.MENU.BUSINESSES}
+                {MENU.BUSINESSES}
               </Link>
             </li>
             <li onClick={() => ref.current?.click()}>
@@ -52,17 +51,17 @@ export const OffCanvas = ({ countryCode }: OffCanvasProps) => {
                 href={`/${countryCode}/${UNITS_LIST.DOCTORS}`}
                 className="p-3 text-[16px]"
               >
-                {_TXT.MENU.DOCTORS}
+                {MENU.DOCTORS}
               </Link>
             </li>
             <li onClick={() => ref.current?.click()}>
               <Link href={`/about`} className="p-3 text-[16px]">
-                {_TXT.MENU.ABOUT}
+                {MENU.ABOUT}
               </Link>
             </li>
             <li onClick={() => ref.current?.click()}>
               <Link href={`/jobs`} className="p-3 text-[16px]">
-                {_TXT.MENU.JOBS}
+                {MENU.JOBS}
               </Link>
             </li>
           </ul>

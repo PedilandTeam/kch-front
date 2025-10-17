@@ -45,8 +45,8 @@ export default function AddQModal() {
           duration: 4000, // Duration in milliseconds (4 seconds)
         });
       })
-      .catch((error) => {
-        console.error(error);
+      .catch((err) => {
+        console.error(err);
         toast.error("خطایی رخ داد");
       })
       .finally(() => {

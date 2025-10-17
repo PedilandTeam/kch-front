@@ -8,7 +8,7 @@ import joiner from "@/utils/joiner";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-import Loading from "../../app/[countryOrSlug]/[unitSlug]/_loading";
+import Loading from "../../app/(withMenu)/[countryOrSlug]/[unitSlug]/_loading";
 import { ItemBreadCrumb } from "./CategoryBreadcrumb";
 
 import { ItemCardsList, StaticAdvertise } from "@components";
@@ -36,8 +36,8 @@ async function fetchCities(
         categoryIds: joiner(categoryId),
       })
     ).json();
-  } catch (e) {
-    console.log(await e);
+  } catch (err) {
+    console.error("Error in fetchCities", err);
     throw new Error("error in get cities fetchCities");
   }
 
@@ -74,10 +74,9 @@ export const CategoryListPage = async ({
         search,
       })
     ).json();
-  } catch (e: any) {
+  } catch (err: any) {
     // Because this handle in CardsList
-    console.log(e);
-    console.log(e?.response?.data);
+    console.error("Error in CategoryListPage", err);
   }
 
   const defaultSeoDescription =

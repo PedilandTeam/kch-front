@@ -1,14 +1,15 @@
 "use client";
 
-import { CircleFlag } from "next-circle-flags";
-import { _TXT } from "@/text";
-import Link from "next/link";
+import { COUNTRY, MENU } from "@/text";
 import { MapPinIcon } from "@phosphor-icons/react";
+import { CircleFlag } from "next-circle-flags";
+import Link from "next/link";
 
 type TopToolsProps = {
   countryCode: string;
   isMainPage: boolean;
 };
+
 export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
   return (
     <div className="top-tools flex items-center">
@@ -24,9 +25,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
           }}
         >
           <button className="btn btn-outline btn-primary w-[48px] rounded-full px-0 sm:w-auto sm:rounded-lg sm:px-3">
-            <span className="hidden sm:inline-block">
-              {_TXT.COUNTRY.SELECT}
-            </span>
+            <span className="hidden sm:inline-block">{COUNTRY.SELECT}</span>
             <MapPinIcon className="h-6 w-6" />
           </button>
         </div>
@@ -61,7 +60,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
                   href={`/${countryCode}/businesses`}
                   className="btn btn-link text-base no-underline"
                 >
-                  {_TXT.MENU.BUSINESSES}
+                  {MENU.BUSINESSES}
                 </Link>
               </li>
               <li>
@@ -69,7 +68,7 @@ export const TopTools = ({ countryCode, isMainPage }: TopToolsProps) => {
                   href={`/${countryCode}/doctors`}
                   className="btn btn-link text-base no-underline"
                 >
-                  {_TXT.MENU.DOCTORS}
+                  {MENU.DOCTORS}
                 </Link>
               </li>
             </ul>

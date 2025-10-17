@@ -19,7 +19,7 @@ export default useGetTopic;
 //           // console.log(result.items);
 //           setTopics(result.items);
 //         })
-//         .catch((error) => console.error(error));
+//         .catch((err) => console.error(err));
 //     };
 
 //     fetchData();

@@ -77,9 +77,9 @@ const baseFetch = async (
         }
         resolve(res);
       })
-      .catch((error: any) => {
-        console.log("error", error);
-        reject(error);
+      .catch((err) => {
+        console.error("baseFetch error", err);
+        reject(err);
       });
   });
 };
@@ -181,15 +181,19 @@ export const API_ROUTES = {
 
   // Refactored by Pedram
   COUNTRIES: {
-    GET_ALL: ({
-      status,
-      revalidate,
-      cache,
-    }: {
-      status?: number;
-      revalidate?: number;
-      cache?: requestCacheType;
-    } = {}) => {
+    GET_ALL: (
+      p0: number,
+      p1: number,
+      {
+        status,
+        revalidate,
+        cache,
+      }: {
+        status?: number;
+        revalidate?: number;
+        cache?: requestCacheType;
+      } = {},
+    ) => {
       return baseFetch(
         {
           path: "countries",

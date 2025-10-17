@@ -22,7 +22,7 @@ export default function SearchInputHeader({
         .then((result) => {
           setResults(result.items || []);
         })
-        .catch((error) => console.error(error));
+        .catch((err) => console.error(err));
     } else {
       setResults([]);
     }

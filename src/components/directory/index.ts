@@ -15,6 +15,6 @@ export * from "./ItemInfo";
 export * from "./ItemSocials";
 export * from "./ItemSuggestion";
 export * from "./UnitBreadcrumb";
-export * from "./UnitCategoriesCarousel";
 export * from "./UnitSeoText";
 export * from "./UnitsListPage";
+export * from "./UnitsTopCat.carousel";

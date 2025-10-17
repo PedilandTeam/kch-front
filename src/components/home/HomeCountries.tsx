@@ -19,8 +19,8 @@ async function fetchCountries() {
   let countries: Country[];
   try {
     countries = await (await API_ROUTES.COUNTRIES.GET_ALL()).json();
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    console.error("Error in fetchCountries", err);
     throw new Error("error in get countries");
   }
   return countries;

@@ -1,6 +1,6 @@
 import type { Country } from "@/schemas/country";
 
-import { CountryPageHead, CountryUnitCategories } from "@components";
+import { CountryPageHead, PageSimple, UnitsTopCat } from "@components";
 
 type CountryPageProps = {
   currentCountry: Country;
@@ -8,14 +8,10 @@ type CountryPageProps = {
 
 export const CountryPage = async ({ currentCountry }: CountryPageProps) => {
   return (
-    <div className="_country-page flex flex-col">
+    <PageSimple className="_country-page">
       <CountryPageHead currentCountry={currentCountry} />
 
-      <CountryUnitCategories currentCountry={currentCountry} />
-
-      {/* <CountryPageForum currentCountry={currentCountry} /> */}
-
-      {/* <CountrySeoText currentCountry={currentCountry} /> */}
-    </div>
+      <UnitsTopCat currentCountry={currentCountry} />
+    </PageSimple>
   );
 };

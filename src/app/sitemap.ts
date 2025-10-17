@@ -1,9 +1,9 @@
 import { API_ROUTES } from "@/routes";
-import { CategoryNamespace } from "@/types/category";
-import { Country } from "@/types/country";
-import { UnitType } from "@/types/unit";
-import { MetadataRoute } from "next";
-import type { PageNamespace } from "types/page";
+import type { Country } from "@/schemas";
+import type { Category, GetCategoryResponse } from "@/types/category";
+import type { Page } from "@/types/page";
+import type { UnitType } from "@/types/unit";
+import type { MetadataRoute } from "next";
 
 function lastModifiedGenerator() {
   const currentDate = new Date();
@@ -42,10 +42,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     });
 
-    const categoriesGet: CategoryNamespace.GET = await (
+    const categoriesGet: GetCategoryResponse = await (
       await API_ROUTES.CATEGOREIS.GET_ALL(1, 300)
     ).json();
-    const categories: CategoryNamespace.category[] = categoriesGet.items;
+    const categories: Category[] = categoriesGet.items;
     categoriesSiteMap = [];
     countries.forEach((country: Country) => {
       return categories.forEach((category) => {
@@ -65,7 +65,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const pages = pagesGet.items;
       const meta = pagesGet.meta;
 
-      pages.forEach((page: PageNamespace.Page) => {
+      pages.forEach((page: Page) => {
         pagesSiteMap.push({
           url: `${baseUrl}/${encodeURIComponent(page.slug)}`,
           lastModified: page.updateDate,
@@ -78,8 +78,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         page++;
       }
     }
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    console.error("Error in sitemap", err);
   }
 
   return [

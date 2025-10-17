@@ -48,10 +48,8 @@ export const ItemSuggestion = async ({
         },
       );
     }
-  } catch (e: AxiosError | any) {
-    console.log(e?.response?.data);
-    console.log(e);
-
+  } catch (err: AxiosError | any) {
+    console.error("Error in ItemSuggestion", err);
     return null;
   }
 
@@ -93,6 +91,7 @@ export const ItemSuggestion = async ({
                     key={page.id}
                     country={page.country}
                     page={page}
+                    carousel
                   />
                 </CarouselItem>
               ))}
