@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { FC } from "react";
-import { ContainerProvider } from "@providers";
+import { ContainerProvider } from "@/_providers";
 
 import { Button } from "@components";
 import { ShieldCheckIcon } from "@phosphor-icons/react/dist/ssr";

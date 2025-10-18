@@ -1,5 +1,4 @@
-import useLinkHandler from "@/hooks/useLinkHandler";
-import { GENERAL } from "@/text/general";
+import { GENERAL } from "@/text";
 import type { Page } from "@/types/page";
 import isPageNew from "@/utils/isPageNew";
 
@@ -23,7 +22,6 @@ export const ItemInfo = ({ pageData }: ItemInfoProps) => {
   const socials = { ...pageData.socials };
   delete socials.website;
   const isNew = isPageNew(pageData.createdDate);
-  const linkHandler = useLinkHandler({ pageData });
 
   return (
     <div className="_item-info relative bg-[#fbf7ed] bg-[url('/images/pattern-03.png')] bg-center pt-8">
@@ -37,7 +35,7 @@ export const ItemInfo = ({ pageData }: ItemInfoProps) => {
           )}
         </div>
 
-        <ItemTopMenu />
+        <ItemTopMenu pageData={pageData} />
       </div>
       <div className="flex flex-col items-center justify-center gap-3 px-4">
         <ItemAvatar

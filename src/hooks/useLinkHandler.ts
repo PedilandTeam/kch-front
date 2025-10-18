@@ -1,14 +1,14 @@
-import { GENERAL } from "@/text/general";
-import { PageNamespace } from "@/types/page";
+import { GENERAL } from "@/text";
+import type { Page } from "@/types/page";
 import DeviceDetector from "device-detector-js";
-import { MouseEvent } from "react";
+import type { MouseEvent } from "react";
 import toast from "react-hot-toast";
 
-type UseLinkHandler = {
-  pageData: PageNamespace.Page;
-};
+interface UseLinkHandlerProps {
+  pageData: Page;
+}
 
-export default function useLinkHandler({ pageData }: UseLinkHandler) {
+export const useLinkHandler = ({ pageData }: UseLinkHandlerProps) => {
   const linkHandler = (e: MouseEvent<HTMLButtonElement>) => {
     const type = e.currentTarget.dataset.type;
     const regexp =
@@ -91,4 +91,4 @@ export default function useLinkHandler({ pageData }: UseLinkHandler) {
   };
 
   return linkHandler;
-}
+};

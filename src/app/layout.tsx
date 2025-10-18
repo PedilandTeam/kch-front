@@ -1,5 +1,5 @@
 import { baseSiteMetadata } from "@/config/metadata";
-import { SiteProvider } from "@providers";
+import { SiteProvider } from "@/_providers";
 import "@/styles/globals.css";
 import { Roboto } from "next/font/google";
 import type { Metadata } from "next";

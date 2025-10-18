@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import { AboutPageHead } from "@/components/site/AboutPageHead";
 import { AboutTextSec } from "@/components/site/AboutTextSec";
-import { StaticPageProvider } from "@/providers/StaticPageProvider";
+import { StaticPageProvider } from "@/_providers/StaticPageProvider";
 
 export const metadata: Metadata = {
   title: "درباره ما",

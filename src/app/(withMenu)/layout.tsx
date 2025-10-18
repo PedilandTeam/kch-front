@@ -1,4 +1,4 @@
-import { AppMenuProvider } from "@/providers/AppMenuProvider";
+import { AppMenuProvider } from "@/_providers/AppMenuProvider";
 
 export default function HomeLayout({
   children,

@@ -4,7 +4,7 @@ import type { Category } from "@/types/category";
 import type { Page } from "@/types/page";
 import type { UnitType } from "@/types/unit";
 import { AxiosError } from "axios";
-import { ContainerProvider } from "@/providers";
+import { ContainerProvider } from "@/_providers";
 
 import { Carousel, CarouselContent, CarouselItem, ItemCard } from "@components";
 

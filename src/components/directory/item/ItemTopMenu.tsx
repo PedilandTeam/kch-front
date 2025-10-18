@@ -1,33 +1,38 @@
 "use client";
 
-import type { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
-import { useState } from "react";
+import { GENERAL } from "@/text";
+import type { Page } from "@/types/page";
+import DeviceDetector from "device-detector-js";
+import { toast } from "sonner";
 
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@components";
 import { CirclesFourIcon } from "@phosphor-icons/react";
 import { BadgeCheckIcon, FlagTriangleRight, Share2Icon } from "lucide-react";
-import { toast } from "sonner";
 
-type Checked = DropdownMenuCheckboxItemProps["checked"];
+interface ItemTopMenuProps {
+  pageData: Page;
+}
 
-export const ItemTopMenu = () => {
-  const [showActivityBar, setShowActivityBar] = useState<Checked>(false);
-  const [showPanel, setShowPanel] = useState<Checked>(false);
+export const ItemTopMenu = ({ pageData }: ItemTopMenuProps) => {
+  const detector = new DeviceDetector();
+  const agent = detector.parse(navigator.userAgent);
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      toast.success("لینک صفحه کپی شد.");
-    } catch (err) {
-      console.error("Failed to copy:", err);
+  const shareHandler = () => {
+    if (agent.device?.type == "desktop") {
+      navigator.clipboard.writeText(
+        `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`,
+      );
+      toast.success(GENERAL.URL_COPIED);
+    } else {
+      navigator.share({
+        url: `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`,
+      });
     }
   };
 
@@ -41,17 +46,17 @@ export const ItemTopMenu = () => {
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40" align="end">
-        <DropdownMenuItem onClick={() => handleCopy()}>
+        <DropdownMenuItem onClick={() => shareHandler()}>
           <Share2Icon />
           اشتراک گذاری
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => setShowPanel(!showPanel)}>
+        <DropdownMenuItem>
           <BadgeCheckIcon />
           دریافت مالکیت
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => setShowActivityBar(!showActivityBar)}>
+        <DropdownMenuItem>
           <FlagTriangleRight />
           گزارش صفحه
         </DropdownMenuItem>
