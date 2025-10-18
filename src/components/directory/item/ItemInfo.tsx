@@ -3,16 +3,14 @@ import type { Page } from "@/types/page";
 import isPageNew from "@/utils/isPageNew";
 
 import {
-  BlueBadge,
-  Button,
   ItemAvatar,
+  ItemBadge,
   ItemContacts,
   ItemLocation,
   ItemSocials,
   ItemTopMenu,
 } from "@components";
 import { CakeIcon, StarIcon } from "@phosphor-icons/react/dist/ssr";
-import { CrownIcon, UserRoundIcon } from "lucide-react";
 
 interface ItemInfoProps {
   pageData: Page;
@@ -44,7 +42,8 @@ export const ItemInfo = ({ pageData }: ItemInfoProps) => {
         />
 
         <div className="flex flex-col items-center">
-          <h1 className="text-primary flex flex-col-reverse text-xl font-bold">
+          <h1 className="text-primary flex items-center gap-1.5 text-xl font-bold">
+            <ItemBadge pageData={pageData} />
             {pageData.title}
           </h1>
           {pageData.subtitle && (
@@ -63,28 +62,7 @@ export const ItemInfo = ({ pageData }: ItemInfoProps) => {
         </div>
       </div>
 
-      <div className="_badges my-6 flex items-center justify-center gap-2 px-4">
-        <BlueBadge pageData={pageData} enable={!!pageData.business} />
-
-        {/* <OrangeBadge enable={!pageData.business} /> */}
-
-        {/* <OrangeModal slug={pageData.slug} /> */}
-
-        <Button className="gap-1 bg-zinc-500/90 text-xs font-normal" size="sm">
-          <UserRoundIcon />
-          فریلنـسر
-        </Button>
-
-        <Button
-          className="gap-1 bg-emerald-500/90 text-xs font-normal"
-          size="sm"
-        >
-          <CrownIcon />
-          ادز کـلاب
-        </Button>
-      </div>
-
-      <div className="_item-contact mt-5 flex flex-col gap-3 border-y border-black/10 bg-white/60 py-3">
+      <div className="_item-contact mt-6 flex flex-col gap-3 border-y border-black/10 bg-white/60 py-3">
         <ItemSocials pageData={pageData} />
 
         <ItemContacts pageData={pageData} />

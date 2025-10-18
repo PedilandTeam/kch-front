@@ -1,7 +1,7 @@
 import { UnitType } from '@/types/unit';
 import wretch from 'wretch';
 import { WretchError } from 'wretch/resolver';
-import fetchWrapper from './fetchWrapper';
+import fetchWrapper from './_fetchWrapper';
 
 export type FetchUnit = { slug: string; revalidate: number };
 export default async function fetchUnits(filters: FetchUnit, revalidate?: number): Promise<UnitType[]> {

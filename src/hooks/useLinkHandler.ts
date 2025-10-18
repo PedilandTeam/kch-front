@@ -2,7 +2,7 @@ import { GENERAL } from "@/text";
 import type { Page } from "@/types/page";
 import DeviceDetector from "device-detector-js";
 import type { MouseEvent } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 interface UseLinkHandlerProps {
   pageData: Page;
@@ -11,6 +11,8 @@ interface UseLinkHandlerProps {
 export const useLinkHandler = ({ pageData }: UseLinkHandlerProps) => {
   const linkHandler = (e: MouseEvent<HTMLButtonElement>) => {
     const type = e.currentTarget.dataset.type;
+    const detector = new DeviceDetector();
+    const agent = detector.parse(navigator.userAgent);
     const regexp =
       /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/gim.exec(
         pageData?.socials?.website!,
@@ -18,8 +20,6 @@ export const useLinkHandler = ({ pageData }: UseLinkHandlerProps) => {
     if (!regexp || !Array.isArray(regexp) || !regexp[1]) {
       return;
     }
-    const detector = new DeviceDetector();
-    const agent = detector.parse(navigator.userAgent);
 
     switch (type) {
       case "website":
@@ -57,18 +57,6 @@ export const useLinkHandler = ({ pageData }: UseLinkHandlerProps) => {
           );
         }
         break;
-      case "share":
-        if (agent.device?.type == "desktop") {
-          navigator.clipboard.writeText(
-            `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`,
-          );
-          toast.success(GENERAL.URL_COPIED);
-        } else {
-          navigator.share({
-            url: `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`,
-          });
-        }
-        break;
       case "phone":
         if (agent.device?.type == "desktop") {
           const number = `00${
@@ -90,5 +78,16 @@ export const useLinkHandler = ({ pageData }: UseLinkHandlerProps) => {
     }
   };
 
-  return linkHandler;
+  const shareHandler = async () => {
+    const url = `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`;
+
+    if (navigator.share) {
+      await navigator.share({ url });
+    } else {
+      await navigator.clipboard.writeText(url);
+      toast.success(GENERAL.URL_COPIED);
+    }
+  };
+
+  return { linkHandler, shareHandler };
 };

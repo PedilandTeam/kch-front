@@ -1,5 +1,5 @@
 import { Country } from "@/schemas/country";
-import fetchWrapper from "./fetchWrapper";
+import fetchWrapper from "./_fetchWrapper";
 
 export type FetchCountry = { code?: string };
 export default async function fetchCountry(

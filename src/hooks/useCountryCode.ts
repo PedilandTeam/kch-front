@@ -1,5 +1,5 @@
 import { useHeader } from "@/store/useHeader";
-import { Country } from "@/schemas/country";
+import type { Country } from "@/schemas/country";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 

@@ -1,6 +1,6 @@
 // src/app/(Site)/[countryOrSlug]/c/[questionId]/layout.tsx
 
-import { FullContentProvider } from "@/_providers/index";
+import { FullContentProvider } from "@/providers/index";
 
 export default function QuestionLayout({
   children,

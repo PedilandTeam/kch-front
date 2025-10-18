@@ -1,12 +1,17 @@
-import fetchWrapper from "@/api/fetchWrapper";
+import fetchWrapper from "@/api/_fetchWrapper";
 import type { City } from "@/schemas/city";
 import type { Category } from "@/types/category";
 import type { Page } from "@/types/page";
 import type { UnitType } from "@/types/unit";
 import { AxiosError } from "axios";
-import { ContainerProvider } from "@/_providers";
 
-import { Carousel, CarouselContent, CarouselItem, ItemCard } from "@components";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  ItemCard,
+  WrapContainer,
+} from "@components";
 
 interface ItemSuggestionProps {
   pageId: string;
@@ -59,7 +64,7 @@ export const ItemSuggestion = async ({
 
   if (pages.length >= 4)
     return (
-      <ContainerProvider>
+      <WrapContainer>
         <div className="flex flex-col rounded-xl bg-gradient-to-b from-blue-900 to-blue-700 pb-5">
           <div className="flex items-center justify-between rounded-t-xl px-4 py-4">
             <h3 className="font-semibold text-white">
@@ -98,6 +103,6 @@ export const ItemSuggestion = async ({
             </CarouselContent>
           </Carousel>
         </div>
-      </ContainerProvider>
+      </WrapContainer>
     );
 };

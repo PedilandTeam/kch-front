@@ -3,11 +3,11 @@ import { Suspense } from "react";
 
 import {
   ItemBreadcrumb,
-  ItemClaim,
   ItemDescription,
+  ItemDetailsCountrySync,
   ItemInfo,
   ItemSuggestion,
-  PageSimple,
+  WrapPageSimple,
 } from "@components";
 
 interface ItemDetailsPageProps {
@@ -30,7 +30,9 @@ export async function ItemDetailsPage({ pageData }: ItemDetailsPageProps) {
   };
 
   return (
-    <PageSimple className="_item-details-page pt-0">
+    <WrapPageSimple className="_item-details-page pt-0">
+      <ItemDetailsCountrySync code={pageData.country.code} />
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -62,8 +64,6 @@ export async function ItemDetailsPage({ pageData }: ItemDetailsPageProps) {
           basedOn="city"
         />
       </Suspense>
-
-      <ItemClaim slug={pageData.slug} enable={!pageData.business} />
-    </PageSimple>
+    </WrapPageSimple>
   );
 }

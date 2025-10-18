@@ -1,12 +1,12 @@
-import fetchWrapper from "@/api/fetchWrapper";
+import fetchWrapper from "@/api/_fetchWrapper";
 import type { Country } from "@/schemas";
 import type { GetPagesResponse } from "@/types/page";
 import type { UnitType } from "@/types/unit";
 import {
   ItemCardsList,
-  PageImage,
   UnitBreadcrumb,
   UnitSeoText,
+  WrapPageImage,
 } from "@components";
 
 interface UnitsListPageProps {
@@ -49,19 +49,28 @@ export async function UnitsListPage({
       revalidate:
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     });
-    
+
     console.log("✅ UnitsListPage - Pages fetched:", pages?.meta);
     console.log("✅ Total items returned:", pages?.items?.length);
-    
+
     // Check if filtering worked
     if (pages?.items?.length > 0) {
       const firstItem = pages.items[0];
       console.log("🔍 First item unit:", firstItem?.unit);
-      const itemsWithCorrectUnit = pages.items.filter(item => item.unit?.id === unit.id);
-      console.log("✅ Items with correct unit:", itemsWithCorrectUnit.length, "out of", pages.items.length);
-      
+      const itemsWithCorrectUnit = pages.items.filter(
+        (item) => item.unit?.id === unit.id,
+      );
+      console.log(
+        "✅ Items with correct unit:",
+        itemsWithCorrectUnit.length,
+        "out of",
+        pages.items.length,
+      );
+
       if (itemsWithCorrectUnit.length === 0) {
-        console.warn("⚠️ No items match the expected unit! This suggests filtering is not working.");
+        console.warn(
+          "⚠️ No items match the expected unit! This suggests filtering is not working.",
+        );
       }
     } else {
       console.warn("⚠️ No items returned at all!");
@@ -71,7 +80,7 @@ export async function UnitsListPage({
   }
 
   return (
-    <PageImage className="_unit-list-page" country={country}>
+    <WrapPageImage className="_unit-list-page" country={country}>
       <div className="flex flex-col items-center space-y-4 px-3">
         <div className="flex items-center justify-center gap-3">
           <h1 className="text-lg font-semibold text-white drop-shadow-sm drop-shadow-black/70">
@@ -87,12 +96,9 @@ export async function UnitsListPage({
         />
       </div>
 
-      <ItemCardsList
-        pages={pages}
-        country={country}
-      />
+      <ItemCardsList pages={pages} country={country} />
 
       <UnitSeoText currentCountry={country} unit={unit} />
-    </PageImage>
+    </WrapPageImage>
   );
 }

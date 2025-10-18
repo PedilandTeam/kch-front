@@ -1,4 +1,4 @@
-import { Country } from "@/schemas/country";
+import type { Country } from "@/schemas/country";
 
 export async function fetchCountriesServer(): Promise<Country[]> {
   const baseUrl = process.env.API_URL;

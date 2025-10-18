@@ -1,4 +1,4 @@
-import fetchWrapper from "@/api/fetchWrapper";
+import fetchWrapper from "@/api/_fetchWrapper";
 import type { Country } from "@/schemas";
 import type { Category } from "@/types/category";
 import type { GetPagesResponse, Page } from "@/types/page";

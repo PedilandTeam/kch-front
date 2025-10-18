@@ -1,5 +1,5 @@
 import { CityNamespace } from '@/types/city';
-import fetchWrapper from './fetchWrapper';
+import fetchWrapper from './_fetchWrapper';
 
 
 export type FetchCities = {

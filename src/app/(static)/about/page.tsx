@@ -1,8 +1,8 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 import { AboutPageHead } from "@/components/site/AboutPageHead";
 import { AboutTextSec } from "@/components/site/AboutTextSec";
-import { StaticPageProvider } from "@/_providers/StaticPageProvider";
+import { WrapPageStatic } from "@components";
 
 export const metadata: Metadata = {
   title: "درباره ما",
@@ -15,10 +15,10 @@ export const metadata: Metadata = {
 
 const AboutPage = () => {
   return (
-    <StaticPageProvider title={metadata.title as string}>
+    <WrapPageStatic title={metadata.title as string}>
       <AboutPageHead />
       <AboutTextSec />
-    </StaticPageProvider>
+    </WrapPageStatic>
   );
 };
 

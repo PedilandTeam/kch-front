@@ -1,18 +1,22 @@
 import { cn } from "@/lib/utils";
 import type { Country } from "@/schemas";
 
-interface PageImageProps {
+interface WrapPageImageProps {
   className?: string;
   country: Country;
   children: React.ReactNode;
 }
 
-export const PageImage = ({ children, className, country }: PageImageProps) => {
+export const WrapPageImage = ({
+  children,
+  className,
+  country,
+}: WrapPageImageProps) => {
   const imageUrl = `/images/slide/home/${country.code}-m.webp`;
 
   return (
-    <div
-      className={cn("_page-simple relative pb-8", className)}
+    <main
+      className={cn("_page-image relative pb-8", className)}
       style={{
         backgroundImage: `url(${imageUrl})`,
         backgroundSize: "contain",
@@ -20,9 +24,7 @@ export const PageImage = ({ children, className, country }: PageImageProps) => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="flex w-full flex-1 flex-col gap-8 pt-5">
-        {children}
-      </div>
-    </div>
+      <div className="flex w-full flex-1 flex-col gap-8 pt-5">{children}</div>
+    </main>
   );
 };

@@ -1,5 +1,5 @@
 import type { GetCategoryResponse } from "@/types/category";
-import fetchWrapper from "./fetchWrapper";
+import fetchWrapper from "./_fetchWrapper";
 
 export type FetchCategories = {
   page?: number | string;

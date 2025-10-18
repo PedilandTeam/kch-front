@@ -1,16 +1,19 @@
 import { cn } from "@/lib/utils";
 
-interface PageSimpleProps {
+interface WrapPageSimpleProps {
   className?: string;
   children: React.ReactNode;
 }
 
-export const PageSimple = ({ children, className }: PageSimpleProps) => {
+export const WrapPageSimple = ({
+  children,
+  className,
+}: WrapPageSimpleProps) => {
   return (
-    <div
+    <main
       className={cn("_page-simple flex flex-col gap-4 pt-4 pb-8", className)}
     >
       {children}
-    </div>
+    </main>
   );
 };

@@ -6,7 +6,7 @@ import CardListItem from "../../../../components/directory/item/ItemCard";
 import { Suspense } from "react";
 import Loading from "./_loading";
 import { API_ROUTES } from "@/routes";
-import fetchWrapper from "@/api/fetchWrapper";
+import fetchWrapper from "@/api/_fetchWrapper";
 
 type CardsListType = {
   unit: UnitType;

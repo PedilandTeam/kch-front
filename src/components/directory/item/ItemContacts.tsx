@@ -1,6 +1,6 @@
 "use client";
 
-import useLinkHandler from "@/hooks/useLinkHandler";
+import { useLinkHandler } from "@/hooks/useLinkHandler";
 import { cn } from "@/lib/utils";
 import { GENERAL } from "@/text/general";
 import { SOCIAL } from "@/text/social";
@@ -13,15 +13,13 @@ import {
   TelegramLogoIcon,
   WhatsappLogoIcon,
 } from "@phosphor-icons/react/dist/ssr";
-import { ItemSocials } from "./ItemSocials";
-import { ItemLocation } from "./ItemLocation";
 
 interface ItemContactsProps {
   pageData: Page;
 }
 
 export const ItemContacts = ({ pageData }: ItemContactsProps) => {
-  const linkHandler = useLinkHandler({ pageData });
+  const { linkHandler } = useLinkHandler({ pageData });
   const number = pageData.contact?.telephone
     ? `00${pageData.country.areaCode ? pageData.country.areaCode : ""}${pageData
         .contact.telephone!}`
@@ -74,7 +72,7 @@ export const ItemContacts = ({ pageData }: ItemContactsProps) => {
         <div key={key} className="group border-l border-dashed last:border-l-0">
           {active ? (
             <button
-              onClick={linkHandler}
+              onClick={(e) => linkHandler(e)}
               data-type={key}
               className="text-primary flex w-full cursor-pointer flex-col items-center justify-center gap-1.5"
             >

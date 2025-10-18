@@ -1,4 +1,4 @@
-import { AppMenuProvider } from "@/_providers/AppMenuProvider";
+import { AppMenuProvider } from "@/components/layout/WrapAppMenu";
 
 export default function CommunityLayout({
   children,

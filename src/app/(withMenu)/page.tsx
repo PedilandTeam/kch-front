@@ -6,10 +6,10 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <main className="_home-page page">
+    <div className="_home-page page">
       <HomeCountries />
 
       <HomeSeo />
-    </main>
+    </div>
   );
 }

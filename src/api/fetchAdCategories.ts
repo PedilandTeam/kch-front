@@ -1,5 +1,5 @@
 import { AdCategoryNamepace } from '@/types/adCategory';
-import fetchWrapper from './fetchWrapper';
+import fetchWrapper from './_fetchWrapper';
 
 
 type FetchAdCategories = {

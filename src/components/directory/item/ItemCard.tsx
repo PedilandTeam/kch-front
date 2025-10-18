@@ -6,7 +6,7 @@ import type { Page } from "@/types/page";
 import categoryPathGenerator from "@/utils/categoryPathGenerator";
 import Link from "next/link";
 
-import { BlueBadge, Card, CardContent, ItemAvatar } from "@components";
+import { Card, CardContent, ItemAvatar, ItemBadge } from "@components";
 import { FolderSimpleStarIcon } from "@phosphor-icons/react";
 
 interface ItemCardProps {
@@ -50,7 +50,8 @@ export const ItemCard = ({
                 !carousel && "mb-1",
               )}
             >
-              <BlueBadge enable={!!page.business} pageData={page} icon />
+              <ItemBadge pageData={page} size="sm" />
+
               <Link
                 className="text-primary hover:text-secondary"
                 href={`/${page.slug}`}

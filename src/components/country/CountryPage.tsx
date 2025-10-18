@@ -1,6 +1,6 @@
 import type { Country } from "@/schemas/country";
 
-import { CountryPageHead, PageSimple, UnitsTopCat } from "@components";
+import { CountryPageHead, UnitsTopCat, WrapPageSimple } from "@components";
 
 type CountryPageProps = {
   currentCountry: Country;
@@ -8,10 +8,10 @@ type CountryPageProps = {
 
 export const CountryPage = async ({ currentCountry }: CountryPageProps) => {
   return (
-    <PageSimple className="_country-page">
+    <WrapPageSimple className="_country-page">
       <CountryPageHead currentCountry={currentCountry} />
 
       <UnitsTopCat currentCountry={currentCountry} />
-    </PageSimple>
+    </WrapPageSimple>
   );
 };

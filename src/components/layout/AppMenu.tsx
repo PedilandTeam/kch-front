@@ -1,30 +1,36 @@
-// src/components/Layout/AppMenu.tsx
 "use client";
 
+import { swrKeys } from "@/hooks/swr/swrKeys";
 import { cn } from "@/lib/utils";
-import { useHeader } from "@/store/useHeader";
-import { Country } from "@/schemas/country";
+import type { Country } from "@/schemas";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-
-// UI Imports
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ChatsIcon, ListIcon } from "@phosphor-icons/react";
-import { CircleFlag } from "next-circle-flags";
-import { CountriesDialog } from "@components";
 import useSWR from "swr";
-import { swrKeys } from "@/hooks/swr/swrKeys";
+
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  SelectCountry,
+} from "@components";
+import { ChatsIcon, ListIcon } from "@phosphor-icons/react";
+import { useCountryCodeStore } from "@/store/UseCountryCodeStore";
 
 export const AppMenu = () => {
-  const { data, error, isLoading } = useSWR(swrKeys.countries());
-  const { countryCode, setCountryCode } = useHeader();
   const params = useParams();
-  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const [countries, setCountries] = useState<Country[] | undefined>();
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
-  const [countries, setCountries] = useState<Country[] | undefined>();
+  const { countryCode, setCountryCode } = useCountryCodeStore();
+
+  const {
+    data,
+    error: countriesError,
+    isLoading: countriesLoading,
+  } = useSWR<Country[]>(swrKeys.countries());
 
   useEffect(() => {
     if (data) {
@@ -32,6 +38,20 @@ export const AppMenu = () => {
       setCountries(filteredCountries);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (!pathname) return;
+
+    if (pathname === "/") {
+      setCountryCode("un");
+      return;
+    }
+
+    const slug = params.countryOrSlug as string;
+    const matched = countries?.find((c) => c.code === slug);
+
+    setCountryCode(matched?.code ?? "un");
+  }, [params, countries, countryCode, setCountryCode]);
 
   // Scroll Effect
   useEffect(() => {
@@ -62,19 +82,6 @@ export const AppMenu = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const countryOrSlug = params.countryOrSlug as string;
-    const isMainPage =
-      !countryOrSlug ||
-      !countries?.find((c: Country) => c.code === countryOrSlug);
-    const countryCodeFromParams = isMainPage ? "" : countryOrSlug;
-    setCountryCode(
-      isMainPage ? "un" : countryCodeFromParams || countryCode || "un",
-    );
-  }, [params, countries, countryCode, setCountryCode]);
-
-  const isMainPage = !countryCode && (countryCode == "un" || !countryCode);
-
   return (
     <div
       className={cn(
@@ -83,18 +90,7 @@ export const AppMenu = () => {
       )}
     >
       <div className="_main-mobileMenu flex items-center justify-between border border-gray-200 bg-white px-4 py-2">
-        <div className="_select-country flex">
-          <CircleFlag
-            className="opacity-50 hover:cursor-pointer"
-            width={32}
-            height={32}
-            quality={75}
-            loading={"lazy"}
-            alt={`Logo of country with ISO code ${countries?.find((c: Country) => c.code === countryCode)?.code}`}
-            countryCode={countryCode}
-            onClick={() => setIsOpen(true)}
-          />
-        </div>
+        <SelectCountry countryCode={countryCode} countries={countries} />
 
         <div className="_menu">
           <ListIcon size={32} weight="duotone" />
@@ -126,12 +122,6 @@ export const AppMenu = () => {
           </Avatar>
         </Link>
       </div>
-
-      <CountriesDialog
-        countries={countries || []}
-        open={isOpen}
-        setOpen={setIsOpen}
-      />
     </div>
   );
 };

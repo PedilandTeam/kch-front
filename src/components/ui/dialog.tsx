@@ -1,3 +1,4 @@
+// Do not override this file
 "use client";
 
 import * as React from "react";
@@ -84,7 +85,7 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-header"
-      className={cn("flex flex-col gap-2 text-center sm:text-left", className)}
+      className={cn("flex flex-col gap-2 text-right", className)}
       {...props}
     />
   );

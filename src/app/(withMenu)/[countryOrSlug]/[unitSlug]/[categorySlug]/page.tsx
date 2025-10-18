@@ -1,5 +1,5 @@
 // Refactored
-import fetchWrapper, { FetchWrapperError } from "@/api/fetchWrapper";
+import fetchWrapper, { FetchWrapperError } from "@/api/_fetchWrapper";
 import type { Country } from "@/schemas";
 import type { GetCategoryResponse } from "@/types/category";
 import type { PathGeneratorType } from "@/types/pathGenerator";

@@ -1,6 +1,6 @@
 import { baseSiteMetadata } from "@/config/metadata";
 import { notFound } from "next/navigation";
-import { getRouteData } from "../data";
+import { getRouteData } from "./data";
 
 import { CountryPage, ItemDetailsPage } from "@components";
 
@@ -9,8 +9,6 @@ type Params = { params: Promise<{ countryOrSlug: string }> };
 export async function generateMetadata({ params }: Params) {
   const { countryOrSlug } = await params;
   const data = await getRouteData(countryOrSlug);
-
-  console.log("Page Data", data);
 
   if (!data) {
     return {

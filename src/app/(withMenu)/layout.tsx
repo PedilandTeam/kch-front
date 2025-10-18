@@ -1,9 +1,9 @@
-import { AppMenuProvider } from "@/_providers/AppMenuProvider";
+import { WrapAppMenu } from "@/components/layout/WrapAppMenu";
 
-export default function HomeLayout({
-  children,
-}: {
+interface LayoutProps {
   children: React.ReactNode;
-}) {
-  return <AppMenuProvider>{children}</AppMenuProvider>;
+}
+
+export default function HomeLayout({ children }: LayoutProps) {
+  return <WrapAppMenu>{children}</WrapAppMenu>;
 }

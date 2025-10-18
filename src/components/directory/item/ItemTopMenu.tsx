@@ -1,9 +1,7 @@
 "use client";
 
-import { GENERAL } from "@/text";
+import { useLinkHandler } from "@/hooks/useLinkHandler";
 import type { Page } from "@/types/page";
-import DeviceDetector from "device-detector-js";
-import { toast } from "sonner";
 
 import {
   DropdownMenu,
@@ -20,20 +18,19 @@ interface ItemTopMenuProps {
 }
 
 export const ItemTopMenu = ({ pageData }: ItemTopMenuProps) => {
-  const detector = new DeviceDetector();
-  const agent = detector.parse(navigator.userAgent);
+  const { shareHandler } = useLinkHandler({ pageData });
 
-  const shareHandler = () => {
-    if (agent.device?.type == "desktop") {
-      navigator.clipboard.writeText(
-        `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`,
-      );
-      toast.success(GENERAL.URL_COPIED);
-    } else {
-      navigator.share({
-        url: `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`,
-      });
-    }
+  const handleOwnershipClick = () => {
+    const telegramUsername = "koochaa_support";
+    const pageUrl = `${process.env.NEXT_PUBLIC_FRONT_URL}/${pageData.slug}`;
+    const message = `سلام، وقت بخیر 👋
+من مالک صفحه "${pageData.title}" هستم و تمایل دارم مدیریت اطلاعات این صفحه رو دریافت کنم.\n\n
+${pageUrl}`;
+
+    const encoded = encodeURIComponent(message);
+    const telegramUrl = `https://t.me/${telegramUsername}?text=${encoded}`;
+
+    window.open(telegramUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -42,7 +39,7 @@ export const ItemTopMenu = ({ pageData }: ItemTopMenuProps) => {
         <CirclesFourIcon
           size={26}
           weight="duotone"
-          className="text-secondary transition duration-300 hover:text-black"
+          className="text-secondary cursor-pointer transition duration-300 hover:text-black"
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40" align="end">
@@ -51,15 +48,15 @@ export const ItemTopMenu = ({ pageData }: ItemTopMenuProps) => {
           اشتراک گذاری
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={handleOwnershipClick}>
           <BadgeCheckIcon />
-          دریافت مالکیت
+          مالکیت صفحه
         </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        {/* <DropdownMenuSeparator />
+        <DropdownMenuItem className="text-destructive">
           <FlagTriangleRight />
-          گزارش صفحه
-        </DropdownMenuItem>
+          گزارش خطا
+        </DropdownMenuItem> */}
       </DropdownMenuContent>
     </DropdownMenu>
   );
