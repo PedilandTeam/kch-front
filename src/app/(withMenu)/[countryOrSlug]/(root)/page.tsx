@@ -10,6 +10,8 @@ export async function generateMetadata({ params }: Params) {
   const { countryOrSlug } = await params;
   const data = await getRouteData(countryOrSlug);
 
+  console.log("Page Data", data);
+
   if (!data) {
     return {
       ...baseSiteMetadata,

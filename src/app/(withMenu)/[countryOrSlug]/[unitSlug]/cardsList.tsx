@@ -2,7 +2,7 @@ import { PageNamespace } from "@/types/page";
 import { UnitType } from "@/types/unit";
 import { Country } from "@/types/country";
 import Pagination from "../../../../components/directory/ListPagination";
-import CardListItem from "../../../../components/directory/ItemCard";
+import CardListItem from "../../../../components/directory/item/ItemCard";
 import { Suspense } from "react";
 import Loading from "./_loading";
 import { API_ROUTES } from "@/routes";

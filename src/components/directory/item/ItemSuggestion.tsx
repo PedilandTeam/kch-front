@@ -60,7 +60,7 @@ export const ItemSuggestion = async ({
   if (pages.length >= 4)
     return (
       <ContainerProvider>
-        <div className="my-6 flex flex-col rounded-xl bg-gradient-to-b from-blue-900 to-blue-700 pb-5">
+        <div className="flex flex-col rounded-xl bg-gradient-to-b from-blue-900 to-blue-700 pb-5">
           <div className="flex items-center justify-between rounded-t-xl px-4 py-4">
             <h3 className="font-semibold text-white">
               {basedOn === "category"

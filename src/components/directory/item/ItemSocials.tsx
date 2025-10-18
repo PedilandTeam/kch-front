@@ -6,7 +6,6 @@ import {
   FacebookLogoIcon,
   InstagramLogoIcon,
   LinkedinLogoIcon,
-  ShareNetworkIcon,
   TelegramLogoIcon,
   XLogoIcon,
   YoutubeLogoIcon,
@@ -88,12 +87,6 @@ export const ItemSocials = ({ pageData }: ItemSocialsProps) => {
               </Link>
             );
           })}
-
-          {/* <ShareNetworkIcon
-          size={30}
-          weight="light"
-          className="text-yellow-800 transition duration-300 hover:text-black"
-        /> */}
         </div>
       ) : (
         <p className="text-muted-foreground text-sm">{ITEM.NO_SOCIAL_MEDIA}</p>

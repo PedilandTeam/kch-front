@@ -1,9 +1,7 @@
-// app/(Site)/[countryOrSlug]/data.ts
-
 import fetchWrapper from "@/api/fetchWrapper";
-import { Category } from "@/types/category";
-import { Country } from "@/types/country";
-import { GetPagesResponse, Page } from "@/types/page";
+import type { Country } from "@/schemas";
+import type { Category } from "@/types/category";
+import type { GetPagesResponse, Page } from "@/types/page";
 import { cache } from "react";
 
 export type RouteData =

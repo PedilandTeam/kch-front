@@ -1,4 +1,4 @@
-type FetchWrapperResponse<T> = T
+type FetchWrapperResponse<T> = T;
 // &
 //  {
 //   $: {
@@ -17,7 +17,7 @@ export class FetchWrapperError {
     error: unknown,
     isUnauthorized: boolean,
     isServerError: boolean,
-    errorJson: any
+    errorJson: any,
   ) {
     this.error = error;
     this.isNotFound = isNotFound;
@@ -39,9 +39,9 @@ export type FetchWrapperConfig = {
 };
 export default async function fetchWrapper<T>(
   path: string,
-  config: FetchWrapperConfig = {}
+  config: FetchWrapperConfig = {},
 ): Promise<FetchWrapperResponse<T>> {
-  let { filters, overrideUrl, revalidate, method = 'GET', body, tags } = config;
+  let { filters, overrideUrl, revalidate, method = "GET", body, tags } = config;
   const url = `${process.env.API_URL}/${path}`;
   const urlObject = new URL(overrideUrl ? overrideUrl : url);
 
@@ -52,16 +52,10 @@ export default async function fetchWrapper<T>(
   if (filters) {
     Object.keys(filters).forEach((filter) => {
       const value = filters![filter];
-      if (value !== undefined && value !== null && value !== '') {
+      if (value !== undefined && value !== null && value !== "") {
         urlObject.searchParams.append(filter, String(value));
       }
     });
-  }
-
-  // Debug logging for pages endpoint
-  if (path === 'pages') {
-    console.log("🔍 FetchWrapper URL:", urlObject.toString());
-    console.log("🔍 FetchWrapper filters:", filters);
   }
 
   const fetchConfig: RequestInit = {
@@ -83,8 +77,7 @@ export default async function fetchWrapper<T>(
   let errorJson: any = null;
   const fetcher: FetchWrapperResponse<T> = await fetch(urlObject, fetchConfig)
     .then(async (res) => {
-
-      const resJson = await res.json()
+      const resJson = await res.json();
 
       if (!res.ok) {
         if (res.status === 404) {
@@ -99,7 +92,7 @@ export default async function fetchWrapper<T>(
           isServerError = true;
         }
 
-        errorJson = resJson
+        errorJson = resJson;
       }
       isOk = true;
       return resJson;
@@ -111,8 +104,7 @@ export default async function fetchWrapper<T>(
           console.error(urlObject.toString(), err);
         }
       }
-        console.error(urlObject.toString(), err);
-      
+      console.error(urlObject.toString(), err);
     });
   if (isOk) {
     return fetcher;
