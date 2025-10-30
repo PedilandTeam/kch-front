@@ -47,17 +47,20 @@ export const ListPagination = ({ pages }: PaginationProps) => {
     setPageNumber(+pageInSearchParams);
   }, [searchParams]);
 
+  const searchParamsString = queryString.stringify(parsedSearchParams || {}, {
+    arrayFormat: "comma",
+  });
+
   const routeGenerator = (
     page: number | string,
     parsedSearchParams: ParsedSearchParams | undefined,
   ) => {
     delete parsedSearchParams?.page;
     router.replace(
-      `${pathname}?page=${page}&${queryString.stringify(
-        parsedSearchParams || {},
-        { arrayFormat: "comma" },
-      )}`,
-      { scroll: true },
+      `${pathname}?page=${page}${searchParamsString ? `&${searchParamsString}` : ""}`,
+      {
+        scroll: true,
+      },
     );
   };
 

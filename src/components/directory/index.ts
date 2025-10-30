@@ -7,7 +7,7 @@ export { ItemContacts } from "./item/ItemContacts";
 export { ItemLocation } from "./item/ItemLocation";
 export { ListPagination } from "./ListPagination";
 export * from "./UnitBreadcrumb";
-export * from "./UnitSeoText";
+export { UnitSeoText } from "./UnitSeoText";
 export * from "./UnitsListPage";
 export * from "./UnitsTopCat.carousel";
 

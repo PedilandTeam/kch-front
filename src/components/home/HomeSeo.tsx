@@ -1,7 +1,7 @@
 export const HomeSeo = () => {
   return (
-    <div className="container">
-      <div className="_seo-text mx-3 my-10">
+    <div className="container mb-10">
+      <div className="_seo-text">
         <h1 className="inline-block w-full text-center text-[16px] font-semibold text-gray-600">
           کـوچـا، جامعه ایرانیان مهاجر مقیم همه جاست!
         </h1>

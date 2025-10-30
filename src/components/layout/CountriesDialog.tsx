@@ -1,7 +1,7 @@
 "use client";
 
 import { MODAL } from "@/text/modal";
-import { Country } from "@/schemas/country";
+import type { Country } from "@/schemas/country";
 import { CircleFlag } from "next-circle-flags";
 import Link from "next/link";
 

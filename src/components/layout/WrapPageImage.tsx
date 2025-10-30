@@ -1,5 +1,8 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import type { Country } from "@/schemas";
+import { useEffect, useState } from "react";
 
 interface WrapPageImageProps {
   className?: string;
@@ -12,11 +15,24 @@ export const WrapPageImage = ({
   className,
   country,
 }: WrapPageImageProps) => {
-  const imageUrl = `/images/slide/home/${country.code}-m.webp`;
+  const [imageUrl, setImageUrl] = useState<string>(
+    `/images/directory/hero-bg-${country.code}.webp`,
+  );
+
+  useEffect(() => {
+    const mainUrl = `/images/directory/hero-bg-${country.code}.webp`;
+    const fallbackUrl = `/images/directory/hero-bg-un.webp`;
+
+    const img = new Image();
+    img.src = mainUrl;
+
+    img.onload = () => setImageUrl(mainUrl); // اگه پیدا شد
+    img.onerror = () => setImageUrl(fallbackUrl); // اگه پیدا نشد
+  }, [country.code]);
 
   return (
     <main
-      className={cn("_page-image relative pb-8", className)}
+      className={cn("_page-image flex flex-1 relative pb-8", className)}
       style={{
         backgroundImage: `url(${imageUrl})`,
         backgroundSize: "contain",

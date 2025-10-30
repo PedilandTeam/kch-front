@@ -1,10 +1,7 @@
 "use client";
 
-import { QuestionNamespace } from "@/types/questions";
-import {
-  ArrowCircleLeft,
-  ArrowCircleRight,
-} from "@phosphor-icons/react";
+import type { GetPagesResponse } from "@/types/page";
+import { ArrowCircleLeft, ArrowCircleRight } from "@phosphor-icons/react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
@@ -14,7 +11,7 @@ type ParsedSearchParams = {
   page?: number;
 };
 type PaginationProps = {
-  pages: Pick<QuestionNamespace.GET, "meta">;
+  pages: GetPagesResponse;
 };
 export default function Pagination({ pages }: PaginationProps) {
   let totalPages = pages?.meta?.totalPages;
@@ -90,17 +87,20 @@ export default function Pagination({ pages }: PaginationProps) {
     setPageNumber(+pageInSearchParams);
   }, [searchParams]);
 
+  const searchParamsString = queryString.stringify(parsedSearchParams || {}, {
+    arrayFormat: "comma",
+  });
+
   const routeGenerator = (
     page: number | string,
     parsedSearchParams: ParsedSearchParams | undefined,
   ) => {
     delete parsedSearchParams?.page;
     router.replace(
-      `${pathname}?page=${page}&${queryString.stringify(
-        parsedSearchParams || {},
-        { arrayFormat: "comma" },
-      )}`,
-      { scroll: true },
+      `${pathname}${searchParamsString ? `?${searchParamsString}` : ""}`,
+      {
+        scroll: true,
+      },
     );
   };
 
@@ -151,7 +151,7 @@ export default function Pagination({ pages }: PaginationProps) {
       >
         <button
           onClick={nextButtonClickHandler}
-          className={`_join-item btn border-none bg-white pl-2 pr-0 shadow-none sm:pl-4 ${
+          className={`_join-item btn border-none bg-white pr-0 pl-2 shadow-none sm:pl-4 ${
             pageNumber == totalPages
               ? "btn-disabled text-gray-300"
               : "btn-active text-sky-600 hover:text-black"
@@ -226,7 +226,7 @@ export default function Pagination({ pages }: PaginationProps) {
       >
         <button
           onClick={prevButtonClickHandler}
-          className={`_join-item btn border-none bg-white pl-0 pr-2 shadow-none sm:pr-4 ${
+          className={`_join-item btn border-none bg-white pr-2 pl-0 shadow-none sm:pr-4 ${
             pageNumber == 1
               ? "btn-disabled text-gray-300"
               : "text-sky-600 hover:text-black"

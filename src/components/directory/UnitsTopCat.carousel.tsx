@@ -101,7 +101,7 @@ export const UnitsTopCat = async ({ currentCountry }: UnitsTopCatProps) => {
                             <div className="text-primary line-clamp-1 text-[15px] font-semibold">
                               {category.name}
                             </div>
-                            <div className="text-primary text-[15px]">
+                            <div className="text-primary text-[15px] font-medium">
                               {category.pageCount} <span>مـورد</span>
                             </div>
                           </div>

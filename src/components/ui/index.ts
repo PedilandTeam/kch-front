@@ -4,6 +4,7 @@ export * from "./card";
 export { Carousel, CarouselContent, CarouselItem } from "./carousel";
 export * from "./command";
 export * from "./dialog";
+export * from "./drawer";
 export * from "./dropdown-menu";
 export * from "./form";
 export * from "./input";

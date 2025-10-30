@@ -1,5 +1,4 @@
-// Refactored
-import fetchWrapper, { FetchWrapperError } from "@/api/_fetchWrapper";
+import fetchWrapper from "@/api/_fetchWrapper";
 import type { Country } from "@/schemas";
 import type { GetCategoryResponse } from "@/types/category";
 import type { PathGeneratorType } from "@/types/pathGenerator";
@@ -10,130 +9,84 @@ import queryString from "query-string";
 
 import { CategoryListPage } from "@components";
 
-interface CategoryPageProps {
-  params: Promise<{
-    countryOrSlug: string;
-    unitSlug: string;
-    categorySlug: string;
-  }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}
-
-/**
- *
- * @param countryOrSlug get country with [countryOrSlug]
- * @param unitSlug get unit of category to check is entered category part of current unit
- * @param categorySlug get targeted category by Slug
- * @returns
- */
-
+// ---------------- Path Generator ----------------
 const pathGenerator = async (
   countryOrSlug: string,
   unitSlug: string,
   categorySlug: string,
 ): Promise<PathGeneratorType> => {
-  try {
-    // Fetch unit data
-    const units = await fetchWrapper<UnitType[]>("units", {
-      filters: {
-        slug: unitSlug,
-      },
+  console.log("🔍 PathGenerator called with:", { countryOrSlug, unitSlug, categorySlug });
+
+  const currentUnit = (
+    await fetchWrapper<UnitType[]>("units", {
+      filters: { slug: unitSlug },
       tags: ["country", "page"],
       revalidate:
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
-    });
-    const currentUnit = units[0];
+    })
+  )[0];
 
-    // Fetch country data
-    const countryList = await fetchWrapper<Country[]>("countries", {
-      filters: {
-        code: countryOrSlug,
-      },
-      tags: ["country", "page"],
-      revalidate:
-        +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
-    });
-    const currentCountry = countryList[0];
+  console.log("🔍 Found unit:", currentUnit);
 
-    // Fetch category data
-    const categories = await fetchWrapper<GetCategoryResponse>("categories", {
-      filters: {
-        page: 1,
-        limit: 1,
-        slug: categorySlug,
-      },
-      tags: ["country", "page"],
-      revalidate:
-        +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
-    });
-    const currentCategory = categories.items[0];
+  const countryList = await fetchWrapper<Country[]>("countries", {
+    filters: { code: countryOrSlug },
+    tags: ["country", "page"],
+    revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+  });
 
-    // Validate all required data exists
-    if (!currentCategory || !currentCountry || !currentUnit) {
-      return {
-        type: null,
-      };
-    }
+  const currentCountry = countryList[0];
 
-    // Validate category belongs to the unit
-    if (currentCategory.unit?.id !== currentUnit.id) {
-      return {
-        type: null,
-      };
-    }
+  const categories = await fetchWrapper<GetCategoryResponse>("categories", {
+    filters: {
+      page: 1,
+      limit: 1,
+      slug: categorySlug,
+    },
+    tags: ["country", "page"],
+    revalidate:
+      +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+  });
 
-    return {
-      type: "category",
-      props: {
-        category: currentCategory,
-        country: currentCountry,
-        unit: currentUnit,
-      },
-    };
-  } catch (err) {
-    console.error("Error in pathGenerator:", err);
-    if (err instanceof FetchWrapperError && err.isNotFound) {
-      return {
-        type: null,
-      };
-    }
-    throw err;
+  const currentCategory = categories.items[0];
+
+  console.log("🔍 Found category:", currentCategory);
+
+  if (!currentUnit || !currentCountry || !currentCategory) {
+    return { type: null };
   }
+
+  // Validate category belongs to the unit
+  if (currentCategory.unit?.id !== currentUnit.id) {
+    console.warn("⚠️ Category does not belong to unit");
+    return { type: null };
+  }
+
+  return {
+    type: "category",
+    props: {
+      category: currentCategory,
+      country: currentCountry,
+      unit: currentUnit,
+    },
+  };
 };
 
-type ParsedSearchParams = {
-  page?: number | number[];
-  city?: any;
-  search: string;
-};
-
-type GenerateMetadataProps = {
-  params: Promise<{
-    countryOrSlug: string;
-    unitSlug: string;
-    categorySlug: string;
-  }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-};
-
+// ---------------- Metadata ----------------
 export const generateMetadata = async ({
   params,
   searchParams,
-}: GenerateMetadataProps): Promise<Metadata> => {
+}: {
+  params: Promise<{ countryOrSlug: string; unitSlug: string; categorySlug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}): Promise<Metadata> => {
   const { countryOrSlug, unitSlug, categorySlug } = await params;
-  const resolvedSearchParams = await searchParams;
+  const search = await searchParams;
 
   let pathInfo: PathGeneratorType;
-
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug, categorySlug);
-  } catch (err) {
-    console.error("Error generating metadata:", err);
-    return {
-      title: "صفحه مورد نظر وجود ندارد | کوچا",
-      description:
-        "متاسفانه چنین صفحه‌ای وجود نداره و یا ممکنه بخاطر تغییرات وب‌سایت جدید کـوچـا آدرسش تغییر کرده باشه.",
-    };
+  } catch (err: any) {
+    throw Error("Error in generateMetadata: " + err);
   }
 
   const category = pathInfo.props?.category;
@@ -146,17 +99,13 @@ export const generateMetadata = async ({
   }
 
   const countries = await fetchWrapper<Country[]>("countries", {
-    filters: {
-      code: countryOrSlug,
-    },
+    filters: { code: countryOrSlug },
     tags: ["country", "page"],
     revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
   });
-  const currentCountry: Country | undefined = countries.find(
-    (country: Country) => country.code == countryOrSlug,
-  );
 
-  const pageSearchParams = resolvedSearchParams?.page;
+  const currentCountry: Country | undefined = countries[0];
+  const pageSearchParams = search?.page;
 
   return {
     title: `لیست ${
@@ -168,49 +117,58 @@ export const generateMetadata = async ({
       pathInfo?.props?.category?.name
     } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
     alternates: {
-      canonical: `${process.env.FRONT_URL}/${
-        currentCountry?.code
-      }/${unitSlug}/${pathInfo?.props?.category?.slug}${
-        pageSearchParams ? `?page=${pageSearchParams}` : ""
-      }`,
+      canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${unitSlug}/${
+        pathInfo?.props?.category?.slug
+      }${pageSearchParams ? `?page=${pageSearchParams}` : ""}`,
     },
   };
+};
+
+// ---------------- Page ----------------
+type ParsedSearchParams = {
+  page?: number | number[];
+  city?: any;
+  search: string;
 };
 
 export default async function CategoryPage({
   params,
   searchParams,
-}: CategoryPageProps) {
+}: {
+  params: Promise<{ countryOrSlug: string; unitSlug: string; categorySlug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   const { countryOrSlug, unitSlug, categorySlug } = await params;
-  const resolvedSearchParams = await searchParams;
+  const rawSearchParams = await searchParams;
 
-  let parsedSearchParams: ParsedSearchParams;
-  let pathInfo: PathGeneratorType;
-
-  parsedSearchParams = queryString.parse(
-    queryString.stringify(resolvedSearchParams ?? {}),
+  const parsedSearchParams = queryString.parse(
+    queryString.stringify(rawSearchParams ?? {}),
     { arrayFormat: "comma", parseNumbers: true },
   ) as ParsedSearchParams;
-  const { page, city, search } = parsedSearchParams;
+
+  const { page: rawPageNumber, city, search } = parsedSearchParams;
 
   // Ensure pageNumber is always a single number
-  const pageNumber = Array.isArray(page) ? page[0] : page || 1;
+  const pageNumber = Array.isArray(rawPageNumber)
+    ? rawPageNumber[0]
+    : rawPageNumber;
+
+  console.log("⭕", city);
+
+  let pathInfo: PathGeneratorType;
 
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug, categorySlug);
-  } catch (err) {
-    console.error("Error in CategoryPage:", err);
-    notFound();
+  } catch (err: any) {
+    throw Error("Error in CategoryPage: " + err);
   }
 
-  if (pathInfo.type && pathInfo.props) {
+  if (pathInfo.type) {
     return (
       <CategoryListPage
-        category={pathInfo.props.category}
-        country={pathInfo.props.country}
-        unit={pathInfo.props.unit}
-        pageNumber={pageNumber}
+        {...pathInfo.props}
         city={city}
+        pageNumber={pageNumber}
         search={search}
       />
     );

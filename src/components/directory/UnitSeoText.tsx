@@ -1,20 +1,35 @@
+"use client";
+
 import type { Country } from "@/schemas";
 import type { UnitType } from "@/types/unit";
+import { useState } from "react";
+import { Button } from "../ui";
+import { cn } from "@/lib/utils";
 
 type UnitSeoTextProps = {
   currentCountry: Country;
   unit: UnitType;
 };
 
-export const UnitSeoText = async ({
-  currentCountry,
-  unit,
-}: UnitSeoTextProps) => {
+export const UnitSeoText = ({ currentCountry, unit }: UnitSeoTextProps) => {
+  const [showMore, setShowMore] = useState(false);
+
   return (
-    <div className="_SEO-text px-4">
-      <div className="text-muted-foreground space-y-2 text-justify text-sm">
+    <div className="_SEO-text flex flex-col px-4">
+      <div
+        className={cn(
+          "text-muted-foreground relative overflow-hidden text-justify text-sm duration-500",
+          showMore ? "h-auto" : "h-40",
+        )}
+      >
+        <div
+          className={cn(
+            "absolute right-0 bottom-0 left-0 h-full",
+            showMore ? "" : "bg-gradient-to-t from-white to-transparent",
+          )}
+        ></div>
         {unit.name === "مشاغل" ? (
-          <>
+          <div className="space-y-2">
             <p>
               در ماه‌های اولیه مهاجرت به {currentCountry.name}، موضوعاتی از قبیل
               فرآیندهای اداری اقامت، بازکردن حساب بانکی، پیدا کردن و مستقر شدن
@@ -38,9 +53,9 @@ export const UnitSeoText = async ({
               مزیت مهم و کاربردی به حساب میاد و میتونه باعث صرفه جویی در وقت،
               انرژی و هزینه شما بشه.
             </p>
-          </>
+          </div>
         ) : (
-          <>
+          <div className="space-y-2">
             <p>
               در ماه‌های اولیه مهاجرت به {currentCountry.name}، موضوعاتی از قبیل
               بیماری‌های اورژانسی، مراجعه به پزشک و مراکز درمانی، تهیه دارو و
@@ -63,9 +78,16 @@ export const UnitSeoText = async ({
               مناسب‌تون رو فارغ از زبان و فرهنگ پزشکی گذشته‌ و بدون هیچ محدودیتی
               انتخاب کنید.
             </p>
-          </>
+          </div>
         )}
       </div>
+      <Button
+        variant="link"
+        className="text-[13px] text-gray-400"
+        onClick={() => setShowMore(!showMore)}
+      >
+        {showMore ? "عدم نمایش" : "نمایش متن"}
+      </Button>
     </div>
   );
 };

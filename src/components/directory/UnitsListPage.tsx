@@ -1,7 +1,10 @@
-import fetchWrapper from "@/api/_fetchWrapper";
+"use client";
+
+import useSWR from "swr";
+import axios from "axios";
 import type { Country } from "@/schemas";
-import type { GetPagesResponse } from "@/types/page";
 import type { UnitType } from "@/types/unit";
+import type { GetPagesResponse } from "@/types/page";
 import {
   ItemCardsList,
   UnitBreadcrumb,
@@ -18,7 +21,7 @@ interface UnitsListPageProps {
   search?: string;
 }
 
-export async function UnitsListPage({
+export function UnitsListPage({
   unit,
   country,
   pageNumber,
@@ -26,61 +29,38 @@ export async function UnitsListPage({
   category,
   search,
 }: UnitsListPageProps) {
-  let pages: GetPagesResponse | undefined = undefined;
-
-  const filters = {
-    page: pageNumber ? pageNumber : 1,
-    limit: 24,
+  // Create the API URL with filters
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const filters = new URLSearchParams({
+    page: String(pageNumber || 1),
+    limit: "24",
     countryCode: country.code,
-    unitId: unit.id, // Use unitId (singular) as expected by /pages API
-    ...(city && { cityIds: city }),
-    ...(category && { categoryIds: category }),
+    unitId: String(unit.id),
+    ...(city && { cityIds: Array.isArray(city) ? city.join(',') : String(city) }),
+    ...(category && { categoryIds: Array.isArray(category) ? category.join(',') : String(category) }),
     ...(search && { search }),
+  });
+
+  const fetcher = async (url: string) => {
+    const response = await axios.get(url);
+    return response.data;
   };
 
-  console.log("🔍 UnitsListPage filters:", filters);
-  console.log("🔍 Unit ID:", unit.id, "Type:", typeof unit.id);
-  console.log("🔍 Country code:", country.code);
+  const {
+    data: pages,
+    isLoading: loading,
+    error,
+  } = useSWR<GetPagesResponse>(
+    `${apiUrl}/pages?${filters.toString()}`,
+    fetcher
+  );
 
-  try {
-    pages = await fetchWrapper<GetPagesResponse>("pages", {
-      filters,
-      tags: ["country", "page"],
-      revalidate:
-        +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
-    });
-
-    console.log("✅ UnitsListPage - Pages fetched:", pages?.meta);
-    console.log("✅ Total items returned:", pages?.items?.length);
-
-    // Check if filtering worked
-    if (pages?.items?.length > 0) {
-      const firstItem = pages.items[0];
-      console.log("🔍 First item unit:", firstItem?.unit);
-      const itemsWithCorrectUnit = pages.items.filter(
-        (item) => item.unit?.id === unit.id,
-      );
-      console.log(
-        "✅ Items with correct unit:",
-        itemsWithCorrectUnit.length,
-        "out of",
-        pages.items.length,
-      );
-
-      if (itemsWithCorrectUnit.length === 0) {
-        console.warn(
-          "⚠️ No items match the expected unit! This suggests filtering is not working.",
-        );
-      }
-    } else {
-      console.warn("⚠️ No items returned at all!");
-    }
-  } catch (err: any) {
-    console.error("❌ Error in UnitsListPage", err);
-  }
+  console.log("🔍 usePages result:", { pages, loading, error });
+  console.log("🔍 Pages data:", pages);
+  console.log("🔍 Pages items:", pages?.items);
 
   return (
-    <WrapPageImage className="_unit-list-page" country={country}>
+    <WrapPageImage className="_unit-list-page h-full" country={country}>
       <div className="flex flex-col items-center space-y-4 px-3">
         <div className="flex items-center justify-center gap-3">
           <h1 className="text-lg font-semibold text-white drop-shadow-sm drop-shadow-black/70">
@@ -96,7 +76,13 @@ export async function UnitsListPage({
         />
       </div>
 
-      <ItemCardsList pages={pages} country={country} />
+      {loading ? (
+        <div className="flex min-h-[400px] items-center justify-center py-8">
+          <div className="text-white">Loading...</div>
+        </div>
+      ) : (
+        <ItemCardsList pages={pages} country={country} />
+      )}
 
       <UnitSeoText currentCountry={country} unit={unit} />
     </WrapPageImage>

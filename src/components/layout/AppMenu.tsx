@@ -8,15 +8,16 @@ import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
+import { useCountryCodeStore } from "@/store/UseCountryCodeStore";
 
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
+  MenuDrawer,
   SelectCountry,
 } from "@components";
-import { ChatsIcon, ListIcon } from "@phosphor-icons/react";
-import { useCountryCodeStore } from "@/store/UseCountryCodeStore";
+import { ChatsIcon } from "@phosphor-icons/react";
 
 export const AppMenu = () => {
   const params = useParams();
@@ -85,16 +86,14 @@ export const AppMenu = () => {
   return (
     <div
       className={cn(
-        "_mobile-menu fixed bottom-0 left-1/2 z-0 w-full max-w-[414px] -translate-x-1/2 transform transition-transform duration-300",
+        "_mobile-menu fixed bottom-0 z-0 w-full max-w-[414px] transform transition-transform duration-300",
         isVisible ? "translate-y-0" : "translate-y-full",
       )}
     >
       <div className="_main-mobileMenu flex items-center justify-between border border-gray-200 bg-white px-4 py-2">
         <SelectCountry countryCode={countryCode} countries={countries} />
 
-        <div className="_menu">
-          <ListIcon size={32} weight="duotone" />
-        </div>
+        <MenuDrawer />
 
         <div className="_logo">
           <Link href={"/"}>

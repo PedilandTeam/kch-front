@@ -5,6 +5,7 @@ export * from "./header";
 export * from "./megaCol";
 export * from "./megaMenu";
 export * from "./megaMenuItems";
+export * from "./MenuDrawer";
 export * from "./modalcountry";
 export * from "./offcanvas";
 export * from "./SelectCountry";
@@ -17,4 +18,3 @@ export * from "./WrapPageContainer";
 export * from "./WrapPageImage";
 export * from "./WrapPageSimple";
 export { WrapPageStatic } from "./WrapPageStatic";
-

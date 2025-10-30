@@ -1,83 +1,62 @@
-import { API_ROUTES } from "@/routes";
-import type { City, Country } from "@/schemas";
+"use client";
+
+import useSWR from "swr";
+import axios from "axios";
+import type { Country } from "@/schemas";
 import type { Category } from "@/types/category";
 import type { GetPagesResponse } from "@/types/page";
 import type { UnitType } from "@/types/unit";
-import fetchCampaigns from "@/utils/fetchCampaigns";
-import joiner from "@/utils/joiner";
-import { notFound } from "next/navigation";
-import { Suspense } from "react";
+import { CategoryBreadcrumb } from "./CategoryBreadcrumb";
 
-import Loading from "../../app/(withMenu)/[countryOrSlug]/[unitSlug]/_loading";
-import { ItemBreadCrumb } from "./CategoryBreadcrumb";
-
-import { ItemCardsList, StaticAdvertise } from "@components";
-
-type PagesListProps = {
-  category: Category;
-  country: Country;
-  unit: UnitType;
-  pageNumber: number;
-  city: number | number[];
-  search: string;
-};
-
-async function fetchCities(
-  countryCode: string,
-  categoryId: number,
-): Promise<City[]> {
-  let cities: City[];
-
-  try {
-    cities = await (
-      await API_ROUTES.CITIES.BY_COUNTRY(countryCode, {
-        page: 1,
-        limit: 100,
-        categoryIds: joiner(categoryId),
-      })
-    ).json();
-  } catch (err) {
-    console.error("Error in fetchCities", err);
-    throw new Error("error in get cities fetchCities");
-  }
-
-  return cities;
-}
+import { ItemCardsList, StaticAdvertise, WrapPageImage } from "@components";
 
 interface CategoryListPageProps {
   category: Category;
   country: Country;
   unit: UnitType;
-  pageNumber: number;
-  city: number | number[];
-  search: string;
+  pageNumber?: number;
+  city?: number | number[];
+  search?: string;
 }
 
-export const CategoryListPage = async ({
+export function CategoryListPage({
   category,
   country,
   unit,
   pageNumber,
   city,
   search,
-}: CategoryListPageProps) => {
-  if (!country) return notFound();
-  const cities = await fetchCities(country.code, category?.id);
+}: CategoryListPageProps) {
+  // Create the API URL with filters
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const filters = new URLSearchParams({
+    page: String(pageNumber || 1),
+    limit: "24",
+    countryCode: country.code,
+    categoryIds: String(category.id),
+    ...(city && {
+      cityIds: Array.isArray(city) ? city.join(",") : String(city),
+    }),
+    ...(search && { search }),
+  });
 
-  let pages: GetPagesResponse | undefined = undefined;
-  try {
-    pages = await (
-      await API_ROUTES.PAGES.GET_ALL(pageNumber ? pageNumber : 1, 24, {
-        countryCode: country.code,
-        cityIds: city,
-        categoryIds: category?.id,
-        search,
-      })
-    ).json();
-  } catch (err: any) {
-    // Because this handle in CardsList
-    console.error("Error in CategoryListPage", err);
-  }
+  const fetcher = async (url: string) => {
+    const response = await axios.get(url);
+    return response.data;
+  };
+
+  const {
+    data: pages,
+    isLoading: loading,
+    error,
+  } = useSWR<GetPagesResponse>(
+    `${apiUrl}/pages?${filters.toString()}`,
+    fetcher,
+  );
+
+  console.log("🔍 CategoryListPage result:", { pages, loading, error });
+  console.log("🔍 Pages data:", pages);
+  console.log("🔍 Pages items:", pages?.items);
 
   const defaultSeoDescription =
     category.seoDescription &&
@@ -86,64 +65,42 @@ export const CategoryListPage = async ({
       country.name || country.englishName,
     );
 
-  const { customers, campaign } = await fetchCampaigns(country.code);
-
   return (
-    <div className="_category-list-page">
-      <div className="_header flex items-center gap-3 p-3">
-        <h1 className="text-secondary text-lg font-semibold">
-          لیست{" "}
-          {category?.seoTitle
-            ? category.seoTitle
-            : `${category.name} فارسی زبان`}{" "}
-          در {country?.name}
-        </h1>
-        <span className="hidden font-medium text-gray-500">
-          ({pages?.meta.totalItems} آیتم)
-        </span>
-      </div>
-
-      <ItemBreadCrumb
-        unit={unit}
-        category={category}
-        country={{ name: country.name, code: country.code }}
-      />
-
-      {/* Cards List */}
-      <Suspense
-        fallback={<Loading />}
-        key={`unit-cardlist-${search}-${city}-${category}`}
-      >
-        <ItemCardsList
-          category={category}
-          country={country}
-          pageNumber={pageNumber}
-          city={city}
-          search={search}
-        />
-      </Suspense>
-
-      <div className="mt-12 mb-5 flex flex-wrap gap-3 px-3">
-        <StaticAdvertise
-          from="category"
-          lgDisable={customers.length >= 4}
-          imageUrlOrPath="/images/banner/ads-002-S1_V1.jpg"
-          link="https://biz.koochaa.com/"
-        />
-        <StaticAdvertise
-          from="category"
-          lgDisable={customers.length >= 4}
-          imageUrlOrPath="/images/banner/ads-001-S1_V6.jpg"
-          link="https://tally.so/r/3XDljz"
+    <WrapPageImage className="_category-list-page h-full" country={country}>
+      <div className="flex flex-col items-center space-y-4 px-3">
+        <div className="flex items-center justify-center gap-3">
+          <h1 className="text-lg font-semibold text-white drop-shadow-sm drop-shadow-black/70">
+            لیست{" "}
+            {category?.seoTitle
+              ? category.seoTitle
+              : `${category.name} فارسی زبان`}{" "}
+            در {country?.name}
+          </h1>
+          <span className="hidden font-medium text-gray-500">
+            ({pages?.meta.totalItems} آیتم)
+          </span>
+        </div>
+        <CategoryBreadcrumb
+          unit={{ name: unit.name, slug: unit.slug }}
+          category={{ name: category.name, slug: category.slug }}
+          country={{ name: country.name, code: country.code }}
         />
       </div>
+
+      {loading ? (
+        <div className="flex min-h-[400px] items-center justify-center py-8">
+          <div className="text-white">Loading...</div>
+        </div>
+      ) : (
+        <ItemCardsList pages={pages} country={country} />
+      )}
 
       {/* SEO Text */}
-      <div className="_SEO-text mx-7 my-10">
+      <div className="_SEO-text px-4">
         <p className="text-justify font-normal text-gray-500">
           {defaultSeoDescription}
         </p>
       </div>
-    </div>
+    </WrapPageImage>
   );
-};
+}
