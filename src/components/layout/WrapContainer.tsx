@@ -3,5 +3,5 @@ interface WrapContainerProps {
 }
 
 export const WrapContainer = ({ children }: WrapContainerProps) => {
-  return <div className="mx-3">{children}</div>;
+  return <div className="px-3">{children}</div>;
 };

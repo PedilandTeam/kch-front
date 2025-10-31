@@ -17,7 +17,7 @@ export const GENERAL = {
   HOME: "خانه",
   HOME_JOB: "شغل خانگی",
   IS_OPEN: "باز است",
-  KOOCHAA: "کوچا",
+  KOOCHAA: "کـوچـا",
   KOOCHAA_SLOGAN: "جامعه پارسی زبانان مهاجر",
   LIST: "جستجوی مشاغل",
   LOADING: "درحال بارگذاری",

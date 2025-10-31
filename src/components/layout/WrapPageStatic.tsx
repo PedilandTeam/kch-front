@@ -13,10 +13,10 @@ export const WrapPageStatic = ({ title, children }: WrapPageStaticProps) => {
   const router = useRouter();
 
   return (
-    <main className="_page-static flex h-full flex-col gap-4 p-4">
+    <main className="_page-static flex h-full flex-col gap-4 p-4 pb-8">
       <div className="flex items-center justify-between">
-        <h4>{title || ""}</h4>
-        <Button variant={"ghost"} onClick={() => router.push("/")}>
+        <h4 className="text-primary font-semibold">{title || ""}</h4>
+        <Button variant={"ghost"} onClick={() => router.back()}>
           بازگشت
           <MoveLeftIcon />
         </Button>

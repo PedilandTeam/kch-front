@@ -64,14 +64,6 @@ export const CountriesDialog = ({
             </DialogDescription>
           </DialogHeader>
         </form>
-
-        <DialogFooter className="sm:justify-center">
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              انصراف
-            </Button>
-          </DialogClose>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

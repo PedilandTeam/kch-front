@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export const SiteBanner = () => {
   return (
-    <div className="container">
+    <div className="_site-banner">
       <Image
         src={"/images/banner/cmnt-img-01.jpg"}
         alt="Banner"

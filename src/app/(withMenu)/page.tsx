@@ -1,4 +1,10 @@
-import { HomeCountries, HomeSeo } from "@components";
+import {
+  HomeCountries,
+  HomeSeo,
+  HomeSlider,
+  WrapContainer,
+  WrapPageSimple,
+} from "@components";
 
 export const metadata = {
   title: "جامعه ایرانیان مهاجر",
@@ -6,10 +12,14 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <div className="_home-page">
-      <HomeCountries />
+    <WrapContainer>
+      <WrapPageSimple className="_home-page">
+        <HomeSlider />
 
-      <HomeSeo />
-    </div>
+        <HomeCountries />
+
+        <HomeSeo />
+      </WrapPageSimple>
+    </WrapContainer>
   );
 }

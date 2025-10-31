@@ -2,7 +2,7 @@
 "use client";
 
 import { useQuestions } from "@/hooks/apiForum/useGetQuestions";
-import { Country } from "@/schemas/country";
+import type { Country } from "@/schemas/country";
 
 export const CommunityPageHeader = ({
   country,
@@ -15,13 +15,11 @@ export const CommunityPageHeader = ({
 
   return (
     <div className="_community-header">
-      <div className="container">
-        <div className="flex items-center justify-between gap-2 rounded-lg border border-stone-100 bg-stone-50 p-3">
-          <h1 className="font-semibold">همرسانی تجربه در {country?.name}</h1>
-          <span className="text-[15px] text-gray-500">
-            ({question?.meta.totalItems} مورد)
-          </span>
-        </div>
+      <div className="flex items-center justify-between gap-2 rounded-lg border border-stone-100 bg-stone-50 p-3">
+        <h1 className="font-semibold">همرسانی تجربه در {country?.name}</h1>
+        <span className="text-[15px] text-gray-500">
+          ({question?.meta.totalItems} مورد)
+        </span>
       </div>
     </div>
   );

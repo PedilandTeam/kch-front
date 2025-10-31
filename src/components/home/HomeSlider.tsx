@@ -1,42 +1,29 @@
 import Image from "next/image";
-import Link from "next/link";
-import sliderImage from "@/assets/images/slide/home/hs-02.webp";
-import sliderImageMobile from "@/assets/images/slide/home/hsm-01.webp";
+import sliderImage from "@/assets/images/bd/hsm-01.webp";
 
 export const HomeSlider = () => {
   return (
-    <div className="slider relative mx-3 flex h-[520px] content-center justify-center rounded-xl">
-      <Image
-        className="hidden rounded-xl object-cover brightness-[.50]"
-        src={sliderImage}
-        placeholder="blur"
-        width={1700}
-        height={520}
-        alt="a Woman working with a laptop"
-        priority
-      />
+    <div className="slider relative flex h-[460px] content-center justify-center rounded-xl">
       <Image
         className="rounded-xl object-cover brightness-[.75]"
-        src={sliderImageMobile}
+        src={sliderImage}
         placeholder="blur"
-        width={430}
-        height={600}
+        width={390}
+        height={545}
         alt="a Woman is holding a globe"
         priority
       />
-      <div className="absolute bottom-[12%] w-auto max-w-[1144px]">
-        <div>
-          <h3 className="bg-opacity-60 inline-flex flex-wrap bg-blue-900 px-2 text-[20px] font-medium text-gray-300">
-            هـر کـجـای جـهـان کـه زنـدگی مـی‌کـنـیـد،
+      <div className="absolute flex h-full w-full items-center justify-center px-4">
+        <div className="flex flex-col items-center gap-3">
+          <h3 className="bg-primary/70 flex h-10 items-center justify-center rounded-md px-3 text-lg font-medium text-white/90">
+            هـرجـای جـهـان کـه زنـدگی مـی‌کـنـیـد
           </h3>
-          <h2 className="mt-2 mb-5 max-w-[310px] pr-3 text-[28px] leading-[48px] font-bold text-white drop-shadow">
-            به راحتی مـشـاغـل و پـزشـکـان فـارسـی زبـان اطـراف‌تـون رو پـیـدا
-            کـنـیـد!
+          <h2 className="text-center text-2xl leading-relaxed font-medium text-white drop-shadow-sm drop-shadow-black/50">
+            به سادگی با جامعه <br />
+            ایرانیان مهاجر اطراف‌تون <br />
+            در ارتباط باشید
           </h2>
         </div>
-        <Link href={"#select-country"} scroll>
-          <button className="btn btn-accent">از اینجا شروع کنید</button>
-        </Link>
       </div>
     </div>
   );

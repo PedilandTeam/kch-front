@@ -100,12 +100,33 @@ body {
     @apply bg-background text-foreground;
   }
 
-  .container {
-    @apply px-3;
+  /* Static Pages Content Section Style */
+  .content {
+    @apply space-y-6;
   }
-
-  .page {
-    @apply pt-3;
+  .content .section {
+    @apply space-y-2;
+  }
+  .content .section h2 {
+    @apply text-primary font-semibold;
+  }
+  .content .section ul {
+    @apply mb-4 space-y-1.5 pr-3 text-[15px] text-gray-700;
+  }
+  .content .section ol {
+    @apply text-primary mb-4 list-decimal space-y-3 pr-3 text-[15px] font-semibold;
+  }
+  .content .section ol li {
+    @apply space-y-0.5;
+  }
+  .content .section ol li p {
+    @apply font-normal text-gray-700;
+  }
+  .content .section ol li p a {
+    @apply text-secondary underline underline-offset-3;
+  }
+  .content .section p {
+    @apply text-[15px] text-gray-800;
   }
 }
 

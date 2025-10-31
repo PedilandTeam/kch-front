@@ -1,20 +1,11 @@
 export * from "./AppMenu";
 export * from "./CountriesDialog";
-export * from "./footer";
-export * from "./header";
-export * from "./megaCol";
-export * from "./megaMenu";
-export * from "./megaMenuItems";
 export * from "./MenuDrawer";
-export * from "./modalcountry";
 export * from "./offcanvas";
 export * from "./SelectCountry";
-export * from "./sideMenuList";
-export * from "./toptools";
 export * from "./WrapAppMenu";
 export * from "./WrapContainer";
-export * from "./WrapFullContent";
-export * from "./WrapPageContainer";
 export * from "./WrapPageImage";
 export * from "./WrapPageSimple";
 export { WrapPageStatic } from "./WrapPageStatic";
+

@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import { useCountryCodeStore } from "@/store/UseCountryCodeStore";
 
+import LogoImg from "@/assets/images/logo.png";
 import {
   Avatar,
   AvatarFallback,
@@ -98,7 +99,7 @@ export const AppMenu = () => {
         <div className="_logo">
           <Link href={"/"}>
             <Image
-              src="/images/logo-01.png"
+              src={LogoImg}
               alt="Koochaa Logo"
               width={42}
               height={42}

@@ -14,3 +14,4 @@ export * from "./radio-group";
 export * from "./select";
 export * from "./sonner";
 export * from "./breadcrumb";
+export * from "./visually-hidden";

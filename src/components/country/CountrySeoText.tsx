@@ -9,11 +9,9 @@ export const CountrySeoText = async ({
 }: CountrySeoTextProps) => {
   return (
     <div className="_country-seo-text my-9">
-      <div className="container">
-        <h1 className="inline-block w-full text-center text-[16px] font-semibold text-gray-600">
-          {`کـوچـا، جامعه ایرانیان مهاجر مقیم ${currentCountry.name}!`}
-        </h1>
-      </div>
+      <h1 className="inline-block w-full text-center text-[16px] font-semibold text-gray-600">
+        {`کـوچـا، جامعه ایرانیان مهاجر مقیم ${currentCountry.name}!`}
+      </h1>
     </div>
   );
 };

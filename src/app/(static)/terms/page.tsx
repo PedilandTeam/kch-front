@@ -1,22 +1,16 @@
-import PageHead from "./page-head";
-import TermsText from "@/text";
-import { Metadata } from "next";
+import type { Metadata } from "next";
+
+import { TermsPage } from "@components";
 
 export const metadata: Metadata = {
-  title: "کوچا | قوانین و مقررات استفاده از سایت",
+  title: "قوانین و مقررات استفاده از سایت",
   description:
     "در این صفحه آخرین نسخه قوانین و مقررات استفاده از سایت کوچا نوشته شده است. مطالعه این صفحه به تمامی کاربران و بازدیدکنندگان پیشنهاد می شود.",
   alternates: {
     canonical: `/terms`,
   },
 };
-const TermsPage = () => {
-  return (
-    <div className="page-wrap static">
-      <PageHead />
-      <TermsText />
-    </div>
-  );
-};
 
-export default TermsPage;
+export default function Page() {
+  return <TermsPage title={metadata.title as string} />;
+}

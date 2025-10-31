@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 
-import { AboutPageHead } from "@/components/site/AboutPageHead";
-import { AboutTextSec } from "@/components/site/AboutTextSec";
-import { WrapPageStatic } from "@components";
+import { AboutPage } from "@components";
 
 export const metadata: Metadata = {
   title: "درباره ما",
@@ -13,13 +11,6 @@ export const metadata: Metadata = {
   },
 };
 
-const AboutPage = () => {
-  return (
-    <WrapPageStatic title={metadata.title as string}>
-      <AboutPageHead />
-      <AboutTextSec />
-    </WrapPageStatic>
-  );
-};
-
-export default AboutPage;
+export default function Page() {
+  return <AboutPage title={metadata.title as string} />;
+}
