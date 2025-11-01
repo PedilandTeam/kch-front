@@ -8,7 +8,12 @@ import type { GetPagesResponse } from "@/types/page";
 import type { UnitType } from "@/types/unit";
 import { CategoryBreadcrumb } from "./CategoryBreadcrumb";
 
-import { ItemCardsList, StaticAdvertise, WrapPageImage } from "@components";
+import {
+  ItemCardsList,
+  StaticAdvertise,
+  WrapContainer,
+  WrapPageImage,
+} from "@components";
 
 interface CategoryListPageProps {
   category: Category;
@@ -54,10 +59,6 @@ export function CategoryListPage({
     fetcher,
   );
 
-  console.log("🔍 CategoryListPage result:", { pages, loading, error });
-  console.log("🔍 Pages data:", pages);
-  console.log("🔍 Pages items:", pages?.items);
-
   const defaultSeoDescription =
     category.seoDescription &&
     category.seoDescription.replace(
@@ -67,40 +68,42 @@ export function CategoryListPage({
 
   return (
     <WrapPageImage className="_category-list-page h-full" country={country}>
-      <div className="flex flex-col items-center space-y-4 px-3">
-        <div className="flex items-center justify-center gap-3">
-          <h1 className="text-lg font-semibold text-white drop-shadow-sm drop-shadow-black/70">
-            لیست{" "}
-            {category?.seoTitle
-              ? category.seoTitle
-              : `${category.name} فارسی زبان`}{" "}
-            در {country?.name}
-          </h1>
-          <span className="hidden font-medium text-gray-500">
-            ({pages?.meta.totalItems} آیتم)
-          </span>
+      <WrapContainer>
+        <div className="flex flex-col items-center space-y-4 mb-6">
+          <div className="flex items-center justify-center gap-3">
+            <h1 className="text-lg font-semibold text-white drop-shadow-sm drop-shadow-black/70">
+              لیست{" "}
+              {category?.seoTitle
+                ? category.seoTitle
+                : `${category.name} فارسی زبان`}{" "}
+              در {country?.name}
+            </h1>
+            <span className="hidden font-medium text-gray-500">
+              ({pages?.meta.totalItems} آیتم)
+            </span>
+          </div>
+          <CategoryBreadcrumb
+            unit={{ name: unit.name, slug: unit.slug }}
+            category={{ name: category.name, slug: category.slug }}
+            country={{ name: country.name, code: country.code }}
+          />
         </div>
-        <CategoryBreadcrumb
-          unit={{ name: unit.name, slug: unit.slug }}
-          category={{ name: category.name, slug: category.slug }}
-          country={{ name: country.name, code: country.code }}
-        />
-      </div>
 
-      {loading ? (
-        <div className="flex min-h-[400px] items-center justify-center py-8">
-          <div className="text-white">Loading...</div>
+        {loading ? (
+          <div className="flex min-h-[400px] items-center justify-center py-8">
+            <div className="text-white">در حال بارگذاری...</div>
+          </div>
+        ) : (
+          <ItemCardsList pages={pages} country={country} />
+        )}
+
+        {/* SEO Text */}
+        <div className="_SEO-text px-4">
+          <p className="text-justify font-normal text-gray-500">
+            {defaultSeoDescription}
+          </p>
         </div>
-      ) : (
-        <ItemCardsList pages={pages} country={country} />
-      )}
-
-      {/* SEO Text */}
-      <div className="_SEO-text px-4">
-        <p className="text-justify font-normal text-gray-500">
-          {defaultSeoDescription}
-        </p>
-      </div>
+      </WrapContainer>
     </WrapPageImage>
   );
 }

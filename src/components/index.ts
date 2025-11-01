@@ -6,3 +6,6 @@ export * from "./home";
 export * from "./layout";
 export * from "./static";
 export * from "./ui";
+// Panel components should be imported directly from their files
+// export * from "./panel";
+

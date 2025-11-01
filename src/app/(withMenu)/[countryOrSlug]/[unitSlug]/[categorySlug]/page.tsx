@@ -15,8 +15,6 @@ const pathGenerator = async (
   unitSlug: string,
   categorySlug: string,
 ): Promise<PathGeneratorType> => {
-  console.log("🔍 PathGenerator called with:", { countryOrSlug, unitSlug, categorySlug });
-
   const currentUnit = (
     await fetchWrapper<UnitType[]>("units", {
       filters: { slug: unitSlug },
@@ -25,8 +23,6 @@ const pathGenerator = async (
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     })
   )[0];
-
-  console.log("🔍 Found unit:", currentUnit);
 
   const countryList = await fetchWrapper<Country[]>("countries", {
     filters: { code: countryOrSlug },
@@ -43,13 +39,10 @@ const pathGenerator = async (
       slug: categorySlug,
     },
     tags: ["country", "page"],
-    revalidate:
-      +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+    revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
   });
 
   const currentCategory = categories.items[0];
-
-  console.log("🔍 Found category:", currentCategory);
 
   if (!currentUnit || !currentCountry || !currentCategory) {
     return { type: null };
@@ -76,7 +69,11 @@ export const generateMetadata = async ({
   params,
   searchParams,
 }: {
-  params: Promise<{ countryOrSlug: string; unitSlug: string; categorySlug: string }>;
+  params: Promise<{
+    countryOrSlug: string;
+    unitSlug: string;
+    categorySlug: string;
+  }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }): Promise<Metadata> => {
   const { countryOrSlug, unitSlug, categorySlug } = await params;
@@ -135,7 +132,11 @@ export default async function CategoryPage({
   params,
   searchParams,
 }: {
-  params: Promise<{ countryOrSlug: string; unitSlug: string; categorySlug: string }>;
+  params: Promise<{
+    countryOrSlug: string;
+    unitSlug: string;
+    categorySlug: string;
+  }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { countryOrSlug, unitSlug, categorySlug } = await params;
@@ -152,8 +153,6 @@ export default async function CategoryPage({
   const pageNumber = Array.isArray(rawPageNumber)
     ? rawPageNumber[0]
     : rawPageNumber;
-
-  console.log("⭕", city);
 
   let pathInfo: PathGeneratorType;
 

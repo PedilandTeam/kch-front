@@ -23,8 +23,6 @@ type QuestionDetailsSectionProps = {
 };
 
 export const QuestionDetails = ({ params }: QuestionDetailsSectionProps) => {
-  console.log(params?.questionId);
-
   const router = useRouter();
 
   const {

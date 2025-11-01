@@ -87,14 +87,12 @@ export const AppMenu = () => {
   return (
     <div
       className={cn(
-        "_mobile-menu fixed bottom-0 z-0 w-full max-w-[414px] transform transition-transform duration-300",
+        "_mobile-menu fixed bottom-0 z-50 w-full max-w-[414px] transform transition-transform duration-300",
         isVisible ? "translate-y-0" : "translate-y-full",
       )}
     >
       <div className="_main-mobileMenu flex items-center justify-between border border-gray-200 bg-white px-4 py-2">
-        <SelectCountry countryCode={countryCode} countries={countries} />
-
-        <MenuDrawer />
+        <MenuDrawer countryCode={countryCode} countries={countries} />
 
         <div className="_logo">
           <Link href={"/"}>
@@ -108,7 +106,9 @@ export const AppMenu = () => {
           </Link>
         </div>
 
-        <div className="_community">
+        <SelectCountry countryCode={countryCode} countries={countries} />
+
+        {/* <div className="_community">
           <ChatsIcon size={32} weight="duotone" />
         </div>
 
@@ -120,7 +120,7 @@ export const AppMenu = () => {
             />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

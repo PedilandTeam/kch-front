@@ -16,8 +16,6 @@ import {
 import Link from "next/link";
 
 export const QuestionCard = ({ data }: { data: Question[] }) => {
-  console.log(data);
-
   return (
     <div className="flex flex-col gap-4">
       {data?.length === 0 ? (

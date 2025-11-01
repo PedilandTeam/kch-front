@@ -30,7 +30,7 @@ export const CategoryBreadcrumb = ({
   unit,
 }: CategoryBreadcrumbProps) => {
   return (
-    <div className="_breadcrumbs rounded-full border-2 border-black/15 bg-black/25 px-5 py-2 text-[15px] text-white">
+    <div className="_breadcrumbs w-full rounded-full border-2 border-black/15 bg-black/25 px-5 py-2 text-[15px] text-white">
       <Breadcrumb className="flex justify-center">
         <BreadcrumbList>
           <BreadcrumbItem className="font-light text-white/90">
@@ -50,9 +50,7 @@ export const CategoryBreadcrumb = ({
           </BreadcrumbItem>
           <BreadcrumbSeparator className="text-white/60" />
           <BreadcrumbItem>
-            <BreadcrumbPage className="text-white/65">
-              {category.name}
-            </BreadcrumbPage>
+            <BreadcrumbPage className="text-white/65">...</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>

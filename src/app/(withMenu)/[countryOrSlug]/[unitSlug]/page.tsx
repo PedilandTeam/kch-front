@@ -13,8 +13,6 @@ const pathGenerator = async (
   countryOrSlug: string,
   unitSlug: string,
 ): Promise<PathGeneratorType> => {
-  console.log("🔍 PathGenerator called with:", { countryOrSlug, unitSlug });
-
   const currentUnit = (
     await fetchWrapper<UnitType[]>("units", {
       filters: { slug: unitSlug },
@@ -23,8 +21,6 @@ const pathGenerator = async (
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     })
   )[0];
-
-  console.log("🔍 Found unit:", currentUnit);
 
   const countryList = await fetchWrapper<Country[]>("countries", {
     filters: { code: countryOrSlug },
@@ -130,8 +126,6 @@ export default async function UnitPage({
   const pageNumber = Array.isArray(rawPageNumber)
     ? rawPageNumber[0]
     : rawPageNumber;
-
-  console.log("⭕", category);
 
   let pathInfo: PathGeneratorType;
 

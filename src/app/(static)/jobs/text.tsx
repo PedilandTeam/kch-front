@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import ApplyForm from "./form";
+// import ApplyForm from "./form";
 
 const JobsText = () => {
   return (
@@ -147,7 +147,7 @@ const JobsText = () => {
           همسفرامون در این مسیر هیجان‌انگیز لحظه شماری می‌کنیم.
         </p>
       </div>
-      <ApplyForm />
+      {/* <ApplyForm /> */}
     </div>
   );
 };

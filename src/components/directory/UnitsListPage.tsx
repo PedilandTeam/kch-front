@@ -9,6 +9,7 @@ import {
   ItemCardsList,
   UnitBreadcrumb,
   UnitSeoText,
+  WrapContainer,
   WrapPageImage,
 } from "@components";
 
@@ -36,8 +37,14 @@ export function UnitsListPage({
     limit: "24",
     countryCode: country.code,
     unitId: String(unit.id),
-    ...(city && { cityIds: Array.isArray(city) ? city.join(',') : String(city) }),
-    ...(category && { categoryIds: Array.isArray(category) ? category.join(',') : String(category) }),
+    ...(city && {
+      cityIds: Array.isArray(city) ? city.join(",") : String(city),
+    }),
+    ...(category && {
+      categoryIds: Array.isArray(category)
+        ? category.join(",")
+        : String(category),
+    }),
     ...(search && { search }),
   });
 
@@ -52,39 +59,37 @@ export function UnitsListPage({
     error,
   } = useSWR<GetPagesResponse>(
     `${apiUrl}/pages?${filters.toString()}`,
-    fetcher
+    fetcher,
   );
-
-  console.log("🔍 usePages result:", { pages, loading, error });
-  console.log("🔍 Pages data:", pages);
-  console.log("🔍 Pages items:", pages?.items);
 
   return (
     <WrapPageImage className="_unit-list-page h-full" country={country}>
-      <div className="flex flex-col items-center space-y-4 px-3">
-        <div className="flex items-center justify-center gap-3">
-          <h1 className="text-lg font-semibold text-white drop-shadow-sm drop-shadow-black/70">
-            لیست {unit?.name} فارسی زبان در {country?.name}
-          </h1>
-          <span className="hidden font-medium text-gray-500">
-            ({pages?.meta.totalItems} آیتم)
-          </span>
+      <WrapContainer>
+        <div className="flex flex-col items-center space-y-4 mb-6">
+          <div className="flex items-center justify-center gap-3">
+            <h1 className="text-lg font-semibold text-white drop-shadow-sm drop-shadow-black/70">
+              لیست {unit?.name} فارسی زبان در {country?.name}
+            </h1>
+            <span className="hidden font-medium text-gray-500">
+              ({pages?.meta.totalItems} آیتم)
+            </span>
+          </div>
+          <UnitBreadcrumb
+            unit={{ name: unit.name, slug: unit.slug }}
+            country={{ name: country.name, code: country.code }}
+          />
         </div>
-        <UnitBreadcrumb
-          unit={{ name: unit.name, slug: unit.slug }}
-          country={{ name: country.name, code: country.code }}
-        />
-      </div>
 
-      {loading ? (
-        <div className="flex min-h-[400px] items-center justify-center py-8">
-          <div className="text-white">Loading...</div>
-        </div>
-      ) : (
-        <ItemCardsList pages={pages} country={country} />
-      )}
+        {loading ? (
+          <div className="flex min-h-[400px] items-center justify-center py-8">
+            <div className="text-white">در حال بارگذاری...</div>
+          </div>
+        ) : (
+          <ItemCardsList pages={pages} country={country} />
+        )}
 
-      <UnitSeoText currentCountry={country} unit={unit} />
+        <UnitSeoText currentCountry={country} unit={unit} />
+      </WrapContainer>
     </WrapPageImage>
   );
 }

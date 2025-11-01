@@ -76,9 +76,6 @@ export default async function sendFormAction(
         },
       );
       if (!response.ok) {
-        console.log(await response.json());
-
-        console.log("not ok send text in jobs");
         throw new Error("خطا در ارتباط با سرور. دوباره تلاش کنید");
       }
     }
@@ -101,7 +98,6 @@ export default async function sendFormAction(
         },
       );
       if (!response.ok) {
-        console.log("not ok send doc in jobs", await response.json());
         throw new Error("خطا در ارتباط با سرور. دوباره تلاش کنید");
       }
     }

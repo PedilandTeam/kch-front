@@ -1,6 +1,5 @@
 import { Button } from "@components";
 import type { AdNamespace } from "@/types/ad";
-import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -26,7 +25,7 @@ export default function Ad({ data }: { data: AdNamespace.IAd }) {
               {data.price ? `${data?.price.toLocaleString()} دلار` : "توافقی"}
             </p>
             <p>
-              {moment(data.createdDate).calendar()} در {data.city?.name}
+              {/* {moment(data.createdDate).calendar()} در {data.city?.name} */}
             </p>
           </div>
         </div>

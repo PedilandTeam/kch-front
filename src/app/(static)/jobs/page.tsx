@@ -1,6 +1,4 @@
-import PageHead from "./page-head";
-import JobsText from "@/text";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "کوچا | فرصت‌های شغلی",
@@ -12,9 +10,9 @@ export const metadata: Metadata = {
 
 const Jobs = () => {
   return (
-    <div className="static page-wrap">
-      <PageHead />
-      <JobsText />
+    <div className="page-wrap static">
+      {/* <PageHead />
+      <JobsText /> */}
     </div>
   );
 };

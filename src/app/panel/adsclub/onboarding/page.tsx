@@ -1,16 +1,17 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo } from "react";
+import { Suspense, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
-import { AdsClubLogo, CreditDisplay } from "@components";
+import { AdsClubLogo } from "@/components/panel/adsClubLogo";
+import { CreditDisplay } from "@/components/panel/CreditDisplay";
 import { usePointsStore } from "@/store/usePointsStore";
 
-export default function IntroPage() {
+function IntroPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -140,7 +141,7 @@ export default function IntroPage() {
             {slides[step - 1]?.btnText}
           </Button>
         ) : (
-          <Button variant="success" className="w-full" asChild>
+          <Button className="w-full" asChild>
             <Link href="/panel/adsclub/onboarding/register">
               {slides[step - 1]?.btnText}
             </Link>
@@ -148,5 +149,13 @@ export default function IntroPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function IntroPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <IntroPageContent />
+    </Suspense>
   );
 }

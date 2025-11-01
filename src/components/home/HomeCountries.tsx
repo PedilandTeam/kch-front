@@ -136,7 +136,7 @@ export const HomeCountries = async () => {
         {sortedFeaturedCountries.map((country, index) => (
           <div
             key={country.code}
-            className="group relative h-[180px] overflow-hidden rounded-xl"
+            className="group relative h-[200px] overflow-hidden rounded-xl"
           >
             <Link href={country.href} className="relative block h-full w-full">
               <Image
@@ -145,7 +145,7 @@ export const HomeCountries = async () => {
                 fill
                 alt={country.alt}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="cursor-pointer transition-all duration-500 group-hover:scale-110"
+                className="h-auto cursor-pointer object-cover transition-all duration-500 group-hover:scale-110"
                 priority={index < 3} // Only prioritize first 3 images
               />
               <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10">

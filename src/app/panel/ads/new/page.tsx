@@ -1,10 +1,13 @@
-import NewAdForm from "./newAd.form";
+"use client";
+
+// import NewAdForm from "./newAd.form";
 
 export default function NewAdPage() {
 
   return(
     <div className="w-full flex justify-center items-center">
-      <NewAdForm/>
+      {/* <NewAdForm/> */}
+      <p>Form is currently disabled</p>
     </div>
   )
 

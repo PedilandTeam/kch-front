@@ -1,6 +1,8 @@
+"use client";
+
 import { AdsItem } from "@/components/panel/AdsItem";
 import { PageHeader } from "@/components/panel/PageHeader";
-import { AdsData, adsData } from "@/constants/ads-data";
+import { adsData, type AdsData } from "@/constants/ads-data";
 
 export default function BookmarksPage() {
   return (

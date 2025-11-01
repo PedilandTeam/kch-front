@@ -1,14 +1,13 @@
+"use client";
+
 import { adsData } from "@/constants/ads-data";
 
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-  Card,
-  CardContent,
-  CardHeader,
-  PageHeader,
 } from "@components";
+import { PageHeader } from "@/components/panel/PageHeader";
 import Image from "next/image";
 import {
   DeviceMobileIcon,

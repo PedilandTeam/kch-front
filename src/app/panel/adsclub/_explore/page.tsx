@@ -1,3 +1,5 @@
+"use client";
+
 import { AdsItem } from "@/components/panel/AdsItem";
 import type { AdsData } from "@/constants/ads-data";
 import { adsData } from "@/constants/ads-data";

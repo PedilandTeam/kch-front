@@ -1,5 +1,3 @@
-import { QuestionDetails } from "@components";
-
 type PageProps = {
   params: Promise<{
     countryOrSlug: string;
@@ -11,7 +9,10 @@ type PageProps = {
 };
 
 export default async function Page({ params }: PageProps) {
-  const { countryOrSlug, questionId } = await params;
-
-  return <QuestionDetails params={{ questionId, countryOrSlug }} />;
+  return (
+    <>
+      <p>hello</p>
+      {/* <QuestionDetails params={{ questionId, countryOrSlug }} /> */}
+    </>
+  );
 }

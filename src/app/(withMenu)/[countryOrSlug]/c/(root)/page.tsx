@@ -4,13 +4,6 @@ import { fetchQuestionsServer } from "@/sdk/questions.server";
 import { notFound } from "next/navigation";
 import { SWRConfig, unstable_serialize } from "swr";
 
-import {
-  CommunityPageHeader,
-  PageContainer,
-  QuestionsSection,
-  SiteBanner,
-} from "@components";
-
 type PageProps = {
   params: Promise<{ countryOrSlug: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -42,14 +35,15 @@ export default async function Page({ params, searchParams }: PageProps) {
   });
 
   return (
-    <PageContainer className="_community-page">
-      <SiteBanner />
+    <p>hello</p>
+    // <PageContainer className="_community-page">
+    //   <SiteBanner />
 
-      <CommunityPageHeader country={country} countryOrSlug={countryOrSlug} />
+    //   <CommunityPageHeader country={country} countryOrSlug={countryOrSlug} />
 
-      <SWRConfig value={{ fallback: { [unstable_serialize(key)]: initial } }}>
-        <QuestionsSection countryCode={countryOrSlug} />
-      </SWRConfig>
-    </PageContainer>
+    //   <SWRConfig value={{ fallback: { [unstable_serialize(key)]: initial } }}>
+    //     <QuestionsSection countryCode={countryOrSlug} />
+    //   </SWRConfig>
+    // </PageContainer>
   );
 }

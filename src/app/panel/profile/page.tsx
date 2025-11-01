@@ -1,4 +1,6 @@
-import { PageHeader } from "@components";
+"use client";
+
+import { PageHeader } from "@/components/panel/PageHeader";
 import ProfileForm from "./ProfileForm";
 
 export default function ProfilePage() {

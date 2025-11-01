@@ -7,7 +7,7 @@ import { useState } from "react";
 
 interface SelectCountryProps {
   countryCode: string;
-  countries: Country[];
+  countries?: Country[];
 }
 
 export const SelectCountry = ({
@@ -15,6 +15,9 @@ export const SelectCountry = ({
   countries,
 }: SelectCountryProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const currentCountry = countries?.find(
+    (c: Country) => c.code === countryCode,
+  );
 
   return (
     <>
@@ -29,7 +32,7 @@ export const SelectCountry = ({
         height={32}
         quality={75}
         loading={"lazy"}
-        alt={`Logo of country with ISO code ${countries?.find((c: Country) => c.code === countryCode)?.code}`}
+        alt={`Logo of country with ISO code ${currentCountry?.code}`}
         countryCode={countryCode}
         onClick={() => setIsOpen(true)}
       />

@@ -6,10 +6,8 @@ import {
   Card,
   CardContent,
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -18,13 +16,29 @@ import {
 import { ListIcon } from "@phosphor-icons/react";
 import { FOOTER, GENERAL, MENU } from "@/text";
 import Link from "next/link";
-import { InstagramLogoIcon } from "@phosphor-icons/react/dist/ssr";
+import {
+  BriefcaseIcon,
+  InstagramLogoIcon,
+  ScalesIcon,
+  StethoscopeIcon,
+} from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
+import type { Country } from "@/schemas";
+import { useRouter } from "next/navigation";
 
-export const MenuDrawer = () => {
+interface MenuDrawerProps {
+  countryCode: string;
+  countries?: Country[];
+}
+
+export const MenuDrawer = ({ countryCode, countries }: MenuDrawerProps) => {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const scrollPositionRef = useRef(0);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const currentCountry = countries?.find(
+    (c: Country) => c.code === countryCode,
+  );
 
   const handleOpenChange = (newOpen: boolean) => {
     if (newOpen) {
@@ -69,7 +83,7 @@ export const MenuDrawer = () => {
           <ListIcon size={32} weight="duotone" />
         </button>
       </DrawerTrigger>
-      <DrawerContent className="bg-gradient-to-t from-primary to-primary/80 mx-auto rounded-t-3xl border-none md:max-w-[414px]">
+      <DrawerContent className="from-primary to-primary/80 mx-auto rounded-t-3xl border-none bg-gradient-to-t md:max-w-[414px]">
         <DrawerHeader className="p-0">
           <DrawerTitle>
             <VisuallyHidden>Menu</VisuallyHidden>
@@ -86,6 +100,46 @@ export const MenuDrawer = () => {
               alt="Koochaa Logo in white color"
             />
           </div>
+
+          {currentCountry && (
+            <div className="flex items-center justify-center">
+              <div className="flex flex-col items-start gap-2">
+                <Button
+                  variant="ghost"
+                  className="h-10 w-auto !p-0 text-[15px] font-normal text-white [&_svg:not([class*='size-'])]:size-6.5"
+                  onClick={() => {
+                    router.push(`/${currentCountry.code}/doctors`);
+                    setOpen(false);
+                  }}
+                >
+                  <StethoscopeIcon weight="duotone" />
+                  <h2>لیست پزشکان ایرانی {currentCountry.name}</h2>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="h-10 w-auto !p-0 text-[15px] font-normal text-white [&_svg:not([class*='size-'])]:size-6.5"
+                  onClick={() => {
+                    router.push(`/${currentCountry.code}/businesses/lawyers`);
+                    setOpen(false);
+                  }}
+                >
+                  <ScalesIcon weight="duotone" />
+                  <h2>لیست وکلای ایرانی {currentCountry.name}</h2>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="h-10 w-auto !p-0 text-[15px] font-normal text-white [&_svg:not([class*='size-'])]:size-6.5"
+                  onClick={() => {
+                    router.push(`/${currentCountry.code}/businesses`);
+                    setOpen(false);
+                  }}
+                >
+                  <BriefcaseIcon weight="duotone" />
+                  <h2>لیست مشاغل ایرانی {currentCountry.name}</h2>
+                </Button>
+              </div>
+            </div>
+          )}
 
           <Link
             href={"https://www.instagram.com/_koochaa"}
@@ -105,7 +159,7 @@ export const MenuDrawer = () => {
           </Link>
 
           <div className="_copyright space-y-2.5 text-center">
-            <div className="flex items-center justify-center gap-6 text-[15px] text-white">
+            <div className="flex items-center justify-center gap-6 text-[15px] font-light text-white">
               <Link href={"/about"} className="">
                 {MENU.ABOUT}
               </Link>

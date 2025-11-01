@@ -14,7 +14,6 @@ export async function verifyCaptchaAction(
   )
     .then(async (res) => {
       const response = await res.json();
-      console.log(response);
 
       if (res.ok) {
         if (response.success) {

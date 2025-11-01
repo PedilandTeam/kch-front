@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import type { Country } from "@/schemas";
+import NextImage from "next/image";
 import { useEffect, useState } from "react";
 
 interface WrapPageImageProps {
@@ -16,12 +17,12 @@ export const WrapPageImage = ({
   country,
 }: WrapPageImageProps) => {
   const [imageUrl, setImageUrl] = useState<string>(
-    `/images/directory/hero-bg-${country.code}.webp`,
+    `/images/bd/${country.code}-hp.webp`,
   );
 
   useEffect(() => {
-    const mainUrl = `/images/directory/hero-bg-${country.code}.webp`;
-    const fallbackUrl = `/images/directory/hero-bg-un.webp`;
+    const mainUrl = `/images/bd/${country.code}-hp.webp`;
+    const fallbackUrl = `/images/bd/un-hp.webp`;
 
     const img = new Image();
     img.src = mainUrl;
@@ -32,15 +33,33 @@ export const WrapPageImage = ({
 
   return (
     <main
-      className={cn("_page-image flex flex-1 relative pb-8", className)}
-      style={{
-        backgroundImage: `url(${imageUrl})`,
-        backgroundSize: "contain",
-        backgroundPosition: "top",
-        backgroundRepeat: "no-repeat",
-      }}
+      className={cn("_page-image relative flex h-full flex-1 pb-8", className)}
     >
-      <div className="flex w-full flex-1 flex-col gap-8 pt-5">{children}</div>
+      <div className="_mask absolute top-0 flex w-full items-end justify-center max-h-[540px]">
+        <div className="relative w-full">
+          <NextImage
+            src={imageUrl}
+            alt="Mask"
+            className="h-auto w-full object-cover"
+            width={414}
+            height={198}
+            priority
+          />
+          <div className="absolute bottom-0 left-0 right-0">
+            <NextImage
+              src="/images/hp-image-mask.webp"
+              alt="Mask"
+              className="h-auto w-full object-cover"
+              width={414}
+              height={198}
+              priority
+            />
+          </div>
+        </div>
+      </div>
+      <div className="z-10 flex w-full flex-1 flex-col gap-8 pt-5">
+        {children}
+      </div>
     </main>
   );
 };

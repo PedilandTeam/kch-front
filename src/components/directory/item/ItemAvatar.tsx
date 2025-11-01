@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import type { Page } from "@/types/page";
 import Image from "next/image";
+import placeholderImg from "@/assets/images/logo-placeholder.webp";
 
 type itemAvatarProps = {
   pageData: Pick<Page, "id" | "haveAvatar" | "profile">;
@@ -14,7 +15,7 @@ export const ItemAvatar = ({ pageData, className }: itemAvatarProps) => {
       src={
         pageData.profile
           ? `${process.env.NEXT_PUBLIC_DL_URL}/pages/${pageData.id}/${pageData.profile}`
-          : "/images/list/logo/logo-placeholder-03.webp"
+          : placeholderImg
       }
       width={100}
       height={100}

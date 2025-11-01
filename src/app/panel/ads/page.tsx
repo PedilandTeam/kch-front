@@ -1,12 +1,11 @@
 "use client";
 
-import { fetcher } from "@/hooks/fetcher";
-import { AdNamespace } from "@/types/ad";
 import useSWR from "swr";
 import Ad from "./components/ad";
 import AdSkeleton from "./components/ad.skeleton";
 import { useUser } from "@/store/useUser";
 import NoAds from "../../../components/panel/tmp/noAds";
+import type { AdNamespace } from "@/types/ad";
 
 export default function Ads() {
   const {
@@ -14,8 +13,7 @@ export default function Ads() {
     isLoading: isAdsLoading,
     error: adsError,
   } = useSWR<AdNamespace.GET>(
-    `${process.env.NEXT_PUBLIC_API_URL}/ads?limit=100&page=1`,
-    fetcher
+    `${process.env.NEXT_PUBLIC_API_URL}/ads?limit=100&page=1`
   );
 
   const { user } = useUser();

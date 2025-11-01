@@ -1,22 +1,20 @@
 import type { Country } from "@/schemas/country";
-import Image from "next/image";
 
 import { CountryStats } from "@components";
+import { CountryImage } from "./CountryImage";
 
 interface CountryPageHeadProps {
   currentCountry: Country;
 }
 
-export const CountryPageHead = ({ currentCountry }: CountryPageHeadProps) => {
+export const CountryPageHead = async ({
+  currentCountry,
+}: CountryPageHeadProps) => {
   return (
     <div className="_country-page-head relative mx-4">
-      <Image
-        className="aspect-square rounded-xl object-cover brightness-[.70]"
-        src={`/images/slide/home/${currentCountry.code}-m.webp`}
-        width={430}
-        height={600}
-        alt={`یک تصویر از کشور ${currentCountry.name}`}
-        priority
+      <CountryImage
+        countryCode={currentCountry.code}
+        countryName={currentCountry.name}
       />
 
       <div className="absolute top-0 right-0 flex h-full w-full flex-col items-center justify-center gap-4 p-3">

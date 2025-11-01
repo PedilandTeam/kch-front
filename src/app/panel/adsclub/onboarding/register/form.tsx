@@ -18,7 +18,6 @@ import {
   FormLabel,
   FormMessage,
   Input,
-  MultiSelect,
   RadioGroup,
   RadioGroupItem,
   Select,
@@ -285,7 +284,7 @@ export default function RegisterForm() {
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="interests"
               render={({ field }) => (
@@ -316,13 +315,13 @@ export default function RegisterForm() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
           </>
         )}
 
         {step === "details" && watchStatus === "migrating" && (
           <>
-            <FormField
+            {/* <FormField
               control={form.control}
               name="destinations"
               render={({ field }) => (
@@ -385,7 +384,7 @@ export default function RegisterForm() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
           </>
         )}
 

@@ -23,16 +23,15 @@ export const ItemCard = ({
   variant,
   carousel,
 }: ItemCardProps) => {
-  console.log("🔧 ItemCard received page:", page);
-  console.log("🔧 ItemCard page.category:", page?.category);
-  console.log("🔧 ItemCard page.category.name:", page?.category?.name);
-  console.log("🔧 ItemCard page.unit:", page?.unit);
-  
   // Add fallback debugging
   if (!page?.category?.name) {
-    console.warn("⚠️ Category name is missing for page:", page?.id, page?.title);
+    console.warn(
+      "⚠️ Category name is missing for page:",
+      page?.id,
+      page?.title,
+    );
   }
-  
+
   return (
     <Card
       className={cn(
@@ -112,7 +111,9 @@ export const ItemCard = ({
                   </Link>
                 )}
                 <span className="mx-1">در</span>
-                <span className="truncate">{page?.city?.name || "No city"}</span>
+                <span className="truncate">
+                  {page?.city?.name || "No city"}
+                </span>
               </div>
             </div>
           </div>

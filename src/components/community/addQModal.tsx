@@ -40,7 +40,6 @@ export default function AddQModal() {
     })
       .then((response) => response.json())
       .then((result) => {
-        // console.log(result);
         toast.success("سوال شما با موفقیت ثبت شد و پس از تایید منتشر میگردد", {
           duration: 4000, // Duration in milliseconds (4 seconds)
         });

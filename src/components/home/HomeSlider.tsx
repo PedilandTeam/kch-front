@@ -3,7 +3,7 @@ import sliderImage from "@/assets/images/bd/hsm-01.webp";
 
 export const HomeSlider = () => {
   return (
-    <div className="slider relative flex h-[460px] content-center justify-center rounded-xl">
+    <div className="slider relative flex h-[440px] content-center justify-center rounded-xl">
       <Image
         className="rounded-xl object-cover brightness-[.75]"
         src={sliderImage}

@@ -15,7 +15,7 @@ export const UnitSeoText = ({ currentCountry, unit }: UnitSeoTextProps) => {
   const [showMore, setShowMore] = useState(false);
 
   return (
-    <div className="_SEO-text flex flex-col px-4">
+    <div className="_SEO-text flex flex-col px-4 mt-4">
       <div
         className={cn(
           "text-muted-foreground relative overflow-hidden text-justify text-sm duration-500",

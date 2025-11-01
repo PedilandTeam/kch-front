@@ -16,7 +16,6 @@ export default useGetTopic;
 //       })
 //         .then((response) => response.json())
 //         .then((result) => {
-//           // console.log(result.items);
 //           setTopics(result.items);
 //         })
 //         .catch((err) => console.error(err));

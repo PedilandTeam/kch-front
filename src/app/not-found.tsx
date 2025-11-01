@@ -3,6 +3,7 @@
 import { useHeader } from "@/store/useHeader";
 import Image from "next/image";
 import { useEffect } from "react";
+import img from "@/assets/images/not-found.png";
 
 export default function NotFound() {
   const { setIsNotFound } = useHeader();
@@ -14,11 +15,11 @@ export default function NotFound() {
   }, []);
 
   return (
-    <div className="_not-found justify-cente flex h-full items-center">
+    <div className="_not-found justify-cente flex h-full items-center bg-blue-50">
       <div className="wrap">
         <div className="flex justify-center">
           <Image
-            src="/images/not-found-01.png"
+            src={img}
             alt="404 Error Iamge"
             width={160}
             height={124}
