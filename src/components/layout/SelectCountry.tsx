@@ -28,8 +28,8 @@ export const SelectCountry = ({
       />
       <CircleFlag
         className="opacity-50 hover:cursor-pointer"
-        width={32}
-        height={32}
+        width={34}
+        height={34}
         quality={75}
         loading={"lazy"}
         alt={`Logo of country with ISO code ${currentCountry?.code}`}

@@ -11,7 +11,7 @@ export const WrapPageSimple = ({
 }: WrapPageSimpleProps) => {
   return (
     <main
-      className={cn("_page-simple flex flex-col gap-4 pt-4 pb-8", className)}
+      className={cn("_page-simple flex flex-col gap-4 pt-4 pb-20", className)}
     >
       {children}
     </main>

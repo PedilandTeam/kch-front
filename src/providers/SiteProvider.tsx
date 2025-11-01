@@ -1,7 +1,6 @@
 "use client";
 
 import Script from "next/script";
-
 import Hotjar from "@/components/hotjar";
 import { Toaster } from "@/components/ui/sonner";
 import { SwrProvider } from "@/lib/swr";

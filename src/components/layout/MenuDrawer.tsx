@@ -80,7 +80,7 @@ export const MenuDrawer = ({ countryCode, countries }: MenuDrawerProps) => {
           }}
           suppressHydrationWarning
         >
-          <ListIcon size={32} weight="duotone" />
+          <ListIcon size={34} weight="duotone" />
         </button>
       </DrawerTrigger>
       <DrawerContent className="from-primary to-primary/80 mx-auto rounded-t-3xl border-none bg-gradient-to-t md:max-w-[414px]">
@@ -90,7 +90,7 @@ export const MenuDrawer = ({ countryCode, countries }: MenuDrawerProps) => {
           </DrawerTitle>
           <DrawerDescription></DrawerDescription>
         </DrawerHeader>
-        <div className="space-y-7 p-5">
+        <div className="space-y-7 p-5 pb-8">
           <div className="flex justify-center">
             <Image
               className="h-auto w-[180px]"
@@ -171,7 +171,7 @@ export const MenuDrawer = ({ countryCode, countries }: MenuDrawerProps) => {
               </Link>
             </div>
 
-            <p className="text-[13px] text-white/70">
+            <p className="text-xs font-light text-white/70">
               {FOOTER.COPYRIGHT_TEXT1}
               <Link href="/" className="mx-1 inline-flex">
                 {GENERAL.KOOCHAA}
