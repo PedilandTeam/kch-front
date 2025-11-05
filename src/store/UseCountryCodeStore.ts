@@ -8,7 +8,6 @@ interface CountryCodeStore {
 
 export const useCountryCodeStore = create<CountryCodeStore>((set) => ({
   countryCode: "un",
-
   setCountryCode: (code) => set({ countryCode: code }),
   resetCountry: () => set({ countryCode: "un" }),
 }));

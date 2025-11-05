@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { usePointsStore } from "@/store/usePointsStore";
+import coinImage from "@/assets/images/icons/icon-coins-2.png";
 
 export const CreditDisplay = () => {
   const { points } = usePointsStore();
@@ -23,12 +24,7 @@ export const CreditDisplay = () => {
       >
         {points}
       </span>
-      <Image
-        src="/images/icons/icon-coins-2.png"
-        width={32}
-        height={32}
-        alt="coin"
-      />
+      <Image src={coinImage} width={32} height={32} alt="coin" />
     </div>
   );
 };

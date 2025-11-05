@@ -1,7 +1,8 @@
 import { usePointsStore } from "@/store/usePointsStore";
 import { MedalIcon } from "@phosphor-icons/react";
-import { Medal } from "lucide-react";
 import Image from "next/image";
+
+import coinImage from "@/assets/images/icons/icon-coins-2.png";
 
 export const CreditStats = () => {
   const { points } = usePointsStore();
@@ -19,7 +20,9 @@ export const CreditStats = () => {
                   weight="duotone"
                   className="text-yellow-700/70"
                 />
-                <span className="text-[13px] text-yellow-700/80">عضویت بـرنـزی</span>
+                <span className="text-[13px] text-yellow-700/80">
+                  عضویت بـرنـزی
+                </span>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -27,7 +30,7 @@ export const CreditStats = () => {
                 {points}
               </p>
               <Image
-                src="/images/icons/icon-coins-2.png"
+                src={coinImage}
                 alt="credit"
                 width={54}
                 height={54}

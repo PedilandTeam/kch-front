@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { AdsClubLogo } from "./adsClubLogo";
+import logoImage from "@/assets/images/logo.png";
 
 export const HomeHeader = () => {
   return (
@@ -11,7 +12,7 @@ export const HomeHeader = () => {
 
       <div className="flex items-center gap-2">
         <AdsClubLogo />
-        <Image src="/images/logo-01.png" alt="logo" width={40} height={40} />
+        <Image src={logoImage} alt="logo" width={40} height={40} />
       </div>
     </header>
   );

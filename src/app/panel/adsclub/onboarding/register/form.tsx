@@ -1,13 +1,17 @@
 "use client";
 
+import {
+  adsClubStep1Schema,
+  adsClubStep2Schema,
+  type AdsClubStep1,
+  type AdsClubStep2,
+} from "@/schemas/adsClubRegister";
 import { usePointsStore } from "@/store/usePointsStore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
-import { adsClubRegisterSchema } from "@/schemas/adsClubRegister";
 
 import {
   Button,
@@ -18,6 +22,7 @@ import {
   FormLabel,
   FormMessage,
   Input,
+  MultiSelect,
   RadioGroup,
   RadioGroupItem,
   Select,
@@ -27,156 +32,251 @@ import {
   SelectValue,
 } from "@components";
 
-type AdsClubRegister = z.infer<typeof adsClubRegisterSchema>;
-
 export default function RegisterForm() {
   const { addPoints } = usePointsStore();
   const [step, setStep] = useState<"status" | "details">("status");
   const router = useRouter();
 
-  const form = useForm<AdsClubRegister>({
-    resolver: zodResolver(adsClubRegisterSchema),
+  // 🔹 مرحله ۱
+  const formStep1 = useForm<AdsClubStep1>({
+    resolver: zodResolver(adsClubStep1Schema),
     defaultValues: {
       status: undefined,
       gender: undefined,
-      birthYear: undefined,
+      birthYear: "",
+    },
+    mode: "onSubmit",
+  });
+
+  // 🔹 مرحله ۲
+  const formStep2 = useForm<AdsClubStep2>({
+    resolver: zodResolver(adsClubStep2Schema),
+    defaultValues: {
+      status: undefined,
+      gender: undefined,
+      birthYear: "",
       country: "",
       city: "",
       interests: [],
       destinations: [],
       methods: [],
     },
+    mode: "onSubmit",
   });
 
-  const watchStatus = form.watch("status");
-
-  // Note: Removed automatic validation trigger to prevent premature form validation
-  // Validation will only occur when user clicks submit button
+  const watchStatus = formStep2.watch("status");
 
   const addCredit = (field: any, value: any, plus: number) => {
     if (
       !field.value ||
       (Array.isArray(field.value) && field.value.length === 0)
-    ) {
+    )
       addPoints(plus);
-    }
     field.onChange(value);
   };
 
-  const onSubmit = (values: AdsClubRegister) => {
-    console.log("Form values:", values);
+  const onSubmitStep2 = (values: AdsClubStep2) => {
+    console.log("✅ Final values:", values);
     toast.success("حساب کاربری شما با موفقیت فعال شد.");
     router.push("/panel/adsclub");
   };
 
+  /* ─────────────── مرحله ۱ ─────────────── */
+  if (step === "status") {
+    return (
+      <Form {...formStep1}>
+        <form
+          onSubmit={formStep1.handleSubmit((data) => {
+            const status = data.status;
+            if (status) {
+              formStep2.setValue("status", status);
+              setStep("details");
+            }
+          })}
+          className="space-y-4"
+        >
+          <div className="text-primary space-y-1 rounded-xl border border-dashed border-blue-800/30 bg-blue-50 p-4">
+            <h2 className="font-medium">Pedram عزیز،</h2>
+            <p className="text-[15px]">
+              لطفاً وضعیت مهاجرت و اطلاعات اولیه را تکمیل کنید.
+            </p>
+          </div>
+
+          <FormField
+            control={formStep1.control}
+            name="status"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  <span className="text-red-500">*</span> وضعیت مهاجرت:
+                </FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    dir="rtl"
+                    onValueChange={(val) => addCredit(field, val, 5)}
+                    value={field.value || ""}
+                    className="flex gap-6"
+                  >
+                    <div className="flex items-center gap-2">
+                      <RadioGroupItem value="migrated" id="migrated" />
+                      <label htmlFor="migrated">مهاجرت کرده‌ام</label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <RadioGroupItem value="migrating" id="migrating" />
+                      <label htmlFor="migrating">در حال مهاجرت هستم</label>
+                    </div>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={formStep1.control}
+            name="gender"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>جنسیت:</FormLabel>
+                <Select
+                  dir="rtl"
+                  onValueChange={(val) => addCredit(field, val, 5)}
+                  value={field.value || ""}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="انتخاب کنید" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="male">مرد</SelectItem>
+                    <SelectItem value="female">زن</SelectItem>
+                    <SelectItem value="other">سایر</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={formStep1.control}
+            name="birthYear"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>سال تولد (میلادی):</FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    inputMode="numeric"
+                    pattern="\d*"
+                    placeholder="مثال: 1990"
+                    {...field}
+                    value={field.value || ""}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/\D/g, "").slice(0, 4);
+                      field.onChange(val);
+                    }}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <Button type="submit" className="w-full">ادامه</Button>
+        </form>
+      </Form>
+    );
+  }
+
   return (
-    <Form {...form}>
+    <Form {...formStep2}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-4"
+        onSubmit={formStep2.handleSubmit(onSubmitStep2)}
+        className="space-y-4"
       >
-        {/* پیام خوشامد */}
-        <div className="text-primary space-y-1.5 rounded-xl border border-dashed border-blue-800/30 bg-blue-50 p-4">
-          {step === "status" && (
-            <>
-              <h2 className="font-medium">Pedram عزیز،</h2>
-              <p>
-                به جمع کاربران ادزکلاب خوش آمدی. امیدواریم که بتونیم خدمات
-                کاربردی رو بهت ارائه کنیم.
-              </p>
-              <p>
-                لطفا موارد خواسته شده رو به دقت پاسخ بدید تا حساب کاربری‌تون
-                براساس سلایق و نیازهای فعلی شما شخصی‌سازی بشه.
-              </p>
-            </>
-          )}
-          {step === "details" && (
-            <>
-              <h2 className="font-medium">تبریک میگم Pedram،</h2>
-              <p>
-                فقط یک قدم دیگه تا تکمیل ثبت نام و آماده شدن حساب کاربریت مونده.
-              </p>
-            </>
-          )}
+        <div className="text-primary space-y-1 rounded-xl border border-dashed border-blue-800/30 bg-blue-50 p-4">
+          <h2 className="font-medium">تبریک می‌گم Pedram،</h2>
+          <p className="text-[15px]">فقط یک قدم دیگه تا پایان باقی مونده!</p>
         </div>
 
-        {/* STEP 1 */}
-        {step === "status" && (
+        {watchStatus === "migrating" && (
           <>
-            {/* وضعیت مهاجرت */}
             <FormField
-              control={form.control}
-              name="status"
+              control={formStep2.control}
+              name="destinations"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    <span className="text-red-500">*</span> وضعیت مهاجرت‌تون رو
-                    مشخص کنید:
-                  </FormLabel>
+                  <FormLabel><span className="text-red-500">*</span> کشورهای موردنظر</FormLabel>
                   <FormControl>
-                    <RadioGroup
-                      dir="rtl"
-                      onValueChange={(val) => {
-                        addCredit(field, val, 5);
-                        form.clearErrors("status");
-                      }}
-                      defaultValue={field.value}
-                      className="flex flex-col gap-3 pt-2 pr-2"
-                    >
-                      <div className="flex items-center gap-2">
-                        <RadioGroupItem value="migrated" id="migrated" />
-                        <label
-                          className="text-primary text-sm font-medium"
-                          htmlFor="migrated"
-                        >
-                          مهاجرت کردم
-                        </label>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <RadioGroupItem value="migrating" id="migrating" />
-                        <label
-                          className="text-primary text-sm font-medium"
-                          htmlFor="migrating"
-                        >
-                          در حال مهاجرت هستم
-                        </label>
-                      </div>
-                    </RadioGroup>
+                    <MultiSelect
+                      options={[
+                        { label: "آلمان", value: "germany" },
+                        { label: "کانادا", value: "canada" },
+                        { label: "استرالیا", value: "australia" },
+                        { label: "سوئد", value: "sweden" },
+                        { label: "هلند", value: "netherlands" },
+                      ]}
+                      defaultValue={field.value || []}
+                      onValueChange={(vals) => field.onChange(vals)}
+                      placeholder="انتخاب کشور..."
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            {/* جنسیت */}
             <FormField
-              control={form.control}
-              name="gender"
+              control={formStep2.control}
+              name="methods"
               render={({ field }) => (
-                <FormItem className="space-y-0">
-                  <FormLabel className="mb-2">
-                    جنسیت:{" "}
-                    <span className="text-muted-foreground text-sm">
-                      (5+ امتیاز)
-                    </span>
-                  </FormLabel>
+                <FormItem>
+                  <FormLabel><span className="text-red-500">*</span> روش‌های مهاجرت</FormLabel>
+                  <FormControl>
+                    <MultiSelect
+                      options={[
+                        { label: "تحصیلی", value: "study" },
+                        { label: "کاری", value: "work" },
+                        { label: "سرمایه‌گذاری", value: "investment" },
+                        { label: "پناهندگی", value: "asylum" },
+                      ]}
+                      defaultValue={field.value || []}
+                      onValueChange={(vals) => field.onChange(vals)}
+                      placeholder="انتخاب روش..."
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </>
+        )}
+
+        {watchStatus === "migrated" && (
+          <>
+            <FormField
+              control={formStep2.control}
+              name="country"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel><span className="text-red-500">*</span> کشور محل زندگی</FormLabel>
                   <Select
                     dir="rtl"
-                    onValueChange={(val) => {
-                      addCredit(field, val, 5);
-                      form.clearErrors("gender");
-                    }}
-                    defaultValue={field.value}
+                    onValueChange={(val) => field.onChange(val)}
+                    value={field.value || ""}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="انتخاب کنید" />
+                        <SelectValue placeholder="انتخاب کشور..." />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="male">مرد</SelectItem>
-                      <SelectItem value="female">زن</SelectItem>
-                      <SelectItem value="other">سایر</SelectItem>
+                      <SelectItem value="germany">آلمان</SelectItem>
+                      <SelectItem value="austria">اتریش</SelectItem>
+                      <SelectItem value="sweden">سوئد</SelectItem>
+                      <SelectItem value="canada">کانادا</SelectItem>
+                      <SelectItem value="netherlands">هلند</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -184,168 +284,52 @@ export default function RegisterForm() {
               )}
             />
 
-            {/* سال تولد */}
             <FormField
-              control={form.control}
-              name="birthYear"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    سال تولد (میلادی):{" "}
-                    <span className="text-muted-foreground text-sm">
-                      (5+ امتیاز)
-                    </span>
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      placeholder="مثال: 1990"
-                      {...field}
-                      onChange={(e) => {
-                        field.onChange(e.target.value);
-                        if (e.target.value) {
-                          form.clearErrors("birthYear");
-                        }
-                      }}
-                      onBlur={(e) => {
-                        const year = Number(e.target.value);
-                        if (year >= 1925 && year <= 2007 && !field.value) {
-                          addPoints(5);
-                        }
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </>
-        )}
-
-        {/* STEP 2 */}
-        {step === "details" && watchStatus === "migrated" && (
-          <>
-            <FormField
-              control={form.control}
-              name="country"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>* در حال حاضر کدوم کشور زندگی میکنی؟</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="مثال: Germany"
-                      {...field}
-                      onChange={(e) => {
-                        field.onChange(e.target.value);
-                        if (e.target.value.trim()) {
-                          form.clearErrors("country");
-                        }
-                      }}
-                      onBlur={(e) => {
-                        if (e.target.value && !field.value) {
-                          addPoints(5);
-                        }
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
+              control={formStep2.control}
               name="city"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
-                    شهر محل سکونت:{" "}
-                    <span className="text-muted-foreground text-sm font-normal">
-                      (اختیاری | 5+ امتیاز)
-                    </span>
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="مثال: Berlin"
-                      {...field}
-                      onChange={(e) => {
-                        field.onChange(e.target.value);
-                        if (e.target.value.trim()) {
-                          form.clearErrors("city");
-                        }
-                      }}
-                      onBlur={(e) => {
-                        if (e.target.value && !field.value) {
-                          addPoints(5);
-                        }
-                      }}
-                    />
-                  </FormControl>
+                  <FormLabel><span className="text-red-500">*</span> شهر محل سکونت</FormLabel>
+                  <Select
+                    dir="rtl"
+                    onValueChange={(val) => field.onChange(val)}
+                    value={field.value || ""}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="انتخاب شهر..." />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="berlin">برلین</SelectItem>
+                      <SelectItem value="hamburg">هامبورگ</SelectItem>
+                      <SelectItem value="munich">مونیخ</SelectItem>
+                      <SelectItem value="vienna">وین</SelectItem>
+                      <SelectItem value="stockholm">استکهلم</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            {/* <FormField
-              control={form.control}
+
+            <FormField
+              control={formStep2.control}
               name="interests"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>* دسته‌بندی‌های مورد علاقه</FormLabel>
+                  <FormLabel><span className="text-red-500">*</span> موضوعات مورد علاقه</FormLabel>
                   <FormControl>
                     <MultiSelect
                       options={[
-                        { label: "ورزش", value: "sport" },
-                        { label: "هنر", value: "art" },
-                        { label: "تکنولوژی", value: "tech" },
-                        { label: "گردشگری", value: "travel" },
+                        { label: "رویدادها و کنسرت", value: "art" },
+                        { label: "خدمات حقوقی و بیمه", value: "sport" },
+                        { label: "خدمات مالی و بانکی", value: "tech" },
+                        { label: "کافه، بار و رستوران", value: "travel" },
+                        { label: "پزشک و داروخانه", value: "food" },
                       ]}
-                      value={field.value || []}
-                      onChange={(vals) => {
-                        const diff = vals.length - (field.value?.length || 0);
-                        if (diff > 0) {
-                          addPoints(diff);
-                        }
-                        field.onChange(vals);
-                        if (vals.length > 0) {
-                          form.clearErrors("interests");
-                        }
-                      }}
-                      placeholder="انتخاب کنید..."
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
-          </>
-        )}
-
-        {step === "details" && watchStatus === "migrating" && (
-          <>
-            {/* <FormField
-              control={form.control}
-              name="destinations"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>* مقاصد احتمالی مهاجرت:</FormLabel>
-                  <FormControl>
-                    <MultiSelect
-                      options={[
-                        { label: "Germany", value: "germany" },
-                        { label: "Canada", value: "canada" },
-                        { label: "Australia", value: "australia" },
-                        { label: "Sweden", value: "sweden" },
-                      ]}
-                      value={field.value || []}
-                      onChange={(vals) => {
-                        const diff = vals.length - (field.value?.length || 0);
-                        if (diff > 0) {
-                          addPoints(diff);
-                        }
-                        field.onChange(vals);
-                        if (vals.length > 0) {
-                          form.clearErrors("destinations");
-                        }
-                      }}
+                      defaultValue={field.value || []}
+                      onValueChange={(vals) => field.onChange(vals)}
                       placeholder="انتخاب کنید..."
                     />
                   </FormControl>
@@ -353,56 +337,11 @@ export default function RegisterForm() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="methods"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>* روش‌های مورد نظر برای مهاجرت:</FormLabel>
-                  <FormControl>
-                    <MultiSelect
-                      options={[
-                        { label: "تحصیل", value: "study" },
-                        { label: "کار", value: "work" },
-                        { label: "سرمایه‌گذاری", value: "investment" },
-                        { label: "پناهندگی", value: "asylum" },
-                      ]}
-                      value={field.value || []}
-                      onChange={(vals) => {
-                        const diff = vals.length - (field.value?.length || 0);
-                        if (diff > 0) {
-                          addPoints(diff);
-                        }
-                        field.onChange(vals);
-                        if (vals.length > 0) {
-                          form.clearErrors("methods");
-                        }
-                      }}
-                      placeholder="انتخاب کنید..."
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
           </>
         )}
 
-        {step === "details" && <Button type="submit">ثبت فرم</Button>}
+        <Button type="submit" className="w-full">ثبت فرم</Button>
       </form>
-
-      {step === "status" && (
-        <Button
-          type="button"
-          onClick={() => {
-            form.trigger("status").then((valid) => {
-              if (valid) setStep("details");
-            });
-          }}
-        >
-          ادامه
-        </Button>
-      )}
     </Form>
   );
 }

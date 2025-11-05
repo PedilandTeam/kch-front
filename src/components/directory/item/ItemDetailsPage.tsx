@@ -1,5 +1,7 @@
+"use client";
+
 import type { Page } from "@/types/page";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 
 import {
   ItemBreadcrumb,
@@ -9,12 +11,13 @@ import {
   ItemSuggestion,
   WrapPageSimple,
 } from "@components";
+import { useCountryCodeStore } from "@/store/UseCountryCodeStore";
 
 interface ItemDetailsPageProps {
   pageData: Page;
 }
 
-export async function ItemDetailsPage({ pageData }: ItemDetailsPageProps) {
+export function ItemDetailsPage({ pageData }: ItemDetailsPageProps) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -28,6 +31,12 @@ export async function ItemDetailsPage({ pageData }: ItemDetailsPageProps) {
       addressCountry: pageData.country.code?.toUpperCase(),
     },
   };
+
+  const { setCountryCode } = useCountryCodeStore();
+
+  useEffect(() => {
+    setCountryCode(pageData.country.code);
+  }, [pageData.country.code]);
 
   return (
     <WrapPageSimple className="_item-details-page pt-0">

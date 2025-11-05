@@ -11,17 +11,22 @@ import { AdsClubLogo } from "@/components/panel/adsClubLogo";
 import { CreditDisplay } from "@/components/panel/CreditDisplay";
 import { usePointsStore } from "@/store/usePointsStore";
 
+import introImage1 from "@/assets/images/intro-img-01.jpg";
+import introImage2 from "@/assets/images/intro-img-02.jpg";
+import introImage3 from "@/assets/images/intro-img-03.jpg";
+import introImage4 from "@/assets/images/intro-img-04.jpg";
+import introImage5 from "@/assets/images/intro-img-05.jpg";
+
 function IntroPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-
   const step = Number(searchParams.get("step") ?? 1);
 
   const slides = useMemo(
     () => [
       {
         id: 1,
-        image: "/images/join/adsclub/intro-img-01.jpg",
+        image: introImage1,
         title: "خوشحالیم که اینجا هستی",
         content:
           "توی ادزکلاب ما یه فضای امن و منصفانه ایجاد کردیم تا اثربخشی تبلیغات رو افزایش بدیم. اینجا آگهی‌ها و پیشنهادات ویژه به صورت هدفمند ارسال میشن و فقط به مخاطبی میرسن که بهشون نیاز داره.",
@@ -29,7 +34,7 @@ function IntroPageContent() {
       },
       {
         id: 2,
-        image: "/images/join/adsclub/intro-img-02.jpg",
+        image: introImage2,
         title: "حفظ حریم شخصی",
         content:
           "تو ادزکلاب، هیچ اطلاعات شخصی از شما جمع‌آوری و نمایش داده نمیشه. آگهی دهندگان و سایر کاربران برخلاف پلتفرم‌های اجتماعی دیگه امکان دسترسی به حساب کاربری شما و ارسال پیام بهتون رو ندارن.",
@@ -37,7 +42,7 @@ function IntroPageContent() {
       },
       {
         id: 3,
-        image: "/images/join/adsclub/intro-img-03.jpg",
+        image: introImage3,
         title: "شخصی‌سازی واقعی",
         content:
           "در اینستاگرام و فیس‌بوک، الگوریتم و در تلگرام، ادمین‌ها تصمیم میگیرن که شما چه چیزی رو ببینید. ولی تو ادزکلاب فقط شما هستید که مشخص می‌کنید چه محتوایی و با چه موضوعاتی براتون ارسال بشه.",
@@ -45,7 +50,7 @@ function IntroPageContent() {
       },
       {
         id: 4,
-        image: "/images/join/adsclub/intro-img-04.jpg",
+        image: introImage4,
         title: "بدون اسپم و هدفمند",
         content:
           "تو ادزکلاب، برخلاف پلتفرم‌های دیگه خبری از بمباران تبلیغاتی، پیام‌های تکراری و غیرمرتبط، ربات و اسپم نیست. شما فقط آگهی‌های مرتبط با علاقه‌مندی‌های خودتون رو در زمان‌بندی معین دریافت می‌کنید.",
@@ -53,7 +58,7 @@ function IntroPageContent() {
       },
       {
         id: 5,
-        image: "/images/join/adsclub/intro-img-05.jpg",
+        image: introImage5,
         title: "سیستم کسب امتیاز",
         content:
           "تو ادزکلاب، برای ایجاد جذابیت و قدردانی از کاربران فعال و وفادار یک سیستم امتیازدهی وجود داره. با جمع‌آوری امتیازهای بیشتر، اعتبار استفاده از خدمات ویژه، تخفیف‌ها و آفرها براتون فعال میشه.",
