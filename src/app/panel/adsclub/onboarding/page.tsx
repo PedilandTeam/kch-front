@@ -16,6 +16,7 @@ import introImage2 from "@/assets/images/intro-img-02.jpg";
 import introImage3 from "@/assets/images/intro-img-03.jpg";
 import introImage4 from "@/assets/images/intro-img-04.jpg";
 import introImage5 from "@/assets/images/intro-img-05.jpg";
+import { useTelegram } from "@/providers/TelegramProvider";
 
 function IntroPageContent() {
   const router = useRouter();
@@ -93,7 +94,6 @@ function IntroPageContent() {
     <div className="flex h-screen flex-col items-center justify-center space-y-6 p-4">
       <div className="flex w-full items-center justify-between">
         <AdsClubLogo />
-
         <CreditDisplay />
       </div>
 
@@ -164,3 +164,4 @@ export default function IntroPage() {
     </Suspense>
   );
 }
+
