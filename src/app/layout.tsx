@@ -1,5 +1,7 @@
 import { baseSiteMetadata } from "@/config/metadata";
 import { SiteProvider } from "@/providers/SiteProvider";
+import { TelegramProvider } from "@/providers/TelegramProvider";
+import { TelegramAuthProvider } from "@/providers/TelegramAuthProvider";
 import "@/styles/globals.css";
 import { Roboto } from "next/font/google";
 import type { Metadata } from "next";
@@ -24,7 +26,11 @@ export default async function RootLayout({
     <html lang="fa" dir="rtl" className={`${roboto.variable} scroll-smooth`}>
       <body className="font-anjoman flex justify-center overflow-x-hidden bg-neutral-100 antialiased">
         <div className="_app relative min-h-dvh w-full max-w-[414px] bg-white shadow-lg">
-          <SiteProvider>{children}</SiteProvider>
+          <TelegramProvider>
+            <TelegramAuthProvider>
+              <SiteProvider>{children}</SiteProvider>
+            </TelegramAuthProvider>
+          </TelegramProvider>
         </div>
       </body>
     </html>
