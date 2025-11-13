@@ -42,7 +42,7 @@ export default async function fetchWrapper<T>(
   config: FetchWrapperConfig = {},
 ): Promise<FetchWrapperResponse<T>> {
   let { filters, overrideUrl, revalidate, method = "GET", body, tags } = config;
-  const url = `${process.env.API_URL}/${path}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/${path}`;
   const urlObject = new URL(overrideUrl ? overrideUrl : url);
 
   if (!filters) {
