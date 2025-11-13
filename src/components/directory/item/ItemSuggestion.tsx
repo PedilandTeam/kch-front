@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import fetchWrapper from "@/api/_fetchWrapper";
+import fetchWrapper from "@/api/fetchWrapper";
 import type { City } from "@/schemas/city";
 import type { Category } from "@/types/category";
 import type { Page } from "@/types/page";

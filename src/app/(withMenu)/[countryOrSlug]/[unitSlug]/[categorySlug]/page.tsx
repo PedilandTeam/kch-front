@@ -1,4 +1,4 @@
-import fetchWrapper from "@/api/_fetchWrapper";
+import fetchWrapper from "@/api/fetchWrapper";
 import type { Country } from "@/schemas";
 import type { GetCategoryResponse } from "@/types/category";
 import type { PathGeneratorType } from "@/types/pathGenerator";

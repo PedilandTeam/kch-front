@@ -1,5 +1,5 @@
 import { AdNamespace } from '@/types/ad';
-import fetchWrapper from './_fetchWrapper';
+import fetchWrapper from './fetchWrapper';
 
 interface Filters {
     [key: string]: any;

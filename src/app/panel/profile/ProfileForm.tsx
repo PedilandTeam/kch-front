@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { adsClubRegisterSchema } from "@/schemas/adsClubRegister";
 
 import {
   Button,
@@ -15,6 +14,7 @@ import {
   FormLabel,
   FormMessage,
   Input,
+  MultiSelect,
   RadioGroup,
   RadioGroupItem,
   Select,
@@ -23,13 +23,27 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@components";
-import { SelectSearch } from "@/components/ui-custom/SelectSearch";
+import { adsClubSchema } from "@/schemas/adsClubRegister";
+import { CircleFlag } from "next-circle-flags";
+import { useEffect, useState } from "react";
+import type { City, Country } from "@/schemas";
+import fetchCountry from "@/api/fetchCountry";
+import fetchCities from "@/api/fetchCities";
 
-type AdsClubRegister = z.infer<typeof adsClubRegisterSchema>;
+type AdsClubRegister = z.infer<typeof adsClubSchema>;
 
 export default function ProfileForm() {
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [cities, setCities] = useState<City[]>([]);
+
+  useEffect(() => {
+    fetchCountry().then((countries) => {
+      setCountries(countries);
+    });
+  }, []);
+
   const form = useForm<AdsClubRegister>({
-    resolver: zodResolver(adsClubRegisterSchema),
+    resolver: zodResolver(adsClubSchema),
     defaultValues: {
       status: "migrated",
       gender: "male",
@@ -140,29 +154,78 @@ export default function ProfileForm() {
                 name="country"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>کشور محل زندگی:</FormLabel>
-                    <FormControl>
-                      <SelectSearch
-                        value={field.value}
-                        onValueChange={field.onChange}
-                      />
-                    </FormControl>
+                    <FormLabel>
+                      <span className="text-red-500">*</span> کشور محل زندگی
+                    </FormLabel>
+                    <Select
+                      dir="rtl"
+                      onValueChange={(val) => {
+                        field.onChange(val);
+                        fetchCities({
+                          countryCode: val,
+                          limit: 1000,
+                          page: 1,
+                        }).then((res) => {
+                          console.log(res);
+                          setCities(res.items || []);
+                          form.setValue("city", "");
+                        });
+                      }}
+                      value={field.value || ""}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="انتخاب کشور..." />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="max-h-60">
+                        {countries.map((country) => (
+                          <SelectItem key={country.id} value={country.code}>
+                            <div className="flex items-center gap-2">
+                              <CircleFlag
+                                width={16}
+                                height={16}
+                                countryCode={country.code}
+                                alt={country.name}
+                                title={country.name}
+                              />
+                              {country.name}
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="city"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>شهر محل زندگی:</FormLabel>
-                    <FormControl>
-                      <SelectSearch
-                        value={field.value}
-                        onValueChange={field.onChange}
-                      />
-                    </FormControl>
+                    <FormLabel>
+                      <span className="text-red-500">*</span> شهر محل سکونت
+                    </FormLabel>
+                    <Select
+                      dir="rtl"
+                      onValueChange={field.onChange}
+                      value={field.value || ""}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="انتخاب شهر..." />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="max-h-60 overflow-y-auto">
+                        {cities.map((city) => (
+                          <SelectItem key={city.id} value={city.name}>
+                            {city.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -177,11 +240,17 @@ export default function ProfileForm() {
                 name="destinations"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>مقاصد مهاجرت:</FormLabel>
+                    <FormLabel>کشورهای موردنظر</FormLabel>
                     <FormControl>
-                      <SelectSearch
-                        value={field.value}
+                      <MultiSelect
+                        // options={countries.map((country) => ({
+                        //   label: country.name,
+                        //   value: country.code,
+                        // }))}
+                        options={[]}
+                        defaultValue={field.value || []}
                         onValueChange={field.onChange}
+                        placeholder="انتخاب کشور..."
                       />
                     </FormControl>
                     <FormMessage />
@@ -193,11 +262,18 @@ export default function ProfileForm() {
                 name="methods"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>روش‌های مهاجرت:</FormLabel>
+                    <FormLabel>روش‌های مهاجرت</FormLabel>
                     <FormControl>
-                      <SelectSearch
-                        value={field.value}
+                      <MultiSelect
+                        options={[
+                          { label: "تحصیلی", value: "study" },
+                          { label: "کاری", value: "work" },
+                          { label: "سرمایه‌گذاری", value: "investment" },
+                          { label: "پناهندگی", value: "asylum" },
+                        ]}
+                        defaultValue={field.value || []}
                         onValueChange={field.onChange}
+                        placeholder="انتخاب روش..."
                       />
                     </FormControl>
                     <FormMessage />

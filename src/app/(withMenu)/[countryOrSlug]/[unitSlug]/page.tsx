@@ -1,4 +1,4 @@
-import fetchWrapper from "@/api/_fetchWrapper";
+import fetchWrapper from "@/api/fetchWrapper";
 import type { UnitType } from "@/types/unit";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";

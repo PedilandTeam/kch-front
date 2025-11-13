@@ -18,7 +18,7 @@ export const SquareButton = ({ children, icon, link }: SquareButtonProps) => {
     <Button
       variant="outline"
       className={cn(
-        "flex h-auto items-center justify-start gap-3 rounded-lg border-blue-100 bg-blue-50 p-4 text-[15px] text-blue-900 [&_svg]:size-7",
+        "flex h-auto items-center justify-start gap-2.5 rounded-lg border-blue-100 bg-blue-50 p-4 text-[15px] text-blue-900 [&_svg:not([class*='size-'])]:size-6.5",
       )}
       asChild={link ? true : false}
     >

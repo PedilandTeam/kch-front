@@ -7,16 +7,15 @@ export const CardsMenu = () => {
         {/* <SquareButton icon={"ListHeartIcon"} link="/panel/adsclub/bookmarks">
           لیست علاقه‌مندی‌ها
         </SquareButton> */}
-        <SquareButton icon={"ListHeartIcon"} link="/panel/adsclub/bookmarks">
+        <SquareButton icon={"CheersIcon"} link="/panel/adsclub/invite">
           دعوت از دوستان (50+ امتیاز)
         </SquareButton>
-        <SquareButton icon={"ListHeartIcon"} link="/panel/adsclub/bookmarks">
+        <SquareButton icon={"CoinsIcon"} link="/panel/adsclub/scores">
           سیستم امتیازدهی
         </SquareButton>
-        <SquareButton icon={"UserListIcon"} link="/panel/profile">
-          مدیریت دسته بندی‌ها
+        <SquareButton icon={"FolderSimpleStarIcon"} link="/panel/adsclub/interests">
+          علاقه‌مندی‌ها
         </SquareButton>
-
         <SquareButton icon={"UserListIcon"} link="/panel/profile">
           حساب کاربری
         </SquareButton>

@@ -1,32 +1,31 @@
-// import { init, retrieveLaunchParams } from "@telegram-apps/sdk";
-// import { useEffect, useState } from "react";
+"use client";
+
+import { init, retrieveLaunchParams } from "@telegram-apps/sdk";
+import { useEffect, useState } from "react";
 
 export default function PanelLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // const [initData, setInitData] = useState<string>("");
+  const [initData, setInitData] = useState<string>("");
 
-  // useEffect(() => {
-  //   const tg = (window as any).Telegram?.WebApp;
+  useEffect(() => {
+    const tg = (window as any).Telegram?.WebApp;
 
-  //   if (tg) {
-  //     const raw = tg.initData || "";
-  //     setInitData(raw);
-  //     console.log("Raw initData:", raw);
-  //   } else {
-  //     setInitData("Telegram WebApp not found — open inside Telegram.");
-  //   }
-  // }, []);
+    if (tg) {
+      const raw = tg.initData || "";
+      setInitData((window as any).Telegram);
+      console.log("Raw initData:", raw);
+    } else {
+      setInitData("Telegram WebApp not found — open inside Telegram.");
+    }
+  }, []);
 
   return (
-    <main className="flex min-h-full flex-col p-4">
+    <main className="flex min-h-full flex-col p-5">
       {/* <p className="text-xs break-all text-gray-500">
-        initDataRaw: {initDataRaw || "(empty)"} <br />
         initData: {JSON.stringify(initData)}
-        <br />
-        data: {data}
       </p>
 
       <div style={{ padding: 16 }}>
