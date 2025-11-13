@@ -31,8 +31,19 @@ export function TelegramProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // hooks provided by the package (they are exported; see docs)
-  const rawInit = useRawInitData(); // returns the raw init data string or undefined
-  const launchParams = useLaunchParams(); // parsed launch params (tgWebApp... fields)
+  // Wrap in try-catch to handle cases where app is opened outside Telegram
+  let rawInit: string | undefined;
+  let launchParams: any;
+  
+  try {
+    rawInit = useRawInitData(); // returns the raw init data string or undefined
+    launchParams = useLaunchParams(); // parsed launch params (tgWebApp... fields)
+  } catch (error) {
+    // App is likely opened outside Telegram, provide fallback values
+    console.warn('Telegram SDK initialization failed, app may be running outside Telegram:', error);
+    rawInit = undefined;
+    launchParams = undefined;
+  }
   // you may also use useSignal for reactive signals (backButton, mainButton, etc.)
 
   // Parse raw init data defensively
