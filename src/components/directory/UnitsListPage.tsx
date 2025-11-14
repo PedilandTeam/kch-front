@@ -5,13 +5,11 @@ import axios from "axios";
 import type { Country } from "@/schemas";
 import type { UnitType } from "@/types/unit";
 import type { GetPagesResponse } from "@/types/page";
-import {
-  ItemCardsList,
-  UnitBreadcrumb,
-  UnitSeoText,
-  WrapContainer,
-  WrapPageImage,
-} from "@components";
+import { WrapPageImage } from "../layout/WrapPageImage";
+import { WrapContainer } from "../layout/WrapContainer";
+import { UnitBreadcrumb } from "./UnitBreadcrumb";
+import { ItemCardsList } from "./item";
+import { UnitSeoText } from "./UnitSeoText";
 
 interface UnitsListPageProps {
   unit: UnitType;
@@ -65,7 +63,7 @@ export function UnitsListPage({
   return (
     <WrapPageImage className="_unit-list-page h-full" country={country}>
       <WrapContainer>
-        <div className="flex flex-col items-center space-y-4 mb-6">
+        <div className="mb-6 flex flex-col items-center space-y-4">
           <div className="flex items-center justify-center gap-3">
             <h1 className="text-lg font-semibold text-white drop-shadow-sm drop-shadow-black/70">
               لیست {unit?.name} فارسی زبان در {country?.name}

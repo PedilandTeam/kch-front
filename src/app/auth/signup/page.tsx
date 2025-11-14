@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import { Button } from "@components";
+import { Button } from "@/components/ui";
 import { MoveLeftIcon } from "lucide-react";
 
 export default function SignupPage() {

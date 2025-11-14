@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@components";
+} from "@/components/ui";
 import { CirclesFourIcon } from "@phosphor-icons/react";
 import { BadgeCheckIcon, FlagTriangleRight, Share2Icon } from "lucide-react";
 

@@ -1,7 +1,7 @@
 // src/components/Community/QuestionsList.tsx
 "use client";
 
-import { QuestionCard, QuestionsTools } from "@components";
+import { QuestionCard, QuestionsTools } from "@/components/ui";
 import { Question } from "@/schemas/community";
 import { Country } from "@/schemas/country";
 

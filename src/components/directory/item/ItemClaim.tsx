@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { FC } from "react";
 
-import { Button } from "@components";
+import { Button } from "@/components/ui";
 import { ShieldCheckIcon } from "@phosphor-icons/react/dist/ssr";
 
 interface ItemClaimProps {

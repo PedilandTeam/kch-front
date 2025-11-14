@@ -7,13 +7,9 @@ import type { Category } from "@/types/category";
 import type { Page } from "@/types/page";
 import type { UnitType } from "@/types/unit";
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  ItemCard,
-  WrapContainer,
-} from "@components";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui";
+import { ItemCard } from "./ItemCard";
+import { WrapContainer } from "@/components/layout/WrapContainer";
 
 interface ItemSuggestionProps {
   pageId: string;

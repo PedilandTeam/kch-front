@@ -14,7 +14,6 @@ import {
   FormLabel,
   FormMessage,
   Input,
-  MultiSelect,
   RadioGroup,
   RadioGroupItem,
   Select,
@@ -22,13 +21,14 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@components";
+} from "@/components/ui";
 import { adsClubSchema } from "@/schemas/adsClubRegister";
 import { CircleFlag } from "next-circle-flags";
 import { useEffect, useState } from "react";
 import type { City, Country } from "@/schemas";
 import fetchCountry from "@/api/fetchCountry";
 import fetchCities from "@/api/fetchCities";
+import { MultiSelect } from "@/components/ui-custom/MultiSelect";
 
 type AdsClubRegister = z.infer<typeof adsClubSchema>;
 

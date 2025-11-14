@@ -1,6 +1,7 @@
 import type { Country } from "@/schemas/country";
-
-import { CountryPageHead, UnitsTopCat, WrapPageSimple } from "@components";
+import { WrapPageSimple } from "../layout/WrapPageSimple";
+import { CountryPageHead } from "./CountryPageHead";
+import { UnitsTopCat } from "../directory/UnitsTopCat.carousel";
 
 type CountryPageProps = {
   currentCountry: Country;

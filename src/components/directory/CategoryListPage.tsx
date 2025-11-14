@@ -7,13 +7,11 @@ import type { Category } from "@/types/category";
 import type { GetPagesResponse } from "@/types/page";
 import type { UnitType } from "@/types/unit";
 import { CategoryBreadcrumb } from "./CategoryBreadcrumb";
+import { WrapPageImage } from "../layout/WrapPageImage";
+import { WrapContainer } from "../layout/WrapContainer";
+import { ItemCardsList } from "./item";
 
-import {
-  ItemCardsList,
-  StaticAdvertise,
-  WrapContainer,
-  WrapPageImage,
-} from "@components";
+
 
 interface CategoryListPageProps {
   category: Category;

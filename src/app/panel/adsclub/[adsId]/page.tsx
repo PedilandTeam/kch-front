@@ -6,7 +6,7 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@components";
+} from "@/components/ui";
 import { PageHeader } from "@/components/panel/PageHeader";
 import Image from "next/image";
 import {

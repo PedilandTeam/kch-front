@@ -4,12 +4,13 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import type { Page } from "@/types/page";
 
-import { BadgeBlueDialog, BadgeOrangeDialog } from "@components";
 import {
   CrownIcon,
   SealCheckIcon,
   SealWarningIcon,
 } from "@phosphor-icons/react";
+import { BadgeBlueDialog } from "./BadgeBlueDialog";
+import { BadgeOrangeDialog } from "./BadgeOrangeDialog";
 
 interface ItemBadgeProps {
   pageData: Page;

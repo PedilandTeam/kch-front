@@ -11,14 +11,8 @@ import useSWR from "swr";
 import { useCountryCodeStore } from "@/store/UseCountryCodeStore";
 
 import LogoImg from "@/assets/images/logo.png";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-  MenuDrawer,
-  SelectCountry,
-} from "@components";
-import { ChatsIcon } from "@phosphor-icons/react";
+import { MenuDrawer } from "./MenuDrawer";
+import { SelectCountry } from "./SelectCountry";
 
 export const AppMenu = () => {
   const params = useParams();
@@ -59,7 +53,7 @@ export const AppMenu = () => {
         "_mobile-menu fixed bottom-2 z-50 w-full max-w-[414px] px-2",
       )}
     >
-      <div className="_main-mobileMenu flex items-center justify-between rounded-full border-gray-200 bg-white/90 backdrop-blur px-4 py-2">
+      <div className="_main-mobileMenu flex items-center justify-between rounded-full border-gray-200 bg-white/90 px-4 py-2 backdrop-blur">
         <MenuDrawer countryCode={countryCode} countries={countries} />
 
         <div className="_logo">

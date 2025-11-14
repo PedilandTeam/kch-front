@@ -2,8 +2,8 @@
 
 import type { Country } from "@/schemas";
 import { CircleFlag } from "next-circle-flags";
-import { CountriesDialog } from ".";
 import { useState } from "react";
+import { CountriesDialog } from "./CountriesDialog";
 
 interface SelectCountryProps {
   countryCode: string;

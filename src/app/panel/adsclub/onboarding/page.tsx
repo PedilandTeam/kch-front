@@ -16,12 +16,22 @@ import introImage2 from "@/assets/images/intro-img-02.jpg";
 import introImage3 from "@/assets/images/intro-img-03.jpg";
 import introImage4 from "@/assets/images/intro-img-04.jpg";
 import introImage5 from "@/assets/images/intro-img-05.jpg";
-import { useTelegram } from "@/providers/TelegramProvider";
+import { useTelegramAuth } from "@/store/useTelegramAuth";
 
 function IntroPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const step = Number(searchParams.get("step") ?? 1);
+  const {
+    resetPoints,
+    addPoints,
+    markOnboardingStep,
+    onboardingSteps,
+    hasHydrated,
+  } = usePointsStore((state) => state);
+  const { userData } = useTelegramAuth();
+
+  const userFullName = `${userData?.user?.first_name} ${userData?.user?.last_name}`;
 
   const slides = useMemo(
     () => [
@@ -63,7 +73,7 @@ function IntroPageContent() {
         title: "سیستم کسب امتیاز",
         content:
           "تو ادزکلاب، برای ایجاد جذابیت و قدردانی از کاربران فعال و وفادار یک سیستم امتیازدهی وجود داره. با جمع‌آوری امتیازهای بیشتر، اعتبار استفاده از خدمات ویژه، تخفیف‌ها و آفرها براتون فعال میشه.",
-        btnText: "بـزن بـریـم (45+ امتیاز)",
+        btnText: "تکمیل ثبت نام (45+ امتیاز)",
       },
     ],
     [],
@@ -73,10 +83,25 @@ function IntroPageContent() {
     router.replace(`?step=${s}`);
   };
 
+  useEffect(() => {
+    if (!hasHydrated) return;
+
+    const currentStep = searchParams.get("step");
+    if (currentStep) return;
+
+    resetPoints(1);
+  }, [hasHydrated]);
+
   const nextStep = () => {
+    const isAlreadyDone = onboardingSteps.includes(step);
+
     if (step < slides.length) {
       goToStep(step + 1);
-      addPoints(1);
+
+      if (!isAlreadyDone) {
+        addPoints(1);
+        markOnboardingStep(step);
+      }
 
       if (step === slides.length - 1) {
         toast.success("تبریک میگم، شما تا این لحظه 5 امتیاز کسب کردید.");
@@ -84,20 +109,16 @@ function IntroPageContent() {
     }
   };
 
-  const addPoints = usePointsStore((state) => state.addPoints);
-
-  useEffect(() => {
-    addPoints(1);
-  }, []);
-
   return (
-    <div className="flex h-screen flex-col items-center justify-center space-y-6 p-4">
+    <div className="flex h-screen flex-col items-center justify-center space-y-8 p-4">
       <div className="flex w-full items-center justify-between">
         <AdsClubLogo />
         <CreditDisplay />
       </div>
 
       <div className="flex flex-1 flex-col items-center justify-center gap-10">
+        <div className="text-primary font-medium">{userFullName} عزیز</div>
+
         <div className="flex w-full flex-1 items-end justify-center">
           <Image
             src={
@@ -109,11 +130,11 @@ function IntroPageContent() {
             priority
           />
         </div>
-        <div className="space-y-2 text-center">
+        <div className="space-y-4 text-center">
           {slides[step - 1]?.title && (
             <h1 className="text-lg font-semibold">{slides[step - 1].title}</h1>
           )}
-          <p className="text-gray-700">{slides[step - 1]?.content}</p>
+          <div className="text-gray-600">{slides[step - 1]?.content}</div>
         </div>
       </div>
 
@@ -164,4 +185,3 @@ export default function IntroPage() {
     </Suspense>
   );
 }
-

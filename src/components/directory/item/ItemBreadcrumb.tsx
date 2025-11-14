@@ -7,7 +7,7 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from "@components";
+} from "@/components/ui";
 
 interface ItemBreadcrumbProps {
   pageData: Page;

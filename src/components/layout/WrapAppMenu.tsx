@@ -1,6 +1,6 @@
 "use client";
 
-import { AppMenu } from "@components";
+import { AppMenu } from "./AppMenu";
 
 interface WrapAppMenuProps {
   children: React.ReactNode;

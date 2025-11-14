@@ -2,15 +2,13 @@ import { GENERAL } from "@/text";
 import type { Page } from "@/types/page";
 import isPageNew from "@/utils/isPageNew";
 
-import {
-  ItemAvatar,
-  ItemBadge,
-  ItemContacts,
-  ItemLocation,
-  ItemSocials,
-  ItemTopMenu,
-} from "@components";
 import { CakeIcon, StarIcon } from "@phosphor-icons/react/dist/ssr";
+import { ItemTopMenu } from "./ItemTopMenu";
+import { ItemAvatar } from "./ItemAvatar";
+import { ItemBadge } from "../badges";
+import { ItemSocials } from "./ItemSocials";
+import { ItemContacts } from "./ItemContacts";
+import { ItemLocation } from "./ItemLocation";
 
 interface ItemInfoProps {
   pageData: Page;

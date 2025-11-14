@@ -1,7 +1,7 @@
 import type { Country } from "@/schemas/country";
 import type { GetPagesResponse, Page } from "@/types/page";
-
-import { ItemCard, ListPagination } from "@components";
+import { ItemCard } from "./ItemCard";
+import { ListPagination } from "../ListPagination";
 
 interface ItemCardsListProps {
   pages?: GetPagesResponse;

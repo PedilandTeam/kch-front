@@ -24,48 +24,109 @@ import {
   SelectItem,
   RadioGroup,
   RadioGroupItem,
-  MultiSelect,
-} from "@components";
+} from "@/components/ui";
 import type { City, Country } from "@/schemas";
 import fetchCountry from "@/api/fetchCountry";
 import { CircleFlag } from "next-circle-flags";
 import fetchCities from "@/api/fetchCities";
+import { MultiSelect } from "@/components/ui-custom/MultiSelect";
+import { useTelegramAuth } from "@/store/useTelegramAuth";
+import { usePointsStore } from "@/store/usePointsStore";
+import fetchAdCategories from "@/api/fetchAdCategories";
+import type { AdCategory } from "@/types/adCategory";
+import fetchMethods from "@/api/fetchMethods";
+import type { IMethod } from "@/types/methods";
+import axios from "axios";
 
 type AdsClubFormValues = z.infer<typeof adsClubSchema>;
 
 export default function RegisterForm() {
   const router = useRouter();
   const [step, setStep] = useState<"status" | "details">("status");
-
   const [countries, setCountries] = useState<Country[]>([]);
   const [cities, setCities] = useState<City[]>([]);
+  const [categories, setCategories] = useState<AdCategory[]>([]);
+  const [methods, setMethods] = useState<IMethod[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const {
+    addPoints,
+    removePoints,
+    genderRewardGiven,
+    markGenderReward,
+    birthYearRewardGiven,
+    markBirthYearReward,
+    hasHydrated,
+    resetPoints,
+  } = usePointsStore((state) => state);
+
+  const { userData } = useTelegramAuth();
+  const userFullName = `${userData?.user?.first_name} ${userData?.user?.last_name}`;
+
+  useEffect(() => {
+    if (!hasHydrated) return;
+
+    resetPoints(50);
+  }, [hasHydrated]);
 
   useEffect(() => {
     fetchCountry().then((countries) => {
       setCountries(countries);
     });
+
+    fetchAdCategories().then((categories) => {
+      setCategories(categories);
+    });
+
+    fetchMethods().then((methods) => {
+      setMethods(methods.data);
+    });
   }, []);
+
+  const interests = categories.filter((category) => category.parent === null);
 
   const form = useForm<AdsClubFormValues>({
     resolver: zodResolver(adsClubSchema),
     defaultValues: {
-      status: undefined,
+      isImmigrate: undefined,
       gender: undefined,
       birthYear: "",
-      country: "",
-      city: "",
-      interests: [],
-      destinations: [],
-      methods: [],
+      countryId: undefined,
+      cityId: undefined,
+      favoriteAdCategoryIds: [],
+      immigrationCountryIds: [],
+      immigrateMethodIds: [],
     },
   });
 
-  const watchStatus = form.watch("status");
+  const watchStatus = form.watch("isImmigrate");
 
-  const onSubmit = (values: AdsClubFormValues) => {
-    console.log("FINAL VALUES:", values);
-    toast.success("حساب کاربری شما با موفقیت فعال شد.");
-    // router.push("/panel/adsclub");
+  const onSubmit = async (values: AdsClubFormValues) => {
+    try {
+      setIsSubmitting(true);
+
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/adsclub/completeOnboarding`,
+        values,
+        {
+          withCredentials: true,
+        },
+      );
+
+      if (!response.data.success) {
+        throw new Error("خطایی رخ داد.");
+      }
+
+      console.log("FINAL VALUES:", values);
+      toast.success("حساب کاربری شما با موفقیت فعال شد.");
+
+      router.push("/panel/adsclub");
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("خطایی رخ داد.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -75,17 +136,17 @@ export default function RegisterForm() {
         {step === "status" && (
           <>
             <div className="text-primary space-y-1 rounded-xl border border-dashed border-blue-800/30 bg-blue-50 p-4">
-              <h2 className="font-medium">Pedram عزیز،</h2>
+              <h2 className="font-medium">{userFullName} عزیز،</h2>
               <p className="text-[15px]">
-                لطفاً وضعیت مهاجرت و اطلاعات اولیه را تکمیل کنید.
+                لطفاً وضعیت مهاجرت و اطلاعات اولیه خود را تکمیل کنید.
               </p>
             </div>
 
             {/* STATUS */}
             <FormField
               control={form.control}
-              name="status"
-              render={({ field }) => (
+              name="isImmigrate"
+              render={({ field, fieldState }) => (
                 <FormItem>
                   <FormLabel>
                     <span className="text-red-500">*</span> وضعیت مهاجرت:
@@ -93,18 +154,39 @@ export default function RegisterForm() {
                   <FormControl>
                     <RadioGroup
                       dir="rtl"
-                      onValueChange={field.onChange}
-                      value={field.value || ""}
+                      value={
+                        field.value === undefined
+                          ? ""
+                          : field.value === true
+                            ? "true"
+                            : "false"
+                      }
+                      onValueChange={(value) => {
+                        if (value === "") return;
+
+                        field.onChange(value === "true");
+
+                        form.clearErrors("isImmigrate");
+                      }}
                       className="flex gap-6"
                     >
                       <div className="flex items-center gap-2">
-                        <RadioGroupItem value="migrated" id="migrated" />
+                        <RadioGroupItem
+                          value="true"
+                          id="migrated"
+                          error={!!fieldState.error}
+                        />
                         <label htmlFor="migrated">مهاجرت کرده‌ام</label>
                       </div>
                       <div className="flex items-center gap-2">
-                        <RadioGroupItem value="migrating" id="migrating" />
+                        <RadioGroupItem
+                          value="false"
+                          id="migrating"
+                          error={!!fieldState.error}
+                        />
                         <label htmlFor="migrating">در حال مهاجرت هستم</label>
                       </div>
+                      <RadioGroupItem value="none" className="hidden" />
                     </RadioGroup>
                   </FormControl>
                   <FormMessage />
@@ -118,11 +200,28 @@ export default function RegisterForm() {
               name="gender"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>جنسیت:</FormLabel>
+                  <FormLabel>
+                    جنسیت:{" "}
+                    <span className="text-muted-foreground text-sm leading-0">
+                      (اختیاری، 5+ امتیاز)
+                    </span>
+                  </FormLabel>
                   <Select
                     dir="rtl"
-                    onValueChange={field.onChange}
-                    value={field.value || ""}
+                    value={field.value ?? ""}
+                    onValueChange={(value) => {
+                      if (value === "none") {
+                        removePoints(5);
+                        markGenderReward(false);
+                      }
+
+                      field.onChange(value || undefined);
+
+                      if (value && !genderRewardGiven) {
+                        addPoints(5);
+                        markGenderReward(true);
+                      }
+                    }}
                   >
                     <FormControl>
                       <SelectTrigger>
@@ -130,6 +229,7 @@ export default function RegisterForm() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
+                      <SelectItem value="none">انتخاب کنید</SelectItem>
                       <SelectItem value="male">مرد</SelectItem>
                       <SelectItem value="female">زن</SelectItem>
                       <SelectItem value="other">سایر</SelectItem>
@@ -145,7 +245,12 @@ export default function RegisterForm() {
               name="birthYear"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>سال تولد (میلادی):</FormLabel>
+                  <FormLabel>
+                    سال تولد میلادی:{" "}
+                    <span className="text-muted-foreground text-sm leading-0">
+                      (اختیاری، 5+ امتیاز)
+                    </span>
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="text"
@@ -159,6 +264,16 @@ export default function RegisterForm() {
                           .replace(/\D/g, "")
                           .slice(0, 4);
                         field.onChange(val);
+
+                        if (val.length === 4 && !birthYearRewardGiven) {
+                          addPoints(5);
+                          markBirthYearReward(true);
+                        }
+
+                        if (val.length === 0 && birthYearRewardGiven) {
+                          removePoints(5);
+                          markBirthYearReward(false);
+                        }
                       }}
                     />
                   </FormControl>
@@ -170,7 +285,13 @@ export default function RegisterForm() {
             <Button
               type="button"
               className="w-full"
-              onClick={() => setStep("details")}
+              onClick={async () => {
+                const isValid = await form.trigger("isImmigrate");
+
+                if (!isValid) return;
+
+                setStep("details");
+              }}
             >
               ادامه
             </Button>
@@ -181,18 +302,20 @@ export default function RegisterForm() {
         {step === "details" && (
           <>
             <div className="text-primary space-y-1 rounded-xl border border-dashed border-blue-800/30 bg-blue-50 p-4">
-              <h2 className="font-medium">تبریک می‌گم Pedram،</h2>
+              <h2 className="font-medium">
+                تبریک می‌گم {userData?.user?.first_name}،
+              </h2>
               <p className="text-[15px]">
-                فقط یک قدم دیگه تا پایان باقی مونده!
+                فقط یک قدم دیگه تا تکمیل ثبت نام تون باقی مونده!
               </p>
             </div>
 
             {/* If migrating */}
-            {watchStatus === "migrating" && (
+            {watchStatus === false && (
               <>
                 <FormField
                   control={form.control}
-                  name="destinations"
+                  name="immigrationCountryIds"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
@@ -200,12 +323,15 @@ export default function RegisterForm() {
                       </FormLabel>
                       <FormControl>
                         <MultiSelect
-                          options={countries.map((country) => ({
+                          options={countries.map((country, index) => ({
+                            key: index,
                             label: country.name,
-                            value: country.code,
+                            value: country.id.toString(),
                           }))}
-                          defaultValue={field.value || []}
-                          onValueChange={field.onChange}
+                          defaultValue={(field.value ?? []).map(String)}
+                          onValueChange={(values) =>
+                            field.onChange(values.map(Number))
+                          }
                           placeholder="انتخاب کشور..."
                         />
                       </FormControl>
@@ -216,7 +342,7 @@ export default function RegisterForm() {
 
                 <FormField
                   control={form.control}
-                  name="methods"
+                  name="immigrateMethodIds"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
@@ -224,14 +350,15 @@ export default function RegisterForm() {
                       </FormLabel>
                       <FormControl>
                         <MultiSelect
-                          options={[
-                            { label: "تحصیلی", value: "study" },
-                            { label: "کاری", value: "work" },
-                            { label: "سرمایه‌گذاری", value: "investment" },
-                            { label: "پناهندگی", value: "asylum" },
-                          ]}
-                          defaultValue={field.value || []}
-                          onValueChange={field.onChange}
+                          options={methods.map((method, index) => ({
+                            key: index,
+                            label: method.titleFa,
+                            value: method.id.toString(),
+                          }))}
+                          defaultValue={(field.value ?? []).map(String)}
+                          onValueChange={(values) =>
+                            field.onChange(values.map(Number))
+                          }
                           placeholder="انتخاب روش..."
                         />
                       </FormControl>
@@ -243,54 +370,63 @@ export default function RegisterForm() {
             )}
 
             {/* If migrated */}
-            {watchStatus === "migrated" && (
+            {watchStatus === true && (
               <>
                 <FormField
                   control={form.control}
-                  name="country"
-                  render={({ field }) => (
+                  name="countryId"
+                  render={({ field, fieldState }) => (
                     <FormItem>
                       <FormLabel>
                         <span className="text-red-500">*</span> کشور محل زندگی
                       </FormLabel>
-                      <Select
-                        dir="rtl"
-                        onValueChange={(val) => {
-                          field.onChange(val);
-                          fetchCities({
-                            countryCode: val,
-                            limit: 1000,
-                            page: 1,
-                          }).then((res) => {
-                            console.log(res);
-                            setCities(res.items || []);
-                            form.setValue("city", "");
-                          });
-                        }}
-                        value={field.value || ""}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
+                      <FormControl>
+                        <Select
+                          dir="rtl"
+                          onValueChange={(val) => {
+                            console.log(val);
+                            field.onChange(Number(val));
+
+                            const country = countries.find(
+                              (c) => c.id === Number(val),
+                            );
+
+                            fetchCities({
+                              countryCode: country?.code ?? "",
+                              limit: 1000,
+                              page: 1,
+                            }).then((res) => {
+                              setCities(res.items || []);
+                              form.setValue("cityId", undefined);
+                            });
+                          }}
+                          value={field.value?.toString() || undefined}
+                        >
+                          <SelectTrigger error={!!fieldState.error}>
                             <SelectValue placeholder="انتخاب کشور..." />
                           </SelectTrigger>
-                        </FormControl>
-                        <SelectContent className="max-h-60">
-                          {countries.map((country) => (
-                            <SelectItem key={country.id} value={country.code}>
-                              <div className="flex items-center gap-2">
-                                <CircleFlag
-                                  width={16}
-                                  height={16}
-                                  countryCode={country.code}
-                                  alt={country.name}
-                                  title={country.name}
-                                />
-                                {country.name}
-                              </div>
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+
+                          <SelectContent className="max-h-60">
+                            {countries.map((country) => (
+                              <SelectItem
+                                key={country.id}
+                                value={country.id.toString()}
+                              >
+                                <div className="flex items-center gap-2">
+                                  <CircleFlag
+                                    width={16}
+                                    height={16}
+                                    countryCode={country.code}
+                                    alt={country.name}
+                                    title={country.name}
+                                  />
+                                  {country.name}
+                                </div>
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -298,30 +434,36 @@ export default function RegisterForm() {
 
                 <FormField
                   control={form.control}
-                  name="city"
-                  render={({ field }) => (
+                  name="cityId"
+                  render={({ field, fieldState }) => (
                     <FormItem>
                       <FormLabel>
                         <span className="text-red-500">*</span> شهر محل سکونت
                       </FormLabel>
-                      <Select
-                        dir="rtl"
-                        onValueChange={field.onChange}
-                        value={field.value || ""}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
+                      <FormControl>
+                        <Select
+                          dir="rtl"
+                          onValueChange={(val) => field.onChange(Number(val))}
+                          value={field.value ? field.value.toString() : ""}
+                        >
+                          <SelectTrigger
+                            error={!!fieldState.error}
+                            disabled={!cities.length}
+                          >
                             <SelectValue placeholder="انتخاب شهر..." />
                           </SelectTrigger>
-                        </FormControl>
-                        <SelectContent className="max-h-60 overflow-y-auto">
-                          {cities.map((city) => (
-                            <SelectItem key={city.id} value={city.name}>
-                              {city.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                          <SelectContent className="max-h-60 overflow-y-auto">
+                            {cities.map((city) => (
+                              <SelectItem
+                                key={city.id}
+                                value={city.id.toString()}
+                              >
+                                {city.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -329,7 +471,7 @@ export default function RegisterForm() {
 
                 <FormField
                   control={form.control}
-                  name="interests"
+                  name="favoriteAdCategoryIds"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
@@ -338,15 +480,17 @@ export default function RegisterForm() {
                       </FormLabel>
                       <FormControl>
                         <MultiSelect
-                          options={[
-                            { label: "رویدادها و کنسرت", value: "art" },
-                            { label: "خدمات حقوقی و بیمه", value: "sport" },
-                            { label: "خدمات مالی و بانکی", value: "tech" },
-                            { label: "کافه، بار و رستوران", value: "travel" },
-                            { label: "پزشک و داروخانه", value: "food" },
-                          ]}
-                          defaultValue={field.value || []}
-                          onValueChange={field.onChange}
+                          options={interests.map((category, index) => ({
+                            key: index,
+                            label: category.name,
+                            value: category.id.toString(),
+                          }))}
+                          defaultValue={(field.value ?? []).map((id) =>
+                            id.toString(),
+                          )}
+                          onValueChange={(values) =>
+                            field.onChange(values.map(Number))
+                          }
                           placeholder="انتخاب کنید..."
                         />
                       </FormControl>
@@ -358,7 +502,7 @@ export default function RegisterForm() {
             )}
 
             <Button type="submit" className="w-full">
-              ثبت فرم
+              تکمیل ثبت نام
             </Button>
           </>
         )}

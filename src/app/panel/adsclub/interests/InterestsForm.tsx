@@ -13,9 +13,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  MultiSelect,
-} from "@components";
+} from "@/components/ui";
 import { adsClubSchema } from "@/schemas/adsClubRegister";
+import { MultiSelect } from "@/components/ui-custom/MultiSelect";
 
 type AdsClubRegister = z.infer<typeof adsClubSchema>;
 

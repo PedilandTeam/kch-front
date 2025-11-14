@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { AboutPage } from "@components";
+import { AboutPage } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "درباره ما",

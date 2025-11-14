@@ -1,6 +1,6 @@
 "use client";
 
-import { AboutPageHead, AboutContent, WrapPageStatic } from "@components";
+import { AboutPageHead, AboutContent, WrapPageStatic } from "@/components/ui";
 
 interface AboutPageProps {
   title: string;

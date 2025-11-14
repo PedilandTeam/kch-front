@@ -7,7 +7,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@components";
+} from "@/components/ui";
 
 interface CategoryBreadcrumbProps {
   category: {

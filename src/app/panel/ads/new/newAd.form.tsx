@@ -8,7 +8,7 @@ import { mutate } from "swr";
 import Pictures from "../components/pictures";
 import useAdManagement from "../hooks/useAdManagement";
 import useUploadAdPictures from "../hooks/useUploadAdPictures";
-import { Button, Input } from "@components";
+import { Button, Input } from "@/components/ui";
 
 type NewAdForm = {
   countryId: string | number;

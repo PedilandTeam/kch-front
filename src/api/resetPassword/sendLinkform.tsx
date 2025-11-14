@@ -4,7 +4,7 @@ import useSendResetPassword from "./useSendResetPassword";
 import EmailSent from "./emailSent";
 import Image from "next/image";
 import toast from "react-hot-toast";
-import { Button, Input } from "@components";
+import { Button, Input } from "@/components/ui";
 
 export default function SendLinkForm() {
   const { sendResetPassword, emailSent, error } = useSendResetPassword();

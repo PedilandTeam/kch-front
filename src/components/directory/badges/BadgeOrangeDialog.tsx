@@ -7,7 +7,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@components";
+} from "@/components/ui";
 import { SealWarningIcon, WarningIcon } from "@phosphor-icons/react/dist/ssr";
 
 interface BadgeOrangeDialogProps {
@@ -41,8 +41,8 @@ export const BadgeOrangeDialog = ({
                 امکانات کـوچـا برای راهبری و توسعه کسب و کارتون استفاده کنید.
               </p>
               <div className="text-destructive">
-                *** در صورت عدم احراز هویت مالک و تایید اطلاعات آن تا پایان آپریل
-                2026، این صفحه از راهنمای مشاغل کـوچـا حذف خواهد شد. ***
+                *** در صورت عدم احراز هویت مالک و تایید اطلاعات آن تا پایان
+                آپریل 2026، این صفحه از راهنمای مشاغل کـوچـا حذف خواهد شد. ***
               </div>
             </div>
             <div className="border-secondary/60 rounded-md border bg-yellow-50 px-3 py-2 text-sm text-yellow-700/90">

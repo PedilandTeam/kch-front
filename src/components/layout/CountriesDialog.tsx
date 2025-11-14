@@ -6,15 +6,12 @@ import { CircleFlag } from "next-circle-flags";
 import Link from "next/link";
 
 import {
-  Button,
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@components";
+} from "@/components/ui";
 
 type CountriesDialogProps = {
   open: boolean;

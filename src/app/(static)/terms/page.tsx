@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { TermsPage } from "@components";
+import { TermsPage } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "قوانین و مقررات استفاده از سایت",

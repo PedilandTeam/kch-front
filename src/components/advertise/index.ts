@@ -1,1 +1,0 @@
-export { StaticAdvertise } from "./StaticAdvertise";

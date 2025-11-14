@@ -10,7 +10,7 @@ import useSWR, { mutate } from "swr";
 import DeleteAdModal from "../components/deleteAd.modal";
 import useAdManagement from "../hooks/useAdManagement";
 import useUploadAdPictures from "../hooks/useUploadAdPictures";
-import { Button, Input } from "@components";
+import { Button, Input } from "@/components/ui";
 
 type EditAdForm = {
   id: string;

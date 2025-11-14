@@ -8,7 +8,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@components";
+} from "@/components/ui";
 import {
   ArrowsClockwiseIcon,
   CrownIcon,

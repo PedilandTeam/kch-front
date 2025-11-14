@@ -821,9 +821,12 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
             className={cn(
               "w-full p-0",
               getPopoverAnimationClass(),
-              screenSize === "mobile" && "w-[91vw]",
-              screenSize === "tablet" && "w-[70vw] max-w-md",
-              screenSize === "desktop" && "min-w-[300px]",
+              screenSize === "mobile" &&
+                "w-[calc(100vw-2rem)] max-w-[calc(414px-2rem)]!",
+              screenSize === "tablet" &&
+                "w-[calc(100vw-2rem)] max-w-[calc(414px-2rem)]!",
+              screenSize === "desktop" &&
+                "w-[calc(100vw-2rem)] max-w-[calc(414px-2rem)]!",
               popoverClassName,
             )}
             style={{

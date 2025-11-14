@@ -3,7 +3,7 @@ import type { Country } from "@/schemas";
 import type { MostUsedCategory } from "@/types/category";
 import Link from "next/link";
 
-import { Button, Carousel, CarouselContent, CarouselItem } from "@components";
+import { Button, Carousel, CarouselContent, CarouselItem } from "@/components/ui";
 import { FolderSimpleStarIcon } from "@phosphor-icons/react/dist/ssr";
 import { ArrowLeftIcon } from "lucide-react";
 

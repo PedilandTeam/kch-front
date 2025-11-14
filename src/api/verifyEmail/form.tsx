@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import useSendEmailVerificationCode from "./useSendEmailVerificationCode";
 import useVerifyCode from "./useVerifyCode";
-import { Button, Input } from "@components";
+import { Button, Input } from "@/components/ui";
 
 type VerifyEmailForm = {
   email: string;

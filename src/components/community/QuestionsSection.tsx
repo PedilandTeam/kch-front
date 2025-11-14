@@ -2,7 +2,7 @@
 
 import useSWR from "swr";
 
-import { QuestionsList } from "@components";
+import { QuestionsList } from "@/components/ui";
 import { swrKeys } from "@/hooks/swr/swrKeys";
 
 type QuestionsSectionProps = {

@@ -1,8 +1,7 @@
+import { RichText } from "@/components/global/RichText";
 import { cn } from "@/lib/utils";
 import { ITEM } from "@/text";
 import type { Page } from "@/types/page";
-
-import { RichText } from "@components";
 
 export const ItemDescription = ({ pageData }: { pageData: Page }) => {
   return (

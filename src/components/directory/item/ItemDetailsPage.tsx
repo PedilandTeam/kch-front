@@ -3,15 +3,13 @@
 import type { Page } from "@/types/page";
 import { Suspense, useEffect } from "react";
 
-import {
-  ItemBreadcrumb,
-  ItemDescription,
-  ItemDetailsCountrySync,
-  ItemInfo,
-  ItemSuggestion,
-  WrapPageSimple,
-} from "@components";
 import { useCountryCodeStore } from "@/store/UseCountryCodeStore";
+import { WrapPageSimple } from "@/components/layout/WrapPageSimple";
+import { ItemDetailsCountrySync } from "./ItemDetailsCountrySync";
+import { ItemInfo } from "./ItemInfo";
+import { ItemDescription } from "./ItemDescription";
+import { ItemBreadcrumb } from "./ItemBreadcrumb";
+import { ItemSuggestion } from "./ItemSuggestion";
 
 interface ItemDetailsPageProps {
   pageData: Page;

@@ -12,7 +12,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
   VisuallyHidden,
-} from "@components";
+} from "@/components/ui";
 import { ListIcon } from "@phosphor-icons/react";
 import { FOOTER, GENERAL, MENU } from "@/text";
 import Link from "next/link";

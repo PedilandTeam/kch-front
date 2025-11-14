@@ -1,6 +1,6 @@
 // src/components/Community/QuestionsTools.tsx
 
-import { Input, Button } from "@components";
+import { Input, Button } from "@/components/ui";
 
 export const QuestionsTools = () => {
   return (

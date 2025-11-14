@@ -1,7 +1,7 @@
 import type { Country } from "@/schemas/country";
 
-import { CountryStats } from "@components";
 import { CountryImage } from "./CountryImage";
+import { CountryStats } from "./CountryStats";
 
 interface CountryPageHeadProps {
   currentCountry: Country;

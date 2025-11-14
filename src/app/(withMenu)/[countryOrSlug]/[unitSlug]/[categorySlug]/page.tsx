@@ -1,4 +1,5 @@
 import fetchWrapper from "@/api/fetchWrapper";
+import { CategoryListPage } from "@/components/directory/CategoryListPage";
 import type { Country } from "@/schemas";
 import type { GetCategoryResponse } from "@/types/category";
 import type { PathGeneratorType } from "@/types/pathGenerator";
@@ -6,8 +7,6 @@ import type { UnitType } from "@/types/unit";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import queryString from "query-string";
-
-import { CategoryListPage } from "@components";
 
 // ---------------- Path Generator ----------------
 const pathGenerator = async (

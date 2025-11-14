@@ -1,10 +1,8 @@
-import {
-  HomeCountries,
-  HomeSeo,
-  HomeSlider,
-  WrapContainer,
-  WrapPageSimple,
-} from "@components";
+import { HomeCountries } from "@/components/home/HomeCountries";
+import { HomeSeo } from "@/components/home/HomeSeo";
+import { HomeSlider } from "@/components/home/HomeSlider";
+import { WrapContainer } from "@/components/layout/WrapContainer";
+import { WrapPageSimple } from "@/components/layout/WrapPageSimple";
 
 export const metadata = {
   title: "جامعه ایرانیان مهاجر",

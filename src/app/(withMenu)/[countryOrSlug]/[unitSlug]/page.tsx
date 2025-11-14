@@ -5,8 +5,7 @@ import { notFound } from "next/navigation";
 import queryString from "query-string";
 import type { PathGeneratorType } from "@/types/pathGenerator";
 import type { Country } from "@/schemas";
-
-import { UnitsListPage } from "@components";
+import { UnitsListPage } from "@/components/directory/UnitsListPage";
 
 // ---------------- Path Generator ----------------
 const pathGenerator = async (

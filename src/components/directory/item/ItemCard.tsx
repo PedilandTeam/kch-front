@@ -6,8 +6,10 @@ import type { Page } from "@/types/page";
 import categoryPathGenerator from "@/utils/categoryPathGenerator";
 import Link from "next/link";
 
-import { Card, CardContent, ItemAvatar, ItemBadge } from "@components";
 import { FolderSimpleStarIcon } from "@phosphor-icons/react";
+import { Card, CardContent } from "@/components/ui";
+import { ItemAvatar } from "./ItemAvatar";
+import { ItemBadge } from "../badges";
 
 interface ItemCardProps {
   page: Page;

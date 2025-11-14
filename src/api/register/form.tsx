@@ -8,7 +8,7 @@ import useRecaptchaV3 from "@/hooks/useRecaptchaV3";
 import { ReCaptchaV3Provider } from "@/components/global/recaptchaV3Provider";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Button, Input } from "@components";
+import { Button, Input } from "@/components/ui";
 
 export type FormikValues = {
   firstname: string;
