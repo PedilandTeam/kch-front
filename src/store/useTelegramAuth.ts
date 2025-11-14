@@ -44,6 +44,7 @@ export const useTelegramAuth = create<UseTelegramAuth>((set) => ({
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/auth/user/telegram/login`,
         { initData: initDataRaw },
+        { withCredentials: true },
       );
     } catch (error) {
       console.error("Telegram authentication failed:", error);
