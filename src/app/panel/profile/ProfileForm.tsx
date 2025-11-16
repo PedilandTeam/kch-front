@@ -29,68 +29,139 @@ import type { City, Country } from "@/schemas";
 import fetchCountry from "@/api/fetchCountry";
 import fetchCities from "@/api/fetchCities";
 import { MultiSelect } from "@/components/ui-custom/MultiSelect";
+import fetchUser from "@/api/fetchUser";
+import type { User } from "@/schemas/user";
+import fetchMethods from "@/api/fetchMethods";
+import type { IMethod } from "@/types/methods";
+import axios from "axios";
+import { toast } from "sonner";
 
-type AdsClubRegister = z.infer<typeof adsClubSchema>;
+type AdsClubFormValues = z.infer<typeof adsClubSchema>;
 
 export default function ProfileForm() {
+  const form = useForm<AdsClubFormValues>({
+    resolver: zodResolver(adsClubSchema),
+    defaultValues: {
+      isImmigrate: undefined,
+      gender: undefined,
+      birthYear: undefined,
+      immigrationCountryIds: [],
+      immigrateMethodIds: [],
+    } as any,
+  });
+
+  const [user, setUser] = useState<User | null>(null);
   const [countries, setCountries] = useState<Country[]>([]);
   const [cities, setCities] = useState<City[]>([]);
+  const [methods, setMethods] = useState<IMethod[]>([]);
+
+  useEffect(() => {
+    async function loadUser() {
+      const res = await fetchUser();
+
+      if (res.ok) {
+        console.log("res", res.user);
+        setUser(res.user);
+
+        form.reset({
+          isImmigrate: res.user.isImmigrate,
+          gender: (res.user.gender as "male" | "female" | "other") ?? undefined,
+          birthYear: String(res.user.birthYear) ?? undefined,
+          immigrationCountryIds:
+            res.user.immigrationCountries.map((c) => c.id) ?? [],
+          immigrateMethodIds: res.user.immigrateMethods.map((m) => m.id) ?? [],
+          countryId: res.user.country?.id ?? undefined,
+          cityId: res.user.city?.id ?? undefined,
+        });
+      }
+    }
+
+    loadUser();
+  }, [form]);
 
   useEffect(() => {
     fetchCountry().then((countries) => {
       setCountries(countries);
     });
+
+    fetchMethods().then((methods) => {
+      setMethods(methods.data);
+    });
   }, []);
 
-  const form = useForm<AdsClubRegister>({
-    resolver: zodResolver(adsClubSchema),
-    defaultValues: {
-      status: "migrated",
-      gender: "male",
-      birthYear: "1990",
-      country: "Germany",
-      city: "Berlin",
-      interests: ["tech", "art"],
-      destinations: [],
-      methods: [],
-    },
-  });
+  useEffect(() => {
+    const countryId = form.getValues("countryId");
 
-  const watchStatus = form.watch("status");
+    if (countries.length > 0 && countryId) {
+      const selectedCountry = countries.find((c) => c.id === countryId);
+      if (selectedCountry) {
+        fetchCities({
+          countryCode: selectedCountry.code,
+          limit: 1000,
+          page: 1,
+        }).then((res) => {
+          setCities(res.items || []);
+        });
+      }
+    }
+  }, [countries, form.watch("countryId")]);
 
-  const onSubmit = (values: AdsClubRegister) => {
-    console.log("Updated profile:", values);
+  const watchStatus = form.watch("isImmigrate");
+
+  const updateHandler = async (values: AdsClubFormValues) => {
+    try {
+      const payload = {
+        ...values,
+        birthYear: values.birthYear ? Number(values.birthYear) : undefined,
+      };
+
+      await axios.put(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/user/data`,
+        payload,
+        {
+          withCredentials: true,
+        },
+      );
+      toast.success("تغییرات با موفقیت ذخیره شد.");
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      toast.error("خطایی رخ داد.");
+    } finally {
+      console.log("SUBMITTED VALUES:", values);
+    }
   };
 
   return (
     <Form {...form}>
       <Card className="border-blue-500/20 bg-blue-50/50 p-4">
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(updateHandler, (error) => {
+            console.log("ERROR:", error);
+          })}
           className="flex flex-col gap-6"
         >
           <FormField
             control={form.control}
-            name="status"
+            name="isImmigrate"
             render={({ field }) => (
               <FormItem>
-                <FormLabel htmlFor="status">وضعیت مهاجرت:</FormLabel>
+                <FormLabel htmlFor="isImmigrate">وضعیت مهاجرت:</FormLabel>
                 <FormControl>
                   <RadioGroup
                     dir="rtl"
-                    value={field.value}
-                    onValueChange={field.onChange}
+                    value={String(field.value ?? false)}
                     className="flex gap-6"
+                    disabled
                   >
                     <div className="flex items-center gap-2">
-                      <RadioGroupItem value="migrated" id="migrated" />
-                      <label htmlFor="migrated" className="text-sm">
+                      <RadioGroupItem value="true" id="true" />
+                      <label htmlFor="true" className="text-sm">
                         مهاجرت کردم
                       </label>
                     </div>
                     <div className="flex items-center gap-2">
-                      <RadioGroupItem value="migrating" id="migrating" />
-                      <label htmlFor="migrating" className="text-sm">
+                      <RadioGroupItem value="false" id="false" />
+                      <label htmlFor="false" className="text-sm">
                         در حال مهاجرت هستم
                       </label>
                     </div>
@@ -108,7 +179,7 @@ export default function ProfileForm() {
               <FormItem>
                 <FormLabel htmlFor="gender">جنسیت:</FormLabel>
                 <Select
-                  value={field.value}
+                  value={String(field.value) ?? ""}
                   onValueChange={field.onChange}
                   dir="rtl"
                 >
@@ -133,13 +204,34 @@ export default function ProfileForm() {
             name="birthYear"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>سال تولد (میلادی):</FormLabel>
+                <FormLabel>
+                  سال تولد میلادی:{" "}
+                  <span className="text-muted-foreground text-sm leading-0">
+                    (اختیاری، 5+ امتیاز)
+                  </span>
+                </FormLabel>
                 <FormControl>
                   <Input
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
+                    pattern="\d*"
                     placeholder="مثال: 1990"
-                    value={field.value ?? ""}
-                    onChange={field.onChange}
+                    {...field}
+                    value={field.value || ""}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/\D/g, "").slice(0, 4);
+                      field.onChange(val);
+
+                      // if (val.length === 4 && !birthYearRewardGiven) {
+                      //   addPoints(5);
+                      //   markBirthYearReward(true);
+                      // }
+
+                      // if (val.length === 0 && birthYearRewardGiven) {
+                      //   removePoints(5);
+                      //   markBirthYearReward(false);
+                      // }
+                    }}
                   />
                 </FormControl>
                 <FormMessage />
@@ -147,11 +239,11 @@ export default function ProfileForm() {
             )}
           />
 
-          {watchStatus === "migrated" && (
+          {watchStatus === true && (
             <>
               <FormField
                 control={form.control}
-                name="country"
+                name="countryId"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
@@ -160,18 +252,23 @@ export default function ProfileForm() {
                     <Select
                       dir="rtl"
                       onValueChange={(val) => {
-                        field.onChange(val);
+                        const countryId = Number(val);
+                        field.onChange(countryId);
+
+                        const selectedCountry = countries.find(
+                          (c) => c.id === countryId,
+                        );
+
                         fetchCities({
-                          countryCode: val,
+                          countryCode: selectedCountry?.code || "",
                           limit: 1000,
                           page: 1,
                         }).then((res) => {
-                          console.log(res);
                           setCities(res.items || []);
-                          form.setValue("city", "");
+                          form.setValue("cityId", undefined);
                         });
                       }}
-                      value={field.value || ""}
+                      value={field.value ? String(field.value) : undefined}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -180,7 +277,10 @@ export default function ProfileForm() {
                       </FormControl>
                       <SelectContent className="max-h-60">
                         {countries.map((country) => (
-                          <SelectItem key={country.id} value={country.code}>
+                          <SelectItem
+                            key={country.id}
+                            value={String(country.id)}
+                          >
                             <div className="flex items-center gap-2">
                               <CircleFlag
                                 width={16}
@@ -202,7 +302,7 @@ export default function ProfileForm() {
 
               <FormField
                 control={form.control}
-                name="city"
+                name="cityId"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
@@ -210,8 +310,8 @@ export default function ProfileForm() {
                     </FormLabel>
                     <Select
                       dir="rtl"
-                      onValueChange={field.onChange}
-                      value={field.value || ""}
+                      onValueChange={(val) => field.onChange(Number(val))}
+                      value={field.value ? String(field.value) : ""}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -220,7 +320,7 @@ export default function ProfileForm() {
                       </FormControl>
                       <SelectContent className="max-h-60 overflow-y-auto">
                         {cities.map((city) => (
-                          <SelectItem key={city.id} value={city.name}>
+                          <SelectItem key={city.id} value={String(city.id)}>
                             {city.name}
                           </SelectItem>
                         ))}
@@ -233,23 +333,25 @@ export default function ProfileForm() {
             </>
           )}
 
-          {watchStatus === "migrating" && (
+          {watchStatus === false && (
             <>
               <FormField
                 control={form.control}
-                name="destinations"
+                name="immigrationCountryIds"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>کشورهای موردنظر</FormLabel>
                     <FormControl>
                       <MultiSelect
-                        // options={countries.map((country) => ({
-                        //   label: country.name,
-                        //   value: country.code,
-                        // }))}
-                        options={[]}
-                        defaultValue={field.value || []}
-                        onValueChange={field.onChange}
+                        options={countries.map((country) => ({
+                          key: country.id,
+                          label: country.name,
+                          value: country.id.toString(),
+                        }))}
+                        defaultValue={(field.value ?? []).map(String)}
+                        onValueChange={(values) =>
+                          field.onChange(values.map(Number))
+                        }
                         placeholder="انتخاب کشور..."
                       />
                     </FormControl>
@@ -259,20 +361,21 @@ export default function ProfileForm() {
               />
               <FormField
                 control={form.control}
-                name="methods"
+                name="immigrateMethodIds"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>روش‌های مهاجرت</FormLabel>
                     <FormControl>
                       <MultiSelect
-                        options={[
-                          { label: "تحصیلی", value: "study" },
-                          { label: "کاری", value: "work" },
-                          { label: "سرمایه‌گذاری", value: "investment" },
-                          { label: "پناهندگی", value: "asylum" },
-                        ]}
-                        defaultValue={field.value || []}
-                        onValueChange={field.onChange}
+                        options={methods.map((method, index) => ({
+                          key: index,
+                          label: method.titleFa,
+                          value: method.id.toString(),
+                        }))}
+                        defaultValue={(field.value ?? []).map(String)}
+                        onValueChange={(values) =>
+                          field.onChange(values.map(Number))
+                        }
                         placeholder="انتخاب روش..."
                       />
                     </FormControl>
@@ -284,7 +387,11 @@ export default function ProfileForm() {
           )}
 
           <div className="mt-2">
-            <Button type="submit" className="w-full">
+            <Button
+              type="submit"
+              className="w-full"
+              onClick={() => console.log("BUTTON CLICKED")}
+            >
               ذخیره تغییرات
             </Button>
           </div>

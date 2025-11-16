@@ -13,7 +13,10 @@ export const CardsMenu = () => {
         <SquareButton icon={"CoinsIcon"} link="/panel/adsclub/scores">
           سیستم امتیازدهی
         </SquareButton>
-        <SquareButton icon={"FolderSimpleStarIcon"} link="/panel/adsclub/interests">
+        <SquareButton
+          icon={"FolderSimpleStarIcon"}
+          link="/panel/adsclub/interests"
+        >
           علاقه‌مندی‌ها
         </SquareButton>
         <SquareButton icon={"UserListIcon"} link="/panel/profile">

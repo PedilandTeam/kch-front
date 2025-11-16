@@ -33,6 +33,7 @@ export type FetchWrapperConfig = {
   };
   method?: "GET" | "POST" | "PUT" | "DELETE";
   revalidate?: number;
+  headers?: Record<string, string>;
   overrideUrl?: string;
   body?: any;
   tags?: string[];
@@ -41,7 +42,15 @@ export default async function fetchWrapper<T>(
   path: string,
   config: FetchWrapperConfig = {},
 ): Promise<FetchWrapperResponse<T>> {
-  let { filters, overrideUrl, revalidate, method = "GET", body, tags } = config;
+  let {
+    filters,
+    overrideUrl,
+    revalidate,
+    method = "GET",
+    body,
+    tags,
+    headers,
+  } = config;
   const url = `${process.env.NEXT_PUBLIC_API_URL}/${path}`;
   const urlObject = new URL(overrideUrl ? overrideUrl : url);
 
@@ -62,7 +71,9 @@ export default async function fetchWrapper<T>(
     method: method,
     headers: {
       "Content-Type": "application/json",
+      ...(headers ?? {}),
     },
+
     credentials: "include",
     ...(body && { body: JSON.stringify(body) }),
     next: { revalidate, tags },

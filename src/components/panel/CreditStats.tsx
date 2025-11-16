@@ -1,15 +1,28 @@
-import { usePointsStore } from "@/store/usePointsStore";
 import { MedalIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 
 import coinImage from "@/assets/images/icons/icon-coins-2.png";
+import fetchUser from "@/api/fetchUser";
+import { useEffect, useState } from "react";
 
 export const CreditStats = () => {
-  const { points } = usePointsStore();
+  const [kch, setKch] = useState(0);
+
+  useEffect(() => {
+    async function loadUser() {
+      const res = await fetchUser();
+
+      if (res.ok) {
+        setKch(res.user.kch);
+      }
+    }
+
+    loadUser();
+  }, []);
 
   return (
     <section>
-      <div className="mb-5 rounded-xl border border-blue-200 bg-blue-100 p-2">
+      <div className="rounded-xl border border-blue-200 bg-blue-100 p-2">
         <div className="flex flex-col justify-center rounded-lg bg-white/90 px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="space-y-1">
@@ -27,14 +40,9 @@ export const CreditStats = () => {
             </div>
             <div className="flex items-center gap-3">
               <p className="text-2xl font-bold text-amber-300 text-shadow-2xs text-shadow-amber-900">
-                {points}
+                {kch}
               </p>
-              <Image
-                src={coinImage}
-                alt="credit"
-                width={54}
-                height={54}
-              />
+              <Image src={coinImage} alt="credit" width={54} height={54} />
             </div>
           </div>
         </div>

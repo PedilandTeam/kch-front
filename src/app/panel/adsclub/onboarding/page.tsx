@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useMemo } from "react";
+import { Suspense, use, useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
@@ -17,11 +17,15 @@ import introImage3 from "@/assets/images/intro-img-03.jpg";
 import introImage4 from "@/assets/images/intro-img-04.jpg";
 import introImage5 from "@/assets/images/intro-img-05.jpg";
 import { useTelegramAuth } from "@/store/useTelegramAuth";
+import fetchUser from "@/api/fetchUser";
+import { Loader } from "@/components/ui-custom/Loader";
 
 function IntroPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [loading, setLoading] = useState(true);
   const step = Number(searchParams.get("step") ?? 1);
+
   const {
     resetPoints,
     addPoints,
@@ -29,9 +33,27 @@ function IntroPageContent() {
     onboardingSteps,
     hasHydrated,
   } = usePointsStore((state) => state);
-  const { userData } = useTelegramAuth();
+
+  const { userData, isLoading } = useTelegramAuth();
 
   const userFullName = `${userData?.user?.first_name} ${userData?.user?.last_name}`;
+
+  useEffect(() => {
+    if (isLoading) return;
+
+    async function loadUser() {
+      const res = await fetchUser();
+
+      if (res.ok && res.isActive) {
+        router.replace("/panel/adsclub");
+        return;
+      }
+
+      setLoading(false);
+    }
+
+    loadUser();
+  }, [isLoading]);
 
   const slides = useMemo(
     () => [
@@ -109,8 +131,12 @@ function IntroPageContent() {
     }
   };
 
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
-    <div className="flex h-screen flex-col items-center justify-center space-y-8 p-4">
+    <div className="flex flex-1 flex-col items-center justify-center space-y-5">
       <div className="flex w-full items-center justify-between">
         <AdsClubLogo />
         <CreditDisplay />
