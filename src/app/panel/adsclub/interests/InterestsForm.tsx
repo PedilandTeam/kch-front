@@ -142,7 +142,7 @@ export default function InterestsForm() {
       <Card className="border-blue-500/20 bg-blue-50/50 p-4">
         <form
           onSubmit={form.handleSubmit(updateHandler, (error) => {
-            console.error("Form Error:", error);
+            console.log("Form Error:", error);
           })}
           className="flex flex-col gap-6"
         >

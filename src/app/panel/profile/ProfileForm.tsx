@@ -165,7 +165,7 @@ export default function ProfileForm() {
       <Card className="border-blue-500/20 bg-blue-50/50 p-4">
         <form
           onSubmit={form.handleSubmit(updateHandler, (error) => {
-            console.error("ّّForm ERROR:", error);
+            console.log("ّّForm ERROR:", error);
           })}
           className="flex flex-col gap-6"
         >
