@@ -1,7 +1,18 @@
 "use client";
 
+import fetchCities from "@/api/fetchCities";
+import fetchCountry from "@/api/fetchCountry";
+import fetchUser from "@/api/fetchUser";
+import type { City, Country } from "@/schemas";
+import { adsClubSchema } from "@/schemas/adsClubRegister";
+import type { User } from "@/schemas/user";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { CircleFlag } from "next-circle-flags";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 import {
@@ -22,23 +33,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui";
-import { adsClubSchema } from "@/schemas/adsClubRegister";
-import { CircleFlag } from "next-circle-flags";
-import { useEffect, useState } from "react";
-import type { City, Country } from "@/schemas";
-import fetchCountry from "@/api/fetchCountry";
-import fetchCities from "@/api/fetchCities";
-import { MultiSelect } from "@/components/ui-custom/MultiSelect";
-import fetchUser from "@/api/fetchUser";
-import type { User } from "@/schemas/user";
-import fetchMethods from "@/api/fetchMethods";
-import type { IMethod } from "@/types/methods";
-import axios from "axios";
-import { toast } from "sonner";
+import { Loader } from "@/components/ui-custom/Loader";
+import { Spinner } from "@/components/ui/spinner";
 
 type AdsClubFormValues = z.infer<typeof adsClubSchema>;
 
 export default function ProfileForm() {
+  const router = useRouter();
+  const [user, setUser] = useState<User | null>(null);
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [cities, setCities] = useState<City[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const form = useForm<AdsClubFormValues>({
     resolver: zodResolver(adsClubSchema),
     defaultValues: {
@@ -47,33 +54,47 @@ export default function ProfileForm() {
       birthYear: undefined,
       immigrationCountryIds: [],
       immigrateMethodIds: [],
+      countryId: undefined,
+      cityId: undefined,
+      favoriteAdCategoryIds: [],
     } as any,
   });
-
-  const [user, setUser] = useState<User | null>(null);
-  const [countries, setCountries] = useState<Country[]>([]);
-  const [cities, setCities] = useState<City[]>([]);
-  const [methods, setMethods] = useState<IMethod[]>([]);
 
   useEffect(() => {
     async function loadUser() {
       const res = await fetchUser();
 
       if (res.ok) {
-        console.log("res", res.user);
         setUser(res.user);
 
         form.reset({
           isImmigrate: res.user.isImmigrate,
           gender: (res.user.gender as "male" | "female" | "other") ?? undefined,
-          birthYear: String(res.user.birthYear) ?? undefined,
-          immigrationCountryIds:
-            res.user.immigrationCountries.map((c) => c.id) ?? [],
-          immigrateMethodIds: res.user.immigrateMethods.map((m) => m.id) ?? [],
+          birthYear: res.user.birthYear ? String(res.user.birthYear) : "",
           countryId: res.user.country?.id ?? undefined,
           cityId: res.user.city?.id ?? undefined,
         });
+
+        form.setValue(
+          "favoriteAdCategoryIds",
+          res.user.favoriteAdCategories.map((c) => c.id),
+          { shouldValidate: false },
+        );
+
+        form.setValue(
+          "immigrationCountryIds",
+          res.user.immigrationCountries.map((c) => c.id),
+          { shouldValidate: false },
+        );
+
+        form.setValue(
+          "immigrateMethodIds",
+          res.user.immigrateMethods.map((m) => m.id),
+          { shouldValidate: false },
+        );
       }
+
+      setIsLoading(false);
     }
 
     loadUser();
@@ -82,10 +103,6 @@ export default function ProfileForm() {
   useEffect(() => {
     fetchCountry().then((countries) => {
       setCountries(countries);
-    });
-
-    fetchMethods().then((methods) => {
-      setMethods(methods.data);
     });
   }, []);
 
@@ -109,10 +126,17 @@ export default function ProfileForm() {
   const watchStatus = form.watch("isImmigrate");
 
   const updateHandler = async (values: AdsClubFormValues) => {
+    setIsSubmitting(true);
+
     try {
+      const cleanedBirthYear =
+        values.birthYear && values.birthYear.trim() !== ""
+          ? Number(values.birthYear)
+          : null;
+
       const payload = {
         ...values,
-        birthYear: values.birthYear ? Number(values.birthYear) : undefined,
+        birthYear: cleanedBirthYear,
       };
 
       await axios.put(
@@ -122,21 +146,26 @@ export default function ProfileForm() {
           withCredentials: true,
         },
       );
+      router.push("/panel/adsclub");
       toast.success("تغییرات با موفقیت ذخیره شد.");
     } catch (error) {
       console.error("Error updating profile:", error);
       toast.error("خطایی رخ داد.");
     } finally {
-      console.log("SUBMITTED VALUES:", values);
+      setIsSubmitting(false);
     }
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <Form {...form}>
       <Card className="border-blue-500/20 bg-blue-50/50 p-4">
         <form
           onSubmit={form.handleSubmit(updateHandler, (error) => {
-            console.log("ERROR:", error);
+            console.error("ّّForm ERROR:", error);
           })}
           className="flex flex-col gap-6"
         >
@@ -330,69 +359,40 @@ export default function ProfileForm() {
                   </FormItem>
                 )}
               />
+
+              <input
+                type="hidden"
+                {...form.register("favoriteAdCategoryIds")}
+                value={JSON.stringify(
+                  form.getValues("favoriteAdCategoryIds") || [],
+                )}
+              />
             </>
           )}
 
           {watchStatus === false && (
             <>
-              <FormField
-                control={form.control}
-                name="immigrationCountryIds"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>کشورهای موردنظر</FormLabel>
-                    <FormControl>
-                      <MultiSelect
-                        options={countries.map((country) => ({
-                          key: country.id,
-                          label: country.name,
-                          value: country.id.toString(),
-                        }))}
-                        defaultValue={(field.value ?? []).map(String)}
-                        onValueChange={(values) =>
-                          field.onChange(values.map(Number))
-                        }
-                        placeholder="انتخاب کشور..."
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
+              <input
+                type="hidden"
+                {...form.register("immigrationCountryIds")}
+                value={JSON.stringify(
+                  form.getValues("immigrationCountryIds") || [],
                 )}
               />
-              <FormField
-                control={form.control}
-                name="immigrateMethodIds"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>روش‌های مهاجرت</FormLabel>
-                    <FormControl>
-                      <MultiSelect
-                        options={methods.map((method, index) => ({
-                          key: index,
-                          label: method.titleFa,
-                          value: method.id.toString(),
-                        }))}
-                        defaultValue={(field.value ?? []).map(String)}
-                        onValueChange={(values) =>
-                          field.onChange(values.map(Number))
-                        }
-                        placeholder="انتخاب روش..."
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
+              <input
+                type="hidden"
+                {...form.register("immigrateMethodIds")}
+                value={JSON.stringify(
+                  form.getValues("immigrateMethodIds") || [],
                 )}
               />
             </>
           )}
 
           <div className="mt-2">
-            <Button
-              type="submit"
-              className="w-full"
-              onClick={() => console.log("BUTTON CLICKED")}
-            >
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
               ذخیره تغییرات
+              {isSubmitting && <Spinner />}
             </Button>
           </div>
         </form>
