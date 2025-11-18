@@ -150,7 +150,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
       placeholder = "Select options",
       animation = 0,
       animationConfig,
-      maxCount = 3,
+      maxCount = 10,
       modalPopover = false,
       asChild = false,
       className,
@@ -675,7 +675,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
                                 "px-1.5 py-0.5 text-xs",
                               screenSize === "mobile" &&
                                 "max-w-[120px] truncate",
-                              singleLine && "flex-shrink-0 whitespace-nowrap",
+                              singleLine && "shrink-0 whitespace-nowrap",
                               "[&>svg]:pointer-events-auto",
                             )}
                             style={{
@@ -747,7 +747,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
                           "bg-secondary/10 hover:bg-secondary/10 h-7",
                           responsiveSettings.compactMode &&
                             "px-1.5 py-0.5 text-xs",
-                          singleLine && "flex-shrink-0 whitespace-nowrap",
+                          singleLine && "shrink-0 whitespace-nowrap",
                           "[&>svg]:pointer-events-auto",
                         )}
                         style={{
@@ -822,11 +822,11 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
               "w-full p-0",
               getPopoverAnimationClass(),
               screenSize === "mobile" &&
-                "w-[calc(100vw-2rem)] max-w-[calc(414px-2rem)]!",
+                "w-[calc(100vw-2.5rem)] max-w-[calc(414px-2.5rem)]!",
               screenSize === "tablet" &&
-                "w-[calc(100vw-2rem)] max-w-[calc(414px-2rem)]!",
+                "w-[calc(100vw-2.5rem)] max-w-[calc(414px-2.5rem)]!",
               screenSize === "desktop" &&
-                "w-[calc(100vw-2rem)] max-w-[calc(414px-2rem)]!",
+                "w-[calc(100vw-2.5rem)] max-w-[calc(414px-2.5rem)]!",
               popoverClassName,
             )}
             style={{
@@ -997,26 +997,26 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
                 <CommandSeparator />
                 <CommandGroup>
                   <div className="flex items-center justify-between">
-                    {selectedValues.length > 0 && (
-                      <>
-                        <CommandItem
-                          onSelect={handleClear}
-                          className="flex-1 cursor-pointer justify-center"
-                        >
-                          حذف همه
-                        </CommandItem>
-                        <Separator
-                          orientation="vertical"
-                          className="flex h-full min-h-6"
-                        />
-                      </>
-                    )}
                     <CommandItem
                       onSelect={() => setIsPopoverOpen(false)}
                       className="max-w-full flex-1 cursor-pointer justify-center"
                     >
                       بستن
                     </CommandItem>
+                    {selectedValues.length > 0 && (
+                      <>
+                        <Separator
+                          orientation="vertical"
+                          className="flex h-full min-h-6"
+                        />
+                        <CommandItem
+                          onSelect={handleClear}
+                          className="flex-1 cursor-pointer justify-center"
+                        >
+                          حذف همه
+                        </CommandItem>
+                      </>
+                    )}
                   </div>
                 </CommandGroup>
               </CommandList>

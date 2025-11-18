@@ -1,6 +1,8 @@
 "use client";
 
-import { TermsPageHead, TermsContent, WrapPageStatic } from "@/components/ui";
+import { WrapPageStatic } from "../layout/WrapPageStatic";
+import { TermsContent } from "./TermsContent";
+import { TermsPageHead } from "./TermsPageHead";
 
 interface TermsPageProps {
   title: string;

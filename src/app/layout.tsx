@@ -3,13 +3,13 @@ import { SiteProvider } from "@/providers/SiteProvider";
 import { TelegramProvider } from "@/providers/TelegramProvider";
 import { TelegramAuthProvider } from "@/providers/TelegramAuthProvider";
 import "@/styles/globals.css";
-import { Roboto } from "next/font/google";
+import { Vazirmatn } from "next/font/google";
 import type { Metadata } from "next";
 
-const roboto = Roboto({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "700"],
-  variable: "--font-roboto",
+const vazirmatn = Vazirmatn({
+  subsets: ["arabic"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-vazirmatn",
   display: "swap",
 });
 
@@ -23,9 +23,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fa" dir="rtl" className={`${roboto.variable} scroll-smooth`}>
-      <body className="font-anjoman flex justify-center overflow-x-hidden bg-neutral-100 antialiased">
-        <div className="_app relative min-h-dvh w-full max-w-[414px] bg-white shadow-lg">
+    <html lang="fa" dir="rtl" className={`${vazirmatn.variable} scroll-smooth`}>
+      <body className="flex justify-center overflow-x-hidden bg-neutral-100 antialiased">
+        <div className="_app relative flex min-h-dvh w-full max-w-[414px] flex-col bg-white shadow-lg">
           <TelegramProvider>
             <TelegramAuthProvider>
               <SiteProvider>{children}</SiteProvider>

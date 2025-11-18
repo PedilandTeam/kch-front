@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import useAuthCheck from '@/hooks/useAuthCheck';
 import { mutate } from 'swr';
-import Loading from '@/components/global/LoaderText';
+import { Loader } from '@/components/ui-custom/Loader';
 
 const LoginPage = () => {
 
@@ -21,7 +21,7 @@ const LoginPage = () => {
     }, [isAuthenticated, isLoading, router])
 
     if(isLoading) {
-        return <Loading/>
+        return <Loader/>
     }
 
     if(!isAuthenticated)

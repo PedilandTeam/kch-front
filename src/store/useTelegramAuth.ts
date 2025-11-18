@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import type { TelegramInitData } from "@/types/telegram";
-import { parse } from "@telegram-apps/init-data-node";
+import { parseInitData } from "@/lib/parseTelegramInitData";
 import axios from "axios";
 
 type UseTelegramAuth = {
@@ -34,7 +34,7 @@ export const useTelegramAuth = create<UseTelegramAuth>((set) => ({
     set({ isLoading: true });
 
     try {
-      const parsedData = parse(initDataRaw);
+      const parsedData = parseInitData(initDataRaw);
 
       set({
         userData: parsedData,

@@ -1,76 +1,77 @@
-'use client'
-import React, { createContext, useContext, useEffect, useMemo, type ReactNode } from 'react';
+"use client";
+
+export const ssr = false;
+export const dynamic = "force-dynamic";
+
+import React, { createContext, useContext, useEffect, useMemo, type ReactNode } from "react";
 import {
   init,
   useLaunchParams,
   useRawInitData,
-  useSignal, // optional helper if you want reactive signals like backButton.isVisible
-} from '@telegram-apps/sdk-react';
+} from "@telegram-apps/sdk-react";
 
 type TelegramContextValue = {
   initialized: boolean;
   initDataRaw?: string;
-  initData?: Record<string, unknown> | undefined;
+  initData?: Record<string, unknown>;
   launchParams?: any;
-  error?: string | undefined;
+  error?: string;
 };
 
 const TelegramContext = createContext<TelegramContextValue | undefined>(undefined);
 
 export function TelegramProvider({ children }: { children: ReactNode }) {
-  // call init() once on mount (docs show calling init to initialize the package)
+  // init only in client
   useEffect(() => {
     try {
       init();
     } catch (err) {
-      // init rarely throws, but be safe — we won't crash the app
-      // You can add logging here.
-      // eslint-disable-next-line no-console
-      console.error('telegram sdk init failed', err);
+      console.error("Telegram init failed:", err);
     }
   }, []);
 
-  // hooks provided by the package (they are exported; see docs)
-  // Wrap in try-catch to handle cases where app is opened outside Telegram
-  let rawInit: string | undefined;
-  let launchParams: any;
-  
+  let rawInit: string | undefined = undefined;
+  let launchParams: any = undefined;
+
+  // Hooks inside try/catch – required for Telegram SDK
   try {
-    rawInit = useRawInitData(); // returns the raw init data string or undefined
-    launchParams = useLaunchParams(); // parsed launch params (tgWebApp... fields)
+    rawInit = useRawInitData();
+    launchParams = useLaunchParams();
   } catch (error) {
-    // App is likely opened outside Telegram, provide fallback values
-    console.warn('Telegram SDK initialization failed, app may be running outside Telegram:', error);
+    // During SSR these will fail (window missing)
+    // But in client they will work
     rawInit = undefined;
     launchParams = undefined;
   }
-  // you may also use useSignal for reactive signals (backButton, mainButton, etc.)
 
-  // Parse raw init data defensively
   const parsedInit = useMemo(() => {
     if (!rawInit) return undefined;
     try {
-      return JSON.parse(rawInit) as Record<string, unknown>;
+      return JSON.parse(rawInit);
     } catch {
       return undefined;
     }
   }, [rawInit]);
 
-  const value = useMemo<TelegramContextValue>(() => {
+  const value = useMemo(() => {
     return {
       initialized: Boolean(rawInit || launchParams),
       initDataRaw: rawInit,
       initData: parsedInit,
       launchParams,
-      error: rawInit && !parsedInit ? 'invalid init data json' : undefined,
+      error: rawInit && !parsedInit ? "invalid json" : undefined,
     };
   }, [rawInit, parsedInit, launchParams]);
 
-  return <TelegramContext.Provider value={value}>{children}</TelegramContext.Provider>;
+  return (
+    <TelegramContext.Provider value={value}>
+      {children}
+    </TelegramContext.Provider>
+  );
 }
 
 export function useTelegram() {
   const ctx = useContext(TelegramContext);
-  if (!ctx) throw new Error('useTelegram must be used inside <TelegramProvider/>');
+  if (!ctx) throw new Error("useTelegram must be used inside <TelegramProvider/>");
   return ctx;
 }

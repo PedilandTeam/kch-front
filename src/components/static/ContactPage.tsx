@@ -1,6 +1,8 @@
 "use client";
 
-import { ContactPageHead, WrapPageStatic, ContactMethods } from "@/components/ui";
+import { WrapPageStatic } from "../layout/WrapPageStatic";
+import { ContactMethods } from "./ContactMethods";
+import { ContactPageHead } from "./ContactPageHead";
 
 interface ContactPageProps {
   title: string;

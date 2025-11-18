@@ -1,27 +1,33 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useMemo } from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import fetchUser from "@/api/fetchUser";
+import { usePointsStore } from "@/store/usePointsStore";
+import { useTelegramAuth } from "@/store/useTelegramAuth";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
-import { AdsClubLogo } from "@/components/panel/adsClubLogo";
-import { CreditDisplay } from "@/components/panel/CreditDisplay";
-import { usePointsStore } from "@/store/usePointsStore";
 
 import introImage1 from "@/assets/images/intro-img-01.jpg";
 import introImage2 from "@/assets/images/intro-img-02.jpg";
 import introImage3 from "@/assets/images/intro-img-03.jpg";
 import introImage4 from "@/assets/images/intro-img-04.jpg";
 import introImage5 from "@/assets/images/intro-img-05.jpg";
-import { useTelegramAuth } from "@/store/useTelegramAuth";
+
+import { AdsClubLogo } from "@/components/panel/adsClubLogo";
+import { CreditDisplay } from "@/components/panel/CreditDisplay";
+import { Loader } from "@/components/ui-custom/Loader";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import { e2p } from "@/utils/e2p";
 
 function IntroPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [loading, setLoading] = useState(true);
   const step = Number(searchParams.get("step") ?? 1);
+
   const {
     resetPoints,
     addPoints,
@@ -29,9 +35,25 @@ function IntroPageContent() {
     onboardingSteps,
     hasHydrated,
   } = usePointsStore((state) => state);
-  const { userData } = useTelegramAuth();
 
-  const userFullName = `${userData?.user?.first_name} ${userData?.user?.last_name}`;
+  const { userData, isLoading } = useTelegramAuth();
+
+  useEffect(() => {
+    if (isLoading) return;
+
+    async function loadUser() {
+      const res = await fetchUser();
+
+      if (res.ok && res.isActive) {
+        router.replace("/panel/adsclub");
+        return;
+      }
+
+      setLoading(false);
+    }
+
+    loadUser();
+  }, [isLoading]);
 
   const slides = useMemo(
     () => [
@@ -40,7 +62,7 @@ function IntroPageContent() {
         image: introImage1,
         title: "خوشحالیم که اینجا هستی",
         content:
-          "توی ادزکلاب ما یه فضای امن و منصفانه ایجاد کردیم تا اثربخشی تبلیغات رو افزایش بدیم. اینجا آگهی‌ها و پیشنهادات ویژه به صورت هدفمند ارسال میشن و فقط به مخاطبی میرسن که بهشون نیاز داره.",
+          "در AdsClub ما یک فضای امن، منصفانه و کارآمد ایجاد کردیم تا اثربخشی تبلیغات را به‌طور واقعی افزایش دهیم. در اینجا آگهی‌ها و پیشنهادهای ویژه به‌صورت هدفمند ارسال می‌شود و فقط به مخاطبان واقعی آن میرسد.",
         btnText: "متوجه شدم",
       },
       {
@@ -48,7 +70,7 @@ function IntroPageContent() {
         image: introImage2,
         title: "حفظ حریم شخصی",
         content:
-          "تو ادزکلاب، هیچ اطلاعات شخصی از شما جمع‌آوری و نمایش داده نمیشه. آگهی دهندگان و سایر کاربران برخلاف پلتفرم‌های اجتماعی دیگه امکان دسترسی به حساب کاربری شما و ارسال پیام بهتون رو ندارن.",
+          "در AdsClub هیچ‌گونه اطلاعات شخصی از شما جمع‌آوری یا نمایش داده نمی‌شود. برخلاف پلتفرم‌های اجتماعی دیگر، آگهی‌دهندگان و سایر کاربران امکان دسترسی به اطلاعات حساب کاربری و ارسال پیام به شما را ندارند.",
         btnText: "متوجه شدم",
       },
       {
@@ -56,7 +78,7 @@ function IntroPageContent() {
         image: introImage3,
         title: "شخصی‌سازی واقعی",
         content:
-          "در اینستاگرام و فیس‌بوک، الگوریتم و در تلگرام، ادمین‌ها تصمیم میگیرن که شما چه چیزی رو ببینید. ولی تو ادزکلاب فقط شما هستید که مشخص می‌کنید چه محتوایی و با چه موضوعاتی براتون ارسال بشه.",
+          "در اینستاگرام و فیس‌بوک، الگوریتم‌ها و در تلگرام ادمین‌ها هستند که تعیین می‌کنند چه چیزی محتوا را برایتان انتخاب می‌کنند. اما در AdsClub فقط شما هستید که مشخص می‌کنید چه محتوایی و با چه موضوعاتی برایتان ارسال شود.",
         btnText: "متوجه شدم",
       },
       {
@@ -64,7 +86,7 @@ function IntroPageContent() {
         image: introImage4,
         title: "بدون اسپم و هدفمند",
         content:
-          "تو ادزکلاب، برخلاف پلتفرم‌های دیگه خبری از بمباران تبلیغاتی، پیام‌های تکراری و غیرمرتبط، ربات و اسپم نیست. شما فقط آگهی‌های مرتبط با علاقه‌مندی‌های خودتون رو در زمان‌بندی معین دریافت می‌کنید.",
+          "در AdsClub، برخلاف پلتفرم‌های دیگر، خبری از بمباران تبلیغاتی، پیام‌های تکراری و غیرمرتبط، ربات‌ها و اسپم نیست. شما فقط آگهی‌هایی را دریافت می‌کنید که با علاقه‌مندی‌های خودتان هماهنگ باشند و آن هم تنها هفته‌ای یک بار.",
         btnText: "متوجه شدم",
       },
       {
@@ -72,7 +94,7 @@ function IntroPageContent() {
         image: introImage5,
         title: "سیستم کسب امتیاز",
         content:
-          "تو ادزکلاب، برای ایجاد جذابیت و قدردانی از کاربران فعال و وفادار یک سیستم امتیازدهی وجود داره. با جمع‌آوری امتیازهای بیشتر، اعتبار استفاده از خدمات ویژه، تخفیف‌ها و آفرها براتون فعال میشه.",
+          "در AdsClub، برای ایجاد جذابیت و قدردانی از کاربران فعال و وفادار، یک سیستم امتیازدهی طراحی شده است. با جمع‌آوری امتیازهای بیشتر، دسترسی شما به خدمات ویژه، تخفیف‌ها و آفرهای اختصاصی فعال می‌شود.",
         btnText: "تکمیل ثبت نام (45+ امتیاز)",
       },
     ],
@@ -109,15 +131,21 @@ function IntroPageContent() {
     }
   };
 
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
-    <div className="flex h-screen flex-col items-center justify-center space-y-8 p-4">
+    <div className="flex flex-1 flex-col items-center justify-center space-y-5">
       <div className="flex w-full items-center justify-between">
         <AdsClubLogo />
         <CreditDisplay />
       </div>
 
       <div className="flex flex-1 flex-col items-center justify-center gap-10">
-        <div className="text-primary font-medium">{userFullName} عزیز</div>
+        <div className="text-primary font-medium">
+          {userData?.user?.first_name} عزیز
+        </div>
 
         <div className="flex w-full flex-1 items-end justify-center">
           <Image
@@ -169,7 +197,7 @@ function IntroPageContent() {
         ) : (
           <Button className="w-full" asChild>
             <Link href="/panel/adsclub/onboarding/register">
-              {slides[step - 1]?.btnText}
+              {e2p(slides[step - 1]?.btnText)}
             </Link>
           </Button>
         )}

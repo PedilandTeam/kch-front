@@ -13,63 +13,238 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui";
 import { adsClubSchema } from "@/schemas/adsClubRegister";
 import { MultiSelect } from "@/components/ui-custom/MultiSelect";
+import { useEffect, useState } from "react";
+import fetchUser from "@/api/fetchUser";
+import type { User } from "@/schemas/user";
+import fetchAdCategories from "@/api/fetchAdCategories";
+import type { AdCategory } from "@/types/adCategory";
+import { Loader } from "@/components/ui-custom/Loader";
+import fetchCountry from "@/api/fetchCountry";
+import fetchMethods from "@/api/fetchMethods";
+import type { Country } from "@/schemas";
+import type { IMethod } from "@/types/methods";
+import axios from "axios";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { Spinner } from "@/components/ui/spinner";
 
-type AdsClubRegister = z.infer<typeof adsClubSchema>;
+type AdsClubFormValues = z.infer<typeof adsClubSchema>;
 
 export default function InterestsForm() {
-  const form = useForm<AdsClubRegister>({
+  const router = useRouter();
+  const [user, setUser] = useState<User | null>(null);
+  const [categories, setCategories] = useState<AdCategory[]>([]);
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [methods, setMethods] = useState<IMethod[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const form = useForm<AdsClubFormValues>({
     resolver: zodResolver(adsClubSchema),
     defaultValues: {
-      interests: ["tech", "art"],
+      isImmigrate: true,
+      favoriteAdCategoryIds: [],
+      immigrationCountryIds: [],
+      immigrateMethodIds: [],
     },
   });
 
-  const onSubmit = (values: AdsClubRegister) => {
-    console.log("Updated profile:", values);
+  useEffect(() => {
+    fetchAdCategories().then((categories) => {
+      setCategories(categories);
+    });
+  }, []);
+
+  const interests = categories.filter((category) => category.parent === null);
+
+  useEffect(() => {
+    async function loadUser() {
+      const res = await fetchUser();
+
+      if (res.ok) {
+        console.log("res", res.user);
+        setUser(res.user);
+
+        const favCats = res.user?.favoriteAdCategories ?? [];
+
+        form.reset({
+          isImmigrate: res.user.isImmigrate,
+          immigrationCountryIds:
+            res.user.immigrationCountries.map((c) => c.id) ?? [],
+          immigrateMethodIds: res.user.immigrateMethods.map((m) => m.id) ?? [],
+          favoriteAdCategoryIds: favCats.map((c) => c.id),
+          birthYear: "",
+        });
+
+        form.setValue("countryId", res.user.country?.id, {
+          shouldValidate: false,
+        });
+
+        form.setValue("cityId", res.user.city?.id, {
+          shouldValidate: false,
+        });
+      }
+    }
+
+    loadUser();
+  }, [form]);
+
+  useEffect(() => {
+    fetchCountry().then((countries) => {
+      setCountries(countries);
+    });
+
+    fetchMethods().then((methods) => {
+      setMethods(methods.data);
+    });
+  }, []);
+
+  const updateHandler = async (values: AdsClubFormValues) => {
+    setIsSubmitting(true);
+
+    try {
+      const payload = { ...values };
+
+      delete payload.birthYear;
+
+      await axios.put(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/user/data`,
+        payload,
+        {
+          withCredentials: true,
+        },
+      );
+      router.push("/panel/adsclub");
+      toast.success("تغییرات با موفقیت ذخیره شد.");
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      toast.error("خطایی رخ داد.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  const watchStatus = form.watch("isImmigrate");
+
+  if (!user || categories.length === 0) {
+    return <Loader />;
+  }
 
   return (
     <Form {...form}>
-      <Card className="border-blue-500/20 bg-blue-50/50 p-4">
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-6"
-        >
-          <FormField
-            control={form.control}
-            name="interests"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>موضوعات مورد علاقه</FormLabel>
-                <FormControl>
-                  <MultiSelect
-                    options={[
-                      { label: "رویدادها و کنسرت", value: "art" },
-                      { label: "خدمات حقوقی و بیمه", value: "sport" },
-                      { label: "خدمات مالی و بانکی", value: "tech" },
-                      { label: "کافه، بار و رستوران", value: "travel" },
-                      { label: "پزشک و داروخانه", value: "food" },
-                    ]}
-                    defaultValue={field.value || []}
-                    onValueChange={field.onChange}
-                    placeholder="انتخاب کنید..."
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <form
+        onSubmit={form.handleSubmit(updateHandler, (error) => {
+          console.log("Form Error:", error);
+        })}
+        className="flex flex-col gap-6"
+      >
+        {watchStatus === true && (
+          <>
+            <FormField
+              control={form.control}
+              name="favoriteAdCategoryIds"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>موضوعات مورد علاقه</FormLabel>
+                  <FormControl>
+                    <MultiSelect
+                      options={interests.map((c) => ({
+                        value: String(c.id),
+                        label: c.name,
+                      }))}
+                      defaultValue={(field.value || []).map(String)}
+                      onValueChange={(values) =>
+                        field.onChange(values.map(Number))
+                      }
+                      placeholder="انتخاب کنید..."
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-          <div className="mt-2">
-            <Button type="submit" className="w-full">
-              ذخیره تغییرات
-            </Button>
-          </div>
-        </form>
-      </Card>
+            <input
+              type="hidden"
+              {...form.register("countryId")}
+              value={form.getValues("countryId")}
+            />
+
+            <input
+              type="hidden"
+              {...form.register("cityId")}
+              value={form.getValues("cityId")}
+            />
+          </>
+        )}
+
+        {watchStatus === false && (
+          <>
+            <FormField
+              control={form.control}
+              name="immigrationCountryIds"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>کشورهای موردنظر</FormLabel>
+                  <FormControl>
+                    <MultiSelect
+                      options={countries.map((country) => ({
+                        key: country.id,
+                        label: country.name,
+                        value: country.id.toString(),
+                      }))}
+                      defaultValue={(field.value ?? []).map(String)}
+                      onValueChange={(values) =>
+                        field.onChange(values.map(Number))
+                      }
+                      placeholder="انتخاب کشور..."
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="immigrateMethodIds"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>روش‌های مهاجرت</FormLabel>
+                  <FormControl>
+                    <MultiSelect
+                      options={methods.map((method, index) => ({
+                        key: index,
+                        label: method.titleFa,
+                        value: method.id.toString(),
+                      }))}
+                      defaultValue={(field.value ?? []).map(String)}
+                      onValueChange={(values) =>
+                        field.onChange(values.map(Number))
+                      }
+                      placeholder="انتخاب روش..."
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </>
+        )}
+
+        <div className="mt-2">
+          <Button type="submit" className="w-full" disabled={isSubmitting}>
+            ذخیره تغییرات
+            {isSubmitting && <Spinner />}
+          </Button>
+        </div>
+      </form>
     </Form>
   );
 }

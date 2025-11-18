@@ -1,7 +1,18 @@
 "use client";
 
+import fetchCities from "@/api/fetchCities";
+import fetchCountry from "@/api/fetchCountry";
+import fetchUser from "@/api/fetchUser";
+import type { City, Country } from "@/schemas";
+import { adsClubSchema } from "@/schemas/adsClubRegister";
+import type { User } from "@/schemas/user";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { CircleFlag } from "next-circle-flags";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 import {
@@ -22,19 +33,72 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui";
-import { adsClubSchema } from "@/schemas/adsClubRegister";
-import { CircleFlag } from "next-circle-flags";
-import { useEffect, useState } from "react";
-import type { City, Country } from "@/schemas";
-import fetchCountry from "@/api/fetchCountry";
-import fetchCities from "@/api/fetchCities";
-import { MultiSelect } from "@/components/ui-custom/MultiSelect";
+import { Loader } from "@/components/ui-custom/Loader";
+import { Spinner } from "@/components/ui/spinner";
 
-type AdsClubRegister = z.infer<typeof adsClubSchema>;
+type AdsClubFormValues = z.infer<typeof adsClubSchema>;
 
 export default function ProfileForm() {
+  const router = useRouter();
+  const [user, setUser] = useState<User | null>(null);
   const [countries, setCountries] = useState<Country[]>([]);
   const [cities, setCities] = useState<City[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const form = useForm<AdsClubFormValues>({
+    resolver: zodResolver(adsClubSchema),
+    defaultValues: {
+      isImmigrate: undefined,
+      gender: undefined,
+      birthYear: undefined,
+      immigrationCountryIds: [],
+      immigrateMethodIds: [],
+      countryId: undefined,
+      cityId: undefined,
+      favoriteAdCategoryIds: [],
+    } as any,
+  });
+
+  useEffect(() => {
+    async function loadUser() {
+      const res = await fetchUser();
+
+      if (res.ok) {
+        setUser(res.user);
+
+        form.reset({
+          isImmigrate: res.user.isImmigrate,
+          gender: (res.user.gender as "male" | "female" | "other") ?? undefined,
+          birthYear: res.user.birthYear ? String(res.user.birthYear) : "",
+          countryId: res.user.country?.id ?? undefined,
+          cityId: res.user.city?.id ?? undefined,
+        });
+
+        form.setValue(
+          "favoriteAdCategoryIds",
+          res.user.favoriteAdCategories.map((c) => c.id),
+          { shouldValidate: false },
+        );
+
+        form.setValue(
+          "immigrationCountryIds",
+          res.user.immigrationCountries.map((c) => c.id),
+          { shouldValidate: false },
+        );
+
+        form.setValue(
+          "immigrateMethodIds",
+          res.user.immigrateMethods.map((m) => m.id),
+          { shouldValidate: false },
+        );
+      }
+
+      setIsLoading(false);
+    }
+
+    loadUser();
+  }, [form]);
 
   useEffect(() => {
     fetchCountry().then((countries) => {
@@ -42,55 +106,91 @@ export default function ProfileForm() {
     });
   }, []);
 
-  const form = useForm<AdsClubRegister>({
-    resolver: zodResolver(adsClubSchema),
-    defaultValues: {
-      status: "migrated",
-      gender: "male",
-      birthYear: "1990",
-      country: "Germany",
-      city: "Berlin",
-      interests: ["tech", "art"],
-      destinations: [],
-      methods: [],
-    },
-  });
+  useEffect(() => {
+    const countryId = form.getValues("countryId");
 
-  const watchStatus = form.watch("status");
+    if (countries.length > 0 && countryId) {
+      const selectedCountry = countries.find((c) => c.id === countryId);
+      if (selectedCountry) {
+        fetchCities({
+          countryCode: selectedCountry.code,
+          limit: 1000,
+          page: 1,
+        }).then((res) => {
+          setCities(res.items || []);
+        });
+      }
+    }
+  }, [countries, form.watch("countryId")]);
 
-  const onSubmit = (values: AdsClubRegister) => {
-    console.log("Updated profile:", values);
+  const watchStatus = form.watch("isImmigrate");
+
+  const updateHandler = async (values: AdsClubFormValues) => {
+    setIsSubmitting(true);
+
+    try {
+      const cleanedBirthYear =
+        values.birthYear && values.birthYear.trim() !== ""
+          ? Number(values.birthYear)
+          : null;
+
+      const payload = {
+        ...values,
+        birthYear: cleanedBirthYear,
+      };
+
+      await axios.put(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/user/data`,
+        payload,
+        {
+          withCredentials: true,
+        },
+      );
+      router.push("/panel/adsclub");
+      toast.success("تغییرات با موفقیت ذخیره شد.");
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      toast.error("خطایی رخ داد.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <Form {...form}>
       <Card className="border-blue-500/20 bg-blue-50/50 p-4">
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-6"
+          onSubmit={form.handleSubmit(updateHandler, (error) => {
+            console.log("ّّForm ERROR:", error);
+          })}
+          className="flex flex-col gap-3"
         >
           <FormField
             control={form.control}
-            name="status"
+            name="isImmigrate"
             render={({ field }) => (
               <FormItem>
-                <FormLabel htmlFor="status">وضعیت مهاجرت:</FormLabel>
+                <FormLabel htmlFor="isImmigrate">وضعیت مهاجرت:</FormLabel>
                 <FormControl>
                   <RadioGroup
                     dir="rtl"
-                    value={field.value}
-                    onValueChange={field.onChange}
+                    value={String(field.value ?? false)}
                     className="flex gap-6"
+                    disabled
                   >
                     <div className="flex items-center gap-2">
-                      <RadioGroupItem value="migrated" id="migrated" />
-                      <label htmlFor="migrated" className="text-sm">
+                      <RadioGroupItem value="true" id="true" />
+                      <label htmlFor="true" className="text-sm">
                         مهاجرت کردم
                       </label>
                     </div>
                     <div className="flex items-center gap-2">
-                      <RadioGroupItem value="migrating" id="migrating" />
-                      <label htmlFor="migrating" className="text-sm">
+                      <RadioGroupItem value="false" id="false" />
+                      <label htmlFor="false" className="text-sm">
                         در حال مهاجرت هستم
                       </label>
                     </div>
@@ -108,7 +208,7 @@ export default function ProfileForm() {
               <FormItem>
                 <FormLabel htmlFor="gender">جنسیت:</FormLabel>
                 <Select
-                  value={field.value}
+                  value={String(field.value) ?? ""}
                   onValueChange={field.onChange}
                   dir="rtl"
                 >
@@ -133,13 +233,34 @@ export default function ProfileForm() {
             name="birthYear"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>سال تولد (میلادی):</FormLabel>
+                <FormLabel>
+                  سال تولد میلادی:{" "}
+                  <span className="text-muted-foreground text-sm leading-0">
+                    (اختیاری، 5+ امتیاز)
+                  </span>
+                </FormLabel>
                 <FormControl>
                   <Input
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
+                    pattern="\d*"
                     placeholder="مثال: 1990"
-                    value={field.value ?? ""}
-                    onChange={field.onChange}
+                    {...field}
+                    value={field.value || ""}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/\D/g, "").slice(0, 4);
+                      field.onChange(val);
+
+                      // if (val.length === 4 && !birthYearRewardGiven) {
+                      //   addPoints(5);
+                      //   markBirthYearReward(true);
+                      // }
+
+                      // if (val.length === 0 && birthYearRewardGiven) {
+                      //   removePoints(5);
+                      //   markBirthYearReward(false);
+                      // }
+                    }}
                   />
                 </FormControl>
                 <FormMessage />
@@ -147,11 +268,11 @@ export default function ProfileForm() {
             )}
           />
 
-          {watchStatus === "migrated" && (
+          {watchStatus === true && (
             <>
               <FormField
                 control={form.control}
-                name="country"
+                name="countryId"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
@@ -160,18 +281,23 @@ export default function ProfileForm() {
                     <Select
                       dir="rtl"
                       onValueChange={(val) => {
-                        field.onChange(val);
+                        const countryId = Number(val);
+                        field.onChange(countryId);
+
+                        const selectedCountry = countries.find(
+                          (c) => c.id === countryId,
+                        );
+
                         fetchCities({
-                          countryCode: val,
+                          countryCode: selectedCountry?.code || "",
                           limit: 1000,
                           page: 1,
                         }).then((res) => {
-                          console.log(res);
                           setCities(res.items || []);
-                          form.setValue("city", "");
+                          form.setValue("cityId", undefined);
                         });
                       }}
-                      value={field.value || ""}
+                      value={field.value ? String(field.value) : undefined}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -180,7 +306,10 @@ export default function ProfileForm() {
                       </FormControl>
                       <SelectContent className="max-h-60">
                         {countries.map((country) => (
-                          <SelectItem key={country.id} value={country.code}>
+                          <SelectItem
+                            key={country.id}
+                            value={String(country.id)}
+                          >
                             <div className="flex items-center gap-2">
                               <CircleFlag
                                 width={16}
@@ -202,7 +331,7 @@ export default function ProfileForm() {
 
               <FormField
                 control={form.control}
-                name="city"
+                name="cityId"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
@@ -210,8 +339,8 @@ export default function ProfileForm() {
                     </FormLabel>
                     <Select
                       dir="rtl"
-                      onValueChange={field.onChange}
-                      value={field.value || ""}
+                      onValueChange={(val) => field.onChange(Number(val))}
+                      value={field.value ? String(field.value) : ""}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -220,7 +349,7 @@ export default function ProfileForm() {
                       </FormControl>
                       <SelectContent className="max-h-60 overflow-y-auto">
                         {cities.map((city) => (
-                          <SelectItem key={city.id} value={city.name}>
+                          <SelectItem key={city.id} value={String(city.id)}>
                             {city.name}
                           </SelectItem>
                         ))}
@@ -230,62 +359,40 @@ export default function ProfileForm() {
                   </FormItem>
                 )}
               />
+
+              <input
+                type="hidden"
+                {...form.register("favoriteAdCategoryIds")}
+                value={JSON.stringify(
+                  form.getValues("favoriteAdCategoryIds") || [],
+                )}
+              />
             </>
           )}
 
-          {watchStatus === "migrating" && (
+          {watchStatus === false && (
             <>
-              <FormField
-                control={form.control}
-                name="destinations"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>کشورهای موردنظر</FormLabel>
-                    <FormControl>
-                      <MultiSelect
-                        // options={countries.map((country) => ({
-                        //   label: country.name,
-                        //   value: country.code,
-                        // }))}
-                        options={[]}
-                        defaultValue={field.value || []}
-                        onValueChange={field.onChange}
-                        placeholder="انتخاب کشور..."
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
+              <input
+                type="hidden"
+                {...form.register("immigrationCountryIds")}
+                value={JSON.stringify(
+                  form.getValues("immigrationCountryIds") || [],
                 )}
               />
-              <FormField
-                control={form.control}
-                name="methods"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>روش‌های مهاجرت</FormLabel>
-                    <FormControl>
-                      <MultiSelect
-                        options={[
-                          { label: "تحصیلی", value: "study" },
-                          { label: "کاری", value: "work" },
-                          { label: "سرمایه‌گذاری", value: "investment" },
-                          { label: "پناهندگی", value: "asylum" },
-                        ]}
-                        defaultValue={field.value || []}
-                        onValueChange={field.onChange}
-                        placeholder="انتخاب روش..."
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
+              <input
+                type="hidden"
+                {...form.register("immigrateMethodIds")}
+                value={JSON.stringify(
+                  form.getValues("immigrateMethodIds") || [],
                 )}
               />
             </>
           )}
 
           <div className="mt-2">
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
               ذخیره تغییرات
+              {isSubmitting && <Spinner />}
             </Button>
           </div>
         </form>

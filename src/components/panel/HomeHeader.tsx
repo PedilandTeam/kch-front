@@ -2,11 +2,17 @@ import Image from "next/image";
 import { AdsClubLogo } from "./adsClubLogo";
 import logoImage from "@/assets/images/logo.png";
 
+import { useTelegramAuth } from "@/store/useTelegramAuth";
+
 export const HomeHeader = () => {
+  const { userData, isLoading } = useTelegramAuth();
+
   return (
-    <header className="mb-5 flex items-center justify-between gap-3">
+    <header className="flex items-center justify-between gap-3">
       <div>
-        <div className="text-[13px] text-gray-500">پدرام عـزیـز،</div>
+        <div className="text-[13px] text-gray-500">
+          {isLoading ? "..." : `${userData?.user?.first_name} عـزیـز،`}
+        </div>
         <div className="font-semibold text-blue-900">خـوش آمـدیـد!</div>
       </div>
 

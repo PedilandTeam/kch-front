@@ -14,116 +14,153 @@ import deImage from "@/assets/images/bd/hp-germany.webp";
 import nlImage from "@/assets/images/bd/hp-netherland.webp";
 import seImage from "@/assets/images/bd/hp-sweden.webp";
 import trImage from "@/assets/images/bd/hp-turkey.webp";
+import { e2p } from "@/utils/e2p";
 
 type CountryWithStats = Country & { pageCount: number };
 
-async function fetchCountriesWithStats() {
-  let countries: Country[];
+// ----------------------
+// SAFE FETCH VERSION
+// ----------------------
+async function safeJsonFetch(req: Promise<Response>): Promise<any | null> {
   try {
-    countries = await (await API_ROUTES.COUNTRIES.GET_ALL(1, 50)).json();
-  } catch (err) {
-    console.error("Error in fetchCountries", err);
-    throw new Error("error in get countries");
-  }
+    const res = await req;
 
-  // Fetch stats for each country to get page counts
+    if (!res.ok) {
+      console.error("API not OK:", res.status, res.statusText);
+      return null;
+    }
+
+    const contentType = res.headers.get("content-type") ?? "";
+
+    if (!contentType.includes("application/json")) {
+      console.error("NON-JSON response detected:", contentType);
+      return null;
+    }
+
+    return await res.json();
+  } catch (err) {
+    console.error("Network/API error:", err);
+    return null;
+  }
+}
+
+// ----------------------
+// FETCH COUNTRIES + STATS — SAFE
+// ----------------------
+async function fetchCountriesWithStats(): Promise<CountryWithStats[] | null> {
+  const countries: Country[] | null = await safeJsonFetch(
+    API_ROUTES.COUNTRIES.GET_ALL(1, 50),
+  );
+
+  if (!countries) return null;
+
   const countriesWithStats = await Promise.all(
     countries.map(async (country) => {
-      try {
-        const stats: StatsNamespace.COUNTRY_STATS = await (
-          await API_ROUTES.STATS.COUNTRY_STATS(country.code, 100)
-        ).json();
-        return { ...country, pageCount: stats.page };
-      } catch (err) {
-        console.error(`Error fetching stats for ${country.code}:`, err);
-        return { ...country, pageCount: 0 };
-      }
+      const stats: StatsNamespace.COUNTRY_STATS | null = await safeJsonFetch(
+        API_ROUTES.STATS.COUNTRY_STATS(country.code, 100),
+      );
+
+      return {
+        ...country,
+        pageCount: stats?.page ?? 0,
+      };
     }),
   );
 
   return countriesWithStats;
 }
 
-// Country configuration for the home page
+// --------------------------------
+// FEATURED COUNTRIES LIST
+// --------------------------------
 const FEATURED_COUNTRIES = [
   {
     code: "uk",
     name: COUNTRY.ENGLAND,
     image: ukImage,
-    alt: "یک تصویر از کشور انگلستان",
+    alt: "انگلستان",
     href: "/uk",
   },
   {
     code: "de",
     name: COUNTRY.GERMANY,
     image: deImage,
-    alt: "یک تصویر از کشور آلمان",
+    alt: "آلمان",
     href: "/de",
   },
   {
     code: "ca",
     name: COUNTRY.CANADA,
     image: caImage,
-    alt: "یک تصویر از کشور کانادا",
+    alt: "کانادا",
     href: "/ca",
   },
   {
     code: "at",
     name: COUNTRY.AUSTRIA,
     image: atImage,
-    alt: "یک تصویر از کشور اتریش",
+    alt: "اتریش",
     href: "/at",
   },
   {
     code: "fr",
     name: COUNTRY.FRANCE,
     image: frImage,
-    alt: "یک تصویر از کشور فرانسه",
+    alt: "فرانسه",
     href: "/fr",
   },
   {
     code: "se",
     name: COUNTRY.SWEDEN,
     image: seImage,
-    alt: "یک تصویر از کشور سوئد",
+    alt: "سوئد",
     href: "/se",
   },
   {
     code: "dk",
     name: COUNTRY.DENMARK,
     image: dkImage,
-    alt: "یک تصویر از کشور دانمارک",
+    alt: "دانمارک",
     href: "/dk",
   },
   {
     code: "tr",
     name: COUNTRY.TURKEY,
     image: trImage,
-    alt: "یک تصویر از کشور ترکیه",
+    alt: "ترکیه",
     href: "/tr",
   },
   {
     code: "nl",
     name: COUNTRY.NETHERLAND,
     image: nlImage,
-    alt: "یک تصویر از کشور هلند",
+    alt: "هلند",
     href: "/nl",
   },
 ];
 
+// ----------------------
+// MAIN COMPONENT — SAFE
+// ----------------------
 export const HomeCountries = async () => {
-  const countries: CountryWithStats[] = await fetchCountriesWithStats();
+  const countries = await fetchCountriesWithStats();
 
-  const getCount = (countryCode: string) => {
-    return countries.find(
-      (country: CountryWithStats) => country.code == countryCode,
-    )?.pageCount;
-  };
+  // ❗ اگر API down بود → نمایش متن دوستانه
+  if (!countries) {
+    return (
+      <div className="py-8 text-center text-red-500">
+        سرویس‌های Koochaa موقتاً در دسترس نیستند.
+      </div>
+    );
+  }
 
-  // Sort featured countries by their page count (highest first)
+  // امن‌سازی خواندن pageCount
+  const getCount = (code: string) =>
+    countries.find((country) => country.code === code)?.pageCount ?? 0;
+
   const sortedFeaturedCountries = FEATURED_COUNTRIES.map((country) => ({
     ...country,
-    count: getCount(country.code) || 0,
+    count: getCount(country.code),
   })).sort((a, b) => b.count - a.count);
 
   return (
@@ -144,14 +181,16 @@ export const HomeCountries = async () => {
                 placeholder="blur"
                 fill
                 alt={country.alt}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="h-auto cursor-pointer object-cover transition-all duration-500 group-hover:scale-110"
-                priority={index < 3} // Only prioritize first 3 images
+                priority={index < 3}
               />
-              <div className="info absolute bottom-0 w-full cursor-pointer bg-gradient-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10">
+
+              <div className="info absolute bottom-0 w-full cursor-pointer bg-linear-to-t from-black px-5 py-8 text-white transition-all duration-500 group-hover:py-10">
                 <h3 className="text-center text-[20px] font-semibold">
                   {country.name}
-                  <span className="mr-1 font-normal">({country.count})</span>
+                  <span className="mr-1 font-normal">
+                    ({e2p(country.count)})
+                  </span>
                 </h3>
               </div>
             </Link>

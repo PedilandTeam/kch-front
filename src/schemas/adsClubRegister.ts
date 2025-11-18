@@ -1,76 +1,82 @@
-import z from "zod";
+import { z } from "zod";
 
 export const adsClubSchema = z
   .object({
-    isImmigrate: z
-      .boolean()
+    isImmigrate: z.boolean(),
+
+    gender: z.string().optional(),
+
+    birthYear: z
+      .string()
       .optional()
-      .refine((val) => val !== undefined, {
-        message: "وضعیت مهاجرت را انتخاب کنید.",
-      }),
+      .refine(
+        (val) => !val || /^\d{4}$/.test(val),
+        "سال تولد باید 4 رقم باشد.",
+      ),
 
-    gender: z.enum(["male", "female", "other"]).optional(),
-    birthYear: z.string().optional(),
+    countryId: z
+      .number({
+        required_error: "کشور محل زندگی را انتخاب کنید.",
+        invalid_type_error: "کشور محل زندگی را انتخاب کنید.",
+      })
+      .int()
+      .positive("کشور محل زندگی را انتخاب کنید.")
+      .optional(),
 
-    countryId: z.number().optional(),
-    cityId: z.number().optional(),
+    cityId: z
+      .number({
+        required_error: "شهر محل سکونت را انتخاب کنید.",
+        invalid_type_error: "شهر محل سکونت را انتخاب کنید.",
+      })
+      .int()
+      .positive("شهر محل سکونت را انتخاب کنید.")
+      .optional(),
 
     favoriteAdCategoryIds: z.array(z.number()).optional(),
 
     immigrationCountryIds: z.array(z.number()).optional(),
+
     immigrateMethodIds: z.array(z.number()).optional(),
   })
-
-  // 🟦 اگر مهاجرت کرده → کشور الزامی
+  .refine((data) => !(data.isImmigrate === true && !data.countryId), {
+    message: "کشور محل زندگی را انتخاب کنید.",
+    path: ["countryId"],
+  })
   .refine(
-    (d) =>
-      d.isImmigrate === false || // ← در حال مهاجرت
-      (d.countryId !== undefined && d.countryId > 0), // ← مهاجرت کرده
-    {
-      message: "کشور محل زندگی را انتخاب کنید.",
-      path: ["countryId"],
-    },
-  )
-
-  // 🟦 اگر مهاجرت کرده → شهر فقط وقتی لازم است که کشور انتخاب شده باشد
-  .refine(
-    (d) =>
-      d.isImmigrate === false || // اگر در حال مهاجرت است → شهر لازم نیست
-      d.countryId === undefined || // اگر کشور انتخاب نشده → شهر لازم نیست
-      (d.cityId !== undefined && d.cityId > 0), // اگر کشور انتخاب شده → شهر لازم است
+    (data) => !(data.isImmigrate === true && data.countryId && !data.cityId),
     {
       message: "شهر محل سکونت را انتخاب کنید.",
       path: ["cityId"],
     },
   )
-
-  // 🟦 اگر مهاجرت کرده → علاقه‌مندی‌ها الزامی
   .refine(
-    (d) =>
-      d.isImmigrate === false ||
-      (d.favoriteAdCategoryIds && d.favoriteAdCategoryIds.length > 0),
+    (data) =>
+      !(
+        data.isImmigrate === true &&
+        (!data.favoriteAdCategoryIds || data.favoriteAdCategoryIds.length === 0)
+      ),
     {
-      message: "حداقل یک موضوع مورد علاقه انتخاب کنید.",
+      message: "حداقل یک مورد را انتخاب کنید.",
       path: ["favoriteAdCategoryIds"],
     },
   )
-
-  // 🟩 اگر در حال مهاجرت → کشورها الزامی
   .refine(
-    (d) =>
-      d.isImmigrate === true ||
-      (d.immigrationCountryIds && d.immigrationCountryIds.length > 0),
+    (data) =>
+      !(
+        data.isImmigrate === false &&
+        (!data.immigrationCountryIds || data.immigrationCountryIds.length === 0)
+      ),
     {
-      message: "کشورهای موردنظر را انتخاب کنید.",
+      message: "حداقل یک کشور را انتخاب کنید.",
       path: ["immigrationCountryIds"],
     },
   )
-
-  // 🟩 اگر در حال مهاجرت → روش‌ها الزامی
   .refine(
-    (d) =>
-      d.isImmigrate === true ||
-      (d.immigrateMethodIds && d.immigrateMethodIds.length > 0),
+    (data) =>
+      !(
+        data.isImmigrate === false &&
+        (!data.immigrateMethodIds || data.immigrateMethodIds.length === 0)
+      ),
     {
       message: "حداقل یک روش مهاجرت را انتخاب کنید.",
       path: ["immigrateMethodIds"],

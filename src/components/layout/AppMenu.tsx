@@ -21,17 +21,21 @@ export const AppMenu = () => {
   const { countryCode, setCountryCode } = useCountryCodeStore();
 
   const {
-    data,
+    data: countriesData,
     error: countriesError,
     isLoading: countriesLoading,
   } = useSWR<Country[]>(swrKeys.countries());
 
+  console.log("Countries:", countriesData);
+
   useEffect(() => {
-    if (data) {
-      const filteredCountries = data?.filter((c: Country) => c.status === true);
+    if (countriesData) {
+      const filteredCountries = countriesData?.filter(
+        (c: Country) => c.status === true,
+      );
       setCountries(filteredCountries);
     }
-  }, [data]);
+  }, [countriesData]);
 
   useEffect(() => {
     if (!pathname) return;

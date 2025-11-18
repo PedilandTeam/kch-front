@@ -1,6 +1,5 @@
+import { ContactPage } from "@/components/static/ContactPage";
 import type { Metadata } from "next";
-
-import { ContactPage } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "تماس با ما",
