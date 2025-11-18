@@ -26,9 +26,6 @@ const nextConfig = {
     ],
     qualities: [75, 100],
   },
-  experimental: {
-    allowedDevOrigins: ["https://dev.koochaa.com", "http://dev.koochaa.com"],
-  },
 };
 
 const withBundleAnalyzer = bundleAnalyzer({

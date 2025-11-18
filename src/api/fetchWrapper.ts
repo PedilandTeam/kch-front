@@ -38,10 +38,11 @@ export type FetchWrapperConfig = {
   body?: any;
   tags?: string[];
 };
+
 export default async function fetchWrapper<T>(
   path: string,
   config: FetchWrapperConfig = {},
-): Promise<FetchWrapperResponse<T>> {
+): Promise<FetchWrapperResponse<T> | null> {
   let {
     filters,
     overrideUrl,
@@ -51,81 +52,75 @@ export default async function fetchWrapper<T>(
     tags,
     headers,
   } = config;
+
   const url = `${process.env.NEXT_PUBLIC_API_URL}/${path}`;
   const urlObject = new URL(overrideUrl ? overrideUrl : url);
 
-  if (!filters) {
-    filters = {};
-  }
+  if (!filters) filters = {};
 
-  if (filters) {
-    Object.keys(filters).forEach((filter) => {
-      const value = filters![filter];
-      if (value !== undefined && value !== null && value !== "") {
-        urlObject.searchParams.append(filter, String(value));
-      }
-    });
-  }
+  Object.keys(filters).forEach((filter) => {
+    const value = filters![filter];
+    if (value !== undefined && value !== null && value !== "") {
+      urlObject.searchParams.append(filter, String(value));
+    }
+  });
 
   const fetchConfig: RequestInit = {
-    method: method,
+    method,
     headers: {
       "Content-Type": "application/json",
       ...(headers ?? {}),
     },
-
     credentials: "include",
     ...(body && { body: JSON.stringify(body) }),
     next: { revalidate, tags },
   };
 
-  // let response: Response | undefined = undefined;
-  let error: unknown;
-  let isNotFound: boolean = false;
-  let isUnAuthorized: boolean = false;
-  let isServerError: boolean = false;
-  let isOk = false;
+  let isNotFound = false;
+  let isUnauthorized = false;
+  let isServerError = false;
   let errorJson: any = null;
-  const fetcher: FetchWrapperResponse<T> = await fetch(urlObject, fetchConfig)
+  let isOk = false;
+  let error: unknown = null;
+
+  const fetcher = await fetch(urlObject, fetchConfig)
     .then(async (res) => {
+      const contentType = res.headers.get("content-type") ?? "";
+
+      // اگر خروجی JSON نبود → یعنی Cloudflare HTML داده → API خراب است
+      if (!contentType.includes("application/json")) {
+        console.warn("⚠ NON-JSON response detected:", urlObject.toString());
+        isServerError = true;
+        isOk = false;
+        return null as any;
+      }
+
       const resJson = await res.json();
 
       if (!res.ok) {
-        if (res.status === 404) {
-          isNotFound = true;
-        }
-
-        if (res.status === 401) {
-          isUnAuthorized = true;
-        }
-
-        if (res.status === 500) {
-          isServerError = true;
-        }
+        if (res.status === 404) isNotFound = true;
+        if (res.status === 401) isUnauthorized = true;
+        if (res.status >= 500) isServerError = true;
 
         errorJson = resJson;
+        isOk = false;
+        return null as any;
       }
+
       isOk = true;
       return resJson;
     })
     .catch((err: unknown) => {
+      console.warn("⚠ Network error:", urlObject.toString(), err);
       error = err;
-      if (err instanceof Error) {
-        if (typeof window === "undefined") {
-          console.error(urlObject.toString(), err);
-        }
-      }
-      console.error(urlObject.toString(), err);
+      isOk = false;
+      return null as any;
     });
-  if (isOk) {
+
+  // بجای throw → graceful fallback
+  if (isOk && !isServerError) {
     return fetcher;
-  } else {
-    throw new FetchWrapperError(
-      isNotFound,
-      error,
-      isUnAuthorized,
-      isServerError,
-      errorJson,
-    );
   }
+
+  return null;
 }

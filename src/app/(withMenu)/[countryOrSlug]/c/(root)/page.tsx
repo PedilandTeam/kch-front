@@ -1,38 +1,38 @@
-import { swrKeys } from "@/hooks/swr/swrKeys";
-import { fetchCountriesServer } from "@/sdk/countries.server";
-import { fetchQuestionsServer } from "@/sdk/questions.server";
-import { notFound } from "next/navigation";
-import { SWRConfig, unstable_serialize } from "swr";
+// import { swrKeys } from "@/hooks/swr/swrKeys";
+// import { fetchCountriesServer } from "@/sdk/countries.server";
+// import { fetchQuestionsServer } from "@/sdk/questions.server";
+// import { notFound } from "next/navigation";
+// import { SWRConfig, unstable_serialize } from "swr";
 
-type PageProps = {
-  params: Promise<{ countryOrSlug: string }>;
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-};
+// type PageProps = {
+//   params: Promise<{ countryOrSlug: string }>;
+//   searchParams: Promise<Record<string, string | string[] | undefined>>;
+// };
 
-export default async function Page({ params, searchParams }: PageProps) {
-  const { countryOrSlug } = await params;
-  const { page } = await searchParams;
-  const countries = await fetchCountriesServer();
-  const country = countries.find((c) => c.code === countryOrSlug);
+export default async function Page() {
+  //   const { countryOrSlug } = await params;
+  //   const { page } = await searchParams;
+  //   const countries = await fetchCountriesServer();
+  //   const country = countries.find((c) => c.code === countryOrSlug);
 
-  if (!country) {
-    return notFound();
-  }
+  //   if (!country) {
+  //     return notFound();
+  //   }
 
-  const pageNumber = Number(page ?? 1);
-  const limit = 30;
+  //   const pageNumber = Number(page ?? 1);
+  //   const limit = 30;
 
-  const key = swrKeys.questions({
-    page: pageNumber,
-    limit,
-    countryCode: countryOrSlug,
-  });
+  //   const key = swrKeys.questions({
+  //     page: pageNumber,
+  //     limit,
+  //     countryCode: countryOrSlug,
+  //   });
 
-  const initial = await fetchQuestionsServer({
-    countryCode: countryOrSlug,
-    page: pageNumber,
-    limit,
-  });
+  //   const initial = await fetchQuestionsServer({
+  //     countryCode: countryOrSlug,
+  //     page: pageNumber,
+  //     limit,
+  //   });
 
   return (
     <p>hello</p>
