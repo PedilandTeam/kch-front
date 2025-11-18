@@ -15,7 +15,7 @@ export const SiteProvider = ({ children }: { children: React.ReactNode }) => {
         richColors
         theme="light"
         toastOptions={{
-          className: "font-anjoman !important",
+          className: "font-vazirmatn !important",
         }}
       />
 

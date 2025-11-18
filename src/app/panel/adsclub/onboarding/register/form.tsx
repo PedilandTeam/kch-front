@@ -38,6 +38,7 @@ import {
 } from "@/components/ui";
 import { MultiSelect } from "@/components/ui-custom/MultiSelect";
 import { Spinner } from "@/components/ui/spinner";
+import { e2p } from "@/utils/e2p";
 
 type AdsClubFormValues = z.infer<typeof adsClubSchema>;
 
@@ -116,11 +117,19 @@ export default function RegisterForm() {
         },
       );
 
-      toast.success("حساب کاربری شما با موفقیت فعال شد.");
       router.push("/panel/adsclub");
+      toast.success("حساب کاربری شما با موفقیت فعال شد.");
     } catch (error) {
-      console.error("Error:", error);
-      toast.error("خطایی رخ داد.");
+      const message = error.response?.data?.message[0];
+      console.error("Error:", message);
+      if (
+        message ===
+        "favoriteAdCategoryIds must contain no more than 10 elements"
+      ) {
+        toast.error("حداکثر 10 علاقه‌مندی  می‌توانید انتخاب کنید.");
+      } else {
+        toast.error("خطایی در ثبت اطلاعات رخ داد.");
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -203,7 +212,7 @@ export default function RegisterForm() {
                   <FormLabel>
                     جنسیت:{" "}
                     <span className="text-muted-foreground text-sm leading-0">
-                      (اختیاری، 5+ امتیاز)
+                      {e2p("(اختیاری، 5+ امتیاز)")}
                     </span>
                   </FormLabel>
                   <Select
@@ -248,7 +257,7 @@ export default function RegisterForm() {
                   <FormLabel>
                     سال تولد میلادی:{" "}
                     <span className="text-muted-foreground text-sm leading-0">
-                      (اختیاری، 5+ امتیاز)
+                      {e2p("(اختیاری، 5+ امتیاز)")}
                     </span>
                   </FormLabel>
                   <FormControl>
@@ -282,7 +291,11 @@ export default function RegisterForm() {
               )}
             />
 
-            <Button type="button" onClick={() => setStep("details")}>
+            <Button
+              className="w-full"
+              type="button"
+              onClick={() => setStep("details")}
+            >
               ادامه
             </Button>
           </>

@@ -12,8 +12,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        anjoman: ["var(--font-anjoman)", "Anjoman", "sans-serif"],
         roboto: ["var(--font-roboto)", "Roboto", "sans-serif"],
+        vazirmatn: ["var(--font-vazirmatn)", "Vazirmatn", "sans-serif"],
       },
       screens: {
         xs: "475px",

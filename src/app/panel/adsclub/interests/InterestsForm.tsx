@@ -139,114 +139,112 @@ export default function InterestsForm() {
 
   return (
     <Form {...form}>
-      <Card className="border-blue-500/20 bg-blue-50/50 p-4">
-        <form
-          onSubmit={form.handleSubmit(updateHandler, (error) => {
-            console.log("Form Error:", error);
-          })}
-          className="flex flex-col gap-6"
-        >
-          {watchStatus === true && (
-            <>
-              <FormField
-                control={form.control}
-                name="favoriteAdCategoryIds"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>موضوعات مورد علاقه</FormLabel>
-                    <FormControl>
-                      <MultiSelect
-                        options={interests.map((c) => ({
-                          value: String(c.id),
-                          label: c.name,
-                        }))}
-                        defaultValue={(field.value || []).map(String)}
-                        onValueChange={(values) =>
-                          field.onChange(values.map(Number))
-                        }
-                        placeholder="انتخاب کنید..."
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+      <form
+        onSubmit={form.handleSubmit(updateHandler, (error) => {
+          console.log("Form Error:", error);
+        })}
+        className="flex flex-col gap-6"
+      >
+        {watchStatus === true && (
+          <>
+            <FormField
+              control={form.control}
+              name="favoriteAdCategoryIds"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>موضوعات مورد علاقه</FormLabel>
+                  <FormControl>
+                    <MultiSelect
+                      options={interests.map((c) => ({
+                        value: String(c.id),
+                        label: c.name,
+                      }))}
+                      defaultValue={(field.value || []).map(String)}
+                      onValueChange={(values) =>
+                        field.onChange(values.map(Number))
+                      }
+                      placeholder="انتخاب کنید..."
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              <input
-                type="hidden"
-                {...form.register("countryId")}
-                value={form.getValues("countryId")}
-              />
+            <input
+              type="hidden"
+              {...form.register("countryId")}
+              value={form.getValues("countryId")}
+            />
 
-              <input
-                type="hidden"
-                {...form.register("cityId")}
-                value={form.getValues("cityId")}
-              />
-            </>
-          )}
+            <input
+              type="hidden"
+              {...form.register("cityId")}
+              value={form.getValues("cityId")}
+            />
+          </>
+        )}
 
-          {watchStatus === false && (
-            <>
-              <FormField
-                control={form.control}
-                name="immigrationCountryIds"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>کشورهای موردنظر</FormLabel>
-                    <FormControl>
-                      <MultiSelect
-                        options={countries.map((country) => ({
-                          key: country.id,
-                          label: country.name,
-                          value: country.id.toString(),
-                        }))}
-                        defaultValue={(field.value ?? []).map(String)}
-                        onValueChange={(values) =>
-                          field.onChange(values.map(Number))
-                        }
-                        placeholder="انتخاب کشور..."
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="immigrateMethodIds"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>روش‌های مهاجرت</FormLabel>
-                    <FormControl>
-                      <MultiSelect
-                        options={methods.map((method, index) => ({
-                          key: index,
-                          label: method.titleFa,
-                          value: method.id.toString(),
-                        }))}
-                        defaultValue={(field.value ?? []).map(String)}
-                        onValueChange={(values) =>
-                          field.onChange(values.map(Number))
-                        }
-                        placeholder="انتخاب روش..."
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </>
-          )}
+        {watchStatus === false && (
+          <>
+            <FormField
+              control={form.control}
+              name="immigrationCountryIds"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>کشورهای موردنظر</FormLabel>
+                  <FormControl>
+                    <MultiSelect
+                      options={countries.map((country) => ({
+                        key: country.id,
+                        label: country.name,
+                        value: country.id.toString(),
+                      }))}
+                      defaultValue={(field.value ?? []).map(String)}
+                      onValueChange={(values) =>
+                        field.onChange(values.map(Number))
+                      }
+                      placeholder="انتخاب کشور..."
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="immigrateMethodIds"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>روش‌های مهاجرت</FormLabel>
+                  <FormControl>
+                    <MultiSelect
+                      options={methods.map((method, index) => ({
+                        key: index,
+                        label: method.titleFa,
+                        value: method.id.toString(),
+                      }))}
+                      defaultValue={(field.value ?? []).map(String)}
+                      onValueChange={(values) =>
+                        field.onChange(values.map(Number))
+                      }
+                      placeholder="انتخاب روش..."
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </>
+        )}
 
-          <div className="mt-2">
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              ذخیره تغییرات
-              {isSubmitting && <Spinner />}
-            </Button>
-          </div>
-        </form>
-      </Card>
+        <div className="mt-2">
+          <Button type="submit" className="w-full" disabled={isSubmitting}>
+            ذخیره تغییرات
+            {isSubmitting && <Spinner />}
+          </Button>
+        </div>
+      </form>
     </Form>
   );
 }

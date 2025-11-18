@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { usePointsStore } from "@/store/usePointsStore";
 import coinImage from "@/assets/images/icons/icon-coins-2.png";
+import { e2p } from "@/utils/e2p";
 
 export const CreditDisplay = () => {
   const { points } = usePointsStore();
@@ -22,7 +23,7 @@ export const CreditDisplay = () => {
           animate ? "scale-125 text-yellow-500" : ""
         }`}
       >
-        {points}
+        {e2p(points)}
       </span>
       <Image src={coinImage} width={32} height={32} alt="coin" />
     </div>

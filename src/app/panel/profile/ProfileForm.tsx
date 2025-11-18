@@ -167,7 +167,7 @@ export default function ProfileForm() {
           onSubmit={form.handleSubmit(updateHandler, (error) => {
             console.log("ّّForm ERROR:", error);
           })}
-          className="flex flex-col gap-6"
+          className="flex flex-col gap-3"
         >
           <FormField
             control={form.control}

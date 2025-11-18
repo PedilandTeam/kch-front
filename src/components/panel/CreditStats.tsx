@@ -4,6 +4,7 @@ import Image from "next/image";
 import coinImage from "@/assets/images/icons/icon-coins-2.png";
 import fetchUser from "@/api/fetchUser";
 import { useEffect, useState } from "react";
+import { e2p } from "@/utils/e2p";
 
 export const CreditStats = () => {
   const [kch, setKch] = useState(0);
@@ -40,7 +41,7 @@ export const CreditStats = () => {
             </div>
             <div className="flex items-center gap-3">
               <p className="text-2xl font-bold text-amber-300 text-shadow-2xs text-shadow-amber-900">
-                {kch}
+                {e2p(kch)}
               </p>
               <Image src={coinImage} alt="credit" width={54} height={54} />
             </div>
