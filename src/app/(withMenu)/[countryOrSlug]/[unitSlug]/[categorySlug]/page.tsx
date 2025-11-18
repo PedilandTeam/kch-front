@@ -21,7 +21,7 @@ const pathGenerator = async (
       revalidate:
         +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
     })
-  )[0];
+  )?.[0];
 
   const countryList = await fetchWrapper<Country[]>("countries", {
     filters: { code: countryOrSlug },
@@ -29,7 +29,7 @@ const pathGenerator = async (
     revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
   });
 
-  const currentCountry = countryList[0];
+  const currentCountry = countryList?.[0];
 
   const categories = await fetchWrapper<GetCategoryResponse>("categories", {
     filters: {
