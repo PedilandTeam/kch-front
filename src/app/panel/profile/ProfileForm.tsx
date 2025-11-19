@@ -108,22 +108,26 @@ export default function ProfileForm() {
     });
   }, []);
 
-  useEffect(() => {
-    const countryId = form.getValues("countryId");
+  const watchCountryId = form.watch("countryId");
 
-    if (countries.length > 0 && countryId) {
-      const selectedCountry = countries.find((c) => c.id === countryId);
-      if (selectedCountry) {
-        fetchCities({
-          countryCode: selectedCountry.code,
-          limit: 1000,
-          page: 1,
-        }).then((res) => {
-          setCities(res.items || []);
-        });
-      }
+  useEffect(() => {
+    if (!watchCountryId) {
+      setCities([]);
+      return;
     }
-  }, [countries, form.watch("countryId")]);
+
+    const selectedCountry = countries.find(
+      (c) => c.id === Number(watchCountryId),
+    );
+
+    if (selectedCountry) {
+      fetchCities({
+        countryCode: selectedCountry.code,
+        limit: 1000,
+        page: 1,
+      }).then((res) => setCities(res.items || []));
+    }
+  }, [watchCountryId, countries]);
 
   const watchStatus = form.watch("isImmigrate");
 
@@ -160,7 +164,7 @@ export default function ProfileForm() {
     }
   };
 
-  const startYear = 2010;
+  const startYear = 2007;
   const yearsCount = 90;
 
   if (isLoading) {
@@ -307,11 +311,11 @@ export default function ProfileForm() {
                     <FormControl>
                       <Select
                         dir="rtl"
-                        value={field.value ? String(field.value) : undefined}
+                        value={field.value ? String(field.value) : ""}
                         onValueChange={async (val) => {
                           const countryId = Number(val);
 
-                          form.setValue("cityId", undefined);
+                          form.setValue("cityId", null);
                           setCities([]);
 
                           field.onChange(countryId);
@@ -370,10 +374,16 @@ export default function ProfileForm() {
                       dir="rtl"
                       value={
                         field.value === null || field.value === undefined
-                          ? undefined
+                          ? ""
                           : String(field.value)
                       }
-                      onValueChange={(v) => field.onChange(Number(v))}
+                      onValueChange={(val) => {
+                        if (!val) {
+                          field.onChange(undefined);
+                          return;
+                        }
+                        field.onChange(Number(val));
+                      }}
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="انتخاب شهر..." />

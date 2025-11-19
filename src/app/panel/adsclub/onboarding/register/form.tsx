@@ -10,6 +10,7 @@ import { usePointsStore } from "@/store/usePointsStore";
 import { useTelegramAuth } from "@/store/useTelegramAuth";
 import type { AdCategory } from "@/types/adCategory";
 import type { IMethod } from "@/types/methods";
+import { e2p } from "@/utils/e2p";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { CircleFlag } from "next-circle-flags";
@@ -27,7 +28,6 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
   RadioGroup,
   RadioGroupItem,
   Select,
@@ -38,8 +38,6 @@ import {
 } from "@/components/ui";
 import { MultiSelect } from "@/components/ui-custom/MultiSelect";
 import { Spinner } from "@/components/ui/spinner";
-import { e2p } from "@/utils/e2p";
-import { error } from "console";
 
 type AdsClubFormValues = z.infer<typeof adsClubSchema>;
 
@@ -64,7 +62,6 @@ export default function RegisterForm() {
   } = usePointsStore((state) => state);
 
   const { userData } = useTelegramAuth();
-  const userFullName = `${userData?.user?.first_name} ${userData?.user?.last_name}`;
 
   useEffect(() => {
     if (!hasHydrated) return;
@@ -127,7 +124,18 @@ export default function RegisterForm() {
         message ===
         "favoriteAdCategoryIds must contain no more than 10 elements"
       ) {
-        toast.error("حداکثر 10 علاقه‌مندی  می‌توانید انتخاب کنید.");
+        form.setError("favoriteAdCategoryIds", {
+          type: "manual",
+          message: "حداکثر 10 علاقه‌مندی  می‌توانید انتخاب کنید.",
+        });
+      } else if (
+        message ===
+        "immigrationCountryIds must contain no more than 10 elements"
+      ) {
+        form.setError("immigrationCountryIds", {
+          type: "manual",
+          message: "حداکثر 10 کشور می‌توانید انتخاب کنید.",
+        });
       } else {
         toast.error("خطایی در ثبت اطلاعات رخ داد.");
       }
@@ -136,7 +144,7 @@ export default function RegisterForm() {
     }
   };
 
-  const startYear = 2010;
+  const startYear = 2007;
   const yearsCount = 90;
 
   return (
@@ -150,7 +158,9 @@ export default function RegisterForm() {
         {step === "status" && (
           <>
             <div className="text-primary space-y-1 rounded-xl border border-dashed border-blue-800/30 bg-blue-50 p-4">
-              <h2 className="font-medium">{userFullName} عزیز،</h2>
+              <h2 className="font-medium">
+                {userData?.user?.first_name} عزیز،
+              </h2>
               <p className="text-[15px]">
                 لطفاً وضعیت مهاجرت و اطلاعات اولیه خود را تکمیل کنید.
               </p>
@@ -339,7 +349,7 @@ export default function RegisterForm() {
                 تبریک می‌گم {userData?.user?.first_name}،
               </h2>
               <p className="text-[15px]">
-                فقط یک قدم دیگه تا تکمیل ثبت نام تون باقی مونده!
+                فقط یک قدم دیگه تا تکمیل ثبت نام‌تون باقی مونده!
               </p>
             </div>
 
@@ -479,6 +489,9 @@ export default function RegisterForm() {
                       <FormLabel>
                         <span className="text-red-500">*</span> موضوعات مورد
                         علاقه
+                        <span className="text-muted-foreground text-sm leading-0">
+                          {e2p("(حداکثر 10 مورد)")}
+                        </span>
                       </FormLabel>
                       <FormControl>
                         <MultiSelect

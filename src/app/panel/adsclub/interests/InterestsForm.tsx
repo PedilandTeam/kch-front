@@ -123,8 +123,27 @@ export default function InterestsForm() {
       router.push("/panel/adsclub");
       toast.success("تغییرات با موفقیت ذخیره شد.");
     } catch (error) {
-      console.error("Error updating profile:", error);
-      toast.error("خطایی رخ داد.");
+      const message = error.response?.data?.message[0];
+      console.error("Error:", message);
+      if (
+        message ===
+        "favoriteAdCategoryIds must contain no more than 10 elements"
+      ) {
+        form.setError("favoriteAdCategoryIds", {
+          type: "manual",
+          message: "حداکثر 10 علاقه‌مندی  می‌توانید انتخاب کنید.",
+        });
+      } else if (
+        message ===
+        "immigrationCountryIds must contain no more than 10 elements"
+      ) {
+        form.setError("immigrationCountryIds", {
+          type: "manual",
+          message: "حداکثر 10 کشور می‌توانید انتخاب کنید.",
+        });
+      } else {
+        toast.error("خطایی در ثبت اطلاعات رخ داد.");
+      }
     } finally {
       setIsSubmitting(false);
     }
