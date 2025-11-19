@@ -18,7 +18,6 @@ export default function PanelLayout({
 
   const router = useRouter();
   const { userData, isLoading, isAuthenticated } = useTelegramAuth();
-  console.log(userData);
 
   useEffect(() => {
     if (!isLoading && isAuthenticated === false) {

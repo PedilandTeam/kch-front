@@ -15,6 +15,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { Button } from "../ui";
+import { e2p } from "@/utils/e2p";
 
 type ParsedSearchParams = {
   page?: number;
@@ -110,7 +111,7 @@ export const ListPagination = ({ pages }: PaginationProps) => {
             variant="ghost"
             className="text-primary hover:text-primary size-9 cursor-auto rounded-full bg-blue-50/70 text-base hover:bg-blue-50/70"
           >
-            {pageNumber}
+            {e2p(pageNumber)}
           </Button>
         </PaginationItem>
         <PaginationItem className="px-2">از</PaginationItem>
@@ -118,7 +119,7 @@ export const ListPagination = ({ pages }: PaginationProps) => {
           variant="ghost"
           className="text-primary hover:text-primary size-9 cursor-auto rounded-full bg-blue-50/70 text-base hover:bg-blue-50/70"
         >
-          {totalPages}
+          {e2p(totalPages)}
         </Button>
 
         {/* Next Button */}

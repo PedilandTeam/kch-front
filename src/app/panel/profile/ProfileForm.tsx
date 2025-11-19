@@ -64,12 +64,14 @@ export default function ProfileForm() {
     async function loadUser() {
       const res = await fetchUser();
 
+      console.log("user", res);
+
       if (res.ok) {
         setUser(res.user);
 
         form.reset({
           isImmigrate: res.user.isImmigrate,
-          gender: (res.user.gender as "male" | "female" | "other") ?? undefined,
+          gender: res.user.gender === null ? null : res.user.gender,
           birthYear: res.user.birthYear ? String(res.user.birthYear) : "",
           countryId: res.user.country?.id ?? undefined,
           cityId: res.user.city?.id ?? undefined,
@@ -130,13 +132,15 @@ export default function ProfileForm() {
 
     try {
       const cleanedBirthYear =
-        values.birthYear && values.birthYear.trim() !== ""
-          ? Number(values.birthYear)
-          : null;
+        typeof values.birthYear === "number" ? values.birthYear : null;
+
+      const cleanedGender =
+        values.gender && values.gender.trim() !== "" ? values.gender : null;
 
       const payload = {
         ...values,
         birthYear: cleanedBirthYear,
+        gender: cleanedGender,
       };
 
       await axios.put(
@@ -156,6 +160,9 @@ export default function ProfileForm() {
     }
   };
 
+  const startYear = 2010;
+  const yearsCount = 90;
+
   if (isLoading) {
     return <Loader />;
   }
@@ -164,9 +171,7 @@ export default function ProfileForm() {
     <Form {...form}>
       <Card className="border-blue-500/20 bg-blue-50/50 p-4">
         <form
-          onSubmit={form.handleSubmit(updateHandler, (error) => {
-            console.log("ّّForm ERROR:", error);
-          })}
+          onSubmit={form.handleSubmit(updateHandler)}
           className="flex flex-col gap-3"
         >
           <FormField
@@ -206,10 +211,23 @@ export default function ProfileForm() {
             name="gender"
             render={({ field }) => (
               <FormItem>
-                <FormLabel htmlFor="gender">جنسیت:</FormLabel>
+                <FormLabel htmlFor="gender">
+                  جنسیت{" "}
+                  <span className="text-muted-foreground text-sm leading-0">
+                    (اختیاری، 10+ امتیاز)
+                  </span>
+                </FormLabel>
                 <Select
-                  value={String(field.value) ?? ""}
-                  onValueChange={field.onChange}
+                  value={
+                    field.value === null
+                      ? ""
+                      : field.value === undefined
+                        ? ""
+                        : field.value
+                  }
+                  onValueChange={(v) =>
+                    field.onChange(v === "unknown" ? null : v)
+                  }
                   dir="rtl"
                 >
                   <FormControl>
@@ -218,6 +236,7 @@ export default function ProfileForm() {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
+                    <SelectItem value="unknown">نامشخص</SelectItem>
                     <SelectItem value="male">مرد</SelectItem>
                     <SelectItem value="female">زن</SelectItem>
                     <SelectItem value="other">سایر</SelectItem>
@@ -233,35 +252,42 @@ export default function ProfileForm() {
             name="birthYear"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>
-                  سال تولد میلادی:{" "}
-                  <span className="text-muted-foreground text-sm leading-0">
-                    (اختیاری، 5+ امتیاز)
-                  </span>
-                </FormLabel>
+                <FormLabel>سال تولد میلادی</FormLabel>
                 <FormControl>
-                  <Input
-                    type="text"
-                    inputMode="numeric"
-                    pattern="\d*"
-                    placeholder="مثال: 1990"
-                    {...field}
-                    value={field.value || ""}
-                    onChange={(e) => {
-                      const val = e.target.value.replace(/\D/g, "").slice(0, 4);
-                      field.onChange(val);
+                  <Select
+                    dir="rtl"
+                    value={
+                      field.value === null || field.value === undefined
+                        ? "" // ← لازم برای placeholder
+                        : String(field.value)
+                    }
+                    onValueChange={(val) => {
+                      if (val === "" || val === "unknown") {
+                        field.onChange(null);
+                        return;
+                      }
 
-                      // if (val.length === 4 && !birthYearRewardGiven) {
-                      //   addPoints(5);
-                      //   markBirthYearReward(true);
-                      // }
-
-                      // if (val.length === 0 && birthYearRewardGiven) {
-                      //   removePoints(5);
-                      //   markBirthYearReward(false);
-                      // }
+                      const num = Number(val);
+                      field.onChange(Number.isNaN(num) ? null : num);
                     }}
-                  />
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="انتخاب کنید" />
+                    </SelectTrigger>
+
+                    <SelectContent className="max-h-60">
+                      <SelectItem value="unknown">نامشخص</SelectItem>
+
+                      {Array.from({ length: yearsCount + 1 }, (_, i) => {
+                        const year = startYear - i;
+                        return (
+                          <SelectItem key={year} value={String(year)}>
+                            {year}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectContent>
+                  </Select>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -278,52 +304,55 @@ export default function ProfileForm() {
                     <FormLabel>
                       <span className="text-red-500">*</span> کشور محل زندگی
                     </FormLabel>
-                    <Select
-                      dir="rtl"
-                      onValueChange={(val) => {
-                        const countryId = Number(val);
-                        field.onChange(countryId);
+                    <FormControl>
+                      <Select
+                        dir="rtl"
+                        value={field.value ? String(field.value) : undefined}
+                        onValueChange={async (val) => {
+                          const countryId = Number(val);
 
-                        const selectedCountry = countries.find(
-                          (c) => c.id === countryId,
-                        );
-
-                        fetchCities({
-                          countryCode: selectedCountry?.code || "",
-                          limit: 1000,
-                          page: 1,
-                        }).then((res) => {
-                          setCities(res.items || []);
                           form.setValue("cityId", undefined);
-                        });
-                      }}
-                      value={field.value ? String(field.value) : undefined}
-                    >
-                      <FormControl>
+                          setCities([]);
+
+                          field.onChange(countryId);
+
+                          const selectedCountry = countries.find(
+                            (c) => c.id === countryId,
+                          );
+                          if (selectedCountry) {
+                            const res = await fetchCities({
+                              countryCode: selectedCountry.code,
+                              limit: 1000,
+                              page: 1,
+                            });
+                            setCities(res.items || []);
+                          }
+                        }}
+                      >
                         <SelectTrigger>
                           <SelectValue placeholder="انتخاب کشور..." />
                         </SelectTrigger>
-                      </FormControl>
-                      <SelectContent className="max-h-60">
-                        {countries.map((country) => (
-                          <SelectItem
-                            key={country.id}
-                            value={String(country.id)}
-                          >
-                            <div className="flex items-center gap-2">
-                              <CircleFlag
-                                width={16}
-                                height={16}
-                                countryCode={country.code}
-                                alt={country.name}
-                                title={country.name}
-                              />
-                              {country.name}
-                            </div>
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                        <SelectContent className="max-h-60">
+                          {countries.map((country) => (
+                            <SelectItem
+                              key={country.id}
+                              value={String(country.id)}
+                            >
+                              <div className="flex items-center gap-2">
+                                <CircleFlag
+                                  width={16}
+                                  height={16}
+                                  countryCode={country.code}
+                                  alt={country.name}
+                                  title={country.name}
+                                />
+                                {country.name}
+                              </div>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -339,14 +368,16 @@ export default function ProfileForm() {
                     </FormLabel>
                     <Select
                       dir="rtl"
-                      onValueChange={(val) => field.onChange(Number(val))}
-                      value={field.value ? String(field.value) : ""}
+                      value={
+                        field.value === null || field.value === undefined
+                          ? undefined
+                          : String(field.value)
+                      }
+                      onValueChange={(v) => field.onChange(Number(v))}
                     >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="انتخاب شهر..." />
-                        </SelectTrigger>
-                      </FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="انتخاب شهر..." />
+                      </SelectTrigger>
                       <SelectContent className="max-h-60 overflow-y-auto">
                         {cities.map((city) => (
                           <SelectItem key={city.id} value={String(city.id)}>

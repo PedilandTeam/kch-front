@@ -3,9 +3,15 @@ import type { Country } from "@/schemas";
 import type { MostUsedCategory } from "@/types/category";
 import Link from "next/link";
 
-import { Button, Carousel, CarouselContent, CarouselItem } from "@/components/ui";
+import {
+  Button,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui";
 import { FolderSimpleStarIcon } from "@phosphor-icons/react/dist/ssr";
 import { ArrowLeftIcon } from "lucide-react";
+import { e2p } from "@/utils/e2p";
 
 export const getMostUsedCategories = async (countryCode: string) => {
   let result: MostUsedCategory;
@@ -102,7 +108,7 @@ export const UnitsTopCat = async ({ currentCountry }: UnitsTopCatProps) => {
                               {category.name}
                             </div>
                             <div className="text-primary text-[15px] font-medium">
-                              {category.pageCount} <span>مـورد</span>
+                              {e2p(category.pageCount)} <span>مـورد</span>
                             </div>
                           </div>
                         </CarouselItem>

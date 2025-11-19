@@ -4,15 +4,9 @@ export const adsClubSchema = z
   .object({
     isImmigrate: z.boolean(),
 
-    gender: z.string().optional(),
+    gender: z.string().nullable().optional(),
 
-    birthYear: z
-      .string()
-      .optional()
-      .refine(
-        (val) => !val || /^\d{4}$/.test(val),
-        "سال تولد باید 4 رقم باشد.",
-      ),
+    birthYear: z.union([z.number(), z.string()]).nullable().optional(),
 
     countryId: z
       .number({

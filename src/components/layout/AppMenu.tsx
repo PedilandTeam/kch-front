@@ -26,8 +26,6 @@ export const AppMenu = () => {
     isLoading: countriesLoading,
   } = useSWR<Country[]>(swrKeys.countries());
 
-  console.log("Countries:", countriesData);
-
   useEffect(() => {
     if (countriesData) {
       const filteredCountries = countriesData?.filter(

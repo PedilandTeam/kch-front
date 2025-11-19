@@ -39,6 +39,7 @@ import {
 import { MultiSelect } from "@/components/ui-custom/MultiSelect";
 import { Spinner } from "@/components/ui/spinner";
 import { e2p } from "@/utils/e2p";
+import { error } from "console";
 
 type AdsClubFormValues = z.infer<typeof adsClubSchema>;
 
@@ -135,12 +136,15 @@ export default function RegisterForm() {
     }
   };
 
+  const startYear = 2010;
+  const yearsCount = 90;
+
   return (
     <Form {...form}>
       <form
         className="space-y-4"
-        onSubmit={form.handleSubmit(onSubmit, (errors) => {
-          console.log(errors);
+        onSubmit={form.handleSubmit(onSubmit, (error) => {
+          console.error(error);
         })}
       >
         {step === "status" && (
@@ -212,7 +216,7 @@ export default function RegisterForm() {
                   <FormLabel>
                     جنسیت:{" "}
                     <span className="text-muted-foreground text-sm leading-0">
-                      {e2p("(اختیاری، 5+ امتیاز)")}
+                      {e2p("(اختیاری، 10+ امتیاز)")}
                     </span>
                   </FormLabel>
                   <Select
@@ -220,14 +224,14 @@ export default function RegisterForm() {
                     value={field.value ?? ""}
                     onValueChange={(value) => {
                       if (value === "none") {
-                        removePoints(5);
+                        removePoints(10);
                         markGenderReward(false);
                       }
 
                       field.onChange(value || undefined);
 
                       if (value && !genderRewardGiven) {
-                        addPoints(5);
+                        addPoints(10);
                         markGenderReward(true);
                       }
                     }}
@@ -257,34 +261,61 @@ export default function RegisterForm() {
                   <FormLabel>
                     سال تولد میلادی:{" "}
                     <span className="text-muted-foreground text-sm leading-0">
-                      {e2p("(اختیاری، 5+ امتیاز)")}
+                      {e2p("(اختیاری، 10+ امتیاز)")}
                     </span>
                   </FormLabel>
                   <FormControl>
-                    <Input
-                      type="text"
-                      inputMode="numeric"
-                      pattern="\d*"
-                      placeholder="مثال: 1990"
-                      {...field}
-                      value={field.value || ""}
-                      onChange={(e) => {
-                        const val = e.target.value
-                          .replace(/\D/g, "")
-                          .slice(0, 4);
-                        field.onChange(val);
+                    <Select
+                      dir="rtl"
+                      value={
+                        field.value === null || field.value === undefined
+                          ? ""
+                          : String(field.value)
+                      }
+                      onValueChange={(val) => {
+                        if (val === "unknown" || val === "") {
+                          field.onChange(null);
 
-                        if (val.length === 4 && !birthYearRewardGiven) {
-                          addPoints(5);
+                          if (birthYearRewardGiven) {
+                            removePoints(10);
+                            markBirthYearReward(false);
+                          }
+
+                          return;
+                        }
+
+                        const num = Number(val);
+
+                        if (Number.isNaN(num)) {
+                          field.onChange(null);
+                          return;
+                        }
+
+                        field.onChange(num); // ⬅ مقدار به صورت number ذخیره می‌شود
+
+                        if (!birthYearRewardGiven) {
+                          addPoints(10);
                           markBirthYearReward(true);
                         }
-
-                        if (val.length === 0 && birthYearRewardGiven) {
-                          removePoints(5);
-                          markBirthYearReward(false);
-                        }
                       }}
-                    />
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="انتخاب کنید" />
+                      </SelectTrigger>
+
+                      <SelectContent className="max-h-60">
+                        <SelectItem value="unknown">نامشخص</SelectItem>
+
+                        {Array.from({ length: yearsCount + 1 }, (_, i) => {
+                          const year = startYear - i;
+                          return (
+                            <SelectItem key={year} value={String(year)}>
+                              {year}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -69,7 +69,6 @@ export default function InterestsForm() {
       const res = await fetchUser();
 
       if (res.ok) {
-        console.log("res", res.user);
         setUser(res.user);
 
         const favCats = res.user?.favoriteAdCategories ?? [];
@@ -140,9 +139,7 @@ export default function InterestsForm() {
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(updateHandler, (error) => {
-          console.log("Form Error:", error);
-        })}
+        onSubmit={form.handleSubmit(updateHandler)}
         className="flex flex-col gap-6"
       >
         {watchStatus === true && (

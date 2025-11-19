@@ -6,7 +6,7 @@
   "scripts": {
     "analyze": "ANALYZE=true next build",
     "build": "next build",
-    "dev": "next dev --turbo",
+    "dev": "next dev --turbo -p 3003",
     "format": "prettier -w .",
     "lint": "next lint",
     "start": "next start",
