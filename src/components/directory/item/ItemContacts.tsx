@@ -22,7 +22,7 @@ export const ItemContacts = ({ pageData }: ItemContactsProps) => {
   const { linkHandler } = useLinkHandler({ pageData });
   const number = pageData.contact?.telephone
     ? `00${pageData.country.areaCode ? pageData.country.areaCode : ""}${pageData
-        .contact.telephone!}`
+        .contact?.telephone!}`
     : pageData.contact?.phone &&
       `00${pageData.country.areaCode ? pageData.country.areaCode : ""}${pageData
         .contact.phone!}`;
