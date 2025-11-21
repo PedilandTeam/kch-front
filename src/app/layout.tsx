@@ -28,15 +28,13 @@ export default async function RootLayout({
       dir="rtl"
       className={`${vazirmatn.variable} h-full scroll-smooth`}
     >
-      <body className="flex h-full flex-col items-center sm:justify-center bg-neutral-800 antialiased">
-        <div className="_app relative flex w-full max-w-[414px] flex-col sm:justify-center bg-white">
-          <div className="scrollbar-thin sm:overflow-y-auto">
-            <TelegramProvider>
-              <TelegramAuthProvider>
-                <SiteProvider>{children}</SiteProvider>
-              </TelegramAuthProvider>
-            </TelegramProvider>
-          </div>
+      <body className="flex h-full flex-col bg-neutral-800 antialiased sm:items-center sm:justify-start">
+        <div className="_app min-h-full scrollbar-thin relative flex w-full max-w-[414px] flex-col bg-white sm:overflow-y-auto">
+          <TelegramProvider>
+            <TelegramAuthProvider>
+              <SiteProvider>{children}</SiteProvider>
+            </TelegramAuthProvider>
+          </TelegramProvider>
         </div>
       </body>
     </html>

@@ -33,7 +33,7 @@ export const WrapPageImage = ({
 
   return (
     <main
-      className={cn("_page-image relative flex h-full flex-1 pb-20", className)}
+      className={cn("_page-image relative flex w-full h-full flex-1 pb-20", className)}
     >
       <div className="_mask absolute top-0 flex w-full items-end justify-center max-h-[540px]">
         <div className="relative w-full">
