@@ -1,4 +1,5 @@
 import animate from "tailwindcss-animate";
+import scrollbar from "tailwind-scrollbar";
 
 export default {
   content: [
@@ -21,5 +22,5 @@ export default {
     },
   },
 
-  plugins: [animate],
+  plugins: [animate, scrollbar({ nocompatible: true })],
 };

@@ -27,11 +27,11 @@ function keyToUrl(key: string | readonly unknown[]): string {
  * Custom fetcher that accepts both string and array keys.
  * ✅ Generic <T> declared directly in function definition.
  */
-const fetcher = async <T = unknown>(key: string | readonly unknown[]): Promise<T> => {
-  const url = keyToUrl(key);
-  const response = await api.get<T>(url);
-  return response.data;
-};
+// const fetcher = async <T = unknown>(key: string | readonly unknown[]): Promise<T> => {
+//   const url = keyToUrl(key);
+//   const response = await api.get<T>(url);
+//   return response.data;
+// };
 
 /**
  * Global SWR provider

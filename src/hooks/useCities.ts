@@ -11,14 +11,14 @@ type queryType = {
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 export function useCities(page: number = 1, limit: number = 15, countryCode: string) {
 
-  const fetcher = async ({url, args}: {url:string, args: any}) => {
-    const requestConfig: AxiosRequestConfig = {
-      method: "GET",
-      url,
-      params: args
-    }
-    return axios(requestConfig).then(response => response.data).catch(error => error)
-  }
+  // const fetcher = async ({url, args}: {url:string, args: any}) => {
+  //   const requestConfig: AxiosRequestConfig = {
+  //     method: "GET",
+  //     url,
+  //     params: args
+  //   }
+  //   return axios(requestConfig).then(response => response.data).catch(error => error)
+  // }
   const { data, error, isLoading } = useSWR({url: `${API_URL}/cities`, args:{page, limit, countryCode,}}, fetcher)
   
 

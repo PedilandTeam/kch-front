@@ -23,14 +23,20 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fa" dir="rtl" className={`${vazirmatn.variable} scroll-smooth`}>
-      <body className="flex justify-center overflow-x-hidden bg-neutral-100 antialiased">
-        <div className="_app relative flex min-h-dvh w-full max-w-[414px] flex-col bg-white shadow-lg">
-          <TelegramProvider>
-            <TelegramAuthProvider>
-              <SiteProvider>{children}</SiteProvider>
-            </TelegramAuthProvider>
-          </TelegramProvider>
+    <html
+      lang="fa"
+      dir="rtl"
+      className={`${vazirmatn.variable} h-full scroll-smooth`}
+    >
+      <body className="flex h-full flex-col items-center sm:justify-center bg-neutral-800 antialiased">
+        <div className="_app relative flex w-full max-w-[414px] flex-col sm:justify-center bg-white">
+          <div className="scrollbar-thin sm:overflow-y-auto">
+            <TelegramProvider>
+              <TelegramAuthProvider>
+                <SiteProvider>{children}</SiteProvider>
+              </TelegramAuthProvider>
+            </TelegramProvider>
+          </div>
         </div>
       </body>
     </html>

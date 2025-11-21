@@ -12,6 +12,7 @@ export const CountrySchema = z.object({
   iso2: z.string(),
   iso3: z.string(),
   name: z.string(),
+  pageCount: z.string(),
   status: z.boolean(),
   updateDate: z.string(),
 });

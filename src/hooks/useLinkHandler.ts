@@ -61,13 +61,13 @@ export const useLinkHandler = ({ pageData }: UseLinkHandlerProps) => {
         if (agent.device?.type == "desktop") {
           const number = `00${
             pageData.country.areaCode ? pageData.country.areaCode : ""
-          }${pageData.contact.phone!}`;
+          }${pageData.contact?.phone!}`;
           navigator.clipboard.writeText(number);
           e.currentTarget.dataset.tip = number;
           toast.success(GENERAL.PHONE_COPIED);
         } else {
           window.open(
-            `tel:${pageData.contact.phone}`,
+            `tel:${pageData.contact?.phone}`,
             "_blank",
             "noopener, noreferrer",
           );

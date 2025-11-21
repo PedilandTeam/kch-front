@@ -8,46 +8,67 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import queryString from "query-string";
 
-// ---------------- Path Generator ----------------
+// =========================
+// Util — Is Country Code ?
+// =========================
+function isCountryCode(slug: string) {
+  return /^[a-zA-Z]{2,8}$/.test(slug);
+}
+
+// =========================
+// Fetch Helpers
+// =========================
+async function fetchUnit(unitSlug: string) {
+  return (
+    await fetchWrapper<UnitType[]>("units", {
+      filters: { slug: unitSlug },
+      tags: ["unit"],
+      revalidate:
+        +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+    })
+  )?.[0];
+}
+
+async function fetchCountry(countryOrSlug: string) {
+  if (!isCountryCode(countryOrSlug)) return null;
+  return (
+    await fetchWrapper<Country[]>("countries", {
+      filters: { code: countryOrSlug },
+      tags: ["country"],
+      revalidate:
+        +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+    })
+  )?.[0];
+}
+
+async function fetchCategory(categorySlug: string) {
+  const res = await fetchWrapper<GetCategoryResponse>("categories", {
+    filters: { page: 1, limit: 1, slug: categorySlug },
+    tags: ["category"],
+    revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
+  });
+
+  return res?.items?.[0] ?? null;
+}
+
+// =========================
+// Path Generator
+// =========================
 const pathGenerator = async (
   countryOrSlug: string,
   unitSlug: string,
   categorySlug: string,
 ): Promise<PathGeneratorType> => {
-  const currentUnit = (
-    await fetchWrapper<UnitType[]>("units", {
-      filters: { slug: unitSlug },
-      tags: ["country", "page"],
-      revalidate:
-        +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
-    })
-  )?.[0];
-
-  const countryList = await fetchWrapper<Country[]>("countries", {
-    filters: { code: countryOrSlug },
-    tags: ["country", "page"],
-    revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
-  });
-
-  const currentCountry = countryList?.[0];
-
-  const categories = await fetchWrapper<GetCategoryResponse>("categories", {
-    filters: {
-      page: 1,
-      limit: 1,
-      slug: categorySlug,
-    },
-    tags: ["country", "page"],
-    revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
-  });
-
-  const currentCategory = categories.items[0];
+  const [currentUnit, currentCountry, currentCategory] = await Promise.all([
+    fetchUnit(unitSlug),
+    fetchCountry(countryOrSlug),
+    fetchCategory(categorySlug),
+  ]);
 
   if (!currentUnit || !currentCountry || !currentCategory) {
     return { type: null };
   }
 
-  // Validate category belongs to the unit
   if (currentCategory.unit?.id !== currentUnit.id) {
     console.warn("⚠️ Category does not belong to unit");
     return { type: null };
@@ -63,7 +84,9 @@ const pathGenerator = async (
   };
 };
 
-// ---------------- Metadata ----------------
+// =========================
+// Metadata
+// =========================
 export const generateMetadata = async ({
   params,
   searchParams,
@@ -78,49 +101,46 @@ export const generateMetadata = async ({
   const { countryOrSlug, unitSlug, categorySlug } = await params;
   const search = await searchParams;
 
-  let pathInfo: PathGeneratorType;
+  let pathInfo: PathGeneratorType = { type: null };
+
   try {
     pathInfo = await pathGenerator(countryOrSlug, unitSlug, categorySlug);
-  } catch (err: any) {
-    throw Error("Error in generateMetadata: " + err);
+  } catch (err) {
+    console.error("❌ Error in generateMetadata:", err);
   }
 
   const category = pathInfo.props?.category;
-  if (!category) {
+  const country = pathInfo.props?.country;
+  const pageSearchParams = search?.page;
+
+  if (!category || !country) {
     return {
       title: "صفحه مورد نظر وجود ندارد | کوچا",
       description:
-        "متاسفانه چنین صفحه‌ای وجود نداره و یا ممکنه بخاطر تغییرات وب‌سایت جدید کـوچـا آدرسش تغییر کرده باشه.",
+        "متاسفانه چنین صفحه‌ای وجود نداره و یا ممکنه بخاطر تغییرات وب‌سایت جدید کوچا آدرسش تغییر کرده باشه.",
     };
   }
 
-  const countries = await fetchWrapper<Country[]>("countries", {
-    filters: { code: countryOrSlug },
-    tags: ["country", "page"],
-    revalidate: +process.env.DEFAULT_REVALIDATE_TIME_FOR_PAGE_HANDLERS || 2000,
-  });
-
-  const currentCountry: Country | undefined = countries[0];
-  const pageSearchParams = search?.page;
-
   return {
     title: `لیست ${
-      category?.seoTitle ? category.seoTitle : `${category.name} فارسی زبان`
-    } در ${pathInfo?.props?.country?.name} | کوچا`,
-    description: `به جامعه مجازی ایرانیان مهاجر مقیم ${
-      countryOrSlug && currentCountry && currentCountry.name
-    } خوش آمدید. در این صفحه لیست کاملی از ${
-      pathInfo?.props?.category?.name
-    } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
+      category.seoTitle ?? `${category.name} فارسی زبان`
+    } در ${country.name} | کوچا`,
+    description: `به جامعه ایرانیان مهاجر مقیم ${
+      country.name
+    } خوش آمدید. در این صفحه لیست کامل ${
+      category.name
+    } فارسی زبان این کشور قابل مشاهده است.`,
     alternates: {
-      canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${unitSlug}/${
-        pathInfo?.props?.category?.slug
-      }${pageSearchParams ? `?page=${pageSearchParams}` : ""}`,
+      canonical: `${process.env.FRONT_URL}/${country.code}/${unitSlug}/${category.slug}${
+        pageSearchParams ? `?page=${pageSearchParams}` : ""
+      }`,
     },
   };
 };
 
-// ---------------- Page ----------------
+// =========================
+// Page Component
+// =========================
 type ParsedSearchParams = {
   page?: number | number[];
   city?: any;
@@ -141,36 +161,24 @@ export default async function CategoryPage({
   const { countryOrSlug, unitSlug, categorySlug } = await params;
   const rawSearchParams = await searchParams;
 
-  const parsedSearchParams = queryString.parse(
+  const parsed = queryString.parse(
     queryString.stringify(rawSearchParams ?? {}),
     { arrayFormat: "comma", parseNumbers: true },
   ) as ParsedSearchParams;
 
-  const { page: rawPageNumber, city, search } = parsedSearchParams;
+  const pageNumber = Array.isArray(parsed.page) ? parsed.page[0] : parsed.page;
+  const { city, search } = parsed;
 
-  // Ensure pageNumber is always a single number
-  const pageNumber = Array.isArray(rawPageNumber)
-    ? rawPageNumber[0]
-    : rawPageNumber;
+  const pathInfo = await pathGenerator(countryOrSlug, unitSlug, categorySlug);
 
-  let pathInfo: PathGeneratorType;
+  if (!pathInfo.type) return notFound();
 
-  try {
-    pathInfo = await pathGenerator(countryOrSlug, unitSlug, categorySlug);
-  } catch (err: any) {
-    throw Error("Error in CategoryPage: " + err);
-  }
-
-  if (pathInfo.type) {
-    return (
-      <CategoryListPage
-        {...pathInfo.props}
-        city={city}
-        pageNumber={pageNumber}
-        search={search}
-      />
-    );
-  } else {
-    notFound();
-  }
+  return (
+    <CategoryListPage
+      {...pathInfo.props}
+      city={city}
+      pageNumber={pageNumber}
+      search={search}
+    />
+  );
 }

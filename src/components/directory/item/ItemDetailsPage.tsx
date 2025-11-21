@@ -22,7 +22,7 @@ export function ItemDetailsPage({ pageData }: ItemDetailsPageProps) {
     name: pageData.title,
     image: `${process.env.NEXT_PUBLIC_DL_URL}/pages/${pageData.id}/${pageData.profile}`,
     url: pageData.socials?.website,
-    telephone: pageData.contact?.telephone || pageData.contact.phone,
+    telephone: pageData.contact?.telephone || pageData.contact?.phone,
     address: {
       "@type": "PostalAddress",
       addressLocality: pageData.city.englishName,

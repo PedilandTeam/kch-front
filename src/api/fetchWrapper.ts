@@ -1,36 +1,17 @@
-type FetchWrapperResponse<T> = T;
-// &
-//  {
-//   $: {
-//     response?: Response | undefined;
-//   };
-// };
+type FetchWrapperResponse<T> = T | null;
 
 export class FetchWrapperError {
-  isNotFound: boolean;
-  error: unknown;
-  isUnauthorized: boolean;
-  isServerError: boolean;
-  errorJson: any;
   constructor(
-    isNotFound: boolean,
-    error: unknown,
-    isUnauthorized: boolean,
-    isServerError: boolean,
-    errorJson: any,
-  ) {
-    this.error = error;
-    this.isNotFound = isNotFound;
-    this.isUnauthorized = isUnauthorized;
-    this.isServerError = isServerError;
-    this.errorJson = errorJson;
-  }
+    public isNotFound: boolean,
+    public error: unknown,
+    public isUnauthorized: boolean,
+    public isServerError: boolean,
+    public errorJson: any,
+  ) {}
 }
 
 export type FetchWrapperConfig = {
-  filters?: {
-    [key: string]: any;
-  };
+  filters?: Record<string, any>;
   method?: "GET" | "POST" | "PUT" | "DELETE";
   revalidate?: number;
   headers?: Record<string, string>;
@@ -42,9 +23,9 @@ export type FetchWrapperConfig = {
 export default async function fetchWrapper<T>(
   path: string,
   config: FetchWrapperConfig = {},
-): Promise<FetchWrapperResponse<T> | null> {
-  let {
-    filters,
+): Promise<FetchWrapperResponse<T>> {
+  const {
+    filters = {},
     overrideUrl,
     revalidate,
     method = "GET",
@@ -53,74 +34,64 @@ export default async function fetchWrapper<T>(
     headers,
   } = config;
 
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/${path}`;
-  const urlObject = new URL(overrideUrl ? overrideUrl : url);
+  // --- Build URL ---
+  const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/${path}`;
+  const urlObj = new URL(overrideUrl ?? baseUrl);
 
-  if (!filters) filters = {};
-
-  Object.keys(filters).forEach((filter) => {
-    const value = filters![filter];
-    if (value !== undefined && value !== null && value !== "") {
-      urlObject.searchParams.append(filter, String(value));
+  // Add query params
+  Object.entries(filters).forEach(([key, val]) => {
+    if (val !== undefined && val !== null && val !== "") {
+      urlObj.searchParams.append(key, String(val));
     }
   });
 
-  const fetchConfig: RequestInit = {
+  // --- Fetch config ---
+  const fetchOptions: RequestInit = {
     method,
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
       ...(headers ?? {}),
     },
-    credentials: "include",
-    ...(body && { body: JSON.stringify(body) }),
+    ...(body ? { body: JSON.stringify(body) } : {}),
     next: { revalidate, tags },
   };
 
-  let isNotFound = false;
-  let isUnauthorized = false;
-  let isServerError = false;
-  let errorJson: any = null;
-  let isOk = false;
-  let error: unknown = null;
+  try {
+    const res = await fetch(urlObj, fetchOptions);
 
-  const fetcher = await fetch(urlObject, fetchConfig)
-    .then(async (res) => {
-      const contentType = res.headers.get("content-type") ?? "";
+    // Detect wrong content type (HTML from CF)
+    const contentType = res.headers.get("content-type") ?? "";
+    const isJson = contentType.includes("application/json");
 
-      // اگر خروجی JSON نبود → یعنی Cloudflare HTML داده → API خراب است
-      if (!contentType.includes("application/json")) {
-        console.warn("⚠ NON-JSON response detected:", urlObject.toString());
-        isServerError = true;
-        isOk = false;
-        return null as any;
-      }
+    if (!isJson) {
+      console.warn(
+        `⚠ fetchWrapper: NON-JSON response from → ${urlObj.toString()}`,
+      );
+      return null;
+    }
 
-      const resJson = await res.json();
+    const data = await res.json();
 
-      if (!res.ok) {
-        if (res.status === 404) isNotFound = true;
-        if (res.status === 401) isUnauthorized = true;
-        if (res.status >= 500) isServerError = true;
+    if (res.ok) {
+      return data as T;
+    }
 
-        errorJson = resJson;
-        isOk = false;
-        return null as any;
-      }
+    // --- Handle known error types ---
+    const error = new FetchWrapperError(
+      res.status === 404,
+      data,
+      res.status === 401,
+      res.status >= 500,
+      data,
+    );
 
-      isOk = true;
-      return resJson;
-    })
-    .catch((err: unknown) => {
-      console.warn("⚠ Network error:", urlObject.toString(), err);
-      error = err;
-      isOk = false;
-      return null as any;
-    });
-
-  // بجای throw → graceful fallback
-  if (isOk && !isServerError) {
-    return fetcher;
+    // DO NOT throw → graceful null fallback
+    console.warn("⚠ fetchWrapper error:", error);
+    return null;
+  } catch (err) {
+    // Network failure
+    console.error(`❌ fetchWrapper network error: ${urlObj.toString()}`, err);
+    return null;
   }
-
-  return null;
 }

@@ -3,13 +3,11 @@
 import Script from "next/script";
 import Hotjar from "@/components/hotjar";
 import { Toaster } from "@/components/ui/sonner";
-import { SwrProvider } from "@/lib/swr";
 
 export const SiteProvider = ({ children }: { children: React.ReactNode }) => {
   return (
-    <SwrProvider>
+    <>
       {children}
-
       <Toaster
         position="top-right"
         richColors
@@ -18,7 +16,6 @@ export const SiteProvider = ({ children }: { children: React.ReactNode }) => {
           className: "font-vazirmatn !important",
         }}
       />
-
       {process.env.NODE_ENV === "production" && (
         <>
           <Hotjar />
@@ -33,6 +30,6 @@ export const SiteProvider = ({ children }: { children: React.ReactNode }) => {
           </Script>
         </>
       )}
-    </SwrProvider>
+    </>
   );
 };

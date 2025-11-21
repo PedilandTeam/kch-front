@@ -25,7 +25,7 @@ export const ItemContacts = ({ pageData }: ItemContactsProps) => {
         .contact?.telephone!}`
     : pageData.contact?.phone &&
       `00${pageData.country.areaCode ? pageData.country.areaCode : ""}${pageData
-        .contact.phone!}`;
+        .contact?.phone!}`;
 
   const contactItems = [
     {

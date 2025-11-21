@@ -10,8 +10,8 @@ import { CategoryBreadcrumb } from "./CategoryBreadcrumb";
 import { WrapPageImage } from "../layout/WrapPageImage";
 import { WrapContainer } from "../layout/WrapContainer";
 import { ItemCardsList } from "./item";
-
-
+import { fetcher } from "@/hooks/swr/fetcher";
+import { usePagesList } from "@/hooks/swr/usePageList";
 
 interface CategoryListPageProps {
   category: Category;
@@ -30,32 +30,14 @@ export function CategoryListPage({
   city,
   search,
 }: CategoryListPageProps) {
-  // Create the API URL with filters
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const filters = new URLSearchParams({
-    page: String(pageNumber || 1),
-    limit: "24",
+  const { pages, loading, error } = usePagesList({
+    page: pageNumber || 1,
+    limit: 24,
     countryCode: country.code,
-    categoryIds: String(category.id),
-    ...(city && {
-      cityIds: Array.isArray(city) ? city.join(",") : String(city),
-    }),
-    ...(search && { search }),
+    categoryIds: category.id,
+    cityIds: city,
+    search,
   });
-
-  const fetcher = async (url: string) => {
-    const response = await axios.get(url);
-    return response.data;
-  };
-
-  const {
-    data: pages,
-    isLoading: loading,
-    error,
-  } = useSWR<GetPagesResponse>(
-    `${apiUrl}/pages?${filters.toString()}`,
-    fetcher,
-  );
 
   const defaultSeoDescription =
     category.seoDescription &&
@@ -67,7 +49,7 @@ export function CategoryListPage({
   return (
     <WrapPageImage className="_category-list-page h-full" country={country}>
       <WrapContainer>
-        <div className="flex flex-col items-center space-y-4 mb-6">
+        <div className="mb-6 flex flex-col items-center space-y-4">
           <div className="flex items-center justify-center gap-3">
             <h1 className="text-lg font-semibold text-white drop-shadow-sm drop-shadow-black/70">
               لیست{" "}

@@ -10,6 +10,7 @@ import { WrapContainer } from "../layout/WrapContainer";
 import { UnitBreadcrumb } from "./UnitBreadcrumb";
 import { ItemCardsList } from "./item";
 import { UnitSeoText } from "./UnitSeoText";
+import { fetcher } from "@/hooks/swr/fetcher";
 
 interface UnitsListPageProps {
   unit: UnitType;
@@ -45,11 +46,6 @@ export function UnitsListPage({
     }),
     ...(search && { search }),
   });
-
-  const fetcher = async (url: string) => {
-    const response = await axios.get(url);
-    return response.data;
-  };
 
   const {
     data: pages,

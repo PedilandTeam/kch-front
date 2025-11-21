@@ -1,14 +1,13 @@
 "use client";
 
-import { swrKeys } from "@/hooks/swr/swrKeys";
 import { cn } from "@/lib/utils";
 import type { Country } from "@/schemas";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
 import { useCountryCodeStore } from "@/store/UseCountryCodeStore";
+import { useCountries } from "@/hooks/swr/useCountries";
 
 import LogoImg from "@/assets/images/logo.png";
 import { MenuDrawer } from "./MenuDrawer";
@@ -20,11 +19,7 @@ export const AppMenu = () => {
   const [countries, setCountries] = useState<Country[] | undefined>();
   const { countryCode, setCountryCode } = useCountryCodeStore();
 
-  const {
-    data: countriesData,
-    error: countriesError,
-    isLoading: countriesLoading,
-  } = useSWR<Country[]>(swrKeys.countries());
+  const { countries: countriesData } = useCountries({ status: 1 });
 
   useEffect(() => {
     if (countriesData) {
@@ -52,7 +47,7 @@ export const AppMenu = () => {
   return (
     <div
       className={cn(
-        "_mobile-menu fixed bottom-2 z-50 w-full max-w-[414px] px-2",
+        "_mobile-menu fixed bottom-2 z-50 w-full max-w-[414px] px-3",
       )}
     >
       <div className="_main-mobileMenu flex items-center justify-between rounded-full border-gray-200 bg-white/90 px-4 py-2 backdrop-blur">

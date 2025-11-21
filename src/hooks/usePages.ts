@@ -16,13 +16,13 @@ export function usePages(page: number = 1, limit: number = 15, countryCode: stri
     setRendered(true)
   },[page, limit, countryCode, unitId, cityIds, categoryIds])
 
-  const fetcher = async (url: string) => {
-    const requestConfig: AxiosRequestConfig = {
-      method: "GET",
-      url,
-    }
-    return axios(requestConfig).then(response => response.data).catch(error => error)
-  }
+  // const fetcher = async (url: string) => {
+  //   const requestConfig: AxiosRequestConfig = {
+  //     method: "GET",
+  //     url,
+  //   }
+  //   return axios(requestConfig).then(response => response.data).catch(error => error)
+  // }
   // args:{page, limit, countryCode, unitId, ...cityIds && {cityIds}, ...categoryIds && {categoryIds}}}
   const { data, error, isLoading, mutate } = useSWR(rendered &&`${API_URL}/pages/preview?status=1&page=${page}&limit=${limit}&countryCode=${countryCode}${unitId ? `&unitId=${unitId}` : ""}${cityIds ? `&cityIds=${cityIds}` : ""}${categoryIds ? `&categoryIds=${categoryIds}` : ""}${search ? `&search=${search}` : ""}`, fetcher)
 
