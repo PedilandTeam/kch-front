@@ -6,7 +6,6 @@ import "@/styles/globals.css";
 import { Vazirmatn } from "next/font/google";
 import type { Metadata } from "next";
 import ScrollFix from "@/components/global/ScrollFix";
-import { GTM_ID, GTMScript } from "@/lib/gtm";
 
 const vazirmatn = Vazirmatn({
   subsets: ["arabic"],
@@ -30,9 +29,6 @@ export default async function RootLayout({
       dir="rtl"
       className={`${vazirmatn.variable} h-full scroll-smooth`}
     >
-      <head>
-        {GTM_ID && <script dangerouslySetInnerHTML={{ __html: GTMScript }} />}
-      </head>
       <body className="flex min-h-screen flex-col bg-neutral-800 antialiased sm:items-center sm:justify-start">
         <div className="_app scrollbar-thin relative flex min-h-screen w-full max-w-[414px] flex-col bg-white sm:overflow-y-auto">
           <ScrollFix />
