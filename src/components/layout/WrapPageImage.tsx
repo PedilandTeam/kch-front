@@ -33,9 +33,12 @@ export const WrapPageImage = ({
 
   return (
     <main
-      className={cn("_page-image relative flex w-full h-full flex-1 pb-20", className)}
+      className={cn(
+        "_page-image relative flex h-full w-full flex-1 pb-20",
+        className,
+      )}
     >
-      <div className="_mask absolute top-0 flex w-full items-end justify-center max-h-[540px]">
+      <div className="_mask absolute top-0 flex max-h-[540px] w-full items-end justify-center">
         <div className="relative w-full">
           <NextImage
             src={imageUrl}
@@ -45,7 +48,7 @@ export const WrapPageImage = ({
             height={198}
             priority
           />
-          <div className="absolute bottom-0 left-0 right-0">
+          <div className="absolute right-0 bottom-0 left-0">
             <NextImage
               src="/images/hp-image-mask.webp"
               alt="Mask"
@@ -57,7 +60,7 @@ export const WrapPageImage = ({
           </div>
         </div>
       </div>
-      <div className="z-10 flex w-full flex-1 flex-col gap-8 pt-5">
+      <div className="z-10 flex w-full flex-1 flex-col gap-6 pt-5">
         {children}
       </div>
     </main>

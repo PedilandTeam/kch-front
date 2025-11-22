@@ -11,7 +11,8 @@ import { WrapPageImage } from "../layout/WrapPageImage";
 import { WrapContainer } from "../layout/WrapContainer";
 import { ItemCardsList } from "./item";
 import { fetcher } from "@/hooks/swr/fetcher";
-import { usePagesList } from "@/hooks/swr/usePageList";
+import { usePagesList } from "@/hooks/swr/usePagesList";
+import { AdsClubBanner } from "../banners/AdsClubBanner";
 
 interface CategoryListPageProps {
   category: Category;
@@ -30,7 +31,7 @@ export function CategoryListPage({
   city,
   search,
 }: CategoryListPageProps) {
-  const { pages, loading, error } = usePagesList({
+  const { pages, loading } = usePagesList({
     page: pageNumber || 1,
     limit: 24,
     countryCode: country.code,
@@ -49,7 +50,7 @@ export function CategoryListPage({
   return (
     <WrapPageImage className="_category-list-page h-full" country={country}>
       <WrapContainer>
-        <div className="mb-6 flex flex-col items-center space-y-4">
+        <div className="flex flex-col items-center space-y-4">
           <div className="flex items-center justify-center gap-3">
             <h1 className="text-lg font-semibold text-white drop-shadow-sm drop-shadow-black/70">
               لیست{" "}
@@ -68,21 +69,23 @@ export function CategoryListPage({
             country={{ name: country.name, code: country.code }}
           />
         </div>
+      </WrapContainer>
 
-        {loading ? (
-          <div className="flex min-h-[400px] items-center justify-center py-8">
-            <div className="text-white">در حال بارگذاری...</div>
-          </div>
-        ) : (
-          <ItemCardsList pages={pages} country={country} />
-        )}
-
-        {/* SEO Text */}
-        <div className="_SEO-text px-4">
-          <p className="text-justify font-normal text-gray-500">
-            {defaultSeoDescription}
-          </p>
+      {loading ? (
+        <div className="flex min-h-[400px] items-center justify-center py-8">
+          <div className="text-white">در حال بارگذاری...</div>
         </div>
+      ) : (
+        <ItemCardsList pages={pages} country={country} />
+      )}
+
+      <AdsClubBanner />
+
+      {/* SEO Text */}
+      <WrapContainer>
+        <p className="text-justify font-normal text-gray-500">
+          {defaultSeoDescription}
+        </p>
       </WrapContainer>
     </WrapPageImage>
   );

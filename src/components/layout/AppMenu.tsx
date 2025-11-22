@@ -17,9 +17,11 @@ export const AppMenu = () => {
   const params = useParams();
   const pathname = usePathname();
   const [countries, setCountries] = useState<Country[] | undefined>();
-  const { countryCode, setCountryCode } = useCountryCodeStore();
 
   const { countries: countriesData } = useCountries({ status: 1 });
+
+  const countryCode = useCountryCodeStore((state) => state.countryCode);
+  const setCountryCode = useCountryCodeStore((state) => state.setCountryCode);
 
   useEffect(() => {
     if (countriesData) {
@@ -33,16 +35,22 @@ export const AppMenu = () => {
   useEffect(() => {
     if (!pathname) return;
 
-    if (pathname === "/") {
+    const parts = pathname.split("/").filter(Boolean);
+
+    if (parts.length === 0) {
       setCountryCode("un");
       return;
     }
 
-    const slug = params.countryOrSlug as string;
+    if (parts.length === 1 && !countries?.some((c) => c.code === parts[0])) {
+      return;
+    }
+
+    const slug = parts[0];
     const matched = countries?.find((c) => c.code === slug);
 
     setCountryCode(matched?.code ?? "un");
-  }, [params, countries, countryCode, setCountryCode]);
+  }, [pathname, countries]);
 
   return (
     <div

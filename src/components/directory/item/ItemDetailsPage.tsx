@@ -10,6 +10,7 @@ import { ItemInfo } from "./ItemInfo";
 import { ItemDescription } from "./ItemDescription";
 import { ItemBreadcrumb } from "./ItemBreadcrumb";
 import { ItemSuggestion } from "./ItemSuggestion";
+import { AdsClubBanner } from "@/components/banners/AdsClubBanner";
 
 interface ItemDetailsPageProps {
   pageData: Page;
@@ -26,19 +27,22 @@ export function ItemDetailsPage({ pageData }: ItemDetailsPageProps) {
     address: {
       "@type": "PostalAddress",
       addressLocality: pageData.city.englishName,
-      addressCountry: pageData.country.code?.toUpperCase(),
+      addressCountry: pageData.country?.code?.toUpperCase(),
     },
   };
 
-  const { setCountryCode } = useCountryCodeStore();
+  const countryCode = useCountryCodeStore((state) => state.countryCode);
+  const setCountryCode = useCountryCodeStore((state) => state.setCountryCode);
 
   useEffect(() => {
+    console.log("BEFORE", countryCode);
     setCountryCode(pageData.country.code);
-  }, [pageData.country.code]);
+    console.log("AFTER", useCountryCodeStore.getState().countryCode);
+  }, [pageData.country?.code]);
 
   return (
     <WrapPageSimple className="_item-details-page pt-0">
-      <ItemDetailsCountrySync code={pageData.country.code} />
+      <ItemDetailsCountrySync code={pageData.country?.code} />
 
       <script
         type="application/ld+json"
@@ -51,11 +55,13 @@ export function ItemDetailsPage({ pageData }: ItemDetailsPageProps) {
 
       <ItemBreadcrumb pageData={pageData} />
 
+      <AdsClubBanner />
+
       <Suspense>
         <ItemSuggestion
           unit={pageData.unit}
           pageId={pageData.id}
-          countryCode={pageData.country.code}
+          countryCode={pageData.country?.code}
           category={pageData.category}
           city={pageData.city}
           basedOn="category"
@@ -66,7 +72,7 @@ export function ItemDetailsPage({ pageData }: ItemDetailsPageProps) {
         <ItemSuggestion
           unit={pageData.unit}
           pageId={pageData.id}
-          countryCode={pageData.country.code}
+          countryCode={pageData.country?.code}
           city={pageData.city}
           basedOn="city"
         />

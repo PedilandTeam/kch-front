@@ -1,3 +1,5 @@
+"use client";
+
 import { GENERAL } from "@/text/general";
 import type { Page } from "@/types/page";
 

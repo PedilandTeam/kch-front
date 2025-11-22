@@ -1,16 +1,14 @@
 "use client";
 
-import useSWR from "swr";
-import axios from "axios";
 import type { Country } from "@/schemas";
 import type { UnitType } from "@/types/unit";
-import type { GetPagesResponse } from "@/types/page";
 import { WrapPageImage } from "../layout/WrapPageImage";
 import { WrapContainer } from "../layout/WrapContainer";
 import { UnitBreadcrumb } from "./UnitBreadcrumb";
 import { ItemCardsList } from "./item";
 import { UnitSeoText } from "./UnitSeoText";
-import { fetcher } from "@/hooks/swr/fetcher";
+import { AdsClubBanner } from "../banners/AdsClubBanner";
+import { usePagesList } from "@/hooks/swr/usePagesList";
 
 interface UnitsListPageProps {
   unit: UnitType;
@@ -29,37 +27,19 @@ export function UnitsListPage({
   category,
   search,
 }: UnitsListPageProps) {
-  // Create the API URL with filters
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const filters = new URLSearchParams({
-    page: String(pageNumber || 1),
-    limit: "24",
+  const { pages, loading } = usePagesList({
+    limit: 30,
+    page: 1,
     countryCode: country.code,
-    unitId: String(unit.id),
-    ...(city && {
-      cityIds: Array.isArray(city) ? city.join(",") : String(city),
-    }),
-    ...(category && {
-      categoryIds: Array.isArray(category)
-        ? category.join(",")
-        : String(category),
-    }),
-    ...(search && { search }),
+    unitId: unit.id,
   });
 
-  const {
-    data: pages,
-    isLoading: loading,
-    error,
-  } = useSWR<GetPagesResponse>(
-    `${apiUrl}/pages?${filters.toString()}`,
-    fetcher,
-  );
+  console.log("pages in component:", country);
 
   return (
     <WrapPageImage className="_unit-list-page h-full" country={country}>
       <WrapContainer>
-        <div className="mb-6 flex flex-col items-center space-y-4">
+        <div className="flex flex-col items-center space-y-4">
           <div className="flex items-center justify-center gap-3">
             <h1 className="text-lg font-semibold text-white drop-shadow-sm drop-shadow-black/70">
               لیست {unit?.name} فارسی زبان در {country?.name}
@@ -73,17 +53,19 @@ export function UnitsListPage({
             country={{ name: country.name, code: country.code }}
           />
         </div>
-
-        {loading ? (
-          <div className="flex min-h-[400px] items-center justify-center py-8">
-            <div className="text-white">در حال بارگذاری...</div>
-          </div>
-        ) : (
-          <ItemCardsList pages={pages} country={country} />
-        )}
-
-        <UnitSeoText currentCountry={country} unit={unit} />
       </WrapContainer>
+
+      {loading ? (
+        <div className="flex min-h-[420px] items-center justify-center py-8">
+          <div className="text-white">در حال بارگذاری...</div>
+        </div>
+      ) : (
+        <ItemCardsList pages={pages} country={country} />
+      )}
+
+      <AdsClubBanner />
+
+      <UnitSeoText currentCountry={country} unit={unit} />
     </WrapPageImage>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { RichText } from "@/components/global/RichText";
 import { cn } from "@/lib/utils";
 import { ITEM } from "@/text";

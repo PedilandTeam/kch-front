@@ -17,10 +17,13 @@ import { ListIcon } from "@phosphor-icons/react";
 import { FOOTER, GENERAL, MENU } from "@/text";
 import Link from "next/link";
 import {
+  BookmarksIcon,
   BriefcaseIcon,
   InstagramLogoIcon,
+  RobotIcon,
   ScalesIcon,
   StethoscopeIcon,
+  TargetIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import type { Country } from "@/schemas";
@@ -101,45 +104,59 @@ export const MenuDrawer = ({ countryCode, countries }: MenuDrawerProps) => {
             />
           </div>
 
-          {currentCountry && (
-            <div className="flex items-center justify-center">
-              <div className="flex flex-col items-start gap-2">
-                <Button
-                  variant="ghost"
-                  className="h-10 w-auto !p-0 text-[15px] font-normal text-white [&_svg:not([class*='size-'])]:size-6.5"
-                  onClick={() => {
-                    router.push(`/${currentCountry.code}/doctors`);
-                    setOpen(false);
-                  }}
-                >
-                  <StethoscopeIcon weight="duotone" />
-                  <h2>لیست پزشکان ایرانی {currentCountry.name}</h2>
-                </Button>
-                <Button
-                  variant="ghost"
-                  className="h-10 w-auto !p-0 text-[15px] font-normal text-white [&_svg:not([class*='size-'])]:size-6.5"
-                  onClick={() => {
-                    router.push(`/${currentCountry.code}/businesses/lawyers`);
-                    setOpen(false);
-                  }}
-                >
-                  <ScalesIcon weight="duotone" />
-                  <h2>لیست وکلای ایرانی {currentCountry.name}</h2>
-                </Button>
-                <Button
-                  variant="ghost"
-                  className="h-10 w-auto !p-0 text-[15px] font-normal text-white [&_svg:not([class*='size-'])]:size-6.5"
-                  onClick={() => {
-                    router.push(`/${currentCountry.code}/businesses`);
-                    setOpen(false);
-                  }}
-                >
-                  <BriefcaseIcon weight="duotone" />
-                  <h2>لیست مشاغل ایرانی {currentCountry.name}</h2>
-                </Button>
-              </div>
+          <div className="flex items-center justify-center">
+            <div className="flex flex-col items-start gap-2">
+              {currentCountry && (
+                <>
+                  <Button
+                    variant="ghost"
+                    className="h-10 w-auto text-[15px] font-normal text-white [&_svg:not([class*='size-'])]:size-6.5"
+                    onClick={() => {
+                      router.push(`/${currentCountry.code}/doctors`);
+                      setOpen(false);
+                    }}
+                  >
+                    <StethoscopeIcon weight="duotone" />
+                    <h2>لیست پزشکان ایرانی {currentCountry.name}</h2>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="h-10 w-auto text-[15px] font-normal text-white [&_svg:not([class*='size-'])]:size-6.5"
+                    onClick={() => {
+                      router.push(`/${currentCountry.code}/businesses/lawyers`);
+                      setOpen(false);
+                    }}
+                  >
+                    <ScalesIcon weight="duotone" />
+                    <h2>لیست وکلای ایرانی {currentCountry.name}</h2>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="h-10 w-auto text-[15px] font-normal text-white [&_svg:not([class*='size-'])]:size-6.5"
+                    onClick={() => {
+                      router.push(`/${currentCountry.code}/businesses`);
+                      setOpen(false);
+                    }}
+                  >
+                    <BriefcaseIcon weight="duotone" />
+                    <h2>لیست مشاغل ایرانی {currentCountry.name}</h2>
+                  </Button>
+                </>
+              )}
+
+              <Button
+                variant="ghost"
+                className="h-10 w-auto text-[15px] font-normal text-white [&_svg:not([class*='size-'])]:size-6.5"
+                onClick={() => {
+                  router.push(`/adsclub`);
+                  setOpen(false);
+                }}
+              >
+                <TargetIcon weight="duotone" />
+                <h2>ارسال هدفمند آگهی (Ads Club)</h2>
+              </Button>
             </div>
-          )}
+          </div>
 
           <Link
             href={"https://www.instagram.com/_koochaa"}
@@ -160,7 +177,9 @@ export const MenuDrawer = ({ countryCode, countries }: MenuDrawerProps) => {
 
           <div className="_copyright space-y-2.5 text-center">
             <div className="flex items-center justify-center gap-6 text-[15px] font-light text-white">
-              <Link href={"/about"} scroll={false}>{MENU.ABOUT}</Link>
+              <Link href={"/about"} scroll={false}>
+                {MENU.ABOUT}
+              </Link>
               <Link href={"/terms"}>{MENU.TERMS_AND_CONDITIONS}</Link>
               <Link href={"/contact"}>{MENU.CONTACT_US}</Link>
             </div>
