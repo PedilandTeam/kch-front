@@ -56,8 +56,13 @@ export const ItemSocials = ({ pageData }: ItemSocialsProps) => {
     },
   ];
 
-  const haveSocial =
-    pageData.socials && Object.keys(pageData.socials).length > 0;
+  console.log("Page Data...", pageData);
+
+  const haveSocial = pageData.socials
+    ? Object.entries(pageData.socials)
+        .filter(([key]) => key !== "website")
+        .some(([_, value]) => value && value.trim() !== "")
+    : false;
 
   return (
     <div className="_item-socials mx-5 flex justify-center border-b border-dashed pb-3">

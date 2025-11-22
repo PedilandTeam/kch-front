@@ -5,12 +5,12 @@ import type { Page } from "@/types/page";
 import isPageNew from "@/utils/isPageNew";
 
 import { CakeIcon, StarIcon } from "@phosphor-icons/react/dist/ssr";
-import { ItemTopMenu } from "./ItemTopMenu";
-import { ItemAvatar } from "./ItemAvatar";
 import { ItemBadge } from "../badges";
-import { ItemSocials } from "./ItemSocials";
+import { ItemAvatar } from "./ItemAvatar";
 import { ItemContacts } from "./ItemContacts";
 import { ItemLocation } from "./ItemLocation";
+import { ItemSocials } from "./ItemSocials";
+import { ItemTopMenu } from "./ItemTopMenu";
 
 interface ItemInfoProps {
   pageData: Page;
