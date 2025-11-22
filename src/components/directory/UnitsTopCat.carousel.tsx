@@ -60,7 +60,7 @@ export const UnitsTopCat = async ({ currentCountry }: UnitsTopCatProps) => {
             return (
               <div
                 key={`unit-${unit.id}`}
-                className="flex flex-col rounded-xl bg-gradient-to-b from-blue-900 to-blue-700 pb-5"
+                className="flex flex-col rounded-xl bg-linear-to-b from-blue-900 to-blue-700 pb-5"
               >
                 <div className="flex items-center justify-between rounded-t-xl px-4 py-4">
                   <h2 className="font-semibold text-white">
@@ -69,7 +69,7 @@ export const UnitsTopCat = async ({ currentCountry }: UnitsTopCatProps) => {
                   <Button
                     variant="link"
                     size="sm"
-                    className="!p-0 font-normal text-white/80"
+                    className="p-0! font-normal text-white/80"
                     asChild
                   >
                     <Link href={`/${currentCountry.code}/${unit.slug}`}>

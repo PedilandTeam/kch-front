@@ -3,6 +3,7 @@
 import Script from "next/script";
 import Hotjar from "@/components/hotjar";
 import { Toaster } from "@/components/ui/sonner";
+import { GTM_ID } from "@/lib/gtm";
 
 export const SiteProvider = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -19,15 +20,16 @@ export const SiteProvider = ({ children }: { children: React.ReactNode }) => {
       {process.env.NODE_ENV === "production" && (
         <>
           <Hotjar />
-          <Script src="https://www.googletagmanager.com/gtag/js?id=G-EED4RG3GPD" />
-          <Script id="google-analytics">
-            {`
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', 'G-EED4RG3GPD');
-                `}
-          </Script>
+          {GTM_ID && (
+            <noscript>
+              <iframe
+                src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+                height="0"
+                width="0"
+                style={{ display: "none", visibility: "hidden" }}
+              />
+            </noscript>
+          )}
         </>
       )}
     </>

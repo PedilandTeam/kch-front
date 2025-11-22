@@ -160,15 +160,9 @@ export const MenuDrawer = ({ countryCode, countries }: MenuDrawerProps) => {
 
           <div className="_copyright space-y-2.5 text-center">
             <div className="flex items-center justify-center gap-6 text-[15px] font-light text-white">
-              <Link href={"/about"} className="">
-                {MENU.ABOUT}
-              </Link>
-              <Link href={"/terms"} className="">
-                {MENU.TERMS_AND_CONDITIONS}
-              </Link>
-              <Link href={"/contact"} className="">
-                {MENU.CONTACT_US}
-              </Link>
+              <Link href={"/about"} scroll={false}>{MENU.ABOUT}</Link>
+              <Link href={"/terms"}>{MENU.TERMS_AND_CONDITIONS}</Link>
+              <Link href={"/contact"}>{MENU.CONTACT_US}</Link>
             </div>
 
             <p className="text-xs font-light text-white/70">
