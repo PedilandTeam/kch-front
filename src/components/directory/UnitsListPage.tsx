@@ -34,8 +34,6 @@ export function UnitsListPage({
     unitId: unit.id,
   });
 
-  console.log("pages in component:", country);
-
   return (
     <WrapPageImage className="_unit-list-page h-full" country={country}>
       <WrapContainer>
