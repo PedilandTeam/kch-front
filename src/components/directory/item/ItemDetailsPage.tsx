@@ -31,13 +31,10 @@ export function ItemDetailsPage({ pageData }: ItemDetailsPageProps) {
     },
   };
 
-  const countryCode = useCountryCodeStore((state) => state.countryCode);
   const setCountryCode = useCountryCodeStore((state) => state.setCountryCode);
 
   useEffect(() => {
-    console.log("BEFORE", countryCode);
     setCountryCode(pageData.country.code);
-    console.log("AFTER", useCountryCodeStore.getState().countryCode);
   }, [pageData.country?.code]);
 
   return (

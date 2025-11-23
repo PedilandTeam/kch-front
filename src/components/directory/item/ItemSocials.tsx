@@ -56,8 +56,6 @@ export const ItemSocials = ({ pageData }: ItemSocialsProps) => {
     },
   ];
 
-  console.log("Page Data...", pageData);
-
   const haveSocial = pageData.socials
     ? Object.entries(pageData.socials)
         .filter(([key]) => key !== "website")
