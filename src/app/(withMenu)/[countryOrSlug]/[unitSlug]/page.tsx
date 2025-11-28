@@ -80,14 +80,14 @@ export const generateMetadata = async ({
   const pageSearchParams = search?.page;
 
   return {
-    title: `لیست ${pathInfo?.props?.unit?.name} فارسی زبان در ${
+    title: `لیست ${pathInfo?.props?.unit?.name} ایرانی در ${
       countryOrSlug && currentCountry && currentCountry.name
     }`,
     description: `به جامعه مجازی ایرانیان مهاجر مقیم ${
       countryOrSlug && currentCountry && currentCountry.name
     } خوش آمدید. در این صفحه لیست کاملی از ${
       pathInfo?.props?.unit?.name
-    } فارسی زبان این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
+    } ایرانی این کشور وجود دارد که می توانید صفحه اختصاصی شان را نیز مشاهده نمایید.`,
     alternates: {
       canonical: `${process.env.FRONT_URL}/${currentCountry?.code}/${
         pathInfo?.props?.unit?.slug

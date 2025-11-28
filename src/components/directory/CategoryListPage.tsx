@@ -56,7 +56,7 @@ export function CategoryListPage({
               لیست{" "}
               {category?.seoTitle
                 ? category.seoTitle
-                : `${category.name} فارسی زبان`}{" "}
+                : `${category.name} ایرانی`}{" "}
               در {country?.name}
             </h1>
             <span className="hidden font-medium text-gray-500">

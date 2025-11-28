@@ -1270,8 +1270,8 @@ export const UNITS_LIST_ARRAY = [
     categories: [
       {
         id: 30,
-        name: "کلیسای فارسی زبان",
-        slug: "کلیسای_فارسی_زبان",
+        name: "کلیسای ایرانی",
+        slug: "کلیسای_ایرانی",
         createdDate: "2023-04-27T00:50:59.412Z",
         updateDate: "2023-04-27T00:50:59.412Z",
       },

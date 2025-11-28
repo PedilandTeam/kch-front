@@ -22,11 +22,11 @@ export const CountryPageHead = async ({
         <div className="absolute top-0 right-0 flex h-full w-full flex-col items-center justify-center gap-4 p-7">
           <div className="flex w-full flex-1 items-center justify-center">
             <h1 className="text-3xl leading-normal font-semibold text-white drop-shadow-md drop-shadow-black">
-              جـامـعـه
+              جامعه
               <br />
-              ایـرانـیـان مـهـاجـر
+              ایرانیان مهاجر
               <br />
-              مـقـیـم {currentCountry.name}
+              مقیم {currentCountry.name}
             </h1>
           </div>
 

@@ -6,8 +6,8 @@ export const MENU = {
   CORPORATE_OPPORTUNITIES: "فرصت‌های همکاری",
   TERMS_AND_CONDITIONS: "قوانین و مقررات",
   PRIVACY_POLICIES: "حریم خصوصی کاربران",
-  BUSINESSES: "مشاغل فارسی زبان",
-  DOCTORS: "پزشکان فارسی زبان",
+  BUSINESSES: "مشاغل ایرانی",
+  DOCTORS: "پزشکان ایرانی",
   COMMUNITY: "سوالات مهاجرت ",
   JobNew:"راهنمای مشاغل"
 

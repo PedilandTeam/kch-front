@@ -49,7 +49,7 @@ export default function CountryCategoriesItems({
                 activeTab == unit.id ? "tab-active border-secondary" : ""
               } `}
             >
-              {unit.name} فارسی زبان
+              {unit.name} ایرانی
             </a>
           );
         })}

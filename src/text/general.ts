@@ -26,7 +26,7 @@ export const GENERAL = {
   MOBILE: "همراه",
   NEW: "جدید",
   NEXT: "بعدی",
-  PERSIAN: "فارسی زبان",
+  PERSIAN: "ایرانی",
   PHONE: "تلفن",
   PHONE_COPIED: "شماره تلفن کپی شد.",
   PLEASE_SELECT: "لطفا انتخاب کنید",
