@@ -123,8 +123,8 @@ export const generateMetadata = async ({
 
   return {
     title: `لیست ${
-      category.seoTitle ?? `${category.name} ایرانی`
-    } در ${country.name}`,
+      category.seoTitle ?? `${category.name}`
+    } ایرانی در ${country.name}`,
     description: `به جامعه ایرانیان مهاجر مقیم ${
       country.name
     } خوش آمدید. در این صفحه لیست کامل ${

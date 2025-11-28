@@ -53,11 +53,8 @@ export function CategoryListPage({
         <div className="flex flex-col items-center space-y-4">
           <div className="flex items-center justify-center gap-3">
             <h1 className="text-lg font-semibold text-white drop-shadow-sm drop-shadow-black/70">
-              لیست{" "}
-              {category?.seoTitle
-                ? category.seoTitle
-                : `${category.name} ایرانی`}{" "}
-              در {country?.name}
+              لیست {category?.seoTitle ? category.seoTitle : category.name}{" "}
+              ایرانی در {country?.name}
             </h1>
             <span className="hidden font-medium text-gray-500">
               ({pages?.meta.totalItems} آیتم)
