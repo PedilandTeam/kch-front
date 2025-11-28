@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Params) {
   if (data.type === "country") {
     return {
       ...baseSiteMetadata,
-      title: `کوچا | جامعه ایرانیان مهاجر مقیم ${data.currentCountry.name}`,
+      title: `جامعه ایرانیان مهاجر مقیم ${data.currentCountry.name}`,
       description: `به جامعه مجازی ایرانیان مهاجر مقیم ${data.currentCountry.name} خوش آمدید...`,
       alternates: { canonical: `/${data.currentCountry.code}` },
     };
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Params) {
 
   return {
     ...baseSiteMetadata,
-    title: `${data.pageData.title} - ${data.pageData.city?.name}، ${data.pageData.country?.name} | کوچا`,
+    title: `${data.pageData.title} - ${data.pageData.city?.name}، ${data.pageData.country?.name}`,
     description: `این صفحه پروفایل اختصاصی ${data.pageData.title} در پلتفرم کوچاست...`,
     alternates: { canonical: `/${data.pageData.slug}` },
   };

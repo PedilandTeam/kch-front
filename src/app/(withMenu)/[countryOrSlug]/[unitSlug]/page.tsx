@@ -82,7 +82,7 @@ export const generateMetadata = async ({
   return {
     title: `لیست ${pathInfo?.props?.unit?.name} فارسی زبان در ${
       countryOrSlug && currentCountry && currentCountry.name
-    } | کوچا`,
+    }`,
     description: `به جامعه مجازی ایرانیان مهاجر مقیم ${
       countryOrSlug && currentCountry && currentCountry.name
     } خوش آمدید. در این صفحه لیست کاملی از ${

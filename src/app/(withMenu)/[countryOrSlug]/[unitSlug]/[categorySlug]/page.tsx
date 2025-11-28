@@ -124,7 +124,7 @@ export const generateMetadata = async ({
   return {
     title: `لیست ${
       category.seoTitle ?? `${category.name} فارسی زبان`
-    } در ${country.name} | کوچا`,
+    } در ${country.name}`,
     description: `به جامعه ایرانیان مهاجر مقیم ${
       country.name
     } خوش آمدید. در این صفحه لیست کامل ${
