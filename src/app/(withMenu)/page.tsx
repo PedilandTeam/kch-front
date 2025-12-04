@@ -5,7 +5,7 @@ import { WrapContainer } from "@/components/layout/WrapContainer";
 import { WrapPageSimple } from "@/components/layout/WrapPageSimple";
 
 export const metadata = {
-  title: "جامعه ایرانیان مهاجر",
+  title: "پلتفرم رشد و بازاریابی کسب و کارهای ایرانیان مهاجر",
 };
 
 export default function Page() {

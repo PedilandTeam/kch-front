@@ -53,7 +53,9 @@ export const CountriesDialog = ({
                         alt={country.name}
                         title={country.name}
                       />
-                      <p className="text-[13px]">{country.name}</p>
+                      <span className="truncate text-center text-[13px]">
+                        {country.name}
+                      </span>
                     </Link>
                   );
                 })}

@@ -2,9 +2,10 @@ import { baseSiteMetadata } from "@/config/metadata";
 import { SiteProvider } from "@/providers/SiteProvider";
 import { TelegramProvider } from "@/providers/TelegramProvider";
 import { TelegramAuthProvider } from "@/providers/TelegramAuthProvider";
-import "@/styles/globals.css";
 import { Vazirmatn } from "next/font/google";
 import type { Metadata } from "next";
+
+import "@/styles/globals.css";
 import ScrollFix from "@/components/global/ScrollFix";
 
 const vazirmatn = Vazirmatn({

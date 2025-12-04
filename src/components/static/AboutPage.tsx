@@ -4,7 +4,6 @@ import { WrapPageStatic } from "../layout/WrapPageStatic";
 import { AboutContent } from "./AboutContent";
 import { AboutPageHead } from "./AboutPageHead";
 
-
 interface AboutPageProps {
   title: string;
 }

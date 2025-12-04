@@ -4,6 +4,6 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-export default function HomeLayout({ children }: LayoutProps) {
+export default function WithMenuLayout({ children }: LayoutProps) {
   return <WrapAppMenu>{children}</WrapAppMenu>;
 }

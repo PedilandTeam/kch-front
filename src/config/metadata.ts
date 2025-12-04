@@ -5,7 +5,7 @@ export const baseSiteMetadata: Metadata = {
     default: "کوچا",
     template: "%s | کوچا",
   },
-  description: "پلتفرم مجازی برای ایرانیان مهاجر در سراسر دنیا",
+  description: "پلتفرم رشد و بازاریابی کسب و کار ایرانیان مهاجر مقیم همه جا",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_FRONT_URL ?? "https://koocha.com",
   ),
