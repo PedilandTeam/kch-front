@@ -6,18 +6,12 @@ import { z } from "zod";
 
 import {
   Button,
-  Card,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
 } from "@/components/ui";
 import { adsClubSchema } from "@/schemas/adsClubRegister";
 import { MultiSelect } from "@/components/ui-custom/MultiSelect";
@@ -151,7 +145,12 @@ export default function InterestsForm() {
 
   const watchStatus = form.watch("isImmigrate");
 
-  if (!user || categories.length === 0) {
+  if (
+    !user ||
+    categories.length === 0 ||
+    countries.length === 0 ||
+    methods.length === 0
+  ) {
     return <Loader />;
   }
 
@@ -175,7 +174,11 @@ export default function InterestsForm() {
                         value: String(c.id),
                         label: c.name,
                       }))}
-                      defaultValue={(field.value || []).map(String)}
+                      defaultValue={(field.value || [])
+                        .map(String)
+                        .filter((val) =>
+                          interests.some((c) => String(c.id) === val),
+                        )}
                       onValueChange={(values) =>
                         field.onChange(values.map(Number))
                       }
@@ -216,7 +219,11 @@ export default function InterestsForm() {
                         label: country.name,
                         value: country.id.toString(),
                       }))}
-                      defaultValue={(field.value ?? []).map(String)}
+                      defaultValue={(field.value ?? [])
+                        .map(String)
+                        .filter((val) =>
+                          countries.some((c) => String(c.id) === val),
+                        )}
                       onValueChange={(values) =>
                         field.onChange(values.map(Number))
                       }
@@ -240,7 +247,11 @@ export default function InterestsForm() {
                         label: method.titleFa,
                         value: method.id.toString(),
                       }))}
-                      defaultValue={(field.value ?? []).map(String)}
+                      defaultValue={(field.value ?? [])
+                        .map(String)
+                        .filter((val) =>
+                          methods.some((m) => String(m.id) === val),
+                        )}
                       onValueChange={(values) =>
                         field.onChange(values.map(Number))
                       }

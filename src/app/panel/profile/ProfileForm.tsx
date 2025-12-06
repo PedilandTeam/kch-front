@@ -64,8 +64,6 @@ export default function ProfileForm() {
     async function loadUser() {
       const res = await fetchUser();
 
-      console.log("user", res);
-
       if (res.ok) {
         setUser(res.user);
 
@@ -136,7 +134,9 @@ export default function ProfileForm() {
 
     try {
       const cleanedBirthYear =
-        typeof values.birthYear === "number" ? values.birthYear : null;
+        values.birthYear && !Number.isNaN(Number(values.birthYear))
+          ? Number(values.birthYear)
+          : null;
 
       const cleanedGender =
         values.gender && values.gender.trim() !== "" ? values.gender : null;
