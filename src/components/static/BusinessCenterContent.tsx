@@ -8,7 +8,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import {
-  BriefcaseIcon,
   DesktopTowerIcon,
   MegaphoneSimpleIcon,
 } from "@phosphor-icons/react/dist/ssr";
@@ -198,11 +197,46 @@ export const BusinessCenterContent = () => {
               ابزار دایرکت هوشمند اینستاگرام
             </AccordionTrigger>
             <AccordionContent className="ac-content">
-              <p>بزودی...</p>
+              <p>
+                اگر در خارج از ایران بلاگر یا اینفلوئنسر هستید، یا از اینستاگرام
+                برای رشد و توسعه کسب‌وکار خودتان استفاده می‌کنید، ابزار دایرکت
+                هوشمند می‌تواند به یک دستیار قدرتمند و همیشه‌ در‌ دسترس برای شما
+                تبدیل شود.
+              </p>
+              <p>
+                این ابزار با ارسال خودکار پاسخ‌های از پیش تعریف شده به دایرکت‌ها
+                و کامنت‌های دریافتی، بخش بزرگی از کارهای وقت‌گیر و تکراری روزمره
+                شما را انجام می‌دهد. به این ترتیب شما زمان بیشتری برای تولید
+                محتوا، توسعه برند و ارتقای کیفیت خدمات در اختیار خواهید داشت.
+              </p>
+              <p>
+                ما با همکاری برند{" "}
+                <Link
+                  href={"https://befroosh.app/fa"}
+                  target="_blank"
+                  className="font-semibold underline underline-offset-4"
+                >
+                  بـفـروش
+                </Link>{" "}
+                امکان استفاده از این سرویس را برای کاربران خارج از ایران فراهم
+                کردیم. این ابزار علاوه بر رابط کاربری فارسی و هزینه کمتر نسب به
+                نمونه‌های خارجی، قابلیت فروش مستقیم کالا و خدمات در دایرکت را
+                نیز ارائه می‌دهد.
+              </p>
+
+              <p>
+                در صورت تمایل به استفاده از این سرویس می‌توانید اشتراک یک ماهه
+                رایگان از ما دریافت کنید.
+              </p>
+              <Button className="mt-3 w-full" asChild>
+                <Link href={"https:/t.me/koochaa_support"} target="_blank">
+                  درخـواسـت فـعـال‌سـازی اشـتـراک رایـگـان
+                </Link>
+              </Button>
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="ac-16" className="ac-item">
+          {/* <AccordionItem value="ac-16" className="ac-item">
             <AccordionTrigger className="ac-trigger">
               طراحی و اجرای کمپین تبلیغاتی
             </AccordionTrigger>
@@ -218,7 +252,7 @@ export const BusinessCenterContent = () => {
             <AccordionContent className="ac-content">
               <p>بزودی...</p>
             </AccordionContent>
-          </AccordionItem>
+          </AccordionItem> */}
         </Accordion>
 
         <h2 className="text-secondary mt-8 mb-4 flex flex-col items-center gap-1 text-lg font-bold">
@@ -344,7 +378,7 @@ export const BusinessCenterContent = () => {
           </AccordionItem>
         </Accordion>
 
-        <h2 className="text-secondary mt-8 mb-4 flex flex-col items-center gap-1 text-lg font-bold">
+        {/* <h2 className="text-secondary mt-8 mb-4 flex flex-col items-center gap-1 text-lg font-bold">
           <BriefcaseIcon weight="duotone" size={40} /> توسعه کـسـب و کـار
         </h2>
 
@@ -375,7 +409,7 @@ export const BusinessCenterContent = () => {
               <p>بزودی...</p>
             </AccordionContent>
           </AccordionItem>
-        </Accordion>
+        </Accordion> */}
       </div>
     </section>
   );
