@@ -4,7 +4,7 @@ import { HomeSlider } from "@/components/home/HomeSlider";
 import { WrapPageSimple } from "@/components/layout/WrapPageSimple";
 
 export const metadata = {
-  title: "پلتفرم رشد و بازاریابی کسب و کارهای ایرانیان مهاجر",
+  title: "پلتفرم رشد و تبلیغات کسب و کارهای ایرانیان مهاجر مقیم خارج",
 };
 
 export default function Page() {

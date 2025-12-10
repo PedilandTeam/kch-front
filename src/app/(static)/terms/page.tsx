@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <TermsPage title={metadata.title as string} />;
+  return <TermsPage title={"قوانین و مقررات"} />;
 }

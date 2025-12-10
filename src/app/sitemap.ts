@@ -82,7 +82,36 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error("Error in sitemap", err);
   }
 
+  // Static routes
+  const staticRoutes: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/about`,
+      lastModified: lastModifiedGenerator(),
+    },
+    {
+      url: `${baseUrl}/adsclub`,
+      lastModified: lastModifiedGenerator(),
+    },
+    {
+      url: `${baseUrl}/business-center`,
+      lastModified: lastModifiedGenerator(),
+    },
+    {
+      url: `${baseUrl}/terms`,
+      lastModified: lastModifiedGenerator(),
+    },
+    {
+      url: `${baseUrl}/privacy`,
+      lastModified: lastModifiedGenerator(),
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified: lastModifiedGenerator(),
+    },
+  ];
+
   return [
+    ...staticRoutes,
     ...countriesSiteMap,
     ...unitsSiteMap,
     ...categoriesSiteMap,

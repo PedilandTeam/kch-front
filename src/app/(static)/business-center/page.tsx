@@ -2,14 +2,14 @@ import { BusinessCenterPage } from "@/components/static/BusinessCenterPage";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "بیزینس سنتر",
+  title: "بیزینس سنتر - راهکار جامعه کسب و کار ویژه ایرانیان مهاجر",
   description:
-    "به جامعه ایرانیان مهاجر مقیم همه جا خوش آمدید. در این صفحه اطلاعات کاملی درباره برند کوچا بدست می آورید و با موسسان، داستان شکل گیری، چشم انداز و اهداف پیش روی آن آشنا می شوید.",
+    "بیزینس سنتر کوچا خدمات حرفه‌ای و منصفانه برای رشد کسب‌وکار ایرانیان خارج از کشور ارائه می‌دهد تا بدون دغدغه روی توسعه و مشتریان خود تمرکز کنید.",
   alternates: {
     canonical: `/business-center`,
   },
 };
 
 export default function Page() {
-  return <BusinessCenterPage title={metadata.title as string} />;
+  return <BusinessCenterPage title={"بیزینس سنتر"} />;
 }

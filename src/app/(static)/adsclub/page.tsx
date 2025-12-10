@@ -2,14 +2,14 @@ import { AdsclubPage } from "@/components/static/AdsclubPage";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "!Ads Club",
+  title: "ادز کلاب - سرویس ارسال هدفمند آگهی ویژه ایرانیان مهاجر",
   description:
-    "به جامعه ایرانیان مهاجر مقیم همه جا خوش آمدید. در این صفحه اطلاعات کاملی درباره برند کوچا بدست می آورید و با موسسان، داستان شکل گیری، چشم انداز و اهداف پیش روی آن آشنا می شوید.",
+    "ادز کلاب سرویس ارسال هدفمند آگهی ویژه ایرانیان مهاجر است که آگهی‌های معتبر را بدون اسپم و مزاحمت، براساس کشور، شهر و نیازتان ارسال می‌کند؛ با حفظ کامل حریم خصوصی.",
   alternates: {
     canonical: `/adsclub`,
   },
 };
 
 export default function Page() {
-  return <AdsclubPage title={metadata.title as string} />;
+  return <AdsclubPage title={"سرویس ادز کلاب"} />;
 }

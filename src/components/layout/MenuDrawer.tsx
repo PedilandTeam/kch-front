@@ -139,7 +139,9 @@ export const MenuDrawer = ({ countryCode, countries }: MenuDrawerProps) => {
                     }}
                   >
                     <BriefcaseIcon weight="duotone" />
-                    <h2>لیست مشاغل ایرانی {currentCountry.name}</h2>
+                    <h2>
+                      لیست مشاغل ایرانی فعال در کشور {currentCountry.name}
+                    </h2>
                   </Button>
                 </>
               )}

@@ -80,7 +80,7 @@ export const generateMetadata = async ({
   const pageSearchParams = search?.page;
 
   return {
-    title: `لیست ${pathInfo?.props?.unit?.name} ایرانی در ${
+    title: `لیست ${pathInfo?.props?.unit?.name} ایرانی در کشور ${
       countryOrSlug && currentCountry && currentCountry.name
     }`,
     description: `به جامعه مجازی ایرانیان مهاجر مقیم ${
