@@ -1,7 +1,6 @@
 import { HomeCountries } from "@/components/home/HomeCountries";
 import { HomeSeo } from "@/components/home/HomeSeo";
 import { HomeSlider } from "@/components/home/HomeSlider";
-import { WrapContainer } from "@/components/layout/WrapContainer";
 import { WrapPageSimple } from "@/components/layout/WrapPageSimple";
 
 export const metadata = {
@@ -10,14 +9,12 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <WrapContainer>
-      <WrapPageSimple className="_home-page">
-        <HomeSlider />
+    <WrapPageSimple className="_home-page">
+      <HomeSlider />
 
-        <HomeCountries />
+      <HomeCountries />
 
-        <HomeSeo />
-      </WrapPageSimple>
-    </WrapContainer>
+      <HomeSeo />
+    </WrapPageSimple>
   );
 }

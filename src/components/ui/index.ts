@@ -1,7 +1,13 @@
 export * from "./avatar";
 export * from "./button";
 export * from "./card";
-export { Carousel, CarouselContent, CarouselItem } from "./carousel";
+export {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "./carousel";
 export * from "./command";
 export * from "./dialog";
 export * from "./drawer";

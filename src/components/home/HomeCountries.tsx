@@ -14,6 +14,7 @@ import deImage from "@/assets/images/bd/hp-germany.webp";
 import nlImage from "@/assets/images/bd/hp-netherland.webp";
 import seImage from "@/assets/images/bd/hp-sweden.webp";
 import trImage from "@/assets/images/bd/hp-turkey.webp";
+import { WrapContainer } from "../layout/WrapContainer";
 
 const FEATURED_COUNTRIES = [
   {
@@ -77,42 +78,44 @@ export const HomeCountries = () => {
   });
 
   return (
-    <div className="_home-countries space-y-4">
-      <h2 className="text-primary text-center font-semibold">
-        کشور محل اقامت خودتون رو انتخاب کنید:
-      </h2>
+    <div className="_home-countries">
+      <WrapContainer className="space-y-4">
+        <h2 className="text-primary text-center font-semibold">
+          کشور محل اقامت خودتون رو انتخاب کنید:
+        </h2>
 
-      <div className="wrap grid grid-cols-1 gap-3">
-        {mergedCountries.map((country) => (
-          <Link key={country.code} href={country.href} className="relative">
-            <div>
-              <Image
-                src={country.image}
-                alt={country.alt}
-                width={400}
-                height={250}
-                className="rounded-xl"
-                priority
-              />
-            </div>
+        <div className="wrap grid grid-cols-1 gap-3">
+          {mergedCountries.map((country) => (
+            <Link key={country.code} href={country.href} className="relative">
+              <div>
+                <Image
+                  src={country.image}
+                  alt={country.alt}
+                  width={400}
+                  height={250}
+                  className="rounded-xl"
+                  priority
+                />
+              </div>
 
-            <div className="absolute bottom-0 w-full cursor-pointer rounded-xl bg-linear-to-t from-black px-5 py-10 text-white transition-all duration-500">
-              <h3 className="text-center text-xl font-semibold">
-                {country.name}
-                {countries && (
-                  <span className="mr-1 font-normal">
-                    ({e2p(country.pageCount)})
-                  </span>
-                )}
-              </h3>
-            </div>
-          </Link>
-        ))}
-      </div>
+              <div className="absolute bottom-0 w-full cursor-pointer rounded-xl bg-linear-to-t from-black px-5 py-10 text-white transition-all duration-500">
+                <h3 className="text-center text-xl font-semibold">
+                  {country.name}
+                  {countries && (
+                    <span className="mr-1 font-normal">
+                      ({e2p(country.pageCount)})
+                    </span>
+                  )}
+                </h3>
+              </div>
+            </Link>
+          ))}
+        </div>
 
-      <p className="text-muted-foreground text-center text-sm">
-        جهت مشاهده لیست تمام کشورها از منو استفاده کنید.
-      </p>
+        <p className="text-muted-foreground text-center text-sm">
+          جهت مشاهده لیست تمام کشورها از منو استفاده کنید.
+        </p>
+      </WrapContainer>
     </div>
   );
 };
