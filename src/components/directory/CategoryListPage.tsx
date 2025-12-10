@@ -13,6 +13,7 @@ import { ItemCardsList } from "./item";
 import { fetcher } from "@/hooks/swr/fetcher";
 import { usePagesList } from "@/hooks/swr/usePagesList";
 import { AdsClubBanner } from "../banners/AdsClubBanner";
+import { BannerTelegram } from "../global/BannerTelegram";
 
 interface CategoryListPageProps {
   category: Category;
@@ -77,6 +78,8 @@ export function CategoryListPage({
       )}
 
       <AdsClubBanner />
+
+      <BannerTelegram />
 
       {/* SEO Text */}
       <WrapContainer>

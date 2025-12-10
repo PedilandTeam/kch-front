@@ -1,8 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import type { Country } from "@/schemas";
-import type { UnitType } from "@/types/unit";
 import { useState } from "react";
 
 import { Button } from "../ui";
@@ -14,8 +12,9 @@ export const SeoText = ({ children }: { children: React.ReactNode }) => {
     <div className="_SEO-text-content mt-4 flex flex-col px-4">
       <div
         className={cn(
-          "text-muted-foreground relative overflow-hidden text-justify text-sm duration-500",
-          showMore ? "h-auto" : "h-40",
+          "[&>p]:text-muted-foreground text-muted-foreground relative overflow-hidden text-justify text-sm duration-500 [&_strong]:font-medium [&>p]:mb-1 [&>p]:text-sm",
+
+          showMore ? "h-auto" : "h-24",
         )}
       >
         <div

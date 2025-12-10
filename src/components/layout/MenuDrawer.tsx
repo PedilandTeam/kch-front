@@ -1,6 +1,12 @@
 "use client";
 
-import { useState, useRef } from "react";
+import type { Country } from "@/schemas";
+import { FOOTER, GENERAL, MENU } from "@/text";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
+
 import {
   Button,
   Card,
@@ -13,21 +19,15 @@ import {
   DrawerTrigger,
   VisuallyHidden,
 } from "@/components/ui";
-import { ListIcon } from "@phosphor-icons/react";
-import { FOOTER, GENERAL, MENU } from "@/text";
-import Link from "next/link";
 import {
-  BookmarksIcon,
   BriefcaseIcon,
   InstagramLogoIcon,
-  RobotIcon,
+  ListIcon,
+  NewspaperClippingIcon,
   ScalesIcon,
   StethoscopeIcon,
-  TargetIcon,
+  StorefrontIcon,
 } from "@phosphor-icons/react/dist/ssr";
-import Image from "next/image";
-import type { Country } from "@/schemas";
-import { useRouter } from "next/navigation";
 
 interface MenuDrawerProps {
   countryCode: string;
@@ -43,21 +43,56 @@ export const MenuDrawer = ({ countryCode, countries }: MenuDrawerProps) => {
     (c: Country) => c.code === countryCode,
   );
 
+  const menuItems = [
+    {
+      title: "بیزینس سنتر (خدمات کسب و کار)",
+      icon: <BriefcaseIcon weight="duotone" className="text-secondary" />,
+      href: "/business-center",
+      country: false,
+    },
+    {
+      title: "ارسال هدفمند آگهی (Ads Club)",
+      icon: (
+        <NewspaperClippingIcon weight="duotone" className="text-secondary" />
+      ),
+      href: "/adsclub",
+      country: false,
+    },
+    {
+      title: `لیست پزشکان ایرانی ${currentCountry?.name}`,
+      icon: <StethoscopeIcon weight="duotone" className="text-secondary" />,
+      href: "/doctors",
+      country: true,
+    },
+    {
+      title: `لیست وکلای ایرانی ${currentCountry?.name}`,
+      icon: <ScalesIcon weight="duotone" className="text-secondary" />,
+      href: "/lawyers",
+      country: true,
+    },
+    {
+      title: `لیست مشاغل ایرانی ${currentCountry?.name}`,
+      icon: <StorefrontIcon weight="duotone" className="text-secondary" />,
+      href: "/businesses",
+      country: true,
+    },
+  ];
+
+  const filteredMenuItems = currentCountry
+    ? menuItems
+    : menuItems.filter((item) => item.country === false);
+
   const handleOpenChange = (newOpen: boolean) => {
     if (newOpen) {
-      // Save scroll position when opening
       scrollPositionRef.current = window.scrollY;
       setOpen(true);
     } else {
-      // Close drawer and prevent focus/scroll issues
       setOpen(false);
 
-      // Blur the button to prevent focus-related aria-hidden conflict
       if (buttonRef.current) {
         buttonRef.current.blur();
       }
 
-      // Restore scroll position
       setTimeout(() => {
         window.scrollTo({
           top: scrollPositionRef.current,
@@ -86,7 +121,7 @@ export const MenuDrawer = ({ countryCode, countries }: MenuDrawerProps) => {
           <ListIcon size={34} weight="duotone" />
         </button>
       </DrawerTrigger>
-      <DrawerContent className="from-primary to-primary/80 mx-auto rounded-t-3xl border-none bg-gradient-to-t md:max-w-[414px]">
+      <DrawerContent className="bg-primary mx-auto rounded-t-3xl border-none md:max-w-[414px]">
         <DrawerHeader className="p-0">
           <DrawerTitle>
             <VisuallyHidden>Menu</VisuallyHidden>
@@ -106,57 +141,19 @@ export const MenuDrawer = ({ countryCode, countries }: MenuDrawerProps) => {
 
           <div className="flex items-center justify-center">
             <div className="flex flex-col items-start gap-2">
-              {currentCountry && (
-                <>
-                  <Button
-                    variant="ghost"
-                    className="h-10 w-auto text-[15px] font-normal text-white [&_svg:not([class*='size-'])]:size-6.5"
-                    onClick={() => {
-                      router.push(`/${currentCountry.code}/doctors`);
-                      setOpen(false);
-                    }}
-                  >
-                    <StethoscopeIcon weight="duotone" />
-                    <h2>لیست پزشکان ایرانی {currentCountry.name}</h2>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="h-10 w-auto text-[15px] font-normal text-white [&_svg:not([class*='size-'])]:size-6.5"
-                    onClick={() => {
-                      router.push(`/${currentCountry.code}/businesses/lawyers`);
-                      setOpen(false);
-                    }}
-                  >
-                    <ScalesIcon weight="duotone" />
-                    <h2>لیست وکلای ایرانی {currentCountry.name}</h2>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="h-10 w-auto text-[15px] font-normal text-white [&_svg:not([class*='size-'])]:size-6.5"
-                    onClick={() => {
-                      router.push(`/${currentCountry.code}/businesses`);
-                      setOpen(false);
-                    }}
-                  >
-                    <BriefcaseIcon weight="duotone" />
-                    <h2>
-                      لیست مشاغل ایرانی فعال در کشور {currentCountry.name}
-                    </h2>
-                  </Button>
-                </>
-              )}
-
-              <Button
-                variant="ghost"
-                className="h-10 w-auto text-[15px] font-normal text-white [&_svg:not([class*='size-'])]:size-6.5"
-                onClick={() => {
-                  router.push(`/adsclub`);
-                  setOpen(false);
-                }}
-              >
-                <TargetIcon weight="duotone" />
-                <h2>ارسال هدفمند آگهی (Ads Club)</h2>
-              </Button>
+              {filteredMenuItems.map((item) => (
+                <Button
+                  variant="ghost"
+                  className="h-10 w-auto gap-3 text-base font-bold text-white [&_svg:not([class*='size-'])]:size-6.5"
+                  onClick={() => {
+                    router.push(item.href);
+                    setOpen(false);
+                  }}
+                >
+                  {item.icon}
+                  <h2>{item.title}</h2>
+                </Button>
+              ))}
             </div>
           </div>
 

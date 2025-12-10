@@ -11,6 +11,7 @@ import { ItemDescription } from "./ItemDescription";
 import { ItemBreadcrumb } from "./ItemBreadcrumb";
 import { ItemSuggestion } from "./ItemSuggestion";
 import { AdsClubBanner } from "@/components/banners/AdsClubBanner";
+import { BannerTelegram } from "@/components/global/BannerTelegram";
 
 interface ItemDetailsPageProps {
   pageData: Page;
@@ -74,6 +75,8 @@ export function ItemDetailsPage({ pageData }: ItemDetailsPageProps) {
           basedOn="city"
         />
       </Suspense>
+
+      <BannerTelegram />
     </WrapPageSimple>
   );
 }

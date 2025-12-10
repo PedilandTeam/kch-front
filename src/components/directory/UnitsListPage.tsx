@@ -9,6 +9,7 @@ import { ItemCardsList } from "./item";
 import { UnitSeoText } from "./UnitSeoText";
 import { AdsClubBanner } from "../banners/AdsClubBanner";
 import { usePagesList } from "@/hooks/swr/usePagesList";
+import { BannerTelegram } from "../global/BannerTelegram";
 
 interface UnitsListPageProps {
   unit: UnitType;
@@ -33,7 +34,6 @@ export function UnitsListPage({
     countryCode: country.code,
     unitId: unit.id,
   });
-  
 
   return (
     <WrapPageImage className="_unit-list-page h-full" country={country}>
@@ -63,6 +63,8 @@ export function UnitsListPage({
       )}
 
       <AdsClubBanner />
+
+      <BannerTelegram />
 
       <UnitSeoText currentCountry={country} unit={unit} />
     </WrapPageImage>

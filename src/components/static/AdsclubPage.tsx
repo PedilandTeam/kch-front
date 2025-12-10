@@ -1,5 +1,6 @@
 "use client";
 
+import { BannerTelegram } from "../global/BannerTelegram";
 import { WrapPageStatic } from "../layout/WrapPageStatic";
 import { AdsclubContent } from "./AdsclubContent";
 import { AdsclubPageHead } from "./AdsclubPageHead";

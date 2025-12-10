@@ -15,6 +15,15 @@ import nlImage from "@/assets/images/bd/hp-netherland.webp";
 import seImage from "@/assets/images/bd/hp-sweden.webp";
 import trImage from "@/assets/images/bd/hp-turkey.webp";
 import { WrapContainer } from "../layout/WrapContainer";
+import {
+  Button,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui";
+import { MapTrifoldIcon } from "@phosphor-icons/react/dist/ssr";
 
 const FEATURED_COUNTRIES = [
   {
@@ -79,38 +88,46 @@ export const HomeCountries = () => {
 
   return (
     <div className="_home-countries">
-      <WrapContainer className="space-y-4">
-        <h2 className="text-primary text-center font-semibold">
+      <WrapContainer className="space-y-6">
+        <h2 className="text-primary flex items-center justify-center gap-2 text-center font-semibold">
+          <MapTrifoldIcon weight="duotone" size={22} />
           کشور محل اقامت خودتون رو انتخاب کنید:
         </h2>
 
-        <div className="wrap grid grid-cols-1 gap-3">
-          {mergedCountries.map((country) => (
-            <Link key={country.code} href={country.href} className="relative">
-              <div>
-                <Image
-                  src={country.image}
-                  alt={country.alt}
-                  width={400}
-                  height={250}
-                  className="rounded-xl"
-                  priority
-                />
-              </div>
+        <Carousel
+          opts={{
+            direction: "rtl",
+            loop: true,
+            align: "start",
+          }}
+        >
+          <CarouselContent>
+            {mergedCountries.map((country) => (
+              <CarouselItem className="basis-1/3" key={country.code}>
+                <Link href={country.href}>
+                  <div
+                    className="aspect-square h-auto w-full rounded-xl bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url(${country.image.src})` }}
+                  >
+                    <div className="flex h-full flex-col items-center justify-center gap-1.5 rounded-xl bg-black/20 text-white">
+                      <h3 className="text-lg leading-none font-medium drop-shadow-lg drop-shadow-black">
+                        {country.name}
+                      </h3>
+                      {/* {countries && (
+                        <span className="leading-none font-normal">
+                          {e2p(country.pageCount)}
+                        </span>
+                      )} */}
+                    </div>
+                  </div>
+                </Link>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
 
-              <div className="absolute bottom-0 w-full cursor-pointer rounded-xl bg-linear-to-t from-black px-5 py-10 text-white transition-all duration-500">
-                <h3 className="text-center text-xl font-semibold">
-                  {country.name}
-                  {countries && (
-                    <span className="mr-1 font-normal">
-                      ({e2p(country.pageCount)})
-                    </span>
-                  )}
-                </h3>
-              </div>
-            </Link>
-          ))}
-        </div>
+          <CarouselPrevious className="text-primary bottom-0 -left-4 -translate-y-1/2 border-0 bg-white p-0! [&_svg]:size-6" />
+          <CarouselNext className="text-primary -right-4 bottom-0 -translate-y-1/2 border-0 bg-white p-0! [&_svg]:size-6" />
+        </Carousel>
 
         <p className="text-muted-foreground text-center text-sm">
           جهت مشاهده لیست تمام کشورها از منو استفاده کنید.

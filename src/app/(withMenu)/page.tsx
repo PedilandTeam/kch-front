@@ -1,3 +1,4 @@
+import { BannerTelegram } from "@/components/global/BannerTelegram";
 import { HomeCountries } from "@/components/home/HomeCountries";
 import { HomeSeo } from "@/components/home/HomeSeo";
 import { HomeSlider } from "@/components/home/HomeSlider";
@@ -9,10 +10,12 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <WrapPageSimple className="_home-page">
+    <WrapPageSimple className="_home-page gap-6">
       <HomeSlider />
 
       <HomeCountries />
+
+      <BannerTelegram className="mt-4" />
 
       <HomeSeo />
     </WrapPageSimple>

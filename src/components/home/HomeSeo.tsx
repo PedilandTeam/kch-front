@@ -3,10 +3,9 @@ import { WrapContainer } from "../layout/WrapContainer";
 
 export const HomeSeo = () => {
   return (
-    // <div className="_seo-text [&>p]:text-muted-foreground [&_strong]:font-medium [&>p]:mb-1 [&>p]:text-sm">
-    <div className="_SEO-text [&>p]:text-muted-foreground [&_strong]:font-medium [&>p]:mb-1 [&>p]:text-sm">
+    <div className="_SEO-text mt-6">
       <WrapContainer>
-        <h1 className="text-primary mb-2 text-center font-semibold">
+        <h1 className="mb-2 text-center font-semibold">
           کـوچـا، پلتفرم رشد و تبلیغات آنلاین کسب و کارهای ایرانی فعال در سراسر
           دنیاست!
         </h1>

@@ -1,20 +1,23 @@
 "use client";
 
+import { useCountries } from "@/hooks/swr/useCountries";
 import { cn } from "@/lib/utils";
 import type { Country } from "@/schemas";
+import { useCountryCodeStore } from "@/store/UseCountryCodeStore";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useCountryCodeStore } from "@/store/UseCountryCodeStore";
-import { useCountries } from "@/hooks/swr/useCountries";
 
-import LogoImg from "@/assets/images/logo.png";
+import LogoImg from "@/assets/images/logo.svg";
+import {
+  BriefcaseIcon,
+  NewspaperClippingIcon,
+} from "@phosphor-icons/react/dist/ssr";
 import { MenuDrawer } from "./MenuDrawer";
 import { SelectCountry } from "./SelectCountry";
 
 export const AppMenu = () => {
-  const params = useParams();
   const pathname = usePathname();
   const [countries, setCountries] = useState<Country[] | undefined>();
 
@@ -61,6 +64,10 @@ export const AppMenu = () => {
       <div className="_main-mobileMenu flex items-center justify-between rounded-full border-gray-200 bg-white/90 px-4 py-2 backdrop-blur">
         <MenuDrawer countryCode={countryCode} countries={countries} />
 
+        <Link className="_business-center" href="/business-center">
+          <BriefcaseIcon size={30} weight="duotone" className="text-primary" />
+        </Link>
+
         <div className="_logo">
           <Link href={"/"}>
             <Image
@@ -73,12 +80,17 @@ export const AppMenu = () => {
           </Link>
         </div>
 
+        <Link className="_adsclub" href="/adsclub">
+          <NewspaperClippingIcon
+            size={30}
+            weight="duotone"
+            className="text-primary"
+          />
+        </Link>
+
         <SelectCountry countryCode={countryCode} countries={countries} />
 
-        {/* <div className="_community">
-          <ChatsIcon size={32} weight="duotone" />
-        </div>
-
+        {/*
         <Link className="_account" href="/account">
           <Avatar className="h-[32px] w-[32px]">
             <AvatarImage
