@@ -31,7 +31,7 @@ export const WrapPageStatic = ({ title, children }: WrapPageStaticProps) => {
           <MoveLeftIcon />
         </Button>
       </div>
-      <WrapContainer className="flex flex-1 space-y-4">
+      <WrapContainer className="flex flex-1 flex-col space-y-4">
         {children}
       </WrapContainer>
 
