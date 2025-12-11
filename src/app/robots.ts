@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/images/"],
+      disallow: ["/images/", "_next/", "/panel/", "/auth/"],
     },
     sitemap: "https://koochaa.com/sitemap.xml",
   };
