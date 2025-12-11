@@ -1,15 +1,15 @@
 "use client";
-
+import { usePagesList } from "@/hooks/swr/usePagesList";
 import type { Country } from "@/schemas";
 import type { UnitType } from "@/types/unit";
-import { WrapPageImage } from "../layout/WrapPageImage";
-import { WrapContainer } from "../layout/WrapContainer";
-import { UnitBreadcrumb } from "./UnitBreadcrumb";
-import { ItemCardsList } from "./item";
-import { UnitSeoText } from "./UnitSeoText";
-import { AdsClubBanner } from "../banners/AdsClubBanner";
-import { usePagesList } from "@/hooks/swr/usePagesList";
-import { BannerTelegram } from "../global/BannerTelegram";
+
+import { AdsClubBanner } from "@/components/banners/AdsClubBanner";
+import { TelegramBanner } from "@/components/banners/TelegramBanner";
+import { ItemCardsList } from "@/components/directory/item";
+import { UnitBreadcrumb } from "@/components/directory/UnitBreadcrumb";
+import { UnitSeoText } from "@/components/directory/UnitSeoText";
+import { WrapContainer } from "@/components/layout/WrapContainer";
+import { WrapPageImage } from "@/components/layout/WrapPageImage";
 
 interface UnitsListPageProps {
   unit: UnitType;
@@ -64,7 +64,7 @@ export function UnitsListPage({
 
       <AdsClubBanner />
 
-      <BannerTelegram />
+      <TelegramBanner />
 
       <UnitSeoText currentCountry={country} unit={unit} />
     </WrapPageImage>

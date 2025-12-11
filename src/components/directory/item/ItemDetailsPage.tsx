@@ -1,17 +1,17 @@
 "use client";
 
+import { useCountryCodeStore } from "@/store/UseCountryCodeStore";
 import type { Page } from "@/types/page";
 import { Suspense, useEffect } from "react";
 
-import { useCountryCodeStore } from "@/store/UseCountryCodeStore";
-import { WrapPageSimple } from "@/components/layout/WrapPageSimple";
-import { ItemDetailsCountrySync } from "./ItemDetailsCountrySync";
-import { ItemInfo } from "./ItemInfo";
-import { ItemDescription } from "./ItemDescription";
-import { ItemBreadcrumb } from "./ItemBreadcrumb";
-import { ItemSuggestion } from "./ItemSuggestion";
 import { AdsClubBanner } from "@/components/banners/AdsClubBanner";
-import { BannerTelegram } from "@/components/global/BannerTelegram";
+import { TelegramBanner } from "@/components/banners/TelegramBanner";
+import { ItemBreadcrumb } from "@/components/directory/item/ItemBreadcrumb";
+import { ItemDescription } from "@/components/directory/item/ItemDescription";
+import { ItemDetailsCountrySync } from "@/components/directory/item/ItemDetailsCountrySync";
+import { ItemInfo } from "@/components/directory/item/ItemInfo";
+import { ItemSuggestion } from "@/components/directory/item/ItemSuggestion";
+import { WrapPageSimple } from "@/components/layout/WrapPageSimple";
 
 interface ItemDetailsPageProps {
   pageData: Page;
@@ -76,7 +76,7 @@ export function ItemDetailsPage({ pageData }: ItemDetailsPageProps) {
         />
       </Suspense>
 
-      <BannerTelegram />
+      <TelegramBanner />
     </WrapPageSimple>
   );
 }

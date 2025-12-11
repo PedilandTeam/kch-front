@@ -26,6 +26,9 @@ export function useCountries(filters?: {
         params,
       });
     },
+    {
+      shouldRetryOnError: false,
+    },
   );
 
   return {

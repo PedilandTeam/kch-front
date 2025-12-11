@@ -1,9 +1,8 @@
 "use client";
 import { COUNTRY } from "@/text/location";
-import Image from "next/image";
+
 import Link from "next/link";
 import { useCountries } from "@/hooks/swr/useCountries";
-import { e2p } from "@/utils/e2p";
 
 import atImage from "@/assets/images/bd/hp-austria.webp";
 import caImage from "@/assets/images/bd/hp-canada.webp";
@@ -73,8 +72,10 @@ const FEATURED_COUNTRIES = [
   },
 ];
 
+const COUNTRIES_FILTERS = { status: 1 };
+
 export const HomeCountries = () => {
-  const { countries } = useCountries({ status: 1 });
+  const { countries } = useCountries(COUNTRIES_FILTERS);
   const mergedCountries = FEATURED_COUNTRIES.map((item) => {
     const apiCountry = countries?.find((c) => c.code === item.code);
 
@@ -89,9 +90,9 @@ export const HomeCountries = () => {
   return (
     <div className="_home-countries">
       <WrapContainer className="space-y-6">
-        <h2 className="text-primary flex items-center justify-center gap-2 text-center font-semibold">
-          <MapTrifoldIcon weight="duotone" size={22} />
-          کشور محل اقامت خودتون رو انتخاب کنید:
+        <h2 className="flex items-center justify-center gap-1.5 text-center font-semibold">
+          <MapTrifoldIcon weight="duotone" size={24} />
+          کشور محل اقامت خود را انتخاب کنید:
         </h2>
 
         <Carousel
@@ -129,9 +130,9 @@ export const HomeCountries = () => {
           <CarouselNext className="text-primary -right-4 bottom-0 -translate-y-1/2 border-0 bg-white p-0! [&_svg]:size-6" />
         </Carousel>
 
-        <p className="text-muted-foreground text-center text-sm">
-          جهت مشاهده لیست تمام کشورها از منو استفاده کنید.
-        </p>
+        <Button className="w-full" asChild>
+          <Link href="/countries">لیست تمام کشورها</Link>
+        </Button>
       </WrapContainer>
     </div>
   );

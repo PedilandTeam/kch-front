@@ -1,9 +1,9 @@
+import { AdsClubBanner } from "@/components/banners/AdsClubBanner";
+import { TelegramBanner } from "@/components/banners/TelegramBanner";
+import { UnitsTopCat } from "@/components/directory/UnitsTopCat.carousel";
+import { WrapPageSimple } from "@/components/layout/WrapPageSimple";
 import type { Country } from "@/schemas/country";
-import { WrapPageSimple } from "../layout/WrapPageSimple";
 import { CountryPageHead } from "./CountryPageHead";
-import { UnitsTopCat } from "../directory/UnitsTopCat.carousel";
-import { AdsClubBanner } from "../banners/AdsClubBanner";
-import { BannerTelegram } from "../global/BannerTelegram";
 
 type CountryPageProps = {
   currentCountry: Country;
@@ -18,7 +18,7 @@ export const CountryPage = async ({ currentCountry }: CountryPageProps) => {
 
       <UnitsTopCat currentCountry={currentCountry} />
 
-      <BannerTelegram />
+      <TelegramBanner />
     </WrapPageSimple>
   );
 };

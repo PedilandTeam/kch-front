@@ -87,7 +87,9 @@ export default async function fetchWrapper<T>(
     );
 
     // DO NOT throw → graceful null fallback
-    console.warn("⚠ fetchWrapper error:", error);
+    if (!error.isNotFound) {
+      console.warn("⚠ fetchWrapper error:", error);
+    }
     return null;
   } catch (err) {
     // Network failure

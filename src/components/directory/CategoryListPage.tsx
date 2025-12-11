@@ -1,19 +1,15 @@
 "use client";
 
-import useSWR from "swr";
-import axios from "axios";
+import { AdsClubBanner } from "@/components/banners/AdsClubBanner";
+import { TelegramBanner } from "@/components/banners/TelegramBanner";
+import { CategoryBreadcrumb } from "@/components/directory/CategoryBreadcrumb";
+import { ItemCardsList } from "@/components/directory/item";
+import { WrapContainer } from "@/components/layout/WrapContainer";
+import { WrapPageImage } from "@/components/layout/WrapPageImage";
+import { usePagesList } from "@/hooks/swr/usePagesList";
 import type { Country } from "@/schemas";
 import type { Category } from "@/types/category";
-import type { GetPagesResponse } from "@/types/page";
 import type { UnitType } from "@/types/unit";
-import { CategoryBreadcrumb } from "./CategoryBreadcrumb";
-import { WrapPageImage } from "../layout/WrapPageImage";
-import { WrapContainer } from "../layout/WrapContainer";
-import { ItemCardsList } from "./item";
-import { fetcher } from "@/hooks/swr/fetcher";
-import { usePagesList } from "@/hooks/swr/usePagesList";
-import { AdsClubBanner } from "../banners/AdsClubBanner";
-import { BannerTelegram } from "../global/BannerTelegram";
 
 interface CategoryListPageProps {
   category: Category;
@@ -79,7 +75,7 @@ export function CategoryListPage({
 
       <AdsClubBanner />
 
-      <BannerTelegram />
+      <TelegramBanner />
 
       {/* SEO Text */}
       <WrapContainer>

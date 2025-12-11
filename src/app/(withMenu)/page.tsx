@@ -1,4 +1,4 @@
-import { BannerTelegram } from "@/components/global/BannerTelegram";
+import { TelegramBanner } from "@/components/banners/TelegramBanner";
 import { HomeCountries } from "@/components/home/HomeCountries";
 import { HomeSeo } from "@/components/home/HomeSeo";
 import { HomeSlider } from "@/components/home/HomeSlider";
@@ -15,7 +15,7 @@ export default function Page() {
 
       <HomeCountries />
 
-      <BannerTelegram className="mt-4" />
+      <TelegramBanner className="mt-4" />
 
       <HomeSeo />
     </WrapPageSimple>

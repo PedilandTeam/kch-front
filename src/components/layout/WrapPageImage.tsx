@@ -27,8 +27,8 @@ export const WrapPageImage = ({
     const img = new Image();
     img.src = mainUrl;
 
-    img.onload = () => setImageUrl(mainUrl); // اگه پیدا شد
-    img.onerror = () => setImageUrl(fallbackUrl); // اگه پیدا نشد
+    img.onload = () => setImageUrl(mainUrl);
+    img.onerror = () => setImageUrl(fallbackUrl);
   }, [country.code]);
 
   return (

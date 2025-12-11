@@ -17,11 +17,13 @@ import {
 import { MenuDrawer } from "./MenuDrawer";
 import { SelectCountry } from "./SelectCountry";
 
+const COUNTRIES_FILTERS = { status: 1 };
+
 export const AppMenu = () => {
   const pathname = usePathname();
   const [countries, setCountries] = useState<Country[] | undefined>();
 
-  const { countries: countriesData } = useCountries({ status: 1 });
+  const { countries: countriesData } = useCountries(COUNTRIES_FILTERS);
 
   const countryCode = useCountryCodeStore((state) => state.countryCode);
   const setCountryCode = useCountryCodeStore((state) => state.setCountryCode);

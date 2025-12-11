@@ -93,6 +93,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: lastModifiedGenerator(),
     },
     {
+      url: `${baseUrl}/countries`,
+      lastModified: lastModifiedGenerator(),
+    },
+    {
       url: `${baseUrl}/business-center`,
       lastModified: lastModifiedGenerator(),
     },

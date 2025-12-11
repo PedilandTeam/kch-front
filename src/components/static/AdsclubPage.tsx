@@ -1,15 +1,14 @@
 "use client";
 
-import { BannerTelegram } from "../global/BannerTelegram";
-import { WrapPageStatic } from "../layout/WrapPageStatic";
-import { AdsclubContent } from "./AdsclubContent";
-import { AdsclubPageHead } from "./AdsclubPageHead";
+import { WrapPageStatic } from "@/components/layout/WrapPageStatic";
+import { AdsclubContent } from "@/components/static/AdsclubContent";
+import { AdsclubPageHead } from "@/components/static/AdsclubPageHead";
 
-interface AboutPageProps {
+interface AdsclubPageProps {
   title: string;
 }
 
-export const AdsclubPage = ({ title }: AboutPageProps) => {
+export const AdsclubPage = ({ title }: AdsclubPageProps) => {
   return (
     <WrapPageStatic title={title}>
       <AdsclubPageHead />

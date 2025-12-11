@@ -1,10 +1,11 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
+import { TelegramBanner } from "@/components/banners/TelegramBanner";
+import { WrapContainer } from "@/components/layout/WrapContainer";
 import { Button } from "@/components/ui";
 import { MoveLeftIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { WrapContainer } from "./WrapContainer";
-import { BannerTelegram } from "../global/BannerTelegram";
 
 interface WrapPageStaticProps {
   title?: string | null;
@@ -17,7 +18,7 @@ export const WrapPageStatic = ({ title, children }: WrapPageStaticProps) => {
   return (
     <main
       data-scroll-container
-      className="_page-static flex h-full flex-col pb-8"
+      className="_page-static flex flex-1 flex-col pb-8"
     >
       <div className="sticky top-0 z-10 flex h-14 items-center justify-between bg-white px-4">
         <h4 className="text-primary font-semibold">{title || ""}</h4>
@@ -30,9 +31,11 @@ export const WrapPageStatic = ({ title, children }: WrapPageStaticProps) => {
           <MoveLeftIcon />
         </Button>
       </div>
-      <WrapContainer className="space-y-4">{children}</WrapContainer>
+      <WrapContainer className="flex flex-1 space-y-4">
+        {children}
+      </WrapContainer>
 
-      <BannerTelegram className="mt-6" />
+      <TelegramBanner className="mt-6" />
     </main>
   );
 };
