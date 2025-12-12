@@ -25,7 +25,7 @@ export const getRouteData = cache(
       const pageRes = await fetchWrapper<GetPagesResponse>("pages", {
         filters: { page: 1, limit: 1, slug: countryOrSlug },
         tags: ["page"],
-        revalidate: REVALIDATE,
+        revalidate: 10,
       });
 
       const item = pageRes?.items?.[0];
