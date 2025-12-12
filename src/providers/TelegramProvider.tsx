@@ -3,7 +3,13 @@
 export const ssr = false;
 export const dynamic = "force-dynamic";
 
-import React, { createContext, useContext, useEffect, useMemo, type ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  type ReactNode,
+} from "react";
 import {
   init,
   useLaunchParams,
@@ -18,7 +24,9 @@ type TelegramContextValue = {
   error?: string;
 };
 
-const TelegramContext = createContext<TelegramContextValue | undefined>(undefined);
+const TelegramContext = createContext<TelegramContextValue | undefined>(
+  undefined,
+);
 
 export function TelegramProvider({ children }: { children: ReactNode }) {
   // init only in client
@@ -26,7 +34,9 @@ export function TelegramProvider({ children }: { children: ReactNode }) {
     try {
       init();
     } catch (err) {
-      console.error("Telegram init failed:", err);
+      if (process.env.NODE_ENV === "development") {
+        console.error("Telegram init failed:", err);
+      }
     }
   }, []);
 
@@ -72,6 +82,7 @@ export function TelegramProvider({ children }: { children: ReactNode }) {
 
 export function useTelegram() {
   const ctx = useContext(TelegramContext);
-  if (!ctx) throw new Error("useTelegram must be used inside <TelegramProvider/>");
+  if (!ctx)
+    throw new Error("useTelegram must be used inside <TelegramProvider/>");
   return ctx;
 }

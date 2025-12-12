@@ -3,6 +3,7 @@
 import { GENERAL } from "@/text";
 import type { Page } from "@/types/page";
 import isPageNew from "@/utils/isPageNew";
+import { useEffect, useState } from "react";
 
 import { CakeIcon, StarIcon } from "@phosphor-icons/react/dist/ssr";
 import { ItemBadge } from "../badges";
@@ -17,9 +18,14 @@ interface ItemInfoProps {
 }
 
 export const ItemInfo = ({ pageData }: ItemInfoProps) => {
+  const [isNew, setIsNew] = useState(false);
+
+  useEffect(() => {
+    setIsNew(isPageNew(pageData.createdDate));
+  }, [pageData.createdDate]);
+
   const socials = { ...pageData.socials };
   delete socials.website;
-  const isNew = isPageNew(pageData.createdDate);
 
   return (
     <div className="_item-info relative bg-[#fbf7ed] bg-[url('/images/pattern-03.png')] bg-center pt-8">

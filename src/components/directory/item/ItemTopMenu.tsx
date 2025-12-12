@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { useLinkHandler } from "@/hooks/useLinkHandler";
 import type { Page } from "@/types/page";
 
@@ -11,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui";
 import { CirclesFourIcon } from "@phosphor-icons/react";
-import { BadgeCheckIcon, FlagTriangleRight, Share2Icon } from "lucide-react";
+import { BadgeCheckIcon, Share2Icon } from "lucide-react";
 
 interface ItemTopMenuProps {
   pageData: Page;
@@ -19,6 +21,11 @@ interface ItemTopMenuProps {
 
 export const ItemTopMenu = ({ pageData }: ItemTopMenuProps) => {
   const { shareHandler } = useLinkHandler({ pageData });
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleOwnershipClick = () => {
     const telegramUsername = "koochaa_support";
@@ -33,15 +40,22 @@ ${pageUrl}`;
     window.open(telegramUrl, "_blank", "noopener,noreferrer");
   };
 
+  const TriggerButton = (
+    <button type="button" className="h-auto rounded-none p-0!">
+      <CirclesFourIcon
+        weight="duotone"
+        className="text-secondary size-6 cursor-pointer transition duration-300 hover:text-black"
+      />
+    </button>
+  );
+
+  if (!isMounted) {
+    return TriggerButton;
+  }
+
   return (
     <DropdownMenu dir="rtl">
-      <DropdownMenuTrigger asChild>
-        <CirclesFourIcon
-          size={26}
-          weight="duotone"
-          className="text-secondary cursor-pointer transition duration-300 hover:text-black"
-        />
-      </DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>{TriggerButton}</DropdownMenuTrigger>
       <DropdownMenuContent className="w-40" align="end">
         <DropdownMenuItem onClick={() => shareHandler()}>
           <Share2Icon />
