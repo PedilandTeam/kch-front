@@ -20,19 +20,13 @@ interface ItemContactsProps {
 
 export const ItemContacts = ({ pageData }: ItemContactsProps) => {
   const { linkHandler } = useLinkHandler({ pageData });
-  const number = pageData.contact?.telephone
-    ? `00${pageData.country.areaCode ? pageData.country.areaCode : ""}${pageData
-        .contact?.telephone!}`
-    : pageData.contact?.phone &&
-      `00${pageData.country.areaCode ? pageData.country.areaCode : ""}${pageData
-        .contact?.phone!}`;
 
   const contactItems = [
     {
       key: "phone",
       label: "همراه",
       icon: DeviceMobileIcon,
-      active: !pageData?.contact?.telephone && !!pageData?.contact?.phone,
+      active: !!pageData?.contact?.phone,
       color: "group-hover:text-foreground",
     },
     {
