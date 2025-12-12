@@ -10,6 +10,7 @@ export const AdsClubBanner = () => {
           src="/images/advertise/bnr-adsclub-01.webp"
           alt="Ads Club Avdertise Banner"
           className="rounded-lg"
+          priority
           width={400}
           height={209}
         />

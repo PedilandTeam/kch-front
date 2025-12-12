@@ -66,23 +66,21 @@ export const AppMenu = () => {
       <div className="_main-mobileMenu flex items-center justify-between rounded-full border-gray-200 bg-white/90 px-4 py-2 backdrop-blur">
         <MenuDrawer countryCode={countryCode} countries={countries} />
 
-        <Link className="_business-center" href="/business-center">
+        <Link
+          className="_business-center"
+          href="/business-center"
+          aria-label="بیزینس سنتر"
+        >
           <BriefcaseIcon size={30} weight="duotone" className="text-primary" />
         </Link>
 
         <div className="_logo">
           <Link href={"/"}>
-            <Image
-              src={LogoImg}
-              alt="Koochaa Logo"
-              width={44}
-              height={44}
-              priority
-            />
+            <Image src={LogoImg} alt="Koochaa Logo" width={44} height={43} />
           </Link>
         </div>
 
-        <Link className="_adsclub" href="/adsclub">
+        <Link className="_adsclub" href="/adsclub" aria-label="AdsClub">
           <NewspaperClippingIcon
             size={30}
             weight="duotone"

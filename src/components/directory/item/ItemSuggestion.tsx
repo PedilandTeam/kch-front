@@ -59,9 +59,9 @@ export const ItemSuggestion = ({
 
   return (
     <WrapContainer>
-      <div className="flex flex-col rounded-xl bg-gradient-to-b from-blue-900 to-blue-700 pb-5">
+      <div className="flex flex-col rounded-xl bg-linear-to-b from-blue-900 to-blue-700 pb-5">
         <div className="flex items-center justify-between rounded-t-xl px-4 py-4">
-          <h3 className="font-semibold text-white">
+          <div className="font-semibold text-white">
             {basedOn === "category"
               ? category?.seoTitle
                 ? `سایر ${category.seoTitle} در`
@@ -70,7 +70,7 @@ export const ItemSuggestion = ({
             {basedOn === "category"
               ? city?.name
               : city?.name || city?.englishName}
-          </h3>
+          </div>
         </div>
 
         <Carousel

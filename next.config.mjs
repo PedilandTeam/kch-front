@@ -2,6 +2,7 @@ import bundleAnalyzer from "@next/bundle-analyzer";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  productionBrowserSourceMaps: true,
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
