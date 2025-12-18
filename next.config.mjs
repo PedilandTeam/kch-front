@@ -27,6 +27,15 @@ const nextConfig = {
     ],
     qualities: [75, 100],
   },
+  async redirects() {
+    return [
+      {
+        source: "/:country/businesses/lawyers",
+        destination: "/:country/lawyers",
+        permanent: true, // 301
+      },
+    ];
+  },
 };
 
 const withBundleAnalyzer = bundleAnalyzer({

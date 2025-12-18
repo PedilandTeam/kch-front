@@ -15,22 +15,14 @@ export default function NotFound() {
   }, []);
 
   return (
-    <div className="_not-found justify-cente flex h-full items-center bg-blue-50">
+    <div className="_not-found flex h-full flex-1 items-center justify-center bg-blue-50/50">
       <div className="wrap">
         <div className="flex justify-center">
-          <Image
-            src={img}
-            alt="404 Error Iamge"
-            width={160}
-            height={124}
-          />
+          <Image src={img} alt="404 Error Iamge" width={160} height={124} />
         </div>
-        <h1 className="text-secondary mt-4 text-center text-lg font-semibold">
+        <h1 className="text-secondary mt-4 text-center text-lg font-medium">
           متاسفانه چنین صفحه‌ای وجود نداره!
         </h1>
-        <p className="px-8 text-center font-light text-gray-600">
-          با انتخاب کشور مورد نظرت می‌تونی به جستجو ادامه بدی.
-        </p>
       </div>
     </div>
   );

@@ -99,12 +99,12 @@ export const HomeCountries = () => {
           opts={{
             direction: "rtl",
             loop: true,
-            align: "start",
+            align: "center",
           }}
         >
-          <CarouselContent>
+          <CarouselContent className="-ml-3">
             {mergedCountries.map((country) => (
-              <CarouselItem className="basis-1/3" key={country.code}>
+              <CarouselItem className="basis-1/3 pl-3" key={country.code}>
                 <Link href={country.href}>
                   <div
                     className="aspect-square h-auto w-full rounded-xl bg-cover bg-center bg-no-repeat"
