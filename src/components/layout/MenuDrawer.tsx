@@ -3,7 +3,6 @@
 import type { Country } from "@/schemas";
 import { FOOTER, GENERAL, MENU } from "@/text";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
@@ -28,6 +27,7 @@ import {
   StethoscopeIcon,
   StorefrontIcon,
 } from "@phosphor-icons/react/dist/ssr";
+import Link from "next/link";
 
 interface MenuDrawerProps {
   countryCode: string;
@@ -61,19 +61,19 @@ export const MenuDrawer = ({ countryCode, countries }: MenuDrawerProps) => {
     {
       title: `لیست پزشکان ایرانی ${currentCountry?.name}`,
       icon: <StethoscopeIcon weight="duotone" className="text-secondary" />,
-      href: "/doctors",
+      href: `/${countryCode}/doctors`,
       country: true,
     },
     {
       title: `لیست وکلای ایرانی ${currentCountry?.name}`,
       icon: <ScalesIcon weight="duotone" className="text-secondary" />,
-      href: "/lawyers",
+      href: `/${countryCode}/lawyers`,
       country: true,
     },
     {
       title: `لیست مشاغل ایرانی ${currentCountry?.name}`,
       icon: <StorefrontIcon weight="duotone" className="text-secondary" />,
-      href: "/businesses",
+      href: `/${countryCode}/businesses`,
       country: true,
     },
   ];
