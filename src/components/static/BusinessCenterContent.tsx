@@ -78,7 +78,7 @@ export const BusinessCenterContent = () => {
                 بگیرید.
               </p>
               <Button className="mt-3 w-full" asChild>
-                <Link href={"https:/t.me/koochaa_support"} target="_blank">
+                <Link href={"https://t.me/koochaa_support"} target="_blank">
                   درخـواسـت لـیـسـت قـیـمـت
                 </Link>
               </Button>
@@ -111,7 +111,7 @@ export const BusinessCenterContent = () => {
                 برای استعلام قیمت با ما تماس بگیرید.
               </p>
               <Button className="mt-3 w-full" asChild>
-                <Link href={"https:/t.me/koochaa_support"} target="_blank">
+                <Link href={"https://t.me/koochaa_support"} target="_blank">
                   درخـواسـت اسـتـعـلام قـیـمـت
                 </Link>
               </Button>
@@ -147,7 +147,7 @@ export const BusinessCenterContent = () => {
                 بگیرید.
               </p>
               <Button className="mt-3 w-full" asChild>
-                <Link href={"https:/t.me/koochaa_support"} target="_blank">
+                <Link href={"https://t.me/koochaa_support"} target="_blank">
                   درخـواسـت ثـبـت کـسـب و کـار
                 </Link>
               </Button>
@@ -185,7 +185,7 @@ export const BusinessCenterContent = () => {
                 تماس بگیرید.
               </p>
               <Button className="mt-3 w-full" asChild>
-                <Link href={"https:/t.me/koochaa_support"} target="_blank">
+                <Link href={"https://t.me/koochaa_support"} target="_blank">
                   درخـواسـت مـشـاوره
                 </Link>
               </Button>
@@ -229,7 +229,7 @@ export const BusinessCenterContent = () => {
                 رایگان از ما دریافت کنید.
               </p>
               <Button className="mt-3 w-full" asChild>
-                <Link href={"https:/t.me/koochaa_support"} target="_blank">
+                <Link href={"https://t.me/koochaa_support"} target="_blank">
                   درخـواسـت فـعـال‌سـازی اشـتـراک رایـگـان
                 </Link>
               </Button>
@@ -281,7 +281,7 @@ export const BusinessCenterContent = () => {
                 تصمیمی با ما مشورت کنید.
               </p>
               <Button className="mt-3 w-full" asChild>
-                <Link href={"https:/t.me/koochaa_support"} target="_blank">
+                <Link href={"https://t.me/koochaa_support"} target="_blank">
                   درخـواسـت مـشـاوره
                 </Link>
               </Button>
@@ -324,7 +324,7 @@ export const BusinessCenterContent = () => {
                 کامل بررسی کرده و راهکار مناسب ارائه کنیم.
               </p>
               <Button className="mt-3 w-full" asChild>
-                <Link href={"https:/t.me/koochaa_support"} target="_blank">
+                <Link href={"https://t.me/koochaa_support"} target="_blank">
                   درخـواست بـررسی وب‌سـایـت
                 </Link>
               </Button>
@@ -370,7 +370,7 @@ export const BusinessCenterContent = () => {
                 وب‌سایت‌تان همیشه پایدار، امن و آماده خدمت‌رسانی به مشتریان است.
               </p>
               <Button className="mt-3 w-full" asChild>
-                <Link href={"https:/t.me/koochaa_support"} target="_blank">
+                <Link href={"https://t.me/koochaa_support"} target="_blank">
                   درخـواسـت مـشـاوره
                 </Link>
               </Button>
