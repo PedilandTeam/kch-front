@@ -3,25 +3,32 @@
 export const ssr = false;
 export const dynamic = "force-dynamic";
 
-import React, {
+import {
   createContext,
   useContext,
   useEffect,
   useMemo,
+  useState,
   type ReactNode,
 } from "react";
 import {
   init,
-  useLaunchParams,
-  useRawInitData,
+  retrieveLaunchParams,
+  retrieveRawInitData,
+  type RetrieveLPResult,
 } from "@telegram-apps/sdk-react";
+import { parseInitData } from "@/lib/parseTelegramInitData";
 
 type TelegramContextValue = {
   initialized: boolean;
   initDataRaw?: string;
   initData?: Record<string, unknown>;
-  launchParams?: any;
+  launchParams?: RetrieveLPResult;
   error?: string;
+};
+
+const defaultValue: TelegramContextValue = {
+  initialized: false,
 };
 
 const TelegramContext = createContext<TelegramContextValue | undefined>(
@@ -29,49 +36,37 @@ const TelegramContext = createContext<TelegramContextValue | undefined>(
 );
 
 export function TelegramProvider({ children }: { children: ReactNode }) {
-  // init only in client
+  const [telegramState, setTelegramState] =
+    useState<TelegramContextValue>(defaultValue);
+
   useEffect(() => {
+    let cleanup: VoidFunction | undefined;
+
     try {
-      init();
-    } catch (err) {
-      if (process.env.NODE_ENV === "development") {
-        console.error("Telegram init failed:", err);
-      }
+      const launchParams = retrieveLaunchParams();
+      const rawInit = retrieveRawInitData();
+
+      cleanup = init({ launchParams });
+
+      setTelegramState({
+        initialized: true,
+        initDataRaw: rawInit,
+        initData: rawInit ? parseInitData(rawInit) : undefined,
+        launchParams,
+      });
+    } catch (error) {
+      setTelegramState({
+        initialized: false,
+        error: error instanceof Error ? error.message : "telegram unavailable",
+      });
     }
+
+    return () => {
+      cleanup?.();
+    };
   }, []);
 
-  let rawInit: string | undefined = undefined;
-  let launchParams: any = undefined;
-
-  // Hooks inside try/catch – required for Telegram SDK
-  try {
-    rawInit = useRawInitData();
-    launchParams = useLaunchParams();
-  } catch (error) {
-    // During SSR these will fail (window missing)
-    // But in client they will work
-    rawInit = undefined;
-    launchParams = undefined;
-  }
-
-  const parsedInit = useMemo(() => {
-    if (!rawInit) return undefined;
-    try {
-      return JSON.parse(rawInit);
-    } catch {
-      return undefined;
-    }
-  }, [rawInit]);
-
-  const value = useMemo(() => {
-    return {
-      initialized: Boolean(rawInit || launchParams),
-      initDataRaw: rawInit,
-      initData: parsedInit,
-      launchParams,
-      error: rawInit && !parsedInit ? "invalid json" : undefined,
-    };
-  }, [rawInit, parsedInit, launchParams]);
+  const value = useMemo(() => telegramState, [telegramState]);
 
   return (
     <TelegramContext.Provider value={value}>

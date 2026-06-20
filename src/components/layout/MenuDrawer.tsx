@@ -144,6 +144,7 @@ export const MenuDrawer = ({ countryCode, countries }: MenuDrawerProps) => {
               {filteredMenuItems.map((item) => (
                 <Button
                   variant="ghost"
+                  key={item.href}
                   className="h-10 w-auto gap-3 text-base font-bold text-white [&_svg:not([class*='size-'])]:size-6.5"
                   onClick={() => {
                     router.push(item.href);

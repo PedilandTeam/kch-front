@@ -4,9 +4,6 @@ import bundleAnalyzer from "@next/bundle-analyzer";
 const nextConfig = {
   productionBrowserSourceMaps: true,
   reactStrictMode: true,
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     ignoreBuildErrors: true,
   },

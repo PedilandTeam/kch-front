@@ -38,7 +38,7 @@ const IUserSchema = z.object({
   username: z.string(),
 });
 
-const UserSchema = IUserSchema.extend({
+export const UserSchema = IUserSchema.extend({
   isActive: z.boolean(),
   ok: z.boolean(),
   user: IUserSchema,

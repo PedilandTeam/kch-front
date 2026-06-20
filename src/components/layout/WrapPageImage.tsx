@@ -39,22 +39,22 @@ export const WrapPageImage = ({
       )}
     >
       <div className="_mask absolute top-0 flex max-h-[540px] w-full items-end justify-center">
-        <div className="relative w-full">
+        <div className="relative aspect-[414/198] w-full">
           <NextImage
             src={imageUrl}
             alt="Mask"
-            className="h-auto w-full object-cover"
-            width={414}
-            height={198}
+            className="object-cover"
+            fill
+            sizes="414px"
             priority
           />
-          <div className="absolute right-0 bottom-0 left-0">
+          <div className="absolute inset-0">
             <NextImage
               src="/images/hp-image-mask.webp"
               alt="Mask"
-              className="h-auto w-full object-cover"
-              width={414}
-              height={198}
+              className="object-cover"
+              fill
+              sizes="414px"
               priority
             />
           </div>

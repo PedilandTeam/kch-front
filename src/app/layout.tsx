@@ -28,6 +28,7 @@ export default async function RootLayout({
     <html
       lang="fa"
       dir="rtl"
+      data-scroll-behavior="smooth"
       className={`${vazirmatn.variable} h-full scroll-smooth`}
     >
       <body className="flex min-h-screen flex-col bg-neutral-800 antialiased sm:items-center sm:justify-start">
