@@ -5,6 +5,7 @@ import type { Page } from "@/types/page";
 import { Suspense, useEffect } from "react";
 
 import { AdsClubBanner } from "@/components/banners/AdsClubBanner";
+import { SurveyBanner } from "@/components/banners/SurveyBanner";
 import { TelegramBanner } from "@/components/banners/TelegramBanner";
 import { ItemBreadcrumb } from "@/components/directory/item/ItemBreadcrumb";
 import { ItemDescription } from "@/components/directory/item/ItemDescription";
@@ -75,6 +76,8 @@ export function ItemDetailsPage({ pageData }: ItemDetailsPageProps) {
           basedOn="city"
         />
       </Suspense>
+
+      <SurveyBanner />
 
       <TelegramBanner />
     </WrapPageSimple>

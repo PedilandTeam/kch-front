@@ -1,6 +1,7 @@
 "use client";
 
 import { AdsClubBanner } from "@/components/banners/AdsClubBanner";
+import { SurveyBanner } from "@/components/banners/SurveyBanner";
 import { TelegramBanner } from "@/components/banners/TelegramBanner";
 import { CategoryBreadcrumb } from "@/components/directory/CategoryBreadcrumb";
 import { ItemCardsList } from "@/components/directory/item";
@@ -74,6 +75,8 @@ export function CategoryListPage({
       )}
 
       <AdsClubBanner />
+
+      <SurveyBanner />
 
       <TelegramBanner />
 

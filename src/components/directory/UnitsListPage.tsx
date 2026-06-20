@@ -4,6 +4,7 @@ import type { Country } from "@/schemas";
 import type { UnitType } from "@/types/unit";
 
 import { AdsClubBanner } from "@/components/banners/AdsClubBanner";
+import { SurveyBanner } from "@/components/banners/SurveyBanner";
 import { TelegramBanner } from "@/components/banners/TelegramBanner";
 import { ItemCardsList } from "@/components/directory/item";
 import { UnitBreadcrumb } from "@/components/directory/UnitBreadcrumb";
@@ -63,6 +64,8 @@ export function UnitsListPage({
       )}
 
       <AdsClubBanner />
+
+      <SurveyBanner />
 
       <TelegramBanner />
 

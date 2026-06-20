@@ -1,4 +1,5 @@
 import { AdsClubBanner } from "@/components/banners/AdsClubBanner";
+import { SurveyBanner } from "@/components/banners/SurveyBanner";
 import { TelegramBanner } from "@/components/banners/TelegramBanner";
 import { UnitsTopCat } from "@/components/directory/UnitsTopCat.carousel";
 import { WrapPageSimple } from "@/components/layout/WrapPageSimple";
@@ -17,6 +18,8 @@ export const CountryPage = async ({ currentCountry }: CountryPageProps) => {
       <AdsClubBanner />
 
       <UnitsTopCat currentCountry={currentCountry} />
+
+      <SurveyBanner />
 
       <TelegramBanner />
     </WrapPageSimple>
